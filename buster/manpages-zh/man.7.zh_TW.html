@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>man(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/man.7.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/manpages/man.7.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es/man.7.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-hu/man.7.hu.html" hreflang="hu">
+<link rel="alternate" href="../../buster/manpages-it/man.7.it.html" hreflang="it">
+<link rel="alternate" href="../../buster/manpages-ja/man.7.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/man.7.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-pt/man.7.pt.html" hreflang="pt">
+<link rel="alternate" href="../../buster/manpages-zh/man.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/man.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; man(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/man.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/man.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS" title="總覽 SYNOPSIS">總覽 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%B0%8E%E8%A8%80_PREAMBLE" title="導言 PREAMBLE">導言 PREAMBLE</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%AE%B5_SECTIONS" title="段 SECTIONS">段 SECTIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%AD%97%E9%AB%94_FONTS" title="字體 FONTS">字體 FONTS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%85%B6%E4%BB%96%E5%AE%8F%E5%91%BD%E4%BB%A4%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2_OTHER_MACROS_AND_STRINGS" title="其他宏命令和字符串 OTHER MACROS AND STRINGS">其他宏命令和字符串 OTHER MACROS AND STRINGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%AE%89%E5%85%A8%E5%AD%90%E9%9B%86_SAFE_SUBSET" title="安全子集 SAFE SUBSET">安全子集 SAFE SUBSET</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%B3%A8%E6%84%8F_NOTES" title="注意 NOTES">注意 NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6_FILES" title="文件 FILES">文件 FILES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85_AUTHOR_S" title="作者 AUTHOR S">作者 AUTHOR S</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO" title="參見 SEE ALSO">參見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國linux論壇man手冊翻譯計劃》:">《中國linux論壇man手冊翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/man.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/man.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/man.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/man.7.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages/man.7.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es/man.7.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-hu/man.7.hu.html" title="Hungarian (hu)">magyar</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-it/man.7.it.html" title="Italian (it)">italiano</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/man.7.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/man.7.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pt/man.7.pt.html" title="Portuguese (pt)">português (pt)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/man.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/man.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/man-db/man.1.zh_CN.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/man.7.zh_TW.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">MAN(7)</td>
+    <td class="head-vol">Linux Programmer&#39;s Manual</td>
+    <td class="head-rtitle">MAN(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+man - 格式化手冊頁的宏
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_SYNOPSIS">總覽 SYNOPSIS<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS">¶</a></h1>
+<b>groff -Tascii -man</b> <i>file</i> ...
+<p class="Pp"><b>groff -Tps -man</b> <i>file</i> ...</p>
+<p class="Pp"><b>man</b> [<i>section</i>] <i>title</i></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+此手冊頁解釋了 <b>groff tmac.man</b>
+  宏包 (通常叫做 <b>man</b>
+  宏包)
+  以及相關的創建手冊頁的慣例。
+  開發者可以使用這個宏包來爲
+  linux
+  書寫或移植手冊文檔。
+  它與其他版本的這個宏包一般是兼容的，因此移植不是一個大問題
+  (但是 NET-2 BSD
+  發佈中使用了一個完全不同的宏包叫做
+  mdoc，參見 <a href="../../buster/manpages/mdoc.7.en.html">mdoc(7)</a>).
+<p class="Pp">注意 NET-2 BSD mdoc
+    手冊頁也可以使用
+    <b>groff</b> 處理，只要指定
+    <b>-mdoc</b> 選項而不是 <b>-man</b>
+    選項。推薦使用 <b>-mandoc</b>
+    選項，因爲這樣會自動判斷應當使用哪一個。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="導言_PREAMBLE">導言 PREAMBLE<a class="anchor" href="#%E5%B0%8E%E8%A8%80_PREAMBLE">¶</a></h1>
+一篇手冊頁的第一個命令
+  (註釋行之後) 應當是
+<div class="Bd-indent">
+<p class="Pp"><b>.TH</b> <i>title section date source manual</i>,</p>
+<p class="Pp"></p>
+</div>
+這裏：
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><i>title</i></dt>
+  <dd>手冊頁的標題 (例如，
+      <i>MAN</i>).</dd>
+  <dt><i>section</i></dt>
+  <dd>手冊頁的章節號應當放在這裏
+      (例如， <i>7</i>).</dd>
+  <dt><i>date</i></dt>
+  <dd>最後修改日期 --
+      記住要在每次修改過此手冊頁之後修改它，
+      這樣可以方便地進行版本控制</dd>
+  <dt><i>source</i></dt>
+  <dd>命令的來源
+    <p class="Pp">對於二進制文件，使用這樣的表述：
+        <i>GNU</i>, <i>NET-2</i>, <i>SLS Distribution</i>, <i>MCC
+        Distribution</i>.</p>
+    <p class="Pp">對於系統調用，使用它適用的內核版本來表述：
+        <i>Linux 0.99.11</i>.</p>
+    <p class="Pp">對於庫調用，使用函數的來源來表述：
+        <i>GNU</i>, <i>BSD 4.3</i>, <i>Linux DLL 4.4.1</i>.</p>
+  </dd>
+  <dt><i>manual</i></dt>
+  <dd>手冊的標題 (例如：
+      <i>Linux Programmer&#39;s Manual</i>).</dd>
+</dl>
+</div>
+<p class="Pp">注意 BSD mdoc
+    格式的手冊頁以 <b>Dd</b>
+    命令開始，而不是 <b>TH</b>
+    命令</p>
+<p class="Pp">手冊章節傳統上如下定義：</p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>1 Commands</b></dt>
+  <dd>用戶可從 shell
+      運行的命令</dd>
+  <dt><b>2 System calls</b></dt>
+  <dd>必須由內核完成的功能</dd>
+  <dt><b>3 Library calls</b></dt>
+  <dd>大多數 <i>libc</i>
+      函數，例如 <a href="../../buster/manpages-dev/qsort.3.en.html">qsort(3)</a>)</dd>
+  <dt><b>4 Special files</b></dt>
+  <dd><i>/dev</i>) 目錄中的文件</dd>
+  <dt><b>5 File formats and conventions</b></dt>
+  <dd><i>/etc/passwd</i>
+      等人類可讀的文件的格式說明</dd>
+  <dt><b>6 Games</b></dt>
+  <dd></dd>
+  <dt><b>7 Macro packages and conventions</b></dt>
+  <dd>文件系統標準描述，網絡協議，ASCII
+      和其他字符集，還有你眼前這份文檔以及其他東西</dd>
+  <dt><b>8 System management commands</b></dt>
+  <dd>類似 <a href="../../buster/mount/mount.8.en.html">mount(8)</a>
+      等命令，大部分只能由
+      <i>root</i> 執行</dd>
+  <dt><b>9 Kernel routines</b></dt>
+  <dd>這是廢棄的章節。
+      原來曾想把一些關於核心的文件放在這裏，
+      但是實際上只有極少數可以寫成文件放在這裏，而且它們也很快過時了。
+      核心開發者可以找到其他更好的資源。</dd>
+</dl>
+</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="段_SECTIONS">段 SECTIONS<a class="anchor" href="#%E6%AE%B5_SECTIONS">¶</a></h1>
+段以 <b>.SH</b>
+  開始，後跟標題名。如果標題包含空格並且和
+  <b>.SH</b>
+  在同一行，則需在標題上加雙引號。
+  傳統的或建議的標題包括：
+  NAME, 總覽 SYNOPSIS, 描述 DESCRIPTION,
+  返回值 RETURN VALUE, 退出狀態 EXIT
+  STATUS, 錯誤處理 ERROR HANDLING, 錯誤
+  ERRORS, 選項 OPTIONS, 用法 USAGE, 示例
+  EXAMPLES, 文件 FILES, 環境 ENVIRONMENT,
+  診斷 DIAGNOSTICS, 安全 SECURITY, 遵循
+  CONFORMING TO, 注意 NOTES, BUGS, 作者 AUTHOR, 和
+  參見 SEE ALSO.
+  在適合使用約定標題的地方，請使用它；
+  這樣做可以使文章更易讀、易懂。
+  不過，只要您的標題能夠增加易懂性，請放心使用。
+  唯一必須的標題是 <i>NAME</i>,
+  他應是手冊頁的第一段，後面應緊跟對該命令的簡單描述。比如：
+<div class="Bd-indent">
+<p class="Pp">.SH NAME
+  <br/>
+  chess \- the game of chess</p>
+<p class="Pp"></p>
+</div>
+請一定要按照這個格式來寫，注意在短橫線
+  (dash `-&#39;) 前要有個斜槓 (slash `´).
+  這種語法結構在 <a href="../../buster/mandoc/makewhatis.8.en.html">makewhatis(8)</a>
+  程序爲 <a href="../../buster/man-db/whatis.1.zh_CN.html">whatis(1)</a> 和 <a href="../../buster/man-db/apropos.1.zh_CN.html">apropos(1)</a>
+  命令建立簡短命令描述時要用到。
+<p class="Pp">其他約定段的內容應爲：</p>
+<dl class="Bl-tag">
+  <dt><b>總覽 SYNOPSIS</b></dt>
+  <dd>簡要描述命令或函數接口。
+      對命令，顯示他的命令和參數（包括各種選項）；黑體表示各種參數，
+      下劃線（或斜體字）表示可以替換的選項；
+      方括號[]中的是可選項，豎線
+      |
+      用於把幾個選項間隔開，
+      小括號()中的部分可以自動重複。
+      對函數，顯示需要的數據聲明或需
+      <b>#include</b>
+      包含的項目，後跟函數聲明。</dd>
+  <dt><b>描述 DESCRIPTION</b></dt>
+  <dd>解釋命令、函數或格式的用途。
+      說明其如何與文件及標準輸入交互，他們的標準輸出及標準錯誤。
+      必須要指明的細節。描述一般情況。
+      選項和參數信息放在
+      OPTIONS（選項）段。
+      如果有語法說明和一些複雜的設定，
+      建議把它們放到
+      USAGE（用法）段（本段中最好只寫一個概要）。</dd>
+  <dt><b>返回值 RETURN VALUE</b></dt>
+  <dd>列出程序或函數會返回的值，指出引發返回值的條件或原因。</dd>
+  <dt><b>退出狀態 EXIT STATUS</b></dt>
+  <dd>列出可能的退出狀態的值，指出引起返回的程序或原因。</dd>
+  <dt><b>選項 OPTIONS</b></dt>
+  <dd>指出程序可用的選項，及其作用。</dd>
+  <dt><b>用法 USAGE</b></dt>
+  <dd>描述程序的較高級的使用方法。</dd>
+  <dt><b>示例 EXAMPLES</b></dt>
+  <dd>provides one or more examples describing how this function, file or
+      command is used.</dd>
+  <dt><b>文件 FILES</b></dt>
+  <dd>列出程序或函數使用到的文件，
+      比如配置文件、啓動文件和程序直接操作的文件。
+      給出文件的絕對路徑，
+      使用安裝程序調整這些路徑以使其與用戶的實際情況相符。
+      對大多數程序來說，缺省的安裝路徑是
+      /usr/local，
+      所以你的文件要與此一致。</dd>
+  <dt><b>環境 ENVIRONMENT</b></dt>
+  <dd>列出影響你的程序的所有環境變量，並說明影響的原因。</dd>
+  <dt><b>診斷 DIAGNOSTICS</b></dt>
+  <dd>寫出常會出現的錯誤概述，並說明解決的辦法。
+      你無需解釋系統錯誤信息或信號，
+      除非它們會影響到您的程序。</dd>
+  <dt><b>安全 SECURITY</b></dt>
+  <dd>討論安全問題和相關話題。對應予避免的配置和環境，
+      可能有安全隱患的命令等等給出警告，
+      特別是當它們不是很明顯時。
+      單獨用一段來討論安全並不必要；如果比較好理解的話，把它放在其他段中
+      （比如 描述 或 用法
+      段）。但是，最好加上它。</dd>
+  <dt><b>遵循 CONFORMING TO</b></dt>
+  <dd>描述它實現的任何標準或約定</dd>
+  <dt><b>注意 NOTES</b></dt>
+  <dd>提供雜項注意事項</dd>
+  <dt><b>BUGS</b></dt>
+  <dd>列出侷限、已知的缺點或不便之處，還有其他可能存在的問題。</dd>
+  <dt><b>作者 AUTHOR</b></dt>
+  <dd>列出程序或文件作者，聯繫辦法等。</dd>
+  <dt><b>參見 SEE ALSO</b></dt>
+  <dd>以字母順序列出相關的手冊頁（man
+      pages)。通常來講，這是一個手冊頁的最後一段。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="字體_FONTS">字體 FONTS<a class="anchor" href="#%E5%AD%97%E9%AB%94_FONTS">¶</a></h1>
+雖然在 UNIX
+  世界中有各種對手冊頁（man
+  pages)的不同約定， 但在 linux
+  系統下存在一個字體的標準：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>對函數，其參數通常用下劃線（或斜體），
+      <i>在總覽（SYNOPSIS)中也是這樣</i>
+      ，其他部分用黑體。
+      例如</dd>
+</dl>
+<div class="Bd-indent"><b>int myfunction(int </b><i>argc</i><b>, char
+  **</b><i>argv</i><b>);</b></div>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>文件名用下劃線（或斜體），例如，.IR
+      &#34;/usr/include/stdio.h&#34; ),
+      但在總覽（SYNOPSIS)中，包含的文件用黑體，例如
+      <b>#include &lt;stdio.h&gt;</b>).</dd>
+  <dt></dt>
+  <dd>專用宏，一般大寫表示，用黑體（如：
+      <b>MAXINT</b>).</dd>
+  <dt></dt>
+  <dd>列舉錯誤代號時，代號用黑體（這種列舉通常使用
+      <b>.TP</b> 宏命令）。</dd>
+  <dt></dt>
+  <dd>對其他手冊頁的引用（或本頁中某主體的引用）用黑體。
+      手冊章節號用普通體（如：
+      <a href="../../buster/manpages-zh/man.7.zh_TW.html">man(7)</a>).
+      設置字體的宏命令如下：</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt><b>.B</b></dt>
+  <dd>黑體</dd>
+  <dt><b>.BI</b></dt>
+  <dd>黑體和下劃線（或斜體）交替（描述函數時非常有用）</dd>
+  <dt><b>.BR</b></dt>
+  <dd>黑體和普通體交替（描述引用時非常有用）</dd>
+  <dt><b>.I</b></dt>
+  <dd>下劃線（或斜體）</dd>
+  <dt><b>.IB</b></dt>
+  <dd>下劃線（或斜體）和黑體交替</dd>
+  <dt><b>.IR</b></dt>
+  <dd>普通體和下劃線（或斜體）交替</dd>
+  <dt><b>.RB</b></dt>
+  <dd>普通體和下劃線（或斜體）交替</dd>
+  <dt><b>.RI</b></dt>
+  <dd>小號字和黑體交替</dd>
+  <dt><b>.SB</b></dt>
+  <dd>小號字和黑體交替</dd>
+  <dt><b>.SM</b></dt>
+  <dd>小號字（用於縮寫）</dd>
+</dl>
+<p class="Pp">按照慣例，每個命令最多可以有六個小節的參數，
+    但是 GNU
+    去除了這個限制。小節之間以空格隔開。
+    如果某小節含有空格，則需要給其加上雙引號。
+    各小節在顯示時無間隔，所以
+    <b>.BR</b>
+    命令可以指定一個黑體的詞，
+    後跟一個普通體的標點。如果命令後無參數，則命令作用於下一行。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="其他宏命令和字符串_OTHER_MACROS_AND_STRINGS">其他宏命令和字符串 OTHER MACROS AND STRINGS<a class="anchor" href="#%E5%85%B6%E4%BB%96%E5%AE%8F%E5%91%BD%E4%BB%A4%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2_OTHER_MACROS_AND_STRINGS">¶</a></h1>
+下面是其他一些相關的宏和預定義的字符串。
+  除非指明，否則所有的宏在本行文本結束時終止。
+  多數宏使用“流行縮進”（prevailing
+  indent)方式。
+  “流行縮進”的值由緊跟着宏命令的
+  <i>i</i>
+  值指定，如果不指定，那就會使用當前的“流行縮進”值。
+  這樣，連續的縮進段就可使用相同的縮進值而不需要重新指定。
+  普通段（不縮進）將“流行縮進”值重值爲缺省值（0.5
+  英寸）。
+  缺省時，縮進是有規則的
+  en(s)：用 en(s) 或者 em(s)
+  作爲縮進的單位，
+  因爲它們會自動地調整字體的大小。
+  (注：度量距離有不同的單位，當請求需要用到不同的距離時，可以使用默認
+  類型來修飾數字，度量單位是英寸，釐米，pica,en,em,點，unit和垂直行距。
+  1pica等於1/6英寸，1em等於字母m的寬度，默認寬度取決於troff中使用
+  的字體。En是em的一半。)
+  其他宏命令定義如下：
+<section class="Ss">
+<h2 class="Ss" id="普通段（無縮進）_Normal_Paragraphs">普通段（無縮進） Normal Paragraphs<a class="anchor" href="#%E6%99%AE%E9%80%9A%E6%AE%B5%EF%BC%88%E7%84%A1%E7%B8%AE%E9%80%B2%EF%BC%89_Normal_Paragraphs">¶</a></h2>
+<dl class="Bl-tag">
+  <dt><b>.LP</b></dt>
+  <dd>與 <b>.PP</b>
+      相同（開始一個新段）</dd>
+  <dt><b>.P</b></dt>
+  <dd>與 <b>.PP</b>
+      相同（開始一個新段）</dd>
+  <dt><b>.PP</b></dt>
+  <dd>開始一個新段，重置“流行縮進”值。</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="相對縮進_Relative_Margin_Indent">相對縮進 Relative Margin Indent<a class="anchor" href="#%E7%9B%B8%E5%B0%8D%E7%B8%AE%E9%80%B2_Relative_Margin_Indent">¶</a></h2>
+<dl class="Bl-tag">
+  <dt><b>.RS</b><i> i</i></dt>
+  <dd>開始相對縮進 --
+      把左邊界右移 <i>i</i>
+     (如果不指定 <i>i</i>
+      值，則使用“流行縮進”值
+      ）。
+      同時設定“流行縮進”值爲
+      0.5 英寸。 直到使用 <b>.RE</b>
+      結束這些設定。</dd>
+  <dt><b>.RE</b></dt>
+  <dd>結束相對縮進同時把“流行縮進”恢復原值。</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="縮進_Indented_Paragraph_Macros">縮進 Indented Paragraph Macros<a class="anchor" href="#%E7%B8%AE%E9%80%B2_Indented_Paragraph_Macros">¶</a></h2>
+<dl class="Bl-tag">
+  <dt><b>.HP</b><i> i</i></dt>
+  <dd>開始懸掛式縮進（段的第一行從左邊揭開時，其餘縮進顯示）</dd>
+  <dt><b>.IP</b><i> x i</i></dt>
+  <dd>在段上標籤 <i>x</i>
+      。如果不指定 <i>x</i>
+      ，則整個段縮進 <i>i</i>
+      。如果指定了 <i>x</i> ，則
+      <i>x</i>
+      之前的段不縮進，之後的段縮進（有些象
+      <b>.TP</b> ，不過 <i>x</i>
+      是跟在命令後面而不是在下一行）。
+      如果 <i>x</i>
+      太長，後面的文本會挪到下一行（文本不會丟
+      失或割斷）。</dd>
+</dl>
+<p class="Pp">做公告列表，可以用
+    \(bu (bullet) 或 \(em (em dash).
+    要用數字或字母列表,
+    可以用.IP 1. 或 .IP A.
+    這樣轉換成其他
+    格式就簡單了。</p>
+<dl class="Bl-tag">
+  <dt><b>.TP</b><i> i</i></dt>
+  <dd>在段上懸掛標籤。標籤在下一行指定，但是結果和
+      <b>.IP</b> 相像。</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="超文本鏈接宏_Hypertext_Link_Macros">超文本鏈接宏 Hypertext Link Macros<a class="anchor" href="#%E8%B6%85%E6%96%87%E6%9C%AC%E9%8F%88%E6%8E%A5%E5%AE%8F_Hypertext_Link_Macros">¶</a></h2>
+<dl class="Bl-tag">
+  <dt><b>.UR</b><i> u</i></dt>
+  <dd>建立一個超文本鏈接到
+      URI (URL) <i>u</i>; 並以 <b>UE</b>
+      結束。當轉換爲 HTML
+      格式時，他會轉換爲
+      <b>&lt;A HREF=&#34;</b><i>u</i><b>&#34;&gt;</b>.
+      有個例外：如果 <i>u</i>
+      是特殊字符 “
+      ：”，則之後不能建立任何超級鏈接，直到以
+      <b>UE</b>
+      結束（這用來在不需要超級鏈接時禁止他）。
+      <b>:</b> LALR(1)</dd>
+</dl>
+<p class="Pp">這個宏比較新，很多程序可能並不對他進行處理。但是由於很多工具
+    (包括 troff)
+    簡單地忽略未定義宏
+    (或者最壞的將它們插入到文本中),
+    插入它們是安全的</p>
+<dl class="Bl-tag">
+  <dt><b>.UE</b></dt>
+  <dd>結束相應的 <b>UR</b>
+      超級鏈接。轉換爲HTML後是
+      <b>&lt;/A&gt;</b>.</dd>
+  <dt><b>.UN</b><i> u</i></dt>
+  <dd>給超級聯接指定名稱爲
+      <i>u</i>; 不需要以 <b>UE</b> UE
+      結束。轉換爲 HTML
+      後爲： <b>&lt;A NAME=&#34;</b><i>u</i><b>&#34;
+      id=&#34;</b><i>u</i><b>&#34;&gt;&amp;nbsp;&lt;/A&gt;</b> (the &amp;nbsp;
+      is optional if support for Mosaic is unneeded).</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="雜項宏_Miscellaneous_Macros">雜項宏 Miscellaneous Macros<a class="anchor" href="#%E9%9B%9C%E9%A0%85%E5%AE%8F_Miscellaneous_Macros">¶</a></h2>
+<dl class="Bl-tag">
+  <dt><b>.DT</b></dt>
+  <dd>重置 tab
+      值爲缺省(每一個0.5英寸)。不引起中斷。</dd>
+  <dt><b>.IX</b><i> ... </i></dt>
+  <dd>插入索引信息（方便搜索系統工作，或打印索引列表）。
+      在頁中索引信息不能正常顯示。
+      如果只有一個參數，
+      參數作爲獨立的索引項指向手冊頁的內容。
+      如果有兩個參數，他可能是
+      Perl 手冊頁格式；
+      第一個參數指定類型名
+      （命令名，標題
+      ，題頭，子段貨源素之一），
+      第二個參數指明自己的索引名。
+      另外，長索引形式：每個參數是一個索引項，
+      次級索引項，再次級索引項，等等直到以空參數結束，
+      然後是程序名參數，\m，還有一小段描述。
+      還可能在跟上一個空參數，有可能是頁控制信息
+      （如： PAGE
+      START)。舉例如下：
+      &#34;programmingtools&#34;&#34;make&#34;&#34;&#34;&#34;make<b>—
+      build programs&#34;.</b></dd>
+  <dt><b>.PD</b><i> d</i></dt>
+  <dd>在段中間垂直距離空開
+      d
+      (如果不指定，則缺省爲
+      d=0.4v)，不引起中斷。</dd>
+  <dt><b>.SS</b><i> t</i></dt>
+  <dd>子標題 <i>t</i> 象是 <b>.SH</b>,
+      但是作爲段中的字標題使用）</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="預定義字符串_Predefined_Strings">預定義字符串 Predefined Strings<a class="anchor" href="#%E9%A0%90%E5%AE%9A%E7%BE%A9%E5%AD%97%E7%AC%A6%E4%B8%B2_Predefined_Strings">¶</a></h2>
+<b>man</b>
+  預定義了下列字符串
+<dl class="Bl-tag">
+  <dt>\*R</dt>
+  <dd>註冊符號: ®</dd>
+  <dt>\*S</dt>
+  <dd>改變成缺省字體大小</dd>
+  <dt>\*(Tm</dt>
+  <dd>商標符號: (Tm)</dd>
+  <dt>\*(lq</dt>
+  <dd>左雙引號: “</dd>
+  <dt>\*(rq</dt>
+  <dd>右雙引號: ”</dd>
+</dl>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="安全子集_SAFE_SUBSET">安全子集 SAFE SUBSET<a class="anchor" href="#%E5%AE%89%E5%85%A8%E5%AD%90%E9%9B%86_SAFE_SUBSET">¶</a></h1>
+理論上 <b>man</b> 是一個 troff
+  宏命令包，實際上很多工具程序沒有支持所有的
+  man 宏命令。
+  因此，爲了這些程序可以正常工作最好忽略
+  troff
+  的一些比較另類的宏。
+  避免使用各種不同的 troff
+  預處理程序
+  （如果必須的話，用
+  <a href="../../buster/groff-base/tbl.1.en.html">tbl(1)</a> 吧，
+  但是在建立雙列表時請使用
+  <b>IP</b> 和 <b>TP</b>
+  命令）。避免使用計算；大多數其他程序不能處理他。
+  使用簡單的命令比較容易轉換爲其他格式。
+  下面的宏命令一般認爲是安全的（雖然多數時候他們都被忽略了）：
+  <b>\&#34;</b>, <b>.</b>, <b>ad</b>, <b>bp</b>, <b>br</b>, <b>ce</b>,
+  <b>de</b>, <b>ds</b>, <b>el</b>, <b>ie</b>, <b>if</b>, <b>fi</b>, <b>ft</b>,
+  <b>hy</b>, <b>ig</b>, <b>in</b>, <b>na</b>, <b>ne</b>, <b>nf</b>, <b>nh</b>,
+  <b>ps</b>, <b>so</b>, <b>sp</b>, <b>ti</b>, <b>tr</b>.
+<p class="Pp">你還可能使用 troff
+    轉義字符（這些轉移符號以
+    \ 開始）。
+    但你要在文本中顯示反斜線時，用\e。
+    其他轉義字符包括：
+    <b>\&#39;</b>, <b>\`</b>, <b>\-</b>, <b>\.</b>, <b>\&#34;</b>, <b>\%</b>,
+    <b>\*x</b>, <b>\*(xx</b>, <b>\(xx</b>, <b>\$N</b>, <b>\nx</b>, <b>\n(xx</b>,
+    <b>\fx</b>, 和 <b>\f(xx</b>. 其中 x、xx
+    是任意字符，N
+    是任意數字不要使用轉義字符來畫圖。</p>
+<p class="Pp">不要隨意使用 <b>bp</b>
+    （break page(中斷頁））。
+    <b>sp</b> （vertical
+    space(垂直距離）只應使用正值。
+    不要用 (<b>de</b>)
+    （define（定義）定義與現有的宏同名的宏（無論
+    man 或 mdoc)；
+    這種重新定義可能會被忽略。
+    每個正縮進 (<b>in</b>)
+    應對應一個負縮進（即使在使用
+    RS 和 RE 是也不例外）。 The
+    condition test (<b>if,ie</b>) should only have &#39;t&#39; or &#39;n&#39; as the condition.
+    可以使用的只有可忽略的轉換
+    (<b>tr</b>)<b>.</b> 改變字體命令
+    (<b>ft</b> 和 <b>\f</b> 轉義序列)
+    只能帶如下參數： 1, 2, 3, 4,
+    R, I, B, P, or CW (ft
+    命令也可以不帶參數)。</p>
+<p class="Pp">如果你是用更多的功能，用各種程序仔細察看一下結果。
+    如果你肯定某功能是安全的，請告訴我們，以便把他增加到這個列表中。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="注意_NOTES">注意 NOTES<a class="anchor" href="#%E6%B3%A8%E6%84%8F_NOTES">¶</a></h1>
+儘量在文本中包含完整的
+  URL（或URIs）；
+  一些工具軟件（如：
+  <a href="../../buster/man2html-base/man2html.1.en.html">man2html(1)</a>
+  ）能夠自動把它們轉換爲超級鏈接。
+  您也可用 <b>UR</b>
+  命令指定鏈接到相關信息。
+  輸入完整的
+  URL(如：&lt;<a href="../..//www.kernel-notes.org</a>&gt; )。
+<p class="Pp">Tools processing these files should open the file and examine the
+    first non-whitespace character.
+    以(.)或（&#39;)開始一行，表明是基於
+    troff 的文件（如： man 或
+    mdoc)。
+    如果是（&lt;）表明基於
+    SGML/XML (如：HTML 或 Docbook)．
+    其他可能是純文本。(例如
+    &#34;catman&#34; 的結果)</p>
+<p class="Pp">有些 man
+    以&#39;\&#34;和空格再加字符列開始，表示他的預處理方法。
+    爲了 troff
+    翻譯器程序處理起來簡單一些，
+    您僅應使用 <a href="../../buster/groff-base/tbl.1.en.html">tbl(1)</a>,
+    而不是其他什麼東東，Linux
+    可以檢測到這一點。
+    不過，你或許想要包含這些信息以使其可以在其他系統得到處理。
+    下面是預處理調用的定義：</p>
+<dl class="Bl-tag">
+  <dt><b>e</b></dt>
+  <dd><a href="../../buster/groff-base/eqn.1.en.html">eqn(1)</a></dd>
+  <dt><b>g</b></dt>
+  <dd><a href="../../buster/grap/grap.1.en.html">grap(1)</a></dd>
+  <dt><b>p</b></dt>
+  <dd><a href="../../buster/groff-base/pic.1.en.html">pic(1)</a></dd>
+  <dt><b>r</b></dt>
+  <dd><a href="../../buster/groff/refer.1.en.html">refer(1)</a></dd>
+  <dt><b>t</b></dt>
+  <dd><a href="../../buster/groff-base/tbl.1.en.html">tbl(1)</a></dd>
+  <dt><b>v</b></dt>
+  <dd>vgrind(1)</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件_FILES">文件 FILES<a class="anchor" href="#%E6%96%87%E4%BB%B6_FILES">¶</a></h1>
+<i>/usr/share/groff/</i>[*/]<i>tmac/tmac.an</i>
+<br/>
+<i>/usr/man/whatis</i>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+大多數宏命令描述的是格式（比如：字體和空格）而不是內容描述（比如：
+  這段文字指向另外一頁），
+  與 mdoc 和 DocBook 正好相反（HTML
+  也有比較多的內容描述）。
+  這使得 <b>man</b>
+  難以轉換爲其他形式，不容易與其他文件組合或自動插入交叉引用。
+  遵照以上的安全說明，就比較容易在將來把他轉換爲其他格式。
+<p class="Pp">The Sun macro <b>TX</b>
+  下不能用。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者_AUTHOR_S">作者 AUTHOR S<a class="anchor" href="#%E4%BD%9C%E8%80%85_AUTHOR_S">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>—</dt>
+  <dd>James Clark (jjc@jclark.com) wrote the implementation of the macro
+      package.</dd>
+  <dt>—</dt>
+  <dd>Rickard E. Faith (faith@cs.unc.edu) wrote the initial version of this
+      manual page.</dd>
+  <dt>—</dt>
+  <dd>Jens Schweikhardt (schweikh@noc.fdn.de) wrote the Linux Man-Page
+      Mini-HOWTO (which influenced this manual page).</dd>
+  <dt>—</dt>
+  <dd>David A. Wheeler (dwheeler@ida.org) heavily modified this manual page,
+      such as adding detailed information on sections and macros.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_SEE_ALSO">參見 SEE ALSO<a class="anchor" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO">¶</a></h1>
+<a href="../../buster/man-db/apropos.1.zh_CN.html">apropos(1)</a>, <a href="../../buster/manpages-zh/groff.1.zh_TW.html">groff(1)</a>, <a href="../../buster/man-db/man.1.zh_CN.html">man(1)</a>, <a href="../../buster/man2html-base/man2html.1.en.html">man2html(1)</a>,
+  <a href="../../buster/manpages/mdoc.7.en.html">mdoc(7)</a>, <a href="../../buster/manpages-zh/mdoc.samples.7.zh_TW.html">mdoc.samples(7)</a>, <a href="../../buster/man-db/whatis.1.zh_CN.html">whatis(1)</a>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>RedCandle &lt;redcandle51@chinaren.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2003.11.25</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國linux論壇man手冊翻譯計劃》:">《中國linux論壇man手冊翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8Blinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">1999-06-16</td>
+    <td class="foot-os">Linux</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+man.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-12T03:39:43Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"man(7)\"}}]}"
+</script>

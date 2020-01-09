@@ -1,0 +1,2113 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>console_codes(4) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/console_codes.4.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/manpages/console_codes.4.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es/console_codes.4.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-ja/console_codes.4.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/console_codes.4.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-pt/console_codes.4.pt.html" hreflang="pt">
+<link rel="alternate" href="../../buster/manpages-zh/console_codes.4.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/console_codes.4.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="4">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; console_codes(4)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/console_codes.4">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/console_codes.4.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME_%E5%90%8D%E7%A8%B1" title="NAME 名稱">NAME 名稱</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#LINUX_CONSOLE_CONTROLS_Linux%E7%B5%82%E7%AB%AF%E6%8E%A7%E5%88%B6" title="LINUX CONSOLE CONTROLS Linux終端控制">LINUX CONSOLE CONTROLS Linux終端控制</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#CHARACTER_SETS_%E5%AD%97%E7%AC%A6%E9%9B%86" title="CHARACTER SETS 字符集">CHARACTER SETS 字符集</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#MOUSE_TRACKING_%E9%BC%A0%E6%A8%99%E8%BB%8C%E8%B7%A1" title="MOUSE TRACKING 鼠標軌跡">MOUSE TRACKING 鼠標軌跡</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%92%8C%E5%85%B6%E5%AE%83%E7%B5%82%E7%AB%AF%E7%9A%84%E6%AF%94%E8%BC%83" title="和其它終端的比較">和其它終端的比較</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B" title="參見">參見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/console_codes.4.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/console_codes.4.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/console_codes.4.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/console_codes.4.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages/console_codes.4.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es/console_codes.4.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/console_codes.4.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/console_codes.4.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pt/console_codes.4.pt.html" title="Portuguese (pt)">português (pt)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/console_codes.4.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/console_codes.4.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">CONSOLE_CODES(4)</td>
+    <td class="head-vol">Linux Programmer&#39;s Manual</td>
+    <td class="head-rtitle">CONSOLE_CODES(4)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME_名稱">NAME 名稱<a class="anchor" href="#NAME_%E5%90%8D%E7%A8%B1">¶</a></h1>
+控制終端代碼 - Linux
+  控制終端轉義和控制序列
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+Linux控制檯實現了VT102和ECMA-48/ISO
+  6429/ANSI X3.64終端控制的子集,
+  這個子集很龐大,當然還有Linux自己私有的控制序列,以改變顏色配置,字符
+  集映像,等等.在下面將要給出的表格中,第二列爲指定的功能給出了ECMA-48
+  或者DEC助記符(如果是後者會在前面加有DEC前綴).沒有給出助記符的序列
+  既不是ECMA-48也不是VT102字符.
+<p class="Pp">在所有標準輸出進程執行完畢,並且一個字符流被送到控制檯
+    驅動程序準備顯示出來的時候,所發生的第一件事就是將進程
+    使用的代碼轉換成顯示使用的代碼.</p>
+<p class="Pp">如果控制檯工作於
+    UTF-8
+    模式,那麼輸入的字節會首先編碼
+    成16位的 Unicode
+    代碼.如果不是UTF-8模式,那麼每個字節
+    會按照當前的字符映射表完成轉換(轉換成Unicode編碼的值).
+    參看下面將要討論的
+    CHARACTER SETS 一章.</p>
+<p class="Pp">在一般情況下,Unicode
+    代碼被轉換成爲存儲在視頻存儲器中的
+    字體索引,這樣對應的具體字符(字符存儲在視頻ROM中)就顯示
+    在屏幕上了. 注意使用
+    Unicode
+    編碼允許我們同時使用
+    512 種不同的字體(和
+    計算機硬件有關).</p>
+<p class="Pp">如果當前的 Unicode
+    代碼是一個控制字符,或者系統目前正在處
+    理一個轉義序列,處理的方式有些特別.它不會被轉換成字體索
+    引,也不會直接顯示在屏幕上.它可能控制光標的移動,或者實現
+    其它控制功能.參看下面的
+    LINUX CONSOLE CONTROLS 一節
+    所進行的討論.</p>
+<p class="Pp">一般來說直接在程序中插入終端控制字符並不是很好.Linux
+    支 持終端兼容的 <b><a href="../../buster/ncurses-bin/terminfo.5.en.html">terminfo(5)</a></b>
+    數據庫.
+    除了直接插入控制和轉義序列,也可以使用象
+    <b><a href="../../buster/ncurses-doc/ncurses.3ncurses.en.html">ncurses(3)</a>,</b> <b><a href="../../buster/ncurses-bin/tput.1.en.html">tput(1)</a>,</b> 或者 <b><a href="../../buster/ncurses-bin/reset.1.en.html">reset(1)</a>.</b>
+    這樣的顯示庫或者工具.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="LINUX_CONSOLE_CONTROLS_Linux終端控制">LINUX CONSOLE CONTROLS Linux終端控制<a class="anchor" href="#LINUX_CONSOLE_CONTROLS_Linux%E7%B5%82%E7%AB%AF%E6%8E%A7%E5%88%B6">¶</a></h1>
+這一段描述了所有在Linux控制檯下使用的調用特殊功能的控制字符
+  和轉義序列(例如.任何不在當前光標處插入可見字符的序列).
+<section class="Ss">
+<h2 class="Ss" id="Control_characters_控制字符">Control characters 控制字符<a class="anchor" href="#Control_characters_%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6">¶</a></h2>
+當一個字符在通過字符映射錶轉換之前含有以下14個代碼之一的時
+  候表明它是一個控制字符.
+  00(NUL),07(BEL),08(BS),09(HT),0a(LF),0b(VT),
+  0c(FF),0d(CR),0e(SO),0f(SI),18(CAN),1a(SUB), 1b(ESC),7f(DEL).
+  我們可以通過設置
+  `顯示控制字符&#39;
+  模式(見下文)以允許07,09,0b,
+  18,1a,7f
+  像普通字符一樣顯示在屏幕上.另一方面,在UTF-8模式下
+  所有位於
+  00-1f之間的代碼都被認爲是控制字符,而不管是否處於
+  `顯示控制字符&#39;模式.
+<p class="Pp">一個控制字符會立刻生效,然後被丟棄(即使是在轉義序列中間),
+    之後轉義序列才繼續處理下一個字符.
+    (在任何情況下,ESC都表示一個新的轉義序列的開始,可能導致
+    前一個序列的非正常終止,CAN和SUB
+    終止任何轉義序列.)
+    可識別的控制字符是BEL,BS,HT,LF,VT,FF,CR,SO,SI,CAN,
+    SUB,ESC,DEL,CSI.他們的功能如下.:</p>
+<p class="Pp HP">BEL(0x07,^G)鈴聲;</p>
+<p class="Pp
+    HP">BS(0x08,^H)後退一格(在行首不起作用);</p>
+<p class="Pp
+    HP">HT(0x09,^I)跳至下一個製表位.如果後面已沒有製表位則跳至行尾;</p>
+<p class="Pp
+    HP">LF(0x0A,^J),VT(0x0B,^K),FF(0x0C,^L)三者都表示換行;</p>
+<p class="Pp HP">CR(0x0D,^M)回車並換行;</p>
+<p class="Pp HP">SO(0x0E,^N)激活 G1 字符集,
+    如果設置了
+    LF/NL(新行模式)還要加上回車換行;</p>
+<p class="Pp HP">SI(0x0F,^O)激活 G0 字符集;</p>
+<p class="Pp
+    HP">CAN(0x18,^X),SUB(0x1A,^Z)兩者都表示中斷轉義序列;</p>
+<p class="Pp
+    HP">ESC(0x1B,^[)開始一個新的轉義序列;</p>
+<p class="Pp HP">DEL(0x7F)忽略;</p>
+<p class="Pp HP">CSI(0x9B)等同於 ESC [;</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="ESC-_but_not_CSI-sequences_非控制轉義序列">ESC- but not CSI-sequences 非控制轉義序列<a class="anchor" href="#ESC-_but_not_CSI-sequences_%E9%9D%9E%E6%8E%A7%E5%88%B6%E8%BD%89%E7%BE%A9%E5%BA%8F%E5%88%97">¶</a></h2>
+<table class="tbl">
+  <tbody><tr>
+    <td>ESC c</td>
+    <td>RIS</td>
+    <td>重繪屏幕.</td>
+  </tr>
+  <tr>
+    <td>ESC D</td>
+    <td>IND</td>
+    <td>換行.</td>
+  </tr>
+  <tr>
+    <td>ESC E</td>
+    <td>NEL</td>
+    <td>新的一行.</td>
+  </tr>
+  <tr>
+    <td>ESC H</td>
+    <td>HTS</td>
+    <td>設置當前列爲製表位.</td>
+  </tr>
+  <tr>
+    <td>ESC M</td>
+    <td>RI</td>
+    <td>翻轉換行(Reverse linefeed).</td>
+  </tr>
+  <tr>
+    <td>ESC Z</td>
+    <td>DECID</td>
+    <td>DEC
+      私有定義.內核將其解釋爲</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>VT102字符,返回字符ESC [ ? 6 c.</td>
+  </tr>
+  <tr>
+    <td>ESC 7</td>
+    <td>DECSC</td>
+    <td>存儲當前狀態(光標座標,</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>屬性,字符集).</td>
+  </tr>
+  <tr>
+    <td>ESC 8</td>
+    <td>DECRC</td>
+    <td>恢復上一次儲存的設置</td>
+  </tr>
+  <tr>
+    <td>ESC [</td>
+    <td>CSI</td>
+    <td>控制序列介紹</td>
+  </tr>
+  <tr>
+    <td>ESC %</td>
+    <td></td>
+    <td>開始一個字符集選擇序列</td>
+  </tr>
+  <tr>
+    <td>ESC % @</td>
+    <td></td>
+    <td>   選擇默認字符集(ISO
+      646 / ISO 8859-1)</td>
+  </tr>
+  <tr>
+    <td>ESC % G</td>
+    <td></td>
+    <td>   選擇 UTF-8</td>
+  </tr>
+  <tr>
+    <td>ESC % 8</td>
+    <td></td>
+    <td>   選擇
+      UTF-8(已不用)</td>
+  </tr>
+  <tr>
+    <td>ESC # 8</td>
+    <td>DECALN</td>
+    <td>DEC 屏幕校準測試 -
+      以E&#39;s填充屏幕.</td>
+  </tr>
+  <tr>
+    <td>ESC(</td>
+    <td></td>
+    <td>開始一個 G0
+      字符集定義序列</td>
+  </tr>
+  <tr>
+    <td>ESC( B</td>
+    <td></td>
+    <td>   選擇默認字符集(ISO
+      8859-1 mapping)</td>
+  </tr>
+  <tr>
+    <td>ESC( 0</td>
+    <td></td>
+    <td>   選擇 vt100
+      圖形映射</td>
+  </tr>
+  <tr>
+    <td>ESC( U</td>
+    <td></td>
+    <td>   選擇空映射 -
+      直接訪問字符ROM</td>
+  </tr>
+  <tr>
+    <td>ESC( K</td>
+    <td></td>
+    <td>   選擇用戶映射
+      - 由程序<a href="../../buster/kbd/mapscrn.8.en.html">mapscrn(8)</a></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>   加載.</td>
+  </tr>
+  <tr>
+    <td>ESC )</td>
+    <td></td>
+    <td>開始一個 G1
+      字符集定義</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>(後面跟 B,0,U,K,同上).</td>
+  </tr>
+  <tr>
+    <td>ESC &gt;</td>
+    <td>DECPNM</td>
+    <td>設置數字小鍵盤模式</td>
+  </tr>
+  <tr>
+    <td>ESC =</td>
+    <td>DECPAM</td>
+    <td>設置程序鍵盤模式</td>
+  </tr>
+  <tr>
+    <td>ESC ]</td>
+    <td>OSC</td>
+    <td>(是perating system command的縮寫)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>ESC ] P <i>nrrggbb</i>:
+      設置調色板,後面緊跟7個</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>十六進制數,再跟一個
+      P :-(.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>這裏 <i>n</i> 是顏色(0-16),而
+      <i>rrggbb</i> 表示</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>紅/綠/藍 值(0-255).</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>ESC ] R: 重置調色板</td>
+  </tr>
+</tbody></table>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="ECMA-48_CSI_sequence_ECMA-48_CSI_序列">ECMA-48 CSI sequence ECMA-48 CSI 序列<a class="anchor" href="#ECMA-48_CSI_sequence_ECMA-48_CSI_%E5%BA%8F%E5%88%97">¶</a></h2>
+CSI(或者 ESC
+  [)後面跟的參數序列大部分是NPAR(16),
+  就是由分號隔開的十進制數.空參數或缺少的參數以0處理.
+  可以用一個問號代替參數序列.
+<p class="Pp">在任何情況下,系統讀取
+    CSI [(或者 ESC [
+    [)後的單個字符,
+    而忽略整個序列.(用於忽略回顯功能鍵.)</p>
+<p class="Pp">CSI
+    序列的動作由其最後一個字符決定.</p>
+<p class="Pp"></p>
+<table class="tbl">
+  <tbody><tr>
+    <td>@</td>
+    <td>ICH</td>
+    <td>用#符號指示空格.</td>
+  </tr>
+  <tr>
+    <td>A</td>
+    <td>CUU</td>
+    <td>光標上移到#標識的行.</td>
+  </tr>
+  <tr>
+    <td>B</td>
+    <td>CUD</td>
+    <td>光標下移到#標識的行.</td>
+  </tr>
+  <tr>
+    <td>C</td>
+    <td>CUF</td>
+    <td>光標右移到#標識的列.</td>
+  </tr>
+  <tr>
+    <td>D</td>
+    <td>CUB</td>
+    <td>光標左移到#標識的列.</td>
+  </tr>
+  <tr>
+    <td>E</td>
+    <td>CNL</td>
+    <td>將光標下移到#指示的行的第一列.</td>
+  </tr>
+  <tr>
+    <td>F</td>
+    <td>CPL</td>
+    <td>將光標上移到#指示的行的第一列.</td>
+  </tr>
+  <tr>
+    <td>G</td>
+    <td>CHA</td>
+    <td>光標移動到當前行的指定列.</td>
+  </tr>
+  <tr>
+    <td>H</td>
+    <td>CUP</td>
+    <td>光標移動到指定行和列(以1行1列爲參照).</td>
+  </tr>
+  <tr>
+    <td>J</td>
+    <td>ED</td>
+    <td>刪除(默認從當前光標處到行尾的)內容.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>ESC [ 1 J:
+      刪除從開始到光標處的內容.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>ESC [ 2 J: 清空整個屏幕.</td>
+  </tr>
+  <tr>
+    <td>K</td>
+    <td>EL</td>
+    <td>刪除行(默認從當前光標處到結尾).</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>ESC [ 1 K:
+      刪除從行首到當前光標處的內容.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>ESC [ 2 K: 刪除整行.</td>
+  </tr>
+  <tr>
+    <td>L</td>
+    <td>IL</td>
+    <td>在空行插入#.</td>
+  </tr>
+  <tr>
+    <td>M</td>
+    <td>DL</td>
+    <td>刪除#標記的行.</td>
+  </tr>
+  <tr>
+    <td>P</td>
+    <td>DCH</td>
+    <td>刪除當前行中#標記的字符.</td>
+  </tr>
+  <tr>
+    <td>X</td>
+    <td>ECH</td>
+    <td>刪除當前行中#標記的單詞.</td>
+  </tr>
+  <tr>
+    <td>a</td>
+    <td>HPR</td>
+    <td>光標移動到#標記的右邊.</td>
+  </tr>
+  <tr>
+    <td>c</td>
+    <td>DA</td>
+    <td>以`I am a VT102&#39;應答 ESC [ ? 6 c: </td>
+  </tr>
+  <tr>
+    <td>d</td>
+    <td>VPA</td>
+    <td>光標移動到當前列指定行</td>
+  </tr>
+  <tr>
+    <td>e</td>
+    <td>VPR</td>
+    <td>光標移動到#標記的下一行.</td>
+  </tr>
+  <tr>
+    <td>f</td>
+    <td>HVP</td>
+    <td>光標移動到指定的行和列.</td>
+  </tr>
+  <tr>
+    <td>g</td>
+    <td>TBC</td>
+    <td>沒有參數:
+      清除當前位置的製表站.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>ESC [ 3 g:
+      刪除所有制表站.</td>
+  </tr>
+  <tr>
+    <td>h</td>
+    <td>SM</td>
+    <td>設置模式(見下文).</td>
+  </tr>
+  <tr>
+    <td>l</td>
+    <td>RM</td>
+    <td>重置模式(見下文).</td>
+  </tr>
+  <tr>
+    <td>m</td>
+    <td>SGR</td>
+    <td>設置屬性(見下文).</td>
+  </tr>
+  <tr>
+    <td>n</td>
+    <td>DSR</td>
+    <td>狀態報告(見下文).</td>
+  </tr>
+  <tr>
+    <td>q</td>
+    <td>DECLL</td>
+    <td>設置鍵盤指示燈.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>ESC [ 0 q: 熄滅所有指示燈</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>ESC [ 1 q: 點亮 Scroll Lock 燈</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>ESC [ 2 q: 點亮 Num Lock 燈</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>ESC [ 3 q: 點亮 Caps Lock 燈</td>
+  </tr>
+  <tr>
+    <td>r</td>
+    <td>DECSTBM</td>
+    <td>設置滾動範圍;
+      參數爲首行和末行.</td>
+  </tr>
+  <tr>
+    <td>s</td>
+    <td>?</td>
+    <td>存儲光標位置.</td>
+  </tr>
+  <tr>
+    <td>u</td>
+    <td>?</td>
+    <td>恢復光標位置.</td>
+  </tr>
+  <tr>
+    <td>`</td>
+    <td>HPA</td>
+    <td>光標移動到當前行指定列.</td>
+  </tr>
+</tbody></table>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="ECMA-48_Set_Graphics_Rendition_設置圖形屬性">ECMA-48 Set Graphics Rendition 設置圖形屬性<a class="anchor" href="#ECMA-48_Set_Graphics_Rendition_%E8%A8%AD%E7%BD%AE%E5%9C%96%E5%BD%A2%E5%B1%AC%E6%80%A7">¶</a></h2>
+ECMA-48 SGR 序列 ESC [ &lt;parameters&gt; m
+  設置顯示屬性.
+  同樣的序列可以設置一個或多個屬性.
+<p class="Pp"></p>
+<table class="tbl">
+  <tbody><tr>
+    <td>par</td>
+    <td>作用</td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>所有屬性重設爲默認值</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>設置邊框</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>設置亮度減半(用一種顏色模擬另一種顏色)</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>設置底紋(用一種顏色模擬另一種顏色)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>(用於模擬的顏色由using
+      ESC ] ...設置)</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>設置閃爍</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>設置反轉視頻(reverse video)</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>重設選定映像,顯示控制標記,</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>反轉元素標記.</td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>選擇空映像,設置顯示控制標記,</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>重設反轉標記.</td>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td>選擇空映像,設置顯示控制標記,</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>重設反轉標記.(在完成映像錶轉</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>換之前反轉標記引起每一字節的</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>高位反轉.)</td>
+  </tr>
+  <tr>
+    <td>21</td>
+    <td>設置正常亮度(和 ECMA-48
+      不兼容)</td>
+  </tr>
+  <tr>
+    <td>22</td>
+    <td>設置正常亮度</td>
+  </tr>
+  <tr>
+    <td>24</td>
+    <td>關閉下劃線</td>
+  </tr>
+  <tr>
+    <td>25</td>
+    <td>不閃爍</td>
+  </tr>
+  <tr>
+    <td>27</td>
+    <td>反轉視頻關閉</td>
+  </tr>
+  <tr>
+    <td>30</td>
+    <td>黑色背景</td>
+  </tr>
+  <tr>
+    <td>31</td>
+    <td>紅色前景</td>
+  </tr>
+  <tr>
+    <td>32</td>
+    <td>綠色前景</td>
+  </tr>
+  <tr>
+    <td>33</td>
+    <td>棕色前景</td>
+  </tr>
+  <tr>
+    <td>34</td>
+    <td>藍色前景</td>
+  </tr>
+  <tr>
+    <td>35</td>
+    <td>品紅前景</td>
+  </tr>
+  <tr>
+    <td>36</td>
+    <td>孔雀藍前景</td>
+  </tr>
+  <tr>
+    <td>37</td>
+    <td>白色前景</td>
+  </tr>
+  <tr>
+    <td>38</td>
+    <td>打開下劃線,設置默認前景色</td>
+  </tr>
+  <tr>
+    <td>39</td>
+    <td>關閉下劃線,設置默認前景色</td>
+  </tr>
+  <tr>
+    <td>40</td>
+    <td>黑色背景</td>
+  </tr>
+  <tr>
+    <td>41</td>
+    <td>紅色背景</td>
+  </tr>
+  <tr>
+    <td>42</td>
+    <td>綠色背景</td>
+  </tr>
+  <tr>
+    <td>43</td>
+    <td>棕色背景</td>
+  </tr>
+  <tr>
+    <td>44</td>
+    <td>藍色背景</td>
+  </tr>
+  <tr>
+    <td>45</td>
+    <td>品紅背景</td>
+  </tr>
+  <tr>
+    <td>46</td>
+    <td>孔雀藍背景</td>
+  </tr>
+  <tr>
+    <td>47</td>
+    <td>白色背景</td>
+  </tr>
+  <tr>
+    <td>49</td>
+    <td>設置默認背景色</td>
+  </tr>
+</tbody></table>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="ECMA-48_Mode_Switches_ECMA-48模式選擇">ECMA-48 Mode Switches ECMA-48模式選擇<a class="anchor" href="#ECMA-48_Mode_Switches_ECMA-48%E6%A8%A1%E5%BC%8F%E9%81%B8%E6%93%87">¶</a></h2>
+<dl class="Bl-tag">
+  <dt>ESC [ 3 h</dt>
+  <dd>DECCRM(默認關閉):
+      顯示控制字符.</dd>
+  <dt>ESC [ 4 h</dt>
+  <dd>DECIM(默認關閉):
+      設置插入模式.</dd>
+  <dt>ESC [ 20 h</dt>
+  <dd>LF/NL(默認關閉):
+      自動在CR後加上 LF,VT 或者
+      FF.</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="ECMA-48_狀態報告命令.">ECMA-48 狀態報告命令.<a class="anchor" href="#ECMA-48_%E7%8B%80%E6%85%8B%E5%A0%B1%E5%91%8A%E5%91%BD%E4%BB%A4.">¶</a></h2>
+<dl class="Bl-tag">
+  <dt>ESC [ 5 n</dt>
+  <dd>設備狀態報告(DSR): 以 ESC [ 0 n
+      應答(終端準備好).</dd>
+  <dt>ESC [ 6 n</dt>
+  <dd>光標位置報告(CPR): 以ESC [
+      <i>y</i> ; <i>x</i> R 應答, 這裏 <i>x,y</i>
+      指光標位置.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="DEC_Private_Mode(DECSET/DECRST)sequences_DEC私有模式序列.">DEC Private Mode(DECSET/DECRST)sequences DEC私有模式序列.<a class="anchor" href="#DEC_Private_Mode(DECSET/DECRST)sequences_DEC%E7%A7%81%E6%9C%89%E6%A8%A1%E5%BC%8F%E5%BA%8F%E5%88%97.">¶</a></h2>
+這裏給出的序列在
+  ECMA-48中沒有描述.我們列出了設置模式序列;
+  用l替換最後一個h就是重設模式序列.
+<dl class="Bl-tag">
+  <dt>ESC [ ? 1 h</dt>
+  <dd>DECCKM(默認關閉):
+      打開時光標鍵送出 ESC O
+      前綴, 而不是 ESC [.</dd>
+  <dt>ESC [ ? 3 h</dt>
+  <dd>DECCOLM(默認 = 80 行): 交替選擇
+      80/132 行模式.當原顯示
+      模式不足以滿足要求的時候,象
+      <b><a href="../../buster/kbd/resizecons.8.en.html">resizecons(8)</a></b>
+      這樣的用戶程序會改變終端顯示卡的硬件註冊.</dd>
+  <dt>ESC [ ? 5 h</dt>
+  <dd>DECSCNM(默認關閉):
+      設置視頻反轉模式.</dd>
+  <dt>ESC [ ? 6 h</dt>
+  <dd>DECOM(默認關閉):
+      打開時,光標位置用相對於滾動條左上角
+      的位置表示.</dd>
+  <dt>ESC [ ? 7 h</dt>
+  <dd>DECAWM(默認關閉):
+      打開自動換行.在這種模式下,一行中
+      超過80列的字符將自動換行(在DECCOLM打開時是132列).</dd>
+  <dt>ESC [ ? 8 h</dt>
+  <dd>DECARM(默認關閉):
+      打開鍵盤自動重複.</dd>
+  <dt>ESC [ ? 9 h</dt>
+  <dd>X10 鼠標報告(默認關閉):
+      設置報告模式
+      1(或者重設爲 0)-
+    見下文.</dd>
+  <dt>ESC [ ? 25 h</dt>
+  <dd>DECCM(默認打開):
+      設置光標可見.</dd>
+  <dt>ESC [ ? 1000 h</dt>
+  <dd>X11 鼠標報告(默認關閉):
+      設置報告模式
+      2(或者重設爲 0)- 見下文.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Linux_Console_Private_CSI_Sequences_Linux控制檯私有控制序列">Linux Console Private CSI Sequences Linux控制檯私有控制序列<a class="anchor" href="#Linux_Console_Private_CSI_Sequences_Linux%E6%8E%A7%E5%88%B6%E6%AA%AF%E7%A7%81%E6%9C%89%E6%8E%A7%E5%88%B6%E5%BA%8F%E5%88%97">¶</a></h2>
+下面的序列既不屬於 ECMA-48
+  字符也不屬於
+  VT102.它們只在
+  Linux控制檯上使用.顏色採用
+  SGR 參數: 0 = 黑色,1 = 紅色,2 =
+  綠色,3 =褐色 ,4 = 藍色,5 =
+  洋紅,6 = 孔雀藍,7 = 白色.
+<p class="Pp"></p>
+<table class="tbl">
+  <tbody><tr>
+    <td>ESC [ 1 ; <i>n</i> ]</td>
+    <td>設置下劃線顏色爲
+      <i>n</i></td>
+  </tr>
+  <tr>
+    <td>ESC [ 2 ; <i>n</i> ]</td>
+    <td>設置暗色爲 <i>n</i></td>
+  </tr>
+  <tr>
+    <td>ESC [ 8 ] </td>
+    <td>設置當前顏色對爲默認屬性.</td>
+  </tr>
+  <tr>
+    <td>ESC [ 9 ; <i>n</i> ]</td>
+    <td>設置屏幕空白超時爲
+      <i>n</i> 分鐘.</td>
+  </tr>
+  <tr>
+    <td>ESC [ 10 ; <i>n</i> ]</td>
+    <td>設置機箱喇叭鳴叫頻率,單位:
+      Hz.</td>
+  </tr>
+  <tr>
+    <td>ESC [ 11 ; <i>n</i> ]</td>
+    <td>設置機箱喇叭鳴叫持續時間,單位:微秒.</td>
+  </tr>
+  <tr>
+    <td>ESC [ 12 ; <i>n</i> ]</td>
+    <td>設置指定控制檯前臺運行.</td>
+  </tr>
+  <tr>
+    <td>ESC [ 13 ] </td>
+    <td>設置指定控制檯黑色</td>
+  </tr>
+  <tr>
+    <td>ESC [ 14 ; <i>n</i> ] </td>
+    <td>設置 VESA 關閉間隔,單位:
+      分鐘.</td>
+  </tr>
+</tbody></table>
+<p class="Pp"></p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="CHARACTER_SETS_字符集">CHARACTER SETS 字符集<a class="anchor" href="#CHARACTER_SETS_%E5%AD%97%E7%AC%A6%E9%9B%86">¶</a></h1>
+內核可以完成以下四種字符轉換,使字符能在屏幕上顯示.
+  a)Latin1 -&gt; PC,b)VT100 graphics -&gt; PC,c)PC -&gt; PC,
+  d)user-defined(用戶自定義).
+<p class="Pp">有兩種字符集設置,以
+    G0 和
+    G1定義,當前字符集必定是其中之一.(初
+    始化爲G0.)鍵入 ^N 使 G1
+    成爲當前字符集,鍵入 ^O
+    使 G0 成爲當前設置.</p>
+<p class="Pp">變量 G0 and G1
+    指向字符映射關係表,並且這種指向關係可以由用戶改變.
+    系統初始化時它們分別指向表
+    a)and b). 序列 ESC( B ,ESC( 0 ,ESC( U 和 ESC( K
+    分別使 G0
+    指向字符映射表
+   a),b),c)和 d). 序列 ESC )B ,ESC )0 ,ESC )U 和 ESC )K
+    分別使 G1
+    指向字符映射表 a),b),c)和
+    d).</p>
+<p class="Pp">序列 ESC c
+    重置一個終端,當屏幕顯示出現混亂時可以使用這個序列.
+    另一個序列 &#34;echo ^V^O&#34;
+    僅僅將G0設爲當前字符集,但並不保證
+    G0 指 向映射表 a).
+    有的Linux發行版中提供一個叫做
+    <b><a href="../../buster/ncurses-bin/reset.1.en.html">reset(1)</a></b>
+    的程序用來送出序列
+    &#34;echo ^[c&#34;.
+    如果你的系統終端變量沒有錯誤(
+    rs1=\Ec), 那麼使用&#34;tput
+    reset&#34;也可以達到同樣效果.</p>
+<p class="Pp">用戶自定義映射表可以用程序
+    <b><a href="../../buster/kbd/mapscrn.8.en.html">mapscrn(8)</a>.</b>
+    定義.這個程序工作時會將送入的字符c通過關係式s=map[c]映射到
+    字符s然後送入顯存.字符s所對應的位圖放在字符ROM裏面,可以使
+    用程序 <b><a href="../../buster/kbd/setfont.8.en.html">setfont(8)</a>.</b></p>
+<p class="Pp">來改變.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="MOUSE_TRACKING_鼠標軌跡">MOUSE TRACKING 鼠標軌跡<a class="anchor" href="#MOUSE_TRACKING_%E9%BC%A0%E6%A8%99%E8%BB%8C%E8%B7%A1">¶</a></h1>
+鼠標軌跡工具可以返回與
+  xterm
+  兼容的鼠標狀態報告.因爲控制檯
+  驅動沒有辦法知道鼠標類型,只有當虛擬終端驅動接收到鼠標輸入
+  輸出消息更新時纔會將這些報告返回給控制檯輸入流..這些鼠標
+  輸入輸出消息由 <b><a href="../../buster/gpm/gpm.8.en.html">gpm(8)</a></b>
+  守護進程產生.
+<p class="Pp">所有鼠標軌跡轉義序列參數由<i>xterm</i>
+    編碼成象<i>value</i>+040
+    這樣的單一字符形式的數字參數.比如,`!&#39;
+    編碼成 1.屏幕座標系統
+    以&#39;1&#39;爲基準.</p>
+<p class="Pp">X10
+    兼容模式在鼠標鍵按下時將按下的鍵和鼠標位置編碼後送出.
+    ESC [ ? 9 h 允許這一動作,ESC [ ? 9
+    l禁止這一動作.
+    有鍵按下時,<i>xterm</i> 送出ESC [
+    M <i>bxy</i>(6 個字符).這裏 <i>b</i>
+    代表 鍵-1,而 <i>x</i> 和 <i>y</i>
+    是鼠標的 x 和 y
+    座標.這和
+    內核產生的序列相同.</p>
+<p class="Pp">常規的軌跡模式(Linux
+    2.0.24不再支持)在左右兩鍵同時按下然後
+    釋放時送出轉義序列.組合鍵編碼也被送出.ESC
+    [ ? 1000 h 允許這 個動作而ESC [
+    1000 l
+    禁止這個動作.當有鍵按下或者釋放時,
+    <i>xterm</i> 送出 ESC [ M <i>bxy</i>.<i>b</i>
+    的低兩位對按鍵信息編碼:
+    0=鼠標鍵1按下,1=鼠標鍵2
+    按下,2=鼠標鍵3
+    按下,3=釋放.
+    高位編碼代表組合鍵,和上述編碼一起送出:
+    4=Shift,8=Meta(Alt),16=Control(Ctrl).<i>x</i>
+    和<i>y</i>爲發生鼠標事
+    件的x和y座標.以左上角爲(1,1).</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="和其它終端的比較">和其它終端的比較<a class="anchor" href="#%E5%92%8C%E5%85%B6%E5%AE%83%E7%B5%82%E7%AB%AF%E7%9A%84%E6%AF%94%E8%BC%83">¶</a></h1>
+我們已經討論了幾種終端類型,比如Linux
+  控制檯.這類終端稱爲
+  &#34;VT100兼容&#34;的終端.這裏我們再介紹其他兩種重要的終端類型:
+  DEC VT102 和 <b><a href="../../buster/xterm/xterm.1.en.html">xterm(1)</a></b>
+  以及他們和Linux控制終端的區別.
+<p class="Pp"></p>
+<section class="Ss">
+<h2 class="Ss" id="Control-character_handling_控制字符處理">Control-character handling 控制字符處理<a class="anchor" href="#Control-character_handling_%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E8%99%95%E7%90%86">¶</a></h2>
+vt102 也使用以下控制序列:
+<p class="Pp HP">NUL(0x00)忽略;</p>
+<p class="Pp HP">ENQ(0x05)觸發應答消息;</p>
+<p class="Pp HP">DC1(0x11,^Q,XON)繼續傳送;</p>
+<p class="Pp HP">DC3(0x13,^S,XOFF)使 vt100
+    忽略(並停止傳送) 除 XOFF and
+    XON 以外的一切字符.</p>
+<p class="Pp">VT100-like DC1/DC3 進程可以由 tty
+    驅動激活.</p>
+<p class="Pp">程序 <i>xterm</i> (在 vt100 模式
+    中)使用控制序列
+    BEL,BS,HT,LF,VT,FF,CR,SO,SI,ESC.</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Escape_sequences_轉義序列">Escape sequences 轉義序列<a class="anchor" href="#Escape_sequences_%E8%BD%89%E7%BE%A9%E5%BA%8F%E5%88%97">¶</a></h2>
+VT100
+  控制檯序列不完全支持Linux控制檯序列:
+<p class="Pp"></p>
+<table class="tbl">
+  <tbody><tr>
+    <td>ESC N</td>
+    <td>SS2</td>
+    <td>僅僅爲下一個字符選擇
+      G2 字符集</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>(Single shift 2).</td>
+  </tr>
+  <tr>
+    <td>ESC O</td>
+    <td>SS3</td>
+    <td>僅僅爲下一個字符選擇
+      G2 字符集</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>(Single shift 2).</td>
+  </tr>
+  <tr>
+    <td>ESC P</td>
+    <td>DCS</td>
+    <td>設備控制字符,由ESC \
+      終止</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>(Device control string).</td>
+  </tr>
+  <tr>
+    <td>ESC X</td>
+    <td>SOS</td>
+    <td>字符串開始.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>(Start of string)</td>
+  </tr>
+  <tr>
+    <td>ESC ^</td>
+    <td>PM</td>
+    <td>私有消息,由 ESC \ 終結</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>(Privacy message)</td>
+  </tr>
+  <tr>
+    <td>ESC \</td>
+    <td>ST</td>
+    <td>字符串終結</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>(String terminator)</td>
+  </tr>
+  <tr>
+    <td>ESC * ...</td>
+    <td></td>
+    <td>指定 G2 字符集</td>
+  </tr>
+  <tr>
+    <td>ESC + ...</td>
+    <td></td>
+    <td>指定 G3 字符集</td>
+  </tr>
+</tbody></table>
+<p class="Pp">程序 <i>xterm</i> (vt100
+    模式)承認 ESC c,ESC # 8,ESC &gt;,ESC =, ESC D,ESC
+    E,ESC H,ESC M,ESC N,ESC O,ESC P ...ESC ESC Z(以 [ ? 1 ; 2 c,`I am a
+    vt100 with advanced video option&#39;迴應) 以及 ESC ^
+    ...ESC 意義同上. 接受 ESC(,ESC ),ESC
+    *,ESC + 後跟 0,A,B
+    的字符序列,分別
+    代表的DEC
+    特殊字符,畫線設置,UK
+    和 US ASCII碼. 接受 ESC ]
+    作爲特定資源設置:</p>
+<p class="Pp"></p>
+<table class="tbl">
+  <tbody><tr>
+    <td>ESC ] 0 ; txt BEL</td>
+    <td>將圖標名和窗口標題設爲文本.</td>
+  </tr>
+  <tr>
+    <td>ESC ] 1 ; txt BEL</td>
+    <td>將圖標名設爲文本.</td>
+  </tr>
+  <tr>
+    <td>ESC ] 2 ; txt BEL</td>
+    <td>將窗口名設爲文本.</td>
+  </tr>
+  <tr>
+    <td>ESC ] 4 6 ; name BEL</td>
+    <td>改變日誌文件名(一般</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>由編譯時選項禁止)</td>
+  </tr>
+  <tr>
+    <td>ESC ] 5 0 ; fn BEL</td>
+    <td>字體設置爲 fn.</td>
+  </tr>
+</tbody></table>
+<p class="Pp">以下字符的含義略有不同::</p>
+<p class="Pp"></p>
+<table class="tbl">
+  <tbody><tr>
+    <td>ESC 7 DECSC</td>
+    <td>存儲光標位置</td>
+  </tr>
+  <tr>
+    <td>ESC 8 DECRC</td>
+    <td>恢復光標位置</td>
+  </tr>
+</tbody></table>
+<p class="Pp">它還接受以下序列:</p>
+<p class="Pp"></p>
+<table class="tbl">
+  <tbody><tr>
+    <td>ESC F</td>
+    <td></td>
+    <td>光標移動到屏幕左下角(由</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>hpLowerleftBugCompat
+      打開這項設置)</td>
+  </tr>
+  <tr>
+    <td>ESC l</td>
+    <td></td>
+    <td>內存鎖定(對於 HP
+      終端).</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>鎖定光標以上的內存.</td>
+  </tr>
+  <tr>
+    <td>ESC m</td>
+    <td></td>
+    <td>內存解鎖(對於 HP
+      終端).</td>
+  </tr>
+  <tr>
+    <td>ESC n</td>
+    <td>LS2</td>
+    <td>調用 G2 字符集.</td>
+  </tr>
+  <tr>
+    <td>ESC o</td>
+    <td>LS3</td>
+    <td>調用 G3 字符集.</td>
+  </tr>
+  <tr>
+    <td>ESC |</td>
+    <td>LS3R</td>
+    <td>以GR調用 G3 字符集.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>在xterm上看不到效果.</td>
+  </tr>
+  <tr>
+    <td>ESC }</td>
+    <td>LS2R</td>
+    <td>以GR調用 G3 字符集.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>在xterm上看不到效果.</td>
+  </tr>
+  <tr>
+    <td>ESC ~</td>
+    <td>LS1R</td>
+    <td>以GR調用 G3 字符集.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>在xterm上看不到效果.</td>
+  </tr>
+</tbody></table>
+<p class="Pp">它不識別 ESC % ...</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="CSI_Sequences_CSI_序列">CSI Sequences CSI 序列<a class="anchor" href="#CSI_Sequences_CSI_%E5%BA%8F%E5%88%97">¶</a></h2>
+程序 <i>xterm</i> (直到 XFree86
+  3.1.2G)不能識別閃爍或者不可見模式的
+  SGR值.X11R6 也不能識別以 SGRs
+  爲參數設置的色彩. <i>xterm</i>
+  可以識別其他的 ECMA-48 CSI
+  序列,只要Linux可以識別.
+  反之亦然.
+<p class="Pp"><i>xterm</i>
+    可以識別以上列出的所有
+    DEC
+    私有序列,但是不包括
+    Linux 私有模式序列. 在 <i>Xterm
+    Control Sequences</i> 中有關於 <i>xterm</i>
+    的私有模式序列的討論.</p>
+<p class="Pp">document by Edward Moy and Stephen Gildea,available with the X
+    distribution.</p>
+<p class="Pp"></p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+在版本爲 2.0.23 的內核中,CSI
+  序列的識別有些問題:
+  不能識別轉義序列中的NUL.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見">參見<a class="anchor" href="#%E5%8F%83%E8%A6%8B">¶</a></h1>
+<b><a href="../../buster/manpages-es/console.4.es.html">console(4)</a>,</b> <b><a href="../../buster/manpages-dev/console_ioctl.4.en.html">console_ioctl(4)</a>,</b> <b><a href="../../buster/manpages-zh/charsets.7.zh_TW.html">charsets(7)</a></b>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">October 31, 1996</td>
+    <td class="foot-os">Linux</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+console_codes.4.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-26T15:37:52Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"console_codes(4)\"}}]}"
+</script>

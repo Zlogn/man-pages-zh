@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>format(3tcl) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/tcl8.6-doc/format.3tcl.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/format.3tcl.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/format.3tcl.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="3tcl">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; format(3tcl)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/format.3tcl">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/format.3tcl.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS" title="總覽 SYNOPSIS">總覽 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#INTRODUCTION" title="INTRODUCTION">INTRODUCTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%B4%B0%E7%AF%80_DETAILS_ON_FORMATTING" title="格式化細節 DETAILS ON FORMATTING">格式化細節 DETAILS ON FORMATTING</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%88%87_ANSI_SPRINTF_%E7%9A%84%E5%8D%80%E5%88%A5_DIFFERENCES_FROM_ANSI_SPRINTF" title="與 ANSI SPRINTF 的區別 DIFFERENCES FROM ANSI SPRINTF">與 ANSI SPRINTF 的區別 DIFFERENCES FROM ANSI SPRINTF</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO" title="參見 SEE ALSO">參見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS" title="關鍵字 KEYWORDS">關鍵字 KEYWORDS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國 Linux 論壇 man 手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/format.3tcl.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/format.3tcl.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/format.3tcl.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/tcl8.6-doc/format.3tcl.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/format.3tcl.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/format.3tcl.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/format.3tcl.zh_TW.html">3tcl (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/ncurses-doc/format.3menu.en.html">3menu (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">format(3tcl)</td>
+    <td class="head-vol">Tcl Built-In Commands</td>
+    <td class="head-rtitle">format(3tcl)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<pre>
+
+</pre>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+format - 按 sprintf
+  的式樣格式化一個字符串
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_SYNOPSIS">總覽 SYNOPSIS<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS">¶</a></h1>
+<b>format </b><i>formatString </i>?<i>arg arg ...</i>?
+<pre>
+
+</pre>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="INTRODUCTION">INTRODUCTION<a class="anchor" href="#INTRODUCTION">¶</a></h1>
+這個命令按與ANSI C <b>sprintf
+  </b>過程相同的方式生成一個格式化了的字符串(在它的實現中使用了
+  <b>sprintf</b>)。<i>FormatString</i>
+  指示如何格式化結果，與
+  <b>sprintf </b>一樣使用 <b>%</b>
+  轉換指定符(specifier)，如果有增添的參數，則它們提供要被替換到結果中的值。<b>format</b>
+  的返回值是格式化了的字符串。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="格式化細節_DETAILS_ON_FORMATTING">格式化細節 DETAILS ON FORMATTING<a class="anchor" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%B4%B0%E7%AF%80_DETAILS_ON_FORMATTING">¶</a></h1>
+命令按從左到右的檢索(scan)
+  <i>formatString</i>
+  的方式操作。除了百分號之外的在格式字符串中的每個字符都要添加到結果字符串上。如果字符是一個
+  <b>%</b>則它不被複制到結果字符串中。轉而，在
+  <b>%</b>
+  後面的字符被作爲一個轉換指定符對待。轉換指定符控制把下一個連續的(successive)
+  <i>arg</i>
+  轉換成一個特定的格式，並把結果添加到結果字符串中轉換指定符的位置上。如果在格式字符串中有多個轉換指定符，則每一個控制一個增添的參數
+  <i>arg</i>。<b>format</b>
+  命令必須給出足夠的
+  <i>arg</i>s 來滿足在 <i>formatString
+  </i>中的所有轉換指定符的需要。
+<p class="Pp">每個轉換指定符可以由六部分組成:
+    一個 XPG3
+    位置指定符，一系列標誌(flag)，一個最小字段寬度，一個精度，一個長度修飾符(modifier)，和一個轉換字符。除了轉換字符之外可以省略這些字段中的任何一個。存在的字段必須按上面給出的次序出現。下面的段落依次討論所有這些字段。</p>
+<p class="Pp">如果 <b>%</b>
+    跟隨着一個十進制數值和一個
+    <b>$</b>,
+    比如“<b>%2$d</b>”，則要轉換的值不接受下一個順序的參數。轉而，它接受由這個數字指示的參數，這裏
+    1 對應於第一個
+    <i>arg</i>。如果因爲在指定符中有
+    <b>*</b>
+    字符而轉換指定符要求多個參數，則使用連續的參數，開始的參數由這個數值給出。這依從
+    XPG3
+    定位指定符約定。如果在
+    <i>formatString</i>
+    中有任何定位的指定符則所有指定符必須定位。</p>
+<p class="Pp">一個轉換指定符的第二部分可以按任意次序包含任何下列的標誌字符:</p>
+<dl class="Bl-tag">
+  <dt><b>-</b></dt>
+  <dd>指定被轉換的參數在它的字段中左對齊(數值一般右對齊，如果需要的話，有前導的空格)。</dd>
+  <dt><b>+</b></dt>
+  <dd>指定輸出的數值必須有符號，即使是正數。</dd>
+  <dt><i>space</i></dt>
+  <dd>指定如果數值的第一個字符不是一個符號則向數值的開始處添加空格。</dd>
+  <dt><b>0</b></dt>
+  <dd>指定應當在數值的左側填充零而不是空格。</dd>
+  <dt><b>#</b></dt>
+  <dd>要求一中替代的輸出形式。對於
+      <b>o</b> 和 <b>O</b>
+      轉換它保證第一個數字總是
+      <b>0</b>。對於 <b>x</b> 或 <b>X</b>
+      轉換，除了零之外，在結果的開始處(分別)添加
+      <b>0x</b> 或
+      <b>0X</b>。對於所有浮點數轉換(<b>e</b>、<b>E</b>、<b>f</b>、<b>g</b>、和
+      <b>G</b>)
+      它保證結果總是一個小數點。對於
+      <b>g</b> 和 <b>G</b>
+      轉換它指定刪除尾部的零。</dd>
+</dl>
+<p class="Pp">一個轉換指定符的第三部分是給出這個轉換的最小字段寬度的一個數字。它典型的被用來按列表的(tabular)輸出形式排列(line
+    up)各列(column)。如果被轉換的參數包含的字符比這個最小字段寬度少，則填充它來達到這個最小的字段寬度。填充通常是在被轉換的參數的左側添加額外的空格，但是可以使用
+    <b>0</b>和 <b>-</b>
+    標誌來分別指定在左側填充零或在右側填充空格。如果指定最小字段寬度爲
+    <b>*</b>
+    而不是一個數值，則用給
+    <b>format</b>
+    命令的下一個參數確定最小字段寬度；它必須是一個數值字符串。</p>
+<p class="Pp">一個轉換指定符的第四部分是一個精度，它由一個點號和隨後的一個數值組成。在不同的轉換中按不同的方式使用這個數值。對於
+    <b>e</b>、<b>E</b>、和 <b>f</b>
+    轉換它指定出現在小數點右側的數字的位數。對於
+    <b>g</b> 和 <b>G</b>
+    轉換它指定出現的數字的總數，包括在小數點兩側的數字(但是，除非指定了
+    <b>#</b>
+    標誌，省略在小數點後面的尾部的零)。對於正數轉換，它指定輸出的最小的數字位數(如果需要的話添加前導的零)。對於
+    <b>s</b>
+    轉換它指定輸出的最大的字符數；如果字符串比它長則刪除尾部的字符。如果用
+    <b>*</b>
+    而不是一個數值來指定精度，則用給
+    <b>format</b>
+    命令的下一個參數來確定精度；它必須是一個數值字符串。</p>
+<p class="Pp">一個轉換指定符的第五部分是一個長度修飾符，它必須是
+    <b>h</b> 或 <b>l</b>。如果它是 <b>h</b>
+    則指定數值值在轉換之前必須被截斷(truncate)成16位值。這個選項很少有用。忽略
+    <b>l</b> 修飾符。</p>
+<p class="Pp">一個轉換指定符的最後一部分是確定進行那種轉換的一個字母字符。當前支持下列轉換字符:</p>
+<dl class="Bl-tag">
+  <dt><b>d</b></dt>
+  <dd>把整數轉換成有符號的十進制字符串。</dd>
+  <dt><b>u</b></dt>
+  <dd>把整數轉換成無符號的十進制字符串。</dd>
+  <dt><b>i</b></dt>
+  <dd>把整數轉換成有符號的十進制字符串；整數可以是十進制的，八進制的(有一個前導的
+      <b>0</b>)
+      或十六進制的(有一個前導的
+      <b>0x</b>)。</dd>
+  <dt><b>o</b></dt>
+  <dd>把整數轉換成無符號八進制字符串。</dd>
+  <dt><b>x</b> or <b>X</b></dt>
+  <dd>把整數轉換成無符號十六進制字符串，對
+      <b>x</b>
+      使用數字“0123456789abcdef”而對
+      <b>X</b> 使用數字
+      “0123456789ABCDEF”。</dd>
+  <dt><b>c</b></dt>
+  <dd>把整數轉換成它代表的
+      Unicode 字符。</dd>
+  <dt><b>s</b></dt>
+  <dd>不轉換，只是插入字符。</dd>
+  <dt><b>f</b></dt>
+  <dd>浮點數轉換成有符號的
+      <i>xx.yyy
+      </i>形式的十進制字符串，這裏的
+      <i>y
+      </i>的位數由精度確定(缺省:
+      6)。如果精度是 0
+      則不輸出小數點。</dd>
+  <dt><b>e</b> or <b>e</b></dt>
+  <dd>把浮點數轉換成
+      <i>x.yyy</i><b>e&amp;#177;</b><i>zz
+      </i>形式的科學記數法，這裏的
+      <i>y
+      </i>的位數由精度確定(缺省:
+      6)。如果精度是 0
+      則不輸出小數點。如果使用
+      <b>E</b> 式樣則輸出 <b>E</b>
+      而不是 <b>e</b>。</dd>
+  <dt><b>g</b> or <b>G</b></dt>
+  <dd>如果指數小於 -4
+      或大於等於精度，則把富點數按
+      <b>%e</b> 或 <b>%E</b>
+      來轉換。否則按 <b>%f</b>
+      轉換。省略尾部的零和尾部的小數點。</dd>
+  <dt><b>%</b></dt>
+  <dd>不轉換: 只是插入
+      <b>%</b>。</dd>
+</dl>
+<p class="Pp">數值轉換，被轉換的參數必須是一個正數或浮點數字符串；format
+    把參數轉換成二進制接着依照轉換指定符把它再轉換成一個字符串。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="與_ANSI_SPRINTF_的區別_DIFFERENCES_FROM_ANSI_SPRINTF">與 ANSI SPRINTF 的區別 DIFFERENCES FROM ANSI SPRINTF<a class="anchor" href="#%E8%88%87_ANSI_SPRINTF_%E7%9A%84%E5%8D%80%E5%88%A5_DIFFERENCES_FROM_ANSI_SPRINTF">¶</a></h1>
+除了下列區別之外，format
+  命令的行爲與 ANSI C <b>sprintf</b>
+  過程相同:
+<dl class="Bl-tag">
+  <dt>[1]</dt>
+  <dd>當前不支持 <b>%p</b> 和 <b>%n</b>
+      指定符。</dd>
+  <dt>[2]</dt>
+  <dd>對於 <b>%c</b>
+      轉換，參數必須是一個十進制字符串，它將被轉換成相應的字符值。</dd>
+  <dt>[3]</dt>
+  <dd>忽略 <b>l</b>
+      修飾符；轉換整數值總是有如沒有修飾符存在，而轉換實數值總是有如存在
+      <b>l</b> 修飾符(例如，
+      使用類型 <b>double</b>
+      作爲內部表示)。如果指定了
+      <b>h</b>
+      修飾符則在轉換前截斷整數值。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_SEE_ALSO">參見 SEE ALSO<a class="anchor" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO">¶</a></h1>
+<a href="../../buster/manpages-dev/sprintf.3.en.html">sprintf(3)</a>, string(n)
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="關鍵字_KEYWORDS">關鍵字 KEYWORDS<a class="anchor" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS">¶</a></h1>
+conversion specifier, format, sprintf, string, substitution
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>寒蟬退士</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/08/29</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國_Linux_論壇_man_手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8B_Linux_%E8%AB%96%E5%A3%87_man_%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">8.1</td>
+    <td class="foot-os">Tcl</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+format.3tcl.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-26T21:44:35Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"format(3tcl)\"}}]}"
+</script>

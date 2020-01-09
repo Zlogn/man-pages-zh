@@ -1,0 +1,2673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bootparam(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages/bootparam.7.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es/bootparam.7.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-ja/bootparam.7.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/bootparam.7.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-pt/bootparam.7.pt.html" hreflang="pt">
+<link rel="alternate" href="../../buster/manpages-zh/bootparam.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/bootparam.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; bootparam(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/bootparam.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/bootparam.7.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E5%8F%99" title="描叙">描叙</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E6%95%B0%E5%88%97%E8%A1%A8" title="参数列表">参数列表</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%80%E8%88%AC%E7%9A%84%E3%80%81%E4%B8%8E%E8%AE%BE%E5%A4%87%E6%97%A0%E5%85%B3%E7%9A%84%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0" title="一般的、与设备无关的启动参数">一般的、与设备无关的启动参数</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%A0%B8%E5%BF%83%E5%BC%80%E5%8F%91%E8%80%85%E6%89%80%E4%BD%BF%E7%94%A8%E7%9A%84%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0" title="核心开发者所使用的启动参数">核心开发者所使用的启动参数</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%BF%E7%94%A8%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F%E7%A3%81%E7%9B%98%E7%9A%84%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0" title="使用内存虚拟磁盘的启动参数">使用内存虚拟磁盘的启动参数</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SCSI%E8%AE%BE%E5%A4%87%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0" title="SCSI设备启动参数">SCSI设备启动参数</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%A1%AC%E7%9B%98%E9%A9%B1%E5%8A%A8%E5%99%A8" title="硬盘驱动器">硬盘驱动器</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#IBM_MCA%E6%80%BB%E7%BA%BF%E8%AE%BE%E5%A4%87" title="IBM MCA总线设备">IBM MCA总线设备</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#CD-ROMs_%28Non-SCSI/ATAPI/IDE%29" title="CD-ROMs (Non-SCSI/ATAPI/IDE)">CD-ROMs (Non-SCSI/ATAPI/IDE)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87" title="以太网络设备">以太网络设备</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%BD%AF%E7%9B%98%E9%A9%B1%E5%8A%A8%E5%99%A8%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F" title="软盘驱动器驱动程序">软盘驱动器驱动程序</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%A3%B0%E5%8D%A1%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F" title="声卡驱动程序">声卡驱动程序</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ISDN_%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F" title="ISDN 驱动程序">ISDN 驱动程序</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%B2%E5%8F%A3%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F" title="串口驱动程序">串口驱动程序</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%89%93%E5%8D%B0%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F" title="打印驱动程序">打印驱动程序</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%BC%A0%E6%A0%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F" title="鼠标驱动程序">鼠标驱动程序</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%A7%86%E9%A2%91%E8%AE%BE%E5%A4%87" title="视频设备">视频设备</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85" title="作者">作者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E8%80%83" title="参考">参考</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D" title="[中文版维护人]">[中文版维护人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/bootparam.7.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/bootparam.7.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/bootparam.7.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages/bootparam.7.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es/bootparam.7.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/bootparam.7.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/bootparam.7.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pt/bootparam.7.pt.html" title="Portuguese (pt)">português (pt)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/bootparam.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/bootparam.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">BOOTPARAM(7)</td>
+    <td class="head-vol">Linux Programmer&#39;s Manual</td>
+    <td class="head-rtitle">BOOTPARAM(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+bootparam -
+  介绍Linux核心的启动参数
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描叙">描叙<a class="anchor" href="#%E6%8F%8F%E5%8F%99">¶</a></h1>
+Linux
+  核心在启动的时候可以接受指定的&#34;命令行参数&#34;或&#34;启动参数&#34;．
+  在通常情况下，由于核心有可能无法识别某些硬件，
+  或可能将某些硬件识别为不正确的配置，因此，
+  这些参数可以被用来提供正确的硬件配置参数。
+  当Linux核心被BIOS直接启动的时候
+  （比如说你的核心是从使用了
+  &#34;cp zImage /dev/fd0&#34; 命令制造的 Linux
+  启动软盘来启动的），
+  你无法指定任何的启动参数。
+  因此，为了能够指定启动参数，你必须使用某些能够传递启动参数的软件，
+  例如 LILO 或 Loadlin。
+  为了使用很少的参数来改变的核心配置，
+  可以使用 rdev，查看
+  <b>rdev（8）</b>
+  可以得到更多的细节。
+<p class="Pp">由 Werner Almesberger 开发的 LILO
+    程序 (LInux LOader)
+    是最普遍的启动配置软件。
+    它能够启动各种不同的系统核心，
+    这些启动配置信息被放置在一个简单明了的文本文件中
+    （请看 <b>lilo（8）</b> 和
+    <b><a href="../../buster/manpages-zh/lilo.conf.5.zh_CN.html">lilo.conf(5)</a>.）</b></p>
+<p class="Pp">LILO 可以启动象
+    DOS，OS/2，Linux，FreeBSD，UnixWare
+    这样的操作系统，
+    而且灵活性也非常强。</p>
+<p class="Pp">另外一个较为普遍的启动软件是&#34;LoadLin&#34;。这是一个基于
+    DOS 操作系统的软件。
+    该软件能够从DOS提示符下启动Linux核心（使用启动参数），
+    只要某些必需的资源可用就行。
+    这对于那些希望从 DOS
+    系统中启动 Linux
+    的人来说是很不错的方法。</p>
+<p class="Pp">如果你的硬件能够被
+    DOS
+    驱动程序启用的话，LoadLin也会是非常有用的。
+    一个最常见的例子是设置与
+    SoundBlaster 兼容的声卡。
+    这些声卡通过使用 DOS
+    驱动程序设定一些寄存器就可以将它们设置成为
+    SB 兼容模式的声卡。
+    在DOS下启动这些声卡的启动程序，然后使用LoadLin程序启动Linux，
+    这样就可以避免由于重新启动Linux系统而造成声卡被重新设置。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参数列表">参数列表<a class="anchor" href="#%E5%8F%82%E6%95%B0%E5%88%97%E8%A1%A8">¶</a></h1>
+核心参数行被解析成为一个由空格分隔的字符串列表（即启动参数表）。
+  大部分的启动参数的格式就象下面这样
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>名字[=值1]，[值2]……[，值10]</dd>
+</dl>
+<p class="Pp">其中&#34;名字&#34;是一个唯一关键字，被用来区分接受值（如果有的话）那一部分核心。
+    要注意的是 10
+    个值的限制是确实存在的，
+    目前的程序代码只能对每个关键字处理
+    10 个逗号分隔的参数
+    （当然，在一些复杂的应用中，
+    你可以通过重新使用同样的关键字来传递多于10个的参数，
+    只要配置程序可以支持该方法）</p>
+<p class="Pp">大部分的排序工作是在
+    linux/init/main.c 中进行的。
+    首先，核心检查参数是否为
+    &#34;root=&#34;、&#34;nfsroot=&#34;、&#34;nfsaddrs=&#34;、&#34;ro&#34;、&#34;rw&#34;、&#34;debug&#34;
+    和&#34;init&#34;这些特殊参数中的一种。这些参数的意义我们将在下面说明。</p>
+<p class="Pp">然后，核心会搜索&#34;配置程序队列&#34;（bootsetups队列）
+    来查看指定的参数字符串（比如&#34;foo&#34;）是不是与某个配置指定设备
+    或是核心的配置程序建立了关联。
+    例如假设你传递给核心
+    foo=3,4,5,6， 那么核心会搜索
+    bootsetups
+    队列看看&#34;foo&#34;是否已经注册。
+    如果是，那么核心将运行与&#34;foo&#34;关联的配置程序（比如foo_setup()）
+    并且将参数3，4，5，6交给核心命令列。</p>
+<p class="Pp">任何象 &#34;foo=bar&#34;
+    这样格式的参数不会被上面所说的那样，
+    作为一个配置程序的关联被接受，而是被解释成为一个环境变量的设置。
+    一个（无用的？）例子就是使用
+    &#34;TERM=vt100&#34;
+    作为核心的启动参数。</p>
+<p class="Pp">任何既不被核心接受又不被解释为环境变量的参数会被传送给第一个系统进程，
+    通常这会是init程序。最常用的传递给
+    init 进程的参数是
+    &#34;single&#34;，
+    它告诉init使用单用户模式启动计算机，并且不要执行任何的守护进程。
+    查阅帮助，看看你所装版本的
+    init
+    程序可以支持的参数。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="一般的、与设备无关的启动参数">一般的、与设备无关的启动参数<a class="anchor" href="#%E4%B8%80%E8%88%AC%E7%9A%84%E3%80%81%E4%B8%8E%E8%AE%BE%E5%A4%87%E6%97%A0%E5%85%B3%E7%9A%84%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="`init=...&#39;">`init=...&#39;<a class="anchor" href="#%60init=...%27">¶</a></h2>
+这个启动参数提供核心执行时的初始化命令。如果它没有被设置，
+  或者没有被找到的话，核心会去尝试调用
+  <i>/etc/init</i>, 然后是 <i>/bin/init</i>,
+  然后是 <i>/sbin/init</i>, 最后是
+  <i>/bin/sh</i>
+  ，如果都失败了，就会提示一个异常信息。
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`nfsaddrs=...&#39;">`nfsaddrs=...&#39;<a class="anchor" href="#%60nfsaddrs=...%27">¶</a></h2>
+该启动参数设置
+  nfs（网络文件系统）启动地址为指定的字符串值。
+  该启动地址被用于网络启动中。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`nfsroot=...&#39;">`nfsroot=...&#39;<a class="anchor" href="#%60nfsroot=...%27">¶</a></h2>
+该动参数设置
+  nfs（网络文件系统）根目录名为指定字符串。
+  如果该字符串不是以&#39;/&#39;、&#39;,&#39;或者一个数字开始的，则该字符串加上&#34;/tftpboot/&#34;的前缀。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`no387&#39;">`no387&#39;<a class="anchor" href="#%60no387%27">¶</a></h2>
+(只有当CONFIG_BUGi386被定义后才有效)
+  某些 i387 协处理器在使用
+  32
+  位保护模式时会出现错误。
+  例如，一些早期的ULSI-387芯片在处理浮点运算时会出现死锁的情况。
+  使用&#34;no387&#34;启动参数可以让Linux忽略你的算术协处理器的存在。
+  当然，这时你就必须将你的核心编译成为支持数学仿真模式。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`no-hlt&#39;">`no-hlt&#39;<a class="anchor" href="#%60no-hlt%27">¶</a></h2>
+(只有当CONFIG_BUGi386被定义后才有效)
+  某些早期的 i486DX-100
+  的处理器芯片在使用
+  &#34;halt&#34; 时会出现问题，
+  使用这个指令后它不会正常的返回到操作模式。
+  使用 &#34;no-halt&#34; 指令告诉 Linux
+  在没有事情可做的时候，
+  只是执行一个无限的循环指令，而不是让CPU进入&#34;halt&#34;模式。
+  这样就可以令人们使用这些有缺陷的芯片来运行
+  Linux。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`root=...&#39;">`root=...&#39;<a class="anchor" href="#%60root=...%27">¶</a></h2>
+这个参数告诉核心在启动的时候使用哪个设备被作为根文件系统。
+  其缺省值是你在编译核心的时候就所确定的根设备。
+  如果你想要修改该值，比如说，将第二个软盘驱动器作为根设备，
+  你可以使用 &#34;root=/dev/fd1&#34;
+  （根设备也可以用
+  <b><a href="../../buster/manpages-zh/rdev.8.zh_CN.html">rdev(8)</a>）；</b> 来设置。
+<p class="Pp">根设备能够以符号形式或数字形式来指定。一种符号指定形式是
+    /dev/XXYN， 其中 XX
+    代表设备类型（ &#34;hd&#34;
+    代表普通 IDE
+    硬盘，紧跟其后的 Y
+    的范围是 &#34;a&#34; 到
+    &#34;d&#34;； &#34;SD&#34; 代表 SCSI
+    硬盘，紧跟其后的 Y
+    的范围是 &#34;a&#34; 到
+    &#34;e&#34;；&#34;ad&#34; 代表 Atari
+    ACSI磁盘， 紧跟其后的 Y
+    的范围是 &#34;a&#34; 到
+    &#34;e&#34;；&#34;ez&#34; 代表 Syquest EZ135
+    兼容的使用并口的可移动硬盘，
+    紧跟其后的 Y
+    的值只能是&#34;a&#34;；&#34;xd&#34;
+    代表 XT
+    兼容的磁盘，紧跟其后的
+    Y 的值是 &#34;a&#34; 或者是
+    &#34;b&#34;；&#34;fd&#34;
+    代表软驱，而 Y
+    代表软驱的序号 - fd0
+    代表 DOS 的 &#34;A：&#34;，
+    fd1代表DOS的 &#34;B：&#34;），Y
+    表示驱动器字母或序号。N
+    代表驱动器的分区号
+    （以十进制数值表示，当然，软驱是没有该信息的）。
+    目前的核心可以使用更多的驱动设备，
+    比如
+    nfs，ram，scd，mcd，cdu535，aztcd，cm206cd，gscd，sbpcd，sonycd，bpcd，
+    其中大部分都是 CD-ROM
+    设备。 （nfs
+    指示网络启动的位置；ram
+    表示一个 ram
+    虚拟磁盘（ram
+    表示可读写储存器）。</p>
+<p class="Pp">需要注意的是以上这些指定对你文件系统上的设备名称并没有做任何实质改变，
+    &#34;/dev/&#34;
+    部分的描述只是出于传统习惯。</p>
+<p class="Pp">你也可以通过使用数字形式的主/次设备号指定根设备，
+    但这是很笨拙和不方便的方法。
+    （例如，/dev/sda3
+    的主设备号是
+    8，次设备号是 3，
+    所以你也可以使用
+    &#34;root=0x0803&#34;
+    来指定根设备。）</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`ro&#39;和`rw&#39;">`ro&#39;和`rw&#39;<a class="anchor" href="#%60ro%27%E5%92%8C%60rw%27">¶</a></h2>
+&#34;ro&#34;
+  选项告诉核心使用&#34;只读&#34;方式装配文件系统。
+  这样可以让&#34;文件一致性检查&#34;程序
+  （fsck程序，用来检查磁盘的工具，类似
+  DOS 的 scandisk 程序）
+  能够在一种所谓&#34;静止&#34;
+  （也就是说没有任何对文件系统的写操作）的文件系统中执行。
+  需要进行写操作的进程必须等到该文件系统使用
+  &#34;读/写&#34;方式重新装配以后才能进行，
+  例如，使用了&#34;mount -w -n -o remount
+  /&#34;命令。 （请查看
+  <b><a href="../../buster/mount/mount.8.en.html">mount(8)</a>。)</b>
+<p class="Pp">&#34;rw&#34;
+    选项告诉核心使用&#34;可读写&#34;方式装配文件系统。这是缺省值。</p>
+<p class="Pp">只读方式和可读写方式的选择可以使用
+    <a href="../../buster/manpages-zh/rdev.8.zh_CN.html">rdev(8)</a>. 来设定。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`reserve=...&#39;">`reserve=...&#39;<a class="anchor" href="#%60reserve=...%27">¶</a></h2>
+该参数用来设定保留区域，使得该区域的
+  I/O
+  端口不会被检测。该命令的格式是
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>reserve=</b><i>iobase,extent[,iobase,extent]...</i></dd>
+</dl>
+<p class="Pp">在某些情况下你的机器也许必须避免设备驱动程序检测
+    （自动检测）某些指定区域的设备。
+    这些情况有可能是因为由于检测会导致硬件错误，或者硬件会被错误地识别，
+    又或者你只是不想核心对该硬件进行初始化。</p>
+<p class="Pp">reserve(保留)启动参数指定一个不要检测的
+    I/O 端口保留区。
+    设备驱动程序不会检测保留区域的
+    I/O 端口，
+    除非其他的启动参数明确的指定需要去检测。</p>
+<p class="Pp">例如，命令行</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>reserve=0x300,32 blah=0x300</dd>
+</dl>
+<p class="Pp">表示设置保留 I/O
+    区域 0x300 到
+    0x31f（共32个端口）
+    不会被 `blah&#39;
+    程序以外的驱动程序所检测。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`mem=...&#39;">`mem=...&#39;<a class="anchor" href="#%60mem=...%27">¶</a></h2>
+PC
+  规范定义的返回内存数的
+  BIOS 调用最大可以返回 64MB
+  内存。 Linux 使用这个 BIOS
+  调用检测机器安装了多少内存。
+  如果你拥有超过 64MB
+  的内存，就可以使用这个参数告诉
+  Linux 你的内存数。
+  该值可以是 10
+  进制的或者是 16
+  进制的（加上 0x
+  的前缀），
+  后缀也可以加上 &#34;k&#34;
+  （乘以 1024）或 &#34;M&#34;
+  （乘以 1048576）。 下面是
+  Linux 初始人 Linus 对 &#34;mem=&#34;
+  参数使用的声明：
+  &#34;核心能够接受任何你给予的
+  &#39;mem=xx&#39; 参数，
+  但是如果你欺骗它的话，它迟早会让你死的很难看。
+  参数用来指定最高位的
+  RAM 地址，所以 &#39;mem=0x1000000&#39;
+  表示你拥有 16MB 的内存。
+  而对于96MB内存的机器来说你应该设置为
+  &#39;mem=0x6000000&#39;。
+<p class="Pp">注意注意注意：有些机器可能会将内存高端设置为
+    BIOS 所使用，
+    所以你可能将不能全部拥有
+    96MB 地址空间。
+    反之，有些芯片可以将包括
+    BIOS
+    的物理内存影射到内存高端去，
+    所以，你可以用的实际空间可能会是
+    96MB+384kB。 但是如果你告诉
+    Linux
+    核心你拥有的内存超出你的实际内存的话，将会发生很糟糕的事情。
+    也许躲得过初一，躲不过十五。&#34;</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`panic=N&#39;">`panic=N&#39;<a class="anchor" href="#%60panic=N%27">¶</a></h2>
+在缺省情况下，核心并不会在异常后重新启动系统，
+  但是这个参数可以指定内核在发生异常后
+  N 秒后重新启动（如果
+  N&gt;0）。
+  这个异常时限也可以使用
+  &#34;echo N&gt;/proc/sys/kernel/panic&#34; 来设定。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`reboot=[warm|cold][,[bios|hard]]&#39;">`reboot=[warm|cold][,[bios|hard]]&#39;<a class="anchor" href="#%60reboot=%5Bwarm%7Ccold%5D%5B,%5Bbios%7Chard%5D%5D%27">¶</a></h2>
+（只有当 CONFIG_BUGi386
+  被定义的时候该参数才起作用）
+  从 2.0.22
+  版本后的核心开始，reboot
+  命令在缺省情况下使用冷启动。
+  你可以使用 &#34;reboot=warm&#34;
+  来进行老版本所的缺省的热启动方式。
+  （冷启动意味着对所有的硬件设备进行重新设置，
+  但是也有可能令在磁盘缓冲区中尚未写到磁盘上的数据被破坏。
+  热启动的优点是速度比较快。）
+  在缺省情况下，
+  要求键盘控制器向机器发出可以重新启动的低电位脉冲是很困难的，
+  但是至少有一种类型的主板不会这样工作。
+  选项 &#34;reboot=bios&#34; 将用 BIOS
+  的设置代替跳线。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`nosmp&#39;_和_`maxcpus=N&#39;">`nosmp&#39; 和 `maxcpus=N&#39;<a class="anchor" href="#%60nosmp%27_%E5%92%8C_%60maxcpus=N%27">¶</a></h2>
+（该参数只有当 __SMP__
+  参数被定义的时候才有效）
+  命令行选项 &#34;nosmp&#34; 或
+  &#34;maxcpus=0&#34; 将会禁止激活
+  SMP（对称多处理）功能，
+  选项 &#34;maxcpus=N&#34; 限制在 SMP
+  方式下工作的 CPU
+  最大数目为 N．
+<p class="Pp"></p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="核心开发者所使用的启动参数">核心开发者所使用的启动参数<a class="anchor" href="#%E6%A0%B8%E5%BF%83%E5%BC%80%E5%8F%91%E8%80%85%E6%89%80%E4%BD%BF%E7%94%A8%E7%9A%84%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="`debug&#39;">`debug&#39;<a class="anchor" href="#%60debug%27">¶</a></h2>
+核心信息被传递给核心的日志守护进程
+  klogd
+  使得它们能够被记录在磁盘中。优先级高于
+  <i>console_loglevel</i>
+  的信息也可以在控制台上被显示出来。
+  （如果想了解信息优先级，可以去查看&lt;linux/kernel.h&gt;文件。）
+  在缺省情况下，所有比调试信息级别高的信息都会被写入日志文件。
+  但是这个启动参数的设置，可以使得核心将
+  DEBUG（调试信息）级别的信息写到日志里。
+  console loglevel
+  也能够在系统运行时通过使用
+  klogd 来设置。 请看 <a href="../../buster/busybox-syslogd/klogd.8.en.html">klogd(8)</a>.
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`profile=N&#39;">`profile=N&#39;<a class="anchor" href="#%60profile=N%27">¶</a></h2>
+用来激活一个核心记录程序。
+  如果你需要了解核心在什么地方消耗其CPU周期，可以通过设置
+  <i>prof_shift</i>
+  为一个非零值来激活核心记录程序。
+  可以通过在编译内核的时候指定
+  CONFIG_PROFILE 值也可以通过
+  &#34;profile=&#34; 选项来指定
+  <i>prof_shift</i> 的值。 当 <i>prof_shift</i>
+  通过以上方式指定为
+  N，或通过 CONFIG_PROFILE_SHIT
+  的方式指定，
+  或者直接使用其缺省值
+  2 的时候，
+  这个值表示记录程序使用
+  prof_shift
+  个时间间隔进行记录：
+  每个时间间隔是一个时钟滴答。
+  当系统执行核心代码的时候，一个记数器的值会不断的增加。
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>profile[address &gt;&gt; prof_shift]++;</dd>
+</dl>
+<p class="Pp">原始的配置文件可以从
+    <i>/proc/profile</i>.
+    中读到。或者你也可以使用象
+    readprofile.c
+    之类的工具来阅读配置文件。任何写到
+    <i>/proc/profile</i>
+    中的操作将清除记数器。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`swap=N1,N2,N3,N4,N5,N6,N7,N8&#39;">`swap=N1,N2,N3,N4,N5,N6,N7,N8&#39;<a class="anchor" href="#%60swap=N1,N2,N3,N4,N5,N6,N7,N8%27">¶</a></h2>
+设置控制核心的虚拟存储交换算法的
+  8 个参数。这8个参数是
+  max_page_age, page_advance, page_decline, page_initial_age, age_cluster_fract,
+  age_cluster_min, pageout_weight, bufferout_weight。
+  只能用于核心控制。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`buff=N1,N2,N3,N4,N5,N6&#39;">`buff=N1,N2,N3,N4,N5,N6&#39;<a class="anchor" href="#%60buff=N1,N2,N3,N4,N5,N6%27">¶</a></h2>
+设置核心缓存管理的 6
+  个参数，分别是 max_buff_age,
+  buff_advance, buff_decline, buff_initial_age, bufferout_weight,
+  buffermem_grace。
+  同样也只能用于核心控制
+<p class="Pp"></p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="使用内存虚拟磁盘的启动参数">使用内存虚拟磁盘的启动参数<a class="anchor" href="#%E4%BD%BF%E7%94%A8%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F%E7%A3%81%E7%9B%98%E7%9A%84%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0">¶</a></h1>
+（该参数只在核心使用
+  CONFIG_BLK_DEV_RAM
+  进行编译后才有效）
+  在通常情况下，在 Linux
+  下使用一个内存虚拟磁盘（RAMDISK）并不是一个好的方法
+  -
+  因为系统会自动、高效的使用可用的内存。
+  但是当用软盘启动的时候（或者当建立一个启动软盘的时候），
+  将软盘的内容读到一个内存虚拟磁盘中是非常有用的。
+  另外的情况也有可能是有一些模块（或者是文件系统又或者是硬件的）
+  必须在主磁盘被访问前被调到内存中来。
+<p class="Pp">在 1.3.48 版本的 Linux
+    中，ramdisk
+    的操作被彻底的改变了。
+    在 1.3.48
+    以前的版本中，内存是静态分配的，&#34;ramdisk
+    = N&#34;
+    参数提供内存的大小。
+    （这些也能够在核心被编译的时候被设置，或者也可以使用
+    <a href="../../buster/manpages-zh/rdev.8.zh_CN.html">rdev(8)</a>.来进行设置） 从
+    1.3.48
+    开始，内存虚拟磁盘开始使用高速缓存，而且可以动态的增加其空间。
+    如果需要了解有关最新的内存虚拟磁盘设置（比如你要了解怎么使用
+    <a href="../../buster/manpages-zh/rdev.8.zh_CN.html">rdev(8)</a>
+    来进行ramdisk的设置）
+    请查看
+  <i>/usr/src/linux/Documentation/ramdisk.txt</i>.</p>
+<p class="Pp">有关的参数一共有四个，两个是布尔变量，两个是整型值。</p>
+<p class="Pp"></p>
+<section class="Ss">
+<h2 class="Ss" id="`load_ramdisk=N&#39;">`load_ramdisk=N&#39;<a class="anchor" href="#%60load_ramdisk=N%27">¶</a></h2>
+如果
+  N=1，载入一个内存虚拟磁盘。如果
+  N=0，不载入内存虚拟磁盘（这是缺省值）。
+<p class="Pp"></p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`prompt_ramdisk=N&#39;">`prompt_ramdisk=N&#39;<a class="anchor" href="#%60prompt_ramdisk=N%27">¶</a></h2>
+如果
+  N=1，需要提示插入软盘。（这是缺省值）
+  如果
+  N=0，没有提示。（因此，这个参数永远也不会需要）
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`ramdisk_size=N&#39;_或者_`ramdisk=N&#39;">`ramdisk_size=N&#39; 或者 `ramdisk=N&#39;<a class="anchor" href="#%60ramdisk_size=N%27_%E6%88%96%E8%80%85_%60ramdisk=N%27">¶</a></h2>
+设置内存虚拟磁盘的最大空间为
+  N kB。缺省值是 4096 kB (4MB)。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`ramdisk_start=N&#39;">`ramdisk_start=N&#39;<a class="anchor" href="#%60ramdisk_start=N%27">¶</a></h2>
+设置启动块数值（也就是内存虚拟磁盘从软盘的多少偏移量位置开始）为
+  N。
+  由于紧跟在内存虚拟磁盘后面的是核心映象文件，所以这个设置是必要的。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`noinitrd&#39;">`noinitrd&#39;<a class="anchor" href="#%60noinitrd%27">¶</a></h2>
+（只有核心在编译时使用了
+  CONFIG_BLK_DEV_RAM 标志和 CONFIG_BLK_DEV_INITRD
+  标志时才会有效）
+  目前，我们基本上可以通过编译核心使其支持使用初始化内存虚拟磁盘
+  （initrd:Initial Ramdisk）。当启用 initrd
+  的时候，
+  启动进程会载入核心和一个已经初始化的内存虚拟磁盘，
+  然后核心会将 initrd
+  转变为一个&#34;普通的&#34;内存虚拟磁盘，
+  并将它激活为可读写的根设备。接下来，会被执行
+  /linuxrc，
+  &#34;真正的&#34;根文件系统被激活，而
+  initrd
+  文件系统则被转移到
+  /initrd 目录下。
+  最后顺序执行正常的启动程序（比如说是
+  /sbin/init 程序）。
+  如果希望得到关于 initrd
+  的详细的介绍，可以参考
+  <i>/usr/src/linux/Documentation/initrd.txt．</i>
+<p class="Pp">自然，&#39;noinitrd&#39;
+    参数告诉核心，尽管核心是按照使用
+    initrd 的参数来编译的，
+    但是也不需要使用我们上面描述的过程。但是，仍然保留
+    initrd 的所有数据到 <i>/dev/initrd</i>.
+    目录下。
+    （该设备只能被使用一次，数据在最后一个使用
+    initrd
+    的进程被关闭后会释放掉）
+    <i>/dev/initrd</i>．）</p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SCSI设备启动参数">SCSI设备启动参数<a class="anchor" href="#SCSI%E8%AE%BE%E5%A4%87%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0">¶</a></h1>
+关于这个区域的一些符号说明：
+<p class="Pp"><i>iobase</i>
+    第一个SCSI主设备占用的I/O端口。它用
+    16
+    进制的数据指定，一般介于
+    0x200 到 0x3ff 之间。</p>
+<p class="Pp"><i>irq</i> SCSI
+    卡设置的硬件中断号。具体的值取决于
+    SCSI 卡的具体要求，
+    一般使用的中断号是
+    5，7，9，10，11，12 和 15。
+    其他的中断号一般会被一些外设所占用，比如说，IDE
+    接口的硬盘，软盘驱动器，串口等等。</p>
+<p class="Pp"><i>scsi-id</i> SCSI 适配器在 SCSI
+    总线上使用的用来标识自身的识别号码（ID）。
+    只有一部分 SCSI
+    适配器允许你改动该 ID
+    的值，大部分都是被固化好的。
+    缺省值一般是
+    7，可是，在 Seagate 和Future Domain
+    TMC-950 的板卡上是 6。</p>
+<p class="Pp"><i>parity</i> 是否允许 SCSI
+    适配器在交换数据的时候使用奇偶效验。
+    指定一个非零值，奇偶效验会起用，如果指定为零则不会启动奇偶效验。
+    同样，不是所有的 SCSI
+    适配卡支持选择奇偶效验的启动参数。</p>
+<p class="Pp"></p>
+<section class="Ss">
+<h2 class="Ss" id="`max_scsi_luns=...&#39;">`max_scsi_luns=...&#39;<a class="anchor" href="#%60max_scsi_luns=...%27">¶</a></h2>
+一个 SCSI
+  设备能够使用一些包括它自己在内的&#34;子设备&#34;。
+  最常用的例子是现在的
+  SCSI CD-ROM
+  设备能够同时处理多张光盘。
+  每张光盘使用&#34;逻辑单元号码&#34;(LUN)来确定其位置。
+  当然，大部分设备，比如硬盘，磁带机都只能处理一个设备，因此它们的
+  LUN 会被设置为 0
+  一些设计上有缺陷的 SCSI
+  设备一旦发现 LUN
+  号码不为零时，就可能不再继续工作。
+  因此，如果在编译的时候没有设置
+  CONFIG_SCSI_MULTI_LUN 标志，
+  新的核心将使用 0
+  作为缺省值。
+<p class="Pp">如果需要在启动的时候指定
+    LUN 的值，可以使用
+    &#34;max_scsi_luns=n&#34;
+    作为启动参数， 而 n
+    是一个大于 1 小于 8
+    的数值。
+    为了避免上面描述的问题，使用
+    n=1
+    可以避免那些设备的造成的错误。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="SCSI_磁带配置">SCSI 磁带配置<a class="anchor" href="#SCSI_%E7%A3%81%E5%B8%A6%E9%85%8D%E7%BD%AE">¶</a></h2>
+一些 SCSI
+  磁带设备的启动设置能够使用下面的格式来进行：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>st=</b><i>buf_size[,write_threshold[,max_bufs]]</i></dd>
+</dl>
+<p class="Pp">前面的两个数字指定单元的大小（kB），缺省的值
+    <i>buf_size</i> 是
+    32kB，最大的值可以指定为
+    16384kB。 <i>write_threshold</i>
+    是磁带得到的缓存区大小，缺省的是
+    30kB。
+    其最大的缓存值依据不同的驱动设备的个数而得到不同的值，缺省值是两个设备。
+    缺省的格式可能象下面这样</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>st=32,30,2</dd>
+</dl>
+<p class="Pp">你能够在核心源码的
+    scsi 目录下的 README.st
+    中看到所有的细节。</p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Adaptec_aha151x,_aha152x,_aic6260,_aic6360,_SB16-SCSI_配置">Adaptec aha151x, aha152x, aic6260, aic6360, SB16-SCSI 配置<a class="anchor" href="#Adaptec_aha151x,_aha152x,_aic6260,_aic6360,_SB16-SCSI_%E9%85%8D%E7%BD%AE">¶</a></h2>
+在这一句中 aha
+  数值代表适配卡类型，aic
+  数值表示适配卡的 SCSI
+  芯片类型， 也包括象
+  Soundblaster-16 这样的 SCSI 设备。
+<p class="Pp">SCSI
+    主设备探测程序将从已经安装好的
+    BIOS 中进行查找，
+    如果没有的话，该检测将不会找到你的设备。
+    那么，你就必须使用以下格式的启动参数：</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>aha152x=</b><i>iobase[,irq[,scsi-id[,reconnect[,parity]]]]</i></dd>
+</dl>
+<p class="Pp">如果驱动程序是以调试模式编译的话，第六个值能够被指定设置调试的级别。</p>
+<p class="Pp">其他的参数已经在上面描述过了。值得一提的是
+    <i>reconnect</i>
+    参数如果是非零值就能够允许设备&#34;断连和重新连接&#34;。下面是一个例子。</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>aha152x=0x340,11,7,1</dd>
+</dl>
+<p class="Pp">要注意到的是参数必须按指定的顺序来设定，
+    这意味着如果你需要指定奇偶参数的话你就必须指定其他的所有参数。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Adaptec_aha154x_配置">Adaptec aha154x 配置<a class="anchor" href="#Adaptec_aha154x_%E9%85%8D%E7%BD%AE">¶</a></h2>
+aha1542
+  系列的适配卡上有一个
+  i82077 软盘控制器，aha1540
+  系列的卡没有。
+  这种卡叫做总线主控卡，它们能够通过参数的设置&#34;合理&#34;的与其他设备共享总线。
+  它们的启动参数就象下面这样：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>aha1542=</b><i>iobase[,buson,busoff[,dmaspeed]]</i></dd>
+</dl>
+<p class="Pp">通常可用的 iobase
+    值会是
+    0x130，0x134，0x230，0x234，0x330，0x334
+    其中的一个。
+    兼容的卡能够允许使用其他值。</p>
+<p class="Pp"><i>buson</i>, <i>busoff</i>
+    值表示的是该卡占用 ISA
+    总线的时间（以微秒计）。缺省值是
+    11 微秒开，4 微秒关，
+    这样其他的卡（比如说基于
+    ISA 总线的 LANCE
+    以太网卡）就能够有机会访问
+    ISA 总线。</p>
+<p class="Pp"><i>dmaspeed</i>
+    值代表直接存储访问
+    （DMA） 的传输速度
+    （以MB/秒为单位）。
+    缺省值是 5MB/秒。
+    较新版本的卡允许你使用软件设置来选择该值，老版本的卡使用跳线来设置。
+    如果你的主板支持的话，你能够将该值提高到
+    10MB/秒。 如果使用
+    5MB/秒以上的传输速度，你就应该进行很小心的实验。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Adaptec_aha274x,_aha284x,_aic7xxx_配置">Adaptec aha274x, aha284x, aic7xxx 配置<a class="anchor" href="#Adaptec_aha274x,_aha284x,_aic7xxx_%E9%85%8D%E7%BD%AE">¶</a></h2>
+这些板卡能够接受象下面这样格式的参数：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>aic7xxx=</b><i>extended,no_reset</i></dd>
+</dl>
+<p class="Pp"><i>extended</i>
+    值，如果是非零的话，表明大容量磁盘的扩展转换模式可以被使用。而
+    <i>no_reset</i>
+    值如果是非零的话，告诉驱动程序在设置
+    SCSI
+    卡后重新启动时不要重新设置
+    SCSI 总线。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="AdvanSys_SCSI_Hosts_configuration_(`advansys=&#39;)">AdvanSys SCSI Hosts configuration (`advansys=&#39;)<a class="anchor" href="#AdvanSys_SCSI_Hosts_configuration_(%60advansys=%27)">¶</a></h2>
+AdvanSys
+  驱动程序能够接收（最多）
+  4 个 I/O 地址用于来探测
+  AdvanSys SCSI 卡。
+  要注意的是这些值（如果使用了它们）并不会对
+  EISA 总线或者 PCI
+  总线的检测有任何作用。
+  它们只能用来检测 ISA
+  总线和 VLB 总线型的卡。
+  另外，如果驱动程序是使用调试模式编译的话，
+  调试级别能够通过加入一个
+  0xdeb[value] 参数来设定。 value
+  可以是
+  0-f（16进制），代表可以得到多达
+  16 个级别的调试信息。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="AM53C974">AM53C974<a class="anchor" href="#AM53C974">¶</a></h2>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>AM53C974=</b><i>host-scsi-id,target-scsi-id,max-rate,max-offset</i></dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="BusLogic_SCSI_Hosts_配置_(`BusLogic=&#39;)">BusLogic SCSI Hosts 配置 (`BusLogic=&#39;)<a class="anchor" href="#BusLogic_SCSI_Hosts_%E9%85%8D%E7%BD%AE_(%60BusLogic=%27)">¶</a></h2>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>BusLogic=</b><i>N1,N2,N3,N4,N5,S1,S2,...</i></dd>
+</dl>
+<p class="Pp">作为更深层次的讨论，我们来分析一下
+    BusLogic
+    命令行参数，参考一下
+    <i>/usr/src/linux/drivers/scsi/BusLogic.c</i>
+    (在我看的核心版本中是3149-3270行).
+    下面的文字是一段精辟的摘录</p>
+<p class="Pp">参数 N1-N5
+    是整数。参数 S1
+    是字符串。N1
+    是适配卡的 I/O 地址。 N2
+    是标记队列深度（Tagged Queue
+    Depth），
+    是为那些支持标记队列（Tagged
+    Queue）的目标设备而设置的。
+    N3
+    是总线停滞时间（以秒计），
+    这是表示从 SCSI
+    适配卡重新启动 SCSI
+    总线到发出一个 SCSI
+    指令之间的时间。 N4
+    是区域选项（只适合特定的单个适配卡）
+    N5
+    是全局选项（针对所有的适配卡）</p>
+<p class="Pp">字符串参数用来对于标记队列控制
+    （TQ:Default，TQ:Enable，TQ:Disable，TQ:&lt;Per-Target-Spec&gt;），
+    出错处理（ER:Default，ER:HardReset，ER:BusDeviceReset，ER:None，ER:&lt;Per-Target-Spec&gt;）
+    和适配卡检测（NoProbe，NoProbeISA，NoProbePCI）。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="EATA/DMA_配置">EATA/DMA 配置<a class="anchor" href="#EATA/DMA_%E9%85%8D%E7%BD%AE">¶</a></h2>
+缺省的需要检测的 I/O
+  端口能够使用以下的参数来改变：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>eata=</b><i>iobase,iobase,...</i><b>.</b></dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Future_Domain_TMC-16x0_配置">Future Domain TMC-16x0 配置<a class="anchor" href="#Future_Domain_TMC-16x0_%E9%85%8D%E7%BD%AE">¶</a></h2>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>fdomain=</b><i>iobase,irq[,adapter_id]</i></dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Great_Valley_Products_(GVP)_SCSI_控制器配置">Great Valley Products (GVP) SCSI 控制器配置<a class="anchor" href="#Great_Valley_Products_(GVP)_SCSI_%E6%8E%A7%E5%88%B6%E5%99%A8%E9%85%8D%E7%BD%AE">¶</a></h2>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>gvp11=</b><i>dma_transfer_bitmask</i></dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Future_Domain_TMC-8xx,_TMC-950_配置">Future Domain TMC-8xx, TMC-950 配置<a class="anchor" href="#Future_Domain_TMC-8xx,_TMC-950_%E9%85%8D%E7%BD%AE">¶</a></h2>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>tmc8xx=</b><i>mem_base,irq</i></dd>
+</dl>
+<p class="Pp">在这里， <i>mem_base</i>
+    值是卡所使用的内存映射的
+    I/O 区域值。
+    常见的值会是
+    0xc8000，0xca000，0xcc000，0xce000，0xdc000，0xde000。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="IN2000_配置">IN2000 配置<a class="anchor" href="#IN2000_%E9%85%8D%E7%BD%AE">¶</a></h2>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>in2000=</b><i>S</i></dd>
+</dl>
+<p class="Pp">这里 S
+    是一个用逗号分隔的关键字
+    [：值]
+    可以被识别的关键字（有可能伴随着值）是：
+    ioport:addr, noreset, nosync:x, period:ns, disconnect:x,debug:x, proc:x.
+    如果你要了解这些参数的功能的话，请看
+    <i>/usr/src/linux/drivers/scsi/in2000.c</i>.</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="NCR5380_和_NCR53C400_配置">NCR5380 和 NCR53C400 配置<a class="anchor" href="#NCR5380_%E5%92%8C_NCR53C400_%E9%85%8D%E7%BD%AE">¶</a></h2>
+这个启动参数遵循以下的格式
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>ncr5380=</b><i>iobase,irq,dma</i></dd>
+</dl>
+<p class="Pp">或者</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>ncr53c400=</b><i>iobase,irq</i></dd>
+</dl>
+<p class="Pp">如果卡没有使用中断，那么
+    IRQ 值
+    255（0xff）将被用来屏蔽中断。
+    IRQ 值 254
+    表示自动检测，更多的细节可以从下面的文档中得到。
+    <i>/usr/src/linux/drivers/scsi/README.g_NCR5380</i>.</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="NCR53C8xx_配置">NCR53C8xx 配置<a class="anchor" href="#NCR53C8xx_%E9%85%8D%E7%BD%AE">¶</a></h2>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>ncr53c8xx=</b><i>S</i></dd>
+</dl>
+<p class="Pp">这里 S
+    是一个用逗号分隔的关键字
+    [：值]
+    可以被识别的关键字（有可能伴随着值）是：
+    mpar (master_parity), spar (scsi_parity),disc (disconnection), specf
+    (special_features), ultra (ultra_scsi),fsn (force_sync_nego), tags
+    (default_tags), sync (default_sync), verb (verbose), debug (debug), burst
+    (burst_max).
+    如果需要了解这些值的功能，请参考
+    <i>/usr/src/linux/drivers/scsi/ncr53c8xx.c</i>.</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="NCR53c406a_配置">NCR53c406a 配置<a class="anchor" href="#NCR53c406a_%E9%85%8D%E7%BD%AE">¶</a></h2>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>ncr53c406a=</b><i>iobase[,irq[,fastpio]]</i></dd>
+</dl>
+<p class="Pp">指定 irq = 0
+    适用于无中断驱动模式。
+    设置 fastpio = 1
+    设置为快速的处理器
+    I/O（PIO）模式，0
+    是慢速的处理器
+    I/O（PIO）模式。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="IOMEGA_PPA3_配置">IOMEGA PPA3 配置<a class="anchor" href="#IOMEGA_PPA3_%E9%85%8D%E7%BD%AE">¶</a></h2>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>ppa=</b><i>iobase[,speed_high[,speed_low[,nybble]]]</i></dd>
+</dl>
+<p class="Pp">这里 iobase
+    的值是并口的地址（缺省值是
+    0x378）， speed_high
+    是在数据处理时延迟时间（以微秒为单位，缺省值是
+    1）， speed_low
+    是端口其他状态下的延迟时间（以微秒为单位，缺省值是
+    6）， nybble 是一个 BOOL
+    值，表示是不是强制使用半个字节（4个位）的工作模式，
+    缺省值是&#34;假&#34;。
+    更多细节请参考
+    <i>/usr/src/linux/drivers/scsi/README.ppa</i>.</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Pro_Audio_Spectrum_配置">Pro Audio Spectrum 配置<a class="anchor" href="#Pro_Audio_Spectrum_%E9%85%8D%E7%BD%AE">¶</a></h2>
+PAS16 适配卡使用 NC5380 SCSI
+  芯片，较新的版本支持免跳线模式。启动参数是下列格式：
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>pas16=</b><i>iobase,irq</i></dd>
+</dl>
+<p class="Pp">不同点是你可以指定
+    IRQ 的值是 255，
+    这样你就可让驱动程序不要使用中断，当然这样会降低性能。
+    通常 iobase 的值是0x388。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Seagate_ST-0x_配置">Seagate ST-0x 配置<a class="anchor" href="#Seagate_ST-0x_%E9%85%8D%E7%BD%AE">¶</a></h2>
+如果你的卡没有在启动的时候被检测到，你需要使用下面格式的启动参数：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>st0x=</b><i>mem_base,irq</i></dd>
+</dl>
+<p class="Pp">这里 <i>mem_base</i>
+    值是卡所使用的内存映射的
+    I/O 区域值。
+    通常的值会是
+    0xc8000，0xca000，0xcc000，0xce000，0xdc000，0xde000。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Trantor_T128_配置">Trantor T128 配置<a class="anchor" href="#Trantor_T128_%E9%85%8D%E7%BD%AE">¶</a></h2>
+这种卡也是使用 NCR5380
+  芯片组，并且接受以下的选项：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>t128=</b><i>mem_base,irq</i></dd>
+</dl>
+<p class="Pp"><i>mem_base</i>
+    的值0xc8000，0xcc000，0xdc000，0xd8000。</p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="UltraStor_14F/34F_配置">UltraStor 14F/34F 配置<a class="anchor" href="#UltraStor_14F/34F_%E9%85%8D%E7%BD%AE">¶</a></h2>
+检测出的缺省的 I/O
+  端口列表能够被
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>eata=</b><i>iobase,iobase,...</i><b>.</b></dd>
+</dl>
+<p class="Pp">所改变。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="WD7000_配置">WD7000 配置<a class="anchor" href="#WD7000_%E9%85%8D%E7%BD%AE">¶</a></h2>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>wd7000=</b><i>irq,dma,iobase</i></dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Commodore_Amiga_A2091/590_SCSI_控制器配置">Commodore Amiga A2091/590 SCSI 控制器配置<a class="anchor" href="#Commodore_Amiga_A2091/590_SCSI_%E6%8E%A7%E5%88%B6%E5%99%A8%E9%85%8D%E7%BD%AE">¶</a></h2>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>wd33c93=</b><i>S</i></dd>
+</dl>
+<p class="Pp">这里 S
+    是一个用逗号分隔的字符串选项。
+    可以被识别的选项字是：
+    nosync:bitmask, nodma:x, eriod:ns, disconnect:x, debug:x, clock:x,
+    next． 详细说明请参考
+    <i>/usr/src/linux/drivers/scsi/wd33c93.c</i>.</p>
+<p class="Pp"></p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="硬盘驱动器">硬盘驱动器<a class="anchor" href="#%E7%A1%AC%E7%9B%98%E9%A9%B1%E5%8A%A8%E5%99%A8">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="IDE_硬盘驱动器/光驱驱动程序参数">IDE 硬盘驱动器/光驱驱动程序参数<a class="anchor" href="#IDE_%E7%A1%AC%E7%9B%98%E9%A9%B1%E5%8A%A8%E5%99%A8/%E5%85%89%E9%A9%B1%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%8F%82%E6%95%B0">¶</a></h2>
+IDE
+  驱动程序可以接受的参数有很多，
+  其范围包括从磁盘规格到有缺陷的控制器芯片的支持。
+  指定驱动程序参数的同时需要使用
+  &#34;hdX=&#34;
+  的格式来指定驱动器。
+  X 的范围是从 &#34;a&#34; 到
+  &#34;h&#34;。
+<p class="Pp">非驱动器选项使用前缀
+    &#34;hd=&#34; 来指定。
+    注意如果将驱动器选项作用于非驱动器选项也可以工作，
+    而且选项也能够象你所期望的那样被应用。</p>
+<p class="Pp">同时还要注意到的是
+    &#34;hd=&#34;
+    格式也能够用于按照规定的顺序（从
+    a 到 h）
+    检索到下一个没有指定的驱动器。在下面的讨论中，我们可以看到
+    &#34;hd=&#34;
+    选项将会被短暂的引用。
+    需要了解更多细节的话，参考
+    linux/drivers/block 目录下的 README.ide</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`hd=cyls,heads,sects[,wpcom[,irq]]&#39;_选项">`hd=cyls,heads,sects[,wpcom[,irq]]&#39; 选项<a class="anchor" href="#%60hd=cyls,heads,sects%5B,wpcom%5B,irq%5D%5D%27_%E9%80%89%E9%A1%B9">¶</a></h2>
+这些选项用来指定磁盘的物理参数。前面三个参数是必须的。
+  柱面/磁头/磁道三个参数将被
+  fdisk 程序所使用。
+  如果是 IDE
+  的硬盘驱动器，&#34;写补偿&#34;值会被忽略掉。
+  指定的 IRQ
+  值是接口程序所使用的，所以其实并不能被称为真正意义上的指定的驱动器参数。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`hd=serialize&#39;_选项">`hd=serialize&#39; 选项<a class="anchor" href="#%60hd=serialize%27_%E9%80%89%E9%A1%B9">¶</a></h2>
+具有双 IDE 接口的 CMD-640
+  芯片在设计上是有缺陷的。
+  这个缺陷是当第二个接口与第一个接口被同时使用时，将会破坏你的数据。
+  使用这个选项能够使你的接口永远不会同时使用。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`hd=dtc2278&#39;选项">`hd=dtc2278&#39;选项<a class="anchor" href="#%60hd=dtc2278%27%E9%80%89%E9%A1%B9">¶</a></h2>
+这个选项告诉驱动程序你拥有一个
+  DTC-2278D 的 IDE 接口。
+  驱动程序就会试图使用
+  DTC
+  的指定操作来激活第二个接口并启动快速传送模式。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`hd=noprobe&#39;选项">`hd=noprobe&#39;选项<a class="anchor" href="#%60hd=noprobe%27%E9%80%89%E9%A1%B9">¶</a></h2>
+不要检测该硬盘驱动器。例如，
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>hdb=noprobe hdb=1166,7,17</dd>
+</dl>
+<p class="Pp">将会屏蔽掉检测，可是仍然指定了驱动器的物理参数，
+    因为这样才能够将驱动器登记成为一个有效的、可用的块设备。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`hd=nowerr&#39;选项">`hd=nowerr&#39;选项<a class="anchor" href="#%60hd=nowerr%27%E9%80%89%E9%A1%B9">¶</a></h2>
+一些驱动器具有 WRERR_STAT
+  位，并且永久有效。这个选项忽略该位。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`hd=cdrom&#39;选项">`hd=cdrom&#39;选项<a class="anchor" href="#%60hd=cdrom%27%E9%80%89%E9%A1%B9">¶</a></h2>
+这个选项告诉 IDE
+  驱动程序有一个 ATAPI
+  兼容的光盘驱动器。
+  在大部分情况下光盘驱动器会被自动的识别，
+  但是对于不能识别的光盘驱动器来说，
+  这个选项是很有用的。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="标准的_ST-506_磁盘驱动程序参数_(`hd=&#39;)">标准的 ST-506 磁盘驱动程序参数 (`hd=&#39;)<a class="anchor" href="#%E6%A0%87%E5%87%86%E7%9A%84_ST-506_%E7%A3%81%E7%9B%98%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%8F%82%E6%95%B0_(%60hd=%27)">¶</a></h2>
+标准的磁盘驱动程序可以接受磁盘的物理参数，就象上面的
+  IDE 设备那样。
+  注意无论怎样它都只希望接受三个参数（柱面/磁头/磁道）--
+  过多或过少的参数都会被忽略掉。
+  当然，它只接受 &#34;hd=&#34;
+  这样的参数，象 &#34;had=&#34;
+  参数这样的在这里是无效的。下面是它的格式：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>hd=cyls,heads,sects</dd>
+</dl>
+<p class="Pp">如果装有两个磁盘驱动器，上面的工作需要重复的进行以配置第二个磁盘驱动器。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="XT_磁盘驱动程序参数_(`xd=&#39;)">XT 磁盘驱动程序参数 (`xd=&#39;)<a class="anchor" href="#XT_%E7%A3%81%E7%9B%98%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%8F%82%E6%95%B0_(%60xd=%27)">¶</a></h2>
+如果你不幸使用了一些些老掉牙的、8
+  位的和使用惊人的 125kB/s
+  传输速度的卡，
+  这些参数会对你有帮助。
+  如果它们不能被识别的话，你只能使用以下格式的启动参数：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>xd=type,irq,iobase,dma_chan</dd>
+</dl>
+<p class="Pp">type
+    值指定该卡的制造厂商，下面是厂商的值及对应的名字：
+    0= 普通卡; 1=DTC; 2,3,4=Western Digital,5,6,7=Seagate;
+    8=OMTI.
+    同一厂家出厂的不同类型的卡的区别由
+    BIOS
+    字符串来指定，如果指定
+    type，这些也就没有用了。</p>
+<p class="Pp">函数 xd_setup()
+    不检查这些值，并且会假设你已经输入了全部的四个值。
+    不要让它失望。
+    这里有一个 WD1002
+    控制器示范用法--假设
+    BIOS
+    被关掉/移走了--使用缺省的
+    XT 控制参数</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>xd=2,5,0x320,3</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Syquest&#39;s_EZ*可移动磁盘">Syquest&#39;s EZ*可移动磁盘<a class="anchor" href="#Syquest%27s_EZ*%E5%8F%AF%E7%A7%BB%E5%8A%A8%E7%A3%81%E7%9B%98">¶</a></h2>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>ez=</b><i>iobase[,irq[,rep[,nybble]]]</i></dd>
+</dl>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="IBM_MCA总线设备">IBM MCA总线设备<a class="anchor" href="#IBM_MCA%E6%80%BB%E7%BA%BF%E8%AE%BE%E5%A4%87">¶</a></h1>
+请同时参考
+  <i>/usr/src/linux/Documentation/mca.txt</i>.
+<p class="Pp"></p>
+<section class="Ss">
+<h2 class="Ss" id="PS/2_ESDI_hard_disks">PS/2 ESDI hard disks<a class="anchor" href="#PS/2_ESDI_hard_disks">¶</a></h2>
+有可能按下面的方法在启动时指定你所需要的磁盘物理参数。
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>ed=</b><i>cyls,heads,sectors.</i></dd>
+</dl>
+<p class="Pp">对于ThinkPad-720,
+    要加上下面的选项</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>tp720=1</b>.</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="IBM_Microchannel_SCSI_Subsystem_配置">IBM Microchannel SCSI Subsystem 配置<a class="anchor" href="#IBM_Microchannel_SCSI_Subsystem_%E9%85%8D%E7%BD%AE">¶</a></h2>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>ibmmcascsi=</b><i>N</i></dd>
+</dl>
+<p class="Pp">这里 N
+    是子系统的<i>pun</i> (SCSI ID)</p>
+<p class="Pp"></p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="CD-ROMs_(Non-SCSI/ATAPI/IDE)">CD-ROMs (Non-SCSI/ATAPI/IDE)<a class="anchor" href="#CD-ROMs_(Non-SCSI/ATAPI/IDE)">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="Aztech_接口">Aztech 接口<a class="anchor" href="#Aztech_%E6%8E%A5%E5%8F%A3">¶</a></h2>
+语法是：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>aztcd=iobase[,magic_number]</dd>
+</dl>
+<p class="Pp">如果你设置 magic_number
+    值为0x79，
+    那么该驱动程序尝试在任何一个未知的固件上面执行。其他的值都会被忽略掉。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="MicroSolutions_`backpack&#39;_光驱接口">MicroSolutions `backpack&#39; 光驱接口<a class="anchor" href="#MicroSolutions_%60backpack%27_%E5%85%89%E9%A9%B1%E6%8E%A5%E5%8F%A3">¶</a></h2>
+语法：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>bpcd=iobase</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="CDU-31A_和_CDU-33A_Sony_接口">CDU-31A 和 CDU-33A Sony 接口<a class="anchor" href="#CDU-31A_%E5%92%8C_CDU-33A_Sony_%E6%8E%A5%E5%8F%A3">¶</a></h2>
+这种光盘驱动器的接口会出现在一些
+  Pro Audio Spectrum 声卡及 其他支持
+  Sony
+  驱动接口的卡上。语法是：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>cdu31a=iobase,[irq[,is_pas_card]]</dd>
+</dl>
+<p class="Pp">指定一个为 0 的 IRQ
+    告诉驱动程序该硬件不支持中断（如一些
+    PAS 卡）。
+    如果你的卡支持中断，就要使用它们，这样可以减少驱动程序的
+    CPU 占用时间。</p>
+<p class="Pp">对于 <i>is_pas_card</i>
+    选项来说，如果使用 Pro
+    Audio Spectrum 的卡则应该输入
+    &#34;PAS&#34;，否则就不需要指定了。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="CDU-535_Sony_接口">CDU-535 Sony 接口<a class="anchor" href="#CDU-535_Sony_%E6%8E%A5%E5%8F%A3">¶</a></h2>
+该光盘驱动器接口的语法如下
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>sonycd535=iobase[,irq]</dd>
+</dl>
+<p class="Pp">如果你要指定 IRQ
+    值的话，0
+    可以被当成一个标志位被填到
+    I/O 地址中。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="GoldStar_接口">GoldStar 接口<a class="anchor" href="#GoldStar_%E6%8E%A5%E5%8F%A3">¶</a></h2>
+该光盘驱动器的接口语法是：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>gscd=iobase</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="ISP16_光驱接口">ISP16 光驱接口<a class="anchor" href="#ISP16_%E5%85%89%E9%A9%B1%E6%8E%A5%E5%8F%A3">¶</a></h2>
+语法：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>isp16=[iobase[,irq[,dma[,type]]]]</dd>
+</dl>
+<p class="Pp">（三个整数值，一个字符串）。如果
+    type 的值是 &#34;noisp16&#34;
+    的话，接口不会被配置。
+    其他可以被接受的 type
+    值包括： `Sanyo&#34;, `Sony&#39;, `Panasonic&#39; 和
+    `Mitsumi&#39;．</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Mitsumi标准接口">Mitsumi标准接口<a class="anchor" href="#Mitsumi%E6%A0%87%E5%87%86%E6%8E%A5%E5%8F%A3">¶</a></h2>
+这种光盘驱动器接口的语法是：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>mcd=iobase,[irq[,wait_value]]</dd>
+</dl>
+<p class="Pp">这里 <i>wait_value</i>
+    被用来设置为内部故障的超时时间。能否实现还需要依靠在编译时的定义而定。
+    Mitsumi FX400 是一种不使用 mcd
+    驱动程序的 IDE/ATAPI
+    光盘驱动器。.</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Mitsumi_XA/MultiSession接口">Mitsumi XA/MultiSession接口<a class="anchor" href="#Mitsumi_XA/MultiSession%E6%8E%A5%E5%8F%A3">¶</a></h2>
+这是与我们上面介绍的一样的硬件，只不过该驱动程序拥有更多的特性。
+  语法：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>mcdx=iobase[,irq]</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Optics_Storage_接口">Optics Storage 接口<a class="anchor" href="#Optics_Storage_%E6%8E%A5%E5%8F%A3">¶</a></h2>
+语法为：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>optcd=iobase</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Phillips_CM206_接口">Phillips CM206 接口<a class="anchor" href="#Phillips_CM206_%E6%8E%A5%E5%8F%A3">¶</a></h2>
+语法是：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>cm206=[iobase][,irq]</dd>
+</dl>
+<p class="Pp">该驱动程序会假定所给的
+    3 到 11
+    之间的值是设置的 IRQ
+    值， 数值在 0x300 到 0x370
+    之间的值是 I/O
+    端口号，
+    因此你可以指定一个，或者可以指定两个，且没有特殊的位置要求。
+    它也接受 &#34;cm206=auto&#34;
+    参数来实现自动检测。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="The_Sanyo_接口">The Sanyo 接口<a class="anchor" href="#The_Sanyo_%E6%8E%A5%E5%8F%A3">¶</a></h2>
+语法是：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>sjcd=iobase[,irq[,dma_channel]]</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="SoundBlaster_Pro_接口">SoundBlaster Pro 接口<a class="anchor" href="#SoundBlaster_Pro_%E6%8E%A5%E5%8F%A3">¶</a></h2>
+语法是：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>sbpcd=iobase,type</dd>
+</dl>
+<p class="Pp">这里 type
+    是下面这些字符串的一种（大小写敏感的）：
+    `SoundBlaster&#39;, `LaserMate&#39;, 或 `SPEA&#39;. I/O
+    地址是光盘驱动器接口的，并不是声卡的一部分。</p>
+<p class="Pp"></p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="以太网络设备">以太网络设备<a class="anchor" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87">¶</a></h1>
+不同的驱动程序使用不同的参数，但是至少它们都会要使用一个
+  IRQ，一个 I/O 端口地址，
+  一个名字。下面是最为普遍的参数设置格式：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>ether=irq,iobase[,param_1[,...param_8]],name</dd>
+</dl>
+<p class="Pp">第一个非数值的参数被作为名字使用。
+    param_n
+    的值（如果可以使用的话）对于不同的卡/驱动程序来说往往具有不同的含义。
+    典型的 param_n
+    的值用来指定象共享的内存地址，接口选择，DMA
+    通道等等。</p>
+<p class="Pp">该参数最普遍的用法是强迫进行第二以太网卡的检测。
+    因为作为缺省的情况来说，内核只是检测第一块以太网卡。
+    下面是实现第二以太网卡检测的简单方法：</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>ether=0,0,eth1</dd>
+</dl>
+<p class="Pp">注意这里 IRQ 和 I/O
+    的值都是
+    0，这个表示值需要进行自动检测。</p>
+<p class="Pp">以太网的 HowTo
+    文件对于多网卡的使用，网卡/驱动程序的指定，
+    param_n
+    数值的使用都有详细的介绍。
+    有兴趣的读者可以参考该文档中对自己拥有的卡的说明。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="软盘驱动器驱动程序">软盘驱动器驱动程序<a class="anchor" href="#%E8%BD%AF%E7%9B%98%E9%A9%B1%E5%8A%A8%E5%99%A8%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F">¶</a></h1>
+软盘驱动程序选项有很多，它们在
+  linux/drivers/block 目录下的 README.fd
+  中列举出来。
+  这些信息就是摘自那个文件。
+<p class="Pp"></p>
+<section class="Ss">
+<h2 class="Ss" id="floppy=mask,allowed_drive_mask">floppy=mask,allowed_drive_mask<a class="anchor" href="#floppy=mask,allowed_drive_mask">¶</a></h2>
+设置允许进行掩码设置的驱动程序将掩码设置为
+  mask。
+  在缺省情况下，只有每个软盘控制器的
+  0 号和 1
+  号单元允许这样做。
+  这样规定的原因是有一些非标准的硬件（华硕的
+  PCI 主板）在访问 2
+  号或者 3 号单元时，
+  会令键盘发生问题。该选项差不多已被
+  cmos 选项所取代了。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="floppy=all_drives">floppy=all_drives<a class="anchor" href="#floppy=all_drives">¶</a></h2>
+为所有的软盘驱动器设置驱动器掩码。
+  如果你在一个软盘控制器上拥有两个驱动器的话，你就可以这么做。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="floppy=asus_pci">floppy=asus_pci<a class="anchor" href="#floppy=asus_pci">¶</a></h2>
+设置掩码为只允许 0
+  号和 1
+  号单元。（缺省值）
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="floppy=daring">floppy=daring<a class="anchor" href="#floppy=daring">¶</a></h2>
+告诉软盘驱动程序你有一个比较好的软盘控制器。
+  这样的设置可以使你的设备运行得更加有效和顺利，
+  但是对于某些特定的控制器，这可能会引起错误，也可能会加快某些操作的速度。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="floppy=0,daring">floppy=0,daring<a class="anchor" href="#floppy=0,daring">¶</a></h2>
+告诉软盘驱动程序你的软盘控制器需要谨慎的运行。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="floppy=one_fdc">floppy=one_fdc<a class="anchor" href="#floppy=one_fdc">¶</a></h2>
+告诉软盘驱动程序你只有一个软盘控制器。（缺省值）
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="floppy=two_fdc_or_floppy=address,two_fdc">floppy=two_fdc or floppy=address,two_fdc<a class="anchor" href="#floppy=two_fdc_or_floppy=address,two_fdc">¶</a></h2>
+告诉软盘驱动程序你拥有两个软盘控制器。第二个控制器假设位于
+  address 值。 如果 address
+  的值没有给出的话，0x370
+  被当成假想位置。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="floppy=thinkpad">floppy=thinkpad<a class="anchor" href="#floppy=thinkpad">¶</a></h2>
+告诉软盘驱动程序你有一个
+  Thinkpad 电脑。Thinkpad
+  的磁盘变更线路与通常的机器相反。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="floppy=0,thinkpad">floppy=0,thinkpad<a class="anchor" href="#floppy=0,thinkpad">¶</a></h2>
+告诉软盘驱动程序你没有一个
+  Thinkpad 电脑。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="floppy=drive,type,cmos">floppy=drive,type,cmos<a class="anchor" href="#floppy=drive,type,cmos">¶</a></h2>
+设置 CMOS 的类型为 type
+  值。条件是驱动器在掩码中被置&#34;允许&#34;。
+  如果你有两个以上的软盘驱动器（在实际的
+  CMOS
+  设置中只能设置两个），
+  或者你的 BIOS
+  使用的是非标准的 CMOS
+  类型，这是非常有用的。
+  把前面两个软盘驱动器的
+  CMOS 设置为 0（缺省值）
+  使得软盘驱动程序从实际的
+  CMOS
+  设置中读取它们的信息。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="floppy=unexpected_interrupts">floppy=unexpected_interrupts<a class="anchor" href="#floppy=unexpected_interrupts">¶</a></h2>
+当接收到一个异常时显示相应的消息。（缺省行为）
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="floppy=no_unexpected_interrupts_or_floppy=L40SX">floppy=no_unexpected_interrupts or floppy=L40SX<a class="anchor" href="#floppy=no_unexpected_interrupts_or_floppy=L40SX">¶</a></h2>
+如果出现异常，也不要提示。IBM
+  L40SX
+  在某些特定的显示模式下需要这个选项。
+  （这看起来象是视频和软盘之间有某种交互关系。
+  异常中断只会影响性能，所以能够被安全的忽略）
+<p class="Pp"></p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="声卡驱动程序">声卡驱动程序<a class="anchor" href="#%E5%A3%B0%E5%8D%A1%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F">¶</a></h1>
+声卡驱动程序也能够接受启动参数来替代编译时使用的值。
+  这种方法并不值得推荐，因为这样会更复杂。
+  参数说明在 /linux/drivers/sound/Readme.Linux
+  文件中描叙。它接受如下格式的启动参数：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>sound=device1[,device2[,device3...[,device10]]]</dd>
+</dl>
+<p class="Pp">这里每个 deviceN
+    是类似于 0xTaaaId
+    这样格式的值，其中各字符表示为：</p>
+<p class="Pp">T - 设备类型: 1=FM, 2=SB, 3=PAS, 4=GUS,
+    5=MPU401, 6=SB16, 7=SB16-MPU401。</p>
+<p class="Pp">aaa - 16 进制的 I/O 地址。</p>
+<p class="Pp">I - 16
+    进制表示的中断地址
+    。</p>
+<p class="Pp">d - DMA 通道号。</p>
+<p class="Pp">这样的格式看起来是很混乱的，你最好在编译的时候就使用你知道的值。
+    使用 &#34;sound=0&#34;
+    的参数将会完全屏蔽声卡驱动程序。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ISDN_驱动程序">ISDN 驱动程序<a class="anchor" href="#ISDN_%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="ICN_ISDN_驱动程序">ICN ISDN 驱动程序<a class="anchor" href="#ICN_ISDN_%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F">¶</a></h2>
+语法：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>icn=iobase,membase,icn_id1,icn_id2</dd>
+</dl>
+<p class="Pp">这里 icn_id1 和 icn_id2
+    是两个字符串，用来为核心消息提供卡的名字。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="PCBIT_ISDN_驱动程序">PCBIT ISDN 驱动程序<a class="anchor" href="#PCBIT_ISDN_%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F">¶</a></h2>
+语法：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>pcbit=membase1,irq1[,membase2,irq2]</dd>
+</dl>
+<p class="Pp">这里 membaseN 是第 N
+    块卡其共享内存的地址，irqN
+    是第 N 块卡的中断值。
+    缺省值是 IRQ 5
+    和内存地址 0xD0000。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Teles_ISDN_驱动程序">Teles ISDN 驱动程序<a class="anchor" href="#Teles_ISDN_%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F">¶</a></h2>
+语法：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>teles=iobase,irq,membase,protocol,teles_id</dd>
+</dl>
+<p class="Pp">这里 iobase 是卡的 I/O
+    端口地址，membase，irq
+    的意义与上面的一样，
+    teles_id 是唯一的 ASCII
+    字符串标识。</p>
+<p class="Pp"></p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="串口驱动程序">串口驱动程序<a class="anchor" href="#%E4%B8%B2%E5%8F%A3%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="RISCom/8_多串口驱动程序_(`riscom8=&#39;)">RISCom/8 多串口驱动程序 (`riscom8=&#39;)<a class="anchor" href="#RISCom/8_%E5%A4%9A%E4%B8%B2%E5%8F%A3%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F_(%60riscom8=%27)">¶</a></h2>
+语法:
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>riscom=iobase1[,iobase2[,iobase3[,iobase4]]]</dd>
+</dl>
+<p class="Pp">更多的细节请参考
+    <i>/usr/src/linux/Documentation/riscom8.txt</i>.</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="DigiBoard_驱动程序_(`digi=&#39;)">DigiBoard 驱动程序 (`digi=&#39;)<a class="anchor" href="#DigiBoard_%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F_(%60digi=%27)">¶</a></h2>
+如果该选项被使用，则应该使用
+  6 个参数。 语法：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>digi=status,type,altpin,numports,iobase,membase</dd>
+</dl>
+<p class="Pp">参数可以是整数值，也可以是字符串值。
+    如果使用了字符串，则
+    iobase 和 membase 参数需要使用 16
+    进制的形式。
+    整型参数值按顺序为：
+    status (允许(1) 或屏蔽(0)该卡),
+    type (PC/Xi(0), PC/Xe(1), PC/Xeve(2), PC/Xem(3)), altpin
+    (允许(1)或屏蔽(0) alternate
+    pin排列), numports
+    (该卡的端口数目), iobase
+    (该卡设置的I/O 端口号
+    (16进制)), membase
+    (内存窗口的基地址(16进制)).
+    所以，下面两个不同格式的参数形式其实是一样的：</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>digi=E,PC/Xi,D,16,200,D0000
+    <br/>
+    digi=1,0,0,16,0x200,851968</dd>
+</dl>
+<p class="Pp">更多的细节请参考
+    <i>/usr/src/linux/Documentation/digiboard.txt</i>.</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Baycom_串/并口无线_Modem">Baycom 串/并口无线 Modem<a class="anchor" href="#Baycom_%E4%B8%B2/%E5%B9%B6%E5%8F%A3%E6%97%A0%E7%BA%BF_Modem">¶</a></h2>
+语法：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>baycom=iobase,irq,modem</dd>
+</dl>
+<p class="Pp">只有三个参数；如果有多张卡，就使用多个该命令。
+    modem
+    参数是一个字符串，值是
+    ser12，ser12*，par96，par96*
+    中的一个。 这里 &#34;*&#34;
+    代表使用软件 DCD。ser12 和
+    par96 用来选择所支持的 modem
+    类型。
+    更多的细节请参考
+    <i>/usr/src/linux/drivers/net/README.baycom</i>.</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Soundcard_无线_Modem_驱动程序">Soundcard 无线 Modem 驱动程序<a class="anchor" href="#Soundcard_%E6%97%A0%E7%BA%BF_Modem_%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F">¶</a></h2>
+语法：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>soundmodem=iobase,irq,dma[,dma2[,serio[,pario]]],0,mode</dd>
+</dl>
+<p class="Pp">除了最后一个参数以外其他的都是整型值；
+    你可能注意到参数中有一个
+    0，需要该数值是因为在设置代码中有一个错误。
+    模式参数是一个字符串，其语法是
+    hw:modem。 这里 hw
+    是&#34;sbc&#34;，&#34;wss&#34;，&#34;wssfdx&#34;
+    中的一个值，modem 是
+    &#34;afsk1200&#34;，&#34;fsk9600&#34;
+    中的一个值。</p>
+<p class="Pp"></p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="打印驱动程序">打印驱动程序<a class="anchor" href="#%E6%89%93%E5%8D%B0%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="`lp=&#39;">`lp=&#39;<a class="anchor" href="#%60lp=%27">¶</a></h2>
+对于 1.3.75
+  版本以后的核心来说，
+  你可以告诉打印驱动程序你使用了或没有使用哪个并行端口。
+  如果你不想让打印驱动程序取得所有可用的并口，后者是非常有用的，
+  这样其他的驱动程序（比如说
+  PLIP，PPA）就能够使用那些端口。
+<p class="Pp">参数的格式是多个
+    I/O 地址及 IRQ
+    对。举例来说， lp=0x3bc,0,0x378,7
+    将使用位于 0x3bc
+    地址的端口， &#34;无 IRQ&#34;
+    (轮询 IRQ)
+    模式，然后使用位于
+    0x378 地址，IRQ 为 7
+    的端口。 位于地址 0x278
+    的端口（如果有的话）不会被检测，
+    因为自动检测模式只发生于没有
+    &#34;lp=&#34; 参数的情况下。
+    如果需要屏蔽打印驱动程序的话，使用
+    lp=0 就可以实现。</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="WDT500/501驱动程序">WDT500/501驱动程序<a class="anchor" href="#WDT500/501%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F">¶</a></h2>
+语法：
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>wdt=io,irq</dd>
+</dl>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="鼠标驱动程序">鼠标驱动程序<a class="anchor" href="#%E9%BC%A0%E6%A0%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="`bmouse=irq&#39;">`bmouse=irq&#39;<a class="anchor" href="#%60bmouse=irq%27">¶</a></h2>
+总线型鼠标驱动程序只能接受一个参数，也就是该硬件需要的
+  IRQ 值。
+<p class="Pp"></p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="`msmouse=irq&#39;">`msmouse=irq&#39;<a class="anchor" href="#%60msmouse=irq%27">¶</a></h2>
+对于微软兼容鼠标来说参数与前面总线鼠标是一样的。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="ATARI鼠标设置">ATARI鼠标设置<a class="anchor" href="#ATARI%E9%BC%A0%E6%A0%87%E8%AE%BE%E7%BD%AE">¶</a></h2>
+atamouse=threshold[,y-threshold]
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>如果只有一个参数，该参数同时代表
+      x 起点坐标和 y
+      起点坐标。
+      如果有两个参数，则第一个是
+      x 起点坐标，第二个是
+      y 起点坐标。
+      这些值必须是在 1 到 20
+      之间（包括
+      20）；缺省值是 2。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="视频设备">视频设备<a class="anchor" href="#%E8%A7%86%E9%A2%91%E8%AE%BE%E5%A4%87">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="`no-scroll&#39;">`no-scroll&#39;<a class="anchor" href="#%60no-scroll%27">¶</a></h2>
+该选项告诉控制台驱动程序不要使用硬件滚动模式
+  （滚动模式在将屏幕图象移动到图形储存器中而不是移动数据时非常有效）。
+  一些 Braille
+  机器会需要它的。
+<p class="Pp"></p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者">作者<a class="anchor" href="#%E4%BD%9C%E8%80%85">¶</a></h1>
+Linus Torvalds
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参考">参考<a class="anchor" href="#%E5%8F%82%E8%80%83">¶</a></h1>
+<a href="../../buster/busybox-syslogd/klogd.8.en.html">klogd(8)</a>, <a href="../../buster/manpages-zh/lilo.conf.5.zh_CN.html">lilo.conf(5)</a>, <b><a href="../../buster/manpages-zh/lilo.8.zh_CN.html">lilo(8)</a>,</b> <b><a href="../../buster/mount/mount.8.en.html">mount(8)</a>,</b>
+  <b><a href="../../buster/manpages-zh/rdev.8.zh_CN.html">rdev(8)</a>.</b>
+<p class="Pp">该手册页的大部分内容来自
+    Paul Gortmaker 写的 Boot Parameter
+    HowTo（1.0.1）版本。 在该 HowTo
+    中还可以找到更多的有关信息。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版维护人]">[中文版维护人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D">¶</a></h1>
+<b>billpan &lt;billpan@yeah.net&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2000/11/06</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9B%BDlinux%E8%AE%BA%E5%9D%9Bman%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">14 January 1995</td>
+    <td class="foot-os">Linux 2.1.21</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+bootparam.7.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-26T15:38:15Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"bootparam(7)\"}}]}"
+</script>

@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>interp(3tcl) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/tcl8.6-doc/interp.3tcl.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/interp.3tcl.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/interp.3tcl.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="3tcl">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; interp(3tcl)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/interp.3tcl">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/interp.3tcl.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS" title="總覽 SYNOPSIS">總覽 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#INTERP_%E5%91%BD%E4%BB%A4_COMMAND" title="INTERP 命令 COMMAND">INTERP 命令 COMMAND</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SLAVE_%E5%91%BD%E4%BB%A4_COMMAND" title="SLAVE 命令 COMMAND">SLAVE 命令 COMMAND</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%AE%89%E5%85%A8%E8%A7%A3%E9%87%8B%E5%99%A8_SAFE_INTERPRETERS" title="安全解釋器 SAFE INTERPRETERS">安全解釋器 SAFE INTERPRETERS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%88%A5%E5%90%8D%E8%AA%BF%E7%94%A8_ALIAS_INVOCATION" title="別名調用 ALIAS INVOCATION">別名調用 ALIAS INVOCATION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%9A%B1%E8%97%8F%E5%91%BD%E4%BB%A4_HIDDEN_COMMANDS" title="隱藏命令 HIDDEN COMMANDS">隱藏命令 HIDDEN COMMANDS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%84%9F%E8%AC%9D_CREDITS" title="感謝 CREDITS">感謝 CREDITS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO" title="參見 SEE ALSO">參見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS" title="關鍵字 KEYWORDS">關鍵字 KEYWORDS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國 Linux 論壇 man 手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/interp.3tcl.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/interp.3tcl.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/interp.3tcl.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/tcl8.6-doc/interp.3tcl.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/interp.3tcl.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/interp.3tcl.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">interp(3tcl)</td>
+    <td class="head-vol">Tcl Built-In Commands</td>
+    <td class="head-rtitle">interp(3tcl)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<pre>
+
+</pre>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+interp - 建立和操縱 Tcl 解釋器
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_SYNOPSIS">總覽 SYNOPSIS<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS">¶</a></h1>
+<b>interp </b><i>option </i>?<i>arg arg ...</i>?
+<pre>
+
+</pre>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+這個命令建立一個或多個新的
+  Tcl
+  解釋器，並使其與建立(它們的)解釋器在相同的應用中共存。建立解釋器的解釋器叫做主解釋器(<i>master</i>)而新解釋器叫做從解釋器(<i>slave</i>)。主解釋器可以建立任意數目的從解釋器，每個從解釋器也可以自己建立增添的從解釋器而成爲它們的主解釋器，這將導致解釋器的一個等級層次(hierarchy)。
+<p class="Pp">每個解釋器相對其他解釋器是獨立的:
+    它有給命令、過程、和全局變量的自己的名字空間。一個主解釋器可以使用叫別名(<i>alias</i>)的機制建立它的從解釋器與它自身間的連接。別名是在一個從解釋器中的一個命令，調用它時，導致在它的主解釋器或其他從解釋器中調用一個命令。解釋器之間的唯一其他連接是通過環境變量(<b>env</b>
+    變量)，它通常被在這個應用中的所有解釋器共享。注意給文件的名字空間(比如由
+    <b>open</b>命令返回的名字)不在解釋器之間共享。提供顯式的命令來共享文件和把到打開文件的引用從一個解釋器轉換(transfer)到另一個。</p>
+<p class="Pp"><b>interp</b>命令還提供對安全(<i>safe</i>)解釋器的支持。一個安全解釋器是一個功能被嚴格限制了的從解釋器，這樣就可以執行不可信任的腳本而不用害怕它們毀壞其他解釋器或這個應用的環境。例如，安全解釋器不能訪問所有
+    IO
+    通道建立命令和子過程建立命令。
+    詳情參見下面的 SAFE INTERPRETERS
+    (安全的解釋器)
+    章節。未從安全的解釋器中去除有危險的功能；但是，它們是隱藏的，所以只有可信任的解釋器可以獲得到它們的訪問。隱藏命令的詳細解釋請參見下面的
+    HIDDEN COMMANDS (隱藏命令)
+    章節。可以使用別名機制來在從解釋器和它的主解釋器之間進行受保護的通信(類似於一個內核調用)。別名機制工作的詳情參見下面的
+    ALIAS INVOCATION
+  (別名調用)章節。</p>
+<p class="Pp">一個限定的(qualified)解釋器的名字是一個適當的
+    Tcl
+    列表，它包含在這個解釋器層次中它的祖先的一個子集，終結於以它的直接上級(immediate)主解釋器命名的字符串。解釋器名字是相對於在其中使用它的哪個解釋器的。例如，如果
+    <b>a</b>
+    是當前解釋器的一個從解釋器並且它有一個從解釋器
+    <b>a1</b>，它依次有一個從解釋器
+    <b>a11</b>，在<b>a</b> 中 <b>a11</b>
+    的限定的名字是列表
+    <b>a1 a11</b>。</p>
+<p class="Pp">下面描述的
+    <b>interp</b>命令接受限定的解釋器名字作爲參數；命令在其中求值的解釋器總是可以作爲
+    <b>{}</b>來引用(空列表或字符串)。注意除了通過別名之外，在一個從解釋器中不可能通過名字引用一個主(祖先)解釋器。還有，沒有通過它可以引用在應用中建立的第一個解釋器的全局名字。這兩種限制的目的都是爲了安全。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="INTERP_命令_COMMAND">INTERP 命令 COMMAND<a class="anchor" href="#INTERP_%E5%91%BD%E4%BB%A4_COMMAND">¶</a></h1>
+使用 <b>interp</b>
+  命令建立、刪除、和操縱從解釋器，並在解釋器之間共享或轉換通道。依賴於
+  <i>option</i>
+  參數，它可以有下列一些形式:
+<dl class="Bl-tag">
+  <dt><b>interp</b> <b>alias</b> <i>srcPath</i> <i>srcCmd</i></dt>
+  <dd>返回一個 Tcl
+      列表，它的元素是與叫做
+      <i>srcCmd</i>的別名有關的
+      <i>targetCmd</i> 和
+      <i>arg</i>s(在建立別名時指定所有這些值；在從解釋器中實際的源命令如果被重命名的話可能與
+      <i>srcCmd</i> 不同)。</dd>
+  <dt><b>interp</b> <b>alias</b> <i>srcPath</i> <i>srcCmd</i> <b>{}</b></dt>
+  <dd>刪除在從解釋器中用
+      <i>srcPath </i>標識的給 <i>srcCmd</i>
+      的別名。<i>srcCmd</i>
+      引用在其下建立別名的名字；如果
+      源命令已經被重命名，則刪除重命名後的命令。</dd>
+  <dt><b>interp</b> <b>alias</b> <i>srcPath</i> <i>srcCmd</i> <i>targetPath</i>
+    <i>targetCmd </i>?<i>arg arg ...</i>?</dt>
+  <dd>這個命令在一個從解釋器和其他解釋器之間建立一個別名(關於在一個從解釋器和它的主解釋器之間建立別名請參見下面的
+      <b>alias</b>
+      從命令)。在這個命令中，兩個從解釋器可以在調用這個命令的解釋器底下的解釋器層次中的任何位置。<i>SrcPath</i>和
+      <i>srcCmd</i>
+      標識這個別名的來源。<i>SrcPath</i>
+      是一個 Tcl
+      列表，它的元素選擇一個特定的解釋器。例如，“<b>a
+      b</b>”標識一個解釋器
+      <b>b</b>，它是解釋器 <b>a</b>
+      的一個從解釋器，<b>a</b>解釋器是調用(命令)的解釋器的一個從解釋器。一個空列表指定調用這個命令的解釋器。<i>srcCmd</i>給出一個新命令的名字，將在源解釋器中建立它。<i>TargetPath</i>和
+      <i>targetCmd</i>
+      指定一個目標解釋器和命令，和
+      <i>arg</i>
+      參數，如果有的話，給
+      <i>targetCmd
+      </i>指定增補的參數，它們在
+      <i>srcCmd</i>
+      調用中指定的所有參數的前面。<i>TargetCmd</i>在這個調用的時候可以被取消定義(undefine)了，或者它已經存在了；它不由這個命令來建立。別名安排在源解釋器中調用給定源命令的時候在目標解釋器中調用給定目標命令。詳情參見下面的
+      ALIAS INVOCATION
+      (別名調用)章節。</dd>
+  <dt><b>interp</b> <b>aliases </b>?<i>path</i>?</dt>
+  <dd>這個命令返回給在用
+      <i>path
+      </i>表示的解釋器中定義的別名的所有源命令的名字一個
+      Tcl 列表。</dd>
+  <dt><b>interp</b> <b>create </b>?<b>-safe</b>? ?<b>--</b>? ?<i>path</i>?</dt>
+  <dd>建立用 <i>path</i>
+      標識的一個從解釋器和叫做從命令(<i>slave
+      command</i>)的一個新命令。從命令的名字是
+      <i>path</i>的最後一個成員。在其中建立新的從解釋器和從命令的解釋器由從
+      <i>path</i>
+      中去除最後一個成員所獲得的路徑來標識。例如，如果
+      <i>path </i>是<i> </i><b>a b c</b>
+      則一個新的從解釋器和叫做
+      <b>c</b>的從命令建立在用路徑
+      <b>a b
+      </b>標識的從解釋器中。可以使用從命令先下面描述的那樣操縱新解釋器。如果省略了
+      <i>path</i>， Tcl 建立 <b>interp</b><i>x
+      </i>形式的一個唯一的名字，這裏的
+      <i>x</i>是一個整數，並用於解釋器和從命令。如果指定了
+      <b>-safe</b>開關(或者主解釋器是一個安全解釋器)，新的從解釋器將建立成功能有限的一個安全解釋器；否則從解釋器將包含
+      Tcl
+      內置命令和變量的全集。使用
+      <b>--</b>
+      開關來標記開關的結束；如果路徑是象
+      <b>-safe</b>
+      這樣的一個特殊的值的時候需要這個開關。這個命令的結果是新解釋器的名字。一個從解釋器的名字在它的主解釋器的所有從解釋器中必須是唯一的；如果在這個主解釋器中用給定名字(標識)的一個從解釋器已經存在則發生一個錯誤。</dd>
+  <dt><b>interp</b> <b>delete </b>?<i>path ...?</i></dt>
+  <dd>刪除用可選的 <i>path</i>
+      參數給出的零個或多個解釋器，並且對於每個解釋器，它還刪除它的所有從解釋器。這個命令還刪除給每個被刪除的解釋器的從命令。對於每個
+      <i>path</i>
+      參數，如果叫這個名字的解釋器不存在，這個名字將引發一個錯誤。</dd>
+  <dt><b>interp</b> <b>eval</b> <i>path arg </i>?<i>arg ...</i>?</dt>
+  <dd>這個命令用與
+      <b>concat</b>命令相同的方式串聯所有的
+      <i>arg</i> 參數，接着在用
+      <i>path
+      </i>標識的解釋器中把結果字符串作爲一個
+      Tcl
+      腳本來求值。把這個求值的結果(如果發生錯誤的話，包括象
+      <b>errorInfo</b>和 <b>errorCode</b>
+      變量這樣的錯誤信息)返回給調用(命令)的解釋器。</dd>
+  <dt><b>interp exists </b><i>path</i></dt>
+  <dd>如果在這個主解釋器中存在用
+      <i>path</i>
+      指定的從解釋器則返回
+      <b>1</b>，否則返回
+      <b>0</b>。如果省略了
+      <i>path</i>，使用調用(命令)的解釋器。
+    <br/>
+  </dd>
+  <dt><b>interp expose </b><i>path</i> <i>hiddenName</i>
+    ?<i>exposedCmdName</i>?</dt>
+  <dd>在用 <i>path
+      </i>表示(denote)的解釋器中，使隱藏的命令
+      <i>hiddenName</i>
+      暴露(expose)，最終把它帶回在一個新的<i>exposedCmdName</i>
+      名字之下(目前只接受沒有任何::
+      的一個全局名字空間名字)。如果有目標名字的一個暴露的命令已經存在，這個命令失敗。隱藏命令的詳情參見下面的HIDDEN
+      COMMANDS (隱藏命令)章節。</dd>
+  <dt><b>interp</b> <b>hide</b> <i>path</i> <i>exposedCmdName</i>
+    ?<i>hiddenCmdName</i>?</dt>
+  <dd>在用 <i>path
+      </i>表示(denote)的解釋器中，使暴露的命令
+      <i>exposedCmdName</i>
+      隱藏，並把它重命名成隱藏命令
+      <i>hiddenCmdName</i>，如果未給出
+      <i>hiddenCmdName</i>
+      則保持相同的名字。如果有目標名字的一個隱藏的命令已經存在，這個命令失敗。目前
+      <i>exposedCmdName</i> 和
+      <i>hiddenCmdName</i>二者不能不能包含名字空間限定符，否則將引發一個錯誤。即使當前名字空間不是全局名字空間，仍在全局名字空間中查找要被
+      <b>interp
+      hide</b>隱藏的命令。這防止從解釋器通過使當前的名字空間不同於全局名字空間(的方式)，來愚弄主解釋器去隱藏錯誤的命令。隱藏命令的詳情參見下面的HIDDEN
+      COMMANDS (隱藏命令)章節。</dd>
+  <dt><b>interp</b> <b>hidden</b> <i>path</i></dt>
+  <dd>返回在用 <i>path</i>
+      標識的解釋器中所有隱藏命令的名字的一個列表。</dd>
+  <dt><b>interp</b> <b>invokehidden</b> <i>path</i> ?<b>-global</b>?
+    <i>hiddenCmdName</i> ?<i>arg ...</i>?</dt>
+  <dd>在由 <i>path</i>
+      表示的解釋器中用提供的參數調用隱藏命令
+      <i>hiddenCmdName</i>
+      。對參數不(進行)替換或求值。如果存在
+      <b>-global</b>
+      標誌，在目標解釋器的全局層次上調用隱藏命令；否則在當前的調用框架
+      (frame)上調用它並且可以訪問調用框架內部和外部的局部變量。隱藏命令的詳情請參見下面的HIDDEN
+      COMMANDS (隱藏命令)章節。</dd>
+  <dt><b>interp issafe</b> ?<i>path</i>?</dt>
+  <dd>如果由 <i>path</i>
+      指定的解釋器是安全的則返回
+      <b>1</b>，否則返回 <b>0</b>。
+    <br/>
+  </dd>
+  <dt><b>interp marktrusted</b> <i>path</i></dt>
+  <dd>標記用 <i>path</i>
+      標識的解釋器是可信任的。不暴露隱藏命令。這個命令只能在可信任的解釋器中調用。如果由
+      <i>path</i>標識的解釋器已經是可信任的，則這個命令沒有影響。</dd>
+  <dt><b>interp</b> <b>share</b> <i>srcPath channelId destPath</i></dt>
+  <dd>在用 <i>srcPath</i>
+      標識的解釋器和用
+      <i>destPath
+      </i>標識的解釋器之間導致用
+      <i>channelId</i>標識的 IO
+      通道變成共享的。兩個解釋器在這個
+      IO通道上由相同的權限。兩個解釋器必須關閉它來關閉低層的
+      IO
+      通道；在銷燬一個解釋器的時候自動關閉在這個解釋器中可訪問的
+      IO 通道。</dd>
+  <dt><b>interp</b> <b>slaves</b> ?<i>path</i>?</dt>
+  <dd>返回與用 <i>path
+      </i>標識的解釋器相關的所有從解釋器的名字的一個
+      Tcl 列表。如果省略了
+      <i>path</i>，使用調用(命令)的解釋器。</dd>
+  <dt><b>interp</b> <b>target</b> <i>path alias</i></dt>
+  <dd>返回描述給一個別名的目標解釋器的一個
+      Tcl
+      列表。用一個解釋器路徑和源命令名指定這個別名，
+      就象在上面的 <b>interp alias</b>
+      中那樣。目標解釋器的名字被返回爲相對於調用(命令)的解釋器的一個解釋器路徑。如果給這個別名的目標解釋器是調用(命令)的解釋器則返回一個空列表。如果給別名的目標解釋器不是調用(命令)的解釋器或是它的後代之一則生成一個錯誤。在調用這個命令的時候目標命令不是必須定義的。</dd>
+  <dt><b>interp</b> <b>transfer</b> <i>srcPath channelId destPath</i></dt>
+  <dd>導致用 <i>channelId</i> 標識的 IO
+      通道，在用 <i>destPath</i>
+      標識的解釋器中變成可獲得的，而在用
+      <i>srcPath
+      </i>標識的解釋器中變成不可獲得的。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SLAVE_命令_COMMAND">SLAVE 命令 COMMAND<a class="anchor" href="#SLAVE_%E5%91%BD%E4%BB%A4_COMMAND">¶</a></h1>
+對於每個用 <b>interp</b>
+  建立的從解釋器，在主解釋器中建立名字與這個新解釋器相同的一個新
+  Tcl
+  命令。可以使用這個命令調用在這個解釋器上的各種操作。它有下面的一般形式:
+<div class="Bd-indent">
+<pre><i>slave command </i>?<i>arg arg ...</i>?
+</pre>
+</div>
+<i>Slave</i>
+  是解釋器的名字，<i>command</i>
+  和
+  <i>arg</i>s確定這個命令的具體行爲。這個命令有效形式有:
+<dl class="Bl-tag">
+  <dt><i>slave </i><b>aliases</b></dt>
+  <dd>返回一個 Tcl
+      列表，它的元素是在
+      <i>slave
+      </i>中的所有別名的名字。返回的名字是建立別名時使用的
+      <i>srcCmd</i>
+      的值(如果它們已經被重命名，則它可以同這個命令的當前的名字不相同)。</dd>
+  <dt><i>slave </i><b>alias </b><i>srcCmd</i></dt>
+  <dd>返回一個 Tcl
+      列表，它的元素是與叫做
+      <i>srcCmd</i> 的別名相關的
+      <i>targetCmd</i> 和
+      <i>arg</i>s(在建立這個別名的時候指定所有這些值；在從解釋器中的實際的源命令如果被重命令則可能與
+      <i>srcCmd</i>不同)。</dd>
+  <dt><i>slave </i><b>alias </b><i>srcCmd </i><b>{}</b></dt>
+  <dd>在從解釋器中刪除給
+      <i>srcCmd</i> 的別名。<i>srcCmd</i>
+      參照在其下建立別名的那個名字；如果源命令已經被重命名，則刪除重命名後的命令。</dd>
+  <dt><i>slave </i><b>alias </b><i>srcCmd targetCmd </i>?<i>arg ..</i>?</dt>
+  <dd>建立一個別名，當在<i>slave
+      </i>中調用 <i>srcCmd</i> 的時候,
+      在主解釋器中調用
+      <i>targetCmd </i>。把 <i>arg</i>
+      參數作爲補充的參數傳遞給
+      <i>targetCmd</i> ，這些參數在
+      <i>srcCmd
+      </i>的調用中傳遞的任何參數之前。詳情參見下面的ALIAS
+      INVOCATION (別名調用)章節。</dd>
+  <dt><i>slave </i><b>eval </b><i>arg </i>?<i>arg ..</i>?</dt>
+  <dd>這個命令用與 <b>concat</b>
+      命令相同的方式串聯所有的
+      <i>arg</i> 參數，接着在<i> slave
+      </i>中把結果字符串作爲一個
+      Tcl
+      腳本來求值。把這個求值的結果(如果有錯誤發生，包括象
+      <b>errorInfo</b> 和 <b>errorCode</b>
+      變量這樣的錯誤信息)返回給調用(命令)的解釋器。
+    <br/>
+  </dd>
+  <dt><i>slave </i><b>expose </b><i>hiddenName </i>?<i>exposedCmdName</i>?</dt>
+  <dd>這個命令暴露在 <i>slave
+      </i>的隱藏的命令
+      <i>hiddenName</i>，最終把它帶回在一個新的<i>exposedCmdName</i>
+      名字之下(目前只接受沒有任何::
+      的一個全局名字空間名字)。如果有目標名字的一個暴露的命令已經存在，這個命令失敗。隱藏命令的詳情參見下面的HIDDEN
+      COMMANDS (隱藏命令)章節。</dd>
+  <dt><i>slave </i><b>hide </b><i>exposedCmdName</i> ?<i>hiddenCmdName</i>?</dt>
+  <dd>這個命令隱藏在從解釋器中暴露的命令
+      <i>exposedCmdName</i>，並把它重命名成隱藏命令
+      <i>hiddenCmdName</i>，如果未給出<i>hiddenCmdName</i>
+      則保持相同的名字。如果有目標名字的一個隱藏的命令已經存在，這個命令失敗。目前
+      <i>exposedCmdName</i>和
+      <i>hiddenCmdName</i>二者不能不能包含名字空間限定符，否則將引發一個錯誤。即使當前名字空間不是全局名字空間，仍在全局名字空間中查找要被隱藏的命令。這防止從解釋器通過使當前的名字空間不同於全局名字空間(的方式)，來愚弄主解釋器去隱藏錯誤的命令。隱藏命令的詳情參見下面的HIDDEN
+      COMMANDS (隱藏命令)章節。</dd>
+  <dt><i>slave </i><b>hidden</b></dt>
+  <dd>返回在 <i>slave
+      </i>中所有隱藏的名字的一個列表。</dd>
+  <dt><i>slave </i><b>invokehidden</b> ?<b>-global</b> <i>hiddenName </i>?<i>arg
+    ..</i>?</dt>
+  <dd>這個命令在 <i>slave
+      </i>中用提供的參數調用隱藏的命令
+      <i>hiddenName</i>。對這些參數不進行求值或替換。如果給出了
+      <b>-global</b>標誌，則在這個從解釋器的全局層次上調用這個命令；否則在當前調用框架上調用它並可訪問這個調用框架內部或外部的局部變量。隱藏命令的詳情參見下面的HIDDEN
+      COMMANDS (隱藏命令)章節。</dd>
+  <dt><i>slave </i><b>issafe</b></dt>
+  <dd>如果從解釋器是安全的則返回
+      <b>1</b>，否則返回 <b>0</b>。
+    <br/>
+  </dd>
+  <dt><i>slave </i><b>marktrusted</b></dt>
+  <dd>標記從解釋器爲可以信任的。只可以被可信任的解釋器調用。這個命令不暴露在這個從解釋器中的任何隱含命令。如果這個命令已經是可以信任的了，則這個命令沒有影響。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="安全解釋器_SAFE_INTERPRETERS">安全解釋器 SAFE INTERPRETERS<a class="anchor" href="#%E5%AE%89%E5%85%A8%E8%A7%A3%E9%87%8B%E5%99%A8_SAFE_INTERPRETERS">¶</a></h1>
+一個安全解釋器是一個功能受限制的解釋器，所以執行從最惡毒的敵人那裏來的任意腳本都是安全的而不用害怕這個腳本毀壞包圍它的(enclosing)應用或你的計算環境的其餘部分。要使一個解釋器安全，要從這個解釋器中刪除特定的命令和變量。例如，刪除在磁盤上建立文件的命令，和刪除<b>exec</b>命令，因爲它可通過子進程導致破壞。通過建立到主解釋器的別名，它小心的檢查它們的參數並提供對設施的一個安全子集的受限制的訪問，可以提供對這些設施的有限的訪問。例如，在一個特定的子目錄中允許文件建立，和允許對仔細選擇的和一個固定的程序的集合的子進程調用。
+<p class="Pp">通過給 <b>interp create
+    </b>命令指定
+    <b>-safe</b>開關來建立一個安全的解釋器。進而，一個安全解釋器建立的任何從解釋器都是安全的。</p>
+<p class="Pp">建立的安全解釋器準確的有下列的內置的命令集:</p>
+<div class="Bd-indent">
+<pre>
+
+<b>after	append	array	binary</b>
+<b>break	case	catch	clock</b>
+<b>close	concat	continue	eof</b>
+<b>error	eval	expr	fblocked</b>
+<b>fcopy	fileevent	flush	for</b>
+<b>foreach	format	gets	global</b>
+<b>history	if	incr	info</b>
+<b>interp	join	lappend	lindex</b>
+<b>linsert	list	llength	lrange</b>
+<b>lreplace	lsearch	lsort	namespace</b>
+<b>package	pid	proc	puts</b>
+<b>read	regexp	regsub	rename</b>
+<b>return	scan	seek	set</b>
+<b>split	string	subst	switch</b>
+<b>tell	trace	unset	update</b>
+<b>uplevel	upvar	variable	vwait</b>
+<b>while</b>
+</pre>
+</div>
+<p class="Pp"><b>interp create</b>
+    建立一個安全解釋器時下列命令是隱藏的:</p>
+<div class="Bd-indent">
+<pre>
+
+<b>cd	exec	exit	fconfigure</b>
+<b>file	glob	load	open</b>
+<b>pwd	socket	source	vwait</b>
+</pre>
+</div>
+<p class="Pp">以後這些命令可以作爲
+    Tcl
+    過程或別名來重新建立，或用
+    <b>interp expose</b>暴露出來。</p>
+<p class="Pp">除此之外，在一個安全解釋器中不存在
+    <b>env</b>變量，所以不能同其他解釋器共享環境變量。<b>env</b>
+    變量可能造成一次安全冒險，因爲用戶可能在某個環境變量中存儲敏感信息。例如，PGP
+    手冊建議在環境變量
+    <i>PGPPASS </i>中存儲 PGP
+    私有密鑰。讓不可信任代碼可以在安全解釋器中訪問這個變量將招致一次安全冒險。</p>
+<p class="Pp">如果擴展被裝載到安全解釋器中，它們也可以限制它們自己功能來排除不安全的命令。對擴展的安全性的管理的討論參見<b>Safe-Tcl</b>
+    和 <b>load</b> Tcl
+    命令的手冊條目。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="別名調用_ALIAS_INVOCATION">別名調用 ALIAS INVOCATION<a class="anchor" href="#%E5%88%A5%E5%90%8D%E8%AA%BF%E7%94%A8_ALIAS_INVOCATION">¶</a></h1>
+精心的設計了別名機制，所以在安全的從解釋器中執行不可信任的腳本是安全的而別名的目標是一個可信任的主解釋器。最保證安全性的最重要的事情是確保從從解釋器傳遞到主解釋器的信息在主解釋器中永不被求值或替換；如果這種情況發生了，它將開啓在從解釋器中的某個邪惡的腳本來在主解釋器中調用任意函數，這將危及安全。
+<p class="Pp">當從解釋器中調用一個別名的源(命令)的時候，在分析這個命令時進行常規的
+    Tcl
+    替換。在源解釋器中完成這些替換，就象對在這個解釋器中的調用的其他命令一樣。源命令的命令過程接受它的參數並把它們與給這個別名的
+    <i>targetCmd</i>和 <i>arg</i>s
+    融合起來建立一個新的參數數組。如果
+    <i>srcCmd</i>的字是``<i>srcCmd arg1 arg2 ...
+    argN</i>&#39;&#39;，則新的字集將是``<i>targetCmd
+    arg arg ... arg arg1 arg2 ... argN</i>&#39;&#39;。這裏的
+    <i>targetCmd</i>和 <i>arg</i>s
+    是在建立別名的時候提供的值。接着用
+    <i>TargetCmd</i>來在目標解釋器中定位(locate)一個命令過程，並且用新的參數集來調用這個命令過程。如果在目標解釋器中沒有叫做
+    <i>targetCmd</i>
+    的命令則發生一個錯誤。在這個字上不進行補充的替換:不通過常規的
+    Tcl
+    求值機制，直接調用目標命令過程。所以在每個字上精確的進行一次替換:
+    在分析建立這個別名的命令的時候替換
+    <i>targetCmd</i> 和
+    <i>args</i>，當在源解釋器中分析這個別名的源命令的時候替換
+    <i>arg1 - argN</i>。</p>
+<p class="Pp">在安全解釋器中給別名寫
+    <i>targetCmd</i>s
+    的時候，給它的參數永遠不被求值或替換是非常重要的，因爲這將提供一種逃逸機制，使從解釋器可以執行在主解釋器中的任意代碼。這將危及系統的安全。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="隱藏命令_HIDDEN_COMMANDS">隱藏命令 HIDDEN COMMANDS<a class="anchor" href="#%E9%9A%B1%E8%97%8F%E5%91%BD%E4%BB%A4_HIDDEN_COMMANDS">¶</a></h1>
+安全解釋器嚴重的限制了在其中執行的
+  Tcl
+  程序可獲得的功能。允許不可信任的
+  Tcl
+  程序訪問這些功能是不安全的，因爲它們可以在這個環境中被用於各種攻擊。但是，有時在安全解釋器的上下文中有使用危險的功能的合理需要。例如，有時一個程序必須
+  <b>source
+  </b>到解釋器中。另一個例子是
+  Tk，在這裏窗口被綁定到與一個特定解釋器關聯的窗口層次當中；一些潛在的危險函數，比如窗口管理，必須在這個解釋器上下文中的那些窗口上進行。
+<p class="Pp"><b>interp</b>
+    命令提供了對這個問題的一種<i>隱藏命令</i>形式的解決方案。不是從安全解釋器中整個的刪除危險的命令，而是隱藏這些命令，所以它們變成對在這個解釋器中執行的
+    Tcl
+    腳本是不可獲得的。但是，這個安全解釋器的任何可信任的祖先可以使用
+    <b>interp
+    invoke</b>，在這個安全解釋器的上下文中，調用這些隱藏命令。隱藏命令和暴露命令駐留在分開的名字空間中。在一個解釋器中可以定義叫相同名字的隱藏命令和暴露命令。</p>
+<p class="Pp">在別名調用期間，在主解釋器中調用的過程體中可以調用在從解釋器中的隱藏命令。例如，在一個從解釋器中可以給
+    <b>source</b>
+    建立一個別名。當在這個從解釋器中調用它的時候，調用在主解釋器中的一個過程來檢查這個操作是否是允許的(比如，是否允許這個從解釋器訪問的它要求source
+    的文件)。接着這個過程在從解釋器中調用隱藏的
+    <b>source</b>命令來實際裝載(source)這個文件的內容。注意在從解釋器中存在來着兩個叫
+    <b>source</b> 的命令:
+    別名和隱藏命令。</p>
+<p class="Pp">因爲一個主解釋器可以把調用一個隱藏命令作爲處理一個別名調用的一部分，必須非常小心的避免對通過別名調用傳遞來的任何參數進行求值。否則，惡意的從解釋器可以導致一個可信任的代表它們來執行危險的命令。這個主題的完整討論參見ALIAS
+    INVOCATION
+    (別名調用)章節。要避免這個問題，對
+    <b>interp
+    invokehidden</b>的參數不要進行替換或求值。</p>
+<p class="Pp">不允許安全解釋器調用它自身中或它後代中的隱藏命令。這防止安全從解釋器訪問在自身中或它們的後代中的隱藏命令。</p>
+<p class="Pp">一個可信任的解釋器可以使用
+    <b>interp expose</b>和 <b>interp hide
+    </b>來操縱一個解釋器中的隱藏命令的集合。<b>interp
+    expose</b> 命令把在用 <i>path
+    </i>標識的解釋器中一個隱藏命令移動到暴露命令的集合中，在這個過程中可能重命名這個命令。如果叫目標名字的一個暴露的命令已經存在，這個操作失敗。類似的，<b>interp
+    hide</b>
+    把在這個解釋器中的一個暴露命令移動到隱藏命令的集合中。不允許安全解釋器在它自身中或它的後代中的隱藏命令和暴露命令的集合之間移動命令。</p>
+<p class="Pp">目前，隱藏命令的名字不能包含名字空間限定符，並且在你可以隱藏它之前必須首先把在一個名字空間中的命令重命令到全局名字空中。在全局名字空間中查找要被
+    <b>interp hide</b>
+    隱藏的命令。這防止從解釋器通過使當前的名字空間不同於全局名字空間(的方式)，來愚弄主解釋器去隱藏錯誤的命令。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="感謝_CREDITS">感謝 CREDITS<a class="anchor" href="#%E6%84%9F%E8%AC%9D_CREDITS">¶</a></h1>
+這個機制基於由 Nathaniel Borenstein
+  和 Marshall Rose 實現的 Safe-Tcl
+  原型。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_SEE_ALSO">參見 SEE ALSO<a class="anchor" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO">¶</a></h1>
+load(n), safe(n), <a href="../../buster/tcl8.6-doc/Tcl_CreateSlave.3tcl.en.html">Tcl_CreateSlave(3)</a>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="關鍵字_KEYWORDS">關鍵字 KEYWORDS<a class="anchor" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS">¶</a></h1>
+alias, master interpreter, safe interpreter, slave interpreter
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>寒蟬退士</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/10/09</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國_Linux_論壇_man_手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8B_Linux_%E8%AB%96%E5%A3%87_man_%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">7.6</td>
+    <td class="foot-os">Tcl</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+interp.3tcl.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-26T21:44:37Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"interp(3tcl)\"}}]}"
+</script>

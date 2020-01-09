@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>regex(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages/regex.7.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es/regex.7.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-it/regex.7.it.html" hreflang="it">
+<link rel="alternate" href="../../buster/manpages-ja/regex.7.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pt/regex.7.pt.html" hreflang="pt">
+<link rel="alternate" href="../../buster/manpages-zh/regex.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/regex.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; regex(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/regex.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/regex.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION" title="DESCRIPTION">DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SEE_ALSO_%E5%8F%83%E8%A6%8B" title="SEE ALSO 參見">SEE ALSO 參見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#AUTHOR_%E4%BD%9C%E8%80%85" title="AUTHOR 作者">AUTHOR 作者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/regex.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/regex.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/regex.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages/regex.7.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es/regex.7.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-it/regex.7.it.html" title="Italian (it)">italiano</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/regex.7.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pt/regex.7.pt.html" title="Portuguese (pt)">português (pt)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/regex.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/regex.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-dev/regex.3.en.html">3 (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/regex.7.zh_TW.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">REGEX(7)</td>
+    <td class="head-vol">Miscellaneous Information Manual</td>
+    <td class="head-rtitle">REGEX(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+regex - POSIX 1003.2 正則表達式
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION">DESCRIPTION<a class="anchor" href="#DESCRIPTION">¶</a></h1>
+正則表達式 (``RE&#39;&#39;s), 在 POSIX 1003.2
+  中定義，包含兩種類型：
+  新式 REs (基本上指的是
+  <i>egrep</i> 使用的那些，1003.2
+  稱其爲 ``extended&#39;&#39; REs
+  也就是“擴展的REs”)
+  和舊式 REs (指的是 <a href="../../buster/ed/ed.1.en.html">ed(1)</a>
+  中的那些，1003.2 稱之爲
+  ``basic&#39;&#39; REs
+  也就是“基本的REs”).
+  舊式 REs
+  的存在僅僅是爲了向後和一些舊程序保持兼容；在最後將加以討論。
+  1003.2 對 RE
+  語法和語義的某些方面沒有做強制規定；
+  `(!)&#39;
+  記號標示了這些內容，它們可能不能完全移植到其他
+  1003.2 實現當中。
+<p class="Pp">一個(新式的) RE
+    正則表達式是一個(!)
+    或多個非空(!) <i>branches</i>
+    分支，以 `|&#39; 分隔。
+    它匹配任何匹配其中一個分支的符號串。</p>
+<p class="Pp">一個 branch
+    分支是一個(!) 或多個
+    <i>pieces</i> 片段連結而成。
+    符號串首先要匹配它的第一個片段，接下來剩餘部分再匹配第二個片段，以此類推。</p>
+<p class="Pp">一個 piece 片段是一個
+    <i>atom</i>
+    原子，其後可能包含一個(!)
+    `*&#39;, `+&#39;, `?&#39;, 或者 <i>bound</i> 量詞。
+    一個原子加上 `*&#39;
+    匹配零個或多個這個原子的匹配構成的序列。
+    一個原子加上 `+&#39;
+    匹配一個或多個這個原子的匹配構成的序列。
+    一個原子加上 `?&#39;
+    匹配零個或一個這個原子的匹配。</p>
+<p class="Pp">一個 <i>bound</i> 量詞是 `{&#39;
+    後面跟一個無符號十進制整數，可能還會跟一個
+    `,&#39;，
+    可能還會再跟一個無符號十進制整數，然後以
+    `}&#39; 結束。
+    整數的大小必須在 0 和
+    RE_DUP_MAX (255(!))
+    之間(包含邊界值)。
+    如果給出了兩個數字，那麼第一個決不能比第二個大。
+    一個原子的量詞中如果只有一個數字而沒有逗號的話，就匹配
+    <i>i</i>
+    個這個原子的匹配構成的序列。
+    一個原子的量詞中如果只有一個數字並且有逗號的話，就匹配
+    <i>i</i>
+    個或多個這個原子的匹配構成的序列。
+    一個原子的量詞中如果包含兩個數字
+    <i>i</i> 和 <i>j</i> 的話，就匹配
+    <i>i</i> 到 <i>j</i>
+    個這個原子的匹配構成的序列。</p>
+<p class="Pp">一個原子是一個包含在
+    `()&#39; 中的正則表達式
+    (這將匹配這個正則表達式匹配的符號串)，
+    一個空的 `()&#39;
+    (匹配空串)， 一個 <i>bracket
+    expression</i>
+    (方括號表達式，參見下面)，
+    `.&#39; (匹配任何字符)， `^&#39;
+    (匹配行首的空字符串)，
+    `$&#39;
+    (匹配行尾的空字符串)，
+    一個 `\&#39;
+    加上下列字符之一
+    `^.[$()|*+?{\&#39;
+    (匹配這個字符，忽略它的任何特殊意義)，
+    一個 `\&#39;
+    (加上任何其他字符(!)
+    匹配那個字符，忽略它的任何特殊意義，就好像
+    `\&#39; 不存在(!))，
+    或者是一個字符，沒有特殊意義
+    (匹配它本身)。 一個 `{&#39;
+    後面是一個非數字的字符時，是一個普通的字符而不是量詞的開始(!)。
+    以 `\&#39; 來結束一個 RE
+    是非法的。</p>
+<p class="Pp">一個 <i>bracket expression</i>
+    方括號表達式是一個字符的列表，包含在
+    `[]&#39; 當中。
+    它一般匹配列表中的任何一個字符
+    (有特殊情況)。
+    如果這個列表以 `^&#39;
+    開始，它將匹配
+    <i>不在</i>
+    列表中的任何字符
+    (下面還會講到特殊情況)。
+    如果列表中的兩個字符以
+    `-&#39;
+    分隔，可以表示字母表中這兩個字符之間(包括這兩個字符)所有的字符。
+    例如，ASCII 字符表中 `[0-9]&#39;
+    匹配任何數字。 不能(!)
+    用一個字符作爲定義兩個字符範圍的端點，就像這樣
+    `a-c-e&#39;。
+    字符範圍是與字母表順序相關的，可移植的程序不應使用它們。</p>
+<p class="Pp">要在列表中包含一個字面的(沒有特殊含義的)
+    `]&#39;，可以把它放在首位(後面可能要加上一個`^&#39;)。
+    要在列表中包含一個字面的
+    `-&#39;，可以把它放在首位或末尾，或者讓它作爲一個字符範圍的末端點。
+    要以一個字面的 `-&#39;
+    作爲字符範圍的起始，可以將它放在
+    `[.&#39; 和 `.]&#39; 當中，
+    使得它成爲一個 collating element
+    (歸併元素，參見下面)。
+    特殊情況除了這些，還有使用
+    `[&#39;
+    的組合(參見下一段)。所有其他特殊字符，包括
+    `\&#39;
+    在內，在方括號表達式中都失去了它們的特殊含義。</p>
+<p class="Pp">方括號表達式中，一個包含在
+    `[.&#39; 和 `.]&#39; 中的歸併元素
+    (collating
+    element，一個字符，一個視爲一體的字符序列，
+    或者一個代表着上述兩類的歸併序列名稱)
+    代表着這個歸併元素所包含的字符序列。
+    這個序列被視爲方括號表達式的一個元素。
+    因此一個包含着多字符歸併元素的方括號表達式可以匹配多於一個的字符。
+    例如，如果這個歸併序列包含一個歸併元素
+    `ch&#39;，那麼 正則表達式
+    `[[.ch.]]&#39;*c&#39; 可以匹配 `chchcc&#39;
+    的前五個字符。</p>
+<p class="Pp">方括號表達式中，一個包含在
+    `[=&#39; 和 `=]&#39;
+    中的歸併元素是一個等價類，代表着
+    等價於它的所有歸併元素
+    (也包括它自身)包含的字符的序列。
+    (如果沒有其他等價的歸併元素，就把它與括號分隔符是
+    `[.&#39; 和 `.]&#39; 時同樣看待。)
+    例如，如果 o 和 ^
+    是一個等價類的成員，那麼
+    `[[=o=]]&#39;，`[[=^=]]&#39; 還有 `[o^]&#39;
+    都是同義詞。
+    一個等價類不能(!)
+    是一個字符範圍的末端點。</p>
+<p class="Pp">方括號表達式中，包含在
+    `[:&#39; 和 `:]&#39; 中的一個 <i>character
+    class</i>(字符類) 代表着這個
+    字符類中的所有字符的列表。
+    標準的字符類名稱是：</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>alnum	digit	punct
+alpha	graph	space
+blank	lower	upper
+cntrl	print	xdigit
+</pre>
+</div>
+<p class="Pp">它們代表着 <a href="../../buster/manpages-dev/wctype.3.en.html">wctype(3)</a>
+    定義的字符類。 一個
+    locale(語言環境)
+    可能會提供其他字符類。
+    一個字符類不能用作一個字符範圍的末端點。</p>
+<p class="Pp">方括號表達式還有兩種特殊的情況(!)
+    ： 方括號表達式 `[[:&lt;:]]&#39;
+    和 `[[:&gt;:]]&#39;
+    分別匹配一個詞的開始和結尾的空字符串。
+    一個 word (詞)是一個 word character
+    (成詞字符)
+    的序列，並且前後都沒有成詞字符。
+    一個 word character (成詞字符)
+    是一個 <i>alnum</i> 字符 (在
+    <a href="../../buster/manpages-dev/wctype.3.en.html">wctype(3)</a> 中有定義)
+    或者是一個下劃線。
+    這是一個擴展，與 POSIX
+    1003.2
+    兼容但沒有寫入正文，在需要移植到其他系統中的軟件中應當小心使用。</p>
+<p class="Pp">如果一個 RE
+    可以匹配一個字符串的多個不同的字串時，RE
+    選擇匹配最前面的一個。
+    如果這個 RE
+    匹配的子串有相同的起始點，RE
+    選擇匹配最長的一個。
+    子表達式也匹配最長的字串，使得整個匹配的字串最長，RE
+    中前面
+    的子表達式比後面的子表達式優先級高。
+    注意高級的子表達式比組成它的子表達式優先級要高。</p>
+<p class="Pp">匹配長度以字符來計算，而不是歸併元素。
+    空字符串被認爲比沒有匹配要長。例如，`bb*&#39;
+    匹配 `abbbc&#39;
+    的中間三個字符；
+    `(wee|week)(knights|nights)&#39; 匹配 `weeknights&#39;
+    的全部十個字符； `(.*).*&#39;
+    匹配
+    `abc&#39;，其中括號中的子表達式匹配所有這三個字符；
+    `(a*)*&#39; 來和 `bc&#39;
+    匹配時，括號中的子表達式和整個
+    RE 都匹配空字符串。</p>
+<p class="Pp">如果指定了 case-indepentent
+    忽略大小寫的匹配，效果是字母表中的大小寫區別似乎都消失了。
+    如果一個字母可能以兩種情況出現，假如它出現在方括號表達式之外，實際上被替換成了一個包含
+    所有情況的方括號表達式，例如
+    `x&#39; 成爲了
+    `[xX]&#39;；如果它出現在方括號表達式之內，
+    那麼它的所有形式都被加入到這個方括號表達式之內，因此例如
+    `[x]&#39; 等同於 `[xX]&#39;，還有 `[^x]&#39;
+    成爲了 `[^xX]&#39;。</p>
+<p class="Pp">對 RE
+    的長度沒有強制的限制。需要可移植的程序不應當使用長於256字節的正則表達式，
+    因爲特定的實現可以不接受這種
+    RE，但是仍然是 POSIX
+    兼容的。</p>
+<p class="Pp">過時的 (``basic&#39;&#39;)
+    正則表達式在很多地方有不同之處。`|&#39;，`+&#39;
+    和 `?&#39; 是普通的字符，
+    並且沒有和它們等價的功能。量詞的分隔符是
+    `\{&#39; 和 `\}&#39;，`{&#39; 和 `}&#39;
+    本身是普通的字符。
+    嵌套的子表達式使用的括號是
+    `\(&#39; 和 `\)&#39;，`(&#39; 和 `)&#39;
+    本身是普通的字符。 `^&#39;
+    是一個普通的字符，除非是
+    RE
+    的第一個字符，或者(!)
+    一個括號中的子表達式的第一個字符。
+    `$&#39;
+    是一個普通的字符，除非是
+    RE
+    的最後一個字符，或者(!)
+    一個括號中的子表達式的最後一個字符。
+    `*&#39;
+    是一個普通的字符，如果它出現在
+    RE
+    的開始，或者一個括號中的子表達式的開始(其後一般是一個
+    `^&#39;)。 最後，還有一類 atom
+    原子，一個 <i>back
+    reference</i>(向後引用)：`\&#39;
+    其後跟一個非零十進制整數
+    <i>d</i>， 匹配與第 <i>d</i>
+    個括號中的子表達式的匹配相同的內容(子表達式的編號是根據它們的左括號而來，從左到右)。
+    因此(例如)，`\([bc]\)\1&#39; 匹配 `bb&#39;
+    或 `cc&#39; 但是不匹配 `bc&#39;。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO_參見">SEE ALSO 參見<a class="anchor" href="#SEE_ALSO_%E5%8F%83%E8%A6%8B">¶</a></h1>
+<a href="../../buster/manpages-dev/regex.3.en.html">regex(3)</a>
+<p class="Pp">POSIX 1003.2, section 2.8 (Regular Expression Notation).</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+同時使用兩種 REs
+  是不明智的。
+<p class="Pp">目前的 1003.2
+    規約稱，如果右括號 `)&#39;
+    沒有對應的 `(&#39;
+    那麼視爲普通字符；這個規定是一個筆誤，將來會改正。
+    避免使用它。</p>
+<p class="Pp">向後引用是糟糕的設計，是高效的實現中要面對的主要問題。
+    另外還會產生晦澀的語法
+    (？`a\(\(b\)*\2\)*d&#39; 可以匹配 `abbbd&#39;
+    嗎？)。
+    避免使用它們。</p>
+<p class="Pp">1003.2
+    對於忽略大小寫的匹配的規定也不明確。
+    上面給出的定義 ``one case implies
+    all cases&#39;&#39;
+    是當前各實現者的共識，被當作正確的語法。</p>
+<p class="Pp">詞邊界的語法醜陋得讓人難以接受。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="AUTHOR_作者">AUTHOR 作者<a class="anchor" href="#AUTHOR_%E4%BD%9C%E8%80%85">¶</a></h1>
+This page was taken from Henry Spencer&#39;s regex package.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>袁乙鈞 &lt;bbbush@163.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2004.02.24</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8Blinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">1994-02-07</td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+regex.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-26T15:38:32Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"regex(7)\"}}]}"
+</script>

@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ar(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/binutils-common/ar.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es-extra/ar.1.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-it/ar.1.it.html" hreflang="it">
+<link rel="alternate" href="../../buster/manpages-ja/ar.1.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/ar.1.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/ar.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/ar.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; ar(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ar.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ar.1.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%80%BB%E8%A7%88" title="总览">总览</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%89%E9%A1%B9" title="选项">选项</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E8%80%83" title="参考">参考</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%89%88%E6%9D%83" title="版权">版权</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA" title="中文版维护人">中文版维护人</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0" title="中文版最新更新">中文版最新更新</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E5%9B%BD_Linux_%E8%AE%BA%E5%9D%9B_man_%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92" title="中国 Linux 论坛 man 手册页翻译计划">中国 Linux 论坛 man 手册页翻译计划</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/ar.1.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/ar.1.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/ar.1.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/binutils-common/ar.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es-extra/ar.1.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-it/ar.1.it.html" title="Italian (it)">italiano</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/ar.1.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/ar.1.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/ar.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ar.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle"><a href="../../buster/manpages-zh/ar.1.zh_CN.html">ar(1)</a></td>
+    <td class="head-vol">GNU 开发工具</td>
+    <td class="head-rtitle"><a href="../../buster/manpages-zh/ar.1.zh_CN.html">ar(1)</a></td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<p class="Pp"></p>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+ar -
+  建立，修改档案或从档案中抽取成员。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="总览">总览<a class="anchor" href="#%E6%80%BB%E8%A7%88">¶</a></h1>
+<b>ar</b> [<b>-</b>]<b></b><i>{dmpqrtx}[abcfilNoPsSuvV] </i>[<i>membername</i>]
+  [<i>count</i>] <i>archive</i> <i>files</i>...
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+GNU 组织的 <b>ar</b>
+  程序用于建立，修改档案或从档案中抽取成员。
+  一个 <i>档案</i>
+  是一个包含了很多其它文件的单独的文件，
+  它采用的结构使得可以很容易恢复原来独立的文件
+  （称为档案的 <i>成员</i>
+  ）。
+<p class="Pp">原始文件（成员）的内容、权限、时间属性、属主和组都
+    在档案中得到保留，在抽取时可以得到恢复。</p>
+<p class="Pp"><b>ar</b>
+    程序维护的档案成员可以拥有一定长度的名字；具体情况，
+    与你系统上的 <b>ar</b>
+    是怎样配置的有关。
+    为了与其它工具维护的档案格式兼容，
+    有可能对成员名字的长度有严格的限制，
+    如果确实是这样，通常要求采用
+    15 个字符
+    （典型的格式是
+    a.out），或者 16
+    个字符（典型的格式是
+    coff）。</p>
+<p class="Pp"><b>ar</b>
+    是一个二进制格式的工具，因为这一类档案多数都作为
+    保存公共程序的
+    <i>库文件</i> 使用。</p>
+<p class="Pp">通过指定修饰符`<b>s</b>&#39;,
+    <b>ar</b> 可以 建立 指向
+    档案中 可重定位 目标
+    模块 定义的 符号表的
+    索引, 一旦建立, 在<b>ar</b>
+    更新 其内容时
+    (通过`<b>q</b>&#39; 执行 更新
+    操作) , 此索引 也会
+    得到 更新. 有这种
+    索引的 档案 可以
+    加速到 库文件的
+    连接过程, 并且 允许
+    库中的 例程 相互调用
+    而无须 考虑 它们
+    在档案中的 位置.</p>
+<p class="Pp">可以 使用`<b>nm -s</b>&#39; 或 `<b>nm
+    --print-armap</b>&#39; 列出 这种索引,
+    如果 档案 没有这类
+    索引, 可以 使用 另外
+    一个 称为<b>ranlib</b> 的<b>ar</b>
+    程序 增加 这种 索引.</p>
+<p class="Pp"></p>
+<p class="Pp"><b>ar</b>
+    至少需要两个参数才能运行：
+    一个指明执行的
+    <i>操作</i>
+    （可能伴随有其它的
+    <i>修饰符</i>
+    ），作用的档案名字。
+    多数 操作 可以 接受
+    更多的<i>文件</i> 参数,
+    指明 操作的 详细
+  文件.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="选项">选项<a class="anchor" href="#%E9%80%89%E9%A1%B9">¶</a></h1>
+<b>ar</b> 允许你 在第一个
+  命令行 参数中 以任意
+  顺序 混合 指定
+  操作码<i>p</i> 和修饰符<i>mod</i> .
+<p class="Pp">只要你 愿意,
+    也可以 用破折号 作为
+    命令行 第一个 参数的
+    开始.</p>
+<p class="Pp"><i>p</i> 关键字 指明
+    要执行的 操作, 只能
+    指明为 如下 之一:</p>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>d</b></dt>
+  <dd>从档案中<i>删除</i> 模块.
+      通过<i>files</i> 指明
+      要删除的 模块的
+      名称; 如果 没有 指出
+      要删除的 文件 名称,
+      档案不会 改变 任何
+      内容.
+    <p class="Pp">如果 给出了<b>&#39;v</b>&#39;
+        修饰符,<b>ar</b> 会例出
+        它删除的 每一个
+        模块.</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>m</b></dt>
+  <dd>用此 操作
+      在档案中<i>移动</i> 成员.
+    <p class="Pp">如果 某个 符号名
+        在档案的 多个
+        成员中 有定义, 那么
+        程序 怎样 连接 档案
+        文件 得到的 结果
+        可能是 不同的.</p>
+    <p class="Pp">如果 没有为<b>m</b>
+        指定 修饰符, 由<i>files</i>
+        指出的 成员
+        将移动到
+        档案的<i>末尾</i> ; 可以
+        通过 `<b>a</b>&#39;, `<b>b</b>&#39; 或 `<b>i</b>&#39;
+        等修饰符, 指定 成员
+        移动的 具体 位置.</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>p</b></dt>
+  <dd>在标准 输出上 <i>打印</i>
+      档案中 指定的 成员.
+      如果 给出了`<b>v</b>&#39;
+      修饰符, 在 打印 成员
+      内容 之前, 先打印
+      成员的 名字.
+    <p class="Pp">如果没有 指明<i>files</i>
+        参数, 档案中 所有的
+        成员 都会被 打印
+        出来.</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>q</b></dt>
+  <dd><i>快速 追加</i>; 增加 <i>files</i>
+      到 <i>archive</i> 的末尾, 不进行
+      替换 检查.
+    <p class="Pp">修饰符 `<b>a</b>&#39; `<b>b</b>&#39; 和
+        `<b>i</b> &#39;<i>不</i> 影响此 操作,
+        新成员 始终 追加到
+        档案的 末尾处.</p>
+    <p class="Pp">修饰符 `<b>v</b>&#39; 可以使
+        <b>ar</b> 列出 它追加的
+        所有文件.</p>
+    <p class="Pp">由于 本功能
+        是用于 快速操作,
+        即使 档案中 有
+        符号表 索引 也不
+        进行 更新; 可以 使用
+        `<b>ar s</b>&#39; 或 <b>ranlib</b> 明确 要求
+        更新 这些索引.</p>
+    <p class="Pp">在为快速 追加
+        重建 索引时,由于 有
+        太多 不同的 系统,
+        所以 GNU <b>ar</b> 采用 `<b>q</b>&#39;
+        作为 `<b>r</b>&#39;的一个
+        同义字.</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>r</b></dt>
+  <dd>把文件 <i>files</i> 插入 <i>archive</i> (
+      <i>替换 </i>). 本操作与 `<b>q</b>&#39;
+      是不同的, 如果
+      档案中 已有的 某个
+      成员与 插入 文件的
+      名称 相同, 此成员
+      将被删除.
+    <p class="Pp">如果 不存在
+        名称为 <i>files</i> 的文件,
+        <b>ar</b> 显示 一个 错误
+        消息, 并且 保留
+        档案中 已有的 同名
+        成员.</p>
+    <p class="Pp">缺省情况下,
+        新成员 增加到
+        挡案的 末尾; 可以
+        通过 使用 `<b>a</b>&#39; `<b>b</b>&#39; 或
+        `<b>i</b> &#39; 等修饰符 指定
+        相对于 已有 成员的
+        位置.</p>
+    <p class="Pp">通过 使用 `<b>v</b>&#39;
+        修饰符 会为每个
+        插入的 文件 产生
+        一行 输出, 根据
+        输出中的 字符 `<b>a</b>&#39; 或
+        `<b>r</b>&#39; 可以 表明 该文件
+        是追加的 (没有 删除
+        以前的成员) 还是
+        替换的.</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>t</b></dt>
+  <dd>显示 一个 <i>archive</i> 档案
+      所包含 内容的 <i>列表
+      </i>, 或 档案中的 由 <i>files</i>
+      指出的 文件 列表.
+      通常 只显示 成员的
+      名称, 如果 使用 `<b>v</b>&#39;
+      修饰符, 可以 得到
+      成员的 权限,
+      时间属性, 属主, 组和
+      大小.
+    <p class="Pp">如果 没有 指出
+        <i>files</i> , 档案中的 所有
+        文件 都会 列出.</p>
+    <p class="Pp">如果 档案中 (称为
+        `<b>b.a</b>&#39;) 有多个 同名 成员
+        (称为 `<b>fie</b>&#39;), `<b>ar t b.a fie</b>&#39; 仅仅
+        列出 第一个; 要看到
+        它们的 全部, 必须
+        要求 完整的 列表
+        —在本例中是 `<b>ar t b.a</b>&#39;.</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>x</b></dt>
+  <dd>从档案中 <i>抽取 </i> 成员
+      (名称为 <i>files</i>) . 如果
+      使用 `<b>v</b>&#39; 修饰符, <b>ar</b>
+      会列出 它抽取的
+      每一个 文件的 名字.
+    <p class="Pp">如果没有给出 <i>files</i>,
+        抽取 档案中 所有的
+        文件.</p>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<p class="Pp">可以在 操作符 <i>p</i>
+    后紧随 一定数量的
+    修饰符 <i>mod </i>以指明
+    操作的 各种 行为.</p>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>a</b></dt>
+  <dd>增加 文件到 档案中
+      已有 成员 <i>之后 </i> ,
+      如果 使用了 修饰符
+      <b>a</b> , 必须在 档案 名称
+      <i>archive</i> 之前 以 <i>membername</i>
+      参数的 形式 给出
+      档案中 已有 成员的
+      名字.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>b</b></dt>
+  <dd>增加 文件到 档案中
+      已有 成员 <i>之前 </i> ,
+      如果 使用了 修饰符
+      <b>b</b> , 必须在 档案 名称
+      <i>archive</i> 之前 以 <i>membername</i>
+      参数的 形式 给出
+      档案中 已有 成员的
+      名字. (和修饰符 `<b>i</b>&#39;
+      相同).
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>c</b></dt>
+  <dd><i>建立 </i> 档案. 指定的
+      档案 <i>archive</i> 始终
+      会被建立, 如果
+      你要求 执行的是
+      更新, 通过 此修饰符
+      建立 档案时 会给出
+      一个 警告.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>f</b></dt>
+  <dd>截短 档案成员的
+      名字. <b>ar</b> 通常 允许
+      任意 长度的 文件名,
+      但这会 导致 与某些
+      系统上的 <b>ar</b> 出现
+      兼容性 问题, 使用 <b>f</b>
+      修饰符 可以
+      在往档案中 追加
+      文件时 把名字 截短.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>i</b></dt>
+  <dd>插入 文件到 档案中
+      已有 成员 <i>之前 </i> ,
+      如果 使用了 修饰符
+      <b>i</b> , 必须在 档案 名称
+      <i>archive</i> 之前 以 <i>membername</i>
+      参数的 形式 给出
+      档案中 已有 成员的
+      名字. (与修饰符 `<b>b</b>&#39;
+      相同).
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>l</b></dt>
+  <dd>接受此修饰符,
+      但不起作用.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>N</b></dt>
+  <dd>使用 <i>count</i> 参数.
+      本修饰符 用于
+      在档案中 有多个 同名
+      成员的 情况. 删除
+      或抽取 档案中 给定
+      名字的第 <i>count</i> 个实例.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>o</b></dt>
+  <dd>抽取 成员时 保留
+      他们 <i>原始的 </i>
+      时间属性. 如果 没有
+      此修饰符, 文件以抽取
+      的时间 作为 它的时间
+      属性.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>P</b></dt>
+  <dd>匹配 档案中的 名字时
+      使用 完整的 路径名.
+      <b>ar</b> 不能 建立 使用
+      完整 路径名的 档案
+      (这不符合 POSIX 标准),
+      但其它的 档案 工具
+      能够建立, 本选项
+      会使 <b>ar</b> 在抽取
+      由其它 工具 建立的
+      档案 文件时,
+      使用完整的 路径名
+      去匹配 档案中 成员的
+      名字.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>s</b></dt>
+  <dd>即使 没有对 档案
+      进行 改变, 用本
+      修饰符 也可以
+      往档案中 写一个 目标
+      文件的 索引 或更新
+      已经 存在的 索引.
+      可以与 其它 操作
+      一起 使用 本修饰符,
+      也可以 单独使用.
+      对一个 档案 执行 `<b>ar s</b>&#39;
+      与执行 `<b>ranlib</b>&#39; 等价.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>S</b></dt>
+  <dd>不生成 档案的
+      符号表. 这可以 加速
+      建立 大的档案 文件的
+      过程,但这样 建立的
+      档案 不能被 连接器
+      使用, 为建立 符号表,
+      在最后 执行 `<b>ar</b>&#39;
+      时应该 不用 `<b>S</b>&#39;
+      修饰符, 或者 对档案
+      执行 一次 `<b>ranlib</b>&#39; .
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>u</b></dt>
+  <dd>通常<b>ar r</b>... 把所有
+      列出的 文件 插入到
+      档案中, 如果 希望
+      <i>仅仅 </i>插入比 档案中
+      已有 成员 更新的
+      文件时, 就应该 使用
+      此修饰符. `<b>u</b>&#39; 修饰符
+      仅允许 与 `<b>r</b>&#39; (替换)
+      操作 一起 使用. 某些
+      情况下, 由于 用 `<b>q</b>&#39;
+      操作 比较 文件的
+      时间属性 会失去
+      速度上的 优势, 所以
+      不允许 执行 `<b>qu</b>&#39;
+      组合操作.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>v</b></dt>
+  <dd>使用本修饰符可以进行
+      <i>冗余的</i>
+      操作。附加了此修饰符时，很多操作会显示
+      更多的消息，如处理的文件名等。
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>V</b></dt>
+  <dd>显示 <b>ar</b> 的版本号。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参考">参考<a class="anchor" href="#%E5%8F%82%E8%80%83">¶</a></h1>
+<b>info 中的</b> `<b>binutils</b>&#39; 条目; <i>The GNU
+  Binary Utilities, Roland H. Pesch (1991年10月).</i>
+  <b>nm</b>(<b>1</b>), <b>ranlib</b>(<b>1</b>).
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="版权">版权<a class="anchor" href="#%E7%89%88%E6%9D%83">¶</a></h1>
+Copyright (c) 1991, 1992, 1993, 1995, 1998, 1999, 2000 Free Software Foundation,
+  Inc.
+<p class="Pp">This document is distributed under the terms of the GNU Free
+    Documentation License, version 1.1. That license is described in the sources
+    for this manual page, but it is not displayed here in order to make this
+    manual more consise. Copies of this license can also be obtained from:
+    <a href="../../copyleft/.">../../copyleft/.</a></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文版维护人">中文版维护人<a class="anchor" href="#%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA">¶</a></h1>
+<b>Yin Huaming &lt;yhmact@pzh-public.sc.cninfo.net&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文版最新更新">中文版最新更新<a class="anchor" href="#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0">¶</a></h1>
+<b>2002/06/23</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中国_Linux_论坛_man_手册页翻译计划">中国 Linux 论坛 man 手册页翻译计划<a class="anchor" href="#%E4%B8%AD%E5%9B%BD_Linux_%E8%AE%BA%E5%9D%9B_man_%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">1999</td>
+    <td class="foot-os">Free Software Foundation</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+ar.1.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2020-01-08T09:32:02Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"ar(1)\"}}]}"
+</script>

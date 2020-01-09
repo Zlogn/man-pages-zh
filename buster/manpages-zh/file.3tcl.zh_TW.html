@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>file(3tcl) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/tcl8.6-doc/file.3tcl.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/file.3tcl.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/file.3tcl.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="3tcl">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; file(3tcl)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/file.3tcl">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/file.3tcl.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS" title="總覽 SYNOPSIS">總覽 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%A7%BB%E6%A4%8D%E8%A6%81%E9%BB%9E_PORTABILITY_ISSUES" title="移植要點 PORTABILITY ISSUES">移植要點 PORTABILITY ISSUES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO" title="參見 SEE ALSO">參見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS" title="關鍵字 KEYWORDS">關鍵字 KEYWORDS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國 Linux 論壇 man 手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/file.3tcl.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/file.3tcl.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/file.3tcl.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/tcl8.6-doc/file.3tcl.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/file.3tcl.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/file.3tcl.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/file.1.zh_TW.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/erlang-manpages/file.3erl.en.html">3erl (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/file.3tcl.zh_TW.html">3tcl (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">file(3tcl)</td>
+    <td class="head-vol">Tcl Built-In Commands</td>
+    <td class="head-rtitle">file(3tcl)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<pre>
+
+</pre>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+file - 操縱文件名和屬性
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_SYNOPSIS">總覽 SYNOPSIS<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS">¶</a></h1>
+<b>file </b><i>option</i> <i>name</i> ?<i>arg arg ...</i>?
+<pre>
+
+</pre>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+這個命令提供在一個文件名或屬性上的一些操作。<i>Name</i>
+  是一個文件的名字；如果它以波浪線(~)開始，則在執行命令之前進行波浪線替換(詳情參見<b>filename</b>
+  命令的手冊條目)。<i>Option</i>
+  指示對文件名做什麼處理。接受
+  <i>option</i>
+  的任何唯一的縮寫。有效的選項是:
+<dl class="Bl-tag">
+  <dt><b>file atime </b><i>name</i> ?<b>time</b>?</dt>
+  <dd>返回一個十進制字符串，給出文件
+      <i>name
+      </i>上次被訪問的時間。如果指定了<i>time</i>，它是這個文件要設置成的訪問時間。這個時間是用標準的
+      POSIX
+      方式(fashion)度量的，即從一個固定的開始時間至今的秒數(通常是1970年1月1日)。如果文件不存在或它的訪問時間不可查詢或設置則生成一個錯誤。在
+      Windows 上，FAT
+      文件系統不支持訪問時間。</dd>
+  <dt><b>file attributes </b><i>name</i></dt>
+  <dd>
+    <br/>
+    <b>file attributes </b><i>name</i> ?<b>option</b>?
+    <br/>
+    <b>file attributes </b><i>name</i> ?<b>option value option
+    value...</b>?</dd>
+</dl>
+<div class="Bd-indent">這個子命令返回或設置與一個文件相關聯的特定於平臺的值。第一種形式返回特定於平臺的標誌(flag)和它們的值的一個列表。第二種形式返回指定選項的值。第三種形式設置一個或多個值。這些值是:
+<p class="Pp">在Unix 上，<b>-group</b>
+    得到或設置這個文件的組名字。給這個命令一個組ID，而它返回一個組名字。<b>-owner</b>
+    得到或設置這個文件的屬主的名字。這個命令返回屬主的名字，而在設置屬主的時候要傳遞給它數值的
+    ID。<b>-permissions</b> 設置或查詢
+    <a href="../../buster/manpages-zh/chmod.1.zh_TW.html">chmod(1)</a>
+    所使用的八進制代碼。這個命令還有限的支持使用
+    <a href="../../buster/manpages-zh/chmod.1.zh_TW.html">chmod(1)</a>的符號屬性來做設置，形式是
+    [ugo]?[[+-=][rwxst],[...]]，這裏使用逗號來分隔多個符號屬性(例如:
+    <b>u+s，go-rw</b>
+    爲用戶添加粘住位(sticky)，爲組和其他刪除讀和寫的許可權)。還支持一個簡化的
+    <b>ls</b>式樣的字符串，形式是
+    rwxrwxrwx (必須是 9
+    個字符)(例如: <b>rwxr-xr-t</b>
+    等價於01755)。</p>
+<p class="Pp">在 Windows 上，<b>-archive</b>
+    給出值或設置或清除這個文件的歸檔屬性。<b>-hidden</b>
+    給出值或設置或清除這個文件的隱藏屬性。<b>-longname</b>將把每個路徑元素擴展成長版本。不能設置這個屬性。<b>-readonly</b>
+    給出值或設置或清除這個文件的只讀屬性。<b>-shortname</b>
+    給出一個字符串，在這裏每個路徑元素被替換成它的短(8.3)版本的文件名。不能設置這個屬性。<b>-system</b>
+    給出值或設置或清除這個文件的系統屬性。</p>
+<p class="Pp">在 Macintosh
+    上，<b>-creator</b>給出或設置這個文件的尋找器(Finder)建立者類型。<b>-hidden</b>給出值或設置或清除這個文件的隱藏屬性。<b>-readonly</b>
+    給出值或設置或清除這個文件的只讀屬性。注意如果打開了文件共享則目錄只能被鎖定。<b>-type</b>
+    給出或設置這個文件的尋找器文件類型。</p>
+</div>
+<dl class="Bl-tag">
+  <dt><b>file channels ?</b><i>pattern</i>?</dt>
+  <dd>如果沒有指定
+      <i>pattern</i>，則返回所有在這個解釋器中註冊的打開通道的一個列表。如果指定了
+      <i>pattern</i>，則只返回匹配<i>pattern</i>
+      的名字。確定匹配使用與
+      <b>string match</b> 相同的規則。</dd>
+  <dt><b>file copy </b>?<b>-force</b>? ?<b>--</b>? <i>source</i>
+    <i>target</i></dt>
+  <dd>
+    <br/>
+    <b>file copy </b>?<b>-force</b>? ?<b>--</b>? <i>source</i> ?<i>source</i>
+      ...? <i>targetDir</i></dd>
+</dl>
+<div class="Bd-indent">第一中形式在路徑名
+  <i>target </i>底下做文件或路徑
+  <i>source</i>的一個復件。如果
+  <i>target</i>
+  是一個現存的目錄，則使用第二種形式。第二種形式在<i>targetDir
+  </i>中做列出的每個 <i>source</i>
+  文件的一個復件。如果指定一個目錄作爲一個
+  <i>source</i>，則這個目錄的內容將被遞歸的複製進
+  <i>targetDir</i> 中。除非指定
+  <b>-force</b>
+  選項否則現存文件將不被覆寫。即使指定了
+  <i>-force</i>
+  ，嘗試覆寫一個非空目錄，用一個文件覆寫一個目錄，或者用一個目錄覆寫一個文件將導致錯誤。參數按指定的次序被處理，如果有錯誤的話，在第一個錯誤處停止(halt)。一個
+  <b>--</b>
+  標記選項的結束；在
+  <b>--</b> 之後的參數即使以
+  <b>-
+  </b>開始將仍被作爲一個
+  <i>source</i> 來對待。</div>
+<dl class="Bl-tag">
+  <dt><b>file delete </b>?<b>-force</b>? ?<b>--</b>? <i>pathname</i>
+    ?<i>pathname</i> ... ?</dt>
+  <dd>刪除由每個 <i>pathname</i>
+      參數所指定的文件或目錄。只有指定
+      <b>-force</b>選項才刪除非空目錄。嘗試刪除一個不存在文件將導致不作爲一個錯誤來考慮。即使沒有指定
+      <b>-force</b>
+      項，嘗試刪除一個只讀文件將導致文件被刪除。參數按指定的次序被處理，如果有錯誤的話，在第一個錯誤處停止(halt)。一個
+      <b>--</b>
+      標記選項的結束；在
+      <b>--</b> 之後的參數即使以
+      <b>-
+      </b>開始將仍被作爲一個
+      <i>pathname</i>來對待。</dd>
+  <dt><b>file dirname </b><i>name</i></dt>
+  <dd>返回一個名字，由在
+      <i>name</i>
+      中除了最後一個之外的所有路徑組成部分(component)組成。如果
+      <i>name</i>
+      是一個相對的文件名並且只包含一個路徑元素(element)，則返回“<b>.</b>”
+      (在 Macintosh
+      上爲“<b>:</b>”)。如果
+      <i>name</i>
+      參照一個根目錄，則返回根目錄。例如，</dd>
+</dl>
+<div class="Bd-indent">
+<div class="Bd-indent">
+<pre><b>file dirname c:/</b>
+</pre>
+</div>
+返回 <b>c:/</b>.
+<p class="Pp">注意波浪線替換隻在必要的時候進行用以補全(complete)命令。例如，</p>
+<div class="Bd-indent">
+<pre><b>file dirname ~/src/foo.c</b>
+</pre>
+</div>
+返回 <b>~/src</b>，而
+<div class="Bd-indent">
+<pre><b>file dirname ~</b>
+</pre>
+</div>
+返回 <b>/home</b> (or something similar).</div>
+<dl class="Bl-tag">
+  <dt><b>file executable </b><i>name</i></dt>
+  <dd>如果文件對當前用戶是可執行的則返回
+      <b>1</b>，否則返回<b>0</b>。</dd>
+  <dt><b>file exists </b><i>name</i></dt>
+  <dd>如果文件 <i>name</i>
+      存在並且當前的用戶對找到(lead
+      to)它(所途徑)的目錄有查找的權利(privilege)則返回<b>1</b>，否則返回
+      <b>0</b>。</dd>
+  <dt><b>file extension </b><i>name</i></dt>
+  <dd>返回在 <i>name
+      </i>最後那個元素的最後一個點號之後幷包括點號的所有在
+      <i>name</i>中字符。如果在
+      <i>name</i>
+      的最後的那個元素中沒有點號則返回空串。</dd>
+  <dt><b>file isdirectory </b><i>name</i></dt>
+  <dd>如果文件 <i>name</i>
+      是一個目錄則返回
+      <b>1</b>，否則返回 <b>0</b>。</dd>
+  <dt><b>file isfile </b><i>name</i></dt>
+  <dd>如果文件 <i>name</i>
+      是一個普通文件則返回
+      <b>1</b>，否則返回 <b>0</b>。</dd>
+  <dt><b>file join </b><i>name</i> ?<i>name ...</i>?</dt>
+  <dd>接受一個或多個文件名並使用對當前平臺正確的路徑分隔符來組合它們。如果特定的
+      <i>name</i>是相對的，則它會被連接到前面的文件名參數上。否則，丟棄所有以前的參數，從當前的參數開始進行連接。例如</dd>
+</dl>
+<div class="Bd-indent">
+<div class="Bd-indent">
+<pre><b>file join a b /foo bar</b>
+</pre>
+</div>
+返回 <b>/foo/bar</b>.
+<p class="Pp">注意任何名字都可以包含分隔符，並且結果總是依從當前平臺的規矩:
+    對 Unix 和 Windows 是 <b>/</b>，對 Macintosh
+    是 <b>:</b>。</p>
+</div>
+<dl class="Bl-tag">
+  <dt><b>file lstat </b><i>name varName</i></dt>
+  <dd>除了使用 <i>lstat</i>
+      調用而不使用 <i>stat
+      </i>之外，與 <b>stat</b>
+      選項(見後)相同。這意味着如果
+      <i>name</i>
+      參照一個符號連接，在
+      <i>varName</i>
+      中返回的信息是針對這個連接而不是它所引用的那個文件。在不支持符號連接的系統上這個選項的行爲與
+      <b>stat</b>選項完全一致。</dd>
+  <dt><b>file mkdir </b><i>dir</i> ?<i>dir</i> ...?</dt>
+  <dd>建立每個指定的目錄。對於每個指定的路徑名
+      <i>dir</i> ，象 <i>dir</i>
+      自身一樣，這個命令將建立所有不存在的父目錄。如果指定了一個現存的目錄，不做動作並不返回錯誤。嘗試用一個目錄覆寫一個現存的文件將導致一個錯誤。參數按指定的次序被處理，如果有錯誤的話，在第一個錯誤處停止(halt)。</dd>
+  <dt><b>file mtime </b><i>name</i> ?<i>time</i>?</dt>
+  <dd>返回一個十進制字符串，給出文件
+      <i>name</i>上次被修改的時間。如果指定了<i>time</i>
+      ，它是這個文件要設置成的修改時間。(等價與
+      Unix 的
+      <b>touch</b>)。這個時間是用標準的
+      POSIX
+      方式(fashion)度量的，即從一個固定的開始時間至今的秒數(通常是1970年1月1日)。如果文件不存在或它的修改時間不可查詢或設置則生成一個錯誤。</dd>
+  <dt><b>file nativename </b><i>name</i></dt>
+  <dd>返回文件的特定於平臺的名字。如果這個文件名需要傳遞給特定於系統的調用，比如對在
+      Windows 下的 exec 或在 Macintosh 上的
+      AppleScript 將會有用。</dd>
+  <dt><b>file owned </b><i>name</i></dt>
+  <dd>如果文件 <i>name</i>
+      由當前用戶所有則返回
+      <b>1</b>，否則返回 <b>0</b>。</dd>
+  <dt><b>file pathtype </b><i>name</i></dt>
+  <dd>返回
+      <b>absolute</b>、<b>relative</b>、<b>volumerelative
+      </b>中的一個。如果 <i>name</i>
+      參照一個在指定捲上的指定文件，路徑類型將是
+      <b>absolute</b>。如果 <i>name</i>
+      參照一個相對當前工作目錄的一個文件，則路徑類型將是
+      <b>relative</b>。如果 <i>name</i>
+      參照在指定捲上的相對於當前工作目錄的一個文件，或者在當前工作捲上的指定文件，則路徑類型是
+      <b>volumerelative</b>。</dd>
+  <dt><b>file readable </b><i>name</i></dt>
+  <dd>如果文件 <i>name</i>
+      對當前用戶是可讀的則返回
+      <b>1</b>，否則返回<b>0</b>。</dd>
+  <dt><b>file readlink </b><i>name</i></dt>
+  <dd>返回由 <i>name</i>
+      給出的符號連接的值(比如，它指向的文件的名字)。如果
+      <i>name</i>
+      不是符號連接或它的值不可讀，則返回一個錯誤。在不支持符號連接的系統上這個選項未定義。</dd>
+  <dt><b>file rename </b>?<b>-force</b>? ?<b>--</b>? <i>source</i>
+    <i>target</i></dt>
+  <dd></dd>
+  <dt><b>file rename </b>?<b>-force</b>? ?<b>--</b>? <i>source</i>
+    ?<i>source</i> ...? <i>targetDir</i></dt>
+  <dd></dd>
+</dl>
+<div class="Bd-indent">第一種形式接受由路徑名<i>source</i>
+  指定的文件或目錄並且把它重命名成
+  <i>target</i>，如果路徑名
+  <i>target</i>指定了在不同目錄下的一個名字，則移動這個文件。如果
+  <i>target</i>
+  是一個現存的目錄，則使用第二種形式。第二中形式移動每個
+  <i>source</i> 文件或目錄到目錄
+  <i>targetDir
+  </i>中。除非指定了<b>-force</b>選項否則不覆寫現存的文件。嘗試覆寫一個非空目錄，用一個文件覆寫一個目錄，或者用一個目錄覆寫一個文件將導致錯誤。參數按指定的次序被處理，如果有錯誤的話，在第一個錯誤處停止(halt)。一個
+  <b>--</b>
+  標記選項的結束；在
+  <b>--</b> 之後的參數即使以
+  <b>-
+  </b>開始將仍被作爲一個
+  <i>source</i> 來對待。</div>
+<dl class="Bl-tag">
+  <dt><b>file rootname </b><i>name</i></dt>
+  <dd>返回 <i>name</i>
+      的最後一個組成部分的最後一個“.”之前但不包括這個“.”的
+      <i>name</i>中的所有字符。如果
+      <i>name</i>
+      的最後的組成部分不包含點號，則返回
+      <i>name</i>。</dd>
+  <dt><b>file size </b><i>name</i></dt>
+  <dd>返回給出文件 <i>name</i>
+      的大小的以字節爲單位的一個十進制字符串。如果文件不存在或它的大小不可查詢則生成一個錯誤。</dd>
+  <dt><b>file split </b><i>name</i></dt>
+  <dd>返回一個列表，它的元素是在
+      <i>name
+      </i>中的路徑的組成部分。列表的第一個元素將與
+      <i>name
+      </i>有相同的路徑類型。所有其他元素將是相對的。除了需要確保一個元素是相對的而無歧義之外，丟棄路徑分隔符。例如，在
+      Unix 下</dd>
+</dl>
+<div class="Bd-indent">
+<div class="Bd-indent">
+<pre><b>file split /foo/~bar/baz</b>
+</pre>
+</div>
+返回 <b>/ foo ./~bar baz</b>
+  來確保以後的命令在第三個組成部分上不進行波浪線替換。</div>
+<dl class="Bl-tag">
+  <dt><b>file stat </b><i>name varName</i></dt>
+  <dd>在 <i>name </i>上調用 <b>stat</b>
+      內核調用，並且使用由
+      <i>varName</i>
+      給出的變量來持有從內核調用返回的信息。<i>VarName</i>
+      被作爲一個數組變量來對待，並且給這個變量設置下列元素:
+      <b>atime</b>、<b>ctime</b>、<b>dev</b>、<b>gid</b>、<b>ino</b>、<b>mode</b>、<b>mtime</b>、<b>nlink</b>、<b>size</b>、<b>type</b>、<b>uid</b>。除了
+      <b>type</b>之外的每個元素都是一個十進制字符串，它們的值來自從
+      <b>stat</b>
+      返回的結構中相應的字段。這些值的意義詳見
+      <b>stat</b> 的手冊條目。<b>type</b>
+      元素給出的文件類型與命令
+      <b>file type
+      </b>返回的有相同的形式。這個命令返回一個空串。</dd>
+  <dt><b>file tail </b><i>name</i></dt>
+  <dd>返回在最後一個目錄分隔符之後的在
+      <i>name</i>中的所有字符。如果
+      <i>name</i>
+      不包含分隔符則返回<i>name</i>。</dd>
+  <dt><b>file type </b><i>name</i></dt>
+  <dd>返回給出文件 <i>name
+      </i>的類型的一個字符串，它將是<b>file</b>、<b>directory</b>、<b>characterSpecial</b>、
+      <b>blockSpecial</b>、<b>fifo</b>、<b>link</b>、或
+      <b>socket</b> 中的一個。</dd>
+  <dt><b>file volume</b></dt>
+  <dd>返回一個適當的 Tcl
+      列表，給出到掛裝在系統上的卷的絕對路徑。在Macintosh上，將是掛裝驅動器的一個列表，包括本地的和網絡的二者。N.B.(?)如果兩個驅動器有相同的名字，它們都將出現在卷列表上，但當前沒有辦法從Tcl
+      來訪問除了第一個之外的任何驅動器。在
+      UNIX
+      上，命令將總是返回
+      &#34;/&#34;，因爲所有文件系統都是本地掛裝的。在
+      Windows
+      上，它將返回可獲得的本地驅動器的一個列表(比如，{a:/
+      c:/})。</dd>
+  <dt><b>file writable </b><i>name</i></dt>
+  <dd>如果文件 <i>name</i>
+      對當前用戶是可寫的則返回
+      <b>1</b>，否則返回 <b>0</b>。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="移植要點_PORTABILITY_ISSUES">移植要點 PORTABILITY ISSUES<a class="anchor" href="#%E7%A7%BB%E6%A4%8D%E8%A6%81%E9%BB%9E_PORTABILITY_ISSUES">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>Unix</b>       </dt>
+  <dd>這些命令總是使用真實用戶和組標識而不使用有效用戶和組標識。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_SEE_ALSO">參見 SEE ALSO<a class="anchor" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO">¶</a></h1>
+filename
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="關鍵字_KEYWORDS">關鍵字 KEYWORDS<a class="anchor" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS">¶</a></h1>
+attributes, copy files, delete files, directory, file, move files, name, rename
+  files, stat
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>寒蟬退士</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/06/21</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國_Linux_論壇_man_手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8B_Linux_%E8%AB%96%E5%A3%87_man_%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">8.3</td>
+    <td class="foot-os">Tcl</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+file.3tcl.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2020-01-06T15:38:22Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"file(3tcl)\"}}]}"
+</script>

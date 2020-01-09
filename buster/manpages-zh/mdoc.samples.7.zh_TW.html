@@ -1,0 +1,4124 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mdoc.samples(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages/mdoc.samples.7.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es/mdoc.samples.7.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-ja/mdoc.samples.7.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pt/mdoc.samples.7.pt.html" hreflang="pt">
+<link rel="alternate" href="../../buster/manpages-zh/mdoc.samples.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/mdoc.samples.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; mdoc.samples(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/mdoc.samples.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/mdoc.samples.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME_%28%E5%90%8D%E5%AD%97%29" title="NAME (名字)">NAME (名字)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS_%28%E7%B8%BD%E8%A6%BD%29" title="SYNOPSIS (總覽)">SYNOPSIS (總覽)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%28%E6%8F%8F%E8%BF%B0%29" title="DESCRIPTION (描述)">DESCRIPTION (描述)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%96%8B%E5%A7%8B_GETTING_STARTED" title="開始 GETTING STARTED">開始 GETTING STARTED</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#TROFF_%E7%89%B9%E6%80%A7" title="TROFF 特性">TROFF 特性</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%89%8B%E5%86%8A%E9%A0%81%E7%B5%90%E6%A7%8B%E5%88%86%E6%9E%90_THE_ANATOMY_OF_A_MAN_PAGE" title="手冊頁結構分析 THE ANATOMY OF A MAN PAGE">手冊頁結構分析 THE ANATOMY OF A MAN PAGE</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%A8%99%E9%A1%8C%E5%AE%8F_TITLE_MACROS" title="標題宏 TITLE MACROS">標題宏 TITLE MACROS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%89%8B%E5%86%8A%E5%AE%8F%E5%9F%9F_%E5%92%8C_%E5%9F%BA%E6%9C%AC%E6%AD%A3%E6%96%87%E5%AE%8F%E5%9F%9F%E7%9A%84%E4%BB%8B%E7%B4%B9" title="手冊宏域 和 基本正文宏域的介紹">手冊宏域 和 基本正文宏域的介紹</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%89%8B%E5%86%8A%E5%9F%9F_MANUAL_DOMAIN" title="手冊域 MANUAL DOMAIN">手冊域 MANUAL DOMAIN</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%9F%BA%E6%9C%AC%E6%AD%A3%E6%96%87%E5%AE%8F%E5%9F%9F_GENERAL_TEXT_DOMAIN" title="基本正文宏域 GENERAL TEXT DOMAIN">基本正文宏域 GENERAL TEXT DOMAIN</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%A0%81%E7%B5%90%E6%A7%8B%E5%AE%8F%E5%AE%8F%E5%9F%9F_PAGE_STRUCTURE_DOMAIN" title="頁結構宏宏域 PAGE STRUCTURE DOMAIN">頁結構宏宏域 PAGE STRUCTURE DOMAIN</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%A0%90%E5%AE%9A%E7%BE%A9%E4%B8%B2_PREDEFINED_STRINGS" title="預定義串 PREDEFINED STRINGS">預定義串 PREDEFINED STRINGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%A8%BA%E6%96%B7_DIAGNOSTICS" title="診斷 DIAGNOSTICS">診斷 DIAGNOSTICS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#GROFF,_TROFF_AND_NROFF" title="GROFF, TROFF AND NROFF">GROFF, TROFF AND NROFF</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%9B%B8%E9%97%9C%E6%96%87%E4%BB%B6_FILES" title="相關文件 FILES">相關文件 FILES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%A6%E8%A6%8B_SEE_ALSO" title="另見 SEE ALSO">另見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B" title="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/mdoc.samples.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/mdoc.samples.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/mdoc.samples.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages/mdoc.samples.7.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es/mdoc.samples.7.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/mdoc.samples.7.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pt/mdoc.samples.7.pt.html" title="Portuguese (pt)">português (pt)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/mdoc.samples.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/mdoc.samples.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">MDOC.SAMPLES(7)</td>
+    <td class="head-vol">Miscellaneous Information Manual</td>
+    <td class="head-rtitle">MDOC.SAMPLES(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME_(名字)">NAME (名字)<a class="anchor" href="#NAME_(%E5%90%8D%E5%AD%97)">¶</a></h1>
+<code class="Nm">mdoc.samples</code> —
+<div class="Nd">用 <code class="Nm">-mdoc</code> 編寫
+  <span class="Ux">BSD</span> 手冊 的
+  示範教程</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS_(總覽)">SYNOPSIS (總覽)<a class="anchor" href="#SYNOPSIS_(%E7%B8%BD%E8%A6%BD)">¶</a></h1>
+<code class="Nm">man mdoc.samples</code>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_(描述)">DESCRIPTION (描述)<a class="anchor" href="#DESCRIPTION_(%E6%8F%8F%E8%BF%B0)">¶</a></h1>
+這個 示範教程 用於
+  編寫 <span class="Ux">BSD</span> 手冊頁 (manual
+  page), 它 使用了 <code class="Nm">-mdoc</code>
+  宏定義包, 這是個
+  <i class="Em">基於內容</i> 和
+  <i class="Em">基於宏域 (domain</i>-base) 的
+  格式化包, 交由 <a class="Xr"><a href="../../buster/manpages-zh/troff.1.zh_TW.html">troff(1)</a></a>
+  處理. 它的 前身 <a class="Xr">-man(7)</a>
+  包, 定義了 頁面佈局 (page
+  layout), 但是 把 諸如
+  字體控制 和 其他 排版
+  細節 留給了 每一個
+  作者. 在 <code class="Nm">-mdoc</code> 包裏,
+  頁面佈局宏 構成了
+  <i class="Em">頁結構宏域 (page structure
+  domain)</i> 它 由 標題,
+  小節首部, 顯示 (displays) 和
+  列表 宏 組成. 這些
+  基本項目 影響 正文 在
+  格式化頁上 的
+  物理位置. 作爲
+  頁結構宏域 的 補充,
+  這裏 還 定義了 另外
+  兩個 宏域, 手冊宏域 和
+  基本正文宏域.
+  基本正文宏域 定義了
+  一些 宏, 執行 例如 引文
+  或 文字強調
+  之類的任務. 手冊宏域
+  定義的宏 是 非正式
+  日常用語 的 子集, 用於
+  描述 命令, 例程 和
+  相關的 <span class="Ux">BSD</span> 文件.
+  手冊宏域裏 的 宏
+  用來處理 命令名,
+  命令行參數和選項,
+  函數名稱, 函數參數,
+  路徑, 變量, 以及 到
+  其他手冊頁 的 參照 等.
+  這些 域項 留有 爲 作者
+  和 手冊頁的 未來用戶
+  設置的 值. 希望 從
+  手冊集中 獲得的
+  一致性 能夠爲 將來的
+  文檔工具 提供
+  更簡單的 轉換.
+<p class="Pp">從 整個的 <span class="Ux">UNIX</span>
+    手冊頁 上 來看, 每個
+    手冊項 可以 簡單的
+    理解爲 一個 man page, 不用
+    注意 它的 實際長度,
+    也沒有 性別歧視 意圖.
+    (譯註: 可能是雙關語, man
+    page...男人頁)</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="開始_GETTING_STARTED">開始 GETTING STARTED<a class="anchor" href="#%E9%96%8B%E5%A7%8B_GETTING_STARTED">¶</a></h1>
+因爲 人們 通常是 爲了
+  能夠 馬上 使用
+  這些材料 的 時候 才
+  閱讀 教程，所以 我們
+  假設 此文檔的 用戶 是
+  缺乏耐心的．下面
+  簡述一下 這份文檔
+  剩餘部分 的 組織:
+<ol class="Bl-enum Bd-indent">
+  <li>TROFF 特性
+    <div class="Bd-indent">
+    <dl class="Bl-tag Bl-compact">
+      <dt>使用宏.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>參數中傳遞空白符.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>尾部的空白符.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>轉義特殊字符.</dt>
+      <dd style="width: auto;"> </dd>
+    </dl>
+    </div>
+  </li>
+  <li>手冊頁的結構分析
+    <div class="Bd-indent">
+    <dl class="Bl-tag Bl-compact">
+      <dt>手冊頁的模板.</dt>
+      <dd style="width: auto;"> </dd>
+    </dl>
+    </div>
+  </li>
+  <li>標題宏.</li>
+  <li>手冊宏域和基本正文宏域的介紹.
+    <div class="Bd-indent">
+    <dl class="Bl-tag Bl-compact">
+      <dt>名稱背後 ....</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>基本語法.</dt>
+      <dd style="width: auto;"> </dd>
+    </dl>
+    </div>
+  </li>
+  <li>手冊宏域
+    <div class="Bd-indent">
+    <dl class="Bl-tag Bl-compact">
+      <dt>地址.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>作者名字.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>參數.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>配置聲明
+        (僅用於手冊第四部分).</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>命令修飾.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>已定義的變量.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>Errno&#39;s
+        (僅用於手冊第二部分).</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>環境變量.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>函數參數.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>函數聲明.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>標誌 (Flags).</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>函數 (庫例程).</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>函數類型.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>交互命令.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>名稱.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>選項.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>路徑.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>變量.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>參照.</dt>
+      <dd style="width: auto;"> </dd>
+    </dl>
+    </div>
+  </li>
+  <li>基本正文宏域
+    <div class="Bd-indent">
+    <dl class="Bl-tag Bl-compact">
+      <dt>AT&amp;T 宏.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>BSD 宏.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>FreeBSD 宏.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>UNIX 宏.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>嵌入/引用宏 (Enclosure/Quoting)</dt>
+      <dd>
+        <div class="Bd-indent">
+        <dl class="Bl-tag Bl-compact">
+          <dt>尖括弧引用/嵌入.</dt>
+          <dd style="width: auto;"> </dd>
+          <dt>方括弧引用/嵌入.</dt>
+          <dd style="width: auto;"> </dd>
+          <dt>雙引號引用/嵌入宏.</dt>
+          <dd style="width: auto;"> </dd>
+          <dt>圓括弧引用/嵌入.</dt>
+          <dd style="width: auto;"> </dd>
+          <dt>單引號引用/嵌入.</dt>
+          <dd style="width: auto;"> </dd>
+          <dt>前綴宏.</dt>
+          <dd style="width: auto;"> </dd>
+        </dl>
+        </div>
+      </dd>
+      <dt>No-Op 或正文宏.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>消除空白宏.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>手冊節對照.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>參考和引用.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>返回值
+        (僅用於手冊頁第二和第三部分)</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>Trade Names
+        (縮略和類型名稱).</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>參數擴展.</dt>
+      <dd style="width: auto;"> </dd>
+    </dl>
+    </div>
+  </li>
+  <li>頁結構宏域
+    <div class="Bd-indent">
+    <dl class="Bl-tag Bl-compact">
+      <dt>小節首部.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>段落和空行.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>保持 (Keeps).</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>顯示.</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>字體模式 (加重,
+        原文和 Symbolic).</dt>
+      <dd style="width: auto;"> </dd>
+      <dt>列表和欄.</dt>
+      <dd style="width: auto;"> </dd>
+    </dl>
+    </div>
+  </li>
+  <li>預定義串</li>
+  <li>診斷</li>
+  <li>用 GROFF, TROFF 和 NROFF 格式化</li>
+  <li>臭蟲 BUGS</li>
+</ol>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="TROFF_特性">TROFF 特性<a class="anchor" href="#TROFF_%E7%89%B9%E6%80%A7">¶</a></h1>
+使用 <code class="Nm">-mdoc</code> 宏包 的
+  目的 是 簡化 寫手冊頁
+  的 過程. 理論上講,
+  要使用 <code class="Nm">-mdoc</code>
+  不一定 要 學習 <a class="Xr"><a href="../../buster/manpages-zh/troff.1.zh_TW.html">troff(1)</a></a>
+  的 隱藏細節; 然而, 有些
+  限制 無法迴避, 最好
+  把它們 擺平. 而且 你
+  應該 知道, 這個 宏包 的
+  速度 比較 <i class="Em">慢.</i>
+<section class="Ss">
+<h2 class="Ss" id="宏的用法_Macro_Usage">宏的用法 Macro Usage<a class="anchor" href="#%E5%AE%8F%E7%9A%84%E7%94%A8%E6%B3%95_Macro_Usage">¶</a></h2>
+在 <a class="Xr"><a href="../../buster/manpages-zh/troff.1.zh_TW.html">troff(1)</a></a> 裏,
+  宏調用的形式 是
+  在行首 以 ‘<code class="Li">.</code>’
+  (句點符) 起始, 緊隨其後
+  是 作爲 宏名 的
+  兩個字符. 參數 跟在
+  宏名 之後, 用 空格符
+  隔開. 這個 位於行首的
+  句點符 使 <a class="Xr"><a href="../../buster/manpages-zh/troff.1.zh_TW.html">troff(1)</a></a> 把
+  緊隨其後 的 兩個字符
+  視作 宏名. 在
+  某些情況下 要把
+  ‘<code class="Li">.</code>’ (句點符)
+  放在 行首, 但不希望
+  被理解成 宏請求,
+  方法是 在 ‘<code class="Li">.</code>’
+  (句點) 前 使用
+  ‘<code class="Li">\&amp;</code>’
+  轉義序列.
+  ‘<code class="Li">\&amp;</code>’ 被
+  解釋成 一段 長度爲零
+  的 空白, 所以 不會 在
+  輸出端 顯示 出來.
+<p class="Pp">一般說來, <a class="Xr"><a href="../../buster/manpages-zh/troff.1.zh_TW.html">troff(1)</a></a>
+    宏 最多 接受 九個參數,
+    忽略掉 其餘的. 大多數
+    在 <code class="Nm">-mdoc</code> 裏的 宏
+    支持 九個參數,
+    某些場合 可以 續加
+    參數, 或擴展到 下一行.
+    (見 <a class="Sx" href="#__u64F4___u5C55__Extensions">擴展
+    Extensions</a>). 有些宏 能夠 處理
+    引號 引起來的 參數 (見
+    下面的
+    <a class="Sx" href="#__u5728___u53C3___u6578___u4E2D___u50B3___u905E___u7A7A___u683C___u7B26_">在參數中傳遞空格符</a>).</p>
+<p class="Pp">大多數 <code class="Nm">-mdoc</code> 的
+    基本正文宏域 和
+    手冊宏域 的宏 擁有
+    一種特性, 表現在 把
+    參數列表 當成
+    可調用的宏 <i class="Em">分析
+    (解釋)</i>. 這意味着 如果
+    參數列表裏的參數 是
+    普通正文宏域 或
+    手冊宏域 裏的 宏, 並且
+    是 可調用宏, 那麼
+    處理的時候 會 執行 或
+    調用. 這種情況下的
+    參數, 即 宏名, 不需要
+    用 ‘<code class="Li">.</code>’
+    (句點符) 引導.
+    這種風格 使 很多 宏
+    嵌套 在 一起; 例如
+    這個 選項宏
+    ‘<code class="Li">.Op</code>’, 可能
+    <i class="Em">調用</i>
+    標誌和參數宏,
+    ‘<code class="Li">Fl</code>’ 和
+    ‘<code class="Li">Ar</code>’, 用來
+    說明 一個 帶參數的
+    選項:</p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt>[<code class="Fl">-s</code> <var class="Ar">bytes</var>]</dt>
+  <dd>來自 <code class="Li">.Op Fl s Ar bytes</code></dd>
+</dl>
+</div>
+<p class="Pp">爲了 防止 把
+    兩個字符的字符串
+    解釋成 宏名, 在這個
+    字符串 前面 加上
+    ‘<code class="Li">\&amp;</code>’
+    轉義序列:</p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt>[Fl s Ar bytes]</dt>
+  <dd>來自 <code class="Li">.Op \&amp;Fl s \&amp;Ar
+    bytes</code></dd>
+</dl>
+</div>
+<p class="Pp">這裏的 字符串
+    ‘<code class="Li">Fl</code>’ 和
+    ‘<code class="Li">Ar</code>’ 沒有
+    被解釋成 宏. 在
+    這篇文檔 和 相應的
+    快速參考手冊 <a class="Xr"><a href="../../buster/manpages/mdoc.7.en.html">mdoc(7)</a></a>
+    中, 參數列表 按
+    可調用參數 分析 的 宏
+    稱爲 已分析, 可以 從
+    參數列表 調用 的 宏
+    稱爲 可調用. 這裏 用的
+    術語 &#39;分析&#39; 可能是個
+    技術失誤, 幾乎 所有的
+    <code class="Nm">-mdoc</code> 宏 都 被分析,
+    既 用它 指 可調用宏,
+    又 指 有 調用 其他宏的
+    能力, 顯得 很笨拙.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="在參數中傳遞空格符_Passing_Space_Characters_in_an_Argument">在參數中傳遞空格符 Passing Space Characters in an Argument<a class="anchor" href="#%E5%9C%A8%E5%8F%83%E6%95%B8%E4%B8%AD%E5%82%B3%E9%81%9E%E7%A9%BA%E6%A0%BC%E7%AC%A6_Passing_Space_Characters_in_an_Argument">¶</a></h2>
+某些時候 我們 希望
+  能夠 把 含有
+  一個或多個 空格符 的
+  字符串 作爲 單個參數
+  傳遞. 如果 要 突破
+  九個參數的限制, 或者
+  傳遞給 宏 的 參數 需要
+  一些 特定佈置, 這個
+  能力 是必須的. 例如,
+  函數宏 ‘<code class="Li">.Fn</code>’ 的
+  第一個參數 是
+  函數名稱, 剩下的參數
+  作爲 函數的參數. ANSI C
+  規定 函數的參數 在
+  圓括弧內 聲明, 每個
+  參數 至少 由 兩個
+  標示符 組成. 例如,
+  <var class="Fa">int foo</var>.
+<p class="Pp">有 兩個方法 傳遞
+    嵌有空格符 的 參數.
+    <i class="Em">補充一點</i>:
+    不幸的是, 在 AT&amp;T <a class="Xr">troff</a>
+    中, 那個 最容易的方法,
+    就是 作爲 單個 參數
+    傳遞 兩個引號之間的
+    字符串和空格符, 非常
+    消耗 時間 和 內存空間.
+    雖然 它 對 <a class="Xr">groff</a>
+    並不費事, 但是 爲了
+    可移植性, 這種 做法
+    只限於 下列
+    有迫切需要 的 宏:</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#Cd"><code class="Li" id="Cd">Cd</code></a></dt>
+  <dd>配置聲明
+      (手冊第四部分
+      <a class="Sx" href="#__u6982___u8981__SYNOPSIS">概要
+      SYNOPSIS</a>)</dd>
+  <dt><a class="permalink" href="#Bl"><code class="Li" id="Bl">Bl</code></a></dt>
+  <dd>列表開始
+      (指定寬度的)</dd>
+  <dt><a class="permalink" href="#Em"><code class="Li" id="Em">Em</code></a></dt>
+  <dd>加重文字</dd>
+  <dt><a class="permalink" href="#Fn"><code class="Li" id="Fn">Fn</code></a></dt>
+  <dd>函數 (手冊第二,
+      四部分)</dd>
+  <dt><a class="permalink" href="#It"><code class="Li" id="It">It</code></a></dt>
+  <dd>列表項</dd>
+  <dt><a class="permalink" href="#Li"><code class="Li" id="Li">Li</code></a></dt>
+  <dd>原文</dd>
+  <dt><a class="permalink" href="#Sy"><code class="Li" id="Sy">Sy</code></a></dt>
+  <dd>Symbolic text</dd>
+  <dt><a class="permalink" href="#_B"><code class="Li" id="_B">%B</code></a></dt>
+  <dd>書題</dd>
+  <dt><a class="permalink" href="#_J"><code class="Li" id="_J">%J</code></a></dt>
+  <dd>期刊名</dd>
+  <dt><a class="permalink" href="#_O"><code class="Li" id="_O">%O</code></a></dt>
+  <dd>參考選注</dd>
+  <dt><a class="permalink" href="#_R"><code class="Li" id="_R">%R</code></a></dt>
+  <dd>報告題目(在參考文件中)</dd>
+  <dt><a class="permalink" href="#_T"><code class="Li" id="_T">%T</code></a></dt>
+  <dd>在書籍或期刊中的題目</dd>
+</dl>
+</div>
+<p class="Pp">一種 傳遞
+    含空格符字符串 的
+    方法 是 用
+    ‘<code class="Li">\ </code>’ 硬編碼
+    或 不可填充空格符,
+    也就是 在 空格符 前
+    加上 轉義符
+    ‘<code class="Li">\</code>’. 這個 方法
+    適用於 任何宏, 但 有個
+    副效應, 它 干擾了 對
+    長行 的 調整. <a class="Xr">Troff</a> 把
+    這種 硬編碼的 空格符
+    看作 可顯示字符, 因此
+    無法 在需要的時候 把
+    字符串 分段 或 換行.
+    這種 方法 適用於
+    字符串 不會 到達
+    行邊界 時, 例如:</p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><code class="Fn">fetch</code>(<var class="Fa">char *str</var>)</dt>
+  <dd>來自 ‘<code class="Li">.Fn fetch char\
+      *str</code>’</dd>
+  <dt><code class="Fn">fetch</code>(<var class="Fa">char *str</var>)</dt>
+  <dd>也可以來自 ‘<code class="Li">.Fn
+      fetch &#34;char *str&#34;</code>’</dd>
+</dl>
+</div>
+<p class="Pp">如果 忽略
+    ‘<code class="Li">\</code>’ 或 引號,
+    ‘<code class="Li">.Fn</code>’ 宏
+    會認爲 有 三個參數,
+    結果 成爲:</p>
+<p class="Pp"></p>
+<div class="Bd
+  Bd-indent"><code class="Li"><code class="Fn">fetch</code>(<var class="Fa">char</var>,
+  <var class="Fa">*str</var>)</code></div>
+<p class="Pp">如果 想知道
+    參數列表 到達 行邊界
+    時 出現什麼, 參看
+    <a class="Sx" href="#BUGS">BUGS</a> 小節.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="尾部的空白符_Trailing_Blank_Space_Characters">尾部的空白符 Trailing Blank Space Characters<a class="anchor" href="#%E5%B0%BE%E9%83%A8%E7%9A%84%E7%A9%BA%E7%99%BD%E7%AC%A6_Trailing_Blank_Space_Characters">¶</a></h2>
+<a class="Xr">Troff</a> 可能 被 行尾的
+  空白符 搞亂,
+  它的防範規則 是 消除
+  所有 位於行末 的
+  空白符. 如果 堅持 在
+  行末 加上 空白符, 可以
+  用 硬空格符 和
+  ‘<code class="Li">\&amp;</code>’
+  轉義字符. 例如,
+  ‘<code class="Li">string\ \&amp;</code>’.
+</section>
+<section class="Ss">
+<h2 class="Ss" id="轉義特殊字符_Escaping_Special_Characters">轉義特殊字符 Escaping Special Characters<a class="anchor" href="#%E8%BD%89%E7%BE%A9%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6_Escaping_Special_Characters">¶</a></h2>
+特殊字符, 如 換行符
+  ‘<code class="Li">\n</code>’, 是 通過 用
+  ‘<code class="Li">\e</code>’ 替換
+  ‘<code class="Li">\</code>’ (e.g.例如
+  ‘<code class="Li">\en</code>’) 保留住
+  反斜槓.
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="手冊頁結構分析_THE_ANATOMY_OF_A_MAN_PAGE">手冊頁結構分析 THE ANATOMY OF A MAN PAGE<a class="anchor" href="#%E6%89%8B%E5%86%8A%E9%A0%81%E7%B5%90%E6%A7%8B%E5%88%86%E6%9E%90_THE_ANATOMY_OF_A_MAN_PAGE">¶</a></h1>
+手冊頁 可以 很容易的
+  通過 模板 構建, 模板
+  放在 <span class="Pa">/usr/share/misc/mdoc.template</span>.
+  另外 在 <span class="Pa">/usr/share/examples/mdoc</span>
+  目錄下 有一些 手冊頁
+  的 例子.
+<section class="Ss">
+<h2 class="Ss" id="手冊頁的模板_A_manual_page_template">手冊頁的模板 A manual page template<a class="anchor" href="#%E6%89%8B%E5%86%8A%E9%A0%81%E7%9A%84%E6%A8%A1%E6%9D%BF_A_manual_page_template">¶</a></h2>
+<div class="Bd Bd-indent">
+<pre>.\&#34; 所有的手冊頁都要求有下面的內容
+.Dd 月 日, 年Month day, year
+.Os 操作系統 [版本/發行號]
+.Dt 文檔標題 [手冊節號][卷]
+.Sh 名稱 NAME
+.Nm 名稱 name
+.Nd 對名稱的簡單描述 one line description of name
+.Sh 總覽 SYNOPSIS
+.Sh 描述 DESCRIPTION
+.\&#34; 後面的內容取消註釋後可以用在你需要的任何地方.
+.\&#34; 緊接着的這條命令用於手冊第二和第三部分, 函數的返回值.
+.\&#34; .Sh 返回值 RETURN VALUES
+.\&#34; 下面的命令用於手冊第1, 6, 7, 8部分.
+.\&#34; .Sh 環境 ENVIRONMENT
+.\&#34; .Sh 文件 FILES
+.\&#34; .Sh 示例 EXAMPLES
+.\&#34; 下面的命令用於手冊第1, 6, 7, 8部分
+.\&#34;     (在shell下的命令返回值和標準錯誤類型的診斷)
+.\&#34; .Sh 診斷 DIAGNOSTICS
+.\&#34; 下面的命令用於手冊第二和第三部分中的錯誤和信號處理.
+.\&#34; .Sh 錯誤 ERRORS
+.\&#34; .Sh 另見 SEE ALSO
+.\&#34; .Sh 遵循 CONFORMING TO
+.\&#34; .Sh 歷史 HISTORY
+.\&#34; .Sh 作者 AUTHORS
+.\&#34; .Sh BUGS
+</pre>
+</div>
+<p class="Pp">模板中 的
+    第一個部分 是
+    (<code class="Li">.Dd</code>, <code class="Li">.Os</code>,
+    <code class="Li">.Dt</code>) 宏; 文檔日期,
+    手冊或其內容 針對的
+    操作系統,
+    手冊頁的標題
+    (<i class="Em">(大寫)</i>) 和
+    該手冊頁 所屬的節
+    (部分號). 這些宏
+    確認和標識了
+    這個手冊頁. 在 後面的
+    <a class="Sx" href="#__u6A19___u984C___u5B8F__TITLE_MACROS">標題宏
+    TITLE MACROS</a> 將 繼續 討論.</p>
+<p class="Pp">這個 模板中 的
+    其餘部分 是 小節首部
+    (section header) (<code class="Li">.Sh</code>); 其中
+    <a class="Sx" href="#__u540D___u7A31__NAME">名稱 NAME</a>,
+    <a class="Sx" href="#__u7E3D___u89BD__SYNOPSIS">總覽
+    SYNOPSIS</a> 和
+    <a class="Sx" href="#__u63CF___u8FF0__DESCRIPTION">描述
+    DESCRIPTION</a> 是 必不可少的.
+    這些 首部 在
+    <a class="Sx" href="#__u9801___u7D50___u69CB___u5B8F___u57DF_">頁結構宏域</a>
+    中 討論 ( 介紹完
+    <a class="Sx" href="#__u624B___u518A___u57DF_">手冊域</a>
+    之後 ) . 有一些 內容宏
+    被用來 示範
+    頁面佈局宏; 建議 接觸
+    頁面佈局宏 前 先看看
+    內容宏.</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="標題宏_TITLE_MACROS">標題宏 TITLE MACROS<a class="anchor" href="#%E6%A8%99%E9%A1%8C%E5%AE%8F_TITLE_MACROS">¶</a></h1>
+標題宏 是 頁結構宏域
+  的 第一部分, 但 在 過去,
+  人們 如果 編寫 手冊頁,
+  它 是 手冊的 第一部分,
+  也是 獨立部分. 這裏
+  設計了 三個宏 分別
+  描述 文檔標題 或
+  手冊標題, 操作系統, 和
+  製作日期. 它們 放在
+  文檔的 最前面, 一次 只
+  調用 一個, 用來 構建
+  文檔的 頁頭 和 頁腳.
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#.Dt___u6587___u6A94___u6A19___u984C____u624B___u518A___u5340______u5377__"><code class="Li" id=".Dt___u6587___u6A94___u6A19___u984C____u624B___u518A___u5340______u5377__">.Dt
+    文檔標題 手冊區#
+    [卷]</code></a></dt>
+  <dd>文檔標題 是 手冊頁的
+      主題, 由於 troff 的 限制,
+      必須 大寫. 手冊節號
+      (部分號) 介於 1, ..., 8,
+      如果 指明瞭
+      手冊節號, 可以 忽略
+      卷標. 卷標 用 下列
+      標識的 一個 或
+      任意個:
+    <p class="Pp"></p>
+    <table class="Bl-column Bd-indent Bl-compact">
+      <tbody><tr>
+        <td><a class="permalink" href="#AMD"><code class="Li" id="AMD">AMD</code></a></td>
+        <td>UNIX
+          歷史遺留的手冊文檔
+          Ancestral Manual Documents</td>
+      </tr>
+      <tr>
+        <td><a class="permalink" href="#SMM"><code class="Li" id="SMM">SMM</code></a></td>
+        <td>UNIX 系統管理員手冊 System
+          Manager&#39;s Manual</td>
+      </tr>
+      <tr>
+        <td><a class="permalink" href="#URM"><code class="Li" id="URM">URM</code></a></td>
+        <td>UNIX 參考手冊 Reference Manual</td>
+      </tr>
+      <tr>
+        <td><a class="permalink" href="#PRM"><code class="Li" id="PRM">PRM</code></a></td>
+        <td>UNIX 程序員手冊 Programmer&#39;s
+          Manual</td>
+      </tr>
+    </tbody></table>
+    <p class="Pp">缺省的卷標
+        <code class="Li">URM</code> 代表 手冊區 1,
+        6, and 7; <code class="Li">SMM</code> 代表
+        手冊區 8; <code class="Li">PRM</code> 代表
+        手冊區 2, 3, 4, and 5.</p>
+  </dd>
+  <dt><a class="permalink" href="#.Os___u64CD___u4F5C___u7CFB___u7D71____u767C___u884C___u865F__"><code class="Li" id=".Os___u64CD___u4F5C___u7CFB___u7D71____u767C___u884C___u865F__">.Os
+    操作系統 發行號#</code></a></dt>
+  <dd>操作系統 的 名字
+      可能 是 縮寫, 像 BSD 或 FreeBSD
+      或 ATT. 發行號 應該 是
+      系統 專用的
+      標準發行術語, 像 4.3, 4.3+Tahoe,
+      V.3, V.4. 識別不出的 參數
+      就 照原樣 顯示在
+      頁腳. 例如,
+      典型的頁腳 可能是:
+    <p class="Pp"></p>
+    <div class="Bd Bd-indent"><code class="Li">.Os BSD 4.3</code></div>
+    <p class="Pp">或</p>
+    <div class="Bd Bd-indent"><code class="Li">.Os FreeBSD 2.2</code></div>
+    <p class="Pp">或者 象
+        訂製的產品</p>
+    <p class="Pp"></p>
+    <div class="Bd Bd-indent"><code class="Li">.Os CS Department</code></div>
+    <p class="Pp">作爲
+        伯克利的缺省設置,
+        不帶 參數 的
+        ‘<code class="Li">.Os</code>’ 定義爲 BSD
+        (指定在文件
+        <span class="Pa">/usr/share/tmac/mdoc/doc-common</span> 中).
+        你 應該 把缺省值
+        設成 本機. 注意, 如果
+        不設置 ‘<code class="Li">.Os</code>’
+        宏, 頁面的左下角 會
+        很難看.</p>
+  </dd>
+  <dt><a class="permalink" href="#.Dd___u6708____u65E5_,___u5E74__(month_day,_year)"><code class="Li" id=".Dd___u6708____u65E5_,___u5E74__(month_day,_year)">.Dd
+    月 日, 年 (month day, year)</code></a></dt>
+  <dd>日期 應當 寫的
+      正規點:
+    <p class="Pp"></p>
+    <div class="Bd Bd-indent"><code class="Li">January 25, 1989</code></div>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="手冊宏域_和_基本正文宏域的介紹">手冊宏域 和 基本正文宏域的介紹<a class="anchor" href="#%E6%89%8B%E5%86%8A%E5%AE%8F%E5%9F%9F_%E5%92%8C_%E5%9F%BA%E6%9C%AC%E6%AD%A3%E6%96%87%E5%AE%8F%E5%9F%9F%E7%9A%84%E4%BB%8B%E7%B4%B9">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="名稱背後_What&#39;s_in_a_name...">名稱背後 What&#39;s in a name...<a class="anchor" href="#%E5%90%8D%E7%A8%B1%E8%83%8C%E5%BE%8C_What%27s_in_a_name...">¶</a></h2>
+手冊宏域 的 宏名 來自
+  非正式的 日常用語,
+  用來 描述 命令, 子程序
+  及其 相關文件. 在 寫
+  手冊頁 時, 文字用語
+  有些 輕微的變化,
+  分別描述 三個 不同
+  應用面. 首先是
+  <code class="Nm">-mdoc</code> 宏請求 的
+  用法. 其次, 用 <code class="Nm">-mdoc</code>
+  宏 描述 <span class="Ux">UNIX</span> 命令.
+  最後, 對 用戶
+  具體的描述 這條命令;
+  也就是 在 手冊頁 正文
+  裏 討論這條命令.
+<p class="Pp">第一種 情況 下,
+    <a class="Xr"><a href="../../buster/manpages-zh/troff.1.zh_TW.html">troff(1)</a></a> 宏 本身 就是
+    一種 命令; troff 命令 的
+    基本語法 是:</p>
+<div class="Bd Pp Bd-indent">.Va argument1 argument2 ... argument9</div>
+<p class="Pp">這裏的
+    ‘<code class="Li">.Va</code>’ 是
+    宏命令 或 宏請求,
+    緊隨其後 的 是
+    待處理的參數. 第二種
+    情況 下, 使用 內容宏
+    描述 一條 <span class="Ux">UNIX</span>
+    命令 要 複雜 些; 一個
+    典型的
+    <a class="Sx" href="#__u7E3D___u89BD__SYNOPSIS">總覽
+    SYNOPSIS</a> 命令行 顯示 如下:</p>
+<div class="Bd Pp Bd-indent"><code class="Nm">filter</code>
+  [<code class="Fl">-flag</code>] <var class="Ar">infile outfile</var></div>
+<p class="Pp">這裏的 <code class="Nm">filter</code> 是
+    命令名稱, 方括弧內 的
+    <code class="Fl">-flag</code> 是一個
+    <i class="Em">標誌</i> 參數, 作爲
+    可選參數 放在 代表
+    選項 的 方括弧內. 在
+    <code class="Nm">-mdoc</code> 術語 中,
+    <var class="Ar">infile</var> 和 <var class="Ar">outfile</var>
+    稱爲 <i class="Em">參數</i>. 產生
+    上述效果 的 宏 是
+    這樣的:</p>
+<div class="Bd Pp Bd-indent">
+<pre>.Nm filter
+.Op Fl flag
+.Ar infile outfile
+</pre>
+</div>
+<p class="Pp">第三種 情況 討論
+    命令 及其語法, 包括
+    它們的例子, 可能 還有
+    更多細節.
+    上面的例子裏, 可以把
+    <var class="Ar">infile</var> 和 <var class="Ar">outfile</var>
+    理解爲 <i class="Em">操作參數
+    operands</i> 或 <i class="Em">文件參數 file
+    arguments</i>. 有些 命令行參數
+    羅列的 十分 長:</p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><code class="Nm">make</code></dt>
+  <dd>[<code class="Fl">-eiknqrstv</code>] [<code class="Fl">-D</code>
+      <var class="Ar">variable</var>] [<code class="Fl">-d</code>
+      <var class="Ar">flags</var>] [<code class="Fl">-f</code>
+      <var class="Ar">makefile</var>]
+      [<code class="Fl">-I</code> <var class="Ar">directory</var>]
+      [<code class="Fl">-j</code> <var class="Ar">max_jobs</var>]
+      [<var class="Ar">variable=value</var>]
+      [<var class="Ar">target ...</var>]</dd>
+</dl>
+</div>
+<p class="Pp">這裏 你 可能 討論
+    <code class="Nm">make</code> 命令 和
+    它的參數 <var class="Ar">makefile</var>,
+    作爲 一個 標誌的參數,
+    <code class="Fl">-f</code>, 或者 討論
+    一個
+    可選的文件操作對象
+    <var class="Ar">target</var>. 在
+    具體的上下文 中,
+    這種細節 能夠 防止
+    混淆. 然而 <code class="Nm">-mdoc</code>
+    宏包中 沒有爲
+    標誌的參數 準備 宏.
+    作爲 替代 是
+    ‘<code class="Li">Ar</code>’ 參數宏,
+    用於 描述 操作對象 或
+    文件參數 如 <var class="Ar">target</var>
+    以及 標誌的參數 如
+    <var class="Ar">variable</var>. 上面的 make
+    命令行 是 這樣
+  產生的:</p>
+<div class="Bd Pp Bd-indent">
+<pre>.Nm make
+.Op Fl eiknqrstv
+.Op Fl D Ar variable
+.Op Fl d Ar flags
+.Op Fl f Ar makefile
+.Op Fl I Ar directory
+.Op Fl j Ar max_jobs
+.Op Ar variable=value
+.Bk -words
+.Op Ar target ...
+.Ek
+</pre>
+</div>
+<p class="Pp">在 <a class="Sx" href="#Keeps">Keeps</a>
+    小節中 將會 解釋
+    ‘<code class="Li">.Bk</code>’ 和
+    ‘<code class="Li">.Ek</code>’ 宏.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="基本語法_General_Syntax">基本語法 General Syntax<a class="anchor" href="#%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95_General_Syntax">¶</a></h2>
+手冊宏域 和
+  基本正文宏域 的 宏
+  有着 相似的語法, 僅有
+  微小差別: ‘<code class="Li">.Ar</code>’,
+  ‘<code class="Li">.Fl</code>’,
+  ‘<code class="Li">.Nm</code>’, 和
+  ‘<code class="Li">.Pa</code>’ 僅當
+  無參數調用時 纔有
+  區別; ‘<code class="Li">.Fn</code>’ 和
+  ‘<code class="Li">.Xr</code>’ 的
+  參數列表 要求 一定的
+  順序; ‘<code class="Li">.Op</code>’ 和
+  ‘<code class="Li">.Fn</code>’
+  宏有嵌套限制. 所有的
+  內容宏 能夠
+  識別和正確處理
+  標點符號, 每個
+  標點符號 要在 前面 用
+  空格 隔開. 如果 給出
+  這樣的 宏請求:
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">.Li sptr, ptr),</code></div>
+<p class="Pp">結果是:</p>
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li"><code class="Li">sptr,
+  ptr),</code></code></div>
+<p class="Pp">標點符號 沒有
+    被識別 出來, 全都按
+    原文字體 輸出. 如果
+    標點符號 前面用
+    空格符 隔開:</p>
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">.Li sptr , ptr ) ,</code></div>
+<p class="Pp">結果是:</p>
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li"><code class="Li">sptr</code>,
+  <code class="Li">ptr</code>),</code></div>
+<p class="Pp">標點符號 被
+    識別出來 了,
+    缺省的字體 也 有別於
+    原文文字的字體.</p>
+<p class="Pp">用 ‘<code class="Li">\&amp;</code>’.
+    轉義符 可以 去掉
+    標點字符 的 特殊意義.
+    <a class="Xr">Troff</a> 作爲 宏語言
+    有一定 的 限制, 當
+    表達的字串 中 含有
+    數學, 邏輯 或 引用
+    符號時 將 難於 處理:</p>
+<div class="Bd Pp Bd-indent">
+<pre>{+,-,/,*,%,&lt;,&gt;,&lt;=,&gt;=,=,==,&amp;,`,&#39;,&#34;}
+</pre>
+</div>
+<p class="Pp">問題是 <a class="Xr">troff</a> 會
+    認爲 它 應該
+    執行或運算 這些 符號
+    代表的操作. 要 防止
+    這一點 可以 用
+    ‘<code class="Li">\&amp;</code>’ 轉義
+    這些 字符. 典型語法 在
+    下面 顯示的 第一個
+    內容宏 中 可以見到,
+    ‘<code class="Li">.Ad</code>’.</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="手冊域_MANUAL_DOMAIN">手冊域 MANUAL DOMAIN<a class="anchor" href="#%E6%89%8B%E5%86%8A%E5%9F%9F_MANUAL_DOMAIN">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="地址宏_Address_Macro">地址宏 Address Macro<a class="anchor" href="#%E5%9C%B0%E5%9D%80%E5%AE%8F_Address_Macro">¶</a></h2>
+地址宏 用 這種 格式
+  標明地址: addr1[,addr2[,addr3]].
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Ad address ...</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Ad_addr1"><code class="Li" id=".Ad_addr1">.Ad
+    addr1</code></a></dt>
+  <dd><span class="Ad">addr1</span></dd>
+  <dt><a class="permalink" href="#.Ad_addr1__."><code class="Li" id=".Ad_addr1__.">.Ad
+    addr1 .</code></a></dt>
+  <dd><span class="Ad">addr1</span>.</dd>
+  <dt><a class="permalink" href="#.Ad_addr1__,_file2"><code class="Li" id=".Ad_addr1__,_file2">.Ad
+    addr1 , file2</code></a></dt>
+  <dd><span class="Ad">addr1</span>, <span class="Ad">file2</span></dd>
+  <dt><a class="permalink" href="#.Ad_f1__,_f2__,_f3__:"><code class="Li" id=".Ad_f1__,_f2__,_f3__:">.Ad
+    f1 , f2 , f3 :</code></a></dt>
+  <dd><span class="Ad">f1</span>, <span class="Ad">f2</span>,
+      <span class="Ad">f3</span>:</dd>
+  <dt><a class="permalink" href="#.Ad_addr__)__)__,"><code class="Li" id=".Ad_addr__)__)__,">.Ad
+    addr ) ) ,</code></a></dt>
+  <dd><span class="Ad">addr</span>)),</dd>
+</dl>
+</div>
+<p class="Pp">不帶參數 調用
+    ‘<code class="Li">.Ad</code>’ 是個
+    錯誤. ‘<code class="Li">.Ad</code>’
+    可以被 (其他宏)
+    調用和分析.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="作者名稱_Author_Name">作者名稱 Author Name<a class="anchor" href="#%E4%BD%9C%E8%80%85%E5%90%8D%E7%A8%B1_Author_Name">¶</a></h2>
+The ‘<code class="Li">.An</code>’ 宏用以
+  說明 這個文檔的
+  描述對象的 作者, 或者
+  這篇手冊頁的 作者.
+  名字 信息 後面的
+  其他參數 被認爲是
+  標點符號.
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .An author_name
+  ...</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.An_Joe__Author"><code class="Li" id=".An_Joe__Author">.An
+    Joe Author</code></a></dt>
+  <dd>
+    <br/>
+    <span class="An">Joe Author</span></dd>
+  <dt><a class="permalink" href="#.An_Joe__Author__,"><code class="Li" id=".An_Joe__Author__,">.An
+    Joe Author ,</code></a></dt>
+  <dd>
+    <br/>
+    <span class="An">Joe Author</span>,</dd>
+  <dt><a class="permalink" href="#.An_Joe__Author___&amp;Aq__nobody@FreeBSD.ORG"><code class="Li" id=".An_Joe__Author___&amp;Aq__nobody@FreeBSD.ORG">.An
+    Joe Author Aq nobody@FreeBSD.ORG</code></a></dt>
+  <dd>
+    <br/>
+    <span class="An">Joe Author</span> ⟨nobody@FreeBSD.ORG⟩</dd>
+  <dt><a class="permalink" href="#.An_Joe__Author__)__)__,"><code class="Li" id=".An_Joe__Author__)__)__,">.An
+    Joe Author ) ) ,</code></a></dt>
+  <dd>
+    <br/>
+    <span class="An">Joe Author</span>)),</dd>
+</dl>
+</div>
+<p class="Pp">‘<code class="Li">.An</code>’
+    宏可以被 (其他宏)
+    分析和調用,
+    不帶參數調用
+    ‘<code class="Li">.An</code>’
+    是個錯誤.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="參數宏_Argument_Macro">參數宏 Argument Macro<a class="anchor" href="#%E5%8F%83%E6%95%B8%E5%AE%8F_Argument_Macro">¶</a></h2>
+當 引用 命令行參數時
+  可以使用 ‘<code class="Li">.Ar</code>’
+  參數宏.
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Ar argument ...</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Ar"><code class="Li" id=".Ar">.Ar</code></a></dt>
+  <dd><var class="Ar">file ...</var></dd>
+  <dt><a class="permalink" href="#.Ar_file1"><code class="Li" id=".Ar_file1">.Ar
+    file1</code></a></dt>
+  <dd><var class="Ar">file1</var></dd>
+  <dt><a class="permalink" href="#.Ar_file1__."><code class="Li" id=".Ar_file1__.">.Ar
+    file1 .</code></a></dt>
+  <dd><var class="Ar">file1</var>.</dd>
+  <dt><a class="permalink" href="#.Ar_file1_file2"><code class="Li" id=".Ar_file1_file2">.Ar
+    file1 file2</code></a></dt>
+  <dd><var class="Ar">file1 file2</var></dd>
+  <dt><a class="permalink" href="#.Ar_f1_f2_f3__:"><code class="Li" id=".Ar_f1_f2_f3__:">.Ar
+    f1 f2 f3 :</code></a></dt>
+  <dd><var class="Ar">f1 f2 f3</var>:</dd>
+  <dt><a class="permalink" href="#.Ar_file__)__)__,"><code class="Li" id=".Ar_file__)__)__,">.Ar
+    file ) ) ,</code></a></dt>
+  <dd><var class="Ar">file</var>)),</dd>
+</dl>
+</div>
+<p class="Pp">如果不帶參數調用
+    ‘<code class="Li">.Ar</code>’ 宏,
+    缺省爲 ‘<code class="Li"><var class="Ar">file
+    ...</var></code>’. ‘<code class="Li">.Ar</code>’
+    宏可以被 (其他宏)
+    分析和調用.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="配置定義_(手冊第四部分)_Configuration_Declaration">配置定義 (手冊第四部分) Configuration Declaration<a class="anchor" href="#%E9%85%8D%E7%BD%AE%E5%AE%9A%E7%BE%A9_(%E6%89%8B%E5%86%8A%E7%AC%AC%E5%9B%9B%E9%83%A8%E5%88%86)_Configuration_Declaration">¶</a></h2>
+‘<code class="Li">.Cd</code>’
+  宏用於描述 <a class="Xr">config(8)</a> 對
+  設備接口的定義
+  (手冊第四部分). 這個宏
+  接受 引號內的參數
+  (只能是雙引號).
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><code class="Cd">device le0 at scode?</code></dt>
+  <dd>來自: ‘<code class="Li">.Cd device le0 at
+      scode?</code>’.</dd>
+</dl>
+</div>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="命令修飾_Command_Modifier">命令修飾 Command Modifier<a class="anchor" href="#%E5%91%BD%E4%BB%A4%E4%BF%AE%E9%A3%BE_Command_Modifier">¶</a></h2>
+命令修飾宏和
+  ‘<code class="Li">.Fl</code>’ (標誌)
+  命令相似, 除了
+  ‘<code class="Li">.Cm</code>’ 宏 不在
+  任何參數 前 加 短橫線
+  (dash). 傳統的標誌 以
+  短橫線 開頭, 但 一些
+  命令 或 命令的子集
+  不用這個. 命令修飾宏
+  也可以 和 交互命令
+  結合 使用, 如 編輯命令.
+  另見 <a class="Sx" href="#Flags">Flags</a>.
+</section>
+<section class="Ss">
+<h2 class="Ss" id="已定義的變量_Defined_Variables">已定義的變量 Defined Variables<a class="anchor" href="#%E5%B7%B2%E5%AE%9A%E7%BE%A9%E7%9A%84%E8%AE%8A%E9%87%8F_Defined_Variables">¶</a></h2>
+在 頭文件 中 已經
+  定義了的變量 用
+  ‘<code class="Li">.Dv</code>’ 宏說明.
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Dv defined_variable
+  ...</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Dv_MAXHOSTNAMELEN"><code class="Li" id=".Dv_MAXHOSTNAMELEN">.Dv
+    MAXHOSTNAMELEN</code></a></dt>
+  <dd><a class="permalink" href="#MAXHOSTNAMELEN"><code class="Dv" id="MAXHOSTNAMELEN">MAXHOSTNAMELEN</code></a></dd>
+  <dt><a class="permalink" href="#.Dv_TIOCGPGRP_)"><code class="Li" id=".Dv_TIOCGPGRP_)">.Dv
+    TIOCGPGRP )</code></a></dt>
+  <dd><a class="permalink" href="#TIOCGPGRP"><code class="Dv" id="TIOCGPGRP">TIOCGPGRP</code></a>)</dd>
+</dl>
+</div>
+<p class="Pp">不帶參數調用
+    ‘<code class="Li">.Dv</code>’
+    是個錯誤.
+    ‘<code class="Li">.Dv</code>’ 宏可以被
+    (其他宏) 分析和調用.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Errno&#39;s_(僅供手冊第二部分)">Errno&#39;s (僅供手冊第二部分)<a class="anchor" href="#Errno%27s_(%E5%83%85%E4%BE%9B%E6%89%8B%E5%86%8A%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86)">¶</a></h2>
+這個 ‘<code class="Li">.Er</code>’ errno 宏
+  指明 手冊 第二部分,
+  庫函數 的
+  錯誤返回值.(譯註:
+  應該是系統調用)
+  下面的 第二個 例子
+  顯示了 ‘<code class="Li">.Er</code>’
+  配合 ‘<code class="Li">.Bq</code>’
+  基本正文宏 的 使用,
+  就象 用在 手冊
+  第二部分 一樣.
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Er ERRNOTYPE ...</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Er_ENOENT"><code class="Li" id=".Er_ENOENT">.Er
+    ENOENT</code></a></dt>
+  <dd><code class="Er">ENOENT</code></dd>
+  <dt><a class="permalink" href="#.Er_ENOENT__)__;"><code class="Li" id=".Er_ENOENT__)__;">.Er
+    ENOENT ) ;</code></a></dt>
+  <dd><code class="Er">ENOENT</code>);</dd>
+  <dt><a class="permalink" href="#.Bq__&amp;Er_ENOTDIR"><code class="Li" id=".Bq__&amp;Er_ENOTDIR">.Bq
+    Er ENOTDIR</code></a></dt>
+  <dd>[<code class="Er">ENOTDIR</code>]</dd>
+</dl>
+</div>
+<p class="Pp">不帶參數調用
+    ‘<code class="Li">.Er</code>’
+    宏是個錯誤.
+    ‘<code class="Li">.Er</code>’ 宏可以被
+    (其他宏) 分析和調用.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="環境變量_Environment_Variables">環境變量 Environment Variables<a class="anchor" href="#%E7%92%B0%E5%A2%83%E8%AE%8A%E9%87%8F_Environment_Variables">¶</a></h2>
+‘<code class="Li">.Ev</code>’
+  宏說明一個環境變量.
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Ev argument ...</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Ev_DISPLAY"><code class="Li" id=".Ev_DISPLAY">.Ev
+    DISPLAY</code></a></dt>
+  <dd><a class="permalink" href="#DISPLAY"><code class="Ev" id="DISPLAY">DISPLAY</code></a></dd>
+  <dt><a class="permalink" href="#.Ev_PATH__."><code class="Li" id=".Ev_PATH__.">.Ev
+    PATH .</code></a></dt>
+  <dd><a class="permalink" href="#PATH"><code class="Ev" id="PATH">PATH</code></a>.</dd>
+  <dt><a class="permalink" href="#.Ev_PRINTER__)__)__,"><code class="Li" id=".Ev_PRINTER__)__)__,">.Ev
+    PRINTER ) ) ,</code></a></dt>
+  <dd><a class="permalink" href="#PRINTER"><code class="Ev" id="PRINTER">PRINTER</code></a>)),</dd>
+</dl>
+</div>
+<p class="Pp">不帶參數調用
+    ‘<code class="Li">.Ev</code>’
+    宏是個錯誤.
+    ‘<code class="Li">.Ev</code>’ 宏可以被
+    (其他宏) 分析和調用.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="函數參數_Function_Argument">函數參數 Function Argument<a class="anchor" href="#%E5%87%BD%E6%95%B8%E5%8F%83%E6%95%B8_Function_Argument">¶</a></h2>
+‘<code class="Li">.Fa</code>’ 宏 用來
+  說明 在手冊的
+  <a class="Sx" href="#__u7E3D___u89BD__SYNOPSIS">總覽 SYNOPSIS</a>
+  小節 之外的 函數參數,
+  或者在
+  <a class="Sx" href="#__u7E3D___u89BD__SYNOPSIS">總覽 SYNOPSIS</a>
+  小節內, 其 參數列表對
+  ‘<code class="Li">.Fn</code>’ 宏 而言
+  過長, 並且 必須 使用
+  ‘<code class="Li">.Fo</code>’ 和
+  ‘<code class="Li">.Fc</code>’ 宏時.
+  ‘<code class="Li">.Fa</code>’ 也 有可能
+  用來 說明 結構成員.
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Fa function_argument
+  ...</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Fa_d_namlen__)__)__,"><code class="Li" id=".Fa_d_namlen__)__)__,">.Fa
+    d_namlen ) ) ,</code></a></dt>
+  <dd><var class="Fa">d_namlen</var>)),</dd>
+  <dt><a class="permalink" href="#.Fa_iov_len"><code class="Li" id=".Fa_iov_len">.Fa
+    iov_len</code></a></dt>
+  <dd><var class="Fa">iov_len</var></dd>
+</dl>
+</div>
+<p class="Pp">不帶參數調用
+    ‘<code class="Li">.Fa</code>’
+    宏是個錯誤.
+    ‘<code class="Li">.Fa</code>’ 宏可以被
+    (其他) 宏分析和調用.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="函數聲明_Function_Declaration">函數聲明 Function Declaration<a class="anchor" href="#%E5%87%BD%E6%95%B8%E8%81%B2%E6%98%8E_Function_Declaration">¶</a></h2>
+‘<code class="Li">.Fd</code>’ 宏 用於
+  第二或 第三部分
+  手冊頁 的
+  <a class="Sx" href="#__u7E3D___u89BD__SYNOPSIS">總覽 SYNOPSIS</a>
+  小節. ‘<code class="Li">.Fd</code>’ 宏
+  既 不調用 其他宏, 也
+  不能 被 其他宏調用.
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Fd include_file (or defined
+  variable)</code></div>
+<p class="Pp">在
+    <a class="Sx" href="#__u7E3D___u89BD__SYNOPSIS">總覽
+    SYNOPSIS</a> 小節, 如果 已經
+    說明了 某個 函數, 並且
+    沒有 出現 省略號, 則
+    ‘<code class="Li">.Fd</code>’ 宏請求
+    能夠 產生 一個 斷行.
+    在 函數 和 函數聲明
+    之間, 垂直方向上 產生
+    一定的 空白.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="標誌_Flags">標誌 Flags<a class="anchor" href="#%E6%A8%99%E8%AA%8C_Flags">¶</a></h2>
+‘<code class="Li">.Fl</code>’ 宏 處理
+  命令行標誌. 它 在
+  標誌前 加一個 短橫線
+  ‘<code class="Li">-</code>’, 對於
+  交互命令 標誌, 它
+  不需要 短橫線, 可以用
+  ‘<code class="Li">.Cm</code>’ (命令修飾
+  command modifier) 宏替換, 它 沒有
+  短橫線.
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Fl argument ...</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Fl"><code class="Li" id=".Fl">.Fl</code></a></dt>
+  <dd><code class="Fl">-</code></dd>
+  <dt><a class="permalink" href="#.Fl_cfv"><code class="Li" id=".Fl_cfv">.Fl
+    cfv</code></a></dt>
+  <dd><a class="permalink" href="#cfv"><code class="Fl" id="cfv">-cfv</code></a></dd>
+  <dt><a class="permalink" href="#.Fl_cfv__."><code class="Li" id=".Fl_cfv__.">.Fl
+    cfv .</code></a></dt>
+  <dd><a class="permalink" href="#cfv_2"><code class="Fl" id="cfv_2">-cfv</code></a>.</dd>
+  <dt><a class="permalink" href="#.Fl_s_v_t"><code class="Li" id=".Fl_s_v_t">.Fl
+    s v t</code></a></dt>
+  <dd><a class="permalink" href="#s"><code class="Fl" id="s">-s</code></a>
+      <code class="Fl">-v</code> <code class="Fl">-t</code></dd>
+  <dt><a class="permalink" href="#.Fl_-__,"><code class="Li" id=".Fl_-__,">.Fl
+    - ,</code></a></dt>
+  <dd><a class="permalink" href="#-"><code class="Fl" id="-">--</code></a>,</dd>
+  <dt><a class="permalink" href="#.Fl_xyz__)__,"><code class="Li" id=".Fl_xyz__)__,">.Fl
+    xyz ) ,</code></a></dt>
+  <dd><a class="permalink" href="#xyz"><code class="Fl" id="xyz">-xyz</code></a>),</dd>
+</dl>
+</div>
+<p class="Pp">如果 ‘<code class="Li">.Fl</code>’
+    宏 不帶 任何 參數, 將
+    只產生 一個 短橫線,
+    代表 stdin/stdout. 注意 如果 把
+    一個 短橫線 做爲
+    ‘<code class="Li">.Fl</code>’ 的參數,
+    結果 會 得到
+    兩個短橫線.
+    ‘<code class="Li">.Fl</code>’ 宏可以被
+    (其他宏) 分析和調用.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="函數(庫函數)_Functions_(library_routines)">函數(庫函數) Functions (library routines)<a class="anchor" href="#%E5%87%BD%E6%95%B8(%E5%BA%AB%E5%87%BD%E6%95%B8)_Functions_(library_routines)">¶</a></h2>
+宏 .Fn 是 ANSI C 函數風格 的
+  模型.
+<div class="Bd Pp">
+<pre>Usage: .Fn [type] function [[type] parameters ...
+</pre>
+</div>
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Fn_getchar"><code class="Li" id=".Fn_getchar">.Fn
+    getchar</code></a></dt>
+  <dd><code class="Fn">getchar</code>()</dd>
+  <dt><a class="permalink" href="#.Fn_strlen_)_,"><code class="Li" id=".Fn_strlen_)_,">.Fn
+    strlen ) ,</code></a></dt>
+  <dd><code class="Fn">strlen</code>()),</dd>
+  <dt><a class="permalink" href="#.Fn__(dqint_align_(dq__(dqconst_*_char_*sptrs_(dq"><code class="Li" id=".Fn__(dqint_align_(dq__(dqconst_*_char_*sptrs_(dq">.Fn
+    &#34;int align&#34; &#34;const * char *sptrs&#34;</code></a>,</dt>
+  <dd><var class="Ft">int</var>
+      <code class="Fn">align</code>(<var class="Fa">const * char
+    *sptrs</var>),</dd>
+</dl>
+<p class="Pp">不帶參數調用
+    ‘<code class="Li">.Fn</code>’
+    是一個錯誤.
+    ‘<code class="Li">.Fn</code>’ 宏可以被
+    (其他宏) 分析和調用,
+    注意 任何 對 其他宏 的
+    調用 應該在
+    ‘<code class="Li">.Fn</code>’ 宏調用
+    的 結尾處 給出 標記
+    (反括弧).</p>
+<p class="Pp">對於 八個 參數
+    以上的 函數
+    (儘管少見), 可以 用 宏
+    ‘<code class="Li">.Fo</code>’ (function open) 和
+    ‘<code class="Li">.Fc</code>’ (function close)
+    配合 ‘<code class="Li">.Fa</code>’ (function
+    argument) 宏 的 使用, 突破
+    參數 過多 的 限制,
+    例如:</p>
+<div class="Bd Pp Bd-indent">
+<pre>.Fo &#34;int res_mkquery&#34;
+.Fa &#34;int op&#34;
+.Fa &#34;char *dname&#34;
+.Fa &#34;int class&#34;
+.Fa &#34;int type&#34;
+.Fa &#34;char *data&#34;
+.Fa &#34;int datalen&#34;
+.Fa &#34;struct rrec *newrr&#34;
+.Fa &#34;char *buf&#34;
+.Fa &#34;int buflen&#34;
+.Fc
+</pre>
+</div>
+<p class="Pp">產生:</p>
+<div class="Bd Pp Bd-indent"><code class="Fn">int
+  res_mkquery</code>(<var class="Fa">int op</var>, <var class="Fa">char
+  *dname</var>, <var class="Fa">int class</var>, <var class="Fa">int type</var>,
+  <var class="Fa">char *data</var>, <var class="Fa">int datalen</var>,
+  <var class="Fa">struct rrec *newrr</var>, <var class="Fa">char *buf</var>,
+  <var class="Fa">int buflen</var>);</div>
+<p class="Pp">宏 ‘<code class="Li">.Fo</code>’ 和
+    ‘<code class="Li">.Fc</code>’ 可以被
+    (其他宏) 分析和調用.
+    在 <a class="Sx" href="#__u7E3D___u89BD__SYNOPSIS">總覽
+    SYNOPSIS</a> 小節, 函數 總是
+    位於 行的開始 處. 如果
+    在 <a class="Sx" href="#__u7E3D___u89BD__SYNOPSIS">總覽
+    SYNOPSIS</a> 小節 有
+    一個以上的 函數聲明,
+    而且 函數類型 沒有
+    說明, 則 會產生 一個
+    斷行. 在 函數 和 函數
+    的 垂直方向 上 產生
+    一定的 空白. 此時
+    ‘<code class="Li">.Fn</code>’ 宏 不按 troff
+    的 行長 檢查 單詞
+    邊界, 有可能 難看的 從
+    單詞中間 斷開. 以後 會
+    解決 這個 問題.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="函數類型_Function_Type">函數類型 Function Type<a class="anchor" href="#%E5%87%BD%E6%95%B8%E9%A1%9E%E5%9E%8B_Function_Type">¶</a></h2>
+這個宏 設計 用在
+  <a class="Sx" href="#__u7E3D___u89BD__SYNOPSIS">總覽 SYNOPSIS</a>
+  小節. 它 可以
+  毫無困難的 用在
+  手冊頁的 其他 地方, 但
+  它的 主要 目的 是 爲
+  第二 和 第三部分
+  手冊頁的
+  <a class="Sx" href="#__u7E3D___u89BD__SYNOPSIS">總覽 SYNOPSIS</a>
+  小節, 以 核心標準形式
+  (kernel normal form) 描述 函數類型
+  (它 導致 斷行, 在 下一行
+  顯示 函數 名稱).
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Ft type ...</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Ft_struct_stat"><code class="Li" id=".Ft_struct_stat">.Ft
+    struct stat</code></a></dt>
+  <dd><var class="Ft">struct stat</var></dd>
+</dl>
+</div>
+<p class="Pp">‘<code class="Li">.Ft</code>’
+    宏不能被其他宏調用.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="交互命令_Interactive_Commands">交互命令 Interactive Commands<a class="anchor" href="#%E4%BA%A4%E4%BA%92%E5%91%BD%E4%BB%A4_Interactive_Commands">¶</a></h2>
+宏 ‘<code class="Li">.Ic</code>’ 用於
+  說明 交互 或 內部命令.
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Ic argument ...</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Ic_:wq"><code class="Li" id=".Ic_:wq">.Ic
+    :wq</code></a></dt>
+  <dd><a class="permalink" href="#:wq"><code class="Ic" id=":wq">:wq</code></a></dd>
+  <dt><a class="permalink" href="#.Ic_do_while__..._"><code class="Li" id=".Ic_do_while__..._">.Ic
+    do while {...}</code></a></dt>
+  <dd><a class="permalink" href="#do_while__..._"><code class="Ic" id="do_while__..._">do
+      while {...}</code></a></dd>
+  <dt><a class="permalink" href="#.Ic_setenv__,_unsetenv"><code class="Li" id=".Ic_setenv__,_unsetenv">.Ic
+    setenv , unsetenv</code></a></dt>
+  <dd><a class="permalink" href="#setenv"><code class="Ic" id="setenv">setenv</code></a>,
+      <code class="Ic">unsetenv</code></dd>
+</dl>
+</div>
+<p class="Pp">不帶參數調用
+    ‘<code class="Li">.Ic</code>’
+    是個錯誤.
+    ‘<code class="Li">.Ic</code>’ 宏可以被
+    (其他宏) 分析和調用.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="名稱宏_Name_Macro">名稱宏 Name Macro<a class="anchor" href="#%E5%90%8D%E7%A8%B1%E5%AE%8F_Name_Macro">¶</a></h2>
+‘<code class="Li">.Nm</code>’ 宏 用於
+  說明 文檔題目 或 主題.
+  它的特點 是 能夠 記住
+  調用時 帶的 第一個
+  參數, 這個 參數 就是
+  該頁的 主題. 當 不帶
+  參數 調用它 時,
+  ‘<code class="Li">.Nm</code>’ 宏 把 以前
+  記住的 參數 顯示 出來,
+  可以 爲作者 省點勁.
+  注意:
+  手冊第二部分或第三部分的函數名稱,
+  在 <a class="Sx" href="#__u540D___u7A31__NAME">名稱 NAME</a>
+  小節 用 ‘<code class="Li">.Nm</code>’
+  說明, 在
+  <a class="Sx" href="#__u7E3D___u89BD__SYNOPSIS">總覽 SYNOPSIS</a>
+  和 其餘 小節 用
+  ‘<code class="Li">.Fn</code>’ 說明. 對於
+  交互命令, 例如 在
+  <a class="Xr"><a href="../../buster/tcsh/csh.1.en.html">csh(1)</a></a> 中的
+  ‘<code class="Li">while</code>’ 命令,
+  應該 使用 ‘<code class="Li">.Ic</code>’
+  宏. ‘<code class="Li">.Ic</code>’ 宏和
+  ‘<code class="Li">.Nm</code>’, 宏
+  非常接近, 只是 它
+  不能夠 記憶 調用時的
+  參數.
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Nm argument ...</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Nm_mdoc.sample"><code class="Li" id=".Nm_mdoc.sample">.Nm
+    mdoc.sample</code></a></dt>
+  <dd><code class="Nm">mdoc.sample</code></dd>
+  <dt><a class="permalink" href="#.Nm__e-mdoc"><code class="Li" id=".Nm__e-mdoc">.Nm
+    \-mdoc</code></a></dt>
+  <dd><code class="Nm">-mdoc</code>.</dd>
+  <dt><a class="permalink" href="#.Nm_foo__)__)__,"><code class="Li" id=".Nm_foo__)__)__,">.Nm
+    foo ) ) ,</code></a></dt>
+  <dd><code class="Nm">foo</code>)),</dd>
+  <dt><a class="permalink" href="#.Nm"><code class="Li" id=".Nm">.Nm</code></a></dt>
+  <dd><code class="Nm">mdoc.samples</code></dd>
+</dl>
+</div>
+<p class="Pp">‘<code class="Li">.Nm</code>’
+    宏可以被 (其他宏)
+    分析和調用.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="選項_Options">選項 Options<a class="anchor" href="#%E9%81%B8%E9%A0%85_Options">¶</a></h2>
+‘<code class="Li">.Op</code>’ 宏 把
+  命令行上 剩餘的 所有
+  參數 用 方括弧
+  括在一起, 把 最後的
+  標點符號 放到 方括弧
+  外面. 宏 ‘<code class="Li">.Oc</code>’
+  和 ‘<code class="Li">.Oo</code>’ 用於
+  處理 跨行.
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Op options ...</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Op"><code class="Li" id=".Op">.Op</code></a></dt>
+  <dd>[]</dd>
+  <dt><a class="permalink" href="#.Op_Fl_k"><code class="Li" id=".Op_Fl_k">.Op
+    Fl k</code></a></dt>
+  <dd>[<code class="Fl">-k</code>]</dd>
+  <dt><a class="permalink" href="#.Op_Fl_k_)_."><code class="Li" id=".Op_Fl_k_)_.">.Op
+    Fl k ) .</code></a></dt>
+  <dd>[<code class="Fl">-k</code>]).</dd>
+  <dt><a class="permalink" href="#.Op_Fl_k_Ar_kookfile"><code class="Li" id=".Op_Fl_k_Ar_kookfile">.Op
+    Fl k Ar kookfile</code></a></dt>
+  <dd>[<code class="Fl">-k</code> <var class="Ar">kookfile</var>]</dd>
+  <dt><a class="permalink" href="#.Op_Fl_k_Ar_kookfile_,"><code class="Li" id=".Op_Fl_k_Ar_kookfile_,">.Op
+    Fl k Ar kookfile ,</code></a></dt>
+  <dd>[<code class="Fl">-k</code> <var class="Ar">kookfile</var>],</dd>
+  <dt><a class="permalink" href="#.Op_Ar_objfil_Op_Ar_corfil"><code class="Li" id=".Op_Ar_objfil_Op_Ar_corfil">.Op
+    Ar objfil Op Ar corfil</code></a></dt>
+  <dd>[<var class="Ar">objfil</var> [<var class="Ar">corfil</var>]]</dd>
+  <dt><a class="permalink" href="#.Op_Fl_c_Ar_objfil_Op_Ar_corfil_,"><code class="Li" id=".Op_Fl_c_Ar_objfil_Op_Ar_corfil_,">.Op
+    Fl c Ar objfil Op Ar corfil ,</code></a></dt>
+  <dd>[<code class="Fl">-c</code> <var class="Ar">objfil</var>
+      [<var class="Ar">corfil</var>]],</dd>
+  <dt><a class="permalink" href="#.Op_word1_word2"><code class="Li" id=".Op_word1_word2">.Op
+    word1 word2</code></a></dt>
+  <dd>[word1 word2]</dd>
+</dl>
+</div>
+<p class="Pp">應用 ‘<code class="Li">.Oc</code>’
+    和 ‘<code class="Li">.Oo</code>’ 宏:</p>
+<div class="Bd Pp Bd-indent">
+<pre>.Oo
+.Op Fl k Ar kilobytes
+.Op Fl i Ar interval
+.Op Fl c Ar count
+.Oc
+</pre>
+</div>
+<p class="Pp">產生: [[<code class="Fl">-k</code>
+    <var class="Ar">kilobytes</var>] [<code class="Fl">-i</code>
+    <var class="Ar">interval</var>] [<code class="Fl">-c</code>
+    <var class="Ar">count</var>]]</p>
+<p class="Pp">宏 ‘<code class="Li">.Op</code>’,
+    ‘<code class="Li">.Oc</code>’ 和
+    ‘<code class="Li">.Oo</code>’ 可以被
+    (其他宏) 分析和調用.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="路徑名_Pathnames">路徑名 Pathnames<a class="anchor" href="#%E8%B7%AF%E5%BE%91%E5%90%8D_Pathnames">¶</a></h2>
+‘<code class="Li">.Pa</code>’ 宏 用於
+  格式化 路徑 或 文件名.
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Pa pathname</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Pa_/usr/share"><code class="Li" id=".Pa_/usr/share">.Pa
+    /usr/share</code></a></dt>
+  <dd><span class="Pa">/usr/share</span></dd>
+  <dt><a class="permalink" href="#.Pa_/tmp/fooXXXXX__)__."><code class="Li" id=".Pa_/tmp/fooXXXXX__)__.">.Pa
+    /tmp/fooXXXXX ) .</code></a></dt>
+  <dd><span class="Pa">/tmp/fooXXXXX</span>).</dd>
+</dl>
+</div>
+<p class="Pp">‘<code class="Li">.Pa</code>’
+    宏可以被 (其他宏)
+    分析和調用.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="變量_Variables">變量 Variables<a class="anchor" href="#%E8%AE%8A%E9%87%8F_Variables">¶</a></h2>
+基本的 變量 參考:
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Va variable ...</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Va_count"><code class="Li" id=".Va_count">.Va
+    count</code></a></dt>
+  <dd><var class="Va">count</var></dd>
+  <dt><a class="permalink" href="#.Va_settimer"><code class="Li" id=".Va_settimer">.Va
+    settimer</code></a>,</dt>
+  <dd><var class="Va">settimer</var>,</dd>
+  <dt><a class="permalink" href="#.Va_int__*prt__)__:"><code class="Li" id=".Va_int__*prt__)__:">.Va
+    int *prt ) :</code></a></dt>
+  <dd><var class="Va">int *prt</var>):</dd>
+  <dt><a class="permalink" href="#.Va_char__s_____)__)__,"><code class="Li" id=".Va_char__s_____)__)__,">.Va
+    char s ] ) ) ,</code></a></dt>
+  <dd><var class="Va">char s</var>])),</dd>
+</dl>
+</div>
+<p class="Pp">不帶參數調用
+    ‘<code class="Li">.Va</code>’
+    宏是個錯誤.
+    ‘<code class="Li">.Va</code>’ 宏可以被
+    (其他宏) 分析和調用.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="手冊頁參照_Manual_Page_Cross_References">手冊頁參照 Manual Page Cross References<a class="anchor" href="#%E6%89%8B%E5%86%8A%E9%A0%81%E5%8F%83%E7%85%A7_Manual_Page_Cross_References">¶</a></h2>
+‘<code class="Li">.Xr</code>’ 宏 把
+  第一個參數 當做
+  手冊頁 名稱,
+  第二個參數, 如果 存在,
+  當做 標點符號 或
+  手冊頁 的 部分號 (節號).
+  剩下 所有的參數 視做
+  標點符號.
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Xr man_page
+  [1,...,8]</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Xr_mdoc"><code class="Li" id=".Xr_mdoc">.Xr
+    mdoc</code></a></dt>
+  <dd><a class="Xr">mdoc</a></dd>
+  <dt><a class="permalink" href="#.Xr_mdoc__,"><code class="Li" id=".Xr_mdoc__,">.Xr
+    mdoc ,</code></a></dt>
+  <dd><a class="Xr">mdoc</a>,</dd>
+  <dt><a class="permalink" href="#.Xr_mdoc_7"><code class="Li" id=".Xr_mdoc_7">.Xr
+    mdoc 7</code></a></dt>
+  <dd><a class="Xr"><a href="../../buster/manpages/mdoc.7.en.html">mdoc(7)</a></a></dd>
+  <dt><a class="permalink" href="#.Xr_mdoc_7__)__)__,"><code class="Li" id=".Xr_mdoc_7__)__)__,">.Xr
+    mdoc 7 ) ) ,</code></a></dt>
+  <dd><a class="Xr"><a href="../../buster/manpages/mdoc.7.en.html">mdoc(7)</a></a>)),</dd>
+</dl>
+</div>
+<p class="Pp">‘<code class="Li">.Xr</code>’
+    宏可以被 (其他宏)
+    分析和調用.
+    不帶參數調用
+    ‘<code class="Li">.Xr</code>’
+    宏是個錯誤.</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="基本正文宏域_GENERAL_TEXT_DOMAIN">基本正文宏域 GENERAL TEXT DOMAIN<a class="anchor" href="#%E5%9F%BA%E6%9C%AC%E6%AD%A3%E6%96%87%E5%AE%8F%E5%9F%9F_GENERAL_TEXT_DOMAIN">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="AT&amp;T_宏">AT&amp;T 宏<a class="anchor" href="#AT&amp;T_%E5%AE%8F">¶</a></h2>
+<div class="Bd Bd-indent">
+<pre>Usage: .At [v6 | v7 | 32v | V.1 | V.4] ...
+</pre>
+</div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.At"><code class="Li" id=".At">.At</code></a></dt>
+  <dd><span class="Ux">AT&amp;T UNIX</span></dd>
+  <dt><a class="permalink" href="#.At_v6_."><code class="Li" id=".At_v6_.">.At
+    v6 .</code></a></dt>
+  <dd><span class="Ux">Version 6 AT&amp;T UNIX</span>.</dd>
+</dl>
+</div>
+<p class="Pp">‘<code class="Li">.At</code>’ 宏
+    <i class="Em">不能</i> 被 (其他宏)
+    分析, 也 <i class="Em">不能</i> 被
+    (其他宏) 調用. 該宏
+    最多 接受 兩個 參數.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="BSD_宏">BSD 宏<a class="anchor" href="#BSD_%E5%AE%8F">¶</a></h2>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Bx [Version/release]
+  ...</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Bx"><code class="Li" id=".Bx">.Bx</code></a></dt>
+  <dd><span class="Ux">BSD</span></dd>
+  <dt><a class="permalink" href="#.Bx_4.3_."><code class="Li" id=".Bx_4.3_.">.Bx
+    4.3 .</code></a></dt>
+  <dd><span class="Ux">4.3BSD</span>.</dd>
+</dl>
+</div>
+<p class="Pp">‘<code class="Li">.Bx</code>’
+    宏可以被 (其他宏)
+    分析和調用.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="FreeBSD_宏">FreeBSD 宏<a class="anchor" href="#FreeBSD_%E5%AE%8F">¶</a></h2>
+<div class="Bd Bd-indent">
+<pre>Usage: .Fx Version.release ...
+</pre>
+</div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Fx_2.2_."><code class="Li" id=".Fx_2.2_.">.Fx
+    2.2 .</code></a></dt>
+  <dd><span class="Ux">FreeBSD 2.2</span>.</dd>
+</dl>
+</div>
+<p class="Pp">‘<code class="Li">.Fx</code>’ 宏
+    <i class="Em">不能</i> 被 (其他宏)
+    分析, 也 <i class="Em">不能</i> 被
+    (其他宏) 調用. 該宏
+    最多 接受 兩個 參數.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="UNIX_宏">UNIX 宏<a class="anchor" href="#UNIX_%E5%AE%8F">¶</a></h2>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Ux ...</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Ux"><code class="Li" id=".Ux">.Ux</code></a></dt>
+  <dd><span class="Ux">UNIX</span></dd>
+</dl>
+</div>
+<p class="Pp">‘<code class="Li">.Ux</code>’
+    宏可以被 (其他宏)
+    分析和調用.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="嵌入和引用宏_Enclosure_and_Quoting_Macros">嵌入和引用宏 Enclosure and Quoting Macros<a class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%92%8C%E5%BC%95%E7%94%A8%E5%AE%8F_Enclosure_and_Quoting_Macros">¶</a></h2>
+嵌入 的 概念 和 引用
+  類似. 把 一句 或 多句
+  引用對象 嵌到 一對
+  字符 中, 象 引號 或
+  括弧. 本篇 文檔中 將
+  混用 術語
+  ‘<code class="Li">嵌入</code>’ 和
+  ‘<code class="Li">引用.</code>’
+  大多數 單行的
+  引用宏名 用 一個
+  小寫字母 ‘<code class="Li">q</code>’
+  結尾, 表明 這是 一個
+  引用(quoting), 但 也有
+  不規則變化. 每個
+  引用宏 都有 一對
+  開始(open) 和 結束(close) 宏,
+  各自 以 ‘<code class="Li">o</code>’ 和
+  ‘<code class="Li">c</code>’ 結尾. 在
+  某些限制時 這些宏
+  可以 跨行 使用,
+  單行的引用宏 可以
+  嵌套在裏面.
+<div class="Bd Pp Bd-indent">
+<table class="Bl-column">
+  <tbody><tr>
+    <td><i class="Em"> Quote</i></td>
+    <td> Close</td>
+    <td> Open</td>
+    <td>Function</td>
+    <td>Result</td>
+  </tr>
+  <tr>
+    <td>.Aq</td>
+    <td>.Ac</td>
+    <td>.Ao</td>
+    <td>Angle Bracket Enclosure</td>
+    <td>&lt;string&gt;</td>
+  </tr>
+  <tr>
+    <td>.Bq</td>
+    <td>.Bc</td>
+    <td>.Bo</td>
+    <td>Bracket Enclosure</td>
+    <td>[string]</td>
+  </tr>
+  <tr>
+    <td>.Dq</td>
+    <td>.Dc</td>
+    <td>.Do</td>
+    <td>Double Quote</td>
+    <td>``string&#39;&#39;</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>.Ec</td>
+    <td>.Eo</td>
+    <td>Enclose String (in XX)</td>
+    <td>XXstringXX</td>
+  </tr>
+  <tr>
+    <td>.Pq</td>
+    <td>.Pc</td>
+    <td>.Po</td>
+    <td>Parenthesis Enclosure</td>
+    <td>(string)</td>
+  </tr>
+  <tr>
+    <td>.Ql</td>
+    <td></td>
+    <td></td>
+    <td>Quoted Literal</td>
+    <td>`st&#39; or string</td>
+  </tr>
+  <tr>
+    <td>.Qq</td>
+    <td>.Qc</td>
+    <td>.Qo</td>
+    <td>Straight Double Quote</td>
+    <td>string</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>.Sq</td>
+    <td>.Sc</td>
+    <td>.So</td>
+    <td>Single Quote</td>
+    <td>`string&#39;</td>
+  </tr>
+</tbody></table>
+</div>
+<p class="Pp">除了 下面的
+    不規則宏, 所有的
+    引用宏 可以被 (其他宏)
+    分析和調用. 所有的
+    引用宏 能夠 正確 處理
+    標點符號, 只要 一次
+    一個字符, 中間 用 空格
+    隔開. 引用宏 檢查
+    開始和結束 符號,
+    以決定 把 它 放在
+    引用串的
+    前面還是後面. 這樣 就
+    有了 一定的
+  嵌套能力.</p>
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#.Ec"><code class="Li" id=".Ec">.Ec</code></a>,
+    <code class="Li">.Eo</code></dt>
+  <dd>這些宏 的 第一個參數
+      是 各自的
+      開始和結束串.</dd>
+  <dt><a class="permalink" href="#.Ql"><code class="Li" id=".Ql">.Ql</code></a></dt>
+  <dd>原文引用宏 的 表現在
+      <a class="Xr">troff</a> 中和 <a class="Xr">nroff</a>
+      不一樣. 如果用 <a class="Xr">nroff</a>
+      格式化, 引用的原文
+      始終 被引用. 如果用 troff
+      格式化, 只有 寬度
+      小於 三個定寬字符 的
+      項 才被 引用. This is to make short strings
+      more visible where the font change to literal (constant width) is less
+      noticeable. 當 字體 變成
+      原文(定寬) 時,
+      短串顯得更容易被看到.</dd>
+  <dt><a class="permalink" href="#.Pf"><code class="Li" id=".Pf">.Pf</code></a></dt>
+  <dd>前綴宏不能被
+      (其他宏) 調用,
+      但是可以被分析.
+    <div class="Bd-indent">
+    <dl class="Bl-tag">
+      <dt><a class="permalink" href="#.Pf_(_Fa_name2"><code class="Li" id=".Pf_(_Fa_name2">.Pf
+        ( Fa name2</code></a></dt>
+      <dd>變成 (<var class="Fa">name2</var>.</dd>
+    </dl>
+    </div>
+    <p class="Pp">這個 ‘<code class="Li">.Ns</code>’
+        (無空格) 宏 執行
+        類似的 後綴 功能.</p>
+  </dd>
+</dl>
+<p class="Pp">引用舉例:</p>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Aq"><code class="Li" id=".Aq">.Aq</code></a></dt>
+  <dd>⟨⟩</dd>
+  <dt><a class="permalink" href="#.Aq__&amp;Ar_ctype.h__)__,"><code class="Li" id=".Aq__&amp;Ar_ctype.h__)__,">.Aq
+    Ar ctype.h ) ,</code></a></dt>
+  <dd>⟨<var class="Ar">ctype.h</var>⟩),</dd>
+  <dt><a class="permalink" href="#.Bq"><code class="Li" id=".Bq">.Bq</code></a></dt>
+  <dd>[]</dd>
+  <dt><a class="permalink" href="#.Bq__&amp;Em_Greek__&amp;,_French__&amp;."><code class="Li" id=".Bq__&amp;Em_Greek__&amp;,_French__&amp;.">.Bq
+    Em Greek , French .</code></a></dt>
+  <dd>[<i class="Em">Greek</i>, <i class="Em">French</i>].</dd>
+  <dt><a class="permalink" href="#.Dq"><code class="Li" id=".Dq">.Dq</code></a></dt>
+  <dd>“”</dd>
+  <dt><a class="permalink" href="#.Dq_string_abc_."><code class="Li" id=".Dq_string_abc_.">.Dq
+    string abc .</code></a></dt>
+  <dd>“string abc”.</dd>
+  <dt><a class="permalink" href="#.Dq__&#39;__A-Z__&#39;"><code class="Li" id=".Dq__&#39;__A-Z__&#39;">.Dq
+    ´^[A-Z]´</code></a></dt>
+  <dd>“´^[A-Z]´”</dd>
+  <dt><a class="permalink" href="#.Ql_man_mdoc"><code class="Li" id=".Ql_man_mdoc">.Ql
+    man mdoc</code></a></dt>
+  <dd>‘<code class="Li">man mdoc</code>’</dd>
+  <dt><a class="permalink" href="#.Qq"><code class="Li" id=".Qq">.Qq</code></a></dt>
+  <dd>“”</dd>
+  <dt><a class="permalink" href="#.Qq_string_)_,"><code class="Li" id=".Qq_string_)_,">.Qq
+    string ) ,</code></a></dt>
+  <dd>“string”),</dd>
+  <dt><a class="permalink" href="#.Qq_string_Ns_),"><code class="Li" id=".Qq_string_Ns_),">.Qq
+    string Ns ),</code></a></dt>
+  <dd>“string),”</dd>
+  <dt><a class="permalink" href="#.Sq"><code class="Li" id=".Sq">.Sq</code></a></dt>
+  <dd>‘’</dd>
+  <dt><a class="permalink" href="#.Sq_string"><code class="Li" id=".Sq_string">.Sq
+    string</code></a></dt>
+  <dd>‘string’</dd>
+</dl>
+</div>
+<p class="Pp">作爲 嵌套引用宏的
+    典型範例, 參見
+    ‘<code class="Li">.Op</code>’ 選項宏.
+    它們 都 來自 上面
+    列出的 基本 引用宏.
+    ‘<code class="Li">.Xo</code>’ 和
+    ‘<code class="Li">.Xc</code>’ 擴展的
+    參數列表宏 同樣 來自
+    相同的 基本例程, 並且,
+    在 最壞的情況 下, 是
+    <code class="Nm">-mdoc</code> 宏 用法的
+    很好範例.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="No-Op_或正文宏_or_Normal_Text_Macro">No-Op 或正文宏 or Normal Text Macro<a class="anchor" href="#No-Op_%E6%88%96%E6%AD%A3%E6%96%87%E5%AE%8F_or_Normal_Text_Macro">¶</a></h2>
+宏 ‘<code class="Li">.No</code>’ 用在
+  某個 宏命令行 上,
+  意如其名, 將 <i class="Em">不</i>
+  被格式化, 語法 遵循
+  一般的 內容宏.
+</section>
+<section class="Ss">
+<h2 class="Ss" id="無空格宏_Space_Macro">無空格宏 Space Macro<a class="anchor" href="#%E7%84%A1%E7%A9%BA%E6%A0%BC%E5%AE%8F_Space_Macro">¶</a></h2>
+‘<code class="Li">.Ns</code>’ 在 宏請求
+  之間 消除 不需要的
+  空格. 它 用在
+  舊式風格的 參數列表
+  中, 標誌和參數 間 沒有
+  空格:
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#.Op_Fl_I_Ns_Ar_directory"><code class="Li" id=".Op_Fl_I_Ns_Ar_directory">.Op
+    Fl I Ns Ar directory</code></a></dt>
+  <dd>產生
+      [<code class="Fl">-I</code><var class="Ar">directory</var>]</dd>
+</dl>
+</div>
+<p class="Pp">注意: ‘<code class="Li">.Ns</code>’
+    宏 在 消除空格後 總會
+    調用 ‘<code class="Li">.No</code>’ 宏,
+    除非 還有 其他 宏名
+    跟在 後面.
+    ‘<code class="Li">.Ns</code>’ 宏可以被
+    (其他宏) 分析和調用.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="手冊頁對照參考_Section_Cross_References">手冊頁對照參考 Section Cross References<a class="anchor" href="#%E6%89%8B%E5%86%8A%E9%A0%81%E5%B0%8D%E7%85%A7%E5%8F%83%E8%80%83_Section_Cross_References">¶</a></h2>
+‘<code class="Li">.Sx</code>’ 宏 指定了
+  到 同一個文檔內的
+  小節首部 的 對照參考.
+  該宏可以被 (其他宏)
+  分析和調用.
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#.Sx_FILES"><code class="Li" id=".Sx_FILES">.Sx
+    FILES</code></a></dt>
+  <dd><a class="Sx" href="#FILES">FILES</a></dd>
+</dl>
+</div>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="參考和引言_References_and_Citations">參考和引言 References and Citations<a class="anchor" href="#%E5%8F%83%E8%80%83%E5%92%8C%E5%BC%95%E8%A8%80_References_and_Citations">¶</a></h2>
+The following macros make a modest attempt to handle references. At best, the
+  macros make it convenient to manually drop in a subset of refer style
+  references. 下面的宏 試圖
+  適度的 處理 參考資料.
+  最好情況時, 這些宏
+  便於 手工 插入 一段
+  相關風格的 參考資料.
+<p class="Pp"></p>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Rs"><code class="Li" id=".Rs">.Rs</code></a></dt>
+  <dd>參考開始. 它 導致
+      一次 斷行, 並且 開始
+      收集 參考資料, 直到
+      遇到 參考結束宏.</dd>
+  <dt><a class="permalink" href="#.Re"><code class="Li" id=".Re">.Re</code></a></dt>
+  <dd>參考結束. 則 打印出
+      參考信息.</dd>
+  <dt><a class="permalink" href="#._A"><code class="Li" id="._A">.%A</code></a></dt>
+  <dd>參考資料 的
+      作者名字, 一次一個.</dd>
+  <dt><a class="permalink" href="#._B"><code class="Li" id="._B">.%B</code></a></dt>
+  <dd>書名.</dd>
+  <dt><a class="permalink" href="#._&amp;_C"><code class="Li" id="._&amp;_C">.%C</code></a></dt>
+  <dd>城市/地點.</dd>
+  <dt><a class="permalink" href="#._&amp;_D"><code class="Li" id="._&amp;_D">.%D</code></a></dt>
+  <dd>日期.</dd>
+  <dt><a class="permalink" href="#._J"><code class="Li" id="._J">.%J</code></a></dt>
+  <dd>期刊名.</dd>
+  <dt><a class="permalink" href="#._N"><code class="Li" id="._N">.%N</code></a></dt>
+  <dd>發行號.</dd>
+  <dt><a class="permalink" href="#._O"><code class="Li" id="._O">.%O</code></a></dt>
+  <dd>可選信息.</dd>
+  <dt><a class="permalink" href="#._P"><code class="Li" id="._P">.%P</code></a></dt>
+  <dd>頁碼.</dd>
+  <dt><a class="permalink" href="#._R"><code class="Li" id="._R">.%R</code></a></dt>
+  <dd>報告名.</dd>
+  <dt><a class="permalink" href="#._T"><code class="Li" id="._T">.%T</code></a></dt>
+  <dd>文章題目.</dd>
+  <dt><a class="permalink" href="#._V"><code class="Li" id="._V">.%V</code></a></dt>
+  <dd>卷.</dd>
+</dl>
+</div>
+<p class="Pp">用 ‘<code class="Li">%</code>’
+    符號 開始的 宏 不能被
+    (其他宏) 調用, 只能 被 trade
+    name macro 分析, 結果 返回給
+    調用者 (此時 結果
+    不太好 預測). 其目的
+    是 允許 trade name 能夠
+    很好的 打印在
+    <a class="Xr">troff</a>/<a class="Xr">ditroff</a> 的
+    輸出端.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="返回值_Return_Values">返回值 Return Values<a class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC_Return_Values">¶</a></h2>
+‘<code class="Li">.Rv</code>’ 宏 產生
+  一些 用在
+  <a class="Sx" href="#__u8FD4___u56DE___u503C__RETURN_VALUES">返回值
+  RETURN VALUES</a> 小節的 文字.
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Rv [-std
+  function]</code></div>
+<p class="Pp">‘<code class="Li">.Rv -std atexit</code>’
+    將輸出 下列文字:</p>
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">.Rv -std atexit</code></div>
+<p class="Pp">這個 <code class="Fl">-std</code> 選項
+    僅用於 手冊頁的
+    第二和第三部分.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Trade_Names_(或縮略和類型名)">Trade Names (或縮略和類型名)<a class="anchor" href="#Trade_Names_(%E6%88%96%E7%B8%AE%E7%95%A5%E5%92%8C%E9%A1%9E%E5%9E%8B%E5%90%8D)">¶</a></h2>
+trade name 宏 一般說來 是 一個
+  很小的 大寫字母宏,
+  用於 所有 大於
+  兩個字符的 大寫單詞.
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Tn symbol ...</code></div>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.Tn_DEC"><code class="Li" id=".Tn_DEC">.Tn
+    DEC</code></a></dt>
+  <dd>DEC</dd>
+  <dt><a class="permalink" href="#.Tn_ASCII"><code class="Li" id=".Tn_ASCII">.Tn
+    ASCII</code></a></dt>
+  <dd>ASCII</dd>
+</dl>
+</div>
+<p class="Pp">‘<code class="Li">.Tn</code>’
+    宏可以被 (其他宏)
+    分析和調用.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="擴展參數_Extended_Arguments">擴展參數 Extended Arguments<a class="anchor" href="#%E6%93%B4%E5%B1%95%E5%8F%83%E6%95%B8_Extended_Arguments">¶</a></h2>
+‘<code class="Li">.Xo</code>’ 和
+  ‘<code class="Li">.Xc</code>’ 宏 可以 在
+  宏的邊界 擴展
+  參數列表. 如果 某個宏
+  要求 所有的參數 在
+  一行上 出現, 則
+  參數列表 不能 在 這兒
+  被 擴展. 例如
+  ‘<code class="Li">.Op</code>’.
+<p class="Pp">這裏有
+    ‘<code class="Li">.Xo</code>’
+    宏的一個示例, 用
+    空格模式宏 把 空格
+    去掉:</p>
+<div class="Bd Pp Bd-indent">
+<pre>.Sm off
+.It Xo Sy I Ar operation
+.No \en Ar count No \en
+.Xc
+.Sm on
+</pre>
+</div>
+<p class="Pp">產生</p>
+<div class="Bd Pp Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><b class="Sy">I</b><var class="Ar">operation</var><span class="No">\n</span><var class="Ar">count</var><span class="No">\n</span></dt>
+  <dd></dd>
+</dl>
+</div>
+<p class="Pp">還有一個:</p>
+<div class="Bd Pp Bd-indent">
+<pre>.Sm off
+.It Cm S No / Ar old_pattern Xo
+.No / Ar new_pattern
+.No / Op Cm g
+.Xc
+.Sm on
+</pre>
+</div>
+<p class="Pp">產生</p>
+<div class="Bd Pp Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#S"><code class="Cm" id="S">S</code></a><span class="No">/</span><var class="Ar">old_pattern</var><span class="No">/</span><var class="Ar">new_pattern</var><span class="No">/</span>[<code class="Cm">g</code>]</dt>
+  <dd></dd>
+</dl>
+</div>
+<p class="Pp">另一個示例用
+    ‘<code class="Li">.Xo</code>’ 和
+    引用宏:
+    測試一個變量的值.</p>
+<div class="Bd Pp Bd-indent">
+<pre>.It Xo
+.Ic .ifndef
+.Oo \&amp;! Oc Ns Ar variable
+.Op Ar operator variable ...
+.Xc
+</pre>
+</div>
+<p class="Pp">產生</p>
+<div class="Bd Pp Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#.ifndef"><code class="Ic" id=".ifndef">.ifndef</code></a>
+    [!]<var class="Ar">variable</var> [<var class="Ar">operator variable
+    ...</var>]</dt>
+  <dd style="width: auto;"> </dd>
+</dl>
+</div>
+<p class="Pp">上面 所有的例子
+    都在 ‘<code class="Li">.It</code>’ (list-item)
+    宏 的 參數列表 中
+    使用了 ‘<code class="Li">.Xo</code>’
+    宏. 擴展宏 不經常
+    使用, 一般用來 擴展
+    list-item 宏 的 參數列表.
+    這也 不幸的 是 擴展宏
+    最苛刻的 地方.
+    前兩個例子裏 空格
+    被去掉; 第三個 例子中,
+    希望 能 輸出 部分
+    空格, 而不是 全部. 在
+    這種情況下 用 這些宏,
+    要 確保 ‘<code class="Li">.Xo</code>’
+    和 ‘<code class="Li">.Xc</code>’ 宏
+    擺放到 第三個例子 中
+    示範的位置. 如果
+    ‘<code class="Li">.Xo</code>’ 宏 沒有
+    單獨 出現在
+    ‘<code class="Li">.It</code>’ 的
+    參數表 中, 則 無法預測
+    空格 情況. 這種情況下,
+    ‘<code class="Li">.Ns</code>’ (no space macro)
+    一定 不能 作爲 一行的
+    第一個宏 或
+    最後一個宏. 當前
+    <span class="Ux">BSD</span> 發佈的 超過
+    900個 手冊頁
+    (事實上大約1500個) 中,
+    只有 十五個 用到了
+    ‘<code class="Li">.Xo</code>’ 宏.</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="頁結構宏宏域_PAGE_STRUCTURE_DOMAIN">頁結構宏宏域 PAGE STRUCTURE DOMAIN<a class="anchor" href="#%E9%A0%81%E7%B5%90%E6%A7%8B%E5%AE%8F%E5%AE%8F%E5%9F%9F_PAGE_STRUCTURE_DOMAIN">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="小節首部_Section_Headers">小節首部 Section Headers<a class="anchor" href="#%E5%B0%8F%E7%AF%80%E9%A6%96%E9%83%A8_Section_Headers">¶</a></h2>
+每個 手冊頁 裏
+  都用到了 下面 列出的
+  三個 ‘<code class="Li">.Sh</code>’
+  小節首部宏. 作者 寫
+  手冊頁 時 可以
+  酌情考慮 其他
+  建議使用的 小節首部.
+  ‘<code class="Li">.Sh</code>’ 宏 最多 帶
+  九個 參數. 它 可以 被
+  (其他宏) 分析, 但不能
+  被調用.
+<dl class="Bl-tag">
+  <dt>.Sh 名稱 NAME</dt>
+  <dd>‘<code class="Li">.Sh 名稱 NAME</code>’
+      宏是 必不可少的.
+      否則 無法設置 頁頭,
+      頁腳 和 缺省的
+      頁佈局, 樣子 會
+      很難看.
+      <a class="Sx" href="#__u540D___u7A31__NAME">名稱 NAME</a>
+      小節 至少 由 三項
+      組成. 第一個 是
+      ‘<code class="Li">.Nm</code>’ 名稱宏,
+      命名 手冊頁的 主題.
+      第二個 是 名稱描述宏
+      ‘<code class="Li">.Nd</code>’, 它 把
+      主題名稱 和 第三項,
+      描述, 分離開來. 描述
+      應該 儘可能的
+      精簡易懂, 少佔空間.</dd>
+  <dt>.Sh 總覽 SYNOPSIS</dt>
+  <dd><a class="Sx" href="#SYNOPSIS">SYNOPSIS</a>
+      總覽小節 描述 該
+      手冊頁對象 的
+      典型用途. 請求的宏
+      是 下面 的 任意一個,
+      ‘<code class="Li">.Nm</code>’,
+      ‘<code class="Li">.Cd</code>’,
+      ‘<code class="Li">.Fn</code>’,
+      (也可能是
+      ‘<code class="Li">.Fo</code>’,
+      ‘<code class="Li">.Fc</code>’,
+      ‘<code class="Li">.Fd</code>’,
+      ‘<code class="Li">.Ft</code>’ 宏).
+      函數名稱宏
+      ‘<code class="Li">.Fn</code>’ 用在
+      手冊頁 的
+      第二第三部分, 命令
+      和 基本名稱宏
+      ‘<code class="Li">.Nm</code>’ 用在
+      手冊頁 的 1, 5, 6, 7, 8 部分.
+      手冊 第四部分 需要
+      ‘<code class="Li">.Nm</code>’,
+      ‘<code class="Li">.Fd</code>’ 或
+      ‘<code class="Li">.Cd</code>’
+      配製設備用途宏.
+      其他一些 宏 可能
+      用來 產生 概要行,
+      象下面的:
+    <div class="Bd Pp Bd-indent"><code class="Nm">cat</code>
+      [<code class="Fl">-benstuv</code>] [<code class="Fl">-</code>]
+      <var class="Ar">file ...</var></div>
+    <p class="Pp">下面 用到的 宏</p>
+    <p class="Pp"></p>
+    <div class="Bd Bd-indent"><code class="Li">.Nm cat</code></div>
+    <div class="Bd Bd-indent"><code class="Li">.Op Fl benstuv</code></div>
+    <div class="Bd Bd-indent"><code class="Li">.Op Fl</code></div>
+    <div class="Bd Bd-indent"><code class="Li">.Ar</code></div>
+    <p class="Pp"><b class="Sy">注意</b>: 宏
+        ‘<code class="Li">.Op</code>’,
+        ‘<code class="Li">.Fl</code>’, 和
+        ‘<code class="Li">.Ar</code>’ 能夠
+        識別 管道符
+        ‘<code class="Li">|</code>’, 因此
+        命令行 如:</p>
+    <p class="Pp"></p>
+    <div class="Bd Bd-indent"><code class="Li">.Op Fl a | Fl b</code></div>
+    <p class="Pp">的 表現 會 出軌.
+        <a class="Xr">Troff</a> 一般把 | 當做
+        特殊符號. 參見
+        <a class="Sx" href="#__u9810___u5B9A___u7FA9___u4E32__PREDEFINED_STRINGS">預定義串
+        PREDEFINED STRINGS</a>, 在
+        其他情況下 | 的使用.</p>
+  </dd>
+  <dt>.Sh 描述 DESCRIPTION</dt>
+  <dd>大多數 情況下
+      <a class="Sx" href="#__u63CF___u8FF0__DESCRIPTION">描述
+      DESCRIPTION</a> 小節 的 第一段話
+      是 關於 這個 命令,
+      函數 或 文件 的 摘要,
+      後跟 字典式的 選項
+      以及 相應的解釋.
+      創建 這樣的 列表,
+      應該 使用
+      ‘<code class="Li">.Bl</code>’
+      列表開始,
+      ‘<code class="Li">.It</code>’
+      列表項和
+      ‘<code class="Li">.El</code>’
+      列表結束宏
+      (參見下面的
+      <a class="Sx" href="#__u5217___u8868___u548C___u6B04___u76EE__Lists_and_Columns">列表和欄目
+      Lists and Columns</a> ).</dd>
+</dl>
+<p class="Pp">下面的
+    ‘<code class="Li">.Sh</code>’ 小節首部
+    是 手冊頁 編排的
+    常見內容, 爲了 保證
+    連續性, 應 適當 使用.
+    它們 按照 應該 出現 的
+    順序 排列.</p>
+<dl class="Bl-tag">
+  <dt>.Sh 環境 ENVIRONMENT</dt>
+  <dd><a class="Sx" href="#__u74B0___u5883__ENVIRONMENT">環境
+      ENVIRONMENT</a> 小節 用來 揭示
+      相關的 環境變量 和
+      線索, 它們的 行爲,
+      表現, 用法.</dd>
+  <dt>.Sh 示例 EXAMPLES</dt>
+  <dd>有 很多 辦法 創建
+      示例, 詳見 下面的
+      <a class="Sx" href="#__u793A___u4F8B__EXAMPLES">示例
+      EXAMPLES</a> 小節.</dd>
+  <dt>.Sh 文件 FILES</dt>
+  <dd>由 手冊頁的 主題對象
+      創建 或 使用 的 文件,
+      應該 通過
+      ‘<code class="Li">.Pa</code>’ 宏在
+      <a class="Sx" href="#__u6587___u4EF6__FILES">文件 FILES</a>
+      小節 陳列 出來.</dd>
+  <dt>.Sh 另見 SEE ALSO</dt>
+  <dd>如果 提及 其他
+      手冊頁 或 參照
+      相應的 手冊, 應
+      把它們 放在
+      <a class="Sx" href="#__u53E6___u898B__SEE_ALSO">另見 SEE
+      ALSO</a> 小節. 參照主題 由
+      ‘<code class="Li">.Xr</code>’ 宏指定.
+      在 <a class="Sx" href="#__u53E6___u898B__SEE_ALSO">另見
+      SEE ALSO</a> 小節 的 參照主題
+      應該按 手冊節號
+      排序, 按 字母順序
+      陳列, 並用 逗號 隔開,
+      例如:
+    <p class="Pp"><a class="Xr"><a href="../../buster/manpages-zh/ls.1.zh_TW.html">ls(1)</a></a>, <a class="Xr"><a href="../../buster/procps/ps.1.en.html">ps(1)</a></a>,
+        <a class="Xr"><a href="../../buster/manpages-zh/group.5.zh_TW.html">group(5)</a></a>, <a class="Xr"><a href="../../buster/passwd/passwd.5.zh_TW.html">passwd(5)</a></a>.</p>
+    <p class="Pp">這時候 不太適合
+        用 <a class="Xr"><a href="../../buster/groff/refer.1.en.html">refer(1)</a></a> 風格 的
+        參考引用.</p>
+  </dd>
+  <dt>.Sh 遵循 CONFORMING TO</dt>
+  <dd>如果 那些 命令,
+      庫函數 或 文件 遵循
+      一定的 標準 實現, 如
+      <span class="St">IEEE Std 1003.2 (“POSIX.2”)</span> 或
+      <span class="St">ANSI X3.159-1989
+      (“ANSI C89”)</span>, 那就
+      不需要 這一小節.
+      如果 命令 不符合
+      任何標準, 應該 把
+      它的歷史 放在
+      <a class="Sx" href="#__u6B77___u53F2__HISTORY">歷史
+      HISTORY</a> 小節.</dd>
+  <dt>.Sh 歷史 HISTORY</dt>
+  <dd>任何 不屬於 已知標準
+      的 命令 應該 在
+      這一節 給出 它的
+      大致歷史.</dd>
+  <dt>.Sh 作者 AUTHORS</dt>
+  <dd>如果 有 必要, 把
+      致謝名單 也 列這兒.</dd>
+  <dt>.Sh 診斷 DIAGNOSTICS</dt>
+  <dd>應該 把 診斷命令
+      放在 這一節.</dd>
+  <dt>.Sh 錯誤 ERRORS</dt>
+  <dd>特定的 錯誤處理,
+      尤其是 庫函數
+      (手冊頁第二第三部分),
+      放這兒. ‘<code class="Li">.Er</code>’
+      宏 用來 指定 一個 errno.</dd>
+  <dt>.Sh BUGS</dt>
+  <dd>明顯的 問題 放這兒...</dd>
+</dl>
+<p class="Pp">可以 增加一些 用戶
+    制定的 ‘<code class="Li">.Sh</code>’
+    小節, 例如, 這樣 設
+    小節:</p>
+<div class="Bd Pp Bd-indent">
+<pre>.Sh PAGE STRUCTURE DOMAIN
+</pre>
+</div>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="段落和空行_Paragraphs_and_Line_Spacing.">段落和空行 Paragraphs and Line Spacing.<a class="anchor" href="#%E6%AE%B5%E8%90%BD%E5%92%8C%E7%A9%BA%E8%A1%8C_Paragraphs_and_Line_Spacing.">¶</a></h2>
+<dl class="Bl-tag">
+  <dt>.Pp</dt>
+  <dd>‘<code class="Li">.Pp</code>’ 把
+      段落命令 放在
+      所需的位置, 可以
+      產生 一個空行. 在
+      ‘<code class="Li">.Sh</code>’ 或
+      ‘<code class="Li">.Ss</code>’ 宏 後面
+      不需要 這個 宏,
+      ‘<code class="Li">.Bl</code>’ 宏 的
+      前面 也不需要. (
+      ‘<code class="Li">.Bl</code>’ 聲明瞭
+      垂直方向 的 距離,
+      除非 給出 -compact 標誌).</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="保持_Keeps">保持 Keeps<a class="anchor" href="#%E4%BF%9D%E6%8C%81_Keeps">¶</a></h2>
+目前 只實現了
+  對單詞的 保持 能力.
+  這個宏 有 ‘<code class="Li">.Bk</code>’
+  (開始保持 begin-keep) 和
+  ‘<code class="Li">.Ek</code>’ (結束保持
+  end-keep ) . ‘<code class="Li">.Bk</code>’ 宏 的
+  唯一 參數是 <code class="Fl">-words</code>,
+  用於 防止 在 選項語句
+  的 中間 斷行. 在 make
+  命令行參數的 例子裏
+  (參見
+  <a class="Sx" href="#__u540D___u7A31___u80CC___u5F8C__What&#39;s_in_a_name">名稱背後
+  What&#39;s in a name</a>), keep 宏防止 <a class="Xr">nroff</a>
+  把 標誌 和 參數 分成
+  兩行. (事實上 可以 用
+  選項宏 防止 此類 事情,
+  但 當我們 決定 在
+  <a class="Xr">troff</a> 中 作爲
+  基本選項, 強制
+  右邊界對齊 時, 它 在
+  稀疏行裏 展開的
+  很糟糕. 使用 保持宏 時
+  需要 多做點事, 增加
+  一個 <code class="Fl">-line</code> 選項 ) .
+</section>
+<section class="Ss">
+<h2 class="Ss" id="示例和顯示">示例和顯示<a class="anchor" href="#%E7%A4%BA%E4%BE%8B%E5%92%8C%E9%A1%AF%E7%A4%BA">¶</a></h2>
+有 五種類型 的 顯示,
+  一個
+  快速的單行縮進顯示
+  ‘<code class="Li">.D1</code>’,
+  快速的單行原文顯示
+  ‘<code class="Li">.Dl</code>’, 原文塊,
+  填充塊, 和由
+  ‘<code class="Li">.Bd</code>’ (begin-display)
+  顯示開始 和
+  ‘<code class="Li">.Ed</code>’ (end-display)
+  顯示結束 宏對 組成的
+  不規則塊.
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#.D1"><code class="Li" id=".D1">.D1</code></a></dt>
+  <dd>(D-one) 顯示 一行
+      縮進文字. 該宏
+      可以被 (其他宏) 分析,
+      但 不能 被調用.
+    <p class="Pp"></p>
+    <div class="Bd
+      Bd-indent"><code class="Li"><code class="Fl">-ldghfstru</code></code></div>
+    <p class="Pp">上面是這樣產生的:
+        <code class="Li">.Dl</code> <code class="Fl">-ldghfstru</code>.</p>
+  </dd>
+  <dt><a class="permalink" href="#.Dl"><code class="Li" id=".Dl">.Dl</code></a></dt>
+  <dd>(D-ell) 顯示 一行 縮進的
+      <i class="Em">原文 literal</i>.
+      ‘<code class="Li">.Dl</code>’ 示例宏
+      已經 遍佈 這篇 文檔.
+      它 允許 縮進 (顯示)
+      一行 文字. 其
+      缺省字體 設爲 定寬
+      (原文), 它 可以 被
+      其他宏 分析 和 識別.
+      然而 不能 被 其他宏
+      調用.
+    <p class="Pp"></p>
+    <div class="Bd Bd-indent"><code class="Li">% ls -ldg
+      /usr/local/bin</code></div>
+    <p class="Pp">上面是這樣產生的
+        <code class="Li">.Dl % ls -ldg /usr/local/bin</code>.</p>
+  </dd>
+  <dt><a class="permalink" href="#.Bd"><code class="Li" id=".Bd">.Bd</code></a></dt>
+  <dd>顯示開始.
+      ‘<code class="Li">.Bd</code>’ 的 顯示
+      必須由 ‘<code class="Li">.Ed</code>’
+      宏 結束. 顯示 可以
+      嵌套在 顯示 和
+      列表中. ‘<code class="Li">.Bd</code>’
+      有 這樣的 語法:
+    <p class="Pp"></p>
+    <div class="Bd Bd-indent"><code class="Li">.Bd display-type [-offset
+      offset_value] [-compact]</code></div>
+    <p class="Pp">顯示類型 必須是
+        下面四個 之一, 可以
+        指定 一個 縮進量.
+        ‘<code class="Li">.Bd</code>’.</p>
+    <p class="Pp"></p>
+    <dl class="Bl-tag Bl-compact">
+      <dt><a class="permalink" href="#ragged"><code class="Fl" id="ragged">-ragged</code></a></dt>
+      <dd>以 打字 形式 顯示
+          一塊 正文, 其
+          右(和左)邊界 是
+          不平整邊界.</dd>
+      <dt><a class="permalink" href="#filled"><code class="Fl" id="filled">-filled</code></a></dt>
+      <dd>顯示 填充 (格式化) 塊.
+          塊中文字 被 格式化
+          (邊界 已經 填充過,
+          不再是 左邊 不對齊
+        ).</dd>
+      <dt><a class="permalink" href="#literal"><code class="Fl" id="literal">-literal</code></a></dt>
+      <dd>顯示 原文塊, 適用於
+          源程序, 或 那種
+          簡單的, 用 table 和 空格
+          調整的 文字.</dd>
+      <dt><a class="permalink" href="#file"><code class="Fl" id="file">-file</code></a>
+        <var class="Ar">file_name</var></dt>
+      <dd>閱讀 並 顯示 跟在
+          <code class="Fl">-file</code> 標誌
+          後面的 文件.
+          原文模式 被打開, table
+          設爲 8個字符 寬, 然而
+          文件中 出現的 任何
+          <a class="Xr">troff/</a><code class="Nm">-mdoc</code> 命令
+          都將 被處理.</dd>
+      <dt><a class="permalink" href="#offset"><code class="Fl" id="offset">-offset</code></a>
+        <var class="Ar">string</var></dt>
+      <dd>如果 <code class="Fl">-offset</code>
+          指定爲 下面 字符串
+          之一, 這些 字符串
+          解釋爲 對 以後的
+          正文塊的 縮進層次.
+        <p class="Pp"></p>
+        <dl class="Bl-tag Bl-compact">
+          <dt><var class="Ar">left</var></dt>
+          <dd>正文塊 按 當前
+              左邊界 對齊, 這是
+              ‘<code class="Li">.Bd</code>’ 的
+              缺省模式.</dd>
+          <dt><var class="Ar">center</var></dt>
+          <dd>應該 是把 正文塊
+              布在 中間.
+              不幸的是, 目前
+              只能在 大致的
+              中間位置 靠左
+              對齊.</dd>
+          <dt><var class="Ar">indent</var></dt>
+          <dd>按 缺省 縮進值 或 table
+              值 縮進. 這個 缺省
+              縮進值 同時 用於
+              ‘<code class="Li">.D1</code>’ 顯示,
+              因此 你 應該 使
+              這兩種 顯示 一致.
+              縮進值 一般 設爲 6n,
+              大約 2/3 英寸
+              (六個字符寬度).</dd>
+          <dt><var class="Ar">indent-two</var></dt>
+          <dd>縮進 缺省值的
+              兩倍.</dd>
+          <dt><var class="Ar">right</var></dt>
+          <dd>在 距離 右邊界
+              大約 兩英寸處 把
+              正文塊 靠 <i class="Em">左</i>
+              對齊. 這個宏 要
+              試驗 效果, 有可能
+              <a class="Xr">troff</a> 怎麼 都
+              弄不對.</dd>
+        </dl>
+      </dd>
+    </dl>
+  </dd>
+  <dt>.Ed</dt>
+  <dd>End-display. 顯示結束.</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="字體模式_Font_Modes">字體模式 Font Modes<a class="anchor" href="#%E5%AD%97%E9%AB%94%E6%A8%A1%E5%BC%8F_Font_Modes">¶</a></h2>
+現有 五個宏 用於 改變
+  手冊頁的 文字外觀:
+<dl class="Bl-tag">
+  <dt>.Em</dt>
+  <dd>文字 可以 用
+      ‘<code class="Li">.Em</code>’ 宏
+      加重或強調. 常用的
+      強調字體 是 斜體 (italic).
+    <p class="Pp"></p>
+    <div class="Bd Bd-indent"><code class="Li">Usage: .Em argument
+      ...</code></div>
+    <div class="Bd-indent">
+    <dl class="Bl-tag Bl-compact">
+      <dt><a class="permalink" href="#.Em_does_not"><code class="Li" id=".Em_does_not">.Em
+        does not</code></a></dt>
+      <dd><i class="Em">does not</i></dd>
+      <dt><a class="permalink" href="#.Em_exceed_1024_."><code class="Li" id=".Em_exceed_1024_.">.Em
+        exceed 1024 .</code></a></dt>
+      <dd><i class="Em">exceed 1024</i>.</dd>
+      <dt><a class="permalink" href="#.Em_vide_infra_)_)_,"><code class="Li" id=".Em_vide_infra_)_)_,">.Em
+        vide infra ) ) ,</code></a></dt>
+      <dd><i class="Em">vide infra</i>)),</dd>
+    </dl>
+    </div>
+    <p class="Pp">‘<code class="Li">.Em</code>’
+        宏可以被 (其他宏)
+        分析和調用.
+        不帶參數 調用
+        ‘<code class="Li">.Em</code>’ 宏 是
+        一個錯誤.</p>
+  </dd>
+  <dt>.Li</dt>
+  <dd>‘<code class="Li">.Li</code>’ 原文宏
+      用來 顯示 字符, 變量,
+      常數, 任何 希望 照
+      輸入文字 原樣顯示 的
+      內容.
+    <p class="Pp"></p>
+    <div class="Bd Bd-indent"><code class="Li">Usage: .Li argument
+      ...</code></div>
+    <div class="Bd-indent">
+    <dl class="Bl-tag Bl-compact">
+      <dt><a class="permalink" href="#.Li__een"><code class="Li" id=".Li__een">.Li
+        \en</code></a></dt>
+      <dd><a class="permalink" href="#_en"><code class="Li" id="_en">\n</code></a></dd>
+      <dt><a class="permalink" href="#.Li_M1_M2_M3__;"><code class="Li" id=".Li_M1_M2_M3__;">.Li
+        M1 M2 M3 ;</code></a></dt>
+      <dd><a class="permalink" href="#M1_M2_M3"><code class="Li" id="M1_M2_M3">M1
+          M2 M3</code></a>;</dd>
+      <dt><a class="permalink" href="#.Li_cntrl-D__)__,"><code class="Li" id=".Li_cntrl-D__)__,">.Li
+        cntrl-D ) ,</code></a></dt>
+      <dd><a class="permalink" href="#cntrl-D"><code class="Li" id="cntrl-D">cntrl-D</code></a>),</dd>
+      <dt><a class="permalink" href="#.Li_1024__..."><code class="Li" id=".Li_1024__...">.Li
+        1024 ...</code></a></dt>
+      <dd><a class="permalink" href="#1024_..."><code class="Li" id="1024_...">1024
+          ...</code></a></dd>
+    </dl>
+    </div>
+    <p class="Pp">‘<code class="Li">.Li</code>’
+        宏可以被 (其他宏)
+        分析和調用.</p>
+  </dd>
+  <dt>.Sy</dt>
+  <dd>一般說來 symbolic 強調宏
+      無論在 象徵主義
+      角度, 還是
+      傳統的英語 裏, 都是
+      用 黑體 (bold) 顯示.
+    <p class="Pp"></p>
+    <div class="Bd Bd-indent"><code class="Li">Usage: .Sy symbol
+      ...</code></div>
+    <div class="Bd-indent">
+    <dl class="Bl-tag Bl-compact">
+      <dt><a class="permalink" href="#.Sy_Important_Notice"><code class="Li" id=".Sy_Important_Notice">.Sy
+        Important Notice</code></a></dt>
+      <dd><b class="Sy">Important Notice</b></dd>
+    </dl>
+    </div>
+    <p class="Pp">‘<code class="Li">.Sy</code>’
+        宏可以被 (其他宏)
+        分析和調用.
+        ‘<code class="Li">.Sy</code>’ 的參數
+        可以 用 引號括起.</p>
+  </dd>
+  <dt><a class="permalink" href="#.Bf"><code class="Li" id=".Bf">.Bf</code></a></dt>
+  <dd>字體模式開始.
+      ‘<code class="Li">.Bf</code>’
+      字體模式 必須用
+      ‘<code class="Li">.Ef</code>’ 宏結束.
+      字體模式宏 可以
+      嵌套. ‘<code class="Li">.Bf</code>’ 宏
+      用 下面的 語法:
+    <p class="Pp"></p>
+    <div class="Bd Bd-indent"><code class="Li">.Bf font-mode</code></div>
+    <p class="Pp">字體模式 必須 是
+        下列 三種 之一:
+        ‘<code class="Li">.Bf</code>’.</p>
+    <p class="Pp"></p>
+    <dl class="Bl-tag Bl-compact">
+      <dt><b class="Sy">Em</b> |
+        <a class="permalink" href="#emphasis"><code class="Fl" id="emphasis">-emphasis</code></a></dt>
+      <dd>就象 是 把
+          ‘<code class="Li">.Em</code>’ 宏 用在
+          整個 正文塊 一樣.</dd>
+      <dt><b class="Sy">Li</b> |
+        <a class="permalink" href="#literal_2"><code class="Fl" id="literal_2">-literal</code></a></dt>
+      <dd>就象 是 把
+          ‘<code class="Li">.Li</code>’ 宏 用在
+          整個 正文塊 一樣.</dd>
+      <dt><b class="Sy">Sy</b> |
+        <a class="permalink" href="#symbolic"><code class="Fl" id="symbolic">-symbolic</code></a></dt>
+      <dd>就象 是 把
+          ‘<code class="Li">.Sy</code>’ 宏 用在
+          整個 正文塊 一樣.</dd>
+    </dl>
+  </dd>
+  <dt>.Ef</dt>
+  <dd>字體模式結束.</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="標記欄和列表_Tagged_Lists_and_Columns">標記欄和列表 Tagged Lists and Columns<a class="anchor" href="#%E6%A8%99%E8%A8%98%E6%AC%84%E5%92%8C%E5%88%97%E8%A1%A8_Tagged_Lists_and_Columns">¶</a></h2>
+有 多種 用 ‘<code class="Li">.Bl</code>’
+  列表開始宏 初始化的
+  列表. 表項 用
+  ‘<code class="Li">.It</code>’ 項目宏
+  指定, 每一個 列表 必須
+  用 ‘<code class="Li">.El</code>’ 宏結束.
+  列表 可以 嵌套在
+  列表和顯示 中. 欄 可以
+  用在 列表 中, 但是 列表
+  不能 列在 欄裏.
+<p class="Pp">另外 還可以 指定
+    列表屬性, 像標記寬度,
+    列表偏移, 以及
+    緊湊模式 (允許 或
+    不允許 表項間的 空行)
+    在本文中 大多 使用了
+    標記風格 (tag style) 的 列表
+    (<code class="Fl">-tag</code>). 作爲
+    步距變化, 表示
+    列表類型的 列表類型
+    是個 突出來 (overhanging) 的
+    列表 (<code class="Fl">-ohang</code>). 這種
+    列表類型 在 TeX 用戶中
+    很流行, 但 看過 很多
+    頁 的 標記列表 後
+    可能會 覺得 有點 滑稽.
+    ‘<code class="Li">.Bl</code>’ 宏 可以
+    接受 下面的
+  列表類型:</p>
+<p class="Pp"></p>
+<dl class="Bl-ohang Bl-compact">
+  <dt><a class="permalink" href="#bullet"><code class="Fl" id="bullet">-bullet</code></a></dt>
+  <dd></dd>
+  <dt><a class="permalink" href="#item"><code class="Fl" id="item">-item</code></a></dt>
+  <dd></dd>
+  <dt><a class="permalink" href="#enum"><code class="Fl" id="enum">-enum</code></a></dt>
+  <dd>這三個 是 最簡單的
+      列表類型. 一旦
+      使用了 ‘<code class="Li">.Bl</code>’
+      宏, 只能用
+      ‘<code class="Li">.It</code>’ 宏 組織
+      表項 . 例如, 可以 這樣
+      寫 一個 簡單的
+      數字列表&#34;
+    <div class="Bd Pp Bd-indent">
+    <pre>.Bl -enum -compact
+.It
+Item one goes here.
+.It
+And item two here.
+.It
+Lastly item three goes here.
+.El
+    </pre>
+    </div>
+    <p class="Pp">結果是:</p>
+    <p class="Pp"></p>
+    <ol class="Bl-enum Bd-indent Bl-compact">
+      <li>Item one goes here.</li>
+      <li>And item two here.</li>
+      <li>Lastly item three goes here.</li>
+    </ol>
+    <p class="Pp">簡單的布告欄:</p>
+    <div class="Bd Pp Bd-indent">
+    <pre>.Bl -bullet -compact
+.It
+Bullet one goes here.
+.It
+Bullet two here.
+.El
+    </pre>
+    </div>
+    <p class="Pp">產生:</p>
+    <ul class="Bl-bullet Bd-indent Bl-compact">
+      <li>Bullet one goes here.</li>
+      <li>Bullet two here.</li>
+    </ul>
+    <p class="Pp"></p>
+  </dd>
+  <dt><a class="permalink" href="#tag"><code class="Fl" id="tag">-tag</code></a></dt>
+  <dd></dd>
+  <dt><a class="permalink" href="#diag"><code class="Fl" id="diag">-diag</code></a></dt>
+  <dd></dd>
+  <dt><a class="permalink" href="#hang"><code class="Fl" id="hang">-hang</code></a></dt>
+  <dd></dd>
+  <dt><a class="permalink" href="#ohang"><code class="Fl" id="ohang">-ohang</code></a></dt>
+  <dd></dd>
+  <dt><a class="permalink" href="#inset"><code class="Fl" id="inset">-inset</code></a></dt>
+  <dd>這些 列表類型 收集
+      ‘<code class="Li">.It</code>’ 宏
+      指定的 參數, 並且
+      創建 一個 標籤, 它
+      可能會 <i class="Em">插入 inset</i>
+      後面的 文字中,
+      <i class="Em">懸掛 (hanged)</i> 顯示在
+      後面的 文字前,
+      <i class="Em">突前 (overhanged)</i> 顯示在
+      更高 位置, 並且 不能
+      縮進 或 <i class="Em">標記 tagged</i>.
+      這個 列表 由
+      ‘<code class="Li"><code class="Fl">-ohang</code></code>’
+      列表類型 構建.
+      ‘<code class="Li">.It</code>’ 宏 只能
+      被 插入 (inset), 懸掛 (hang), 和
+      標記列表類型宏 分析,
+      且 不能 被調用.</dd>
+</dl>
+這是 一個 插入標籤 的
+  例子:
+<dl class="Bl-inset Bd-indent">
+  <dt><i class="Em">Tag</i></dt>
+  <dd>The tagged list (also called a tagged paragraph) is the most common type
+      of list used in the Berkeley manuals.</dd>
+  <dt><i class="Em">Diag</i></dt>
+  <dd>Diag lists create section four diagnostic lists and are similar to inset
+      lists except callable macros are ignored.</dd>
+  <dt><i class="Em">Hang</i></dt>
+  <dd>Hanged labels are a matter of taste.</dd>
+  <dt><i class="Em">Ohang</i></dt>
+  <dd>Overhanging labels are nice when space is constrained.</dd>
+  <dt><i class="Em">Inset</i></dt>
+  <dd>Inset labels are useful for controlling blocks of paragraphs and are
+      valuable for converting <code class="Nm">-mdoc</code> manuals to other
+      formats.</dd>
+</dl>
+<p class="Pp">下面是 產生
+    這個例子 的 源文本:</p>
+<div class="Bd Pp Bd-indent">
+<pre>.Bl -inset -offset indent
+.It Em Tag
+The tagged list (also called a tagged paragraph) is the
+most common type of list used in the Berkeley manuals.
+.It Em Diag
+Diag lists create section four diagnostic lists
+and are similar to inset lists except callable
+macros are ignored.
+.It Em Hang
+Hanged labels are a matter of taste.
+.It Em Ohang
+Overhanging labels are nice when space is constrained.
+.It Em Inset
+Inset labels are useful for controlling blocks of
+paragraphs and are valuable for converting
+.Nm -mdoc
+manuals to other formats.
+.El
+</pre>
+</div>
+<p class="Pp">這是 含有 兩個表項
+    的 懸掛列表:</p>
+<dl class="Bl-hang Bd-indent">
+  <dt><i class="Em">Hanged</i></dt>
+  <dd>labels appear similar to tagged lists when the label is smaller than the
+      label width.</dd>
+  <dt><i class="Em">Longer hanged list labels</i></dt>
+  <dd>blend in to the paragraph unlike tagged paragraph labels.</dd>
+</dl>
+<p class="Pp">它們的 源文本爲:</p>
+<div class="Bd Pp Bd-indent">
+<pre>.Bl -hang -offset indent
+.It Em Hanged
+labels appear similar to tagged lists when the
+label is smaller than the label width.
+.It Em Longer hanged list labels
+blend in to the paragraph unlike
+tagged paragraph labels.
+.El
+</pre>
+</div>
+<p class="Pp">帶有 可選 寬度項的
+    標記列表 可以 控制
+    標記的 寬度.</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<dl class="Bl-tag Bl-compact">
+  <dt>SL</dt>
+  <dd>sleep time of the process (seconds blocked)</dd>
+  <dt>PAGEIN</dt>
+  <dd>number of disk I/O&#39;s resulting from references by the process to pages not
+      loaded in core.</dd>
+  <dt>UID</dt>
+  <dd>numerical user-id of process owner</dd>
+  <dt>PPID</dt>
+  <dd>numerical id of parent of process process priority (non-positive when in
+      non-interruptible wait)</dd>
+</dl>
+</div>
+<p class="Pp">源文本是:</p>
+<div class="Bd Pp Bd-indent">
+<pre>.Bl -tag -width &#34;PAGEIN&#34; -compact -offset indent
+.It SL
+sleep time of the process (seconds blocked)
+.It PAGEIN
+number of disk
+.Tn I/O Ns &#39;s
+resulting from references
+by the process to pages not loaded in core.
+.It UID
+numerical user-id of process owner
+.It PPID
+numerical id of parent of process process priority
+(non-positive when in non-interruptible wait)
+.El
+</pre>
+</div>
+<p class="Pp">可接受的
+  寬度說明:</p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#width"><code class="Fl" id="width">-width</code></a>
+    <var class="Ar">Fl</var></dt>
+  <dd>把 寬度 設置爲 標誌 (flag)
+      的 缺省 寬度. 所有
+      可調用的 宏 都有
+      一個 缺省 寬度值.
+      目前 ‘<code class="Li">.Fl</code>’ 的
+      值 設爲 十個
+      字符寬度, 大約 5/6
+    英寸.</dd>
+  <dt><a class="permalink" href="#width_2"><code class="Fl" id="width_2">-width</code></a>
+    <var class="Ar">24n</var></dt>
+  <dd>設置 寬度 爲 24 個
+      字符寬度, 大約
+      兩英寸. 要使 比例
+      調整正常, 字母
+      ‘<code class="Li">n</code>’
+    必不可少</dd>
+  <dt><a class="permalink" href="#width_3"><code class="Fl" id="width_3">-width</code></a>
+    <var class="Ar">ENAMETOOLONG</var></dt>
+  <dd>設置 寬度爲 所給串的
+      長度.</dd>
+  <dt><a class="permalink" href="#width_4"><code class="Fl" id="width_4">-width</code></a>
+    <var class="Ar">&#34;int mkfifo&#34;</var></dt>
+  <dd>同樣, 設置 寬度爲
+      所給串的 長度.</dd>
+</dl>
+</div>
+<p class="Pp">如果 沒有 爲
+    標記列表類型 指定
+    寬度, 第一次 調用
+    ‘<code class="Li">.It</code>’ 的 時候,
+    格式化軟件 試圖 決定
+    適當的寬度. 如果
+    ‘<code class="Li">.It</code>’ 的
+    第一個 參數 是
+    可調用宏, 就 使用
+    這個宏的 缺省寬度,
+    就像 把 宏名 當做寬度.
+    可是 如果 列表中 的
+    其他表項 得到 另一個
+    可調用宏, 則 認爲 它是
+    新的, 嵌套的 列表.</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="預定義串_PREDEFINED_STRINGS">預定義串 PREDEFINED STRINGS<a class="anchor" href="#%E9%A0%90%E5%AE%9A%E7%BE%A9%E4%B8%B2_PREDEFINED_STRINGS">¶</a></h1>
+下面的串 是 預定義的,
+  可以 用在 troff 的
+  串翻譯序列
+  ‘<code class="Li">\*(xx</code>’ 中,
+  這裏的 <i class="Em">xx</i> 就是
+  定義的 串名; 以及
+  串翻譯序列
+  ‘<code class="Li">\*x</code>’, 這裏的
+  <i class="Em">x</i> 是串名. 翻譯序列
+  可以 用在 文本 的
+  任何地方.
+<table class="Bl-column Bd-indent">
+  <tbody><tr>
+    <td><b class="Sy">String</b></td>
+    <td>Nroff</td>
+    <td>Troff</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#_="><code class="Li" id="_=">&lt;=</code></a></td>
+    <td>&lt;=</td>
+    <td>≤</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#_=_2"><code class="Li" id="_=_2">&gt;=</code></a></td>
+    <td>&gt;=</td>
+    <td>≥</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#Rq"><code class="Li" id="Rq">Rq</code></a></td>
+    <td>&#39;&#39;</td>
+    <td>”</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#Lq"><code class="Li" id="Lq">Lq</code></a></td>
+    <td>``</td>
+    <td>“</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#ua"><code class="Li" id="ua">ua</code></a></td>
+    <td>^</td>
+    <td>↑</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#aa"><code class="Li" id="aa">aa</code></a></td>
+    <td>&#39;</td>
+    <td>´</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#ga"><code class="Li" id="ga">ga</code></a></td>
+    <td>`</td>
+    <td>`</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#q"><code class="Li" id="q">q</code></a></td>
+    <td>&#34;</td>
+    <td>&#34;</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#Pi"><code class="Li" id="Pi">Pi</code></a></td>
+    <td>pi</td>
+    <td>pi</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#Ne"><code class="Li" id="Ne">Ne</code></a></td>
+    <td>!=</td>
+    <td>≠</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#Le"><code class="Li" id="Le">Le</code></a></td>
+    <td>&lt;=</td>
+    <td>≤</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#Ge"><code class="Li" id="Ge">Ge</code></a></td>
+    <td>&gt;=</td>
+    <td>≥</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#Lt"><code class="Li" id="Lt">Lt</code></a></td>
+    <td>&lt;</td>
+    <td>&gt;</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#Gt"><code class="Li" id="Gt">Gt</code></a></td>
+    <td>&gt;</td>
+    <td>&lt;</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#Pm"><code class="Li" id="Pm">Pm</code></a></td>
+    <td>+-</td>
+    <td>±</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#If"><code class="Li" id="If">If</code></a></td>
+    <td>infinity</td>
+    <td>infinity</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#Na"><code class="Li" id="Na">Na</code></a></td>
+    <td><i>NaN</i></td>
+    <td>NaN</td>
+  </tr>
+  <tr>
+    <td><a class="permalink" href="#Ba"><code class="Li" id="Ba">Ba</code></a></td>
+    <td>|</td>
+    <td>|</td>
+  </tr>
+</tbody></table>
+<p class="Pp"><b class="Sy">注意</b>: 那個
+    名爲 ‘<code class="Li">q</code>’ 的 串
+    應該 寫成
+    ‘<code class="Li">\*q</code>’, 因爲 它
+    只有 一個字符.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="診斷_DIAGNOSTICS">診斷 DIAGNOSTICS<a class="anchor" href="#%E8%A8%BA%E6%96%B7_DIAGNOSTICS">¶</a></h1>
+<code class="Nm">-mdoc</code> 的 除錯系統
+  比較 有限, 但是 可以
+  幫助你 檢測出 微妙的
+  錯誤, 例如 參數名 和
+  內部寄存器 或 宏名
+  衝突. (是什麼?) 寄存器
+  是 <a class="Xr">troff</a> 的
+  算術存儲類, 用
+  一到二個字符 命名.
+  <code class="Nm">-mdoc</code> 對 <a class="Xr">troff</a> 和
+  <a class="Xr">ditroff</a> 而言, 所有
+  <code class="Nm">-mdoc</code> 的
+  內部寄存器 由
+  兩個字符 組成, 格式是
+  &lt;大寫字母&gt;
+  &lt;小寫字母&gt; 如
+  ‘<code class="Li">Ar</code>’,
+  &lt;小寫字母&gt;
+  &lt;大寫字母&gt; 如
+  ‘<code class="Li">aR</code>’ 或 &lt;字母&gt;
+  &lt;數字&gt; 如 ‘<code class="Li">C1</code>’.
+  作爲 亂上加亂, <a class="Xr">troff</a>
+  有 它 自己的
+  內部寄存器, 由 兩個
+  小寫字母 組成, 或者 是
+  一個點 加上 一個字母,
+  或者 是 轉義字符 (meta-character)
+  和 字符. 已經 介紹過的
+  示例中 展示過 怎樣用
+  轉義序列
+  ‘<code class="Li">\&amp;</code>’ 防止
+  解釋宏. 這辦法 同樣
+  適用於 內部寄存器名.
+<p class="Pp">如果 未經轉義的
+    寄存器名 出現在
+    宏請求的 參數列表 中,
+    其 後果 不可預測.
+    一般說來, 如果
+    大段的文字 沒有
+    出現在 該出現的 地方,
+    或者 短句, 如標籤,
+    消失了, 多半是
+    這個地方 誤解了
+    參數列表中的
+    參數類型. 既然
+    你的母親 都 沒打算
+    讓你 記住 那些
+    亂七八糟的 東西, 那就
+    用 一種辦法 來 找出
+    參數 是否 有效:
+    ‘<code class="Li">.Db</code>’ (debug) 宏
+    可以 顯示出 對
+    大多數宏 的
+    參數列表的 解釋. 諸如
+    ‘<code class="Li">.Pp</code>’ 之類 的
+    宏 不包含 調試信息,
+    但是 所有 可調用宏
+    包含, 我們 強烈建議
+    一旦 有 疑點, 打開
+    ‘<code class="Li">.Db</code>’ 宏.</p>
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">Usage: .Db [on | off]</code></div>
+<p class="Pp">在 這個 示例中,
+    我們把 介於 debug 宏 之間
+    的 文本 故意 弄出點
+    錯誤 (標誌參數
+    ‘<code class="Li">aC</code>’ 應該 寫成
+    ‘<code class="Li">\&amp;aC</code>’ ):</p>
+<div class="Bd Pp Bd-indent">
+<pre>.Db on
+.Op Fl aC Ar file )
+.Db off
+</pre>
+</div>
+<p class="Pp">結果輸出爲:</p>
+<div class="Bd Pp Bd-indent">
+<pre>DEBUGGING ON
+DEBUG(argv) MACRO: `.Op&#39;  Line #: 2
+	Argc: 1  Argv: `Fl&#39;  Length: 2
+	Space: `&#39;  Class: Executable
+	Argc: 2  Argv: `aC&#39;  Length: 2
+	Space: `&#39;  Class: Executable
+	Argc: 3  Argv: `Ar&#39;  Length: 2
+	Space: `&#39;  Class: Executable
+	Argc: 4  Argv: `file&#39;  Length: 4
+	Space: ` &#39;  Class: String
+	Argc: 5  Argv: `)&#39;  Length: 1
+	Space: ` &#39;  Class: Closing Punctuation or suffix
+	MACRO REQUEST: .Op Fl aC Ar file )
+DEBUGGING OFF
+</pre>
+</div>
+<p class="Pp">調試信息的 第一行
+    是 調用的 宏名, 這裏是
+    ‘<code class="Li">.Op</code>’ 和 它
+    所在的 行號. 如果
+    涉及了 一個 或 多個
+    文件 (特別是 其他文件
+    包含進來),
+    行號有可能失靈.
+    但如果 只有 一個文件,
+    它 應該是 準的. 第二行
+    給出了 參數計數, 參數
+    (‘<code class="Li">Fl</code>’) 和
+    它的長度. 如果
+    參數的長度 是
+    兩個字符, 將會 測試
+    看它 能否 執行
+    (不幸的是,含有 非零值
+    的 寄存器 看上去
+    都能執行). 第三行 給出
+    分配給類的 空間, 以及
+    類的類型. 這裏的
+    問題是, 參數 aC 不應該
+    可執行. 類的
+    四種類型是 字符串,
+    可執行類, 結束標點,
+    和開始標點. 最後一行
+    顯示了 讀入的 完整
+    參數行. 下個例子裏,
+    惹禍的 ‘<code class="Li">aC</code>’
+    被轉義了:</p>
+<div class="Bd Pp Bd-indent">
+<pre>.Db on
+.Em An escaped \&amp;aC
+.Db off
+</pre>
+</div>
+<div class="Bd Pp Bd-indent">
+<pre>DEBUGGING ON
+DEBUG(fargv) MACRO: `.Em&#39;  Line #: 2
+	Argc: 1  Argv: `An&#39;  Length: 2
+	Space: ` &#39;  Class: String
+	Argc: 2  Argv: `escaped&#39;  Length: 7
+	Space: ` &#39;  Class: String
+	Argc: 3  Argv: `aC&#39;  Length: 2
+	Space: ` &#39;  Class: String
+	MACRO REQUEST: .Em An escaped &amp;aC
+DEBUGGING OFF
+</pre>
+</div>
+<p class="Pp">參數 ‘<code class="Li">\&amp;aC</code>’
+    表現出 同樣的 長度2,
+    這是 因爲
+    ‘<code class="Li">\&amp;</code>’ 序列的
+    長度 爲零, 但是 不存在
+    叫做 ‘<code class="Li">\&amp;aC</code>’ 的
+    寄存器, 因此 它的類型
+    是 字符串.</p>
+<p class="Pp">其他 診斷內容 是
+    使用報告等, 能夠
+    自我解釋的.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="GROFF,_TROFF_AND_NROFF">GROFF, TROFF AND NROFF<a class="anchor" href="#GROFF,_TROFF_AND_NROFF">¶</a></h1>
+The <code class="Nm">-mdoc</code> 宏包 不需要
+  和 <a class="Xr">groff</a> 的 兼容模式.
+<p class="Pp">爲了 便於
+    在線閱讀, 這個宏包
+    阻止了 分頁, 頁頭,
+    頁腳 之類 常常在
+    <a class="Xr">nroff</a> 中 出現的 中斷.
+    此時 即使在 手冊頁 尾,
+    <a class="Xr">groff</a> (和參數
+    <code class="Fl">-T</code><var class="Ar">ascii</var> ) 也
+    不會 提示 什麼. 對
+    分頁的 阻止 使得
+    <a class="Xr">nroff</a>&#39;d 文件 不適合
+    硬拷貝 (hardcopy). 有一個
+    名爲 ‘<code class="Li">cR</code>’ 的
+    寄存器 可以 通過 在
+    文件 <span class="Pa">/usr/src/share/tmac/doc-nroff</span>
+    (依賴於宿主系統)
+    中置零, 恢復
+  傳統風格.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="相關文件_FILES">相關文件 FILES<a class="anchor" href="#%E7%9B%B8%E9%97%9C%E6%96%87%E4%BB%B6_FILES">¶</a></h1>
+<dl class="Bl-tag Bl-compact">
+  <dt><span class="Pa">/usr/share/tmac/tmac.doc</span></dt>
+  <dd>手冊宏包</dd>
+  <dt><span class="Pa">/usr/share/misc/mdoc.template</span></dt>
+  <dd>編寫 手冊 的 模板</dd>
+  <dt><span class="Pa">/usr/share/examples/mdoc/*</span></dt>
+  <dd>一些 手冊頁 的 例子</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="另見_SEE_ALSO">另見 SEE ALSO<a class="anchor" href="#%E5%8F%A6%E8%A6%8B_SEE_ALSO">¶</a></h1>
+<a class="Xr"><a href="../../buster/man-db/man.1.zh_CN.html">man(1)</a></a>, <a class="Xr"><a href="../../buster/manpages-zh/troff.1.zh_TW.html">troff(1)</a></a>, <a class="Xr"><a href="../../buster/manpages/mdoc.7.en.html">mdoc(7)</a></a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+仍然 沒有 解決 在
+  標誌參數中的 連字符,
+  在 <a class="Sx" href="#__u63CF___u8FF0__DESCRIPTION">描述
+  DESCRIPTION</a> 小節 偶爾 會
+  出點麻煩 (在 連字符處
+  斷行).
+<p class="Pp">文檔中 沒有 聲明
+    預定義串.</p>
+<p class="Pp">還沒有 把 3f 小節
+    加進 頭例程 (header routine) 中.</p>
+<p class="Pp">‘<code class="Li">.Nm</code>’ 字體
+    不應當在 <a class="Sx" href="#NAME">NAME</a>
+    小節 中 改變.</p>
+<p class="Pp">應該 檢查
+    ‘<code class="Li">.Fn</code>’ 防止 行
+    太短 的 時候 斷行.
+    偶然 它會 斷開 反括弧,
+    而 有時候 如果 某行
+    已滿時, 看上去 會
+    很可笑.</p>
+<p class="Pp">當 使用 nroff 格式化
+    文檔 時, 防止
+    頁頭和頁腳 (不是
+    初始的 頭和腳) 斷開 的
+    方法 有可能 偶爾 在
+    頁的底部 產生 一個
+    不可見的 部分填滿的
+    行 (空行).</p>
+<p class="Pp">列表和顯示宏不做任何保存,
+    顯然它應該做的.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b class="Sy">徐明 &lt;xuming@users.sourceforge.net&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b class="Sy">2003/05/13</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B">¶</a></h1>
+<b class="Sy"><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">December 30, 1993</td>
+    <td class="foot-os">Linux 4.19.0-6-amd64</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+mdoc.samples.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:33Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"mdoc.samples(7)\"}}]}"
+</script>

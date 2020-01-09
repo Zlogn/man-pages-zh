@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>daemon(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/daemon.7.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/systemd/daemon.7.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/daemon.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/daemon.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; daemon(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/daemon.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/daemon.7.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%90%AF%E5%8A%A8" title="启动">启动</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%8E_SYSTEMD_%E6%95%B4%E5%90%88" title="与 SYSTEMD 整合">与 SYSTEMD 整合</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%A7%BB%E6%A4%8D%E5%B7%B2%E6%9C%89%E7%9A%84%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B" title="移植已有的守护进程">移植已有的守护进程</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%94%BE%E7%BD%AE%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%95%B0%E6%8D%AE" title="放置守护进程的数据">放置守护进程的数据</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E8%A7%81" title="参见">参见</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES" title="NOTES">NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/daemon.7.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/daemon.7.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/daemon.7.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/daemon.7.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/systemd/daemon.7.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/daemon.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/daemon.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/daemon/daemon.1.en.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-dev/daemon.3.en.html">3 (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/daemon.7.zh_CN.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">DAEMON(7)</td>
+    <td class="head-vol">daemon</td>
+    <td class="head-rtitle">DAEMON(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+daemon -
+  编写与打包系统守护进程
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+&#34;守护进程&#34;的意思是在后台运行的服务进程，
+  常用于监督系统的运行或者提供某种功能。
+  在传统的 SysV Unix 系统上，
+  多个守护进程必须严格按照特定的顺序依次启动。
+  在&#34;新型&#34;的 <a href="../../buster/manpages-zh/systemd.1.zh_CN.html">systemd(1)</a>
+  系统上，
+  守护进程的启动顺序非常简单且非常强大。
+  本手册同时解说了上述两种不同的启动方案，
+  并特别推荐了应该包含在
+  systemd
+  系统中的守护进程。
+<section class="Ss">
+<h2 class="Ss" id="传统的SysV守护进程">传统的SysV守护进程<a class="anchor" href="#%E4%BC%A0%E7%BB%9F%E7%9A%84SysV%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B">¶</a></h2>
+传统的SysV守护进程在启动的时候，
+  应该在初始化阶段执行下面的步骤：
+<p class="Pp"></p>
+<div class="Bd-indent"> 1.关闭除 STDIN STDOUT STDERR
+  之外的所有文件描述符</div>
+<p class="Pp"></p>
+<div class="Bd-indent">
+  2.重置所有信号处理器</div>
+<p class="Pp"></p>
+<div class="Bd-indent">
+  3.重置所有信号掩码</div>
+<p class="Pp"></p>
+<div class="Bd-indent">
+  4.清理环境变量(重置一部分，移除一部分)</div>
+<p class="Pp"></p>
+<div class="Bd-indent"> 5.调用 <b>fork()</b>
+  创建一个后台进程</div>
+<p class="Pp"></p>
+<div class="Bd-indent">
+  6.在子进程中调用 <b>setsid()</b>
+  从终端脱离并创建一个独立的会话</div>
+<p class="Pp"></p>
+<div class="Bd-indent">
+  7.在子进程中再一次调用
+  <b>fork()</b>
+  以确保守护进程永远无法获取任何终端。</div>
+<p class="Pp"></p>
+<div class="Bd-indent">
+  8.第一个子进程主动退出，
+  只有第二个子进程(实际的守护进程)保持运行，
+  并且以 init(PID=1)
+  为父进程。</div>
+<p class="Pp"></p>
+<div class="Bd-indent">
+  9.守护进程(第二个子进程)将
+  STDIN STDOUT STDERR 连接到 /dev/null
+  虚拟设备</div>
+<p class="Pp"></p>
+<div class="Bd-indent">10.守护进程将 umask
+  设为 0</div>
+<p class="Pp"></p>
+<div class="Bd-indent">11.守护进程将当前目录切换到根目录(/)</div>
+<p class="Pp"></p>
+<div class="Bd-indent">12.守护进程将自身的PID记录到例如
+  /run/foobar.pid 这样的文件中</div>
+<p class="Pp"></p>
+<div class="Bd-indent">13.守护进程丢弃自己不需要的权限(如果可以)</div>
+<p class="Pp"></p>
+<div class="Bd-indent">14.守护进程通知最初的父进程：初始化工作已完成</div>
+<p class="Pp"></p>
+<div class="Bd-indent">15.最初的父进程自身退出</div>
+<p class="Pp">注意，这些步骤对于下文讲述的新型守护进程是不需要的，
+    除非为了刻意兼容传统的SysV系统。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="新型守护进程">新型守护进程<a class="anchor" href="#%E6%96%B0%E5%9E%8B%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B">¶</a></h2>
+Linux
+  系统上的新型守护进程更容易被监控也更容易实现。
+<p class="Pp">守护进程无需实现前文所描述的复杂步骤，
+    即可直接在 systemd
+    提供的干净的上下文环境中运行：</p>
+<p class="Pp">环境变量已经被清理、信号处理器与信号掩码已经被重置、没有遗留的文件描述符、守护进程自动在其专属的会话中执行、
+    标准输入(STDIN)已被连接到
+    /dev/null
+    虚拟设备(除非另有配置)、
+    标准输出(STDOUT)与标准错误(STDERR)已被连接到
+    <a href="../../buster/systemd/systemd-journald.service.8.en.html">systemd-journald.service(8)</a>
+    日志服务(除非另有配置)、umask
+    已经被重置 ... 等等</p>
+<p class="Pp">新型守护进程只需要遵守如下要求：</p>
+<p class="Pp"></p>
+<div class="Bd-indent"> 1.收到 <b>SIGTERM</b>
+  信号后
+  关闭进程并确保干净的退出</div>
+<p class="Pp"></p>
+<div class="Bd-indent"> 2.收到 <b>SIGHUP</b>
+  信号后
+  重新加载配置文件(若需要)</div>
+<p class="Pp"></p>
+<div class="Bd-indent">
+  3.主守护进程在退出时应该按照
+  <b>LSB recommendations for SysV init scripts</b>[1]
+  的要求返回恰当的退出码，
+  以便于 systemd
+  判断服务的退出状态。</div>
+<p class="Pp"></p>
+<div class="Bd-indent">
+  4.若可行，在初始化的最后一步，
+  通过 D-Bus
+  创建进程的控制接口，
+  并在 D-Bus
+  上注册一个总线名称。</div>
+<p class="Pp"></p>
+<div class="Bd-indent"> 5.提供一个 .service
+  单元文件，
+  包含如何启动/停止/维护该服务的配置。
+  详见 <a href="../../buster/systemd/systemd.service.5.en.html">systemd.service(5)</a> 手册。</div>
+<p class="Pp"></p>
+<div class="Bd-indent"> 6.尽可能依赖于
+  systemd
+  的资源控制与权限剥夺功能
+  (CPU与内存占用/文件访问等等)，
+  而不要自己实现它们。
+  详见 <a href="../../buster/systemd/systemd.exec.5.en.html">systemd.exec(5)</a> 手册。</div>
+<p class="Pp"></p>
+<div class="Bd-indent"> 7.若使用了 D-Bus ，
+  则强烈推荐使用基于 D-Bus
+  的启动机制。
+  这样做有许多好处：
+  守护进程可以按需延迟启动；
+  可以和依赖于它的进程并行启动(提升启动速度)；
+  守护进程可以在失败时被自动重启
+  而不丢失D-Bus总线上的请求(详见下文)</div>
+<p class="Pp"></p>
+<div class="Bd-indent">
+  8.若守护进程通过套接字提供服务，
+  则强烈推荐使用基于套接字的启动机制(详见下文)。
+  这样做有许多好处：
+  守护进程可以按需延迟启动；
+  可以和依赖于它的进程并行启动(提升启动速度)；
+  对于无状态协议(例如
+  syslog, DNS)，
+  守护进程可以在失败时被自动重启而不丢失套接字上的请求(详见下文)</div>
+<p class="Pp"></p>
+<div class="Bd-indent">
+  9.若可能，守护进程应该通过
+  <a href="../../buster/libsystemd-dev/sd_notify.3.en.html">sd_notify(3)</a> 接口通知 systemd
+  &#34;启动已完成&#34;或&#34;状态已更新&#34;这样的消息。</div>
+<p class="Pp"></p>
+<div class="Bd-indent">10.不要使用 <b>syslog()</b>
+  记录日志，
+  只需简单的使用 <b>fprintf()</b>
+  向 STDERR 输出日志即可。
+  如果必须指明日志等级，
+  则可以在日志的
+  行首加上类似 &#34;&lt;4&gt;&#34;
+  这样的前缀即可(这里表示4级&#34;WARNING&#34;)。
+  详见 <a href="../../buster/libsystemd-dev/sd-daemon.3.en.html">sd-daemon(3)</a> 与 <a href="../../buster/systemd/systemd.exec.5.en.html">systemd.exec(5)</a>
+  手册。</div>
+<p class="Pp">上述要求与 <b>Apple MacOS X Daemon
+    Requirements</b>[2] 类似，
+    但并不完全相同。</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="启动">启动<a class="anchor" href="#%E5%90%AF%E5%8A%A8">¶</a></h1>
+systemd
+  提供了多种启动机制(见下文)，
+  而服务单元也经常同时使用其中的几种。
+  例如 bluetoothd.service
+  可以在插入蓝牙硬件时被启动，
+  也可以在某进程访问其
+  D-Bus 接口时被启动。
+  又如打印服务可以在IPP端口有流量接入时被启动，
+  也可以在插入打印机硬件时被启动，
+  还可以在有文件进入打印机
+  spool 目录时被启动。
+  甚至对于必须在系统启动时无条件启动的服务，
+  为了尽可能并发启动，
+  也应该使用某些启动机制。
+  如果某守护进程实现了一个
+  D-Bus
+  服务或者监听一个套接字，
+  那么使用基于 D-Bus
+  或基于套接字的启动机制，
+  将允许该进程与其客户端同时并行启动(从而加快启动速度)。
+  因为所有的通信渠道都已事先建立，
+  并且不会丢失任何客户端请求，
+  同时 D-Bus
+  总线或者内核会将客户端请求排入队列等候，
+  直到完成启动。
+<section class="Ss">
+<h2 class="Ss" id="系统启动时启动">系统启动时启动<a class="anchor" href="#%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%97%B6%E5%90%AF%E5%8A%A8">¶</a></h2>
+传统的守护进程一般是在系统启动时通过SysV初始化脚本自动启动，
+  systemd
+  也支持这种启动方式。
+<p class="Pp">对于 systemd 来说，
+    如果希望确保某单元在系统启动时自动启动，
+    那么最佳的做法是在默认启动目标
+    (通常是 multi-user.target 或
+    graphical.target)的 .wants/
+    目录中为该单元建立软链接。
+    参见 <a href="../../buster/systemd/systemd.unit.5.en.html">systemd.unit(5)</a>
+    手册以了解 .wants/ 目录，
+    参见 <a href="../../buster/systemd/systemd.special.7.en.html">systemd.special(7)</a>
+    手册以了解上述两个特殊的启动目标。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="基于套接字的启动">基于套接字的启动<a class="anchor" href="#%E5%9F%BA%E4%BA%8E%E5%A5%97%E6%8E%A5%E5%AD%97%E7%9A%84%E5%90%AF%E5%8A%A8">¶</a></h2>
+为了尽可能提高并行性与健壮性，
+  以及简化配置与开发，
+  对于需要监听套接字的服务，
+  强烈推荐使用基于套接字的启动机制。
+  使用此机制后，
+  守护进程不再需要创建和绑定套接字，
+  而是由 systemd
+  接管这个工作。 systemd
+  将会根据单元文件的设置，
+  预先创建所需的套接字，
+  并在第一个客户端请求接入的时候启动该服务，
+  以实现服务的按需启动。
+  该机制的好处还在于，
+  预先创建好套接字之后，
+  所有使用此套接字通信的进程可以并行启动(包括客户端和服务端)。
+  此外，重启服务只会导致丢失最低限度的客户端连接，
+  甚至不丢失任何客户端请求
+  (例如对于 DNS 或 syslog
+  这样的无状态协议)。
+  因为套接字在服务重启期间始终保持有效并且可被访问，
+  同时所有客户端请求也都被排入队列等候处理。
+<p class="Pp">使用此机制之后，
+    守护进程必须要从 systemd
+    接收已创建好的套接字，
+    而不能自己创建并绑定套接字。
+    关于如何使用该机制，参见
+    <a href="../../buster/libsystemd-dev/sd_listen_fds.3.en.html">sd_listen_fds(3)</a> 与 <a href="../../buster/libsystemd-dev/sd-daemon.3.en.html">sd-daemon(3)</a>
+    手册。
+    只需要小小的修改，
+    即可在原有启动机制的基础上添加基于套接字的启动机制，
+    至于如何移植，详见后文。</p>
+<p class="Pp">systemd 通过 .socket
+    单元实现该机制，详见
+    <a href="../../buster/systemd/systemd.socket.5.en.html">systemd.socket(5)</a> 手册。
+    必须确保所有为支持基于套接字启动而创建的监听
+    socket 单元都被包含在
+    sockets.target 中。 建议在 socket
+    单元的 &#34;[Install]&#34;
+    小节加入 <i>WantedBy=sockets.target</i>
+    设置，
+    以确保在启用该单元时能够自动添加上述依赖关系。
+    除非明确设置了
+    <i>DefaultDependencies=no</i> ，
+    否则会为所有 socket
+    单元隐含的创建必要的顺序依赖。
+    有关 sockets.target
+    的解释，详见 <a href="../../buster/systemd/systemd.special.7.en.html">systemd.special(7)</a>
+    手册。 如果某 socket
+    单元已被包含在 sockets.target
+    中，
+    那么不建议在其中再添加任何额外的依赖关系(例如
+    multi-user.target 之类)。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="基于_D-Bus_的启动">基于 D-Bus 的启动<a class="anchor" href="#%E5%9F%BA%E4%BA%8E_D-Bus_%E7%9A%84%E5%90%AF%E5%8A%A8">¶</a></h2>
+如果守护进程使用 D-Bus
+  与客户端通信，
+  那么它应该使用基于 D-Bus
+  的启动机制，
+  这样当客户端访问其 D-Bus
+  接口时，
+  该服务将被自动启动。
+  该机制是通过 D-Bus service
+  文件实现的(不要与普通的单元文件混淆)。
+  为了确保让 D-Bus 使用 systemd
+  来启动与维护守护进程，
+  必须在这些 D-Bus service
+  文件中使用 <i>SystemdService=</i>
+  指明其匹配的服务单元。
+  例如，对于文件名为
+  org.freedesktop.RealtimeKit.service 的 D-Bus service
+  来说，
+  为了将其绑定到 rtkit-daemon.service
+  服务单元，
+  必须确保在该文件中设置了
+  <i>SystemdService=rtkit-daemon.service</i> 指令。
+  注意，必须明确设置
+  <i>SystemdService=</i> 指令，
+  否则当服务单元同时使用多种启动机制时，
+  可能会导致竞争条件的出现。
+</section>
+<section class="Ss">
+<h2 class="Ss" id="基于设备的启动">基于设备的启动<a class="anchor" href="#%E5%9F%BA%E4%BA%8E%E8%AE%BE%E5%A4%87%E7%9A%84%E5%90%AF%E5%8A%A8">¶</a></h2>
+用于管理特定类型硬件的守护进程，
+  只应该在符合条件的硬件变为可用或者被插入时，才需要启动。
+  为了达到上述目的，
+  可以将服务的启动/停止与硬件的插入/拔出事件绑定。
+  当带有 &#34;systemd&#34;
+  标签的设备出现在 sysfs/udev
+  设备树中时， systemd
+  将会自动为其创建对应的
+  device 单元。
+  通过向这些单元中添加对其他单元的
+  <i>Wants=</i> 依赖，
+  就可以实现当该 device
+  单元被启动(也就是硬件被插入)时，
+  连带启动其他单元，从而实现基于设备的启动。
+  这可以通过向 udev
+  规则库中添加 <i>SYSTEMD_WANTS=</i>
+  属性来实现， 详见
+  <a href="../../buster/systemd/systemd.device.5.en.html">systemd.device(5)</a> 手册。
+  通常，并不是将 service
+  单元直接添加到设备的
+  <i>Wants=</i> 依赖中，
+  而是通过专用的 target
+  单元间接添加。
+  例如，不是将 bluetoothd.service
+  添加到各种蓝牙设备的
+  <i>Wants=</i> 依赖中， 而是将
+  bluetoothd.service 添加到 bluetooth.target 的
+  <i>Wants=</i> 依赖中，
+  同时再将 bluetooth.target
+  添加到各种蓝牙设备的
+  <i>Wants=</i> 依赖中。
+  通过引入 bluetooth.target
+  这个抽象层，
+  系统管理员无需批量修改
+  udev 规则库， 仅通过 <b>systemctl
+  enable|disable ...</b> 命令 修改
+  bluetooth.target.wants/
+  目录中的软链接，
+  即可控制 bluetoothd.service
+  的使用。
+</section>
+<section class="Ss">
+<h2 class="Ss" id="基于路径的启动">基于路径的启动<a class="anchor" href="#%E5%9F%BA%E4%BA%8E%E8%B7%AF%E5%BE%84%E7%9A%84%E5%90%AF%E5%8A%A8">¶</a></h2>
+对于处理 spool
+  文件或目录的守护进程(例如打印服务)来说，
+  仅在 spool
+  文件或目录状态发生变化或者内容非空时，
+  才需要启动。 通过 .path
+  单元实现的、
+  基于路径的启动机制正好适用于这种场合，
+  详见 <a href="../../buster/systemd/systemd.path.5.en.html">systemd.path(5)</a> 手册。
+</section>
+<section class="Ss">
+<h2 class="Ss" id="基于定时器的启动">基于定时器的启动<a class="anchor" href="#%E5%9F%BA%E4%BA%8E%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%90%AF%E5%8A%A8">¶</a></h2>
+对于周期性的操作(例如垃圾文件清理或者网络对时)，
+  可以通过基于定时器的启动机制来实现。
+  这种机制通过 .timer
+  单元实现，详见
+  <a href="../../buster/systemd/systemd.timer.5.en.html">systemd.timer(5)</a> 手册。
+</section>
+<section class="Ss">
+<h2 class="Ss" id="其他启动方式">其他启动方式<a class="anchor" href="#%E5%85%B6%E4%BB%96%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F">¶</a></h2>
+在其他操作系统上还存在着其他的启动机制，
+  不过这些机制都可以被前述的各种机制的组合替代。
+  因此在这里不再赘述。
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="与_SYSTEMD_整合">与 SYSTEMD 整合<a class="anchor" href="#%E4%B8%8E_SYSTEMD_%E6%95%B4%E5%90%88">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="编写_systemd_单元文件">编写 systemd 单元文件<a class="anchor" href="#%E7%BC%96%E5%86%99_systemd_%E5%8D%95%E5%85%83%E6%96%87%E4%BB%B6">¶</a></h2>
+在编写单元文件时应当考虑下列建议：
+<p class="Pp"></p>
+<div class="Bd-indent"> 1.尽可能不用
+  <i>Type=forking</i> 。
+  若非用不可，则必须正确设置
+  <i>PIDFile=</i> 指令。参见
+  <a href="../../buster/systemd/systemd.service.5.en.html">systemd.service(5)</a> 手册。</div>
+<p class="Pp"></p>
+<div class="Bd-indent"> 2.若守护进程在 D-Bus
+  上注册了一个名字，
+  则应尽可能使用
+  <i>Type=dbus</i></div>
+<p class="Pp"></p>
+<div class="Bd-indent">
+  3.设置一个易于理解的
+  <i>Description=</i></div>
+<p class="Pp"></p>
+<div class="Bd-indent"> 4.确保 <i>DefaultDependencies=yes</i>
+  ，
+  除非该单元必须在系统启动的早期启动或者必须在系统关闭的末期关闭。</div>
+<p class="Pp"></p>
+<div class="Bd-indent">
+  5.通常无需显式定义依赖关系。
+  不过，如果确实需要显式定义依赖关系，
+  为了确保单元文件不局限于特定的发行版，仅应该依赖于
+  <a href="../../buster/systemd/systemd.special.7.en.html">systemd.special(7)</a>
+  中列出的单元以及自身所属软件包中提供的单元。</div>
+<p class="Pp"></p>
+<div class="Bd-indent"> 6.确保在 &#34;[Install]&#34;
+  小节中包含完整的启用信息(参见
+  <a href="../../buster/systemd/systemd.unit.5.en.html">systemd.unit(5)</a> 手册)。
+  若希望自动启动该单元，
+  则应该设置 <i>WantedBy=multi-user.target</i>
+  或 <i>WantedBy=graphical.target</i>
+  若希望自动启动该单元的套接字，则应该设置
+  <i>WantedBy=sockets.target</i> 。
+  通常你还希望在启用该单元时，
+  一起启用对应的套接字单元(假定为
+  foo.service)， 因此还应该设置
+  <i>Also=foo.socket</i></div>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="安装_service_单元文件">安装 service 单元文件<a class="anchor" href="#%E5%AE%89%E8%A3%85_service_%E5%8D%95%E5%85%83%E6%96%87%E4%BB%B6">¶</a></h2>
+当从源代码编译安装(<b>make
+  install</b>)软件包时，
+  其中的系统服务单元文件会被默认安装到
+  <b>pkg-config systemd --variable=systemdsystemunitdir</b>
+  命令返回的目录中(通常是
+  /usr/lib/systemd/system)；
+  而其中的用户服务单元文件会被默认安装到
+  <b>pkg-config systemd --variable=systemduserunitdir</b>
+  命令返回的目录中(通常是
+  /usr/lib/systemd/user)；
+  但并不应该使用 <b>systemctl enable
+  ...</b> 命令启用它们。
+  当从包管理器安装(<b>rpm
+  -i</b>)二进制软件包时，
+  其中的单元文件应该同样安装到上述位置。
+  但不同之处在于，
+  还应该使用 <b>systemctl enable ...</b>
+  命令启用它们，
+  因此安装的单元有可能会在开机时自动启动。
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="移植已有的守护进程">移植已有的守护进程<a class="anchor" href="#%E7%A7%BB%E6%A4%8D%E5%B7%B2%E6%9C%89%E7%9A%84%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B">¶</a></h1>
+虽然 systemd 兼容传统的 SysV
+  初始化系统，
+  但是移植旧有的守护进程可以更好的利用
+  systemd 的先进特性。
+  建议对旧有的 SysV
+  守护进程做如下改进：
+  ...[省略]...
+</section>
+<section class="Sh">
+<h1 class="Sh" id="放置守护进程的数据">放置守护进程的数据<a class="anchor" href="#%E6%94%BE%E7%BD%AE%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%95%B0%E6%8D%AE">¶</a></h1>
+建议遵守 <a href="../../buster/manpages-zh/file-hierarchy.7.zh_CN.html">file-hierarchy(7)</a>
+  所建议的通用准则。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参见">参见<a class="anchor" href="#%E5%8F%82%E8%A7%81">¶</a></h1>
+<a href="../../buster/manpages-zh/systemd.1.zh_CN.html">systemd(1)</a>, <a href="../../buster/libsystemd-dev/sd-daemon.3.en.html">sd-daemon(3)</a>, <a href="../../buster/libsystemd-dev/sd_listen_fds.3.en.html">sd_listen_fds(3)</a>,
+  <a href="../../buster/libsystemd-dev/sd_notify.3.en.html">sd_notify(3)</a>, <a href="../../buster/manpages-dev/daemon.3.en.html">daemon(3)</a>, <a href="../../buster/systemd/systemd.service.5.en.html">systemd.service(5)</a>,
+  <a href="../../buster/manpages-zh/file-hierarchy.7.zh_CN.html">file-hierarchy(7)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES">NOTES<a class="anchor" href="#NOTES">¶</a></h1>
+<dl class="Bl-tag">
+  <dt> 1.</dt>
+  <dd>LSB recommendations for SysV init scripts</dd>
+</dl>
+<div class="Bd-indent"><a href="../../LSB_3.1.1/LSB-Core-generic/LSB-Core-generic/iniscrptact.html">../../LSB_3.1.1/LSB-Core-generic/LSB-Core-generic/iniscrptact.html</a></div>
+<dl class="Bl-tag">
+  <dt> 2.</dt>
+  <dd>Apple MacOS X Daemon Requirements</dd>
+</dl>
+<div class="Bd-indent"><a href="../../library/mac/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html">../../library/mac/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html</a></div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<p class="Pp">翻译人员：金步国
+  <br/>
+  金步国作品集：https://www.jinbuguo.com
+  <br/>
+  中文 man
+    手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os">systemd 231</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+daemon.7.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-30T03:48:41Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"daemon(7)\"}}]}"
+</script>

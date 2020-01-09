@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>roff(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/groff/roff.7.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-ja/roff.7.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-zh/roff.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/roff.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; roff(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/roff.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/roff.7.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8E%86%E5%8F%B2_HISTORY" title="历史 HISTORY">历史 HISTORY</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%BF%E7%94%A8_USING_ROFF" title="使用 USING ROFF">使用 USING ROFF</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#roff_%E7%BC%96%E7%A8%8B_ROFF_PROGRAMMING" title="roff 编程 ROFF PROGRAMMING">roff 编程 ROFF PROGRAMMING</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6%E6%89%A9%E5%B1%95%E5%90%8D_FILE_NAME_EXTENSIONS" title="文件扩展名 FILE NAME EXTENSIONS">文件扩展名 FILE NAME EXTENSIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%BC%96%E8%BE%91_EDITING_ROFF" title="编辑 EDITING ROFF">编辑 EDITING ROFF</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E8%A7%81_SEE_ALSO" title="参见 SEE ALSO">参见 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85_AUTHORS" title="作者 AUTHORS">作者 AUTHORS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D" title="[中文版维护人]">[中文版维护人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中国linux论坛man手册翻译计划》:">《中国linux论坛man手册翻译计划》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/roff.7.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/roff.7.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/roff.7.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/groff/roff.7.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/roff.7.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/roff.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/roff.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">ROFF(7)</td>
+    <td class="head-vol">Miscellaneous Information Manual</td>
+    <td class="head-rtitle">ROFF(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+roff - roff
+  排版系统的概念和历史
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+<i>roff</i>
+  是一系列排版程序，如
+  <i>troff</i>, <i>nroff</i>, <i>ditroff</i>, <i>groff</i>,
+  等等的通称。 一个 roff
+  排版系统包含一个可扩展的文本格式化语言和一系列程序用以打印和转换为其他文本格式。
+  传统的，它是 Unix
+  的主要文本处理系统；现在，每个
+  类Unix
+  操作系统仍然附带一个
+  roff
+  系统作为核心软件包。
+<p class="Pp">当今最普遍的 roff
+    系统是自由软件的实现
+    <i>GNU roff</i>, <a href="../../buster/manpages-zh/groff.1.zh_CN.html">groff(1)</a>. groff
+    之前的实现被称为传统的
+    <i>classical</i> 实现 (从 1973
+    年开始)。 <i>groff</i>
+    实现了它的传统的前辈的用法和功能，并且加入了更多扩展。
+    当前，由于 <i>groff</i>
+    是唯一可以在 (几乎是)
+    任何计算机系统上都可用的
+    roff
+    系统，因此它是事实上的
+    roff 标准。</p>
+<p class="Pp">在一些古老的 Unix
+    系统中，有一个叫做
+    <b>roff</b>
+    的可执行文件，实现了甚至更加古老的
+    <i>Multics</i> 操作系统中的 <b>runoff
+    。</b> 参见 <b>HISTORY</b> 段落。
+    它的功能非常有限，即使与古老的
+    troff
+    相比；它不再被支持了。
+    因此，在本文档中，
+    <i>roff</i> 总是泛指 roff 系统 <i>roff
+    system</i> ，不是古老的 roff
+    可执行文件</p>
+<p class="Pp">尽管历史悠久，roff
+    当前还在广泛使用中，例如，UNIX
+    系统的手册页 (<i>man pages</i>)
+    ，很多软件书籍，系统文档，标准和团体组织的文档都是用
+    roff 来写的。 roff
+    在文本设备上的输出效果仍然是无可比拟的，
+    并且，与其他自由的排版系统相比，它的图形输出也不差，
+    甚至强于很多商业的系统</p>
+<p class="Pp">最普遍的 roff
+    的应用是手册页 <i>manual pages</i>
+    (简称 <i>man pages</i>)<i>;</i>
+    它是很多操作系统中的标准文档系统</p>
+<p class="Pp">此文档描述了围绕
+    <i>roff system</i>
+    开发的一些历史事件；
+    所有 roff
+    版本在用法方面的一些共同点，
+    roff
+    管道的细节－－它经常被掩盖在类似
+    <a href="../../buster/manpages-zh/groff.1.zh_CN.html">groff(1)</a> 等等的 “前端”
+    之后；
+    对排版语言的一般的概述；
+    一些写 roff
+    文档的技巧；
+    还有到更多资料的链接</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="历史_HISTORY">历史 HISTORY<a class="anchor" href="#%E5%8E%86%E5%8F%B2_HISTORY">¶</a></h1>
+<i>roff</i>
+  文本处理系统有很长的一段历史，可以回溯到60
+  年代。 roff 系统自身与 Unix
+  操作系统关系密切，
+  但是它的起源要从更早的操作系统
+  CTSS 和 Multics 开始。
+<section class="Ss">
+<h2 class="Ss" id="祖先_The_Predecessor_runoff">祖先 The Predecessor runoff<a class="anchor" href="#%E7%A5%96%E5%85%88_The_Predecessor_runoff">¶</a></h2>
+<i>roff</i>
+  系统的演变与操作系统的历史紧密联系。
+  它的 “先祖” <b>runoff</b> 是
+  <i>Jerry Saltzer</i> 在 <i>CTSS</i> 操作系统
+  (<i>Compatible Time Sharing System</i>
+  ，兼容分时系统 (?)，1961)
+  上的作品。 CTTS
+  后来发展成为操作系统
+  Unix
+  的一个著名的来源，出现于
+  1963，同时 <i>runoff</i>
+  成为文档和文本处理的主要格式。
+  当时，这两种操作系统只能运行在非常昂贵的计算机之上，
+  因此它们大部分用于研究和官方及军队的任务之中
+<p class="Pp">与现代的 roff 相比，
+    <i>runoff</i>
+    语言可以做的事非常有限。
+    在 60
+    年代，只能产生文本的输出。
+    这可以用一个长度为 2
+    的命令 (request)
+    的集合实现，
+    这些命令的绝大部分都保持不变地被
+    roff 采用。
+    这种语言的模型是根据
+    “前计算机时代”
+    的排版习惯而建立的，
+    那时，以点 (dot, `.&#39;)
+    开头的行被写在手稿中，
+    向之后进行手工排版工作的工人指示格式化的要求</p>
+<p class="Pp">开始，runoff 程序是用
+    <i>PL/1</i>
+    语言写成的，后来用
+    <i>BCPL</i> 来写－－那是
+    <i>C</i> 编程语言的
+    “祖母”。 在 Multics
+    操作系统中，帮助系统由
+    runoff 来处理， 与 roff 管理 Unix
+    手册页的作用类似。
+    仍然有 runoff
+    语言写成的文档，
+    例如可以到 Saltzer
+    的主页看看。参见 <b>SEE
+    ALSO</b> 段</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="传统的_nroff/troff_系统_The_Classical_nroff/troff_System">传统的 nroff/troff 系统 The Classical nroff/troff System<a class="anchor" href="#%E4%BC%A0%E7%BB%9F%E7%9A%84_nroff/troff_%E7%B3%BB%E7%BB%9F_The_Classical_nroff/troff_System">¶</a></h2>
+在 70 年代，Multics 的后裔 (offspring)
+  <i>Unix</i>
+  变得越来越普遍，因为它可以运行在廉价的计算机上，
+  并且那时在大学里可以很容易地获得。
+  在 MIT (麻省理工，the Massachusetts
+  Institute of Technology),
+  有人想在一台运行 Unix 的
+  PDP-11 计算机上驱动 Wang
+  (王安公司?) 的 <i>Graphic Systems CAT</i>
+  排字机，一种图形化的输出设备。
+  由于 runoff
+  在这种任务上能力有限，它被
+  <i>Josef F. Osanna</i>, (Multics
+  操作系统的主要开发者之一，几个
+  runoff 移植系统的作者)
+  继续开发，成为一种更强大的文本排版系统
+<p class="Pp"><i>runoff</i>
+    这个名字被简化为
+    <i>roff</i>. Ocsanna
+    所设想的，极大扩展了的语言已经包含了一个完整的
+    <i>roff</i> 系统的所有元素。
+    所有现代的 roff
+    系统都试图实现同这个系统兼容。
+    因此 Joe Osanna
+    是当之无愧的所有 roff
+    系统之父</p>
+<p class="Pp">最早的 <i>roff</i>
+    系统有三个排版程序</p>
+<dl class="Bl-tag">
+  <dt><b>troff</b></dt>
+  <dd>(<i>typesetter roff</i>)
+      为它唯一支持的 <i>CAT</i>
+      排字机产生一个图形的输出</dd>
+  <dt><b>nroff</b></dt>
+  <dd>为终端和文本打印机产生合适的文本输出</dd>
+  <dt><b>roff</b></dt>
+  <dd>对最初的 runoff
+      程序的有限功能进行重新实现；
+      这个程序在后来的版本中被抛弃。
+      现在， <i>roff</i>
+      这个名字只用来指代一个
+      troff/nroff 系统的整体</dd>
+</dl>
+<p class="Pp">Osanna 的第一版用 PDP-11
+    的汇编语言实现，发布于
+    1973. <i>Brian Kernighan</i> 加入到 <i>roff</i>
+    的开发中，使用
+    C 编程语言将它进行了重写。
+    C 版本发布于 1975.</p>
+<p class="Pp"><b>nroff</b>/<b>troff</b>
+    程序使用的排版语言的语法记载在著名的
+    <i>Troff User&#39;s Manual [CSTR #54]</i>
+    中，出版于 1976, Brian Kernighan
+    对它不断修订，直到
+    1992 年。
+    此文档是对传统的
+    <i>classical troff</i> 的说明.
+    所有后来的 <i>roff</i>
+    系统都试着与这个说明实现兼容</p>
+<p class="Pp">1977 年，Osanna 在他 50
+    岁时，由于一次突发的心脏病而去世。
+    Kernighan 继续开发 troff。
+    下一个开发目标是赋予
+    troff
+    一个更一般的接口，以支持更多设备，
+    中间输出格式和
+    “后处理” 系统。
+    这使得 <i>roff</i>
+    系统的结构趋于完整，现在仍然被使用。参见
+    <b>USING ROFF</b> 段。 1979
+    年，它们被写入论文
+    <i>[CSTR #97]</i>. 这个新的 troff
+    版本是所有现存的较新的
+    troff 系统的基础，包括
+    <i>groff</i>.
+    在一些系统上，这个设备无关的
+    <i>troff</i>
+    有一个可执行文件叫做
+    <a href="../../buster/groff/ditroff.7.en.html">ditroff(7)</a>. 所有现代的 <b>troff</b>
+    程序都已经自动提供了对
+    distroff 完整的兼容性</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="商业化_Commercialization">商业化 Commercialization<a class="anchor" href="#%E5%95%86%E4%B8%9A%E5%8C%96_Commercialization">¶</a></h2>
+免费的 Unix 7
+  操作系统商业化之后，出现了严重的退步。
+  一大批不同的操作系统浮出水面，为他们所作的扩展间的互不兼容而争斗。
+  幸好，这种不兼容没有影响到原始的
+  troff。
+  所有不同的商业版本的
+  roff 系统都大量使用了
+  Osanna/Kernighan
+  的开放的源代码和文档，但是却将其作为
+  <b>它们的</b> 系统 (“their”
+  system) 出售—
+  只有很少的修改
+<p class="Pp">古老的 Unix 和传统的
+    troff 的源代码在长达 20
+    年时间里不再可以自由获得。</p>
+<p class="Pp">幸运的是，Caldera
+    收购了 SCO UNIX (2001). 随后，Caldera
+    使得源代码可以在网上获得，允许用于非商业用途。参见
+    <b>SEE ALSO</b> 段</p>
+<p class="Pp">(译注：谁能想到，现在，2003
+    年，SCO会成为自由软件和开源软件界共同的敌人呢？
+    而Caldera
+    又在什么地方呢？)</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="自由的_Free_roff">自由的 Free roff<a class="anchor" href="#%E8%87%AA%E7%94%B1%E7%9A%84_Free_roff">¶</a></h2>
+任何商业的 roff
+  系统都无法成为 roff
+  开发中的后继者。
+  商业社会中的每个人都只对他们自己的事情感兴趣。
+  这使得曾经如此优秀的
+  Unix 操作系统在 80
+  年代一蹶不振
+<p class="Pp">作为对如此快速的商业化过程的补救
+    (As a counter-measure to the galopping
+    commercialization，还请重新翻译)，
+    AT&amp;T Bell Labs
+    贝尔实验室试图发起一个恢复性的项目
+    (？，a rescue project)
+    ，使用他们的 <i>Plan 9</i>
+    操作系统。
+    它可以免费用于非商业用途，甚至包含了源代码。
+    但是它有一个专利许可证，that
+    empedes the free development (
+    还请解释词义)。
+    这种想法早已过时，因此
+    Plan 9
+    没有被主流开发者接受为自己的平台</p>
+<p class="Pp">真正的补救措施
+    (？， remedy)
+    是不断出现的自由操作系统
+    (386BSD, GNU/Linux, 等等.) 和 80 年代到
+    90
+    年代的自由软件工程。
+    他们实现了传统的 Unix
+    的特性和很多扩展，因此旧的
+    “XP体验” 不会丢掉 (such
+    that the old experience is not lost)。 进入 21
+    世纪，类 Unix
+    系统重新成为计算机工业中的主导因素
+    —
+  这要感谢自由软件</p>
+<p class="Pp">最重要的自由 roff
+    计划是 GNU 移植版本的
+    troff， 由 James Clark 建立，使用
+    它叫做 <i>groff</i> (<i>GNU roff</i>). 参见
+    <a href="../../buster/manpages-zh/groff.1.zh_CN.html">groff(1)</a> 中的概述</p>
+<p class="Pp">groff
+    系统仍然在继续开发。
+    它与传统 troff
+    兼容，但是还添加了很多扩展。
+    它是第一个可以在几乎所有操作系统上运行的
+    roff 系统并且 —
+    它是自由开放的。
+    这使得 groff 成为现在 roff
+    的事实标准</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="使用_USING_ROFF">使用 USING ROFF<a class="anchor" href="#%E4%BD%BF%E7%94%A8_USING_ROFF">¶</a></h1>
+很多人不会注意到他们在使用
+  roff。
+  当你阅读一份手册页 (man
+  page) 时，roff 工作在后台。
+  roff 文档可以使用 <b>xditview</b>(1x)
+  程序查看，它是一个 X
+  发行版的标准程序。参见
+  <b>X</b>(7x). 但是显式地使用 roff
+  也不困难
+<p class="Pp">一些 roff
+    实现提供了包装程序，使得人们可以简单地在命令行使用
+    roff 系统。 例如，GNU 的 roff
+    实现 <a href="../../buster/manpages-zh/groff.1.zh_CN.html">groff(1)</a>
+    提供了命令行选项来避免传统
+    troff
+    中过长的的命令管道；
+    <a href="../../buster/groff-base/grog.1.en.html">grog(1)</a>
+    程序试着从文档猜测应当使用什么参数来运行
+    groff；
+    不习惯于指定命令行选项的人应当用
+    <a href="../../buster/groff/groffer.1.en.html">groffer(1)</a>
+    程序来图形化地显示
+    groff 文件和手册页</p>
+<section class="Ss">
+<h2 class="Ss" id="管道_The_roff_Pipe">管道 The roff Pipe<a class="anchor" href="#%E7%AE%A1%E9%81%93_The_roff_Pipe">¶</a></h2>
+roff 系统由预处理器
+  (preprocessor)，roff
+  排版程序和后处理器
+  (postprocessor) 组成。
+  这种结构使用了大量的管道
+  <i>piping</i>
+  机制，意思是，一系列的程序陆续地被调用，
+  队列中的每个程序的输出就作为下一个程序的输入
+<p class="Pp">\</p>
+<p class="Pp">\)\$*</p>
+<p class="Pp">预处理器产生 roff
+    代码，传给一个 roff
+    处理器 (例如，troff)，
+    然后 roff
+    处理器接下来产生中间输出，传给一个后处理器程序，
+    用来打印或者产生最终输出</p>
+<p class="Pp">所有这些组件都使用它们自己的程序语言；
+    每种语言是与其他组件完全无关的。
+    此外，还可以包括为特殊目标而制作
+    (tailor) 的 roff 宏包</p>
+<p class="Pp">大多数 roff
+    文档中掺杂着使用一些包中的宏、
+    一个或多个预处理器的代码，还会添加
+    roff
+    语言中的一些元素。
+    用户很少需要用到 roff
+    排版语言的完整功能；
+    只有宏包的作者需要知道底层细节
+    (gory details)</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="预处理器_Preprocessors">预处理器 Preprocessors<a class="anchor" href="#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8_Preprocessors">¶</a></h2>
+预处理器是任何产生符合
+  roff
+  排版语言语法的输出的程序。
+  每个预处理器都有它自己的语言，在预处理器运行时被翻译为
+  roff 代码。 roff
+  文档中可以包含以这种语言写成的片段；
+  它们可以被特殊的 roff
+  命令或宏识别 (they are identified by
+  special roff requests or macros)。
+  加入了预处理器代码的文档必须通过所有相应的预处理器处理之后，
+  才能传给真正的 roff
+  排版程序，
+  因为真正的 roff
+  排版程序会忽略所有陌生的代码。
+  预处理器只会分析并转换指定由它处理的文档部分
+<p class="Pp">有大量的自由/商业
+    roff 预处理器。
+    一些不能在所有系统上使用，
+    还有一些预处理器被认为是
+    roff
+    系统不可分割的部分。
+    传统的预处理器有</p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>tbl</b></dt>
+  <dd>制表 (table)</dd>
+  <dt><b>eqn</b></dt>
+  <dd>数学公式 (mathematical formulæ)</dd>
+  <dt><b>pic</b></dt>
+  <dd>绘图 (diagram)</dd>
+  <dt><b>refer</b></dt>
+  <dd>书目索引 (bibliographic references)</dd>
+  <dt><b>soelim</b></dt>
+  <dd>包含标准位置的宏文件
+      (macro)</dd>
+</dl>
+</div>
+<p class="Pp">其他已知预处理器，但不是在所有系统上都可用，包括</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>chem</b></dt>
+  <dd>化学公式 (chemical formulæ)</dd>
+  <dt><b>grap</b></dt>
+  <dd>构造图元 (graphical elements)</dd>
+  <dt><b>grn</b></dt>
+  <dd>插入 <b>gremlin</b>(1) 图片</dd>
+</dl>
+</div>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="排版程序_Formatter_Programs">排版程序 Formatter Programs<a class="anchor" href="#%E6%8E%92%E7%89%88%E7%A8%8B%E5%BA%8F_Formatter_Programs">¶</a></h2>
+A <i>roff formatter</i>
+  排版程序是一个解释用
+  roff 排版语言或 roff
+  宏包写成的文档的程序。
+  它产生中间结果 <i>intermediate
+  output</i>,
+  将送入单一设备后处理器。后处理器必须在排版程序的命令行选项中指定。
+  文档必须已经通过了所有需要的预处理器处理
+<p class="Pp">roff
+    排版程序的输出以另外一种语言表示：
+    <i>intermediate output format</i> 或 <i>troff output</i>.
+    这种语言最初详述在
+    <i>[CSTR #97]</i> 中；它的 GNU
+    扩展记载在 <a href="../../buster/groff/groff_out.5.en.html">groff_out(5)</a>
+    中。
+    中间输出语言与高级的
+    roff
+    语言相比像一种汇编指令语言。
+    产生的中间输出是为一种特定的设备优化过的，
+    但是对于所有设备，这种语言都适用</p>
+<p class="Pp">roff 排版程序是整个 roff
+    系统的核心。 传统 roff
+    有两个排版程序：
+    对应字符设备的 <b>nroff</b>
+    和对应图形设备的
+    <b>troff</b></p>
+<p class="Pp">通常， <i>troff</i>
+    这个名字泛指这两种排版程序
+    (is used as a general term to refer to both formatters)。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="设备_后处理器_Devices_and_Postprocessors">设备 后处理器 Devices and Postprocessors<a class="anchor" href="#%E8%AE%BE%E5%A4%87_%E5%90%8E%E5%A4%84%E7%90%86%E5%99%A8_Devices_and_Postprocessors">¶</a></h2>
+设备是类似打印机、字符或图形终端等的硬件接口，
+  或者是用于转换为另一种字符或图形设备的软件接口
+<p class="Pp">后处理器是将 troff
+    输出转化为一种适于某种特殊设备的格式的程序。
+    对于输出目标来说，roff
+    后处理器像是它们的设备驱动</p>
+<p class="Pp">每种设备都有为其优化的后处理器程序。.
+    后处理器解释中间输出，产生设备相关的代码，传送给设备</p>
+<p class="Pp">设备名和后处理器程序的名称是不固定的，
+    因为它们依赖于计算机的软硬件的能力。
+    例如， <i>[CSTR #54]</i>
+    中提到的传统的设备名已经有了极大的改变。
+    旧的硬件不再存在，旧的图形转换程序与现代同等功能的程序相比太不精确了</p>
+<p class="Pp">例如，Postscript 设备 <i>post</i>
+    在传统 troff 中分辨率是
+    720，而 groff 的 <i>ps</i> 设备是 72000,
+    提高了 100 倍</p>
+<p class="Pp">现在，操作系统为大多数类似打印机的硬件提供了设备驱动，
+    因此不必为每个打印机写一个特殊的后处理器</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="roff_编程_ROFF_PROGRAMMING">roff 编程 ROFF PROGRAMMING<a class="anchor" href="#roff_%E7%BC%96%E7%A8%8B_ROFF_PROGRAMMING">¶</a></h1>
+roff 文档是加入了 roff
+  排版元素的普通文档。
+  roff 排版语言非常强大；
+  它几乎是一个完整的程序语言，并且提供了扩充自身的元素。
+  使用这些元素，就可以开发为特殊程序定制的宏包。
+  这样的宏包比普通的 roff
+  要容易上手得多。
+  所以大多数人会选择一中宏包，
+  不用去关心 roff
+  语言的内部实现
+<section class="Ss">
+<h2 class="Ss" id="宏包_Macro_Packages">宏包 Macro Packages<a class="anchor" href="#%E5%AE%8F%E5%8C%85_Macro_Packages">¶</a></h2>
+宏包是一些适于以便利的办法格式化某种特殊文档的宏的集合。
+  它们简化了 roff 的使用。
+  一个包的宏定义保存在一个叫做
+  <i>name</i><b>.tmac</b> 的文件中
+  (传统的命名是 <b>tmac.</b><i>name</i>).
+  所有 tmac
+  文件保存在标准位置的一个或多个目录中。
+  有关宏包的命名和位置的细节可以看
+  <a href="../../buster/groff/groff_tmac.5.en.html">groff_tmac(5)</a>.
+<p class="Pp">文档中用到的宏包可以使用命令行选项
+    \)\$* 提供给排版程序,
+    参见 <a href="../../buster/manpages-zh/troff.1.zh_CN.html">troff(1)</a>,
+    它们也可以在文档中指定，使用
+    roff 语言的
+    “包含文件”
+    命令，参见 <a href="../../buster/groff/groff.7.en.html">groff(7)</a>.</p>
+<p class="Pp">著名的传统宏包有
+    <i>man</i>
+    用来处理传统手册页
+    <i>mdoc</i> 处理 BSD
+    样式的手册页；此类书籍、文档和信件的宏集合是
+    <i>me</i>
+    (命名也许是根据它的创造者之名
+    <i>Eric</i> Allman 而来), <i>ms</i>
+    (命名来自 <i>Manuscript Macros</i>),
+    还有 <i>mm</i> (命名来自 <i>Memorandum
+    Macros</i>).</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="roff_排版语言_The_roff_Formatting_Language">roff 排版语言 The roff Formatting Language<a class="anchor" href="#roff_%E6%8E%92%E7%89%88%E8%AF%AD%E8%A8%80_The_roff_Formatting_Language">¶</a></h2>
+传统的 roff
+  排版语言记述在 troff
+  用户手册 <i>Troff User&#39;s Manual</i>
+  <i>[CSTR #54]</i> 中. roff
+  语言是完整的编程语言，提供了命令
+  (request)，宏定义，转义序列
+  (escape sequence)，
+  字符串变量，数字或数量寄存器
+  (number or size
+  registers)，还有流程控制语句
+<p class="Pp"><i>Requests</i> “命令”
+    是预定义的基础的排版命令，与
+    shell
+    提示下的命令类似。
+    用户可以定义类似
+    “命令”
+    的元素，使用 roff 的
+    “预定义” 元素。
+    用户定义的命令就被叫做
+    “宏” <i>macros</i>.
+    文档作者不会体会到
+    命令和宏
+    之间用法的任何区别；
+    它们都写在一行中，并以一个点
+    (dot, `.&#39;) 开始</p>
+<p class="Pp"><i>Escape sequences</i>
+    “转义序列”
+    是以反斜杠 (backslash, `\f[B]\*[@1]\f[]&#39;\$* )
+    开始的 roff 元素。
+    它们可以被插入到任何地方，包括文本的一行中间。
+    它们用来实现不同的功能，可以使用
+    \)\$* 插入非 ASCII
+    字符，使用 \)\$*
+    改变字体，使用 \)\$*
+    插入行内注释，它们也可以转义特殊的控制字符，像这样
+    \)\$*
+    还有很多很多其他的功能</p>
+<p class="Pp"><i>Strings</i> “字符串”
+    是存储一个字符串的变量。
+    字符串以 <b>.ds</b>
+    命令存储。
+    存储的字符串可以用
+    <b>\*</b> 转义序列获得</p>
+<p class="Pp"><i>Registers</i> “寄存器”
+    存储数字和数量。
+    寄存器可以用 <b>.nr</b>
+    命令设置，然后用控制序列
+    <b>\n</b> 来获得它的值</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件扩展名_FILE_NAME_EXTENSIONS">文件扩展名 FILE NAME EXTENSIONS<a class="anchor" href="#%E6%96%87%E4%BB%B6%E6%89%A9%E5%B1%95%E5%90%8D_FILE_NAME_EXTENSIONS">¶</a></h1>
+手册页使用章节号作为文件扩展名，例如本文档的文件名是
+  <i>roff.7</i>,
+  也就是说它放在手册页的第
+   7 章
+<p class="Pp">传统的宏包使用包名称作为文件扩展名，例如
+    <i>file.</i><b>me</b> 意思是使用了
+    <i>me</i> 宏包的文件，
+    <i>file.</i><b>mm</b> 使用了宏包 <i>mm</i>,
+    <i>file.</i><b>ms</b> 用的是 <i>ms</i>,
+    <i>file.</i><b>pic</b> 则是 <i>pic</i> 等等</p>
+<p class="Pp">但是没有 roff
+    文档统一的命名方式，尽管
+    <i>file.</i><b>tr</b> 用于 <i>troff file</i>
+    在现在和当时都是一样的
+    也许应当有 roff
+    文件扩展名的一个标准</p>
+<p class="Pp">文件扩展名与 <a href="../../buster/less/less.1.en.html">less(1)</a>
+    格式化工具结合，会非常好用。
+    它提供了用单一的方式打开各种输入的可能性，
+    方法是定义一个 shell
+    环境变量 <b>LESSOPEN</b>.
+    这种办法没有什么文档，这是一个例子：</p>
+<p class="Pp">\</p>
+<p class="Pp">\)\$*</p>
+<p class="Pp">\</p>
+<p class="Pp"><b>lesspipe</b>
+    可以是一个系统提供的命令或者是你自己的脚本。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="编辑_EDITING_ROFF">编辑 EDITING ROFF<a class="anchor" href="#%E7%BC%96%E8%BE%91_EDITING_ROFF">¶</a></h1>
+最好的 roff 文档编辑器是
+  Emacs，参见 <a href="../../buster/manpages-zh/emacs.1.zh_CN.html">emacs(1)</a>.
+  它提供了 <i>nroff</i>
+  模式，适于所有种类的
+  roff “方言”。
+  可以用下面的命令来激活这种模式
+<p class="Pp">当用 Emacs
+    编辑文档时可以输入
+    `<i>M-x nroff-mode</i>&#39;
+    来改变模式，这里 <b>M-x</b>
+    意思是按住 <b>Meta</b> 键 (或
+    <b>Alt</b>) 同时点一下 <b>x </b>
+    键</p>
+<p class="Pp">也可以在编辑器加载文件的时候，自动改变模式</p>
+<dl class="Bl-tag">
+  <dt>\)\$*</dt>
+  <dd>最好的办法是将下面三行注释包含在文件末尾
+    <p class="Pp">\</p>
+    <p class="Pp"></p>
+    <pre><b>.\&#34; Local Variables:</b>
+<b>.\&#34; mode: nroff</b>
+<b>.\&#34; End:</b>
+    </pre>
+  </dd>
+  <dt>\)\$*</dt>
+  <dd>有一系列的文件扩展名，例如手册页的扩展名，会自动触发
+      nroff 模式</dd>
+  <dt>\)\$*</dt>
+  <dd>理论上，可以将下面的序列
+    <p class="Pp">\</p>
+    <p class="Pp"><b>.\&#34; -*- nroff -*-</b></p>
+    <p class="Pp">\</p>
+    <p class="Pp">作为文件的第一行，也可以使
+        emacs 在加载文件时启用
+        nroff 模式。
+        不幸的是，一些程序例如
+        <b>man</b>
+        在这种方法中会出错；因此请不要用它</p>
+  </dd>
+</dl>
+<p class="Pp">所有的 roff
+    排版程序都提供了自动的断行以及水平和竖直间距。
+    为了不干扰它的功能，应当注意以下几点：</p>
+<dl class="Bl-tag">
+  <dt>\)\$*</dt>
+  <dd>不要在 roff
+      文档中包含空行或只包含空格的行，
+      而是使用“空行”命令
+      (一行中只包含一个点)，或者一行注释
+      <b>.\&#34;</b>
+      (如果需要一个构造元素的话)</dd>
+  <dt>\)\$*</dt>
+  <dd>不要在行首用空格，因为这会导致不可预测的行为。
+      段落缩进可以以受控的方式，用
+      roff 命令构造出来</dd>
+  <dt>\)\$*</dt>
+  <dd>每句话应当放到自己的一行中，因为句号后面的空格的处理方法是根据它结束的是短语还是句子而不同的。
+      要区别这两种情况，在每句话后面加上一个换行</dd>
+  <dt>\)\$*</dt>
+  <dd>另外要使用 Emacs 的 auto-fill
+      模式的话，最好在每句话后面添加一个空的
+      roff 命令
+      (一行中只包含一个点)</dd>
+</dl>
+<p class="Pp">下面的例子显示了最佳的
+    roff 编辑习惯是怎样的</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <pre>这是一个 roff 文档的例子.
+\)\$*
+这是同一段中的下一句.
+\)\$*
+这是下一个句子，它比较长，分成了多
+行；类似 `cf.&#39; 这样的短语可以很容易地
+识别，因为其中的“点”后面没有换行.
+\)\$*
+(在输出时，它们仍会在同一段中.)
+\)\$*
+(译注：如果使用中文的标点“。”就不用考虑这些，
+但是每句话后面换行总是个好主意。少用 `.&#39; 为妙)
+    </pre>
+  </dd>
+</dl>
+<p class="Pp">除了
+    Emacs，其他一些编辑器也提供了
+    nroff
+    格式文件的支持，例如
+    <a href="../../buster/manpages-zh/vim.1.zh_CN.html">vim(1)</a>, 它是 <a href="../../buster/manpages-zh/vi.1.zh_CN.html">vi(1)</a>
+    程序的扩展</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+<i>UNIX®</i> 是 Open Group
+  的注册商标。 但是在
+  Caldera 在 2001 年收购 SCO UNIX
+  之后，事情发生了极大的好转
+<p class="Pp">(译注：为什么 2003 年
+    SCO 又会成为 M$
+  的走狗呢?)</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参见_SEE_ALSO">参见 SEE ALSO<a class="anchor" href="#%E5%8F%82%E8%A7%81_SEE_ALSO">¶</a></h1>
+有大量的讲述 roff
+  的文档。 讲述传统 troff
+  的原始文档仍可获得，groff
+  的所有方面也都详细地记录在文档中
+<section class="Ss">
+<h2 class="Ss" id="Internet_sites">Internet sites<a class="anchor" href="#Internet_sites">¶</a></h2>
+<dl class="Bl-tag">
+  <dt>troff.org</dt>
+  <dd>提供了 roff
+      所有历史方面的概述和指引。
+      这个网站仍在建设；但是，它将成为
+      roff 历史的主要来源</dd>
+  <dt>Multics</dt>
+  <dd>包含很多 MIT
+      的项目的信息，CTSS，Multics，早期的
+      Unix，还包括 <i>runoff</i>;
+      尤其有用的是一个术语字典，还有很多到古老的文档的链接</dd>
+  <dt>Unix Archive</dt>
+  <dd>提供了古老的 Unix
+      的源码和一些二进制文件
+      (包括 troff
+      的源码和它的文档)，它们
+      是 Caldera 自 2001
+      年以来公开的，例如著名的
+      Unix 版本 7 的 PDP-11
+      平台版本位置是</dd>
+  <dt>Developers at AT&amp;T Bell Labs</dt>
+  <dd>提供了搜索早期开发者信息的功能</dd>
+  <dt>Plan 9</dt>
+  <dd>AT&amp;T Bell Labs
+      贝尔实验室的作品</dd>
+  <dt>runoff</dt>
+  <dd>保存了古老的 runoff
+      排版语言写成的一些文档</dd>
+  <dt>CSTR Papers</dt>
+  <dd>保存了原始的 troff 手册
+      (CSTR #54, #97, #114, #116, #122)
+      还有著名的有关编程的历史文档</dd>
+  <dt>GNU roff</dt>
+  <dd>提供了 自由的 roff
+      实现：groff，并且它是 roff
+      的事实标准</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="历史文档_Historical_roff_Documentation">历史文档 Historical roff Documentation<a class="anchor" href="#%E5%8E%86%E5%8F%B2%E6%96%87%E6%A1%A3_Historical_roff_Documentation">¶</a></h2>
+很多
+  历史文档仍然可以在线获得。
+  troff
+  语言主要的两部手册是
+<dl class="Bl-tag">
+  <dt>[CSTR #54]</dt>
+  <dd>J. F. Osanna, (《用户手册》) Bell
+      Labs, 1976; revised by Brian Kernighan, 1992.
+    <p class="Pp"></p>
+  </dd>
+  <dt>[CSTR #97]</dt>
+  <dd>Brian Kernighan, (《设备无关的
+      troff》) Bell Labs, 1981, revised March 1982.</dd>
+</dl>
+<p class="Pp">将 roff
+    作为一种“小语言”(&#34;little
+    language&#34;) 来讲述的论文有</p>
+<dl class="Bl-tag">
+  <dt>[CSTR #114]</dt>
+  <dd>Jon L. Bentley and Brian W. Kernighan, (《grap:
+      一种图形排版语言》)
+      Bell Labs, August 1984.</dd>
+  <dt>[CSTR #116]</dt>
+  <dd>Brian W. Kernighan, (《pic:
+      一种排版用的图形控制语言》)
+      Bell Labs, December 1984.</dd>
+  <dt>[CSTR #122]</dt>
+  <dd>J. L. Bentley, L. W. Jelinski, and B. W. Kernighan, (《chem:
+      排版化学结构图的程序，计算机与化学》)
+      Bell Labs, April 1986.</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="手册页_Manual_Pages">手册页 Manual Pages<a class="anchor" href="#%E6%89%8B%E5%86%8C%E9%A1%B5_Manual_Pages">¶</a></h2>
+由于它结构复杂，完整的
+  roff
+  系统包含很多很多手册页，
+  每一个都描述了 roff
+  的一个方面。
+  不幸的是，不同的 roff
+  实现之间，它们的手册没有相同的命名格式
+<p class="Pp">在 <i>groff</i> 中，手册页
+    <a href="../../buster/manpages-zh/groff.1.zh_CN.html">groff(1)</a> 包含了 groff
+    相关的所有文档的索引</p>
+<p class="Pp">其他系统中，你需要自己探索，但是
+    <a href="../../buster/manpages-zh/troff.1.zh_CN.html">troff(1)</a> 是个很好的起点</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者_AUTHORS">作者 AUTHORS<a class="anchor" href="#%E4%BD%9C%E8%80%85_AUTHORS">¶</a></h1>
+Copyright (C) 2000, 2001, 2002 Free Software Foundation, Inc.
+<p class="Pp">This document is distributed under the terms of the FDL (GNU Free
+    Documentation License) version 1.1 or later. You should have received a copy
+    of the FDL on your system, it is also available on-line at the</p>
+<p class="Pp">此文档是 <i>groff</i>, GNU roff
+    套件的一部分。
+    它的作者是
+    它的管理者是</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版维护人]">[中文版维护人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D">¶</a></h1>
+<b>bbbush &lt;bbbush@163.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2003.11.28</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中国linux论坛man手册翻译计划》:">《中国linux论坛man手册翻译计划》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9B%BDlinux%E8%AE%BA%E5%9D%9Bman%E6%89%8B%E5%86%8C%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">23 April 2002</td>
+    <td class="foot-os">Groff Version 1.18.1</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+roff.7.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-24T03:51:58Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"roff(7)\"}}]}"
+</script>

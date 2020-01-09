@@ -1,0 +1,2305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>systemctl(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/systemctl.1.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/systemd/systemctl.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/systemctl.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/systemctl.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; systemctl(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/systemctl.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/systemctl.1.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS" title="SYNOPSIS">SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%89%E9%A1%B9" title="选项">选项</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%91%BD%E4%BB%A4" title="命令">命令</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%80%E5%87%BA%E7%8A%B6%E6%80%81" title="退出状态">退出状态</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F" title="环境变量">环境变量</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E8%A7%81" title="参见">参见</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES" title="NOTES">NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/systemctl.1.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/systemctl.1.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/systemctl.1.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/systemctl.1.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/systemd/systemctl.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/systemctl.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/systemctl.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">SYSTEMCTL(1)</td>
+    <td class="head-vol">systemctl</td>
+    <td class="head-rtitle">SYSTEMCTL(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+systemctl - 控制 systemd
+  系统与服务管理器
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS">SYNOPSIS<a class="anchor" href="#SYNOPSIS">¶</a></h1>
+<p class="Pp HP"><b>systemctl</b> [OPTIONS...] COMMAND [NAME...]</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>systemctl</b>
+  可用于检查和控制
+  <a href="../../buster/manpages-zh/systemd.1.zh_CN.html">systemd(1)</a>
+  系统与服务管理器的状态。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="选项">选项<a class="anchor" href="#%E9%80%89%E9%A1%B9">¶</a></h1>
+能够识别的命令行选项如下：
+<p class="Pp"><b>-t</b>, <b>--type=</b></p>
+<div class="Bd-indent">参数必须是一个
+  逗号分隔的单元类型列表(例如&#34;service,socket&#34;)。
+<p class="Pp">在列出单元时，如果使用了此选项，
+    那么表示只列出指定类型的单元，
+    否则将列出所有类型的单元。</p>
+<p class="Pp">此外，作为特例，使用
+    <b>--type=help</b>
+    表示在列出所有可用的单元类型之后退出。</p>
+</div>
+<p class="Pp"><b>--state=</b></p>
+<div class="Bd-indent">参数必须是一个逗号分隔的单元状态列表(只有
+  LOAD, ACTIVE, SUB 三大类)。
+  在列出单元时，如果使用了此选项，那么表示只列出处于指定状态的单元，
+  否则将列出所有状态的单元。
+  例如，使用 <b>--state=failed</b>
+  表示只列出处于失败(failed)状态的单元。
+<p class="Pp">此外，作为特例，使用
+    <b>--state=help</b>
+    表示在列出所有可用的单元状态之后退出。</p>
+</div>
+<p class="Pp"><b>-p</b>, <b>--property=</b></p>
+<div class="Bd-indent">参数必须是一个逗号分隔的属性名称列表(例如&#34;MainPID,LogLevel&#34;)，
+  表示在使用 <b>show</b>
+  命令显示属性时，
+  仅显示参数中列出的属性。
+  如果未指定此选项，那么将显示全部属性。
+  如果多次指定此选项，
+  那么相当于将这些选项的参数用逗号连接起来。
+<p class="Pp">不带参数的
+    <b>systemctl show</b> 命令
+    将会显示管理器(systemd)自身的属性(参见
+    <a href="../../buster/systemd/systemd-system.conf.5.en.html">systemd-system.conf(5)</a> 手册)。</p>
+<p class="Pp">不同类型的单元拥有不同的属性集，
+    指定任意一个单元(即使并不存在)，都可以查看此类单元的所有属性。
+    类似的，即使指定了一个不存在的任务(job)，也能查看任务的所有属性。
+    每种单元能够拥有的属性集分散在
+    <a href="../../buster/systemd/systemd.unit.5.en.html">systemd.unit(5)</a> 手册
+    以及此类单元专属的手册中，例如
+    <a href="../../buster/systemd/systemd.service.5.en.html">systemd.service(5)</a>, <a href="../../buster/systemd/systemd.socket.5.en.html">systemd.socket(5)</a>
+  等等。</p>
+</div>
+<p class="Pp"><b>-a</b>, <b>--all</b></p>
+<div class="Bd-indent">在列出单元时，表示列出所有已加载的单元。
+  在使用 <b>show</b>
+  命令显示属性时，
+  表示显示所有属性，而不管这些属性是否已被设置。
+<p class="Pp">如果想要列出所有已安装的单元，请使用
+    <b>list-unit-files</b> 命令。</p>
+</div>
+<p class="Pp"><b>-r</b>, <b>--recursive</b></p>
+<div class="Bd-indent">在列出单元时，
+  同时也以
+  &#34;容器名:单元名&#34;
+  格式列出本地容器中的单元。</div>
+<p class="Pp"><b>--reverse</b></p>
+<div class="Bd-indent">在使用 <b>list-dependencies</b>
+  命令时，
+  仅显示单元之间的反向依赖关系。
+  也就是仅显示 <i>WantedBy=</i>,
+  <i>RequiredBy=</i>, <i>PartOf=</i>, <i>BoundBy=</i>
+  系列(而不是 <i>Wants=</i>
+  系列)的依赖关系。</div>
+<p class="Pp"><b>--after</b></p>
+<div class="Bd-indent">在使用 <b>list-dependencies</b>
+  命令时，
+  仅显示在先后顺序上早于指定单元的那些单元，
+  也就是递归的列出 <i>After=</i>
+  中的单元。
+<p class="Pp">注意，每个 <i>After=</i>
+    依赖都会自动生成一个对应的
+    <i>Before=</i> 依赖。
+    单元之间的先后顺序既可以被显式的明确设定，
+    也可以由其他指令隐式的自动生成(例如
+    <i>WantedBy=</i> 或 <i>RequiresMountsFor=</i>)。
+    无论是隐式自动生成的先后顺序，
+    还是显式明确设定的先后顺序，
+    都会被 <b>list-dependencies</b>
+    命令显示出来。</p>
+</div>
+<p class="Pp"><b>--before</b></p>
+<div class="Bd-indent">在使用 <b>list-dependencies</b>
+  命令时，
+  仅显示在先后顺序上晚于指定单元的那些单元，
+  也就是递归的列出
+  <i>Before=</i> 中的单元。</div>
+<p class="Pp"><b>-l</b>, <b>--full</b></p>
+<div class="Bd-indent">在 <b>status</b>, <b>list-units</b>,
+  <b>list-jobs</b>, <b>list-timers</b>
+  命令的输出中，
+  显示完整的单元名称、进程树项目、日志输出、单元描述，
+  也就是不省略或截断它们。</div>
+<p class="Pp"><b>--value</b></p>
+<div class="Bd-indent">在使用 <b>show</b>
+  命令显示属性时，
+  仅显示属性值，而不显示属性名及等号。</div>
+<p class="Pp"><b>--show-types</b></p>
+<div class="Bd-indent">在使用 <b>list-sockets</b>
+  命令列出套接字(socket)时，同时显示套接字的类型。</div>
+<p class="Pp"><b>--job-mode=</b></p>
+<div class="Bd-indent">在向任务队列中添加新任务(job)时，如何处理队列中已有的任务。
+  可设为 &#34;fail&#34;, &#34;replace&#34;,
+  &#34;replace-irreversibly&#34;, &#34;isolate&#34;,
+  &#34;ignore-dependencies&#34;, &#34;ignore-requirements&#34;,
+  &#34;flush&#34; 之一。 仅在使用
+  <b>isolate</b>
+  命令时，默认值为
+  &#34;isolate&#34; 且不能更改，
+  对于其他命令，默认值皆为
+  &#34;replace&#34; 。
+<p class="Pp">&#34;fail&#34;
+    表示当新任务与队列中已有的任务冲突时，该命令将失败。
+    所谓&#34;冲突&#34;的含义是：导致队列中已有的某个启动操作转变为停止操作，或者相反。</p>
+<p class="Pp">&#34;replace&#34;
+    表示将队列中冲突的任务替换为新任务。</p>
+<p class="Pp">&#34;replace-irreversibly&#34; 与 &#34;replace&#34;
+    类似，
+    不同之处在于将新任务同时标记为&#34;不可撤销&#34;，
+    也就是即使未来与其他新添加的任务发生冲突也不会被撤消。
+    注意，这个&#34;不可撤销&#34;的任务，
+    仍然可以使用 <b>cancel</b>
+    命令显式的撤消。</p>
+<p class="Pp">&#34;isolate&#34;
+    仅用于启动操作，表示在该单元启动之后，所有其他单元都会被停止。
+    当使用 <b>isolate</b>
+    命令的时候，
+    这是默认值，且不能更改。</p>
+<p class="Pp">&#34;flush&#34;
+    表示撤消队列中已有的全部任务，然后加入新任务。</p>
+<p class="Pp">&#34;ignore-dependencies&#34;
+    表示忽略新任务的所有依赖关系(包括先后顺序依赖)，
+    立即执行请求的操作。
+    如果成功，
+    那么所有被依赖的单元及先后顺序都将被忽略。
+    仅用于调试目的，切勿用于常规目的。</p>
+<p class="Pp">&#34;ignore-requirements&#34; 类似于
+    &#34;ignore-dependencies&#34; ，
+    表示仅忽略必需的依赖(但依然遵守单元之间的先后顺序)。</p>
+</div>
+<p class="Pp"><b>--fail</b></p>
+<div class="Bd-indent">这是 <b>--job-mode=fail</b>
+  的快捷方式。
+<p class="Pp">当与 <b>kill</b>
+    命令一起使用时，
+    表示如果没有任何单元被杀死，那么将会导致报错。</p>
+</div>
+<p class="Pp"><b>-i</b>, <b>--ignore-inhibitors</b></p>
+<div class="Bd-indent">当关闭或休眠系统时，忽略
+  inhibitor 锁。
+  应用程序可以利用 inhibitor
+  锁防止某些重要操作(例如刻录光盘)被关机或休眠打断。
+  任何用户都可以获取
+  inhibitor 锁，
+  但是只有特权用户可以撤消或者忽略它。
+  正常情况下，
+  关机与休眠动作会因为
+  inhibitor
+  锁的存在而失败(无论该动作是否由特权用户发起)，
+  同时所有已激活的 inhibitor
+  锁也都会被显示出来。
+  但如果使用了此选项，
+  那么 inhibitor
+  锁将被忽略，关机或休眠将会照常执行，
+  同时也不再显示这些已激活的锁。</div>
+<p class="Pp"><b>-q</b>, <b>--quiet</b></p>
+<div class="Bd-indent">安静模式，也就是禁止输出任何信息到标准输出。
+  注意：(1)这并不适用于输出信息是唯一结果的命令(例如
+  <b>show</b>)；
+  (2)显示在标准错误上的出错信息永远不会被屏蔽。</div>
+<p class="Pp"><b>--no-block</b></p>
+<div class="Bd-indent">默认为阻塞模式，也就是任务经过校验、排入任务队列之后，
+  <b>systemctl</b>
+  必须一直等到单元启动/停止完成才算执行结束。
+  使用此选项之后，将变为无阻塞模式，也就是任务排入队列之后，
+  即算 <b>systemctl</b>
+  执行结束(不必等待单元启动/停止完成)。</div>
+<p class="Pp"><b>--user</b></p>
+<div class="Bd-indent">与当前调用用户的用户服务管理器(systemd
+  用户实例)通信，
+  而不是默认的系统服务管理器(systemd
+  系统实例)。</div>
+<p class="Pp"><b>--system</b></p>
+<div class="Bd-indent">与系统服务管理器(systemd
+  系统实例)通信，
+  这是默认值。</div>
+<p class="Pp"><b>--no-wall</b></p>
+<div class="Bd-indent">在执行 halt, poweroff, reboot
+  动作前，不发送警告消息。</div>
+<p class="Pp"><b>--global</b></p>
+<div class="Bd-indent">表示在全局用户单元目录(通常是
+  /etc/systemd/user/)上操作，
+  从而全局的操作一个用户单元，这会影响到所有未来登入的用户。</div>
+<p class="Pp"><b>--no-reload</b></p>
+<div class="Bd-indent">与 <b>enable</b>, <b>disable</b>, <b>edit</b>
+  命令连用，
+  表示在完成操作之后不重新加载
+  systemd
+  守护进程的配置(默认会自动重新加载)，
+  相当于不自动执行
+  <b>daemon-reload</b> 命令。</div>
+<p class="Pp"><b>--no-ask-password</b></p>
+<div class="Bd-indent">与 <b>start</b>
+  及其相关命令(reload, restart, try-restart,
+  reload-or-restart, reload-or-try-restart, isolate)连用，
+  表示不询问密码。
+  单元在启动时可能要求输入密码(例如用于解密证书或挂载加密文件系统)。
+  当未使用此选项时，
+  <b>systemctl</b>
+  将会在终端上向用户询问所需的密码。
+  如果使用了此选项，
+  那么必须通过其他方法提供密码(例如通过密码代理程序)，
+  否则单元可能会启动失败。
+  使用此选项还会导致在验证用户身份时，
+  不能使用从终端输入密码的方式。</div>
+<p class="Pp"><b>--kill-who=</b></p>
+<div class="Bd-indent">与 <b>kill</b>
+  命令连用，
+  表示向哪个进程发送信号(<b>--signal=</b>)。
+  可设为
+  <b>main</b>(仅杀死主进程) 或
+  <b>control</b>(仅杀死控制进程)
+  或
+  <b>all</b>(杀死全部进程，这是默认值)。
+  所谓&#34;主进程&#34;是指定义了单元生存期的进程。
+  所谓&#34;控制进程&#34;是指用于改变单元状态的进程。
+  例如，所有 <i>ExecStartPre=</i>,
+  <i>ExecStop=</i>, <i>ExecReload=</i>
+  启动的进程都是控制进程。
+  注意，对于一个单元来说，同一时刻只能存在一个控制进程，
+  因为同一时刻只能存在一个状态变化的动作。
+  对于 <i>Type=forking</i>
+  类型的服务来说，
+  <i>ExecStart=</i>
+  启动的初始进程就是一个控制进程，
+  而此进程随后派生出来作为守护进程运行的那个进程，
+  则是该单元的主进程(如果它可以被检测到的话)。
+  但对于其他类型的服务来说，
+  <i>ExecStart=</i>
+  启动的初始进程反而始终是该服务的主进程。
+  一个服务单元可以包含以下进程：
+  零个或一个主进程，零个或一个控制进程，
+  任意数量(可以是零个)的其他进程。
+  注意，不是所有类型的单元都含有上述三种进程。
+  例如，对于 mount
+  类型的单元来说，
+  就仅有控制进程(/usr/bin/mount
+  与 /usr/bin/umount)，
+  而没有主进程。
+  默认值是 <b>all</b></div>
+<p class="Pp"><b>-s</b>, <b>--signal=</b></p>
+<div class="Bd-indent">与 <b>kill</b>
+  命令连用，
+  表示向目标进程发送哪个信号。
+  必须是 <b>SIGTERM</b>, <b>SIGINT</b>, <b>SIGSTOP</b>
+  之类众所周知的信号。
+  默认值为 <b>SIGTERM</b>
+ 。
+ .RE
+<p class="Pp"><b>-f</b>, <b>--force</b></p>
+<div class="Bd-indent">当与 <b>enable</b>
+  命令连用时，
+  表示复盖所有现存的同名符号链接。
+<p class="Pp">当与 <b>edit</b>
+    命令连用时，
+    表示创建所有尚不存在的指定单元。</p>
+<p class="Pp">当与 <b>halt</b>, <b>poweroff</b>, <b>reboot</b>,
+    <b>kexec</b>
+    命令连用时，表示跳过单元的正常停止步骤，强制直接执行关机操作。
+    如果仅使用此选项一次，那么所有进程都将被强制杀死，并且所有文件系统都将被卸载(或以只读模式重新挂载)。
+    这可以算是一种野蛮但还算相对比较安全的快速关机或重启的方法。
+    如果连续两次使用此选项，那么将既不杀死进程，也不卸载文件系统，
+    而是直接强制关机或重启(但
+    <b>kexec</b> 除外)。
+    警告：连续两次使用
+    <b>--force</b>
+    选项将会导致数据丢失、文件系统不一致等不良后果。
+    注意，如果连续两次使用
+    <b>--force</b>
+    选项，那么所有操作都将由
+    <b>systemctl</b>
+    自己直接执行，而不会与
+    systemd 进程通信。
+    这意味着，即使 systemd
+    进程已经僵死或者崩溃，连续两次使用
+    <b>--force</b>
+    选项所指定的操作依然能够执行成功。</p>
+</div>
+<p class="Pp"><b>--message=</b></p>
+<div class="Bd-indent">当与 <b>halt</b>, <b>poweroff</b>,
+  <b>reboot</b>, <b>kexec</b>
+  命令一起使用时，
+  用于设置一个解释为什么进行该操作的字符串。
+  此字符串将与默认的关机消息一起记录到日志中。</div>
+<p class="Pp"><b>--now</b></p>
+<div class="Bd-indent">当与 <b>enable</b>
+  命令连用时，
+  表示同时还要启动该单元。
+  当与 <b>disable</b> 或 <b>mask</b>
+  命令连用时，
+  表示同时还要停止该单元。</div>
+<p class="Pp"><b>--root=</b></p>
+<div class="Bd-indent">与 <b>enable</b>/<b>disable</b>/<b>is-enabled</b>
+  等相关命令连用，用于设置寻找单元文件时的根目录。</div>
+<p class="Pp"><b>--runtime</b></p>
+<div class="Bd-indent">当与 <b>enable</b>, <b>disable</b>,
+  <b>edit</b>
+  等相关命令连用时，
+  表示仅作临时变更，从而确保这些变更会在重启后丢失。
+  这意味着所做的变更将会保存在
+  /run
+  目录下(立即生效但重启后该目录的内容将全部丢失)，
+  而不是保存在 /etc
+  目录下。
+<p class="Pp">类似的，当与
+    <b>set-property</b> 命令连用时，
+    所做的变更亦是临时的，
+    这些变更在重启后亦会丢失。</p>
+</div>
+<p class="Pp"><b>--preset-mode=</b></p>
+<div class="Bd-indent">与 <b>preset</b> 或 <b>preset-all</b>
+  命令连用，可设为下列值之一：
+  &#34;full&#34;(默认值)
+  表示完全按照预设规则启用与停用各单元。
+  &#34;enable-only&#34;
+  表示仅按照预设规则启用各单元。
+  &#34;disable-only&#34;
+  表示仅按照预设规则停用各单元。</div>
+<p class="Pp"><b>-n</b>, <b>--lines=</b></p>
+<div class="Bd-indent">与 <b>status</b>
+  命令连用，
+  控制日志的显示行数(从最新的一行开始计算)。
+  必须设为一个正整数，默认值是&#34;10&#34;。</div>
+<p class="Pp"><b>-o</b>, <b>--output=</b></p>
+<div class="Bd-indent">与 <b>status</b>
+  命令连用，
+  控制日志的显示格式。
+  详见 <a href="../../buster/manpages-zh/journalctl.1.zh_CN.html">journalctl(1)</a>
+  手册。默认值为 &#34;short&#34;
+ 。
+ .RE
+<p class="Pp"><b>--firmware-setup</b></p>
+<div class="Bd-indent">与 <b>reboot</b>
+  命令连用，
+  要求系统主板的UEFI固件重启到安装模式。
+  仅支持某些以UEFI模式启动的主板。</div>
+<p class="Pp"><b>--plain</b></p>
+<div class="Bd-indent">与 <b>list-dependencies</b>, <b>list-units</b>,
+  <b>list-machines</b> 命令连用，
+  将输出从默认的树形变为列表型。</div>
+<p class="Pp"><b>-H</b>, <b>--host=</b></p>
+<div class="Bd-indent">操作指定的远程主机。可以仅指定一个主机名(hostname)，
+  也可以使用 &#34;username@hostname&#34;
+  格式。 hostname
+  后面还可以加上容器名(以冒号分隔)，
+  也就是形如 &#34;hostname:container&#34;
+  的格式，
+  以表示直接连接到指定主机的指定容器内。
+  操作将通过SSH协议进行，以确保安全。
+  可以通过 <b>machinectl -H </b><b></b><i>HOST</i>
+  命令列出远程主机上的所有容器名称。</div>
+<p class="Pp"><b>-M</b>, <b>--machine=</b></p>
+<div class="Bd-indent">在本地容器内执行操作。
+  必须明确指定容器的名称。</div>
+<p class="Pp"><b>--no-pager</b></p>
+<div class="Bd-indent">不将程序的输出内容管道(pipe)给分页程序。</div>
+<p class="Pp"><b>--no-legend</b></p>
+<div class="Bd-indent">不输出列标题，
+  也就是不在输出列表的头部和尾部显示字段的名称。</div>
+<p class="Pp"><b>-h</b>, <b>--help</b></p>
+<div class="Bd-indent">显示简短的帮助信息并退出。</div>
+<p class="Pp"><b>--version</b></p>
+<div class="Bd-indent">显示简短的版本信息并退出。</div>
+</div>
+</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="命令">命令<a class="anchor" href="#%E5%91%BD%E4%BB%A4">¶</a></h1>
+模式(<i>PATTERN</i>)参数的语法与文件名匹配语法类似：用&#34;*&#34;匹配任意数量的字符，用&#34;?&#34;匹配单个字符，用&#34;[]&#34;匹配字符范围。
+  如果给出了模式(<i>PATTERN</i>)参数，那么表示该命令仅作用于单元名称与至少一个模式相匹配的单元。
+<section class="Ss">
+<h2 class="Ss" id="单元命令">单元命令<a class="anchor" href="#%E5%8D%95%E5%85%83%E5%91%BD%E4%BB%A4">¶</a></h2>
+<b>list-units </b><b>[</b><i>PATTERN</i>...]
+<div class="Bd-indent">列出 <b>systemd</b>
+  已加载的单元。
+  除非明确使用 <b>--all</b>
+  选项列出全部单元(包括：直接引用的单元、出于依赖关系而被引用的单元、活动的单元、失败的单元)，
+  否则默认仅列出：活动的单元、失败的单元、正处于任务队列中的单元。
+  如果给出了模式(<i>PATTERN</i>)参数，那么表示该命令仅作用于单元名称与至少一个模式相匹配的单元。
+  还可以通过 <b>--type=</b> 与
+  <b>--state=</b>
+  选项过滤要列出的单元。
+<p class="Pp">这是默认命令。</p>
+</div>
+<p class="Pp"><b>list-sockets </b><b>[</b><i>PATTERN</i>...]</p>
+<div class="Bd-indent">列出已加载的套接字(socket)单元，并按照监听地址排序。
+  如果给出了模式(<i>PATTERN</i>)参数，那么表示该命令仅作用于单元名称与至少一个模式相匹配的单元。
+  该命令的输出大致像下面这样子：
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>LISTEN           UNIT                        ACTIVATES
+/dev/initctl     systemd-initctl.socket      systemd-initctl.service
+...
+[::]:22          sshd.socket                 sshd.service
+kobject-uevent 1 systemd-udevd-kernel.socket systemd-udevd.service
+5 sockets listed.
+</pre>
+</div>
+<p class="Pp">注意：因为监听地址中有可能包含空格，
+    所以不适合使用程序分析该命令的输出。</p>
+<p class="Pp">参见 <b>--show-types</b>, <b>--all</b>,
+    <b>--state=</b> 选项。</p>
+</div>
+<p class="Pp"><b>list-timers </b><b>[</b><i>PATTERN</i>...]</p>
+<div class="Bd-indent">列出已加载的定时器(timer)单元，并按照下次执行的时间点排序。
+  如果给出了模式(<i>PATTERN</i>)参数，那么表示该命令仅作用于单元名称与至少一个模式相匹配的单元。
+<p class="Pp">参见 <b>--all</b> 与 <b>--state=</b>
+    选项。</p>
+</div>
+<p class="Pp"><b>start </b><b></b><i>PATTERN</i><b>...</b></p>
+<div class="Bd-indent">启动(activate)指定的已加载单元(无法启动未加载的单元)。
+<p class="Pp">如果某个单元未被启动，又没有处于失败(failed)状态，
+    那么通常是因为该单元没有被加载，所以根本没有被模式匹配到。
+    此外，对于从模板实例化而来的单元，因为
+    systemd
+    会在其尚未启动前忽略它们，
+    又因为模式(<i>PATTERN</i>)参数仅能匹配已加载单元的&#34;主名称&#34;(不含单元的&#34;别名&#34;)，
+    所以，在这个命令中使用包含通配符的模式并没有多少实际意义。</p>
+</div>
+<p class="Pp"><b>stop </b><b></b><i>PATTERN</i><b>...</b></p>
+<div class="Bd-indent">停止(deactivate)指定的单元</div>
+<p class="Pp"><b>reload </b><b></b><i>PATTERN</i><b>...</b></p>
+<div class="Bd-indent">要求指定的单元重新加载它们的配置。
+  注意，这里所说的&#34;配置&#34;是服务进程专属的配置(例如
+  httpd.conf 之类)， 而不是 systemd
+  的&#34;单元文件&#34;。
+  如果你想重新加载 systemd
+  的&#34;单元文件&#34;，
+  那么应该使用 <b>daemon-reload</b>
+  命令。 以 Apache 为例，
+  该命令会导致重新加载
+  httpd.conf 文件， 而不是 apache.service
+  文件。
+<p class="Pp">不要将此命令与
+    <b>daemon-reload</b> 命令混淆。</p>
+</div>
+<p class="Pp"><b>restart </b><b></b><i>PATTERN</i><b>...</b></p>
+<div class="Bd-indent">重新启动指定的单元。
+  若指定的单元尚未启动，则启动它们。</div>
+<p class="Pp"><b>try-restart </b><b></b><i>PATTERN</i><b>...</b></p>
+<div class="Bd-indent">重新启动指定的已启动单元。
+  注意，若指定的单元尚未启动，则不做任何操作。</div>
+<p class="Pp"><b>reload-or-restart </b><b></b><i>PATTERN</i><b>...</b></p>
+<div class="Bd-indent">首先尝试重新加载指定单元的进程专属配置，
+  对于那些加载失败的单元，再继续尝试重新启动它们。
+  若指定的单元尚未启动，则启动它们。</div>
+<p class="Pp"><b>try-reload-or-restart </b><b></b><i>PATTERN</i><b>...</b></p>
+<div class="Bd-indent">首先尝试重新加载指定单元的进程专属配置，
+  对于那些加载失败的单元，再继续尝试重新启动它们。
+  注意，若指定的单元尚未启动，则不做任何操作。</div>
+<p class="Pp"><b>isolate </b><b></b><i>NAME</i></p>
+<div class="Bd-indent">启动指定的单元以及所有依赖单元，同时停止所有其他单元。
+  如果没有给出单元的后缀名，
+  那么相当于以 &#34;.target&#34;
+  作为后缀名。
+<p class="Pp">这类似于传统上切换SysV运行级的概念。
+    该命令会立即停止所有在新目标单元中不需要的进程，
+    这其中可能包括当前正在运行的图形环境以及正在使用的终端。</p>
+<p class="Pp">注意，该命令仅可用于
+    <b>AllowIsolate=yes</b> 的单元。参见
+    <a href="../../buster/systemd/systemd.unit.5.en.html">systemd.unit(5)</a> 手册。</p>
+</div>
+<p class="Pp"><b>kill </b><b></b><i>PATTERN</i><b>...</b></p>
+<div class="Bd-indent">向指定单元的
+  <b>--kill-who=</b> 进程发送 <b>--signal=</b>
+  信号。</div>
+<p class="Pp"><b>is-active </b><b></b><i>PATTERN</i><b>...</b></p>
+<div class="Bd-indent">检查指定的单元中，是否有处于活动(active)状态的单元。
+  如果存在至少一个处于活动(active)状态的单元，那么返回&#34;0&#34;值，否则返回非零值。
+  除非同时使用了 <b>--quiet</b>
+  选项，
+  否则，此命令还会在标准输出上显示单元的状态。</div>
+<p class="Pp"><b>is-failed </b><b></b><i>PATTERN</i><b>...</b></p>
+<div class="Bd-indent">检查指定的单元中，是否有处于失败(failed)状态的单元。
+  如果存在至少一个处于失败(failed)状态的单元，那么返回&#34;0&#34;值，否则返回非零值。
+  除非同时使用了 <b>--quiet</b>
+  选项，
+  否则，此命令还会在标准输出上显示单元的状态。</div>
+<p class="Pp"><b>status</b> [<i>PATTERN</i>...|<i>PID</i>...]</p>
+<div class="Bd-indent">如果指定了单元，那么显示指定单元的运行时状态信息，以及这些单元最近的日志数据。
+  如果指定了PID，那么显示指定PID所属单元的运行时状态信息，以及这些单元最近的日志数据。
+  如果未指定任何单元或PID，那么显示整个系统的状态信息，
+  此时若与 <b>--all</b> 连用，
+  则同时显示所有已加载单元(可以用
+  <b>-t</b>
+  限定单元类型)的状态信息。
+<p class="Pp">此命令用于输出人类易读的结果，不要将其用于程序分析(应该使用
+    <b>show</b> 命令)。
+    除非使用了 <b>--lines</b> 与
+    <b>--full</b> 选项，
+    否则默认只输出10行日志，
+    并且超长的部分会被省略号截断。此外，
+    <b>journalctl --unit=</b><b></b><i>NAME</i> 或 <b>journalctl
+    --user-unit=</b><b></b><i>NAME</i>
+    也会对超长的消息使用类似的省略号截断。</p>
+</div>
+<p class="Pp"><b>show</b> [<i>PATTERN</i>...|<i>JOB</i>...]</p>
+<div class="Bd-indent">以&#34;属性=值&#34;的格式显示指定单元或任务的所有属性。
+  单元用其名称表示，而任务则用其id表示。
+  如果没有指定任何单元或任务，
+  那么显示管理器(systemd)自身的属性。
+  除非使用了 <b>--all</b> 选项，
+  否则默认不显示属性值为空的属性。
+  可以使用 <b>--property=</b>
+  选项限定仅显示特定的属性。
+  此命令的输出适合用于程序分析，
+  而不适合被人类阅读(应该使用
+  <b>status</b> 命令)。</div>
+<p class="Pp"><b>cat </b><b></b><i>PATTERN</i><b>...</b></p>
+<div class="Bd-indent">显示指定单元的单元文件内容。
+  在显示每个单元文件的内容之前，
+  会额外显示一行单元文件的绝对路径。</div>
+<p class="Pp"><b>set-property </b><b></b><i>NAME</i><b>
+    </b><b></b><i>ASSIGNMENT</i><b>...</b></p>
+<div class="Bd-indent">在运行时修改单元的属性值。
+  主要用于修改单元的资源控制属性值而无需直接修改单元文件。
+  并非所有属性都可以在运行时被修改，
+  但大多数资源控制属性(参见
+  <a href="../../buster/systemd/systemd.resource-control.5.en.html">systemd.resource-control(5)</a>)可以。
+  所作修改会立即生效，并永久保存在磁盘上，以确保永远有效。
+  但是如果使用了 <b>--runtime</b>
+  选项，
+  那么此修改仅临时有效，下次重启此单元后，将会恢复到原有的设置。
+  设置属性的语法与单元文件中的写法相同。
+<p class="Pp">例如： <b>systemctl set-property foobar.service
+    CPUShares=777</b></p>
+<p class="Pp">注意，此命令可以同时修改多个属性值，
+    只需依次将各个属性用空格分隔即可。</p>
+<p class="Pp">与单元文件中的规则相同，
+    设为空表示清空当前已存在的列表。</p>
+</div>
+<p class="Pp"><b>help
+    </b><b></b><i>PATTERN</i><b>...|</b><b></b><i>PID</i><b>...</b></p>
+<div class="Bd-indent">显示指定单元的手册页(若存在)。
+  指定PID表示显示该进程所属单元的手册页(若存在)。</div>
+<p class="Pp"><b>reset-failed [</b><b></b><i>PATTERN</i><b>...]</b></p>
+<div class="Bd-indent">重置指定单元的失败(failed)状态。
+  如果未指定任何单元，则重置所有单元的失败(failed)状态。
+  当某个单元因为某种原因操作失败(例如退出状态码不为零或进程被强制杀死或启动超时)，
+  将会自动进入失败(failed)状态，
+  退出状态码与导致故障的原因
+  将被记录到日志中以方便日后排查。</div>
+<p class="Pp"><b>list-dependencies</b> [<i>NAME</i>]</p>
+<div class="Bd-indent">显示单元的依赖关系。
+  也就是显示由 <i>Requires=</i>,
+  <i>Requisite=</i>, <i>ConsistsOf=</i>, <i>Wants=</i>, <i>BindsTo=</i>
+  所形成的依赖关系。
+  如果没有明确指定单元的名称，
+  那么表示显示 default.target
+  的依赖关系树。
+<p class="Pp">默认情况下，仅以递归方式显示
+    target
+    单元的依赖关系树，而对于其他类型的单元，仅显示一层依赖关系(不递归)。
+    但如果使用了 <b>--all</b>
+    选项，
+    那么将对所有类型的单元都强制递归的显示完整的依赖关系树。</p>
+<p class="Pp">还可以使用 <b>--reverse</b>,
+    <b>--after</b>, <b>--before</b>
+    选项指定仅显示特定类型的依赖关系。</p>
+</div>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="单元文件命令">单元文件命令<a class="anchor" href="#%E5%8D%95%E5%85%83%E6%96%87%E4%BB%B6%E5%91%BD%E4%BB%A4">¶</a></h2>
+<b>list-unit-files </b><b>[</b><i>PATTERN...</i>]
+<div class="Bd-indent">列出所有已安装的单元文件及其启用状态(相当于同时使用了
+  <b>is-enabled</b> 命令)。
+  如果给出了模式(<i>PATTERN</i>)参数，
+  那么表示该命令仅作用于单元文件名称与至少一个模式相匹配的单元(仅匹配文件名，不匹配路径)。</div>
+<p class="Pp"><b>enable </b><b></b><i>NAME</i><b>...</b>, <b>enable
+    </b><b></b><i>PATH</i><b>...</b></p>
+<div class="Bd-indent">启用指定的单元或单元实例(多数时候相当于将这些单元设为&#34;开机时自动启动&#34;或&#34;插入某个硬件时自动启动&#34;)。
+  这将会按照单元文件中
+  &#34;[Install]&#34; 小节的指示，
+  在例如 /etc/systemd/system/multi-user.target.wants/
+  这样的目录中，创建指向单元文件自身的软链接。
+  创建完软连接之后，systemd
+  将会自动重新加载自身的配置(相当于执行
+  <b>daemon-reload</b>
+  命令)，以确保所做的变更立即生效。
+  注意，除非同时使用了
+  <b>--now</b>
+  选项(相当于同时执行
+  <b>start</b> 命令)，
+  否则启用一个单元<i>并不会</i>导致该单元被启动。
+  注意，对于形如 foo@bar.service
+  这样的单元实例，
+  软链接自身的文件名是实例化之后的单元名称，
+  但是软连接所指向的目标文件则是该单元的模板文件。
+<p class="Pp">如果此命令的参数是一个有效的单元名称(<i>NAME</i>)，那么将自动搜索所有单元目录。
+    如果此命令的参数是一个单元文件的绝对路径(<i>PATH</i>)，那么将直接使用指定的单元文件。
+    如果参数是一个位于标准单元目录之外的单元文件，
+    那么将会在标准单元目录中额外创建一个指向此单元文件的软连接，
+    以确保该单元文件能够被
+    <b>start</b>
+    之类的命令找到。</p>
+<p class="Pp">除非使用了 <b>--quiet</b>
+    选项，
+    否则此命令还会显示对文件系统所执行的操作(Created
+    symlink ...)。</p>
+<p class="Pp">此命令是维护
+    .{wants,requires}/
+    目录与单元别名的首选方法。
+    注意，此命令仅会按照单元文件中
+    &#34;[Install]&#34;
+    小节预设的名称创建软链接。
+    另一方面，系统管理员亦可手动创建所需的软链接，
+    特别是在需要创建不同于默认软链接名称的时候。
+    不过需要注意的是，系统管理员必须在创建完软连接之后手动执行
+    <b>daemon-reload</b> 命令，
+    以确保所做的变更立即生效。</p>
+<p class="Pp">不要将此命令与
+    <b>start</b>
+    命令混淆，它们是相互独立的命令：
+    可以启动一个尚未启用的单元，也可以启用一个尚未启动的单元。
+    <b>enable</b>
+    命令只是设置了单元的启动钩子(通过创建软链接)，
+    例如在系统启动时或者某个硬件插入时，自动启动某个单元。
+    而 <b>start</b>
+    命令则是具体执行单元的启动操作，
+    例如对于服务单元来说就是启动守护进程，而对于套接字单元来说则是绑定套接字，等等。</p>
+<p class="Pp">若与 <b>--user</b>
+    选项连用，则表示变更仅作用于用户实例，否则默认作用于系统实例(相当于使用
+    <b>--system</b> 选项)。 若与 <b>--runtime</b>
+    选项连用，则表示仅作临时性变更(重启后所有变更都将丢失)，否则默认为永久性变更。
+    若与 <b>--global</b>
+    选项连用，则表示变更作用于所有用户(在全局用户单元目录上操作)，否则默认仅作用于当前用户(在私有用户单元目录上操作)。
+    注意，当与 <b>--runtime</b>
+    选项连用时，systemd
+    守护进程不会重新加载自身的配置。</p>
+<p class="Pp">不可将此命令应用于已被
+    <b>mask</b>
+    命令屏蔽的单元，否则将会导致错误。</p>
+</div>
+<p class="Pp"><b>disable </b><b></b><i>NAME</i><b>...</b></p>
+<div class="Bd-indent">停用指定的单元或单元实例(多数时候相当于撤销这些单元的&#34;开机时自动启动&#34;以及&#34;插入某个硬件时自动启动&#34;)。
+  这将会从单元目录中删除所有指向单元自身及所有支持单元的软链接。
+  这相当于撤销 <b>enable</b> 或
+  <b>link</b> 命令所做的操作。
+  注意，此命令会删除<i>所有</i>指向单元自身及所有支持单元的软链接，
+  包括手动创建的软连接以及通过
+  <b>enable</b> 与 <b>link</b>
+  命令创建的软连接。
+  注意，虽然 <b>disable</b> 与 <b>enable</b>
+  是一对相反的命令，但是它们的效果并不一定总是完全对称的。
+  因为 <b>disable</b>
+  删除的软连接数量有可能比上一次
+  <b>enable</b>
+  命令创建的软连接数量更多。
+<p class="Pp">此命令的参数仅能接受单元的名字，而不能接受单元文件的路径。</p>
+<p class="Pp">除了停用参数中明确指定的单元之外，那些在被停用单元
+    &#34;[Install]&#34; 小节的 <i>Also=</i>
+    选项中列出的所有单元，也同样会被停用。
+    也就是说，这个停用动作是沿着
+    <i>Also=</i>
+    选项不断传递的。</p>
+<p class="Pp">删除完软连接之后，
+    systemd
+    将会自动重新加载自身的配置(相当于执行
+    <b>daemon-reload</b>
+    命令)，以确保所做的变更立即生效。
+    注意，除非同时使用了
+    <b>--now</b>
+    选项(相当于同时执行
+    <b>stop</b> 命令)，
+    否则停用一个单元<i>并不会</i>导致该单元被停止。</p>
+<p class="Pp">除非使用了 <b>--quiet</b>
+    选项，
+    否则此命令还会显示对文件系统所执行的操作(Removed
+    symlink ...)。</p>
+<p class="Pp">有关 <b>--system</b>, <b>--user</b>, <b>--runtime</b>,
+    <b>--global</b>
+    选项的影响，参见上面对
+    <b>enable</b> 命令的解释。</p>
+</div>
+<p class="Pp"><b>reenable </b><b></b><i>NAME</i><b>...</b></p>
+<div class="Bd-indent">重新启用指定的单元或单元实例。
+  这相当于先使用 <b>disable</b>
+  命令之后再使用 <b>enable</b>
+  命令。
+  通常用于按照单元文件中
+  &#34;[Install]&#34;
+  小节的指示重置软链接名称。
+  此命令的参数仅能接受单元的名字，而不能接受单元文件的路径。</div>
+<p class="Pp"><b>preset </b><b></b><i>NAME</i><b>...</b></p>
+<div class="Bd-indent">按照预设文件(*.preset)的指示，重置指定单元的启用(enable)/停用(disable)状态。
+  其效果等价于按照预设规则，对列出的单元依次使用
+  <b>disable</b> 或 <b>enable</b> 命令。
+<p class="Pp">可以使用 <b>--preset-mode=</b>
+    选项控制如何参照预设文件：
+    既启用又停用、仅启用、仅停用</p>
+<p class="Pp">如果指定单元的
+    &#34;[Install]&#34;
+    小节不包含必要的启用信息，
+    那么此命令将会悄无声息的忽略该单元。</p>
+<p class="Pp">有关预设文件的更多说明，详见
+    <a href="../../buster/systemd/systemd.preset.5.en.html">systemd.preset(5)</a> 手册与 <b>Preset</b>[1]
+    文档。</p>
+</div>
+<p class="Pp"><b>preset-all</b></p>
+<div class="Bd-indent">按照预设文件(*.preset)的指示，
+  重置全部单元的启用(enable)/停用(disable)状态(参见上文)。
+<p class="Pp">可以使用 <b>--preset-mode=</b>
+    选项控制如何参照预设文件：
+    既启用又停用、仅启用、仅停用</p>
+</div>
+<p class="Pp"><b>is-enabled </b><b></b><i>NAME</i><b>...</b></p>
+<div class="Bd-indent">检查是否有至少一个指定的单元或单元实例已经被启用。如果有，那么返回&#34;0&#34;，否则返回非零。
+  除非使用了 <b>--quiet</b>
+  选项，否则此命令还会显示指定的单元或单元实例的当前启用状态：
+<p class="Pp"><b>Table 1. is-enabled
+    命令的输出</b></p>
+<table class="tbl" border="1" style="border-style: solid;">
+  <tbody><tr>
+    <td>状态</td>
+    <td>含义</td>
+    <td>返回值</td>
+  </tr>
+  <tr>
+    <td>&#34;enabled&#34;</td>
+    <td>已经通过 /etc/systemd/system/*.{wants,requires}/
+      目录下的软连接被永久启用</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>&#34;enabled-runtime&#34;</td>
+    <td>已经通过 /run/systemd/system/*.{wants,requires}/
+      目录下的软连接被临时启用</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>&#34;linked&#34;</td>
+    <td>虽然单元文件本身不在标准单元目录中，但是指向此单元文件的一个或多个软连接已经存在于
+      /etc/systemd/system/ 永久目录中</td>
+    <td>&gt; 0</td>
+  </tr>
+  <tr>
+    <td>&#34;linked-runtime&#34;</td>
+    <td>虽然单元文件本身不在标准单元目录中，但是指向此单元文件的一个或多个软连接已经存在于
+      /run/systemd/system/ 临时目录中</td>
+    <td>&gt; 0</td>
+  </tr>
+  <tr>
+    <td>&#34;masked&#34;</td>
+    <td>已经被 /etc/systemd/system/
+      目录永久屏蔽(软连接指向
+      /dev/null 文件)，因此 <b>start</b>
+      操作会失败</td>
+    <td>&gt; 0</td>
+  </tr>
+  <tr>
+    <td>&#34;masked-runtime&#34;</td>
+    <td>已经被 /run/systemd/systemd/
+      目录临时屏蔽(软连接指向
+      /dev/null 文件)，因此 <b>start</b>
+      操作会失败</td>
+    <td>&gt; 0</td>
+  </tr>
+  <tr>
+    <td>&#34;static&#34;</td>
+    <td>尚未被启用，并且单元文件的
+      &#34;[Install]&#34;
+      小节中没有可用于
+      <b>enable</b> 命令的选项</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>&#34;indirect&#34;</td>
+    <td>尚未被启用，但是单元文件的
+      &#34;[Install]&#34; 小节中 <i>Also=</i>
+      选项的值列表非空(也就是列表中的某些单元可能已被启用)</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>&#34;disabled&#34;</td>
+    <td>尚未被启用，但是单元文件的
+      &#34;[Install]&#34;
+      小节中存在可用于
+      <b>enable</b> 命令的选项</td>
+    <td>&gt; 0</td>
+  </tr>
+  <tr>
+    <td>&#34;generated&#34;</td>
+    <td>单元文件是被单元生成器动态生成的(参见
+      <a href="../../buster/systemd/systemd.generator.7.en.html">systemd.generator(7)</a>
+      手册)。被生成的单元文件可能并未被直接启用，而是被单元生成器隐含的启用了。</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>&#34;transient&#34;</td>
+    <td>单元文件是被运行时API动态临时生成的。该临时单元可能并未被启用。</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>&#34;bad&#34;</td>
+    <td>单元文件不正确或者出现其他错误。
+      <b>is-enabled</b>
+      不会返回此状态，而是会显示一条出错信息。
+      <b>list-unit-files</b>
+      命令有可能会显示此单元。</td>
+    <td>&gt; 0</td>
+  </tr>
+</tbody></table>
+<p class="Pp"></p>
+</div>
+<p class="Pp"><b>mask </b><b></b><i>NAME</i><b>...</b>
+  <br/>
+</p>
+<div class="Bd-indent">屏蔽指定的单元或单元实例。
+  也就是在单元目录中创建指向
+  /dev/null
+  的同名符号连接，从而在根本上确保无法启动这些单元。
+  这比 <b>disable</b>
+  命令更彻底，可以通杀一切启动方法(包括手动启动)，所以应该谨慎使用该命令。
+  若与 <b>--runtime</b>
+  选项连用，则表示仅作临时性屏蔽(重启后屏蔽将失效)，否则默认为永久性屏蔽。
+  除非使用了 <b>--now</b>
+  选项(相当于同时执行
+  <b>stop</b>
+  命令)，否则仅屏蔽一个单元并不会导致该单元被停止。
+  此命令的参数仅能接受单元的名字，而不能接受单元文件的路径。</div>
+<p class="Pp"><b>unmask </b><b></b><i>NAME</i><b>...</b></p>
+<div class="Bd-indent">解除对指定单元或单元实例的屏蔽，这是
+  <b>mask</b> 命令的反动作。
+  也就是在单元目录中删除指向
+  /dev/null 的同名符号连接。
+  此命令的参数仅能接受单元的名字，而不能接受单元文件的路径。</div>
+<p class="Pp"><b>link </b><b></b><i>PATH</i><b>...</b></p>
+<div class="Bd-indent">将不在标准单元目录中的单元文件(通过软链接)连接到标准单元目录中去。
+  <i>PATH</i>
+  参数必须是单元文件的绝对路径。该命令的结果可以通过
+  <b>disable</b> 命令撤消。
+  通过该命令，可以让一个不在标准单元目录中的单元文件，也可以像位于标准单元目录中的常规单元文件一样，
+  被 <b>start</b>, <b>stop</b> ...
+  等各种命令操作。</div>
+<p class="Pp"><b>revert </b><b></b><i>NAME</i><b>...</b></p>
+<div class="Bd-indent">将指定的单元恢复成初始版本。
+  这将会删除对指定单元的所有修改。
+  例如，对于 &#34;foo.service&#34;
+  单元来说，
+  将会删除所有 foo.service.d/
+  目录。
+  如果指定的单元在 /usr/lib/
+  目录中
+  还存在单元文件的初始版本，那么还会进一步删除
+  /etc/ 与 /run/ 目录中
+  所有用来覆盖初始单元文件的软连接与自定义单元文件。
+  如果指定的单元已经被屏蔽，那么将会被解除屏蔽。
+<p class="Pp">从效果上看，该命令相当于撤销
+    <b>edit</b>, <b>set-property</b>, <b>mask</b>
+    命令所做的操作，
+    并且将指定单元的配置恢复成软件包提供的初始值。</p>
+</div>
+<p class="Pp"><b>add-wants </b><b></b><i>TARGET</i><b>
+    </b><b></b><i>NAME</i><b>...</b>, <b>add-requires
+    </b><b></b><i>TARGET</i><b> </b><b></b><i>NAME</i><b>...</b></p>
+<div class="Bd-indent">将指定的单元或单元实例(<i>NAME</i>)
+  作为 &#34;Wants=&#34; 或 &#34;Requires=&#34;
+  依赖， 添加到 <i>TARGET</i>
+  单元中。
+<p class="Pp">关于 <b>--system</b>, <b>--user</b>, <b>--runtime</b>,
+    <b>--global</b> 选项的影响，
+    参见前文对 <b>enable</b>
+    命令的解释。</p>
+</div>
+<p class="Pp"><b>edit </b><b></b><i>NAME</i><b>...</b></p>
+<div class="Bd-indent">调用文本编辑器(参见下面的&#34;环境变量&#34;小节)修改指定的单元或单元实例。
+<p class="Pp">若使用了 <b>--full</b>
+    选项，则表示使用新编辑的单元文件完全取代原始单元文件，
+    否则默认将新编辑的单元配置片段(位于
+    .d/
+    目录)附加到原始单元文件的末尾。</p>
+<p class="Pp">如果使用了 <b>--force</b>
+    选项，并且某些指定的单元文件不存在，
+    那么将会强制打开一个新的空单元文件以供编辑。</p>
+<p class="Pp">注意，在编辑过程中，编辑器实际操作的只是临时文件，
+    仅在编辑器正常退出时，临时文件的内容才会被实际写入到目标文件中。</p>
+<p class="Pp">注意，如果在编辑器退出时，临时文件的内容为空，
+    则表示取消编辑动作(而不是写入一个空文件)。</p>
+<p class="Pp">编辑动作完成之后，systemd
+    将会自动重新加载自身的配置(相当于执行
+    <b>daemon-reload</b>
+    命令)，以确保所做的变更立即生效。</p>
+<p class="Pp">关于 <b>--system</b>, <b>--user</b>, <b>--runtime</b>,
+    <b>--global</b> 选项的影响，
+    参见前文对 <b>enable</b>
+    命令的解释。</p>
+<p class="Pp">注意：(1)该命令不可用于编辑远程主机上的单元文件。
+    (2)禁止在编辑 /etc
+    中的原始单元文件时使用
+    <b>--runtime</b> 选项， 因为 /etc
+    中的单元文件优先级高于
+    /run 中的单元文件。</p>
+</div>
+<p class="Pp"><b>get-default</b></p>
+<div class="Bd-indent">显示默认的启动目标。
+  这将显示 default.target
+  软链接所指向的实际单元文件的名称。</div>
+<p class="Pp"><b>set-default </b><b></b><i>NAME</i></p>
+<div class="Bd-indent">设置默认的启动目标。
+  这会将 default.target
+  软链接指向 <i>NAME</i>
+  单元。</div>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="机器命令">机器命令<a class="anchor" href="#%E6%9C%BA%E5%99%A8%E5%91%BD%E4%BB%A4">¶</a></h2>
+<b>list-machines </b><b>[</b><i>PATTERN</i>...]
+<div class="Bd-indent">列出主机和所有运行中的本地容器，以及它们的状态。
+  如果给出了模式(<i>PATTERN</i>)参数，
+  那么仅显示容器名称与至少一个模式匹配的本地容器。</div>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="任务(job)命令">任务(job)命令<a class="anchor" href="#%E4%BB%BB%E5%8A%A1(job)%E5%91%BD%E4%BB%A4">¶</a></h2>
+<b>list-jobs </b><b>[</b><i>PATTERN...</i>]
+<div class="Bd-indent">列出正在运行中的任务。
+  如果给出了模式(<i>PATTERN</i>)参数，
+  那么仅显示单元名称与至少一个模式匹配的任务。</div>
+<p class="Pp"><b>cancel </b><b></b><i>JOB</i><b>...</b></p>
+<div class="Bd-indent">据给定的任务ID撤消任务。
+  如果没有给出任务ID，
+  那么表示撤消所有尚未执行的任务。</div>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="环境变量命令">环境变量命令<a class="anchor" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%91%BD%E4%BB%A4">¶</a></h2>
+<b>show-environment</b>
+<div class="Bd-indent">显示所有 systemd
+  环境变量及其值。
+  显示格式遵守shell脚本语法，可以直接用于shell脚本中。
+  这些环境变量会被传递给所有由
+  systemd 派生的进程。</div>
+<p class="Pp"><b>set-environment </b><b></b><i>VARIABLE=VALUE</i><b>...</b></p>
+<div class="Bd-indent">设置指定的 systemd
+  环境变量。</div>
+<p class="Pp"><b>unset-environment </b><b></b><i>VARIABLE</i><b>...</b></p>
+<div class="Bd-indent">撤消指定的 systemd
+  环境变量。
+  如果仅指定了变量名，那么表示无条件的撤消该变量(无论其值是什么)。
+  如果以 VARIABLE=VALUE
+  格式同时给出了变量值，
+  那么表示仅当 VARIABLE
+  的值恰好等于 VALUE 时，
+  才撤消 VARIABLE 变量。</div>
+<p class="Pp"><b>import-environment</b> [<i>VARIABLE...</i>]</p>
+<div class="Bd-indent">导入指定的客户端环境变量。
+  如果未指定任何参数，
+  则表示导入全部客户端环境变量。</div>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="systemd_生命周期命令">systemd 生命周期命令<a class="anchor" href="#systemd_%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%91%BD%E4%BB%A4">¶</a></h2>
+<b>daemon-reload</b>
+<div class="Bd-indent">重新加载 systemd
+  守护进程的配置。
+  具体是指：重新运行所有的生成器(<a href="../../buster/systemd/systemd.generator.7.en.html">systemd.generator(7)</a>)，
+  重新加载所有单元文件，重建整个依赖关系树。
+  在重新加载过程中，
+  所有由 systemd
+  代为监听的用户套接字都始终保持可访问状态。
+<p class="Pp">不要将此命令与
+    <b>reload</b> 命令混淆。</p>
+</div>
+<p class="Pp"><b>daemon-reexec</b></p>
+<div class="Bd-indent">重新执行 systemd
+  守护进程。
+  具体是指：首先序列化
+  systemd 状态，
+  接着重新执行 systemd
+  守护进程并反序列化原有状态。
+  此命令仅供调试和升级
+  systemd 使用。
+  有时候也作为 <b>daemon-reload</b>
+  命令的重量级版本使用。
+  在重新执行过程中，
+  所有由 systemd
+  代为监听的用户套接字都始终保持可访问状态。</div>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="系统命令">系统命令<a class="anchor" href="#%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4">¶</a></h2>
+<b>is-system-running</b>
+<div class="Bd-indent">检查当前系统是否处于正常运行状态(running)，若正常则返回&#34;0&#34;，否则返回大于零的正整数。
+  所谓正常运行状态是指：
+  系统完成了全部的启动操作，整个系统已经处于完全可用的状态，
+  特别是没有处于启动/关闭/维护状态，并且没有任何单元处于失败(failed)状态。
+  除非使用了 <b>--quiet</b>
+  选项，
+  否则此命令还会在标准输出上显示系统的当前状态，
+  如下表所示：
+<p class="Pp"><b>Table 2. is-system-running
+    命令的输出</b></p>
+<table class="tbl" border="1" style="border-style: solid;">
+  <tbody><tr>
+    <td>状态</td>
+    <td>含义</td>
+    <td>返回值</td>
+  </tr>
+  <tr>
+    <td><i>initializing</i></td>
+    <td>启动的早期阶段。也就是尚未到达
+      basic.target/rescue.target/emergency.target
+      之前的阶段。</td>
+    <td>&gt; 0</td>
+  </tr>
+  <tr>
+    <td><i>starting</i></td>
+    <td>启动的晚期阶段。
+      也就是任务队列首次达到空闲之前的阶段，
+      或者已经启动到了某个救援
+      target 中。</td>
+    <td>&gt; 0</td>
+  </tr>
+  <tr>
+    <td><i>running</i></td>
+    <td>完成了全部的启动操作，整个系统已经处于完全可用的状态，
+      并且没有任何单元处于失败(failed)状态。</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td><i>degraded</i></td>
+    <td>完成了全部的启动操作，系统已经可用，
+      但是某些单元处于失败(failed)状态。</td>
+    <td>&gt; 0</td>
+  </tr>
+  <tr>
+    <td><i>maintenance</i></td>
+    <td>启动了 rescue.target/emergency.target
+      目标。</td>
+    <td>&gt; 0</td>
+  </tr>
+  <tr>
+    <td><i>stopping</i></td>
+    <td>系统正处于关闭过程中。</td>
+    <td>&gt; 0</td>
+  </tr>
+  <tr>
+    <td><i>offline</i></td>
+    <td>整个系统已经处于完全可用的状态，
+      但init进程(PID=1)不是 systemd</td>
+    <td>&gt; 0</td>
+  </tr>
+  <tr>
+    <td><i>unknown</i></td>
+    <td>由于资源不足或未知原因，
+      无法检测系统的当前状态</td>
+    <td>&gt; 0</td>
+  </tr>
+</tbody></table>
+<p class="Pp"></p>
+</div>
+<p class="Pp"><b>default</b>
+  <br/>
+</p>
+<div class="Bd-indent">进入默认模式。差不多相当于执行
+  <b>isolate default.target</b> 命令。</div>
+<p class="Pp"><b>rescue</b></p>
+<div class="Bd-indent">进入救援模式。差不多相当于执行
+  <b>isolate rescue.target</b> 命令。
+  但同时会向所有用户显示一条警告信息。</div>
+<p class="Pp"><b>emergency</b></p>
+<div class="Bd-indent">进入紧急维修模式。差不多相当于执行
+  <b>isolate emergency.target</b> 命令。
+  但同时会向所有用户显示一条警告信息。</div>
+<p class="Pp"><b>halt</b></p>
+<div class="Bd-indent">关闭系统，但不切断电源。
+  差不多相当于执行 <b>start
+  halt.target --job-mode=replace-irreversibly</b> 命令。
+  但同时会向所有用户显示一条警告信息。
+  若仅使用一次 <b>--force</b>
+  选项，则跳过单元的正常停止步骤而直接杀死所有进程，强制卸载所有文件系统(或以只读模式重新挂载)，并立即关闭系统。
+  若使用了两次 <b>--force</b>
+  选项，则跳过杀死进程和卸载文件系统的步骤，并立即关闭系统，这会导致数据丢失、文件系统不一致等不良后果。
+  注意，如果连续两次使用
+  <b>--force</b> 选项，
+  那么所有操作都将由
+  <b>systemctl</b>
+  自己直接执行，而不会与
+  systemd 进程通信。
+  这意味着，即使 systemd
+  进程已经僵死或者崩溃，
+  连续两次使用 <b>--force</b>
+  选项所指定的操作依然能够执行成功。</div>
+<p class="Pp"><b>poweroff</b></p>
+<div class="Bd-indent">关闭系统，同时切断电源。
+  差不多相当于执行 <b>start
+  poweroff.target --job-mode=replace-irreversibly</b> 命令。
+  但同时会向所有用户显示一条警告信息。
+  若仅使用一次 <b>--force</b>
+  选项，则跳过单元的正常停止步骤而直接杀死所有进程，强制卸载所有文件系统(或以只读模式重新挂载)，并立即关闭系统。
+  若使用了两次 <b>--force</b>
+  选项，则跳过杀死进程和卸载文件系统的步骤，并立即关闭系统，这会导致数据丢失、文件系统不一致等不良后果。
+  注意，如果连续两次使用
+  <b>--force</b> 选项，
+  那么所有操作都将由
+  <b>systemctl</b>
+  自己直接执行，而不会与
+  systemd 进程通信。
+  这意味着，即使 systemd
+  进程已经僵死或者崩溃，
+  连续两次使用 <b>--force</b>
+  选项所指定的操作依然能够执行成功。</div>
+<p class="Pp"><b>reboot </b><b>[</b><i>arg</i>]</p>
+<div class="Bd-indent">关闭系统，然后重新启动。
+  差不多相当于执行 <b>start
+  reboot.target --job-mode=replace-irreversibly</b> 命令。
+  但同时会向所有用户显示一条警告信息。
+  若仅使用一次 <b>--force</b>
+  选项，则跳过单元的正常停止步骤而直接杀死所有进程，强制卸载所有文件系统(或以只读模式重新挂载)，并立即关闭系统。
+  若使用了两次 <b>--force</b>
+  选项，则跳过杀死进程和卸载文件系统的步骤，并立即关闭系统，这会导致数据丢失、文件系统不一致等不良后果。
+  注意，如果连续两次使用
+  <b>--force</b> 选项，
+  那么所有操作都将由
+  <b>systemctl</b>
+  自己直接执行，而不会与
+  systemd 进程通信。
+  这意味着，即使 systemd
+  进程已经僵死或者崩溃，
+  连续两次使用 <b>--force</b>
+  选项所指定的操作依然能够执行成功。
+<p class="Pp">若给出了可选的
+    <i>arg</i> 参数，
+    那么将会被作为可选参数传递给
+    <a href="../../buster/manpages-dev/reboot.2.en.html">reboot(2)</a> 系统调用。
+    其取值范围依赖于特定的硬件平台。
+    例如 &#34;recovery&#34;
+    有可能表示触发系统恢复动作，
+    而 &#34;fota&#34; 有可能表示
+    “firmware over the air”
+    固件更新。</p>
+</div>
+<p class="Pp"><b>kexec</b></p>
+<div class="Bd-indent">关闭系统，并通过内核的
+  kexec 接口重新启动。
+  差不多相当于执行 <b>start
+  kexec.target --job-mode=replace-irreversibly</b> 命令。
+  但同时会向所有用户显示一条警告信息。
+  若使用了 <b>--force</b> 选项，
+  则跳过服务的正常关闭步骤而直接杀死所有进程，
+  强制卸载所有文件系统(或只读挂载)，
+  并立即关闭系统。</div>
+<p class="Pp"><b>exit </b><b>[</b><i>EXIT_CODE</i>]</p>
+<div class="Bd-indent">让 systemd 按照指定的
+  <i>EXIT_CODE</i>
+  退出码(必须是整数)退出。
+  若未指定 <i>EXIT_CODE</i>
+  则退出码为零。
+<p class="Pp">此命令相当于 <b>poweroff</b>
+    命令，
+    但仅可用于用户实例(也就是以
+    <b>--user</b>
+    选项启动的实例)或容器，
+    否则会执行失败。</p>
+</div>
+<p class="Pp"><b>switch-root </b><b></b><i>ROOT</i><b>
+  </b><b>[</b><i>INIT</i>]</p>
+<div class="Bd-indent">将系统的根目录切换到
+  <i>ROOT</i> 并执行新的 <i>INIT</i>
+  程序(PID=1)。
+  此命令仅应该在初始内存盘(&#34;initrd&#34;)中使用。
+  如果未指定 <i>INIT</i> 参数，
+  那么表示自动在 <i>ROOT</i>
+  目录下搜索 systemd
+  二进制程序， 并用作
+  <i>INIT</i> 程序，
+  同时&#34;initrd&#34;中 systemd
+  的状态将会传递给新的
+  systemd 进程，
+  从而允许在新系统中对原&#34;initrd&#34;中的各种服务状态进行内省。</div>
+<p class="Pp"><b>suspend</b></p>
+<div class="Bd-indent">休眠到内存。
+  相当于启动 suspend.target
+  目标。</div>
+<p class="Pp"><b>hibernate</b></p>
+<div class="Bd-indent">休眠到硬盘。
+  相当于启动 hibernate.target
+  目标。</div>
+<p class="Pp"><b>hybrid-sleep</b></p>
+<div class="Bd-indent">进入混合休眠模式。
+  也就是同时休眠到内存和硬盘。
+  相当于启动 hybrid-sleep.target
+  目标。</div>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="参数语法">参数语法<a class="anchor" href="#%E5%8F%82%E6%95%B0%E8%AF%AD%E6%B3%95">¶</a></h2>
+单元命令的参数可能是一个单独的单元名称(<i>NAME</i>)，
+  也可能是多个匹配模式(<i>PATTERN</i>...)。
+  对于第一种情况，如果省略单元名称的后缀，那么默认以
+  &#34;.service&#34; 为后缀，
+  除非那个命令只能用于某种特定类型的单元。例如
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre># systemctl start sshd
+</pre>
+</div>
+<p class="Pp">等价于</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre># systemctl start sshd.service
+</pre>
+</div>
+<p class="Pp">， 而</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre># systemctl isolate default
+</pre>
+</div>
+<p class="Pp">等价于</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre># systemctl isolate default.target
+</pre>
+</div>
+<p class="Pp">，因为 isolate
+    命令只能用于 .target
+    单元。
+    注意，设备文件路径(绝对路径)会自动转化为
+    device
+    单元名称，其他路径(绝对路径)会自动转化为
+    mount 单元名称。
+    例如，如下命令</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre># systemctl status /dev/sda
+# systemctl status /home
+</pre>
+</div>
+<p class="Pp">分别等价于</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre># systemctl status dev-sda.device
+# systemctl status home.mount
+</pre>
+</div>
+<p class="Pp">对于第二种情况，可以在模式中使用shell风格的匹配符，对所有已加载单元的主名称(primary
+    name)进行匹配。
+    如果没有使用匹配符并且省略了单元后缀，那么处理方式与第一种情况完全相同。
+    这就意味着：如果没有使用匹配符，那么该模式就等价于一个单独的单元名称(<i>NAME</i>)，只表示一个明确的单元。
+    如果使用了匹配符，那么该模式就可以匹配任意数量的单元(包括零个)。</p>
+<p class="Pp">模式使用 <a href="../../buster/manpages-dev/fnmatch.3.en.html">fnmatch(3)</a>
+    语法，
+    也就是可以使用shell风格的
+    &#34;*&#34;, &#34;?&#34;, &#34;[]&#34;
+    匹配符(详见 <a href="../../buster/manpages-zh/glob.7.zh_CN.html">glob(7)</a>)。
+    模式将基于所有已加载单元的主名称(primary
+    name)进行匹配，
+    如果某个模式未能匹配到任何单元，那么将会被悄无声息的忽略掉。
+    例如</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre># systemctl stop sshd@*.service
+</pre>
+</div>
+<p class="Pp">命令将会停止所有
+    sshd@.service 的实例单元。
+    注意，单元的别名(软连接)以及未被加载的单元，不在匹配范围内(也就是不作为匹配目标)。</p>
+<p class="Pp">对于单元文件命令，<i>NAME</i>
+    参数必须是单元名称(完整的全称或省略了后缀的简称)或单元文件的绝对路径。
+    例如：</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre># systemctl enable foo.service
+</pre>
+</div>
+<p class="Pp">或</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre># systemctl link /path/to/foo.service
+</pre>
+</div>
+<p class="Pp"></p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="退出状态">退出状态<a class="anchor" href="#%E9%80%80%E5%87%BA%E7%8A%B6%E6%80%81">¶</a></h1>
+返回值为 0 表示成功，
+  非零返回值表示失败代码。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="环境变量">环境变量<a class="anchor" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">¶</a></h1>
+<i>$SYSTEMD_EDITOR</i>
+<div class="Bd-indent">编辑单元文件时所使用的编辑器，会覆盖
+  <i>$EDITOR</i> 与 <i>$VISUAL</i> 的值。
+  如果 <i>$SYSTEMD_EDITOR</i>, <i>$EDITOR</i>, <i>$VISUAL</i>
+  都不存在或无法使用，
+  那么将会依次尝试使用
+  <a href="../../buster/joe-jupp/editor.1.en.html">editor(1)</a>, <a href="../../buster/nano/nano.1.en.html">nano(1)</a>, <a href="../../buster/manpages-zh/vim.1.zh_CN.html">vim(1)</a>, <a href="../../buster/manpages-zh/vi.1.zh_CN.html">vi(1)</a>
+  编辑器。</div>
+<p class="Pp"><i>$SYSTEMD_PAGER</i></p>
+<div class="Bd-indent">指定分页程序。仅在未指定
+  <b>--no-pager</b> 选项时有意义。
+  此变量会覆盖 <i>$PAGER</i>
+  的值。
+  将此变量设为空字符串或
+  &#34;cat&#34; 等价于使用 <b>--no-pager</b>
+  选项。</div>
+<p class="Pp"><i>$SYSTEMD_LESS</i></p>
+<div class="Bd-indent">用于覆盖
+  默认传递给 <b>less</b>
+  程序的命令行选项
+  (&#34;FRSXMK&#34;)。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参见">参见<a class="anchor" href="#%E5%8F%82%E8%A7%81">¶</a></h1>
+<a href="../../buster/manpages-zh/systemd.1.zh_CN.html">systemd(1)</a>, <a href="../../buster/manpages-zh/journalctl.1.zh_CN.html">journalctl(1)</a>, <a href="../../buster/manpages-zh/loginctl.1.zh_CN.html">loginctl(1)</a>,
+  <a href="../../buster/systemd-container/machinectl.1.en.html">machinectl(1)</a>, <a href="../../buster/systemd/systemd.unit.5.en.html">systemd.unit(5)</a>,
+  <a href="../../buster/systemd/systemd.resource-control.5.en.html">systemd.resource-control(5)</a>, <a href="../../buster/systemd/systemd.special.7.en.html">systemd.special(7)</a>, <a href="../../buster/manpages-zh/wall.1.zh_CN.html">wall(1)</a>,
+  <a href="../../buster/systemd/systemd.preset.5.en.html">systemd.preset(5)</a>, <a href="../../buster/systemd/systemd.generator.7.en.html">systemd.generator(7)</a>, <a href="../../buster/manpages-zh/glob.7.zh_CN.html">glob(7)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES">NOTES<a class="anchor" href="#NOTES">¶</a></h1>
+<dl class="Bl-tag">
+  <dt> 1.</dt>
+  <dd>Preset</dd>
+</dl>
+<div class="Bd-indent"><a href="../../wiki/Software/systemd/Preset">../../wiki/Software/systemd/Preset</a></div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<p class="Pp">翻译人员：金步国
+  <br/>
+  金步国作品集：https://www.jinbuguo.com
+  <br/>
+  中文 man
+    手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os">systemd 231</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+systemctl.1.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2020-01-05T15:51:56Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"systemctl(1)\"}}]}"
+</script>

@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>create_function(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-tr/create_function.7.tr.html" hreflang="tr">
+<link rel="alternate" href="../../buster/manpages-zh/create_function.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/create_function.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; create_function(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/create_function.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/create_function.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS" title="SYNOPSIS">SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#PARAMETERS_%E5%8F%83%E6%95%B8" title="PARAMETERS 參數">PARAMETERS 參數</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES_%E6%B3%A8%E6%84%8F" title="NOTES 注意">NOTES 注意</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#EXAMPLES_%E4%BE%8B%E5%AD%90" title="EXAMPLES 例子">EXAMPLES 例子</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#COMPATIBILITY_%E5%85%BC%E5%AE%B9%E6%80%A7" title="COMPATIBILITY 兼容性">COMPATIBILITY 兼容性</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SEE_ALSO_%E5%8F%83%E8%A6%8B" title="SEE ALSO 參見">SEE ALSO 參見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AD%AF%E8%80%85" title="譯者">譯者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/create_function.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/create_function.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/create_function.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-tr/create_function.7.tr.html" title="Turkish (tr)">Türkçe</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/create_function.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/create_function.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">CREATE FUNCTION(7)</td>
+    <td class="head-vol">SQL Commands</td>
+    <td class="head-rtitle">CREATE FUNCTION(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+CREATE FUNCTION - 定義一個新函數
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS">SYNOPSIS<a class="anchor" href="#SYNOPSIS">¶</a></h1>
+<pre>CREATE [ OR REPLACE ] FUNCTION <i>name</i> ( [ <i>argtype</i> [, ...] ] )
+    RETURNS <i>rettype</i>
+  { LANGUAGE <i>langname</i>
+    | IMMUTABLE | STABLE | VOLATILE
+    | CALLED ON NULL INPUT | RETURNS NULL ON NULL INPUT | STRICT
+    | [EXTERNAL] SECURITY INVOKER | [EXTERNAL] SECURITY DEFINER
+    | AS &#39;<i>definition</i>&#39;
+    | AS &#39;<i>obj_file</i>&#39;, &#39;<i>link_symbol</i>&#39;
+  } ...
+    [ WITH ( <i>attribute</i> [, ...] ) ]
+
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>CREATE FUNCTION</b>
+  定義一個新的函數。
+  CREATE OR REPLACE FUNCTION
+  將要麼創建一個新函數，
+  要麼替換現有的定義。
+<p class="Pp">
+  
+    如果包含了一個模式名，那麼函數就在指定的模式中創建。否則它會在當前模式中創建。
+    新函數的名字不能和同一個模式中的任何帶有同樣參數類型的函數同名。
+    不過，參數類型不同的函數可以同名（這叫做重載）。</p>
+<p class="Pp">
+  
+    要更新一個現有函數的定義，使用
+    CREATE OR REPLACE FUNCTION。
+    我們不能用這個方法修改一個函數的名字或者參數類型（如果你這麼幹，那麼你就會創建一個新的，不同的函數）。
+    同樣，CREATE OR REPLACE FUNCTION
+    也不會允許你修改一個現有函數的返回類型。
+    要做這些事情，你必須刪除並重新創建函數。</p>
+<p class="Pp">
+  
+    如果你刪除然後重建一個函數，新函數和舊的將是不同的實體；你會破壞現有規則，視圖，觸發器等等。
+    使用 CREATE OR REPLACE FUNCTION
+    可以在不破壞引用該函數的對象的前提下修改函數定義。</p>
+<p class="Pp">
+  
+    創建這個函數的用戶成爲函數的所有者。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="PARAMETERS_參數">PARAMETERS 參數<a class="anchor" href="#PARAMETERS_%E5%8F%83%E6%95%B8">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b></b><i>name</i><b></b></dt>
+  <dd>
+    
+    要創建的函數名字。</dd>
+  <dt><b></b><i>argtype</i><b></b></dt>
+  <dd>
+    
+      該函數的數據類型（可以有模式修飾）。如果有的話，參數類型可以是基本類型，也可以是複合類型，域類型，或者和一個現有字段相同的類型。
+    <p class="Pp">
+       一個字段的類型是用
+        <i>tablename</i>.<i>columnname</i>%TYPE
+        表示的；使用這個東西可以幫助函數獨立於表定義的修改。</p>
+    <p class="Pp">
+      
+        根據實現語言的不同，我們還可以在這上面聲明
+        &#34;僞類型&#34;， 比如
+        cstring。僞類型表示實際的參數類型要麼是沒有完整地聲明，要麼是在普通的
+        SQL 數據類型之外。</p>
+  </dd>
+  <dt><b></b><i>rettype</i><b></b></dt>
+  <dd>
+    
+      返回數據類型。輸出類型可以聲明爲一個基本類型，複合類型，域類型，
+      或者從現有字段拷貝。參閱上面
+      argtype
+      的描述獲取如何引用一個現有類型的信息。
+    <p class="Pp">
+      
+        根據實現語言的不同，我們還可以在這上面聲明
+        &#34;僞類型&#34;， 比如
+        cstring。 SETOF
+        修飾詞表示該函數將返回一套條目，
+        而不是一條條目。</p>
+  </dd>
+  <dt><b></b><i>langname</i><b></b></dt>
+  <dd>
+    
+      用以實現函數的語言的名字。
+      可以是 SQL，C，
+      internal，或者是用戶定義的過程語言名字。
+      （又見 createlang。 ）
+      爲了保持向下兼容，該名字可以用單引號包圍。</dd>
+  <dt><b>IMMUTABLE</b></dt>
+  <dd></dd>
+  <dt><b>STABLE</b></dt>
+  <dd></dd>
+  <dt><b>VOLATILE</b></dt>
+  <dd>
+    
+      這些屬性告訴系統把對該函數的多次調用替換成一次是否安全。
+      主要用於運行時優化。
+      至少應該聲明一個選擇。如果任何一個都沒有出現，那麼
+      VOLATILE 是缺省假設。
+    <p class="Pp">IMMUTABLE
+        表示該函數在給出同樣的參數值時總是返回相同的結果；
+        也就是說，它不做數據庫查找或者是使用那些並沒有直接出現在其參數列表裏面的信息。
+        如果給出這個選項，那麼任何帶着全部是常量參數對該函數的調用都將立即替換爲該函數的值。</p>
+    <p class="Pp">STABLE
+        表示在一次表掃描裏，對相同參數值，
+        該函數將穩定返回相同的值，但是它的結果可能在不同
+        SQL 語句之間變化。
+        這個選項對那些結果倚賴數據庫查找，參數變量（比如當前時區），等等的函數是很合適的。
+        還要注意 current_timestamp
+        族函數是 stable
+        (穩定)的，因爲它們的值在一次事務中不會變化。</p>
+    <p class="Pp">VOLATILE
+        表示該函數值甚至可以在一次表掃描內改變，
+        因此不會做任何優化。很少數據庫函數在這個概念上是易變的；
+        一些例子是
+        random()，currval()，
+        timeofday()。請注意任何有副作用的函數都必需列爲易變類，
+        即使其結果相當有規律也應該這樣，這樣才能避免它被優化；一個例子就是
+        setval()。</p>
+  </dd>
+  <dt><b>CALLED ON NULL INPUT</b></dt>
+  <dd></dd>
+  <dt><b>RETURNS NULL ON NULL INPUT</b></dt>
+  <dd></dd>
+  <dt><b>STRICT</b></dt>
+  <dd>CALLED ON NULL INPUT
+      （缺省）表明該函數在自己的某些參數是空值的時候還是可以按照正常的方式調用。
+      剩下的事情是函數的作者必須負責檢查空值以及相應地做出反應。
+    <p class="Pp">RETURNS NULL ON NULL INPUT 或 STRICT
+        表明如果它的任何參數是
+        NULL，此函數總是返回
+        NULL。
+        如果聲明瞭這個參數，則如果存在
+        NULL
+        參數時不會執行該函數；
+        而只是自動假設一個
+        NULL 結果。</p>
+  </dd>
+  <dt><b>[EXTERNAL] SECURITY INVOKER</b></dt>
+  <dd></dd>
+  <dt><b>[EXTERNAL] SECURITY DEFINER</b></dt>
+  <dd>SECURITY INVOKER
+      表明該函數將帶着調用它的用戶的權限執行。
+      這是缺省。SECURITY DEFINER
+      聲明該函數將以創建它的用戶的權限執行。
+    <p class="Pp">
+       關鍵字 EXTERNAL
+        的目的是和 SQL 兼容，
+        但是我們和 SQL
+        不同的是，這個特性不僅僅適用於外部的函數，
+        所以它是可選的。</p>
+  </dd>
+  <dt><b></b><i>definition</i><b></b></dt>
+  <dd>
+    
+      一個定義函數的字串；含義取決於語言。它可以是一個內部函數名字，
+      一個指向某個目標文件的路徑，一個
+      SQL
+      查詢，或者一個用過程語言寫的文本。</dd>
+  <dt><b></b><i>obj_file</i><b>, </b><i>link_symbol</i><b></b></dt>
+  <dd>
+     這個形式的 AS
+      子句用於在函數的 C
+      源文件裏的函數名字和
+      SQL
+      函數的名字不同的時候可動態裝載
+      C 語言函數。 字串 obj_file
+      是包含可動態裝載的對象的文件名，而
+      link_symbol
+      是函數的鏈接符號，也就是該函數在
+      C 源文件裏的名字。
+      如果省略了鏈接符號，那麼就假設它和被定義的
+      SQL 函數同名。</dd>
+  <dt><b></b><i>attribute</i><b></b></dt>
+  <dd>
+    
+      歷史遺留的函數可選信息。下面的屬性可以在此出現：</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>isStrict</b></dt>
+  <dd>
+     等效於 STRICT 或者 RETURNS NULL ON NULL
+    INPUT</dd>
+  <dt><b>isCachable</b></dt>
+  <dd>isCachable 是 IMMUTABLE
+      的過時的等效物；不過出於向下兼容，我們仍然接受它。</dd>
+</dl>
+</div>
+<p class="Pp">
+  
+    屬性名是大小寫無關的。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES_注意">NOTES 注意<a class="anchor" href="#NOTES_%E6%B3%A8%E6%84%8F">¶</a></h1>
+ 請參閱 ``User-Defined Functions&#39;&#39;
+  獲取更多關於書寫函數的信息。
+<p class="Pp">
+   我們允許你將完整的 SQL
+    類型語法用於輸入參數和返回值。
+    不過，有些類型聲明的細節（比如，numeric
+    類型的精度域）是由下層函數實現負責的，
+    並且會被 CREATE FUNCTION
+    命令悄悄地吞掉。
+    （也就是說，不再被識別或強制）。</p>
+<p class="Pp">PostgreSQL
+    允許函數重載；
+    也就是說，同一個函數名可以用於幾個不同的函數，
+    只要它們的參數可以區分它們。不過，所有函數的
+    C 名字必須不同，
+    也就是說你必須給予重載的
+    C 函數不同的 C
+    名字（比如，使用參數類型作爲
+    C 名字的一部分）。</p>
+<p class="Pp">
+   如果重複調用 CREATE
+    FUNCTION，並且都指向同一個目標文件，
+    那麼該文件只裝載一次。要卸載和恢復裝載該文件（可能是在開發過程中），你可以使用
+    LOAD [<a href="../../buster/manpages-zh/load.7.zh_TW.html">load(7)</a>] 命令。</p>
+<p class="Pp">
+   使用 DROP FUNCTION
+    刪除一個用戶定義函數。</p>
+<p class="Pp">
+  
+    函數定義裏面的任何單引號或者反斜槓都必須用寫雙份的方式逃逸。</p>
+<p class="Pp">
+  
+    要能定義函數，用戶必須對該語言有
+    USAGE 權限。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES_例子">EXAMPLES 例子<a class="anchor" href="#EXAMPLES_%E4%BE%8B%E5%AD%90">¶</a></h1>
+
+  這裏是一個簡單的例子，用於幫助你開始掌握這個命令。
+  更多信息和例子，參閱
+  ``User-Defined Functions&#39;&#39;。
+<p class="Pp"></p>
+<pre>CREATE FUNCTION add(integer, integer) RETURNS integer
+    AS &#39;select $1 + $2;&#39;
+    LANGUAGE SQL
+    IMMUTABLE
+    RETURNS NULL ON NULL INPUT;
+
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="COMPATIBILITY_兼容性">COMPATIBILITY 兼容性<a class="anchor" href="#COMPATIBILITY_%E5%85%BC%E5%AE%B9%E6%80%A7">¶</a></h1>
+ 在 SQL99
+  裏的確定義了一個CREATE
+  FUNCTION PostgreSQL
+  的和它類似但是不兼容。
+  這個屬性是不可移植的，可以使用的不同語言也是如此。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO_參見">SEE ALSO 參見<a class="anchor" href="#SEE_ALSO_%E5%8F%83%E8%A6%8B">¶</a></h1>
+ALTER FUNCTION [<a href="../../buster/manpages-zh/alter_function.7.zh_TW.html">alter_function(7)</a>], DROP FUNCTION
+  [<a href="../../buster/manpages-zh/drop_function.7.zh_TW.html">drop_function(7)</a>], GRANT [<a href="../../buster/manpages-zh/grant.7.zh_TW.html">grant(7)</a>], LOAD [<a href="../../buster/manpages-zh/load.7.zh_TW.html">load(7)</a>],
+  REVOKE [<a href="../../buster/manpages-zh/revoke.7.zh_TW.html">revoke(7)</a>], <a href="../../buster/manpages-zh/createlang.1.zh_TW.html">createlang(1)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="譯者">譯者<a class="anchor" href="#%E8%AD%AF%E8%80%85">¶</a></h1>
+<b>Postgresql 中文網站</b> <b>何偉平
+  &lt;laser@pgsqldb.org&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-02</td>
+    <td class="foot-os">SQL - Language Statements</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+create_function.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:32Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"create_function(7)\"}}]}"
+</script>

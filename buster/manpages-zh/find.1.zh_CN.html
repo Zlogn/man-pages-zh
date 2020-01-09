@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>find(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/find.1.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/findutils/find.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es-extra/find.1.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-hu/find.1.hu.html" hreflang="hu">
+<link rel="alternate" href="../../buster/manpages-ja/find.1.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/find.1.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/find.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/find.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; find(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/find.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/find.1.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%80%BB%E8%A7%88_SYNOPSIS" title="总览 SYNOPSIS">总览 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F_EXPRESSIONS" title="表达式 EXPRESSIONS">表达式 EXPRESSIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E8%A7%81_SEE_ALSO" title="参见 SEE ALSO">参见 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D" title="[中文版维护人]">[中文版维护人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/find.1.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/find.1.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/find.1.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/find.1.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/findutils/find.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es-extra/find.1.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-hu/find.1.hu.html" title="Hungarian (hu)">magyar</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/find.1.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/find.1.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/find.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/find.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/find.1.zh_CN.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/itcl3-doc/find.3itcl.en.html">3itcl (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">FIND(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">FIND(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+find -
+  递归地在层次目录中处理文件
+</section>
+<section class="Sh">
+<h1 class="Sh" id="总览_SYNOPSIS">总览 SYNOPSIS<a class="anchor" href="#%E6%80%BB%E8%A7%88_SYNOPSIS">¶</a></h1>
+<b>find</b> [path...] [expression]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+这个文档是GNU版本 <b>find</b>
+  命令的使用手册。 <b>find</b>
+  搜索目录树上的每一个文件名，它从左至右运算给定的表达式，按照优先规则(见运
+  算符OPERATORS一节)进行匹配，直到得出结果（左边运算在
+  &#39;与&#39; 操作中得出假，
+  在&#39;或&#39;
+  操作中得出真），然后
+  <b>find</b>
+  移向下一个文件名。
+<p class="Pp">第一个以 &#39;-&#39; , &#39;(&#39; , &#39;)&#39; , &#39;,&#39; 或
+    &#39;!&#39;
+    这些字符起始的参数是表达式的开始;
+    在它之前的任何参数是要搜索的路径，在它之后的任何参数都是表达式的余下部分。
+    如果没有路径参数，缺省用当前目录。如果没有表达式，缺省表达式
+    用 &#39;-print&#39;.</p>
+<p class="Pp">当所有文件都成功处理时
+    <b>find</b>
+    退出并返回状态值0。如果发生错误则返回一个大于0的值。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="表达式_EXPRESSIONS">表达式 EXPRESSIONS<a class="anchor" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F_EXPRESSIONS">¶</a></h1>
+表达式是由<b>选项</b>(选项总是影响所有的操作,
+  而不仅仅是一个指定的文件的处
+  理,
+  而且总是返回真值)，<b>测试</b>(测试返回一个真值或一个假值)，还有<b>动</b>
+  <b>作</b>(动作有side effects,
+  返回一个真值或假值)
+  组成。它们都以运算符分开.忽
+  略运算符的时候，默认使用
+  -and 连接.
+  如果表达式没有包含
+  -prune 以外的动
+  作，当表达式为真时会执行
+  -print 动作。
+<section class="Ss">
+<h2 class="Ss" id="选项_OPTIONS">选项 OPTIONS<a class="anchor" href="#%E9%80%89%E9%A1%B9_OPTIONS">¶</a></h2>
+所有的选项都总是返回真值，它们总会被执行，除非放在表达式中执行不到的地方。
+  因此，清楚起见，最好把它们放在表达式的开头部分。
+<dl class="Bl-tag">
+  <dt>-daystart</dt>
+  <dd>从当日起始时开始而不是从24小时之前，计算时间(for
+      -amin, -atime, -cmin, -ctime, -mmin, and -mtime)。</dd>
+  <dt>-depth</dt>
+  <dd>先处理目录的内容再处理目录本身。</dd>
+  <dt>-follow</dt>
+  <dd>不检索符号链接。隐含了
+      -noleaf。</dd>
+  <dt>-help, --help</dt>
+  <dd>列出 <b>find</b>
+      的命令行用法的概要，然后退出。</dd>
+  <dt>-maxdepth <i>levels</i></dt>
+  <dd>进入命令行参数指定的目录下层目录时，最深不超过<i>levels</i>(一个非负整数)
+      层。`-maxdepth 0&#39;
+      意味着只在命令行参数指定的目录中执行测试和动作。</dd>
+  <dt>-mindepth <i>levels</i></dt>
+  <dd>不在<i>levels</i>(一个非负整数)层之内执行任何测试和动作。`-mindepth
+      1&#39;意
+      味着处理所有的文件，除了命令行参数指定的目录中的文件。</dd>
+  <dt>-mount</dt>
+  <dd>不进入处于其它文件系统之上的目录。可以用-xdev代替，从而和一些其他版本的
+      <b>find</b> 兼容。</dd>
+  <dt>-noleaf</dt>
+  <dd>不为“目录中子目录数量比硬连接数少2”这种假设做优化。这个选项在搜索那些不遵
+      循UNIX文件系统链接约定的文件系统时用，比如CD-ROM,MS-DOS文件系统或AFS卷的
+      加载点。在普通的UNIX文件系统中,每个目录至少有两个硬连接,它的名字和它
+      的 &#39;.&#39;
+      条目。另外，它的子目录(假如有)还会各有一个
+      &#39;..&#39; 链接到它。在 <b>find</b>
+      检索一个目录时，发现子目录数比它的连接数少二时，它就知道目录中的其他条目
+      并非目录(而是目录树中的叶(`leaf&#39;)节点)。除非需要检索的是这个叶节点，否则
+      没必要去处理它。这样可以带来很大的搜索速度提升。</dd>
+  <dt>-version, --version</dt>
+  <dd>打印<b>find</b>的版本号然后退出。</dd>
+  <dt>-xdev</dt>
+  <dd>不进入处于其他文件系统之上的目录。</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="测试_TESTS">测试 TESTS<a class="anchor" href="#%E6%B5%8B%E8%AF%95_TESTS">¶</a></h2>
+数字参数可以这样给出：
+<dl class="Bl-tag">
+  <dt><i>+n</i></dt>
+  <dd>是比 <i>n</i> 大，</dd>
+  <dt><i>-n</i></dt>
+  <dd>是比 <i>n</i> 小，</dd>
+  <dt><i>n</i></dt>
+  <dd>正好是 <i>n</i> 。</dd>
+  <dt>-amin <i>n</i></dt>
+  <dd>对文件的最近一次访问是在
+      <i>n</i> 分钟之前。</dd>
+  <dt>-anewer <i>file</i></dt>
+  <dd>对文件的最近一次访问比
+      <i>file</i>
+      修改时间要晚。如果命令行中
+      -follow 在 -anewer
+      之前，(也只有在这种情况下)
+      -anewer 会受 -follow 的影响。</dd>
+  <dt>-atime <i>n</i></dt>
+  <dd>对文件的最近一次访问是在
+      <i>n</i>*24 小时之前。</dd>
+  <dt>-cmin <i>n</i></dt>
+  <dd>对文件状态的最近一次修改是在
+      <i>n</i> 分钟之前。</dd>
+  <dt>-cnewer <i>file</i></dt>
+  <dd>对文件状态的最近一次修改比
+      <i>file</i>
+      修改时间要晚。如果命令行中
+      -follow 在 -cnewer
+      之前，(也只有在这种情况下)
+      -cnewer 会受 -follow 的影响。</dd>
+  <dt>-ctime <i>n</i></dt>
+  <dd>对文件状态的最近一次修改是在
+      <i>n</i>*24 小时之前。</dd>
+  <dt>-empty</dt>
+  <dd>文件是空的普通文件或者空目录。</dd>
+  <dt>-false</dt>
+  <dd>总是false。</dd>
+  <dt>-fstype <i>type</i></dt>
+  <dd>文件处于 <i>type</i>
+      类型的文件系统之上。有效的文件系统类型在不同版本的Unix中是不同的；一些Unix中的不完全的文件系统类型列表是这样：ufs,
+      4.2, 4.3, nfs, tmp, mfs, S51K, S52K. 你可以用
+      -printf 加上 %F
+      指令来查看你的文件系统的类型。</dd>
+  <dt>-gid <i>n</i></dt>
+  <dd>文件的数字形式的组ID是
+      <i>n</i>。</dd>
+  <dt>-group <i>gname</i></dt>
+  <dd>文件属于 <i>gname</i>
+      (也允许使用数字形式的组ID).</dd>
+  <dt>-ilname <i>pattern</i></dt>
+  <dd>和 -lname
+      类似，但是匹配时是不区分大小写的。</dd>
+  <dt>-iname <i>pattern</i></dt>
+  <dd>和 -name
+      类似，但是匹配时是不区分大小写的。例如，`fo*&#39;
+      and `F??&#39; 模式与文件名 `Foo&#39;, `FOO&#39;,
+      `foo&#39;, `fOo&#39; 等等相匹配。</dd>
+  <dt>-inum <i>n</i></dt>
+  <dd>文件的 i 结点数是
+      <i>n</i>。</dd>
+  <dt>-ipath <i>pattern</i></dt>
+  <dd>和 -path
+      类似，但是匹配时是不区分大小写的。</dd>
+  <dt>-iregex <i>pattern</i></dt>
+  <dd>和 -regex 类似,
+      但是匹配时是不区分大小写的。</dd>
+  <dt>-links <i>n</i></dt>
+  <dd>文件有 <i>n</i> 个链接。</dd>
+  <dt>-lname <i>pattern</i></dt>
+  <dd>文件是一个与<i>pattern</i>
+      匹配的符号链接。元字符不会对`/&#39;
+      或 `.&#39; 做特殊处理。</dd>
+  <dt>-mmin <i>n</i></dt>
+  <dd>对文件数据的最近一次修改是在
+      <i>n</i> 分钟之前。</dd>
+  <dt>-mtime <i>n</i></dt>
+  <dd>对文件数据的最近一次修改是在
+      <i>n</i>*24 小时之前。</dd>
+  <dt>-name <i>pattern</i></dt>
+  <dd>基本的文件名(将路径去掉了前面的目录)与shell模式<i>pattern</i>相匹配。元字符(`*&#39;,
+      `?&#39;, 还有`[]&#39; )
+      不会匹配文件名开头的`.&#39;
+      。使用 -prune
+      来略过一个目录及其中的文件。查看
+      -path
+    的描述中的范例。</dd>
+  <dt>-newer <i>file</i></dt>
+  <dd>对文件的最近一次修改比
+      <i>file</i>
+      修改时间要晚。如果命令行中
+      -follow 在 -newer
+      之前，(也只有在这种情况下)
+      -newer 会受 -follow 的影响。</dd>
+  <dt>-nouser</dt>
+  <dd>没有符合文件的数字形式的用户ID的用户。</dd>
+  <dt>-nogroup</dt>
+  <dd>没有符合文件的数字形式的组ID的组。</dd>
+  <dt>-path <i>pattern</i></dt>
+  <dd>文件名与shell模式<i>pattern</i>相匹配。元字符不会对`/&#39;
+      或 `.&#39;
+      做特殊处理。因此，例如：
+    <br/>
+    <br/>
+    find . -path &#39;./sr*sc&#39;
+    <br/>
+    <br/>
+    如果存在 &#39;./src/misc&#39;
+      的话，会将它打印出来。想要忽略一个完整的目录树，应当使用-prune
+      而不是检查目录树中所有的文件。例如：要跳过
+      &#39;src/emacs&#39;
+      目录和其中所有的文件和子目录，把其他找到的文件打印出来，应当这样：
+    <br/>
+    <br/>
+    find . -path &#39;./src/emacs&#39; -prune -o -print
+    <br/>
+    <br/>
+  </dd>
+  <dt>-perm <i>mode</i></dt>
+  <dd>文件的权限位恰好是
+      <i>mode</i> (八进制或符号)。
+      Symbolic modes use mode 0 as a point of departure.</dd>
+  <dt>-perm -<i>mode</i></dt>
+  <dd>所有的权限位 <i>mode</i>
+      都被设置了的文件。</dd>
+  <dt>-perm +<i>mode</i></dt>
+  <dd>任何权限位 <i>mode</i>
+      被设置了的文件。</dd>
+  <dt>-regex <i>pattern</i></dt>
+  <dd>文件名与正则表达式
+      <i>pattern</i>
+      匹配。这是对整个路径的匹配，不是搜索文件。例如，要匹配名为`./fubar3&#39;
+      的文件，可以使用正则表达式
+      `.*bar.&#39; 或者
+      `.*b.*3&#39;，但是不能用`b.*r3&#39;。</dd>
+  <dt>-size <i>n</i>[bckw]</dt>
+  <dd>文件使用了 <i>n</i>
+      单位个存储单元。默认的单位是512字节的块，也可以用<i>n</i>后面加上
+      `b&#39;
+      来指定这个值。其他的单位是字节，如果在
+      <i>n</i> 后面加上 `c&#39;
+      ；千字节(kB)，如果在
+      <i>n</i> 后面加上`k&#39;
+      ；两字节的字，如果在
+      <i>n</i> 后面加上 `w&#39;
+      。大小不会计入 indirect
+      blocks，但是会计入没有真正分配空间的疏松文件中的块。</dd>
+  <dt>-true</dt>
+  <dd>总是true。</dd>
+  <dt>-type <i>c</i></dt>
+  <dd>文件是 <i>c</i>
+      类型的。类型可取值如下：</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt>b</dt>
+  <dd>特殊块文件(缓冲的)</dd>
+  <dt>c</dt>
+  <dd>特殊字符文件(不缓冲)</dd>
+  <dt>d</dt>
+  <dd>目录</dd>
+  <dt>p</dt>
+  <dd>命名管道 (FIFO)</dd>
+  <dt>f</dt>
+  <dd>普通文件</dd>
+  <dt>l</dt>
+  <dd>符号链接</dd>
+  <dt>s</dt>
+  <dd>套接字</dd>
+  <dt>D</dt>
+  <dd>门 (Solaris 特有)</dd>
+</dl>
+</div>
+<dl class="Bl-tag">
+  <dt>-uid <i>n</i></dt>
+  <dd>文件的数字形式的用户ID是
+      <i>n</i> 。</dd>
+  <dt>-used <i>n</i></dt>
+  <dd>文件最后一次存取是在最后一次修改它的状态的
+      <i>n</i> 天之后。</dd>
+  <dt>-user <i>uname</i></dt>
+  <dd>文件的所有者是 <i>uname</i>
+      (也可以使用数字形式的用户ID).</dd>
+  <dt>-xtype <i>c</i></dt>
+  <dd>和 -type
+      相同，除非文件是一个符号链接。对于符号链接：如果没有给出
+      -follow
+      ，如果文件是一个指向
+      <i>c</i>
+      类型文件的链接，那么返回true；如果给出了
+      -follow ，如果 <i>c</i> 是 `l&#39;
+      那么返回true。换句话说，对于符号链接，-xtype
+      检查那些 -type
+      不检查的文件。</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="动作_ACTIONS">动作 ACTIONS<a class="anchor" href="#%E5%8A%A8%E4%BD%9C_ACTIONS">¶</a></h2>
+<dl class="Bl-tag">
+  <dt>-exec <i>command</i> ;</dt>
+  <dd>执行
+      <i>command</i>；如果命令返回状态值0，那么
+      exec 返回true。所有 <b>find</b>
+      其余的命令行参数将作为提供给命令的参数，直到遇到一个由
+      `;&#39;
+      组成的参数为止。命令的参数中，字符串
+      `{}&#39;
+      将以正在处理的文件名替换。所有的
+      `{}&#39;
+      都会被替换，不仅是在单独的一个参数中。有些版本的
+      <b>find</b> 不是这样做的。
+      这些参数可能需要用
+      `\&#39; 来escape
+      或者用括号括住，防止它们被shell展开。命令是从起始目录执行的。</dd>
+  <dt>-fls <i>file</i></dt>
+  <dd>返回true；类似 -ls 但是像
+      -fprint 那样写入 <i>file</i>。</dd>
+  <dt>-fprint <i>file</i></dt>
+  <dd>返回true；将文件全名打印到文件
+      <i>file</i> 中。如果运行 <b>find</b>
+      时 <i>file</i>
+      不存在，那么它将被创建。如果它存在，它将被覆盖。文件名``/dev/stdout&#39;&#39;
+      和``/dev/stderr&#39;&#39;
+      会作特殊处理；它们分别指的是标准输出和标准错误输出。</dd>
+  <dt>-fprint0 <i>file</i></dt>
+  <dd>返回true；类似 -print0
+      但是像 -fprint 那样写入
+      <i>file</i>。</dd>
+  <dt>-fprintf <i>file</i> <i>format</i></dt>
+  <dd>返回true；类似 -printf
+      但是像 -fprint 那样写入
+      <i>file</i>。</dd>
+  <dt>-ok <i>command</i> ;</dt>
+  <dd>类似 -exec
+      但是会先向用户询问
+      (在标准输入);
+      如果回应不是以 `y&#39; 或 `Y&#39;
+      起始则不会运行 <i>command</i>
+      而是返回false。</dd>
+  <dt>-print</dt>
+  <dd>返回true；在标准输出打印文件全名，然后是一个换行符。</dd>
+  <dt>-print0</dt>
+  <dd>返回true；在标准输出打印文件全名，然后是一个null字符。这样可以使得处理
+      <b>find</b>
+      的输出的程序可以正确地理解带有换行符的文件名。</dd>
+  <dt>-printf <i>format</i></dt>
+  <dd>返回true；在标准输出打印
+      <i>format</i> , 解释 `\&#39; escape 还有 `%&#39;
+      指令。字段宽度和精度可以像C函数
+      `printf&#39; 那样来指定。与 -print
+      不同的是, -printf
+      在字符串末端不会添加一个新行。可用的escape
+      和指令如下：</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt>\a</dt>
+  <dd>警告铃声</dd>
+  <dt>\b</dt>
+  <dd>回退</dd>
+  <dt>\c</dt>
+  <dd>立即停止以当前格式输出，刷新输出设备。</dd>
+  <dt>\f</dt>
+  <dd>表格结束</dd>
+  <dt>\n</dt>
+  <dd>新行</dd>
+  <dt>\r</dt>
+  <dd>回车</dd>
+  <dt>\t</dt>
+  <dd>水平tab</dd>
+  <dt>\v</dt>
+  <dd>竖直tab</dd>
+  <dt>\\</dt>
+  <dd>输出自身`\&#39;</dd>
+  <dt>\NNN</dt>
+  <dd>ASCII编码是NNN(八进制)的字符</dd>
+</dl>
+<p class="Pp">在一个 `\&#39;
+    字符后面使用任何其他字符会被作为普通的字符，因此它们都会被打印出来。</p>
+<dl class="Bl-tag">
+  <dt>%%</dt>
+  <dd>输出自身`%&#39;</dd>
+  <dt>%a</dt>
+  <dd>文件最后一次存取的时间。格式是C函数
+      `ctime&#39; 返回值的格式。</dd>
+  <dt>%A<i>k</i></dt>
+  <dd>文件最后一次存取的时间。格式以
+      <i>k</i> 指定，可以是 `@&#39;
+      或者是C函数 `strftime&#39;
+      的指令格式。下面列出了
+      <i>k</i>
+      可用的值；有一些并不是在所有系统上都可用，因为不同系统中
+      `strftime&#39; 也不同。</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt>@</dt>
+  <dd>从 Jan. 1, 1970, 00:00 GMT 起的秒数</dd>
+</dl>
+<p class="Pp">时间字段：</p>
+<dl class="Bl-tag">
+  <dt>H</dt>
+  <dd>小时 (00..23)</dd>
+  <dt>I</dt>
+  <dd>小时 (01..12)</dd>
+  <dt>k</dt>
+  <dd>小时 ( 0..23)</dd>
+  <dt>l</dt>
+  <dd>小时 ( 1..12)</dd>
+  <dt>M</dt>
+  <dd>分钟 (00..59)</dd>
+  <dt>p</dt>
+  <dd>本地的 AM 或者 PM</dd>
+  <dt>r</dt>
+  <dd>12小时格式的时间 (hh:mm:ss
+      [AP]M)</dd>
+  <dt>S</dt>
+  <dd>秒 (00..61)</dd>
+  <dt>T</dt>
+  <dd>24小时格式的时间 (hh:mm:ss)</dd>
+  <dt>X</dt>
+  <dd>本地的时间表示方法
+      (H:M:S)</dd>
+  <dt>Z</dt>
+  <dd>时区(例如，EDT)，如果不能决定时区就是空</dd>
+</dl>
+<p class="Pp">日期字段：</p>
+<dl class="Bl-tag">
+  <dt>a</dt>
+  <dd>本地一星期中每天的名称的缩写(Sun..Sat)</dd>
+  <dt>A</dt>
+  <dd>本地一星期中每天的全名，可变长度
+      (Sunday..Saturday)</dd>
+  <dt>b</dt>
+  <dd>本地每月的名称的缩写
+      (Jan..Dec)</dd>
+  <dt>B</dt>
+  <dd>本地每月的全名，可变长度
+      (January..December)</dd>
+  <dt>c</dt>
+  <dd>本地的日期和时间表示
+      (Sat Nov 04 12:02:33 EST 1989)</dd>
+  <dt>d</dt>
+  <dd>一个月当中的日子
+    (01..31)</dd>
+  <dt>D</dt>
+  <dd>日期 (mm/dd/yy)</dd>
+  <dt>h</dt>
+  <dd>与 b 相同</dd>
+  <dt>j</dt>
+  <dd>一年当中的日子 (001..366)</dd>
+  <dt>m</dt>
+  <dd>月份 (01..12)</dd>
+  <dt>U</dt>
+  <dd>以星期日作为每周起始，一年当中的星期
+      (00..53)</dd>
+  <dt>w</dt>
+  <dd>一星期当中的日子
+    (0..6)</dd>
+  <dt>W</dt>
+  <dd>以星期一当作每周起始，一年当中的星期
+      (00..53)</dd>
+  <dt>x</dt>
+  <dd>本地的日期表示 (mm/dd/yy)</dd>
+  <dt>y</dt>
+  <dd>年份的最后两位 (00..99)</dd>
+  <dt>Y</dt>
+  <dd>年份 (1970...)</dd>
+</dl>
+</div>
+<dl class="Bl-tag">
+  <dt>%b</dt>
+  <dd>文件大小，以512字节的块为单位
+      (四舍五入)。</dd>
+  <dt>%c</dt>
+  <dd>文件状态最后一次修改的时间。格式是C函数
+      `ctime&#39; 返回值的格式。</dd>
+  <dt>%C<i>k</i></dt>
+  <dd>文件状态最后一次修改的时间。格式以
+      <i>k</i> 指定，类似于%A。</dd>
+  <dt>%d</dt>
+  <dd>文件在目录树中的深度；0
+      意味着文件是一个命令行参数。</dd>
+  <dt>%f</dt>
+  <dd>去掉了前面的目录的文件名
+      (只剩下最后的成分)。</dd>
+  <dt>%F</dt>
+  <dd>文件所在文件系统的类型；这个值可以为
+      -fstype 所用。</dd>
+  <dt>%g</dt>
+  <dd>文件的组名，如果组没有名称就是数字形式的组ID。</dd>
+  <dt>%G</dt>
+  <dd>文件的数字形式的组ID。</dd>
+  <dt>%h</dt>
+  <dd>文件名的前面的目录部分
+      (仅除去最后的成分)。</dd>
+  <dt>%H</dt>
+  <dd>据以找到了文件的命令行参数。</dd>
+  <dt>%i</dt>
+  <dd>文件的 i
+      结点号(16进制)。</dd>
+  <dt>%k</dt>
+  <dd>文件大小，以1kB
+      的块为单位
+      (四舍五入)。</dd>
+  <dt>%l</dt>
+  <dd>符号链接的目标
+      (如果文件不是一个符号链接，那么结果是空字符串)。</dd>
+  <dt>%m</dt>
+  <dd>文件的权限位
+      (8进制)。</dd>
+  <dt>%n</dt>
+  <dd>文件的硬连接数。</dd>
+  <dt>%p</dt>
+  <dd>文件名。</dd>
+  <dt>%P</dt>
+  <dd>文件名，去掉了据以找到了文件的命令行参数的名称部分。</dd>
+  <dt>%s</dt>
+  <dd>文件大小，以字节为单位。</dd>
+  <dt>%t</dt>
+  <dd>文件最后一次修改的时间。格式是C函数
+      `ctime&#39; 返回值的格式。</dd>
+  <dt>%T<i>k</i></dt>
+  <dd>文件最后一次修改的时间。格式以
+      <i>k</i> 指定，类似于%A。</dd>
+  <dt>%u</dt>
+  <dd>文件的用户名，如果用户没有名称就是数字形式的用户ID。</dd>
+  <dt>%U</dt>
+  <dd>文件的数字形式的用户ID。</dd>
+</dl>
+<p class="Pp">在一个 `%&#39;
+    字符后面使用任何其他字符，`%&#39;
+    将被忽略
+    (但是其他字符会被打印出来)。</p>
+</div>
+<dl class="Bl-tag">
+  <dt>-prune</dt>
+  <dd>如果没有给出 -depth
+      则返回 true;
+      不进入当前目录。
+    <br/>
+    如果给出了 -depth
+      则返回false;
+    没有效果。</dd>
+  <dt>-ls</dt>
+  <dd>返回true；以 `ls -dils&#39;
+      格式在标准输出列出文件。块以1kB
+      字节为单位计数，除非设置了环境变量POSIXLY_CORRECT，那样的话会使用
+      512字节的块。</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="运算符_OPERATORS">运算符 OPERATORS<a class="anchor" href="#%E8%BF%90%E7%AE%97%E7%AC%A6_OPERATORS">¶</a></h2>
+以优先级高低顺序排列：
+<dl class="Bl-tag">
+  <dt>( <i>expr</i> )</dt>
+  <dd>强制为优先</dd>
+  <dt>! <i>expr</i></dt>
+  <dd>如果 <i>expr</i>
+    是false则返回true</dd>
+  <dt>-not <i>expr</i></dt>
+  <dd>与 ! <i>expr</i> 相同</dd>
+  <dt><i>expr1 expr2</i></dt>
+  <dd>与
+      (隐含的默认运算符)；如果
+      <i>expr1</i> 为false则不会执行
+      <i>expr2</i></dd>
+  <dt><i>expr1</i> -a <i>expr2</i></dt>
+  <dd>与 <i>expr1 expr2</i> 相同</dd>
+  <dt><i>expr1</i> -and <i>expr2</i></dt>
+  <dd>与 <i>expr1 expr2</i> 相同</dd>
+  <dt><i>expr1</i> -o <i>expr2</i></dt>
+  <dd>或；如果 <i>expr1</i> 为true
+      则不会执行 <i>expr2</i></dd>
+  <dt><i>expr1</i> -or <i>expr2</i></dt>
+  <dd>与 <i>expr1</i> -o <i>expr2</i> 相同</dd>
+  <dt><i>expr1</i> , <i>expr2</i></dt>
+  <dd>列表；<i>expr1</i> 和 <i>expr2</i>
+      都会被执行。<i>expr1</i>
+      的值被忽略，列表的值是
+      <i>expr2</i>的值</dd>
+</dl>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参见_SEE_ALSO">参见 SEE ALSO<a class="anchor" href="#%E5%8F%82%E8%A7%81_SEE_ALSO">¶</a></h1>
+<b>locate</b>(1L), <b>locatedb</b>(5L), <b>updatedb</b>(1L), <b>xargs</b>(1L)
+  <b>Finding Files</b> (Info 在线帮助,
+  或者是打印的版本)
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版维护人]">[中文版维护人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D">¶</a></h1>
+<b>袁乙钧 &lt;bbbush@163.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>11/01/2003</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9B%BDlinux%E8%AE%BA%E5%9D%9Bman%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+find.1.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-17T21:40:42Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"find(1)\"}}]}"
+</script>

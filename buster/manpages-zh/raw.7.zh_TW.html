@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>raw(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages/raw.7.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es/raw.7.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-ja/raw.7.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pt/raw.7.pt.html" hreflang="pt">
+<link rel="alternate" href="../../buster/manpages-zh/raw.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/raw.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; raw(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/raw.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/raw.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD_%E8%A6%BD" title="總 覽">總 覽</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F_%E8%BF%B0" title="描 述">描 述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%9C%B0%E5%9D%80%E6%A0%BC%E5%BC%8F" title="地址格式">地址格式</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SOCKET%E9%81%B8%E9%A0%85" title="SOCKET選項">SOCKET選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%B3%A8_%E6%84%8F" title="注 意">注 意</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%8C%AF%E8%AA%A4%E8%99%95%E7%90%86" title="錯誤處理">錯誤處理</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%8C%AF_%E8%AA%A4" title="錯 誤">錯 誤</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%89%88_%E6%9C%AC" title="版 本">版 本</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C_%E8%80%85" title="作 者">作 者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%A6_%E8%A6%8B" title="另 見">另 見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/raw.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/raw.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/raw.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages/raw.7.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es/raw.7.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/raw.7.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pt/raw.7.pt.html" title="Portuguese (pt)">português (pt)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/raw.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/raw.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/ncurses-doc/raw.3ncurses.en.html">3ncurses (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/raw.7.zh_TW.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/util-linux/raw.8.en.html">8 (<span title="System administration commands (usually only for root)">sysadmin</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">RAW(7)</td>
+    <td class="head-vol">Linux 程序員手冊</td>
+    <td class="head-rtitle">RAW(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<p class="Pp"></p>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+raw, SOCK_RAW - Linux IPv4 raw socket.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總_覽">總 覽<a class="anchor" href="#%E7%B8%BD_%E8%A6%BD">¶</a></h1>
+#include &lt;sys/socket.h&gt;
+<br/>
+#include &lt;netinet/in.h&gt;
+<br/>
+raw_socket = socket(PF_INET, SOCK_RAW, int protocol );
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描_述">描 述<a class="anchor" href="#%E6%8F%8F_%E8%BF%B0">¶</a></h1>
+Raw sockets
+  使得用戶端可以實現新的
+  IPv4 協議。 raw socket
+  設備接收或發送不含鏈接層報頭的原始數據包。
+  只有激活接口選項 IP_HDRINCL
+  時 IPv4 層纔會在傳輸包中
+  添加 IP
+  報頭。而且當激活時，包中必須含有
+  IP 報頭。包中含 有 IP
+  報頭才能被接收。
+<p class="Pp">只有 user id 爲 0 或具有
+    CAP_NET_RAW 能力才能打開 raw
+  sockets.</p>
+<p class="Pp">所有匹配爲此 raw socket
+    聲明的協議號的包或錯誤都將被傳
+    送到該
+    socket.要察看許可的協議列表，
+    請參考 RFC1700
+    給出的代號和 getprotobyname (3).</p>
+<p class="Pp">IPPROTO_RAW 意味着 IP_HDRINCL
+    處於激活狀態，也意味着接收
+    所有 IP 協議.
+    但是不允許傳送。</p>
+<p class="Pp"></p>
+<table class="tbl" border="1" style="border-style: solid;">
+  <tbody><tr>
+    <td colspan="2" style="text-align: center;">IP_HDRINCL
+      會在傳送時修改 IP
+      報頭。</td>
+  </tr>
+  <tr>
+    <td>IP Checksum</td>
+    <td> 總是寫入。</td>
+  </tr>
+  <tr>
+    <td>Source Address</td>
+    <td>爲 0 時寫入。</td>
+  </tr>
+  <tr>
+    <td>Packet Id</td>
+    <td>爲 0 時寫入。</td>
+  </tr>
+  <tr>
+    <td>Total Length</td>
+    <td>總是寫入。</td>
+  </tr>
+</tbody></table>
+<p class="Pp"></p>
+<p class="Pp">如果指定了 IP_HDRINCL 且 IP
+    報頭含有的目的地址不是
+    0，那麼 該 socket
+    的目的地址用於路由該包。
+    如果指定了 MSG_DONTROUTE
+    則目的地址
+    應指向某個本地接口。否則會進行路有表查找，但是網關路由會被
+    忽略。如果未設定 IP_HDRINCL
+    則可通過 setsockopt (2) 在 raw socket
+    中設定 IP header 選項。參考
+    ip (7) 瞭解更多信 息。</p>
+<p class="Pp">在 Linux 2.2 下可以用 IP socket
+    選項設置所有的 IP
+    報頭域和選項.
+    這意味着通常只有新的協議
+    或沒有用戶界面的協議需要
+    raw socket (就象 ICMP).
+    當收到一個包時，它首先被傳給綁定到包協議的任何
+    raw socket
+    然後才傳給其他協議句柄(handler)。
+    (比如．內核協議模塊).</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="地址格式">地址格式<a class="anchor" href="#%E5%9C%B0%E5%9D%80%E6%A0%BC%E5%BC%8F">¶</a></h1>
+raw socket 使用在 ip (7)
+  中定義的標準 sockaddr_in
+  地址結構。 sin_port
+  域用於指定 IP
+  協議號，但是在 Linux 2.2
+  下傳送時應將
+  其忽略，而且應該一直設爲0
+  (參見 BUGS).
+<p class="Pp">對於接收的包，sin_port
+    被設置爲該包的協議號。
+    參考
+    其中包括介紹有效的 IP
+    協議的文件.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SOCKET選項">SOCKET選項<a class="anchor" href="#SOCKET%E9%81%B8%E9%A0%85">¶</a></h1>
+raw socket 選項可使用 setsockopt (2)
+  進行設置，用 getsockopt
+  (2)進行讀取（通過傳遞
+  SOL_RAW 族標誌）.
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>ICMP_FILTER</b></dt>
+  <dd>激活綁定到 IPPROTO_ICMP
+      協議的一個用於 raw socket
+      特殊的過濾器。
+      該值對每種 ICMP
+      消息都有一個位（掩碼），
+      可以把那種 ICMP
+      消息過濾掉．缺省時是不過濾
+      ICMP 消息．
+    <p class="Pp">另外，還支持所有對數據報
+        socket 有效的 <a href="../../buster/manpages-zh/ip.7.zh_TW.html">ip(7)</a> SOL_IP socket
+        選項．</p>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="注_意">注 意<a class="anchor" href="#%E6%B3%A8_%E6%84%8F">¶</a></h1>
+raw socket 包長超過接口 MTU
+  時會把包分成碎片。(另見
+  BUGS).
+  另一個更友好和快速的選擇是使用路徑
+  MTU 查找。 在 ip (7) IP_PMTU_DISCOVER
+  一段有詳細描述。
+<p class="Pp">使用 bind (2) 可將 raw socket
+    綁定到指定的本地地址。
+    如果沒有綁定，則接收所有符合指定的
+    IP 協議的包。 另外用
+    SO_BINDTODEVICE 可以將 RAW socket
+    綁定到指定的網絡
+    設備。 詳見： socket (7).</p>
+<p class="Pp">IPPROTO_RAW
+    只能傳送。如果你確實想接收所有的
+    IP 包 用 packet (7) socket 和 ETH_P_IP 協議.
+    請注意 packet socket不象 raw socket
+    那樣對 IP
+    碎片進行重組。</p>
+<p class="Pp">如果想要爲一個 datagram
+    socket 接收的所有 ICMP
+    包，那麼最好 在那個
+    socket 上使用 IP_RECVERR。詳見：
+    ip (7).</p>
+<p class="Pp">raw socket 能竊聽所有的 IP
+    協議, 即使象 ICMP 或 TCP
+    這樣在內核中有協議模塊的也不例外。這時候包會同時傳送到
+    核心模塊和raw socket.
+    一個可移植的程序不能依賴這個特性，
+    許多其他 BSD socket
+    實現在這方面有侷限．</p>
+<p class="Pp">Linux
+    從不改變用戶傳輸的包
+    (除了前 面提到的 IP_HDRINCL
+    ，填入一些0字段).這與其他
+    raw socket
+    實現方式是不同的．</p>
+<p class="Pp">RAW socket 通常很難移植.
+    socket 傳輸時使用 sin_port
+    中設置的 協議，但 Linux2.2
+    下不行了，解決辦法是使用
+    IP_HDRINCL.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="錯誤處理">錯誤處理<a class="anchor" href="#%E9%8C%AF%E8%AA%A4%E8%99%95%E7%90%86">¶</a></h1>
+只有連接了 socket 或 IP_RECVERR
+  設置爲有效時，網絡錯誤纔會
+  傳送給用戶。因爲兼容性的原因只有
+  EMSGSIZE 和 EPROTO 被傳送 給 socket.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="錯_誤">錯 誤<a class="anchor" href="#%E9%8C%AF_%E8%AA%A4">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>IP_RECVERR</b></dt>
+  <dd>使得所有的錯誤存儲到
+      error queue（錯誤隊列）.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>EMSGSIZE</b></dt>
+  <dd>包太大。或者因爲路徑
+      MTU 查找 （IP_PMTU_DISCOVER）
+      設置爲有效，或者因爲包的尺寸超過
+      IPv4 規定的包 最大尺寸
+      64KB.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>EACCES</b></dt>
+  <dd>用戶試圖傳送到某廣播地址但是並未事先在socket中設置廣播
+      標誌。
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>EPROTO</b></dt>
+  <dd>ICMP
+      錯誤報告有參數問題。
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>EFAULT</b></dt>
+  <dd>無效內存地址。
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>EOPNOTSUPP</b></dt>
+  <dd>傳送給 socket
+      的標誌無效(比如：MSG_OOB
+      ).
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>EINVAL</b></dt>
+  <dd>無效參數.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>EPERM</b></dt>
+  <dd>用戶無權打開 raw socket.
+      只有用戶 id 爲 0 或具有
+      CAP_NET_RAW 屬性方可。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="版_本">版 本<a class="anchor" href="#%E7%89%88_%E6%9C%AC">¶</a></h1>
+IP_RECVERR 和 ICMP_FILTER 是 Linux 2.2
+  的新實現.
+  不能用於可移植程序。
+<p class="Pp">如果設置了 SO_BSDCOMPAT
+    標誌， Linux 2.0 裏面有和 BSD
+    裏兼容的 raw socket
+    代碼錯誤， 在 2.2
+    裏已經修補了．</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+沒有描述透明代理擴展.
+<p class="Pp">當設置 IP_HDRINCL
+    選項後datagrams（自尋址數據包）不會被分段
+    並受 MTU 限制. 這是 Linux 2.2
+    的限制.</p>
+<p class="Pp">在 Linux 2.2 sin_port 中設置的 IP
+    協議會丟失。使用的是綁定了
+    socket 的協議，或在 socket
+    (2)初始化調用中指定的協議。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作_者">作 者<a class="anchor" href="#%E4%BD%9C_%E8%80%85">¶</a></h1>
+Andi Kleen.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="另_見">另 見<a class="anchor" href="#%E5%8F%A6_%E8%A6%8B">¶</a></h1>
+<a href="../../buster/manpages-zh/ip.7.zh_TW.html">ip(7)</a>, <a href="../../buster/manpages-zh/socket.7.zh_TW.html">socket(7)</a>, <a href="../../buster/manpages-dev/recvmsg.2.en.html">recvmsg(2)</a>, <a href="../../buster/manpages-dev/sendmsg.2.en.html">sendmsg(2)</a>.
+<p class="Pp">RFC1191 for path MTU discovery.
+  <br/>
+  RFC791 and the include file for the IP protocol.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>RedCandle &lt;redcandle51@chinaren.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2000/10/15</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8Blinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2 Oct 1998</td>
+    <td class="foot-os">Linux 手冊頁</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+raw.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-26T15:38:32Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"raw(7)\"}}]}"
+</script>

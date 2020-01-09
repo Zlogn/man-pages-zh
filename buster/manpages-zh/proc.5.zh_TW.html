@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>proc(5) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/proc.5.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/manpages/proc.5.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es/proc.5.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-ja/proc.5.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/proc.5.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-pt/proc.5.pt.html" hreflang="pt">
+<link rel="alternate" href="../../buster/manpages-zh/proc.5.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/proc.5.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="5">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; proc(5)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/proc.5">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/proc.5.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%88%E8%A6%8B" title="又見">又見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%B5%E5%BE%AA" title="遵循">遵循</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85" title="注意事項">注意事項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/proc.5.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/proc.5.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/proc.5.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/proc.5.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages/proc.5.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es/proc.5.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/proc.5.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/proc.5.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pt/proc.5.pt.html" title="Portuguese (pt)">português (pt)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/proc.5.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/proc.5.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/proc.3tcl.zh_TW.html">3tcl (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/proc.5.zh_TW.html">5 (<span title="File formats and conventions eg /etc/passwd">formats</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">PROC(5)</td>
+    <td class="head-vol">File Formats Manual</td>
+    <td class="head-rtitle">PROC(5)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+proc - 進程信息僞文件系統
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+/proc 是一個僞文件系統,
+  被用作內核數據結構的接口,
+  而不僅僅 是解釋說明
+  /dev/kmem.
+  /proc裏的大多數文件都是隻讀的,
+  但也可
+  以通過寫一些文件來改變內核變量.
+<p class="Pp">下面對整個 /proc
+    目錄作一個大略的介紹.</p>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><i>[number]</i></dt>
+  <dd>在 /proc 目錄裏,
+      每個正在運行的進程都有一個以該進程
+      ID 命名的子目錄,
+      其下包括如下的目錄和僞文件.</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><i>cmdline</i></dt>
+  <dd>該文件保存了進程的完整命令行.
+      如果該進程已經
+      被交換出內存,
+      或者該進程已經僵死,
+      那麼就沒有
+      任何東西在該文件裏,
+      這時候對該文件的讀操作將返回零
+      個字符.
+      該文件以空字符 null
+      而不是換行符作爲結
+      束標誌.</dd>
+  <dt><i>cwd</i></dt>
+  <dd>一個符號連接,
+      指向進程當前的工作目錄.
+      例如, 要找出進程 20 的
+      cwd, 你可以:
+    <br/>
+    <pre><span class="Li">cd /proc/20/cwd; /bin/pwd</span>
+    </pre>
+  </dd>
+</dl>
+<p class="Pp">請注意 pwd
+    命令通常是 shell 內置的,
+    在這樣的情況下可能
+    工作得不是很好.</p>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><i>environ</i></dt>
+  <dd>該文件保存進程的環境變量,
+      各項之間以空字符分隔,
+      結尾也可能是一個空字符.
+      因此, 如果要輸出進程
+      1 的環境變量, 你應該:
+    <br/>
+    <pre><span class="Li">(cat /proc/1/environ; echo) | tr &#34;;\000&#34;; &#34;;\n&#34;;</span>
+    </pre>
+  </dd>
+</dl>
+<p class="Pp">(至於爲什麼想要這麼做,
+    請參閱 <a href="../../buster/manpages-zh/lilo.8.zh_TW.html">lilo(8)</a>.)</p>
+<dl class="Bl-tag">
+  <dt><i>exe</i></dt>
+  <dd>也是一個符號連接,
+      指向被執行的二進制代碼.
+    <p class="Pp">在 Linux 2.0
+        或者更早的版本下,
+        對 exe 特殊文件的 <i><a href="../../buster/manpages-dev/readlink.2.en.html">readlink(2)</a></i>
+        返回一個如下格式的字符串:</p>
+    <p class="Pp">[設備號]:節點號</p>
+    <p class="Pp">舉個例子, [0301]:1502
+        就是某設備的 1502 節點,
+        該設備的主設備號爲
+        03 (如 IDE, MFM 等驅動器),
+        從設備號爲 01
+        (第一個驅動器的第一分區).</p>
+    <p class="Pp">而在 Linux 2.2 下, <i><a href="../../buster/manpages-dev/readlink.2.en.html">readlink(2)</a></i>
+        則給出命令的實際路徑名.</p>
+    <p class="Pp">另外,
+        該符號連接也可以正常析引用(試圖打開
+        exe
+        文件實際上將打開一個可執行文件).
+        你甚至可以鍵入
+        <i>/proc/[number]/exe</i> 來運行 [number]
+        進程的副本.</p>
+    <p class="Pp">帶 -inum 選項的 <i><a href="../../buster/manpages-zh/find.1.zh_TW.html">find(1)</a></i>
+        命令可以定位該文件.</p>
+  </dd>
+  <dt><i>fd</i></dt>
+  <dd>進程所打開的每個文件都有一個符號連接在該子目
+      錄裏,
+      以文件描述符命名,
+      這個名字實際上是指向
+      真正的文件的符號連接，（和
+      exe 記錄一樣）． 例如, 0
+      是標準輸入, 1
+      是標準輸出, 2
+      是標準錯誤, 等等.
+    <p class="Pp">程序有時可能想要讀取一個文件卻不想要標準輸入，
+        或者想寫到一個文件卻不想將輸出送到標準輸出去，
+        那麼就可以很有效地用如下的辦法騙過(假定
+        -i 是輸入 文件的標誌,
+        而 -o
+        是輸出文件的標誌):
+      <br/>
+    </p>
+    <pre><span class="Li">foobar -i /proc/self/fd/0 -o /proc/self/fd/1 ...</span>
+    </pre>
+    <br/>
+    這樣就是一個能運轉的過濾器.
+      請注意該方法不能
+      用來在文件裏搜索,
+      這是因爲 fd
+      目錄裏的文件是
+      不可搜索的.
+    <p class="Pp">在 UNIX 類的系統下,
+        /proc/self/fd/N 基本上就與 /dev/fd/N
+        相同. 實際上,
+        大多數的 Linux MAKEDEV
+        腳本都將 /dev/fd
+        符號連接到 [..]/proc/self/fd 上.</p>
+  </dd>
+  <dt><i>maps</i></dt>
+  <dd>該文件包含當前的映象內存區及他們的訪問許可.
+    <p class="Pp">格式如下:</p>
+    <pre><br/>
+
+address           perms offset   dev   inode
+00000000-0002f000 r-x-- 00000400 03:03 1401
+0002f000-00032000 rwx-p 0002f400 03:03 1401
+00032000-0005b000 rwx-p 00000000 00:00 0
+60000000-60098000 rwx-p 00000400 03:03 215
+60098000-600c7000 rwx-p 00000000 00:00 0
+bfffa000-c0000000 rwx-p 00000000 00:00 0
+    </pre>
+    <br/>
+  </dd>
+</dl>
+<p class="Pp">address
+    是進程所佔據的地址空間,
+    perms 是權限集:</p>
+<pre><br/>
+
+r = read
+w = write
+x = execute
+s = shared
+p = private (copy on write)
+</pre>
+<br/>
+<p class="Pp">offset
+    是文件或者別的什麼的偏移量,
+    dev 是設備號(主設
+    備號:從設備號), 而 inode
+    則是設備的節點號. 0
+    表明沒有
+    節點與內存相對應,
+    就象 bss 的情形.</p>
+<p class="Pp">在 Linux 2.2
+    下還增加了一個域給可用的路徑名.</p>
+<dl class="Bl-tag">
+  <dt><i>mem</i></dt>
+  <dd>該文件並不是 mem (1:1)
+      設備,
+      儘管它們有相同的設備號.
+      /dev/mem
+      設備是做任何地址轉換之前的物理內存,
+      而這裏的 mem
+      文件是訪問它的進程的內存.目前這個
+      mem 還不能 <i><a href="../../buster/manpages-dev/mmap.2.en.html">mmap(2)</a></i>
+      （內存映射）出去，而且可能一直要等到內核中增加了一個通用的
+      <i><a href="../../buster/manpages-dev/mmap.2.en.html">mmap(2)</a></i> 以後才能實現．
+      (也許在你讀本手冊頁時這一切已經發生了)</dd>
+  <dt><i>mmap</i></dt>
+  <dd><i><a href="../../buster/manpages-dev/mmap.2.en.html">mmap(2)</a></i> 做的 maps
+      映射目錄，是和 exe, fd/*
+      等類似的符號連接.
+      請注意 maps 包含了比
+      /proc/*/mmap 更多的信息,
+      所以應該廢棄 mmap.
+    <p class="Pp">&#34;;0&#34;; 通常指 libc.so.4.</p>
+    <p class="Pp">在 linux 內核 1.1.40 裏,
+        <i>/proc/*/mmap</i> 被取消了.
+        (現在是 <b>真的</b>
+        廢棄不用了!)</p>
+  </dd>
+  <dt><i>root</i></dt>
+  <dd>依靠系統調用 <i><a href="../../buster/manpages-dev/chroot.2.en.html">chroot(2)</a>,</i> unix
+      和 linux 可以讓
+      每個進程有各自的文件系統根目錄.
+      由 <i><a href="../../buster/manpages-dev/chroot.2.en.html">chroot(2)</a></i>
+      系統調用設置．
+      根指向文件系統的根，性質就象
+      exe, fd/* 等一樣．</dd>
+  <dt><i>stat</i></dt>
+  <dd>進程狀態信息, 被命令
+      <i><a href="../../buster/procps/ps.1.en.html">ps(1)</a></i> 使用.
+    <p class="Pp">現將該文件裏各域,
+        以及他們的 <i><a href="../../buster/manpages-dev/scanf.3.en.html">scanf(3)</a></i>
+        格式說明符,
+        按順序分述如下:</p>
+  </dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><i>pid</i> %d</dt>
+  <dd>進程標識．</dd>
+  <dt><i>comm</i> %s</dt>
+  <dd>可執行文件的文件名,
+      包括路徑.
+      該文件是否可
+      見取決於該文件是否已被交換出內存.</dd>
+  <dt><i>state</i> %c</dt>
+  <dd>&#34;;RSDZT&#34;; 中的一個, R
+      是正在運行, S 是
+      在可中斷的就緒態中睡眠,
+      D 是在不可中
+      斷的等待或交換態中睡眠,
+      Z 是僵死, T
+      是被跟蹤或被停止(由於收到信號).</dd>
+  <dt><i>ppid</i> %d</dt>
+  <dd>父進程 PID.</dd>
+  <dt><i>pgrp</i> %d</dt>
+  <dd>進程的進程組 ID.</dd>
+  <dt><i>session</i> %d</dt>
+  <dd>進程的會話 ID.</dd>
+  <dt><i>tty</i> %d</dt>
+  <dd>進程所使用終端.</dd>
+  <dt><i>tpgid</i> %d</dt>
+  <dd>當前擁有該進程所連接終端的進程所在的進程
+      組 ID.</dd>
+  <dt><i>flags</i> %u</dt>
+  <dd>進程標誌.
+      目前每個標誌都設了數學位,
+      所以輸出裏就不包括該位.
+      crt0.s 檢查數學仿真
+      這可能是一個臭蟲,
+      因爲不是每個進
+      程都是用 c
+      編譯的程序.
+      數學位應該是十
+      進制的 4,
+      而跟蹤位應該是十進制的
+      10.</dd>
+  <dt><i>minflt</i> %u</dt>
+  <dd>進程所導致的小錯誤（minor
+      faults）數目, 這樣的
+      小錯誤（minor
+      faults）不需要從磁盤重新載入一個
+      內存頁.</dd>
+  <dt><i>cminflt</i> %u</dt>
+  <dd>進程及其子進程所導致的小錯誤（minor
+      faults）數目.</dd>
+  <dt><i>majflt</i> %u</dt>
+  <dd>進程所導致的大錯誤（major
+      faults）數目, 這樣的
+      大錯誤（major
+      faults）需要重新載入內存頁.</dd>
+  <dt><i>cmajflt</i> %u</dt>
+  <dd>進程及其子進程所導致的大錯誤（major
+      faults）數目.</dd>
+  <dt><i>utime</i> %d</dt>
+  <dd>進程被調度進用戶態的時間(以
+      jiffy 爲單 位, 1 jiffy=1/100
+      秒，另外不同硬件體系略有不同).</dd>
+  <dt><i>stime</i> %d</dt>
+  <dd>進程被調度進內核態的時間,
+      以 jiffy 爲 單位.</dd>
+  <dt><i>cutime</i> %d</dt>
+  <dd>進程及其子進程被調度進用戶態的時間,
+      以 jiffy 爲單位.</dd>
+  <dt><i>cstime</i> %d</dt>
+  <dd>進程及其子進程被調度進內核態的時間,
+      以 jiffy 爲單位.</dd>
+  <dt><i>counter</i> %d</dt>
+  <dd>如果進程不是當前正在運行的進程,
+      就是
+      進程在下個時間片當前可以擁有的最大時
+      間, 以 jiffy 爲單位.
+      如果進程是當前正
+      在運行的進程,
+      就是當前時間片中所剩下
+      jiffy 數目.</dd>
+  <dt><i>priority</i> %d</dt>
+  <dd>標準優先數只再加上
+      15, 在內核裏該值總
+      是正的.</dd>
+  <dt><i>timeout</i> %u</dt>
+  <dd>當前至進程的下一次間歇時間,
+      以 jiffy 爲單位.</dd>
+  <dt><i>itrealvalue</i> %u</dt>
+  <dd>由於計時間隔導致的下一個
+      SIGALRM
+      發送進程的時延，以
+      jiffy 爲單位.</dd>
+  <dt><i>starttime</i> %d</dt>
+  <dd>進程自系統啓動以來的開始時間,
+      以 jiffy 爲單位.</dd>
+  <dt><i>vsize</i> %u</dt>
+  <dd>虛擬內存大小.</dd>
+  <dt><i>rss</i> %u</dt>
+  <dd>Resident Set Size（駐留大小）:
+      進程所佔用的真實內
+      存大小, 以頁爲單位,
+      爲便於管理而減去 了
+      3. rss 只包括正文,
+      數據以及堆棧的空間,
+      但不包括尚未要求裝入內存的或已被交換出去的.</dd>
+  <dt><i>rlim</i> %u</dt>
+  <dd>當前進程的 rss 限制,
+      以字節爲單位, 通
+      常爲 2,147,483,647.</dd>
+  <dt><i>startcode</i> %u</dt>
+  <dd>正文部分地址下限.</dd>
+  <dt><i>endcode</i> %u</dt>
+  <dd>正文部分地址上限.</dd>
+  <dt><i>startstack</i> %u</dt>
+  <dd>堆棧開始地址.</dd>
+  <dt><i>kstkesp</i> %u</dt>
+  <dd>esp(32 位堆棧指針)
+      的當前值, 與在進程
+      的內核堆棧頁得到的一致.</dd>
+  <dt><i>kstkeip</i> %u</dt>
+  <dd>EIP(32
+      位指令指針)的當前值.</dd>
+  <dt><i>signal</i> %d</dt>
+  <dd>待處理信號的
+      bitmap(通常爲 0).</dd>
+  <dt><i>blocked</i> %d</dt>
+  <dd>被阻塞信號的 bitmap(對 shell
+      通常是 0, 2)．</dd>
+  <dt><i>sigignore</i> %d</dt>
+  <dd>被忽略信號的 bitmap.</dd>
+  <dt><i>sigcatch</i> %d</dt>
+  <dd>被俘獲信號的 bitmap.</dd>
+  <dt><i>wchan</i> %u</dt>
+  <dd>進程在其中等待的通道,
+      實際是一個系統
+      調用的地址.
+      如果你需要文本格式的,
+      也
+      可以在名字列表中找到.
+      (如果有最新版本的
+      /etc/psdatabase, 你 可以在 <i>ps -l</i>
+      的結果中的 WCHAN
+    域看到)</dd>
+</dl>
+</div>
+</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><i>cpuinfo</i></dt>
+  <dd>保存了CPU
+      以及體系架構依賴條目的列表.
+      對於不同的系
+      統架構有不同的列表,
+      共有的兩項是 <i>cpu</i> 和
+      <i>BogoMIPS</i>, <i>cpu</i>
+      可能是當前在用的 CPU,
+      而 <i>BogoMIPS</i>
+      則是內核初始化時計算出
+      的一個系統常數.</dd>
+  <dt><i>devices</i></dt>
+  <dd>主設備號及設備組的列表,
+      文本格式. MAKEDEV 腳本使用
+      該文件來維持內核的一致性.</dd>
+  <dt><i>dma</i></dt>
+  <dd>一個列表,
+      指出正在使用的<i>ISA</i> DMA
+      (直接內存訪問)通道.</dd>
+  <dt><i>filesystems</i></dt>
+  <dd>以文本格式列出了被編譯進內核的文件系統.
+      當沒有給 <i>mount(1)</i>
+      指明哪個文件系統的時候,
+      <i>mount(1)</i>
+      就依靠該文件遍歷不同的文件系統.</dd>
+  <dt><i>interrupts</i></dt>
+  <dd>該文件以 ASCII
+      格式記錄了（至少是在
+      i386 體系上的）每次 IRQ
+      的中斷數目.</dd>
+  <dt><i>ioports</i></dt>
+  <dd>該文件列出了當前在用的已註冊
+      I/O 端口範圍.</dd>
+  <dt><i>kcore</i></dt>
+  <dd>該僞文件以 core
+      文件格式給出了系統的物理內存映象,
+      再 利用未卸載的內核
+      (/usr/src/linux/tools/zSystem), 我
+      們就可以用 GDB
+      查探當前內核的任意數據結構.
+    <p class="Pp">該文件的總長度是物理內存
+        (RAM) 的大小再加上 4KB.</p>
+  </dd>
+  <dt><i>kmsg</i></dt>
+  <dd>可以用該文件取代系統調用
+      <i><a href="../../buster/manpages-dev/syslog.2.en.html">syslog(2)</a></i> 來記錄內核信息.
+      但是讀該文件需要超級用戶權限,
+      並且一次只能有一個進
+      程可以讀該文件,
+      因而如果一個使用了
+      <i><a href="../../buster/manpages-dev/syslog.2.en.html">syslog(2)</a></i>
+      系統調用功能來記錄內核信息的系統日誌進程正在運行的話,
+      別的進程就不能再去讀該僞文件了.
+    <p class="Pp">該文件的內容可以用
+        <i><a href="../../buster/manpages-zh/dmesg.8.zh_TW.html">dmesg(8)</a></i> 來察看.</p>
+  </dd>
+  <dt><i>ksyms</i></dt>
+  <dd>該文件保存了內核輸出的符號定義,
+      <i>modules(X)</i> 使用該文件
+      動態地連接和捆綁可裝載的模塊.</dd>
+  <dt><i>loadavg</i></dt>
+  <dd>平均負載數給出了在過去的
+      1, 5, 15
+      分鐘裏在運行隊列裏
+      的任務數, 與 <i><a href="../../buster/manpages-zh/uptime.1.zh_TW.html">uptime(1)</a></i>
+      等命令的結果相同.</dd>
+  <dt><i>locks</i></dt>
+  <dd>這個文件顯示當前文件鎖．</dd>
+  <dt><i>malloc</i></dt>
+  <dd>只有在編譯時定義了
+      CONFIGDEBUGMALLOC
+    纔會有該文件．</dd>
+  <dt><i>meminfo</i></dt>
+  <dd><i><a href="../../buster/manpages-zh/free.1.zh_TW.html">free(1)</a></i>
+      利用該文件來給出系統總的空閒內存和已用內存
+      (包括物理內存和交換內存),
+      以及內核所使用的共享內存
+      和緩衝區.
+    <p class="Pp">該文件與 <i><a href="../../buster/manpages-zh/free.1.zh_TW.html">free(1)</a></i>
+        格式相同,
+        但是以字節爲單位而不是
+        KB.</p>
+  </dd>
+  <dt><i>modules</i></dt>
+  <dd>列出了系統已載入的模塊,
+      文本格式.</dd>
+  <dt><i>net</i></dt>
+  <dd>該子目錄包括多個 ASCII
+      格式的網絡僞文件,
+      描述了網絡
+      層的部分情況. 可以用
+      cat 來察看這些文件,
+      但標準的 <i><a href="../../buster/manpages-zh/netstat.8.zh_TW.html">netstat(8)</a></i>
+      命令組更清晰地給出了這些文件的信息.</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><i>arp</i></dt>
+  <dd>該文件以 ASCII
+      格式保存了內核 ARP 表,
+      用於地址解析,
+      包括靜態和動態 arp
+      數據. 文件格式如下:
+    <pre><br/>
+
+IP address       HW type     Flags       HW address
+10.11.100.129    0x1         0x6         00:20:8A:00:0C:5A
+10.11.100.5      0x1         0x2         00:C0:EA:00:00:4E
+44.131.10.6      0x3         0x2         GW4PTS
+    </pre>
+    <br/>
+  </dd>
+</dl>
+<p class="Pp">其中 &#39;IP address&#39; 是機器的
+    IPv4 地址; &#39;HW type&#39; 是地址的硬
+    件類型, 遵循 RFC 826; flags 是 ARP
+    結構的內部標誌, 在
+    /usr/include/linux/if_arp.h 中定義; &#39;HW address&#39;
+    是該 IP
+    地址的物理層映射(如果知道的話).</p>
+<dl class="Bl-tag">
+  <dt><i>dev</i></dt>
+  <dd>該僞文件包含網絡設備狀態信息,
+      給出了發送和收
+      到的包的數目,
+      錯誤和衝突的數目,
+      以及別的一些
+      基本統計數據. <i><a href="../../buster/manpages-zh/ifconfig.8.zh_TW.html">ifconfig(8)</a></i>
+      利用了該文件來報
+      告網絡設備狀態.
+      文件格式如下:
+    <pre><br/>
+
+Inter-|   Receive                  |   Transmit
+face |packets errs drop fifo frame|packets errs drop fifo colls carrier
+lo:      0    0    0    0    0     2353    0    0    0     0    0
+eth0: 644324    1    0    0    1   563770    0    0    0   581    0
+<br/>
+
+    </pre>
+  </dd>
+  <dt><i>ipx</i></dt>
+  <dd>無信息.</dd>
+  <dt><i>ipx_route</i></dt>
+  <dd>無信息.</dd>
+  <dt><i>rarp</i></dt>
+  <dd>該文件具有和 <i>arp</i>
+      同樣的格式,
+      包含當前的逆向
+      地址映射數據. <i><a href="../../buster/net-tools/rarp.8.en.html">rarp(8)</a></i>
+      利用這些數據來作逆向
+      地址查詢服務. 只有將
+      RARP 配置進內核,
+      該文件才 存在.</dd>
+  <dt><i>raw</i></dt>
+  <dd>該文件保存了 RAW
+      套接字表,
+      大部分信息除用於調試以外沒有什麼用.
+      `sl&#39;
+      指出了套接字的內核散列槽號;
+      &#39;local address&#39;
+      包括本地地址和協議號對;
+      &#34;St&#34;
+      是套接字的內部狀態;
+      tx_queue 和 rx_queue
+      是內核存儲器使用意義上的輸入輸
+      出數據隊列; RAW
+      沒有使用&#34;tr&#34;,
+      &#34;tm-&amp;gt;when&#34; 和 &#34;rexmits&#34;; uid
+      是套接字創建者的有效
+      uid.</dd>
+  <dt><i>route</i></dt>
+  <dd>沒有信息,
+      但是看上去類似於
+      <i><a href="../../buster/manpages-zh/route.8.zh_TW.html">route(8)</a></i></dd>
+  <dt><i>snmp</i></dt>
+  <dd>該文件以 ASCII
+      格式保存了 IP, ICMP, TCP 以及
+      UDP
+      管理所需的數據信息,
+      基於 snmp 協議. TCP mib (TCP
+      管理數據庫)尚未完善,
+      可能在 1.2.0 內核能夠
+      完成.</dd>
+  <dt><i>tcp</i></dt>
+  <dd>該文件保存了 TCP
+      套接字表,
+      大部分信息除用於調試以外沒有什麼用.
+      &#34;sl&#34;
+      指出了套接字的內核散列槽號;
+      &#34;local address&#34;
+      包括本地地址和端口號;
+      &#34;remote address&#34; 包括遠地
+      地址和端口號(如果有連接的話);
+      &#39;St&#39; 是套接字的內
+      部狀態; &#39;tx_queue&#39; 和 &#39;rx_queue&#39;
+      是內核存儲器使用意義上
+      的輸入輸出數據隊列;
+      &#34;tr&#34;, &#34;tm-&amp;gt;when&#34; 和 &#34;rexmits&#34;
+      保存
+      了內核套接字聲明的內部信息,
+      只用於調試; uid
+      是套接字創建者的有效
+      uid.</dd>
+  <dt><i>udp</i></dt>
+  <dd>該文件保存了 UDP
+      套接字表,
+      大部分信息除用於調試以外沒有什麼用.
+      &#34;sl&#34;
+      指出了套接字的內核散列槽號;
+      &#34;local address&#34;
+      包括本地地址和端口號;
+      &#34;remote address&#34; 包括遠地
+      地址和端口號(如果有連接的話);
+      &#34;St&#34; 是套接字的內
+      部狀態; &#34;tx_queue&#34; 和
+      &#34;rx_queue&#34;
+      是內核存儲器使用意義上
+      的輸入輸出數據隊列;
+      UDP 沒有使用
+      &#34;tr&#34;,&#34;tm-&amp;gt;when&#34; 和 &#34;rexmits&#34;;
+      uid
+      是套接字創建者的有效
+      uid. 格式如下:
+    <pre><br/>
+
+sl  local_address rem_address   st tx_queue rx_queue tr rexmits  tm-&amp;gt;when uid
+1: 01642C89:0201 0C642C89:03FF 01 00000000:00000001 01:000071BA 00000000 0
+1: 00000000:0801 00000000:0000 0A 00000000:00000000 00:00000000 6F000100 0
+1: 00000000:0201 00000000:0000 0A 00000000:00000000 00:00000000 00000000 0
+<br/>
+
+    </pre>
+  </dd>
+  <dt><i>unix</i></dt>
+  <dd>列出了當前系統的UNIX域套接字以及它們的狀態,
+      格式如下:
+    <pre>
+
+<span class="Li">Num RefCount Protocol Flags    Type St Path</span>
+<span class="Li">0: 00000002 00000000 00000000 0001 03</span>
+<span class="Li">1: 00000001 00000000 00010000 0001 01 /dev/printer</span>
+
+    </pre>
+  </dd>
+</dl>
+<p class="Pp">`Num&#39; 是內核散列槽號;
+    &#39;RefCount&#39; 是用戶套接字號;
+    &#39;Protocol&#39; 當前總是 0; &#39;Flags&#39;
+    是內核標誌,
+    指出了套接字的狀態;
+    &#39;Type&#39; 當前總是
+    1(在內核中尚未支持 unix
+    域數據報套接字); &#39;St&#39;
+    是套接字內部狀態; &#39;Path&#39;
+    套接字綁捆的路徑(如果有的話).</p>
+</div>
+<dl class="Bl-tag">
+  <dt><i>pci</i></dt>
+  <dd>該文件列出了內核初始化時發現的所有
+      PCI 設備及其配置.</dd>
+  <dt><i>scsi</i></dt>
+  <dd>該目錄包括 scsi
+      中間層僞文件及各種
+      SCSI 底層驅動器子目錄,
+      對系統中每個 SCSI host,
+      子目錄中都存在一個文件與之對應,
+      展示了部分 SCSI IO
+      子系統的狀態.
+      這些文件是 ASCII 格式 的,
+      可用cat閱讀.
+    <p class="Pp">你也可以通過寫其中某些文件來重新配置該子系統,
+        開關一些功能.</p>
+  </dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><i>scsi</i></dt>
+  <dd>該文件列出了內核掌握的所有
+      SCSI 設備, 其內容就
+      和系統啓動時所看到的類似.
+      目前 scsi 只支持
+      <i>singledevice</i>命令,
+      該命令允許 root
+      添加一個熱插
+      拔(hotplugged)設備到一個已知設備列表中.
+    <p class="Pp">命令 <b>echo &#39;scsi singledevice 1 0 5 0&#39; &amp;gt;
+        /proc/scsi/scsi</b> 令 host scsi1 掃描 SCSI
+        通道 0, 看在 ID 5 LUN 0
+        是否存在設備,
+        如果在該地址
+        存在設備,
+        或者該地址無效,
+        則返回一個錯誤.</p>
+  </dd>
+  <dt><i>drivername</i></dt>
+  <dd>目前 <i>drivername</i> 可包含: NCR53c7xx,
+      aha152x, aha1542, aha1740, aic7xxx, buslogic, eata_dma, eata_pio, fdomain,
+      in2000, pas16, qlogic, scsi_debug, seagate, t128, u15-24f, ultrastore
+      或者 wd7000.
+      這些目錄展示那些至少註冊了一個
+      SCSI HBA 的驅動.
+      而對每個已註冊的 host,
+      每個目錄中都包含一個文件與之對應,
+      而這些對應的 host
+      文件就以初始化時分配給
+      host 的數字來命名.
+    <p class="Pp">這些文件給出了驅動程序以及設備的配置,
+        統計數據等.</p>
+    <p class="Pp">可以通過寫這些文件實現不同的
+        host 上做不同的工作.
+        例如, root 可以用 <i>latency</i> 和
+        <i>nolatency</i> 命令打
+        開或者關閉 eata_dma
+        驅動器上測量延時的代碼,
+        也可以用 <i>lockup</i> 和 <i>unlock</i>
+        命令 控制 scsi_debug
+        驅動器所模擬的總線鎖操作.</p>
+  </dd>
+</dl>
+</div>
+<dl class="Bl-tag">
+  <dt><i>self</i></dt>
+  <dd>當某進程訪問 /proc
+      目錄時, 該目錄就指向
+      /proc 下以該進 程 ID
+      命名的目錄.</dd>
+  <dt><i>stat</i></dt>
+  <dd>內核及系統的統計數據.</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><i>cpu 3357 0 4313 1362393</i></dt>
+  <dd>系統分別消耗在用戶模式,
+      低優先權的用戶模式（nice）,
+      系統模式,
+      以及空閒任務的時間,
+      以 jiffy 爲單位.
+      最後一個數值應該是
+      uptime
+      僞文件第二個數值的
+      100 倍.</dd>
+  <dt><i>disk 0 0 0 0</i></dt>
+  <dd>目前並沒有實現這四個磁盤記錄,
+      我甚至認爲就不應該實現它，
+      這是由於在別的機器上內核統計通常依賴轉換率及
+      每秒 I/O 數,
+      而這令每個驅動器只能有一個域.</dd>
+  <dt><i>page 5741 1808</i></dt>
+  <dd>系統（從磁盤）交換進的頁數和交換出去的頁數．</dd>
+  <dt><i>swap 1 0</i></dt>
+  <dd>取入的交換頁及被取出的交換頁的頁數.</dd>
+  <dt><i>intr 1462898</i></dt>
+  <dd>系統自啓動以來所收到的中斷數.</dd>
+  <dt><i>ctxt 115315</i></dt>
+  <dd>系統所作的進程環境切換次數.</dd>
+  <dt><i>btime 769041601</i></dt>
+  <dd>系統自 1970 年 1 月 1
+      號以來總的運行時間,
+      以秒爲單位.</dd>
+</dl>
+</div>
+<dl class="Bl-tag">
+  <dt><i>sys</i></dt>
+  <dd>該目錄在 1.3.57
+      的內核裏開始出現,
+      包含一些對應於內
+      核變量的文件和子目錄.
+      你可以讀這些變量,
+      有的也可以
+      通過<i>proc</i>修改,
+      或者用系統調用 <a href="../../buster/manpages-dev/sysctl.2.en.html">sysctl(2)</a>
+      修改.
+      目前該目錄下有如下三個子目錄:
+      <i>kernel</i>;, <i>;</i>net<i>;, </i>;<i>vm</i>
+      每個各自包括一些文件和子目錄.</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><i>kernel</i></dt>
+  <dd>該目錄包括如下文件:
+      <i>domainname</i>;, <i>;</i>file-max<i>;, </i>;<i>file-nr</i>;,
+      <i>;</i>hostname<i>;, </i>; <i>inode-max</i>;, <i>;</i>inode-nr<i>;,
+      </i>;<i>osrelease</i>;, <i>;</i>ostype<i>;, </i>; <i>panic</i>;,
+      <i>;</i>real-root-dev<i>;, </i>;<i>securelevel</i>;,
+      <i>;</i>version<i>,</i>
+      由文件名就可以清楚地得知各文件功能.</dd>
+</dl>
+<p class="Pp">只讀文件 <i>file-nr</i>
+    給出當前打開的文件數.</p>
+<p class="Pp">文件 <i>file-max</i>
+    給出系統所容許的最大可打開文件數.
+    如果 1024 不夠大的話,
+    可以
+  <br/>
+</p>
+<pre><span class="Li">echo 4096 &amp;gt; /proc/sys/kernel/file-max</span>
+</pre>
+<p class="Pp">類似地, 文件 <i>inode-nr</i>
+    以及文件 <i>inode-max</i>
+    指出了當前 inode
+    數和最大 inode 數.</p>
+<p class="Pp">文件 <i>ostype</i>;, <i>;</i>osrelease<i>;,
+    </i>;<i>version</i> 實際上是 <i>/proc/version</i>
+    的子字串．</p>
+<p class="Pp">文件 <i>panic</i>
+    可以對內核變量
+    <i>panic_timeout</i>
+    進行讀/寫訪問．
+    如果該值爲零, 內核在
+    panic 時進入（死）循環;
+    如果非零,
+    該值指出內核將自動重起的時間,
+    以秒爲單位.</p>
+<p class="Pp">文件 <i>securelevel</i>
+    目前似乎沒什麼意義 -
+    root 無所不能.</p>
+</div>
+<dl class="Bl-tag">
+  <dt><i>uptime</i></dt>
+  <dd>該文件包含兩個數:
+      系統正常運行時間和總的空閒時間,
+      都以秒爲單位.</dd>
+  <dt><i>version</i></dt>
+  <dd>指明瞭當前正在運行的內核版本,
+      例如:
+    <pre><br/>
+
+<span class="Li">Linux version 1.0.9 (quinlan@phaze) #1 Sat May 14 01:51:54 EDT 1994</span>
+<br/>
+
+    </pre>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="又見">又見<a class="anchor" href="#%E5%8F%88%E8%A6%8B">¶</a></h1>
+<a href="../../buster/manpages-zh/cat.1.zh_TW.html">cat(1)</a>, <a href="../../buster/manpages-zh/find.1.zh_TW.html">find(1)</a>, <a href="../../buster/manpages-zh/free.1.zh_TW.html">free(1)</a>, mount(1), <a href="../../buster/procps/ps.1.en.html">ps(1)</a>, <a href="../../buster/coreutils/tr.1.en.html">tr(1)</a>, <a href="../../buster/manpages-zh/uptime.1.zh_TW.html">uptime(1)</a>, <a href="../../buster/manpages-dev/readlink.2.en.html">readlink(2)</a>,
+  <a href="../../buster/manpages-dev/mmap.2.en.html">mmap(2)</a>, <a href="../../buster/manpages-dev/chroot.2.en.html">chroot(2)</a>, <a href="../../buster/manpages-dev/syslog.2.en.html">syslog(2)</a>, <a href="../../buster/manpages-zh/hier.7.zh_TW.html">hier(7)</a>, <a href="../../buster/net-tools/arp.8.en.html">arp(8)</a>, <a href="../../buster/manpages-zh/dmesg.8.zh_TW.html">dmesg(8)</a>, <a href="../../buster/manpages-zh/netstat.8.zh_TW.html">netstat(8)</a>,
+  <a href="../../buster/manpages-zh/route.8.zh_TW.html">route(8)</a>, <a href="../../buster/manpages-zh/ifconfig.8.zh_TW.html">ifconfig(8)</a>, <a href="../../buster/procinfo/procinfo.8.en.html">procinfo(8)</a>等等.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="遵循">遵循<a class="anchor" href="#%E9%81%B5%E5%BE%AA">¶</a></h1>
+本手冊頁基本上是針對
+  Linux 1.3.11 內核,
+  如有必要請及時更新!
+<p class="Pp">最後更新也是針對
+    Linux 1.3.11.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="注意事項">注意事項<a class="anchor" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85">¶</a></h1>
+請注意許多字符串(例如環境變量或者命令行)是以內部格式保存的,
+  以 NUL
+  作爲子域的結束標誌,
+  可以用 <i>od -c</i> 或者 <i>tr
+  &#34;;\000&#34;; &#34;;\n&#34;;</i>
+  使之變得更可讀.
+<p class="Pp">本手冊頁還不完善,
+    可能有不夠確切的地方,
+    需要經常更新.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+<i>/proc</i>
+  可能會給那些使用了
+  <a href="../../buster/manpages-dev/chroot.2.en.html">chroot(2)</a>
+  的進程帶來安全問題.
+  例如, 如果 <i>/proc</i> 被 mount 在
+  <b>chroot</b> 級別裏, 一個 到
+  <i>/proc/1/root</i> 的 <a href="../../buster/manpages-dev/chdir.2.en.html">chdir(2)</a>
+  操作將返回文件系統的原始根目錄.
+  由於 Linux 還不支持 <b>fchroot</b>(2)
+  調用,
+  該問題可能更應該看作一個特性而不是一個
+  bug.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>mapping &lt;mapping@263.net&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2000/11/26</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8Blinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">22 July 1996</td>
+    <td class="foot-os">Linux Programmer&#39;s Manual</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+proc.5.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-26T21:44:41Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"proc(5)\"}}]}"
+</script>

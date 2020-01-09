@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>journalctl(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/journalctl.1.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/systemd/journalctl.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/journalctl.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/journalctl.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; journalctl(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/journalctl.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/journalctl.1.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS" title="SYNOPSIS">SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%89%E9%A1%B9" title="选项">选项</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%80%E5%87%BA%E7%8A%B6%E6%80%81" title="退出状态">退出状态</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F" title="环境变量">环境变量</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BE%8B%E5%AD%90" title="例子">例子</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E8%A7%81" title="参见">参见</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES" title="NOTES">NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/journalctl.1.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/journalctl.1.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/journalctl.1.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/journalctl.1.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/systemd/journalctl.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/journalctl.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/journalctl.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">JOURNALCTL(1)</td>
+    <td class="head-vol">journalctl</td>
+    <td class="head-rtitle">JOURNALCTL(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+journalctl - 检索 systemd 日志
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS">SYNOPSIS<a class="anchor" href="#SYNOPSIS">¶</a></h1>
+<p class="Pp HP"><b>journalctl</b> [OPTIONS...] [MATCHES...]</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>journalctl</b> 可用于检索 <a href="../../buster/manpages-zh/systemd.1.zh_CN.html">systemd(1)</a>
+  日志(由 <a href="../../buster/systemd/systemd-journald.service.8.en.html">systemd-journald.service(8)</a>
+  记录)。
+<p class="Pp">如果不带任何参数直接调用此命令，
+    那么将显示所有日志内容(从最早一条日志记录开始)。</p>
+<p class="Pp">如果指定了 [MATCHES...]
+    参数，
+    那么输出的日志将会按照
+    [MATCHES...] 参数进行过滤。 MATCHE
+    必须符合 &#34;FIELD=VALUE&#34; 格式
+    (例如 &#34;_SYSTEMD_UNIT=httpd.service&#34; )，
+    参见 <a href="../../buster/systemd/systemd.journal-fields.7.en.html">systemd.journal-fields(7)</a>
+    手册以了解日志字段的详细介绍。
+    如果有多个不同的字段被
+    [MATCHES...] 参数匹配，
+    那么这些字段之间使用&#34;AND&#34;逻辑连接，
+    也就是，日志项必须同时满足全部字段的匹配条件才能被输出。
+    如果同一个字段被多个
+    [MATCHES...] 参数匹配，
+    那么这些匹配条件之间使用&#34;OR&#34;逻辑连接，
+    也就是对于同一个字段，日志项只需满足任意一个匹配条件即可输出。
+    最后， &#34;+&#34;
+    字符可用作 [MATCHES...]
+    组之间的分隔符，并被视为使用&#34;OR&#34;逻辑连接。
+    也就是，MATCHE1 MATCHE2 + MATCHE3 MATCHE4 MATCHE5 +
+    MATCHE6 MATCHE7 相当于 ( MATCHE1 MATCHE2 ) OR ( MATCHE3
+    MATCHE4 MATCHE5 ) OR ( MATCHE6 MATCHE7 )</p>
+<p class="Pp">还可以使用绝对路径作为参数来过滤日志。
+    绝对路径可以是普通文件，也可以是软连接，但必须指向一个确实存在的文件。
+    如果路径指向了一个二进制可执行文件，
+    那么它实际上相当于是一个对
+    &#34;_EXE=&#34;
+    字段的匹配(仅匹配完整的绝对路径)。
+    如果路径指向了一个可执行脚本，
+    那么它实际上相当于是一个对
+    &#34;_COMM=&#34;
+    字段的匹配(仅匹配脚本的文件名)。
+    如果路径指向了一个设备节点，
+    那么它实际上相当于是一个对
+    &#34;_KERNEL_DEVICE=&#34;
+    字段的匹配(匹配该设备及其所有父设备的内核设备名称)。
+    在查询时，软连接会被追踪到底，内核设备名称将被合成，
+    父设备将按照当时的实际情况被提列出来。
+    因为日志项一般并不包含标记实际物理设备的字段，
+    所以，设备节点一般就是实际物理设备的最佳代表。
+    但是又因为设备节点与物理设备之间的对应关系在系统重启之后可能会发生变化，
+    所以，根据设备节点过滤日志仅对本次启动有意义，
+    除非你能确认对应关系在重启之后保持不变。</p>
+<p class="Pp">可以使用 <b>--boot</b>, <b>--unit=</b>
+    等选项
+    进一步附加额外的约束条件(相当于使用&#34;AND&#34;逻辑连接)。</p>
+<p class="Pp">最终的输出结果来自所有可访问的日志文件的综合，
+    无论这些日志文件是否正在滚动或者正在被写入，
+    也无论这些日志文件是属于系统日志还是用户日志，
+    只要有访问权限，就会被包括进来。</p>
+<p class="Pp">用于提取日志的日志文件的集合可以使用
+    <b>--user</b>, <b>--system</b>, <b>--directory</b>, <b>--file</b>
+    选项进行筛选。</p>
+<p class="Pp">每个用户都可以访问其专属的用户日志。
+    但是默认情况下，
+    只有root用户以及
+    &#34;systemd-journal&#34;, &#34;adm&#34;, &#34;wheel&#34;
+    组中的用户才可以访问全部的日志(系统与其他用户)。
+    注意，一般发行版还会给
+    &#34;adm&#34; 与 &#34;wheel&#34;
+    组一些其他额外的特权。
+    例如 &#34;wheel&#34;
+    组的用户一般都可以执行一些系统管理任务。</p>
+<p class="Pp">默认情况下，结果会通过
+    <b>less</b>
+    工具进行分页输出，
+    并且超长行会在屏幕边缘被截断。
+    不过，被截掉的部分可以通过左右箭头按键查看。
+    如果不想分页输出，那么可以使用
+    <b>--no-pager</b>
+    选项，参见下面的&#34;环境变量&#34;小节。</p>
+<p class="Pp">如果是输出到 tty
+    的话，行的颜色还会根据日志的级别变化：
+    ERROR
+    或更高级别为红色，NOTICE
+    或更高级别为高亮，其他级别则正常显示。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="选项">选项<a class="anchor" href="#%E9%80%89%E9%A1%B9">¶</a></h1>
+能够识别的命令行选项如下：
+<p class="Pp"><b>--no-full</b>, <b>--full</b>, <b>-l</b></p>
+<div class="Bd-indent">如果字段内容超长则以省略号(...)截断以适应列宽。
+  默认显示完整的字段内容(超长的部分换行显示或者被分页工具截断)。
+<p class="Pp">老旧的 <b>-l</b>/<b>--full</b> 选项
+    仅用于撤销已有的
+    <b>--no-full</b>
+    选项，除此之外没有其他用处。</p>
+</div>
+<p class="Pp"><b>-a</b>, <b>--all</b></p>
+<div class="Bd-indent">完整显示所有字段内容，
+  即使其中包含不可打印字符或者字段内容超长。</div>
+<p class="Pp"><b>-f</b>, <b>--follow</b></p>
+<div class="Bd-indent">只显示最新的日志项，并且不断显示新生成的日志项。
+  此选项隐含了 -n
+  选项。</div>
+<p class="Pp"><b>-e</b>, <b>--pager-end</b></p>
+<div class="Bd-indent">在分页工具内立即跳转到日志的尾部。
+  此选项隐含了 <b>-n1000</b>
+  以确保分页工具不必缓存太多的日志行。
+  不过这个隐含的行数可以被明确设置的
+  <b>-n</b> 选项覆盖。
+  注意，此选项仅可用于
+  <a href="../../buster/less/less.1.en.html">less(1)</a> 分页器。</div>
+<p class="Pp"><b>-n</b>, <b>--lines=</b></p>
+<div class="Bd-indent">限制显示最新的日志行数。
+  <b>--pager-end</b> 与 <b>--follow</b>
+  隐含了此选项。
+  此选项的参数：若为正整数则表示最大行数；
+  若为 &#34;all&#34;
+  则表示不限制行数；
+  若不设参数则表示默认值10行。</div>
+<p class="Pp"><b>--no-tail</b></p>
+<div class="Bd-indent">显示所有日志行，
+  也就是用于撤销已有的
+  <b>--lines=</b> 选项(即使与 -f
+  连用)。</div>
+<p class="Pp"><b>-r</b>, <b>--reverse</b></p>
+<div class="Bd-indent">反转日志行的输出顺序，
+  也就是最先显示最新的日志。</div>
+<p class="Pp"><b>-o</b>, <b>--output=</b></p>
+<div class="Bd-indent">控制日志的输出格式。
+  可以使用如下选项：
+<p class="Pp"><b>short</b></p>
+<div class="Bd-indent">这是默认值，
+  其输出格式与传统的
+  <b>syslog</b>[1]
+  文件的格式相似，
+  每条日志一行。</div>
+<p class="Pp"><b>short-iso</b></p>
+<div class="Bd-indent">与 short
+  类似，只是将时间戳字段以
+  ISO 8601 格式显示。</div>
+<p class="Pp"><b>short-precise</b></p>
+<div class="Bd-indent">与 short
+  类似，只是将时间戳字段的秒数精确到微秒级别。</div>
+<p class="Pp"><b>short-monotonic</b></p>
+<div class="Bd-indent">与 short
+  类似，只是将时间戳字段的零值从内核启动时开始计算。</div>
+<p class="Pp"><b>short-unix</b></p>
+<div class="Bd-indent">与 short
+  类似，只是将时间戳字段显示为从&#34;UNIX时间原点&#34;(1970-1-1
+  00:00:00 UTC)以来的秒数。
+  精确到微秒级别。</div>
+<p class="Pp"><b>verbose</b></p>
+<div class="Bd-indent">以结构化的格式显示每条日志的所有字段。</div>
+<p class="Pp"><b>export</b></p>
+<div class="Bd-indent">将日志序列化为二进制字节流(大部分依然是文本)
+  以适用于备份与网络传输(详见
+  <b>Journal Export Format</b>[2] 文档)。</div>
+<p class="Pp"><b>json</b></p>
+<div class="Bd-indent">将日志项按照JSON数据结构格式化，
+  每条日志一行(详见 <b>Journal
+  JSON Format</b>[3] 文档)。</div>
+<p class="Pp"><b>json-pretty</b></p>
+<div class="Bd-indent">将日志项按照JSON数据结构格式化，
+  但是每个字段一行，
+  以便于人类阅读。</div>
+<p class="Pp"><b>json-sse</b></p>
+<div class="Bd-indent">将日志项按照JSON数据结构格式化，每条日志一行，但是用大括号包围，
+  以适应 <b>Server-Sent Events</b>[4]
+  的要求。</div>
+<p class="Pp"><b>cat</b></p>
+<div class="Bd-indent">仅显示日志的实际内容，
+  而不显示与此日志相关的任何元数据(包括时间戳)。</div>
+</div>
+<p class="Pp"><b>--utc</b></p>
+<div class="Bd-indent">以世界统一时间(UTC)表示时间</div>
+<p class="Pp"><b>--no-hostname</b></p>
+<div class="Bd-indent">不显示来源于本机的日志消息的主机名字段。
+  此选项仅对 <b>short</b>
+  系列输出格式(见上文)有效。</div>
+<p class="Pp"><b>-x</b>, <b>--catalog</b></p>
+<div class="Bd-indent">在日志的输出中增加一些解释性的短文本，
+  以帮助进一步说明日志的含义、
+  问题的解决方案、支持论坛、
+  开发文档、以及其他任何内容。
+  并非所有日志都有这些额外的帮助文本，
+  详见 <b>Message Catalog Developer Documentation</b>[5]
+  文档。
+<p class="Pp">注意，如果要将日志输出用于bug报告，
+    请<i>不要</i>使用此选项。</p>
+</div>
+<p class="Pp"><b>-q</b>, <b>--quiet</b></p>
+<div class="Bd-indent">当以普通用户身份运行时，
+  不显示任何警告信息与提示信息。
+  例如：&#34;-- Logs begin at ...&#34;, &#34;-- Reboot
+  --&#34;</div>
+<p class="Pp"><b>-m</b>, <b>--merge</b></p>
+<div class="Bd-indent">混合显示包括远程日志在内的所有可见日志。</div>
+<p class="Pp"><b>-b </b><b>[</b><i>ID</i>]<b>[</b><i>±offset</i>],
+    <b>--boot=</b><b>[</b><i>ID</i>]<b>[</b><i>±offset</i>]</p>
+<div class="Bd-indent">显示特定于某次启动的日志，
+  这相当于添加了一个
+  &#34;_BOOT_ID=&#34; 匹配条件。
+<p class="Pp">如果参数为空(也就是
+    <i>ID</i> 与 <i>±offset</i>
+    都未指定)，
+    则表示仅显示本次启动的日志。</p>
+<p class="Pp">如果省略了 <i>ID</i> ，
+    那么当 <i>±offset</i>
+    是正数的时候，
+    将从日志头开始正向查找，
+    否则(也就是为负数或零)将从日志尾开始反响查找。
+    举例来说， &#34;-b
+    1&#34;表示按时间顺序排列最早的那次启动，
+    &#34;-b
+    2&#34;则表示在时间上第二早的那次启动；
+    &#34;-b
+    -0&#34;表示最后一次启动，
+    &#34;-b
+    -1&#34;表示在时间上第二近的那次启动，
+    以此类推。 如果
+    <i>±offset</i> 也省略了，
+    那么相当于&#34;-b -0&#34;，
+    除非本次启动不是最后一次启动(例如用
+    <b>--directory</b>
+    指定了另外一台主机上的日志目录)。</p>
+<p class="Pp">如果指定了32字符的
+    <i>ID</i> ， 那么表示以此
+    <i>ID</i>
+    所代表的那次启动为基准
+    计算偏移量(<i>±offset</i>)，
+    计算方法同上。
+    换句话说， 省略 <i>ID</i>
+    表示以本次启动为基准
+    计算偏移量(<i>±offset</i>)。</p>
+</div>
+<p class="Pp"><b>--list-boots</b></p>
+<div class="Bd-indent">列出每次启动的
+  序号(也就是相对于本次启动的偏移量)、32字符的ID、
+  第一条日志的时间戳、最后一条日志的时间戳。</div>
+<p class="Pp"><b>-k</b>, <b>--dmesg</b></p>
+<div class="Bd-indent">仅显示内核日志。隐含了
+  <b>-b</b> 选项以及 &#34;_TRANSPORT=kernel&#34;
+  匹配项。</div>
+<p class="Pp"><b>-t</b>, <b>--identifier=</b><b></b><i>SYSLOG_IDENTIFIER</i></p>
+<div class="Bd-indent">仅显示 <b>syslog</b>[1]
+  识别符为 <i>SYSLOG_IDENTIFIER</i>
+  的日志项。
+<p class="Pp">可以多次使用该选项以指定多个识别符。</p>
+</div>
+<p class="Pp"><b>-u</b>,
+    <b>--unit=</b><b></b><i>UNIT</i><b>|</b><b></b><i>PATTERN</i></p>
+<div class="Bd-indent">仅显示属于特定单元的日志。
+  也就是单元名称正好等于
+  <i>UNIT</i> 或者符合 <i>PATTERN</i>
+  模式的单元。
+  这相当于添加了一个
+  &#34;_SYSTEMD_UNIT=<i>UNIT</i>&#34;
+  匹配项(对于 <i>UNIT</i>
+  来说)，
+  或一组匹配项(对于
+  <i>PATTERN</i> 来说)。
+<p class="Pp">可以多次使用此选项以添加多个并列的匹配条件(相当于用&#34;OR&#34;逻辑连接)。</p>
+</div>
+<p class="Pp"><b>--user-unit=</b></p>
+<div class="Bd-indent">仅显示属于特定用户会话单元的日志。
+  相当于同时添加了
+  &#34;_SYSTEMD_USER_UNIT=&#34; 与 &#34;_UID=&#34;
+  两个匹配条件。
+<p class="Pp">可以多次使用此选项以添加多个并列的匹配条件(相当于用&#34;OR&#34;逻辑连接)。</p>
+</div>
+<p class="Pp"><b>-p</b>, <b>--priority=</b></p>
+<div class="Bd-indent">根据日志等级(包括等级范围)过滤输出结果。
+  日志等级数字与其名称之间的对应关系如下
+  (参见 <a href="../../buster/manpages-dev/syslog.3.en.html">syslog(3)</a>)： &#34;emerg&#34; (0),
+  &#34;alert&#34; (1), &#34;crit&#34; (2),
+  &#34;err&#34; (3), &#34;warning&#34; (4),
+  &#34;notice&#34; (5), &#34;info&#34; (6),
+  &#34;debug&#34; (7) 。
+  若设为一个单独的数字或日志等级名称，
+  则表示仅显示小于或等于此等级的日志
+  (也就是重要程度等于或高于此等级的日志)。
+  若使用 FROM..TO..
+  设置一个范围，
+  则表示仅显示指定的等级范围内(含两端)的日志。
+  此选项相当于添加了
+  &#34;PRIORITY=&#34; 匹配条件。</div>
+<p class="Pp"><b>-c</b>, <b>--cursor=</b></p>
+<div class="Bd-indent">从指定的游标(cursor)开始显示日志。
+  [提示]每条日志都有一个&#34;__CURSOR&#34;字段，类似于该条日志的指纹。</div>
+<p class="Pp"><b>--after-cursor=</b></p>
+<div class="Bd-indent">从指定的游标(cursor)<i>之后</i>开始显示日志。
+  如果使用了 <b>--show-cursor</b>
+  选项，
+  则也会显示游标本身。</div>
+<p class="Pp"><b>--show-cursor</b></p>
+<div class="Bd-indent">在最后一条日志之后显示游标，
+  类似下面这样，以&#34;--&#34;开头：
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>-- cursor: s=0639...
+</pre>
+</div>
+<p class="Pp">游标的具体格式是私有的(也就是没有公开的规范)，
+    并且会变化。</p>
+</div>
+<p class="Pp"><b>-S</b>, <b>--since=</b>, <b>-U</b>, <b>--until=</b></p>
+<div class="Bd-indent">显示晚于指定时间(--since=)的日志、显示早于指定时间(--until=)的日志。
+  参数的格式类似 &#34;2012-10-30
+  18:17:16&#34; 这样。
+  如果省略了&#34;时:分:秒&#34;部分，
+  则相当于设为 &#34;00:00:00&#34; 。
+  如果仅省略了&#34;秒&#34;的部分则相当于设为
+  &#34;:00&#34; 。
+  如果省略了&#34;年-月-日&#34;部分，
+  则相当于设为当前日期。
+  除了&#34;年-月-日
+  时:分:秒&#34;格式，
+  参数还可以进行如下设置：
+  (1)设为 &#34;yesterday&#34;, &#34;today&#34;,
+  &#34;tomorrow&#34;
+  以表示那一天的零点(00:00:00)。
+  (2)设为 &#34;now&#34;
+  以表示当前时间。
+  (3)可以在&#34;年-月-日
+  时:分:秒&#34;前加上
+  &#34;-&#34;(前移) 或 &#34;+&#34;(后移)
+  前缀以表示相对于当前时间的偏移。
+  关于时间与日期的详细规范，
+  参见 <a href="../../buster/systemd/systemd.time.7.en.html">systemd.time(7)</a></div>
+<p class="Pp"><b>-F</b>, <b>--field=</b></p>
+<div class="Bd-indent">显示所有日志中某个字段的所有可能值。
+  [译者注]类似于SQL语句：&#34;SELECT
+  DISTINCT 某字段 FROM
+  全部日志&#34;</div>
+<p class="Pp"><b>-N</b>, <b>--fields</b></p>
+<div class="Bd-indent">输出所有日志字段的名称</div>
+<p class="Pp"><b>--system</b>, <b>--user</b></p>
+<div class="Bd-indent">仅显示系统服务与内核的日志(<b>--system</b>)、
+  仅显示当前用户的日志(<b>--user</b>)。
+  如果两个选项都未指定，则显示当前用户的所有可见日志。</div>
+<p class="Pp"><b>-M</b>, <b>--machine=</b></p>
+<div class="Bd-indent">显示来自于正在运行的、特定名称的本地容器的日志。
+  参数必须是一个本地容器的名称。</div>
+<p class="Pp"><b>-D </b><b></b><i>DIR</i>,
+  <b>--directory=</b><b></b><i>DIR</i></p>
+<div class="Bd-indent">仅显示来自于特定目录中的日志，
+  而不是默认的运行时和系统日志目录中的日志。</div>
+<p class="Pp"><b>--file=</b><b></b><i>GLOB</i></p>
+<div class="Bd-indent"><i>GLOB</i>
+  是一个可以包含&#34;?&#34;与&#34;*&#34;的文件路径匹配模式。
+  表示仅显示来自与指定的
+  <i>GLOB</i>
+  模式匹配的文件中的日志，
+  而不是默认的运行时和系统日志目录中的日志。
+  可以多次使用此选项以指定多个匹配模式(多个模式之间用&#34;OR&#34;逻辑连接)。</div>
+<p class="Pp"><b>--root=</b><b></b><i>ROOT</i></p>
+<div class="Bd-indent">在对日志进行操作时，
+  将 <i>ROOT</i>
+  视为系统的根目录。
+  例如 <b>--update-catalog</b> 将会创建
+  <i>ROOT</i>/var/lib/systemd/catalog/database</div>
+<p class="Pp"><b>--new-id128</b></p>
+<div class="Bd-indent">此选项并不用于显示日志内容，
+  而是用于重新生成一个标识日志分类的
+  128-bit ID 。
+  此选项的目的在于
+  帮助开发者生成易于辨别的日志消息，
+  以方便调试。</div>
+<p class="Pp"><b>--header</b></p>
+<div class="Bd-indent">此选项并不用于显示日志内容，
+  而是用于显示日志文件内部的头信息(类似于元数据)。</div>
+<p class="Pp"><b>--disk-usage</b></p>
+<div class="Bd-indent">此选项并不用于显示日志内容，
+  而是用于显示所有日志文件(归档文件与活动文件)的磁盘占用总量。</div>
+<p class="Pp"><b>--vacuum-size=</b>, <b>--vacuum-time=</b>,
+    <b>--vacuum-files=</b></p>
+<div class="Bd-indent">这些选项并不用于显示日志内容，
+  而是用于清理日志归档文件(并不清理活动的日志文件)，
+  以释放磁盘空间。
+  <b>--vacuum-size=</b>
+  可用于限制归档文件的最大磁盘使用量
+  (可以使用 &#34;K&#34;, &#34;M&#34;, &#34;G&#34;,
+  &#34;T&#34; 后缀)； <b>--vacuum-time=</b>
+  可用于清除指定时间之前的归档
+  (可以使用 &#34;s&#34;, &#34;m&#34;, &#34;h&#34;,
+  &#34;days&#34;, &#34;weeks&#34;, &#34;months&#34;, &#34;years&#34;
+  后缀)； <b>--vacuum-files=</b>
+  可用于限制日志归档文件的最大数量。
+  注意，<b>--vacuum-size=</b> 对 <b>--disk-usage</b>
+  的输出仅有间接效果，
+  因为 <b>--disk-usage</b>
+  输出的是归档日志与活动日志的总量。
+  同样，<b>--vacuum-files=</b>
+  也未必一定会减少日志文件的总数，
+  因为它同样仅作用于归档文件而不会删除活动的日志文件。
+  此三个选项可以同时使用，以同时从三个维度去限制归档文件。
+  若将某选项设为零，则表示取消此选项的限制。</div>
+<p class="Pp"><b>--list-catalog </b><b>[</b><i>128-bit-ID...</i>]<b> </b></p>
+<div class="Bd-indent">简要列出日志分类信息，
+  其中包括对分类信息的简要描述。
+<p class="Pp">如果明确指定了分类ID(<i>128-bit-ID</i>)，
+    那么仅显示指定的分类。</p>
+</div>
+<p class="Pp"><b>--dump-catalog </b><b>[</b><i>128-bit-ID...</i>]<b> </b></p>
+<div class="Bd-indent">详细列出日志分类信息
+  (格式与 .catalog 文件相同)。
+<p class="Pp">如果明确指定了分类ID(<i>128-bit-ID</i>)，
+    那么仅显示指定的分类。</p>
+</div>
+<p class="Pp"><b>--update-catalog</b></p>
+<div class="Bd-indent">更新日志分类索引二进制文件。
+  每当安装、删除、更新了分类文件，都需要执行一次此动作。</div>
+<p class="Pp"><b>--setup-keys</b></p>
+<div class="Bd-indent">此选项并不用于显示日志内容，
+  而是用于生成一个新的FSS(Forward
+  Secure Sealing)密钥对。
+  此密钥对包含一个&#34;sealing
+  key&#34;与一个&#34;verification key&#34;。
+  &#34;sealing
+  key&#34;保存在本地日志目录中，
+  而&#34;verification
+  key&#34;则必须保存在其他地方。
+  详见 <a href="../../buster/manpages-zh/journald.conf.5.zh_CN.html">journald.conf(5)</a> 中的 <b>Seal=</b>
+  选项。</div>
+<p class="Pp"><b>--force</b></p>
+<div class="Bd-indent">与 <b>--setup-keys</b> 连用，
+  表示即使已经配置了FSS(Forward
+  Secure Sealing)密钥对，
+  也要强制重新生成。</div>
+<p class="Pp"><b>--interval=</b></p>
+<div class="Bd-indent">与 <b>--setup-keys</b>
+  连用，指定&#34;sealing
+  key&#34;的变化间隔。
+  较短的时间间隔会导致占用更多的CPU资源，
+  但是能够减少未检测的日志变化时间。
+  默认值是 15min</div>
+<p class="Pp"><b>--verify</b></p>
+<div class="Bd-indent">检查日志文件的内在一致性。
+  如果日志文件在生成时开启了FSS特性，
+  并且使用 <b>--verify-key=</b>
+  指定了FSS的&#34;verification key&#34;，
+  那么，同时还将验证日志文件的真实性。</div>
+<p class="Pp"><b>--verify-key=</b></p>
+<div class="Bd-indent">与 <b>--verify</b>
+  选项连用，
+  指定FSS的&#34;verification key&#34;</div>
+<p class="Pp"><b>--sync</b></p>
+<div class="Bd-indent">要求日志守护进程将所有未写入磁盘的日志数据刷写到磁盘上，
+  并且一直阻塞到刷写操作实际完成之后才返回。
+  因此该命令可以保证当它返回的时候，
+  所有在调用此命令的时间点之前的日志，
+  已经全部安全的刷写到了磁盘中。</div>
+<p class="Pp"><b>--flush</b></p>
+<div class="Bd-indent">要求日志守护进程
+  将 /run/log/journal 中的日志数据
+  刷写到 /var/log/journal 中
+  (如果持久存储设备当前可用的话)。
+  此操作会一直阻塞到操作完成之后才会返回，
+  因此可以确保在该命令返回时，
+  数据转移确实已经完成。
+  注意，此命令仅执行一个单独的、一次性的转移动作，
+  若没有数据需要转移，
+  则此命令什么也不做，
+  并且也会返回一个表示操作已正确完成的返回值。</div>
+<p class="Pp"><b>--rotate</b></p>
+<div class="Bd-indent">要求日志守护进程滚动日志文件。
+  此命令会一直阻塞到滚动完成之后才会返回。</div>
+<p class="Pp"><b>-h</b>, <b>--help</b></p>
+<div class="Bd-indent">显示简短的帮助信息并退出。</div>
+<p class="Pp"><b>--version</b></p>
+<div class="Bd-indent">显示简短的版本信息并退出。</div>
+<p class="Pp"><b>--no-pager</b></p>
+<div class="Bd-indent">不将程序的输出内容管道(pipe)给分页程序。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="退出状态">退出状态<a class="anchor" href="#%E9%80%80%E5%87%BA%E7%8A%B6%E6%80%81">¶</a></h1>
+返回值为 0 表示成功，
+  非零返回值表示失败代码。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="环境变量">环境变量<a class="anchor" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">¶</a></h1>
+<i>$SYSTEMD_PAGER</i>
+<div class="Bd-indent">指定分页程序。仅在未指定
+  <b>--no-pager</b> 选项时有意义。
+  此变量会覆盖 <i>$PAGER</i>
+  的值。
+  将此变量设为空字符串或
+  &#34;cat&#34; 等价于使用 <b>--no-pager</b>
+  选项。</div>
+<p class="Pp"><i>$SYSTEMD_LESS</i></p>
+<div class="Bd-indent">用于覆盖
+  默认传递给 <b>less</b>
+  程序的命令行选项
+  (&#34;FRSXMK&#34;)。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="例子">例子<a class="anchor" href="#%E4%BE%8B%E5%AD%90">¶</a></h1>
+不带任何选项与参数，表示显示全部日志
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>journalctl
+</pre>
+</div>
+<p class="Pp">仅指定一个匹配条件，
+    显示所有符合该匹配条件的日志</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>journalctl _SYSTEMD_UNIT=avahi-daemon.service
+</pre>
+</div>
+<p class="Pp">指定了两个不同字段的匹配条件，
+    显示同时满足两个匹配条件的日志</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>journalctl _SYSTEMD_UNIT=avahi-daemon.service _PID=28097
+</pre>
+</div>
+<p class="Pp">指定了同一个字段的两个不同匹配条件，
+    显示满足其中任意一个条件的日志</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>journalctl _SYSTEMD_UNIT=avahi-daemon.service _SYSTEMD_UNIT=dbus.service
+</pre>
+</div>
+<p class="Pp">使用 &#34;+&#34;
+    连接两组匹配条件，
+    相当于逻辑&#34;OR&#34;连接</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>journalctl _SYSTEMD_UNIT=avahi-daemon.service _PID=28097 + _SYSTEMD_UNIT=dbus.service
+</pre>
+</div>
+<p class="Pp">显示所有 D-Bus
+    进程产生的日志</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>journalctl /usr/bin/dbus-daemon
+</pre>
+</div>
+<p class="Pp">显示上一次启动所产生的所有内核日志</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>journalctl -k -b -1
+</pre>
+</div>
+<p class="Pp">持续显示 apache.service
+    服务不断生成的日志</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>journalctl -f -u apache
+</pre>
+</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参见">参见<a class="anchor" href="#%E5%8F%82%E8%A7%81">¶</a></h1>
+<a href="../../buster/manpages-zh/systemd.1.zh_CN.html">systemd(1)</a>, <a href="../../buster/systemd/systemd-journald.service.8.en.html">systemd-journald.service(8)</a>, <a href="../../buster/manpages-zh/systemctl.1.zh_CN.html">systemctl(1)</a>,
+  <a href="../../buster/systemd-coredump/coredumpctl.1.en.html">coredumpctl(1)</a>, <a href="../../buster/systemd/systemd.journal-fields.7.en.html">systemd.journal-fields(7)</a>,
+  <a href="../../buster/manpages-zh/journald.conf.5.zh_CN.html">journald.conf(5)</a>, <a href="../../buster/systemd/systemd.time.7.en.html">systemd.time(7)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES">NOTES<a class="anchor" href="#NOTES">¶</a></h1>
+<dl class="Bl-tag">
+  <dt> 1.</dt>
+  <dd>syslog</dd>
+</dl>
+<div class="Bd-indent">//linux/sysklogd.html</div>
+<dl class="Bl-tag">
+  <dt> 2.</dt>
+  <dd>Journal Export Format</dd>
+</dl>
+<div class="Bd-indent"><a href="../../wiki/Software/systemd/export">../../wiki/Software/systemd/export</a></div>
+<dl class="Bl-tag">
+  <dt> 3.</dt>
+  <dd>Journal JSON Format</dd>
+</dl>
+<div class="Bd-indent"><a href="../../wiki/Software/systemd/json">../../wiki/Software/systemd/json</a></div>
+<dl class="Bl-tag">
+  <dt> 4.</dt>
+  <dd>Server-Sent Events</dd>
+</dl>
+<div class="Bd-indent"><a href="../../en-US/docs/Server-sent_events/Using_server-sent_events">../../en-US/docs/Server-sent_events/Using_server-sent_events</a></div>
+<dl class="Bl-tag">
+  <dt> 5.</dt>
+  <dd>Message Catalog Developer Documentation</dd>
+</dl>
+<div class="Bd-indent"><a href="../../wiki/Software/systemd/catalog">../../wiki/Software/systemd/catalog</a></div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<p class="Pp">翻译人员：金步国
+  <br/>
+  金步国作品集：https://www.jinbuguo.com
+  <br/>
+  中文 man
+    手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os">systemd 231</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+journalctl.1.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-30T03:48:28Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"journalctl(1)\"}}]}"
+</script>

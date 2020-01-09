@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>chat(8) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/ppp/chat.8.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-ja/chat.8.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/chat.8.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/chat.8.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/chat.8.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="8">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; chat(8)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/chat.8">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/chat.8.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS" title="總覽 SYNOPSIS">總覽 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%B8%E9%A0%85_OPTIONS" title="選項 OPTIONS">選項 OPTIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#CHAT_%E8%85%B3%E6%9C%AC_SCRIPT" title="CHAT 腳本 SCRIPT">CHAT 腳本 SCRIPT</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#COMMENTS" title="COMMENTS">COMMENTS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SENDING_DATA_FROM_A_FILE" title="SENDING DATA FROM A FILE">SENDING DATA FROM A FILE</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%94%BE%E6%A3%84%E5%AD%97%E7%AC%A6%E4%B8%B2_ABORT_STRINGS" title="放棄字符串 ABORT STRINGS">放棄字符串 ABORT STRINGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#CLR_ABORT_STRINGS" title="CLR_ABORT STRINGS">CLR_ABORT STRINGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SAY_STRINGS" title="SAY STRINGS">SAY STRINGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#REPORT_STRINGS" title="REPORT STRINGS">REPORT STRINGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#CLR_REPORT_STRINGS" title="CLR_REPORT STRINGS">CLR_REPORT STRINGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ECHO" title="ECHO">ECHO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#HANGUP" title="HANGUP">HANGUP</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B6%85%E6%99%82_TIMEOUT" title="超時 TIMEOUT">超時 TIMEOUT</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SENDING_%E7%99%BC%E9%80%81_EOT" title="SENDING 發送 EOT">SENDING 發送 EOT</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%94%A2%E7%94%9F%E4%B8%AD%E6%96%B7_GENERATING_BREAK" title="產生中斷 GENERATING BREAK">產生中斷 GENERATING BREAK</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%BD%89%E7%BE%A9%E5%BA%8F%E5%88%97_ESCAPE_SEQUENCES" title="轉義序列 ESCAPE SEQUENCES">轉義序列 ESCAPE SEQUENCES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ENVIRONMENT_VARIABLES" title="ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#TERMINATION_CODES" title="TERMINATION CODES">TERMINATION CODES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO" title="參見 SEE ALSO">參見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#COPYRIGHT" title="COPYRIGHT">COPYRIGHT</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國linux論壇man手冊翻譯計劃》:">《中國linux論壇man手冊翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/chat.8.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/chat.8.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/chat.8.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/ppp/chat.8.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/chat.8.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/chat.8.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/chat.8.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/chat.8.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">CHAT(8)</td>
+    <td class="head-vol">System Manager&#39;s Manual</td>
+    <td class="head-rtitle">CHAT(8)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+chat -
+  與數據機自動溝通的指令稿
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_SYNOPSIS">總覽 SYNOPSIS<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS">¶</a></h1>
+<b>chat</b> [ <i>options</i> ] <i>script</i>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+<i>chat</i>
+  程式在電腦與數據機之間定義溝通交換事宜。
+  它最主要的
+  目的是用來在點對點協定的隱形程式
+  (pppd) 以及遠端的 pppd 程序
+  之間建立連線。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="選項_OPTIONS">選項 OPTIONS<a class="anchor" href="#%E9%81%B8%E9%A0%85_OPTIONS">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>-f <i>&lt;chat file&gt;</i></b></dt>
+  <dd>從 chat 檔案讀取 chat
+      指令稿。這個選項的使用與
+      chat 的 令稿參數互斥(mutually
+      exclusive)。使用者必須具有存取該
+      檔案的讀取權。在檔案中允許多線(multiple
+      lines)設定。應
+      該要以空白或是橫向定位(horizontal
+      tab)字元來分隔字串。</dd>
+  <dt><b>-t <i>&lt;timeout&gt;</i></b></dt>
+  <dd>對於所要接收的期待字串(expected
+      string)設定逾時限制。
+      如果在該時間限制內沒有接收到該字串的話那麼就不送出回覆
+      字串(reply string)。
+      可以送出一個變通(alternate)的回覆
+      或者如果沒有變通的回覆字串則該指令稿將會失敗。一個失敗
+      的指令稿將會使得 chat
+      程式以一個非零的錯誤碼結束。</dd>
+  <dt><b>-r <i>&lt;report file&gt;</i></b></dt>
+  <dd>Set the file for output of the report strings. If you use the keyword
+      <i>REPORT</i>, the resulting strings are written to this file. If this
+      option is not used and you still use <i>REPORT</i> keywords, the
+      <i>stderr</i> file is used for the report strings.</dd>
+  <dt><b>-e</b></dt>
+  <dd>Start with the echo option turned on. Echoing may also be turned on or off
+      at specific points in the chat script by using the <i>ECHO</i> keyword.
+      When echoing is enabled, all output from the modem is echoed to
+      <i>stderr</i>.</dd>
+  <dt><b>-E</b></dt>
+  <dd>Enables environment variable substituion within chat scripts using the
+      standard <i>$xxx</i> syntax.</dd>
+  <dt><b>-v</b></dt>
+  <dd>要求 chat
+      指令稿以冗長(verbose)模式執行。
+      這個 chat 程
+      式接下來會將所有從數據機接收的文字以及輸出的字串記錄到
+      SYSLOG 去。The default is to log through the SYSLOG; the
+      logging method may be altered with the -S and -s flags.</dd>
+  <dt><b>-V</b></dt>
+  <dd>Request that the <i>chat</i> script be executed in a stderr verbose mode.
+      The <i>chat</i> program will then log all text received from the modem and
+      the output strings sent to the modem to the stderr device. This device is
+      usually the local console at the station running the chat or pppd
+    program.</dd>
+  <dt><b>-s</b></dt>
+  <dd>Use stderr. All log messages from &#39;-v&#39; and all error messages will be sent
+      to stderr.</dd>
+  <dt><b>-S</b></dt>
+  <dd>Do not use the SYSLOG. By default, error messages are sent to the SYSLOG.
+      The use of -S will prevent both log messages from &#39;-v&#39; and error messages
+      from being sent to the SYSLOG.</dd>
+  <dt><b>-T <i>&lt;phone number&gt;</i></b></dt>
+  <dd>Pass in an arbitary string, usually a phone number, that will be
+      substituted for the \T substitution metacharacter in a send string.</dd>
+  <dt><b>-U <i>&lt;phone number 2&gt;</i></b></dt>
+  <dd>Pass in a second string, usually a phone number, that will be substituted
+      for the \U substitution metacharacter in a send string. This is useful
+      when dialing an ISDN terminal adapter that requires two numbers.</dd>
+  <dt><b>script</b></dt>
+  <dd>script 如果指令稿沒有以 -f
+      選項指定在檔案裡那麼該指令稿會如同
+      參數般被包含在 chat
+      程式裡。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="CHAT_腳本_SCRIPT">CHAT 腳本 SCRIPT<a class="anchor" href="#CHAT_%E8%85%B3%E6%9C%AC_SCRIPT">¶</a></h1>
+<i>chat</i> 腳本定義通訊過程
+<p class="Pp">一個指令稿裡包含一個或多個〞期待對方送出(expect-send)〞的配對
+    字串(pairs of
+    string)，以空白隔開，還有一個選擇性的〞期待對方
+    送出之候補(subexpect-subsend)〞配對字串，以短線(dash)隔開。像
+    下面這個例子：</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>ogin:-BREAK-ogin: ppp ssword: hello2u2</dd>
+</dl>
+<p class="Pp">這一行指示 chat
+    程式應該期待 &#34;ogin:&#34;
+    這個字串。如果在所分配的
+    時間區間內接收簽入提示失敗的話，
+    那它就送出一個中斷程序(break
+    sequence)給遠端然後期待
+    &#34;ogin:&#34; 這個字串。
+    如果第一個 &#34;ogin:&#34;
+    被接收到那麼中斷程序就不會產生。</p>
+<p class="Pp">一旦它接收到該簽入提示則
+    chat 程式將會送出 ppp
+    這個字串然後期 待
+    &#34;ssword:&#34;
+    這個提示。當它接收到密碼提示以後，它將會送出密碼
+    hello2u2 。</p>
+<p class="Pp">一般在回覆字串後面會跟著送出一個機架返回(carriage
+    return)。在
+    〞期待〞字串裡除非以
+    字元程序(character
+    sequence)指定為必
+    須否則不會期待它的出現。</p>
+<p class="Pp">期待程序(expect
+    sequence)應該只包含辨認字串所需要的資料。因為
+    它一般是儲放在磁碟檔案裡，它不應該包含變動的資訊。
+    通常以期待
+    字串來尋找時間字串(time
+    strings)， 網路辨識字串(network
+    iden- tification
+    strings)，或是其它變動的資料是不被接受的。</p>
+<p class="Pp">為求協助修正在初始化程序中(initial
+    sequence) 可能會傳送錯誤的
+    字元，所以尋找 &#34;ogin:&#34;
+    這個字串而不是 &#34;login:&#34;
+    。 開頭的 &#34;l&#34;
+    字元可能接收錯誤而你永遠找不到該字串，
+    即使它已經被系統送出。
+    因此緣故，指令稿尋找
+    &#34;ogin:&#34; 而不是 &#34;login:&#34;
+    以及 &#34;ssword&#34; 而 不是
+    &#34;password:&#34; 。</p>
+<p class="Pp">一個非常簡單的指令稿看起來可能像這樣：</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>ogin: ppp ssword: hello2u2</dd>
+</dl>
+<p class="Pp">換句話說， 期待
+    ...ogin:, 送出 ppp, 期待 ...ssword:,
+    再送出 hello2u2 。</p>
+<p class="Pp">在實際使用上，簡單的指令稿是罕見的。最少最少，
+    原先的字串沒有
+    被接收時你應該要把候補期待(sub-sequences)包括進來。例如，考慮
+    下面這個例子：</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>ogin:--ogin: ppp ssword: hello2u2</dd>
+</dl>
+<p class="Pp">這會是一個比前面所用的簡單指令稿更好的指令稿。
+    這個會尋找相同 同的
+    login: 提示，然而,
+    如果沒有接收到的話，
+    會送出一個單獨的
+    返回程序(return
+    sequence)並且它會接著再次尋找
+    login: 。要是雜
+    雜訊掩蓋掉第一個 login
+    提示那麼接著送出空線路(empty
+    line)經常
+    將會再次產生簽入提示。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="COMMENTS">COMMENTS<a class="anchor" href="#COMMENTS">¶</a></h1>
+Comments can be embedded in the chat script. A comment is a line which starts
+  with the <b>#</b> (hash) character in column 1. Such comment lines are just
+  ignored by the chat program. If a &#39;#&#39; character is to be expected as the first
+  character of the expect sequence, you should quote the expect string. If you
+  want to wait for a prompt that starts with a # (hash) character, you would
+  have to write something like this:
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd># Now wait for the prompt and send logout string
+    <br/>
+    ´# &#39; logout</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SENDING_DATA_FROM_A_FILE">SENDING DATA FROM A FILE<a class="anchor" href="#SENDING_DATA_FROM_A_FILE">¶</a></h1>
+If the string to send starts with an at sign (@), the rest of the string is
+  taken to be the name of a file to read to get the string to send. If the last
+  character of the data read is a newline, it is removed. The file can be a
+  named pipe (or fifo) instead of a regular file. This provides a way for
+  <b>chat</b> to communicate with another program, for example, a program to
+  prompt the user and receive a password typed in.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="放棄字符串_ABORT_STRINGS">放棄字符串 ABORT STRINGS<a class="anchor" href="#%E6%94%BE%E6%A3%84%E5%AD%97%E7%AC%A6%E4%B8%B2_ABORT_STRINGS">¶</a></h1>
+許多數據機會以字串來回報呼叫的狀況。
+  這些字串可能是 CONNECTED
+  或是 NO CARRIER 或是 BUSY 。
+  通常要是數據機連線到遠端失敗的話
+  應該會希望結束指令稿。
+  困難是指令稿不會確實地知道它可能接收到
+  哪個數據機字串。在某次嘗試時，
+  他可能接收到 BUSY
+  然而下次它可
+  能接收到 NO CARRIER 。
+<p class="Pp">這些〞失敗〞字串可以用
+    ABORT
+    程序指定到指令稿中。像是下面這個
+    例子般地寫到指令稿裡：</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>ABORT BUSY ABORT &#39;NO CARRIER&#39; &#39;&#39; ATZ OK ATDT5551212 CONNECT</dd>
+</dl>
+<p class="Pp">這個程序將不會期待什麼；而且接著送出
+    ATZ
+    這個字串。對此期待的
+    回應是 OK
+    這個字串。當它接收到
+    OK 時，字串 ADTD5551212 就進行
+    撥號。期待字串是 CONNECT
+    。 如果字串 CONNECT
+    被接收到那麼就會
+    執行指令稿其餘的部份。然而，要是數據機發現電話忙線，
+    他將會送 出 BUSY
+    這個字串。
+    這會使得該字串符合失敗字元程序(abort
+    char- acter)。
+    這個指令稿將會因為它發現一個失敗字串(abort
+    string)而
+    失敗(fail)。如果他接收到的是
+    NO CARRIER 字串，
+    它也會因為同樣
+    的原因而失敗。不是可以接收到字串就是字串將終結
+    chat 指令稿。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="CLR_ABORT_STRINGS">CLR_ABORT STRINGS<a class="anchor" href="#CLR_ABORT_STRINGS">¶</a></h1>
+This sequence allows for clearing previously set <b>ABORT</b> strings.
+  <b>ABORT</b> strings are kept in an array of a pre-determined size (at
+  compilation time); <b>CLR_ABORT</b> will reclaim the space for cleared entries
+  so that new strings can use that space.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SAY_STRINGS">SAY STRINGS<a class="anchor" href="#SAY_STRINGS">¶</a></h1>
+The <b>SAY</b> directive allows the script to send strings to the user at the
+  terminal via standard error. If <b>chat</b> is being run by pppd, and pppd is
+  running as a daemon (detached from its controlling terminal), standard error
+  will normally be redirected to the file /etc/ppp/connect-errors.
+<p class="Pp"><b>SAY</b> strings must be enclosed in single or double quotes. If
+    carriage return and line feed are needed in the string to be output, you
+    must explicitely add them to your string.</p>
+<p class="Pp">The SAY strings could be used to give progress messages in
+    sections of the script where you want to have &#39;ECHO OFF&#39; but still let the
+    user know what is happening. An example is:</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>ABORT BUSY
+    <br/>
+    ECHO OFF
+    <br/>
+    SAY &#34;Dialling your ISP...\n&#34;
+    <br/>
+    ´&#39; ATDT5551212
+    <br/>
+    TIMEOUT 120
+    <br/>
+    SAY &#34;Waiting up to 2 minutes for connection ... &#34;
+    <br/>
+    CONNECT &#39;&#39;
+    <br/>
+    SAY &#34;Connected, now logging in ...0
+    <br/>
+    ogin: account
+    <br/>
+    ssword: pass
+    <br/>
+    $ SAY &#34;Logged in OK ...0 <i>etc ...</i></dd>
+</dl>
+<p class="Pp">This sequence will only present the SAY strings to the user and
+    all the details of the script will remain hidden. For example, if the above
+    script works, the user will see:</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>Dialling your ISP...
+    <br/>
+    Waiting up to 2 minutes for connection ... Connected, now logging in ...
+    <br/>
+    Logged in OK ...</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="REPORT_STRINGS">REPORT STRINGS<a class="anchor" href="#REPORT_STRINGS">¶</a></h1>
+A <b>report</b> string is similar to the ABORT string. The difference is that
+  the strings, and all characters to the next control character such as a
+  carriage return, are written to the report file.
+<p class="Pp">The report strings may be used to isolate the transmission rate of
+    the modem&#39;s connect string and return the value to the chat user. The
+    analysis of the report string logic occurs in conjunction with the other
+    string processing such as looking for the expect string. The use of the same
+    string for a report and abort sequence is probably not very useful, however,
+    it is possible.</p>
+<p class="Pp">The report strings to no change the completion code of the
+    program.</p>
+<p class="Pp">These &#34;report&#34; strings may be specified in the script
+    using the <i>REPORT</i> sequence. It is written in the script as in the
+    following example:</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>REPORT CONNECT ABORT BUSY &#39;&#39; ATDT5551212 CONNECT &#39;&#39; ogin: account</dd>
+</dl>
+<p class="Pp">This sequence will expect nothing; and then send the string
+    ATDT5551212 to dial the telephone. The expected string is <i>CONNECT</i>. If
+    the string <i>CONNECT</i> is received the remainder of the script is
+    executed. In addition the program will write to the expect-file the string
+    &#34;CONNECT&#34; plus any characters which follow it such as the
+    connection rate.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="CLR_REPORT_STRINGS">CLR_REPORT STRINGS<a class="anchor" href="#CLR_REPORT_STRINGS">¶</a></h1>
+This sequence allows for clearing previously set <b>REPORT</b> strings.
+  <b>REPORT</b> strings are kept in an array of a pre-determined size (at
+  compilation time); <b>CLR_REPORT</b> will reclaim the space for cleared
+  entries so that new strings can use that space.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ECHO">ECHO<a class="anchor" href="#ECHO">¶</a></h1>
+The echo options controls whether the output from the modem is echoed to
+  <i>stderr</i>. This option may be set with the <i>-e</i> option, but it can
+  also be controlled by the <i>ECHO</i> keyword. The &#34;expect-send&#34;
+  pair <i>ECHO</i> <i>ON</i> enables echoing, and <i>ECHO</i> <i>OFF</i>
+  disables it. With this keyword you can select which parts of the conversation
+  should be visible. For instance, with the following script:
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>ABORT &#39;BUSY&#39;
+    <br/>
+    ABORT &#39;NO CARRIER&#39;
+     &#39;&#39;
+    <br/>
+    ATZ
+    <br/>
+    OK\r\n ATD1234567
+    <br/>
+    \r\n \c
+    <br/>
+    ECHO ON
+    <br/>
+    CONNECT \c
+    <br/>
+    ogin: account</dd>
+</dl>
+<p class="Pp">all output resulting from modem configuration and dialing is not
+    visible, but starting with the <i>CONNECT</i> (or <i>BUSY</i>) message,
+    everything will be echoed.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="HANGUP">HANGUP<a class="anchor" href="#HANGUP">¶</a></h1>
+The HANGUP options control whether a modem hangup should be considered as an
+  error or not. This option is useful in scripts for dialling systems which will
+  hang up and call your system back. The HANGUP options can be <b>ON</b> or
+  <b>OFF</b>.
+<br/>
+When HANGUP is set OFF and the modem hangs up (e.g., after the first stage of
+  logging in to a callback system), <b>chat</b> will continue running the script
+  (e.g., waiting for the incoming call and second stage login prompt). As soon
+  as the incoming call is connected, you should use the <b>HANGUP ON</b>
+  directive to reinstall normal hang up signal behavior. Here is an (simple)
+  example script:
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>ABORT &#39;BUSY&#39;
+    <br/>
+    ´´ ATZ
+    <br/>
+    OK\r\n ATD1234567
+    <br/>
+    \r\n \c
+    <br/>
+    CONNECT \c
+    <br/>
+    ´Callback login:&#39; call_back_ID
+    <br/>
+    HANGUP OFF
+    <br/>
+    ABORT &#34;Bad Login&#34;
+    <br/>
+    ´Callback Password:&#39; Call_back_password
+    <br/>
+    TIMEOUT 120
+    <br/>
+    CONNECT \c
+    <br/>
+    HANGUP ON
+    <br/>
+    ABORT &#34;NO CARRIER&#34;
+    <br/>
+    ogin:--BREAK--ogin: real_account
+    <br/>
+    <i>etc ...</i></dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="超時_TIMEOUT">超時 TIMEOUT<a class="anchor" href="#%E8%B6%85%E6%99%82_TIMEOUT">¶</a></h1>
+初始的逾時值是 45
+  秒。這可以用 -t
+  參數來加以改變。
+<p class="Pp">要對下一個期待字串改變逾時值的話，可以使用下面這個例子：</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>ATZ OK ATDT5551212 CONNECT TIMEOUT 10 ogin:--ogin: TIMEOUT 5 assword:
+      hello2u2</dd>
+</dl>
+<p class="Pp">這將會在期待
+    &#34;login:&#34;
+    提示的時候把逾時限制改成
+    10 秒。 逾時限
+    制接著在它尋找密碼提示時被改成
+    5 秒。</p>
+<p class="Pp">逾時限制一旦改變就會持續作用直到它再度被改變。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SENDING_發送_EOT">SENDING 發送 EOT<a class="anchor" href="#SENDING_%E7%99%BC%E9%80%81_EOT">¶</a></h1>
+EOT
+  這個特別的回覆字串指示
+  chat 程式應該送出一個 EOT
+  字元到遠
+  端去。這是一般的檔案結束(End-of-file)字元程序。
+  在 EOT 後面並
+  不會跟著送出一個返回字元(return)。
+<p class="Pp">這個 EOT 程序可以用 ^D
+    序列嵌入到送出的字串裡。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="產生中斷_GENERATING_BREAK">產生中斷 GENERATING BREAK<a class="anchor" href="#%E7%94%A2%E7%94%9F%E4%B8%AD%E6%96%B7_GENERATING_BREAK">¶</a></h1>
+BREAK
+  這個特別的回覆字串將會使得一個中斷情況被送出。
+  這個中斷
+  是傳送端的一個特殊。接收端一般對此的處理是改變傳輸率。
+  它可以
+  用來循環測試遠端可能的傳輸率直到你能夠接到有效的簽入提示。
+<p class="Pp">這個中斷程序可以用
+    <i>\K</i>
+    序列嵌入到送出的字串裡。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="轉義序列_ESCAPE_SEQUENCES">轉義序列 ESCAPE SEQUENCES<a class="anchor" href="#%E8%BD%89%E7%BE%A9%E5%BA%8F%E5%88%97_ESCAPE_SEQUENCES">¶</a></h1>
+期待以及回覆字串可以包含轉義序列。
+  所有這種程序在回覆字串中都
+  是合法的。有許多在期待字串中是合法的。
+  那些在期待程序中無效的
+  會被指出。
+<dl class="Bl-tag">
+  <dt><b>&#39;&#39;</b></dt>
+  <dd>期待或送出一個空字串(null
+      string)
+      。如果你送出一個空字
+      串那麼它還會送出一個返回字元。這個程序可以是一對省略符
+      號(apostrophe)或者也可以是引用字元。</dd>
+  <dt><b>\b</b></dt>
+  <dd>代表一個退位(backspace)字元。</dd>
+  <dt><b>\c</b></dt>
+  <dd>抑制在回覆字串結尾的新列(newline)字元。
+      這是送出沒有返
+      回字元尾隨的字串的唯一方法。它必須在送出字串的結尾。例
+      如，這個程序 hello
+      將會簡單地送出字元
+      h, e, l, l, o。
+      （在期待字串中無效。）</dd>
+  <dt><b>\d</b></dt>
+  <dd>延遲一秒鐘。該程式使用最長延遲為一秒的
+      <a href="../../buster/manpages-zh/sleep.1.zh_TW.html">sleep(1)</a> 。（在
+      期待字串中無效。）</dd>
+  <dt><b>\K</b></dt>
+  <dd>插入一個中斷（在期待字串中無效。）</dd>
+  <dt><b>
+  </b></dt>
+  <dd>送出一個新列(newline)或換行(linefeed)字元。</dd>
+  <dt><b>\N</b></dt>
+  <dd>送出一個空字元(null
+      character)。同樣的程序可以用
+        代
+      替。（在期待字串中無效。）</dd>
+  <dt><b>\p</b></dt>
+  <dd>暫停一小段時間。延遲
+      1/10
+      秒。（在期待字串中無效。）</dd>
+  <dt><b>\q</b></dt>
+  <dd>抑制字串寫往 SYSLOG
+      檔案。該 ??????
+      字串被記錄到自己的
+      空間。（在期待字串中無效。）</dd>
+  <dt><b>\r</b></dt>
+  <dd>傳送或期待一個機架返回（字元）</dd>
+  <dt><b>\s</b></dt>
+  <dd>代替字串中的空白。這個可以用在不願引用包含空白的字串之時。&#39;HI
+      TIM&#39; 以及 HI\sTIM
+    是相同的。</dd>
+  <dt><b>\t</b></dt>
+  <dd>傳送或期待一個定位(tab)字元。</dd>
+  <dt><b>\T</b></dt>
+  <dd>Send the phone number string as specified with the <i>-T</i> option
+      <i>(not valid in expect.)</i></dd>
+  <dt><b>\U</b></dt>
+  <dd>Send the phone number 2 string as specified with the <i>-U</i> option
+      <i>(not valid in expect.)</i></dd>
+  <dt><b></b></dt>
+  <dd>傳送或期待一個倒斜線(backslash)字元。</dd>
+  <dt><b>\ddd</b></dt>
+  <dd>將八進位數字 (ddd)
+      折疊(collapse)成單一的 ASCII
+      字元並
+      將其送出。（某些字元在期待字串中無效。）</dd>
+  <dt><b>^C</b></dt>
+  <dd>替換含有以 C
+      代表之控制字元的程序。例如，字元
+      DC1(17) 是以 ^Q
+      表示。（某些字元在期待字串中無效。）</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ENVIRONMENT_VARIABLES">ENVIRONMENT VARIABLES<a class="anchor" href="#ENVIRONMENT_VARIABLES">¶</a></h1>
+Environment variables are available within chat scripts, if the <i>-E</i> option
+  was specified in the command line. The metacharacter <i>$</i> is used to
+  introduce the name of the environment variable to substitute. If the
+  substition fails, because the requested environment variable is not set,
+  <i>nothing</i> is replaced for the variable.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="TERMINATION_CODES">TERMINATION CODES<a class="anchor" href="#TERMINATION_CODES">¶</a></h1>
+The <i>chat</i> program will terminate with the following completion codes.
+<dl class="Bl-tag">
+  <dt><b>0</b></dt>
+  <dd>The normal termination of the program. This indicates that the script was
+      executed without error to the normal conclusion.</dd>
+  <dt><b>1</b></dt>
+  <dd>One or more of the parameters are invalid or an expect string was too
+      large for the internal buffers. This indicates that the program as not
+      properly executed.</dd>
+  <dt><b>2</b></dt>
+  <dd>An error occurred during the execution of the program. This may be due to
+      a read or write operation failing for some reason or chat receiving a
+      signal such as SIGINT.</dd>
+  <dt><b>3</b></dt>
+  <dd>A timeout event occurred when there was an <i>expect</i> string without
+      having a &#34;-subsend&#34; string. This may mean that you did not
+      program the script correctly for the condition or that some unexpected
+      event has occurred and the expected string could not be found.</dd>
+  <dt><b>4</b></dt>
+  <dd>The first string marked as an <i>ABORT</i> condition occurred.</dd>
+  <dt><b>5</b></dt>
+  <dd>The second string marked as an <i>ABORT</i> condition occurred.</dd>
+  <dt><b>6</b></dt>
+  <dd>The third string marked as an <i>ABORT</i> condition occurred.</dd>
+  <dt><b>7</b></dt>
+  <dd>The fourth string marked as an <i>ABORT</i> condition occurred.</dd>
+  <dt><b>...</b></dt>
+  <dd>The other termination codes are also strings marked as an <i>ABORT</i>
+      condition.</dd>
+</dl>
+<p class="Pp">Using the termination code, it is possible to determine which
+    event terminated the script. It is possible to decide if the string
+    &#34;BUSY&#34; was received from the modem as opposed to &#34;NO DIAL
+    TONE&#34;. While the first event may be retried, the second will probably
+    have little chance of succeeding during a retry.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_SEE_ALSO">參見 SEE ALSO<a class="anchor" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO">¶</a></h1>
+關於 chat
+  指令稿的其它資訊可以在
+  UUCP 文件裡找到。chat
+  指令稿 的概念由 uucico
+  程式所使用的指令稿來的。
+<p class="Pp">uucico(1), <a href="../../buster/uucp/uucp.1.en.html">uucp(1)</a></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="COPYRIGHT">COPYRIGHT<a class="anchor" href="#COPYRIGHT">¶</a></h1>
+The <i>chat</i> program is in public domain. This is not the GNU public license.
+  If it breaks then you get to keep both pieces.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>asdchen &lt;asdchen@pc2.hinet.net&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>1995/09/30</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國linux論壇man手冊翻譯計劃》:">《中國linux論壇man手冊翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8Blinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">22 May 1999</td>
+    <td class="foot-os">Chat Version 1.22</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+chat.8.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:34Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"chat(8)\"}}]}"
+</script>

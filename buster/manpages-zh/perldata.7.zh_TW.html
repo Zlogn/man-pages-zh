@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>perldata(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/perldata.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/perldata.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; perldata(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perldata.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perldata.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SEE_ALSO_%E5%8F%83%E8%A6%8B" title="SEE ALSO 參見">SEE ALSO 參見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA" title="中文版維護人">中文版維護人</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0" title="中文版最新更新">中文版最新更新</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83" title="中文手冊頁翻譯計劃">中文手冊頁翻譯計劃</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perldata.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/perldata.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/perldata.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perldata.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perldata.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/perl-doc/perldata.1.en.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perldata.7.zh_TW.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">PERLDATA(7)</td>
+    <td class="head-vol">Perl Programmers Reference Guide</td>
+    <td class="head-rtitle">PERLDATA(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+perldata- Perl 數據類型
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="Variable_names_變量名">Variable names 變量名<a class="anchor" href="#Variable_names_%E8%AE%8A%E9%87%8F%E5%90%8D">¶</a></h2>
+Perl
+  有三種內建的數據類型：標量，數組和關聯數組（即“哈希表，
+  hash”）。數組以數字爲索引，通常以0開始，升序排列。哈希表以與值相關聯
+  的字符串爲索引，內部排列是無序的。
+<p class="Pp">值通常通過一個變量名（或變量名的引用）來引用。變量名的前綴字符顯示了值的
+    數據類型。其餘部分指明瞭引用的是哪一個特定的值。通常變量名是一個唯一的標
+    識符，以字母或下劃線開始，包括字母、下劃線和數字。某些情況下，也可以是以
+    `::&#39;
+    分隔的一串標識符(或者是過時的`&#39;&#39;)；除了最後一
+    個，其它都是包名，用來定位最後一個標識符所在的位置(詳情參見
+    perlmod 中的
+    Packages)。可以用一個簡單的標識符來替代它，利用引用就可以。下文有詳述，
+    也可參見 perlref .</p>
+<p class="Pp">Perl
+    也有內建的變量，其名稱不遵循這一規則。它們名稱古怪，這樣可以避免與你的變量名衝突。模式匹配中被匹配到的字符串是以`$&#39;
+    加一個數字的變量名來存放的(參見
+    the perlop manpage 和 the perlre manpage)。
+    另外，還有幾個使你可以介入perl
+    內部工作的特殊變量，其名稱中包含標點和控制字符（參見
+    perlvar ）</p>
+<p class="Pp">標量以 &#39;$&#39;開始,
+    即使它是數組或哈希的元素也是如此。可以把
+    &#39;$&#39; 理解爲`s&#39;
+    ，表示scalar（標量）。（譯者注：此處根據有關文檔，做了改動，下面的@處也
+    是這樣）</p>
+<p class="Pp"></p>
+<pre>    $days               # 簡單標量 &#34;days&#34;
+    $days[28]           # 數組 @days的第29個元素
+    $days{&#39;Feb&#39;}        # 哈希 %days的 `Feb&#39; 所對應的值
+    $#days              # 數組 @days的最後一個元素的索引值
+</pre>
+<p class="Pp">整個數組（或數組和哈希的局部）以
+    &#39;@&#39;開始,
+    它類似英文中的“these”
+    或“those”
+    (這些...那些...)，表示期望有多個值。</p>
+<p class="Pp"></p>
+<pre>    @days               # ($days[0], $days[1],... $days[n])
+    @days[3,4,5]        # 即 ($days[3],$days[4],$days[5])
+    @days{&#39;a&#39;,&#39;c&#39;}      # 即 ($days{&#39;a&#39;},$days{&#39;c&#39;})
+</pre>
+<p class="Pp">整個哈希以 &#39;%&#39; 開始:</p>
+<p class="Pp"></p>
+<pre>    %days               # (key1, val1, key2, val2 ...)
+</pre>
+<p class="Pp">另外，子程序以&#39;&amp;&#39;來表示,
+    但有時在不引起誤解的情況下也可以不用,
+    就象 “do”
+    在英語中常常省略一樣。
+    符號表項以 &#39;*&#39;
+    作爲開始字符, 不過你
+    現在還不用關心這個 (if
+    ever ;-)</p>
+<p class="Pp">每一種數據類型都有它自己的名字空間，常量標識符也一樣。這意味着你可以使用
+    同一個名字來命名標量、數組、哈希、文件句柄、目錄句柄、子程序、格式或標籤。
+    即$foo 和@foo
+    是不同的變量。也即意味着$foo[1]
+    是 @foo 的一部分,
+    而不是$foo的一部分.
+    這看來有些怪異，不過很
+    正常，因爲它本來就怪異。</p>
+<p class="Pp">因爲變量名以 &#39;$&#39;, &#39;@&#39;,
+    或 &#39;%&#39;開始,
+    保留詞對變量沒有什麼影響。保留詞影響
+    的是標籤和文件句柄，因爲它們不是以特殊字符前綴開始的。你不能用“log”
+    來命名文件句柄，因爲它是保留詞（提示：你可以用
+    `open(LOG,&#39;logfile&#39;)&#39; 而不是 `open(log,&#39;logfile&#39;)&#39;).
+    使用大寫的文件句柄既增加了可讀性，
+    又減少了衝突的發生。大小寫是有意義的--“FOO”,“Foo”,
+    和“foo”
+    是不同的名稱。以字母或下劃線開始的名稱可以包含數字和下劃線。</p>
+<p class="Pp">可以用一個返回相關引用的表達式來替換這樣的變量名。參見
+    perlref</p>
+<p class="Pp">以數字開始的變量名只能包含數字。不是以字母、下劃線或數字開始的變量名只能
+    含有一個字符，如：$%
+    或$$.
+    (大部分這樣的變量都有特殊的意
+    義。例如，$$
+    是當前進程的id。)</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Context_上下文">Context 上下文<a class="anchor" href="#Context_%E4%B8%8A%E4%B8%8B%E6%96%87">¶</a></h2>
+在 Perl
+  中有時操作或值的意義取決於該操作或值所處的上下文。有兩個主要的上
+  下文：列表和標量上下文。相當一部分操作在需要列表的上下文中返回列表，在需
+  要標量的上下文中返回標量。這在有關該操作的文檔中會提到。換句話講，Perl會
+  重載這些操作符。英語中的某些詞，如`fish&#39;和`sheep&#39;與此類似。
+<p class="Pp">操作可以根據不同的上下文返回不同的值。例如，如果這樣寫：</p>
+<p class="Pp"></p>
+<pre>    int( &lt;STDIN&gt; )
+</pre>
+<p class="Pp">integer
+    操作提供標量上下文給
+    &lt;&gt; 操作符, &lt;&gt; 會從STDIN
+    讀入一行返回給 integer
+    操作，然後它返回其中的整型量。但如果你這樣寫：</p>
+<p class="Pp"></p>
+<pre>    sort( &lt;STDIN&gt; )
+</pre>
+<p class="Pp">sort操作提供列表上下文給&lt;&gt;,
+    &lt;&gt;會讀入STDIN中的每一行直到結束，然後將其傳遞給sort，sort然後將其排序輸出。</p>
+<p class="Pp">賦值比較特殊，左側的參數決定了右側的參數的上下文。賦值給標量，則右側參數的上下文是標量上下文；賦值給數組或哈希，則右側參數的上下文是列表上下文。賦值給列表（或片段，其實也是列表），右側的上下文也是列表上下文。</p>
+<p class="Pp">當你使用`use warnings&#39;
+    編譯指示或 Perl 的<b>-w</b>
+    參數時，
+    你可能會看到這樣的警告：在“無效的上下文，void
+    context” 中使用了常量
+    或函數。無效上下文的意思是值被丟棄不用，比如只包含有&#34;fred&#34;;
+    的語句; 或是`getpwuid(0);&#39;;.
+    在要求列表上下文的函數
+    被標量上下文環境調用時,也會出現這個警告.</p>
+<p class="Pp">用戶定義的子程序可能會需要查看上下文是無效，標量，還是列表。不過，大多數並
+    不需要這麼做。因爲標量和列表會自動插入到一個列表中。參見
+    perlfunc 中的 “wantarray”
+    以瞭解如何辨明你的函數調用時的上下文。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Scalar_values_標量">Scalar values 標量<a class="anchor" href="#Scalar_values_%E6%A8%99%E9%87%8F">¶</a></h2>
+Perl
+  中的所有數據都是標量,
+  標量的數組,標量的哈希.
+  標量可以是三種不同的值:
+  數字, 字符(串), 引用.
+  通常,
+  不同值之間的轉換是透明的.
+  雖然一個標量不可能有多個值,
+  但是它可以是一個包含多個值的數組或哈希的引用.
+<p class="Pp">標量不一定非此即彼.
+    不需要聲明變量的類型是&#34;字符串&#34;,&#34;數字&#34;,&#34;引用&#34;或其它什麼.
+    因爲標量會自動轉換,
+    所以其類型不用關心.
+    Perl
+    是上下文多形語言,它的標量可以是字符串,數字或引用(包括對象).
+    其中字符串和數字在大多數情況下並沒有什麼不同,
+    引用是強化的,不可變的帶有內建引用計數和析構器的指針.</p>
+<p class="Pp">標量在不是空字符串和數字0的時候被解釋爲真
+    TRUE.
+    布爾上下文是這樣一種上下文,
+    這時不會發生數字或字符串的自動轉換.</p>
+<p class="Pp">有兩種空字符串(有時以&#34;empty&#34;表示),
+    定義了的和未定義的.
+    定義了的空字符串就是長度爲零的字符串,如&#34;&#34;.
+    未定義的空字符串是一個值,這個值表示某事物並沒有真實值與它對應,
+    比如出錯,
+    或到達文件尾,
+    或者你引用一個未定義的數組或哈希的元素時,都會返回一個未定義的空字符串.
+    雖然在早期Perl
+    中,在要求已定義變量的上下文中使用未定義的變量可以使得該變量得到定義,
+    現在卻只有在特殊的情況下才會出現這種結果,參見the
+    perlref manpage. 可以用defined()
+    函數來檢測標量是否已經定義(對數組和哈希無效),也可以用undef()
+    去除對變量的定義.</p>
+<p class="Pp">要弄清楚一個字符串是否是有效的非0數字,只要看它是不是數字0和字母“0”
+    就足夠了(不過這在使用-w參數時,會顯示警告).
+    因爲非數字的字符串被看作0,
+    與awk中相似:</p>
+<p class="Pp"></p>
+<pre>    if ($str == 0 &amp;&amp; $str ne &#34;0&#34;)  {
+        warn &#34;That doesn&#39;t look like a number&#34;;
+    }
+</pre>
+<p class="Pp">這種方法可能是最好的,因爲如若不然你不會正確對待IEEE
+    的註釋,比如`NaN&#39;
+    和無窮大. 別的時候,
+    你可能更願意用<i>POSIX::strtod()</i>
+    函數或是正則表達式來檢測字符串是否能用做數字(參見perlre).</p>
+<p class="Pp"></p>
+<pre>    warn &#34;has nondigits&#34;        if     /\D/;
+    warn &#34;not a natural number&#34; unless /^\d+$/;             # rejects -3
+    warn &#34;not an integer&#34;       unless /^-?\d+$/;           # rejects +3
+    warn &#34;not an integer&#34;       unless /^[+-]?\d+$/;
+    warn &#34;not a decimal number&#34; unless /^-?\d+\.?\d*$/;     # rejects .2
+    warn &#34;not a decimal number&#34; unless /^-?(?:\d+(?:\.\d*)?|\.\d+)$/;
+    warn &#34;not a C float&#34;
+        unless /^([+-]?)(?=\d|\.\d)\d*(\.\d*)?([Ee]([+-]?\d+))?$/;
+</pre>
+<p class="Pp">數組的長度是標量.
+    通過$#days你可以知道@days的長度.
+    技術上講,這不是數組的長度;
+    而是最後一個元素的下標,因爲第一個元素的下標是0.
+    對$#days
+    賦值會改變數組的長度.
+    以這種方式減少數組的話,
+    會破壞其中的值,
+    再增加其長度也不能恢復.
+    (Perl 4中是可以的,
+    我們改變了它以確保析構器被及時調用.)</p>
+<p class="Pp">你可以使用一些小技巧來預擴展一個數組(如果你知道它將會變得很大的話).
+    可以用給超出數組範圍的元素賦值的方法擴展數組.
+    可以給數組賦值一個空列表以清空數組.
+    下面語句等價:</p>
+<p class="Pp"></p>
+<pre>    @whatever = ();
+    $#whatever = -1;
+</pre>
+<p class="Pp">數組處於標量上下文中時,
+    返回值是數組的長度.
+    (列表在標量上下文中,返回值是列表的最後一個元素,像是C中的逗號操作符,
+    而內建函數的返回值由它們自己決定.)
+    以下語句爲真:</p>
+<p class="Pp"></p>
+<pre>    scalar(@whatever) == $#whatever - $[ + 1;
+</pre>
+<p class="Pp">Perl 5 改變了$[ 的意義:
+    不必擔心別的程序改變了$[
+    的值.
+    (換言之,不推薦使用$[ )
+    所以,可以寫成這樣:</p>
+<p class="Pp"></p>
+<pre>    scalar(@whatever) == $#whatever + 1;
+</pre>
+<p class="Pp">有些程序員爲了明確起見,
+    會使用顯式的轉換:</p>
+<p class="Pp"></p>
+<pre>    $element_count = scalar(@whatever);
+</pre>
+<p class="Pp">當哈希處於標量上下文中時,
+    如果哈希爲空,
+    返回值爲假, 如果非空,
+    返回值爲真;
+    說得更精確些,
+    返回值是個字符串,
+    由已經使用的存儲段和分配的全部存儲段組成,二者之間以斜槓分隔.
+    這可以用來反映Perl的哈希算法的好壞.
+    例如,
+    你的哈希中有10,000個元素,但是%HASH
+    的標量值爲&#34;1/16&#34;,
+    則說明僅用到了16個存儲段中的一個,
+    也許10,000個元素都在這一個存儲段中.
+    最好不要發生這種情況.</p>
+<p class="Pp">你可以預先爲哈希分配空間,
+    這要使用給<i>keys()</i>
+    函數賦值的方法來實現.
+    實際分配的空間是大於所給值的二的冪：</p>
+<p class="Pp"></p>
+<pre>    keys(%users) = 1000;                # 分配 1024 空間
+</pre>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Scalar_value_constructors_標量數據構造">Scalar value constructors 標量數據構造<a class="anchor" href="#Scalar_value_constructors_%E6%A8%99%E9%87%8F%E6%95%B8%E6%93%9A%E6%A7%8B%E9%80%A0">¶</a></h2>
+數值常量有以下浮點和整數格式:
+<p class="Pp"></p>
+<pre>    12345
+    12345.67
+    .23E-10             # a very small number
+    3.14_15_92          # a very important number
+    4_294_967_296       # underscore for legibility
+    0xff                # hex
+    0xdead_beef         # more hex   
+    0377                # octal
+    0b011011            # binary
+</pre>
+<p class="Pp">在數字常量中可以在數字間插入下劃線來增加可讀性。例如，可以三位一組
+    (Unix 樣式的分組，例如
+    0b110_110_100)，或者四位一組
+    (來表示 nibbles，例如
+    0b1010_0110)，或者其他分組。</p>
+<p class="Pp">字符串通常以單引號或雙引號括起.
+    與標準Unix
+    shells中的引號相似:
+    雙引號可以接收轉義和變量;
+    單引號不可以 (除了`\&#39;&#39;
+    和`\\&#39;)). C
+    樣式的轉義字符可以用來輸入新行，跳格等字符，轉義字符的列表可以參見
+    perlop 中的“Quote and Quote-like Operators”</p>
+<p class="Pp">十六進制,八進制,或二進制以字符串形式表示(如:&#39;0xff&#39;),不能自動轉換爲十進制形式.
+    hex() 和 oct()
+    函數可以實現轉換.
+    參見 perlfunc 中的 hex 和 oct
+    瞭解詳情.</p>
+<p class="Pp">可以在字符串中直接加入新行.
+    字符串中的變量只能是標量,數組和數組或哈希的片段
+    (換言之, 以$或@開始,
+    後跟下標.).
+    以下語句打印``The price is $100.&#39;&#39;</p>
+<p class="Pp"></p>
+<pre>    $Price = &#39;$100&#39;;    # not interpolated
+    print &#34;The price is $Price.\n&#34;;     # interpolated
+</pre>
+<p class="Pp">perl 中沒有 double
+    interpolation，因此$100
+    保持不變。</p>
+<p class="Pp">正如在有些shell中一樣,
+    你可以用花括號括起變量名,
+    以便區分變量名和其後的字母及下劃線.
+    如果要將一個變量改寫爲字符串時，必須這樣做，以避免與後面的雙冒號或單引號連接起來，否則會被當作包名：</p>
+<p class="Pp"></p>
+<pre>    $who = &#34;Larry&#34;;
+    print PASSWD &#34;${who}::0:0:Superuser:/:/bin/perl\n&#34;;
+    print &#34;We use ${who}speak when ${who}&#39;s here.\n&#34;;
+</pre>
+<p class="Pp">如果沒有花括號,
+    Perl會尋找 $whospeak, $who::0, 和 $who&#39;s
+    變量.
+    後兩個是不存在的 who
+    包中的$0 和 $s.</p>
+<p class="Pp">實際上,
+    花括號中的標識符必須是字符串,
+    哈希的下標也必須是字符串.
+    都不需要引號,
+    前面的例子$days{&#39;Feb&#39;}
+    可以寫作 $days{Feb}
+    引號會自動加上.
+    但是下標中的其它複雜內容被解釋爲表達式.</p>
+<p class="Pp"><i>Version Strings</i></p>
+<p class="Pp"><b>注意:</b> Version Strings (v-strings) have been
+    deprecated. They will not be available after Perl 5.8. The marginal benefits
+    of v-strings were greatly outweighed by the potential for Surprise and
+    Confusion.</p>
+<p class="Pp">類似`v1.20.300.4000&#39;
+    這樣的形式被解釋爲一個字符串.
+    這種形式稱爲
+    v-strings，提供了更易讀的方法來構造字符串，比起&#34;\x{1}\x{14}\x{12c}\x{fa0}&#34;
+    更加易讀. 這在表示 Unicode
+    字符串時很有用,
+    在使用字符串比較命令(`cmp&#39;,`gt&#39;,`lt&#39;
+    等)比較版本號時也非常有用.
+    如果其中的點號多於兩個,
+    則開始的`v&#39; 可以省略.</p>
+<p class="Pp"></p>
+<pre>    print v9786;              # prints UTF-8 encoded SMILEY, &#34;\x{263a}&#34;
+    print v102.111.111;       # prints &#34;foo&#34;
+    print 102.111.111;        # same
+</pre>
+<p class="Pp">這種形式可以用於require
+    和 use
+    中作版本檢查.“$^V”
+    特殊變量中的Perl版本號就是以這種形式保存的.
+    參見 perlvar 中的“$^V”
+    注意使用 v-strings 來保存 IPv4
+    地址是不可移植的，除非同時使用
+    Socket 包的<i>inet_aton()</i>/<i>inet_ntoa()</i>
+    函數。</p>
+<p class="Pp">注意從 Perl 5.8.1
+    開始單個數字的 v-strings
+    (類似`v65&#39;) 如果在`=&gt;&#39;
+    操作符(通常用來從 hash
+    值中區分開 hash 鍵)
+    之前，不是一個
+    v-strings，而是解釋爲字符串
+    (&#39;v65&#39;)。在 Perl 5.6.0 到 Perl 5.8.0
+    它一直是
+    v-strings，但是這樣帶來了更多混淆和錯誤而不是優點。多個數字的
+    v-strings，類似`v65.66&#39;
+    和65.66.67，繼續總是被當作
+    v-strings</p>
+<p class="Pp"><i>特殊常量</i></p>
+<p class="Pp">特殊變量 __FILE__, __LINE__, 和
+    __PACKAGE__
+    代表當前文件名,行號,和包名.
+    它們只能作爲單獨的符號來使用;
+    不能用於字符串中內插.
+    如果沒有當前包(用`package;&#39;
+    指令來實現), 則__PACKAGE__
+    是一個未定義的值.</p>
+<p class="Pp">控制字符 ^D 和 ^Z, 以及
+    __END__ 和 __DATA__
+    變量可以表示文件的邏輯結束.
+    其後的文本被忽略.</p>
+<p class="Pp">__DATA__
+    之後的文本可以通過文件句柄`PACKNAME::DATA&#39;
+    讀取,`PACKNAME&#39; 是 __DATA__
+    所在的包的名稱.
+    句柄指向__DATA__
+    後面的文本.
+    讀取結束程序會自動關閉該句柄`close
+    DATA&#39;. 爲了與 __DATA__
+    還沒有出現以前已經存在的程序兼容,
+    __END__ 在頂級腳本中與 __DATA__
+    性質相同(在用`require&#39; 或`do&#39;
+    調用時是不同的)
+    不過可以通過`main::DATA&#39;
+    來調用其中的內容.</p>
+<p class="Pp">參見 SelfLoader 詳細瞭解
+    __DATA__, 其中還有例子.
+    要注意在BEGIN
+    塊中無法讀取DATA句柄:
+    因爲BEGIN
+    塊在編譯時即被執行,
+    而此時 __DATA__ (或 __END__)
+    還未被程序看到.</p>
+<p class="Pp"><i>裸詞</i></p>
+<p class="Pp">在文法上沒有特殊意義的詞語都被看作字符串.
+    稱之爲 &#34;裸詞&#34;.
+    和文件句柄以及標籤一樣,
+    僅包含小寫字母的裸詞有可能在將來與程序中的保留詞發生衝突,
+    實際上,當你使用`use warnings&#39;
+    語句,或是<b>-w</b> 選項時,
+    Perl會對此提出警告.
+    一些人可能希望完全禁止這樣的詞.
+    如果有如下語句:</p>
+<p class="Pp"></p>
+<pre>    use strict &#39;subs&#39;;
+</pre>
+<p class="Pp">那麼不能被解釋爲子程序的裸詞會引起編譯時錯誤.
+    這種限制到塊結束時終止.
+    而內部的塊可以撤消這一限制,
+    用`no strict &#39;subs&#39;&#39;</p>
+<p class="Pp"><i>數組合並分隔符</i></p>
+<p class="Pp">數組和序列被合併爲雙引號引用的字符串時，以變量$&#34;
+    指定的值
+    (如果指定了“use English;”
+    那麼是$LIST_SEPARATOR 的值)
+    作爲分隔符，默認是空格。下列語句等價：</p>
+<p class="Pp"></p>
+<pre>    $temp = join($&#34;, @ARGV);
+    system &#34;echo $temp&#34;;
+</pre>
+<p class="Pp"></p>
+<pre>    system &#34;echo @ARGV&#34;;
+</pre>
+<p class="Pp">在搜索模式中(在雙引號字符串中也是)有一個易混淆之處:`/$foo[bar]/&#39;
+    應該是`/${foo}[bar]/&#39; (`[bar]&#39;
+    是正則表達式的字符類)
+    還是`/${foo[bar]}/&#39;/ (`[bar]&#39; 是數組@foo
+    的下標) 呢? 如果@foo
+    不存在,
+    那很明顯它應該是字符類.
+    如果@foo 存在, Perl
+    會盡力猜測`[bar]&#39; 的含義,
+    且它幾乎總是對的.
+    如果它猜錯了,
+    或者你比較偏執,
+    你可以使用花括號.</p>
+<p class="Pp">here-document
+    的語法已經被移動到
+    perlop 中的“Quote and Quote-like Operators”</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="List_value_constructors_列表值構造">List value constructors 列表值構造<a class="anchor" href="#List_value_constructors_%E5%88%97%E8%A1%A8%E5%80%BC%E6%A7%8B%E9%80%A0">¶</a></h2>
+列表是用逗號分開的各個值組成的(如果優先級需要的話,外面還要用圓括號包圍):
+<p class="Pp"></p>
+<pre>    (LIST)
+</pre>
+<p class="Pp">在不需要列表的上下文中,
+    列表的值是最後一個元素的值,
+    這與C中的逗號操作符類似.
+    例如:</p>
+<p class="Pp"> @foo = (&#39;cc&#39;, &#39;-E&#39;, $bar);</p>
+<p class="Pp">將列表賦給數組@foo,
+    但是</p>
+<p class="Pp"> $foo = (&#39;cc&#39;, &#39;-E&#39;, $bar);</p>
+<p class="Pp">將$bar 的值賦給$foo.
+    注意,
+    數組在標量上下文中的值是數組的長度;
+    下例將3賦給$foo:</p>
+<p class="Pp"></p>
+<pre>    @foo = (&#39;cc&#39;, &#39;-E&#39;, $bar);
+    $foo = @foo;                # $foo gets 3
+</pre>
+<p class="Pp">列表的最後可以輸入逗號,
+    所以這樣也是正確的:</p>
+<p class="Pp"></p>
+<pre>    @foo = (
+        1,
+        2,
+        3,
+    );
+</pre>
+<p class="Pp">要將here-document 賦給數組,
+    一行作爲一個元素,
+    可以這樣作:</p>
+<p class="Pp"></p>
+<pre>    @sauces = &lt;&lt;End_Lines =~ m/(\S.*\S)/g;
+        normal tomato
+        spicy tomato
+        green chile
+        pesto
+        white wine
+    End_Lines
+</pre>
+<p class="Pp">列表會自動插入子列表.
+    也即,
+    下例將展開數組,哈希等,
+    並將其中的每一個元素作爲該新列表的一個元素.
+    數組或哈希失去其原來的身份.列表</p>
+<p class="Pp"> (@foo,@bar,&amp;SomeSub,%glarch)</p>
+<p class="Pp">包括@foo,@bar的每一個元素,包括函數
+    SomeSub
+    返回值列表的每一個元素,
+    包括 %glarch
+    的每一個字值對.
+    要想使用不內插的列表,
+    可以參見 perlref</p>
+<p class="Pp">空列表可以表示爲().
+    在列表中插入空列表沒有意義.
+    ((),(),()) 與()相同. 同樣,
+    內插一個空數組也沒有意義.</p>
+<p class="Pp">合併的語法表示開和閉括號都是可選的
+    (除非爲表示優先級需要)；而列表可以以可選的逗號結束表示列表中的多個逗號是合法的語法。列表`1,,3&#39;
+    是兩個列表的並置，`1,&#39;
+    還有3,
+    第一個以可選的逗號結束。`1,,3&#39;
+    是`(1,),(3)&#39; 也是`1,3&#39;
+    (類似的，`1,,,3&#39; 是`(1,),(,),3&#39;
+    也是`1,3&#39; 等等)
+    不過我們不建議你使用這麼混亂的寫法</p>
+<p class="Pp">列表也可以象數組一樣使用下標.
+    爲了避免歧義需要在列表外使用括號.
+    例如:</p>
+<p class="Pp"></p>
+<pre>    # Stat returns list value.
+    $time = (stat($file))[8];
+</pre>
+<p class="Pp"></p>
+<pre>    # SYNTAX ERROR HERE.
+    $time = stat($file)[8];  # OOPS, FORGOT PARENTHESES
+</pre>
+<p class="Pp"></p>
+<pre>    # Find a hex digit.
+    $hexdigit = (&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;,&#39;f&#39;)[$digit-10];
+</pre>
+<p class="Pp"></p>
+<pre>    # A &#34;reverse comma operator&#34;.
+    return (pop(@foo),pop(@foo))[0];
+</pre>
+<p class="Pp">可以給列表賦值,
+    當然列表中的每個元素必須合法才行:</p>
+<p class="Pp"> ($a, $b, $c) = (1, 2, 3);</p>
+<p class="Pp"> ($map{&#39;red&#39;}, $map{&#39;blue&#39;}, $map{&#39;green&#39;}) = (0x00f, 0x0f0,
+    0xf00);</p>
+<p class="Pp">特例是可以賦值爲`undef&#39;。當忽略程序的某些返回值時這很有用:</p>
+<p class="Pp"> ($dev, $ino, undef, undef, $uid, $gid) = stat($file);</p>
+<p class="Pp">列表賦值處於標量上下文中時,
+    返回值是等號右側的表達式的元素個數:</p>
+<p class="Pp"></p>
+<pre>    $x = (($foo,$bar) = (3,2,1));       # set $x to 3, not 2
+    $x = (($foo,$bar) = f());           # set $x to f()&#39;s return count
+</pre>
+<p class="Pp">這在布爾上下文中很方便,
+    因爲多數列表函數在結束時返回空列表,
+    這時列表賦值會返回0,
+    被解釋爲FALSE.</p>
+<p class="Pp">它也是一個有用的習慣的來源，就是在列表上下文中執行一個函數或操作，然後記錄返回值的個數，方法是爲一個空列表賦值，然後在標量上下文中使用這個值。例如，如下代碼：</p>
+<p class="Pp"> $count = () = $string =~ /\d+/g;</p>
+<p class="Pp">將置$count 爲$string
+    中找到的數字組數量。這樣能行的原因是模式匹配是列表上下文
+    (因爲它被賦予一個空列表)，因此返回所有匹配部分的列表。在標量上下文中的列表賦值將它轉換爲元素的個數
+    (這裏是模式被匹配的數量)，然後賦值給$count。注意簡單地使用</p>
+<p class="Pp"> $count = $string =~ /\d+/g;</p>
+<p class="Pp">沒有作用，因爲在標量上下文中的模式匹配只會返回
+    true 或
+    false，而不是所有的匹配。</p>
+<p class="Pp">最後一個元素可以是數組或哈希:</p>
+<p class="Pp"></p>
+<pre>    ($a, $b, @rest) = split;
+    my($a, $b, %rest) = @_;
+</pre>
+<p class="Pp">當然可以在任何位置使用數組或哈希,
+    不過第一個數組或哈希會將所有的值都據爲己有,
+    其它的元素都會變爲undefined.這在my()
+    或 local()中或許有用.</p>
+<p class="Pp">哈希可以用含有字值對的列表來初始化:</p>
+<p class="Pp"></p>
+<pre>    # same as map assignment above
+    %map = (&#39;red&#39;,0x00f,&#39;blue&#39;,0x0f0,&#39;green&#39;,0xf00);
+</pre>
+<p class="Pp">列表和數組交互性很強,
+    哈希則不然.
+    你可以象使用數組時一樣對列表使用下標並不意味着可以象使用哈希一樣使用列表.
+    同樣,處於列表中的哈希總是以字值對的形式展開.
+    因此有時使用引用要更好一些.</p>
+<p class="Pp">通常在字值對中使用`=&gt;&#39;
+    操作符會更易讀.`=&gt;&#39;
+    與逗號作用相同,
+    不過它 還有一個作用,
+    那就是可以使它左側的對象被解釋爲字符串:
+    如果該對象是裸
+    字的話,將是合法的標識符
+    (`=&gt;&#39;
+    不引用包含雙冒號的複合標識符).
+    這在初始
+    化哈希時棒極了:</p>
+<p class="Pp"></p>
+<pre>    %map = (
+                 red   =&gt; 0x00f,
+                 blue  =&gt; 0x0f0,
+                 green =&gt; 0xf00,
+   );
+</pre>
+<p class="Pp">或者初始化哈希的引用:</p>
+<p class="Pp"></p>
+<pre>    $rec = {
+                witch =&gt; &#39;Mable the Merciless&#39;,
+                cat   =&gt; &#39;Fluffy the Ferocious&#39;,
+                date  =&gt; &#39;10/31/1776&#39;,
+    };
+</pre>
+<p class="Pp">or for using call-by-named-parameter to complicated functions:</p>
+<p class="Pp"></p>
+<pre>   $field = $query-&gt;radio_group(
+               name      =&gt; &#39;group_name&#39;,
+               values    =&gt; [&#39;eenie&#39;,&#39;meenie&#39;,&#39;minie&#39;],
+               default   =&gt; &#39;meenie&#39;,
+               linebreak =&gt; &#39;true&#39;,
+               labels    =&gt;\%labels
+   );
+</pre>
+<p class="Pp">注意哈希初始化時的順序和輸出時的順序並不一定相同.
+    要得到順序的輸出可以參見
+    perlfunc 中的“sort”</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Subscripts_下標">Subscripts 下標<a class="anchor" href="#Subscripts_%E4%B8%8B%E6%A8%99">¶</a></h2>
+數組可以用一個美元符號，加上它的名字(不包括前導的`@&#39;)，加上方括號和其中包含的下標來取得值。例如：
+<p class="Pp"></p>
+<pre>    @myarray = (5, 50, 500, 5000);
+    print &#34;Element Number 2 is&#34;, $myarray[2], &#34;\n&#34;;
+</pre>
+<p class="Pp">數組下標從 0
+    開始。負值下標返回從尾部開始數的值。在我們的例子中，$myarray[-1]
+    將是 5000,$myarray[-2] 是 500。</p>
+<p class="Pp">Hash
+    下標與此類似，但是不使用方括號而是花括號。例如：</p>
+<p class="Pp"></p>
+<pre>    %scientists = 
+    (
+        &#34;Newton&#34; =&gt; &#34;Isaac&#34;,
+        &#34;Einstein&#34; =&gt; &#34;Albert&#34;,
+        &#34;Darwin&#34; =&gt; &#34;Charles&#34;,
+        &#34;Feynman&#34; =&gt; &#34;Richard&#34;,
+    );
+</pre>
+<p class="Pp"> print &#34;Darwin&#39;s First Name is &#34;,
+    $scientists{&#34;Darwin&#34;}, &#34;\n&#34;;</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Slices_片段">Slices 片段<a class="anchor" href="#Slices_%E7%89%87%E6%AE%B5">¶</a></h2>
+通常對哈希或數組一次訪問一個元素.
+  也可以使用下標對列表元素進行訪問.
+<p class="Pp"></p>
+<pre>    $whoami = $ENV{&#34;USER&#34;};             # one element from the hash
+    $parent = $ISA[0];                  # one element from the array
+    $dir    = (getpwnam(&#34;daemon&#34;))[7];  # likewise, but with list
+</pre>
+<p class="Pp">片段可以一次訪問列表,數組或哈希中的幾個元素,
+    這是通過列表下標來實現的.
+    這比分別寫出每個值要方便一些.</p>
+<p class="Pp"></p>
+<pre>    ($him, $her)   = @folks[0,-1];              # array slice
+    @them          = @folks[0 .. 3];            # array slice
+    ($who, $home)  = @ENV{&#34;USER&#34;, &#34;HOME&#34;};      # hash slice
+    ($uid, $dir)   = (getpwnam(&#34;daemon&#34;))[2,7]; # list slice
+</pre>
+<p class="Pp">既然可以給列表賦值,
+    當然也可以哈希或數組的片段賦值.</p>
+<p class="Pp"></p>
+<pre>    @days[3..5]    = qw/Wed Thu Fri/;
+    @colors{&#39;red&#39;,&#39;blue&#39;,&#39;green&#39;} 
+                   = (0xff0000, 0x0000ff, 0x00ff00);
+    @folks[0, -1]  = @folks[-1, 0];
+</pre>
+<p class="Pp">上面的操作與下列語句等價:</p>
+<p class="Pp"></p>
+<pre>    ($days[3], $days[4], $days[5]) = qw/Wed Thu Fri/;
+    ($colors{&#39;red&#39;}, $colors{&#39;blue&#39;}, $colors{&#39;green&#39;})
+                   = (0xff0000, 0x0000ff, 0x00ff00);
+    ($folks[0], $folks[-1]) = ($folks[-1], $folks[0]);
+</pre>
+<p class="Pp">既然改變片段就會改變數組或哈希的原始值,
+    那麼`foreach&#39;
+    結構可以部分或全部地改變數組或哈希的值.</p>
+<p class="Pp"> foreach (@array[ 4 .. 10 ]) { s/peter/paul/ }</p>
+<p class="Pp"></p>
+<pre>    foreach (@hash{qw[key1 key2]}) {
+        s/^\s+//;           # trim leading whitespace
+        s/\s+$//;           # trim trailing whitespace
+        s/(\w+)/\u\L$1/g;   # &#34;titlecase&#34; words
+    }
+</pre>
+<p class="Pp">空列表的片段還是空列表,
+    因此:</p>
+<p class="Pp"></p>
+<pre>    @a = ()[1,0];           # @a has no elements
+    @b = (@a)[0,1];         # @b has no elements
+    @c = (0,1)[2,3];        # @c has no elements
+</pre>
+<p class="Pp">但是:</p>
+<p class="Pp"></p>
+<pre>    @a = (1)[1,0];          # @a has two elements
+    @b = (1,undef)[1,0,2];  # @b has three elements
+</pre>
+<p class="Pp">下例利用了這一特性,當返回空列表時循環終止:</p>
+<p class="Pp"></p>
+<pre>    while ( ($home, $user) = (getpwent)[7,0]) {
+        printf &#34;%-8s %s\n&#34;, $user, $home;
+    }
+</pre>
+<p class="Pp">我們在前面說過,
+    標量上下文中的列表賦值返回值是右側的元素個數.
+    空列表沒有元素,
+    所以當口令文件讀完後,
+    返回值是0而不是2.</p>
+<p class="Pp">爲什麼對哈希的片段使用&#39;@&#39;而不是&#39;%&#39;呢.
+    因爲括號的類型(方括號或花括號)決定了它是數組還是哈希.
+    而數組或哈希的開始字符(&#39;$&#39;或&#39;@&#39;)表示返回值是單個值還是多個值(列表).</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Typeglobs_and_Filehandles_全局類型和文件句柄">Typeglobs and Filehandles 全局類型和文件句柄<a class="anchor" href="#Typeglobs_and_Filehandles_%E5%85%A8%E5%B1%80%E9%A1%9E%E5%9E%8B%E5%92%8C%E6%96%87%E4%BB%B6%E5%8F%A5%E6%9F%84">¶</a></h2>
+Perl 使用叫做 全局類型
+  的類型來支持整個符號表項.
+  全局類型的前綴是*,
+  因爲它表示所有的類型.
+  這在過去通常用來給函數傳遞數組或哈希的引用,
+  但是現在有了真正的引用,
+  這就幾乎不需要了.
+<p class="Pp">現在,全局類型的主要用途是創建符號表別名.
+    如下賦值:</p>
+<p class="Pp"> *this = *that;</p>
+<p class="Pp">使得$this 成爲
+    $that的別名, @this 成爲
+    @that的別名,%this 成爲
+    %that的別名, &amp;this 成爲
+    &amp;that的別名, 等等.
+    使用引用會更安全.
+    這樣:</p>
+<p class="Pp"> local *Here::blue =\$There::green;</p>
+<p class="Pp">暫時使 $Here::blue 成爲
+    $There::green的別名, 但不會使
+    @Here::blue 成爲 @There::green的別名,
+    也不會使 %Here::blue 成爲
+    %There::green的別名, 等等. 參見
+    perlmod 中的 Symbol Tables
+    有多個例子.
+    看起來可能有些怪異,
+    不過這卻是整個import/export系統的基礎.</p>
+<p class="Pp">全局類型的其它用途還有,
+    給函數傳輸文件句柄或是創建新的文件句柄.
+    如果你要使用全局類型代替文件句柄,
+    可以這樣做:</p>
+<p class="Pp"> $fh = *STDOUT;</p>
+<p class="Pp">或者使用真正的引用,
+    象這樣:</p>
+<p class="Pp"></p>
+<pre>    $fh =\*STDOUT;
+</pre>
+<p class="Pp">參見 perlsub
+    有關於間接句柄的多個例子.</p>
+<p class="Pp">全局類型也是使用local()
+    創建局部文件句柄的一種方法.
+    作用範圍在當前塊之內,
+    但是可以被傳回.例如:</p>
+<p class="Pp"></p>
+<pre>    sub newopen {
+        my $path = shift;
+        local  *FH;  # not my!
+        open   (FH, $path)          or  return undef;
+        return *FH;
+    }
+    $fh = newopen(&#39;/etc/passwd&#39;);
+</pre>
+<p class="Pp">既然我們有*foo{THING}
+    這樣的記法,
+    全局類型不再多用於文件句柄,但在從函數傳出或向函數傳入新的文件句柄時它還是必需的.因爲*HANDLE{IO}
+    只有在HANDLE
+    已經是文件句柄時才起作用.
+    換言之,
+    在建立新符號表項時必須使用
+    *FH; *foo{THING} 是不行的.
+    不知道該用誰時, 使用
+    *FH</p>
+<p class="Pp">所有能創建文件句柄的函數
+    (open(), opendir(), pipe(), socketpair(), sysopen(), socket(), 和
+    accept())
+    ,在傳遞給它們的句柄是標量時,會自動創建一個匿名句柄.
+    這使得象open(my $fh, ...) 和 open(local
+    $fh,...)
+    這樣的結構可以創建一個在超出範圍時可以自動關閉的句柄,如果沒有另外的對它們的引用的話.
+    這大大減少了全局類型的使用,當需要打開一個可以到處使用的句柄時,
+    可以這樣做：</p>
+<p class="Pp"></p>
+<pre>    sub myopen {
+        open my $fh, &#34;@_&#34;
+             or die &#34;Can&#39;t open &#39;@_&#39;: $!&#34;;
+        return $fh;
+    }
+</pre>
+<p class="Pp"></p>
+<pre>    {
+        my $f = myopen(&#34;&lt;/etc/motd&#34;);
+        print &lt;$f&gt;;
+        # $f implicitly closed here
+    }
+</pre>
+<p class="Pp">注意如果使用了初始化的標量，那麼結果會有不同：`my
+    $fh=&#39;zzz&#39;; open($fh, ...)&#39; 與`open( *{&#39;zzz&#39;}, ...)&#39;
+    等價。`use strict &#39;refs&#39;&#39;
+    禁止了這樣做。</p>
+<p class="Pp">另一個創建匿名句柄的方法是用Symbol
+    模塊或IO::Handle
+    模塊或諸如此類的東西.
+    These modules have the advantage of not hiding different types of the same
+    name during the local(). 在 open() in the perlfunc manpage
+    的文末有個例子.(譯者注:說實話,對匿名句柄我現在也是一頭霧水,翻譯的不當之處,請高手指出.)</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO_參見">SEE ALSO 參見<a class="anchor" href="#SEE_ALSO_%E5%8F%83%E8%A6%8B">¶</a></h1>
+參見 the perlvar manpage 瞭解
+  Perl的內建變量和合法變量。參見the
+  perlref manpage, the perlsub manpage, 和 Symbol Tables in the perlmod
+  manpage 瞭解全局類型和 *foo{THING}
+  語法。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文版維護人">中文版維護人<a class="anchor" href="#%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA">¶</a></h1>
+<b>redcandle &lt;redcandle51@nospam.chinaren.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文版最新更新">中文版最新更新<a class="anchor" href="#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0">¶</a></h1>
+<b>2001年12月4日星期二</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文手冊頁翻譯計劃">中文手冊頁翻譯計劃<a class="anchor" href="#%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-25</td>
+    <td class="foot-os">perl v5.8.3</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+perldata.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-28T03:40:57Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"perldata(7)\"}}]}"
+</script>

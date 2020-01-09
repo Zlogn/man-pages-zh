@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xxd(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/xxd/xxd.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/xxd/xxd.1.fr.html" hreflang="fr">
+<link rel="alternate" href="../../buster/xxd/xxd.1.it.html" hreflang="it">
+<link rel="alternate" href="../../buster/xxd/xxd.1.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/xxd/xxd.1.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/xxd/xxd.1.ru.html" hreflang="ru">
+<link rel="alternate" href="../../buster/manpages-zh/xxd.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/xxd.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; xxd(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/xxd.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/xxd.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_%28SYNOPSIS%29" title="總覽 (SYNOPSIS)">總覽 (SYNOPSIS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_%28DESCRIPTION%29" title="描述 (DESCRIPTION)">描述 (DESCRIPTION)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%B8%E9%A0%85_%28OPTIONS%29" title="選項 (OPTIONS)">選項 (OPTIONS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%91%8A%E8%AA%A1_%28CAVEATS%29" title="告誡 (CAVEATS)">告誡 (CAVEATS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BE%8B%E5%AD%90_%28EXAMPLES%29" title="例子 (EXAMPLES)">例子 (EXAMPLES)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%BF%94%E5%9B%9E%E5%80%BC_%28RETURN_VALUES%29" title="返回值 (RETURN VALUES)">返回值 (RETURN VALUES)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_%28SEE_ALSO%29" title="參見 (SEE ALSO)">參見 (SEE ALSO)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AD%A6%E5%91%8A_%28WARNINGS%29" title="警告 (WARNINGS)">警告 (WARNINGS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%89%88%E6%9C%AC_%28VERSION%29" title="版本 (VERSION)">版本 (VERSION)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85_%28AUTHOR%29" title="作者 (AUTHOR)">作者 (AUTHOR)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%5D" title="[中國Linux論壇man手冊頁翻譯計劃]">[中國Linux論壇man手冊頁翻譯計劃]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/xxd.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/xxd.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/xxd.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/xxd/xxd.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/xxd/xxd.1.fr.html" title="French (fr)">français</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/xxd/xxd.1.it.html" title="Italian (it)">italiano</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/xxd/xxd.1.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/xxd/xxd.1.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/xxd/xxd.1.ru.html" title="Russian (ru)">русский</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/xxd.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/xxd.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">XXD(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">XXD(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<p class="Pp"></p>
+<p class="Pp"></p>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+<i>xxd</i> -
+  以十六進制形式表示
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_(SYNOPSIS)">總覽 (SYNOPSIS)<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_(SYNOPSIS)">¶</a></h1>
+<b>xxd</b> -h[elp]
+<br/>
+<b>xxd</b> [options] [infile [outfile]]
+<br/>
+<b>xxd</b> -r[evert] [options] [infile [outfile]]
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_(DESCRIPTION)">描述 (DESCRIPTION)<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_(DESCRIPTION)">¶</a></h1>
+<i>xxd</i>
+  建立一個指定文件或者標準輸入的十六進制轉儲，同時也可以
+  把十六進制轉儲轉換成原來的二進制形式。同
+  <b><a href="../../buster/manpages-zh/uuencode.1.zh_TW.html">uuencode(1)</a></b> 和 <b><a href="../../buster/sharutils/uudecode.1.en.html">uudecode(1)</a></b>
+  一樣，它也可以把二進制數據轉換成
+  ASCII
+  表示形式，這樣電子郵件就可以
+  安全的傳輸。但是它有一個優點，就是可以把解碼後的結果輸出到
+  標準輸出。同時它還可以用來給二進制文件打補丁。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="選項_(OPTIONS)">選項 (OPTIONS)<a class="anchor" href="#%E9%81%B8%E9%A0%85_(OPTIONS)">¶</a></h1>
+如果沒有給定 <i>infile</i>
+  就用標準輸入。如果
+  <i>infile</i> 是一個 “-”
+  字符，也從標準輸入讀入。如果沒有給定
+  <i>outfile</i>
+  （或者它的文件名是
+  一個 `<b>-</b>´
+  字符），結果將輸出至標準輸出。
+<p class="Pp">注意我們用的是一個很“懶”的解析器，它只檢查選項的第一個字符，
+    除非這個選項有參數。在一個單字符的選項和它的參數之間的空格
+    可有可無. 選項的 參數
+    可以 用 十進制,
+    十六進制 或者
+    八進制的 形式 指定.
+    也就是說 -c8<b>,</b> <b>-c 8</b>, <b>-c 010</b>
+    和 <b>-cols 8</b> 是 等價的.</p>
+<dl class="Bl-tag">
+  <dt><i>-a</i> | <i>-autoskip</i></dt>
+  <dd>打開/關閉 autoskip: 用一個
+      單獨的 &#39;*&#39; 來 代替 空行.
+      默認 關閉.</dd>
+  <dt><i>-b</i> | <i>-bits</i></dt>
+  <dd>轉到 比特(二進制
+      數字) 模式, 而 不是
+      十六進制 模式. 在
+      這種 模式 下, 每個
+      字符 被 表示成 八個 0/1
+      的 數字, 而 不是
+      一般的 十六進制
+      形式. 每 一行 都 以
+      一個 用 十六進制
+      形式 表示的 行號,
+      後面 是 ascii (或者 ebcdic) 形式
+      開頭. 命令行 選項 -r, -p, -i
+      在 這個 模式下
+      不起作用.</dd>
+  <dt><i>-c cols </i>|<i> -cols cols</i></dt>
+  <dd><i>-c cols </i>|<i> -cols cols</i> 每行 表示
+      &lt;<i>cols</i>&gt; 個 字符. 默認 16 (-i:
+      12, -ps: 30, -b: 6). 最多 256.</dd>
+  <dt><i>-E</i> | <i>-EBCDIC</i></dt>
+  <dd>把 右手邊的 字符
+      編碼 從 ASCII 變爲 EBCDIC. 這個
+      並不 改變 其
+      十六進制 表示 形式.
+      同 -r, -p 或者 -i 一起用 是
+      沒有 意義的.</dd>
+  <dt><i>-g bytes </i>|<i> -groupsize bytes</i></dt>
+  <dd>每 &lt;<i>bytes</i>&gt; 個 字符 (每
+      兩個 十六進制 字符
+      或者 八個 二進制
+      數字) 之間 用 一個
+      空格 隔開. 用 <i>-g 0</i> 禁止
+      分組. 在 普通 模式 中
+      &lt;<i>Bytes</i>&gt; 默認 是 <i>2</i> 在
+      二進制 模式 中 是 <i>1</i>.
+      分組 並不 適用於 postscript
+      或者 include style 選項.</dd>
+  <dt><i>-h</i> | <i>-help</i></dt>
+  <dd>顯示 可用 命令 概述
+      並且 退出. 不做 其它
+      任何 事情.</dd>
+  <dt><i>-i</i> | <i>-include</i></dt>
+  <dd>輸出 爲 C 語言的 包含
+      文件 形式. 除非 xxd 從
+      標準輸入 讀入, 不然
+      會 輸出 一個 完整的
+      靜態 數組 定義(與
+      輸入 文件 同名).</dd>
+  <dt><i>-l len </i>|<i> -len len</i></dt>
+  <dd>輸出 &lt;<i>len</i>&gt; 個 字符 後
+      停止.</dd>
+  <dt><i>-p</i> | <i>-ps</i> | <i>-postscript</i> | <i>-plain</i></dt>
+  <dd>以 postscript 的 連續
+      十六進制 轉儲 輸出.
+      這 也叫做 純
+      十六進制 轉儲.</dd>
+  <dt><i>-r</i> | <i>-revert</i></dt>
+  <dd>逆向 操作: 把
+      十六進制 轉儲 轉換
+      (或者 打補丁) 成
+      二進制 形式. 如果 不
+      輸出 到 標準輸出, xxd
+      並不把 輸出 文件
+      截斷, 而是 直接 寫到
+      輸出 文件. 用 <i>-r -p</i> 來 從
+      一個 沒有 行號 沒有
+      某種 列格式 的 純
+      十六進制 轉儲 讀入.
+      附加的 空格 和 換行
+      可以 出現 在 任何
+      地方.</dd>
+  <dt><i>-seek offset</i></dt>
+  <dd>用在 <i>-r</i> 之後: 會在
+      當前 文件的 偏移量
+      上 增加 &lt;<i>offset</i>&gt;<i>.</i></dd>
+  <dt><i>-s [+][-]seek</i></dt>
+  <dd>從 infile 的 絕對 或者
+      相對 偏移量 &lt;<i>seek</i>&gt;
+      開始. <i>+ </i> 表示 相對於
+      標準 輸入 當前的
+      位置 (如果 不是
+      標準輸入 就 沒有
+      意義了). <i>- </i> 表示 從
+      文件 末尾 (如果 和 <i> + </i>
+      連用: 從 標準輸入
+      當前 位置) 向前 數
+      一些 字符, 從 那個
+      地方 開始. 如果 沒有 -s
+      選項, xxd 從 當前 位置
+      開始.</dd>
+  <dt><i>-u</i></dt>
+  <dd>用大寫字母.
+      默認的是小寫字母.</dd>
+  <dt><i>-v</i> | <i>-version</i></dt>
+  <dd>顯示 版本 字符串.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="告誡_(CAVEATS)">告誡 (CAVEATS)<a class="anchor" href="#%E5%91%8A%E8%AA%A1_(CAVEATS)">¶</a></h1>
+<i>xxd -r</i> 在 對待 行號 上
+  有一些 地方 值得 注意.
+  如過 輸出 文件 可以
+  定位, 那麼 在 十六進制
+  文件 中的 行首的 行號
+  可以 重疊, 順序 可以
+  打亂, 還 可以 略去 一些
+  行號. 這種 情況 下, xxd 會
+  用 <a href="../../buster/manpages-dev/lseek.2.en.html">lseek(2)</a> 來 定位. 如果 輸出
+  文件 不可以 定位, 那麼
+  行號 可以 不連續, 但是
+  必須 按 順序, 這種 情況
+  下, 中間 會 插入 null 字符.
+<p class="Pp"><i>xxd -r</i> 從不 輸出 解析
+    錯誤. 錯誤 會 被跳過.</p>
+<p class="Pp">在 編輯 十六進制
+    文件時 要 注意 <i>xxd -r</i> 在
+    讀入 足夠列 之後
+    會跳過 本行 後面
+    所有的 數據 (見 選項 -c).
+    這 就是說 對可打印的
+    ASCII (或者 EBCDIC) 的修改
+    都會被 忽略. 用 xxd -r -p
+    把一個 純十六進制
+    轉儲文件 (或者 postscript)
+    恢復 成 二進制文件 與
+    列數 是否 正確 沒有
+    什麼 關係, 它會 解釋
+    所有 看起來 像 兩個
+    十六進制的 數字.</p>
+<p class="Pp">請 注意
+  <br/>
+  <i>% xxd -i file</i>
+  <br/>
+  和
+  <br/>
+  <i>% xxd -i &lt; file</i> 的 區別.</p>
+<p class="Pp">因爲 <a href="../../buster/manpages-dev/lseek.2.en.html">lseek(2)</a> 是 用來
+    重置 輸入指針的, 所以
+    <i>xxd -s +seek</i> 和 <i>xxd -s seek</i> 是
+    有區別的. 如果 輸入 是
+    標準輸入, 並且 在 xxd
+    被執行是 它的
+    標準輸入的 指針 位置
+    不是在 文件的 開頭,
+    那麼 多了個 &#39;+&#39; 效果
+    就會 不一樣了. 下面的
+    例子 可能 幫助你
+    弄清楚(也可能 讓你
+    更糊塗)...</p>
+<p class="Pp">在讀 之前 需要
+    重置 輸入的 文件指針;
+    因爲 `cat&#39; 已經 讀到了
+    輸入的 文件尾.
+  <br/>
+  <i>% sh -c &#39;cat &gt; plain_copy; xxd -s 0 &gt; hex_copy&#39; &lt; file</i></p>
+<p class="Pp">從 0x480 (=1024+128) 開始讀. `+&#39;
+    表明 &#34;相對於 當前的
+    文件位置&#34;, 也就是說
+    從 dd 讀了 1k, 在此 基礎上
+    再加 `128&#39;.
+  <br/>
+  <i>% sh -c &#39;dd of=plain_snippet bs=1k count=1; xxd -s +128 &gt; hex_snippet&#39;
+    &lt; file</i></p>
+<p class="Pp">從 0x100 ( = 1024-768) 開始讀.
+  <br/>
+  <i>% sh -c &#39;dd of=plain_snippet bs=1k count=1; xxd -s +-768 &gt; hex_snippet&#39;
+    &lt; file</i></p>
+<p class="Pp">可是, 這種 情況
+    很少 發生, 我們 也
+    很少 需要用 `+&#39;. 當用了 -s
+    是, 作者 比較 喜歡 用
+    <a href="../../buster/strace/strace.1.en.html">strace(1)</a> 或者 truss(1) 去 監控 xxd 的
+    行爲.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="例子_(EXAMPLES)">例子 (EXAMPLES)<a class="anchor" href="#%E4%BE%8B%E5%AD%90_(EXAMPLES)">¶</a></h1>
+(譯者: 實際 輸出 可能 和
+  例子 有 一些 出入, 只要
+  理解 其 意思 就行了)
+<br/>
+顯示 <b>file</b> 除了 前 三行
+  (十六進制 的 0x30) 的 所有
+  內容.
+<br/>
+<i>% xxd -s 0x30 file</i>
+<p class="Pp">顯示 <b>file</b> 最後 三行
+    (十六進制 的 0x30) 的 所有
+    內容.
+  <br/>
+  <i>% xxd -s -0x30 file</i></p>
+<p class="Pp">顯示 120 個 字符, 每行
+    20 個 字符, 連續 顯示.
+  <br/>
+  <i>% xxd -l 120 -ps -c 20 xxd.1</i>
+  <br/>
+  2e544820585844203120224d616e75616c207061
+  <br/>
+  676520666f7220787864220a2e5c220a2e5c2220
+  <br/>
+  32317374204d617920313939360a2e5c22204d61
+  <br/>
+  6e207061676520617574686f723a0a2e5c222020
+  <br/>
+  2020546f6e79204e7567656e74203c746f6e7940
+  <br/>
+  7363746e7567656e2e7070702e67752e6564752e</p>
+<p class="Pp">顯示 120 個 字符, 每行
+    12 個 字符.
+  <br/>
+  <i>% xxd -l 120 -c 12 xxd.1</i>
+  <br/>
+  0000000: 2e54 4820 5858 4420 3120 224d .TH XXD 1 &#34;M
+  <br/>
+  000000c: 616e 7561 6c20 7061 6765 2066 anual page f
+  <br/>
+  0000018: 6f72 2078 7864 220a 2e5c 220a or xxd&#34;..\&#34;.
+  <br/>
+  0000024: 2e5c 2220 3231 7374 204d 6179 .\&#34; 21st May
+  <br/>
+  0000030: 2031 3939 360a 2e5c 2220 4d61 1996..\&#34; Ma
+  <br/>
+  000003c: 6e20 7061 6765 2061 7574 686f n page autho
+  <br/>
+  0000048: 723a 0a2e 5c22 2020 2020 546f r:..\&#34; To
+  <br/>
+  0000054: 6e79 204e 7567 656e 7420 3c74 ny Nugent &lt;t
+  <br/>
+  0000060: 6f6e 7940 7363 746e 7567 656e ony@sctnugen
+  <br/>
+  000006c: 2e70 7070 2e67 752e 6564 752e .ppp.gu.edu.</p>
+<p class="Pp">只 顯示 xxd.1 中 的
+    日期.
+  <br/>
+  <i>% xxd -s 0x28 -l 12 -c 12 xxd.1</i>
+  <br/>
+  0000028: 3231 7374 204d 6179 2031 3939 21st May 199</p>
+<p class="Pp">把 <b>input_file</b> 考到 <b>output_file</b>
+    並 在 前面 增加 100 個
+    字節的 0x00.
+  <br/>
+  <i>% xxd input_file | xxd -r -s 100 &gt; output_file</i></p>
+<p class="Pp">給 文件 xxd.1 中的 日期
+    打 補釘.
+  <br/>
+  <i>% echo &#39;0000029: 3574 68&#39; | xxd -r - xxd.1</i>
+  <br/>
+  <i>% xxd -s 0x28 -l 12 -c 12 xxd.1</i>
+  <br/>
+  0000028: 3235 7468 204d 6179 2031 3939 25th May 199</p>
+<p class="Pp">建立 一個 65537 字節的
+    文件, 所有 字節 都是 0x00,
+    除了 最後 一個 字節 是
+    &#39;A&#39; (十六進制 0x41).
+  <br/>
+  <i>% echo ´010000: 41´ | xxd -r &gt; file</i></p>
+<p class="Pp">打開 autoskip, 顯示 上例
+    中 建立的 文件.
+  <br/>
+  <i>% xxd -a -c 12 file</i>
+  <br/>
+  0000000: 0000 0000 0000 0000 0000 0000 ............
+  <br/>
+  *
+  <br/>
+  000fffc: 0000 0000 40 ....A</p>
+<p class="Pp">建立 一個 只 含有
+    一個 &#39;A&#39; 的 文件. &#39;-r -s&#39; 後面
+    的 數字 同 文件 中的
+    行號 相 抵消; 結果是
+    開頭 的 字節 被
+    跳過了.
+  <br/>
+  <i>% echo &#39;010000: 41&#39; | xxd -r -s -0x10000 &gt; file</i></p>
+<p class="Pp">在 編輯器, 比如 <b><a href="../../buster/manpages-zh/vim.1.zh_TW.html">vim(1)</a></b>
+    中 把 xxd 當成 一個 過濾
+    程序 來用, 用 十六進制
+    來 顯示 被 標記 爲 &#39;a&#39; 和
+    &#39;z&#39; 中間 的 區域.
+  <br/>
+  <i>:&#39;a,&#39;z!xxd</i></p>
+<p class="Pp">在 編輯器, 比如 <b><a href="../../buster/manpages-zh/vim.1.zh_TW.html">vim(1)</a></b>
+    中 把 xxd 當成 一個 過濾
+    程序 來用, 用來 恢復
+    被 標記 爲 &#39;a&#39; 和 &#39;z&#39; 中間
+    的 區域 的 十六進制
+    顯示.
+  <br/>
+  <i>:&#39;a,&#39;z!xxd -r</i></p>
+<p class="Pp">在 編輯器, 比如 <b><a href="../../buster/manpages-zh/vim.1.zh_TW.html">vim(1)</a></b>
+    中 把 xxd 當成 一個 過濾
+    程序 來用, 用來 恢復
+    一行的 十六進治 顯示.
+    把 光標 移動 到 相應行
+    並 鍵入:
+  <br/>
+  <i>!!xxd -r</i></p>
+<p class="Pp">從 串行線 中 讀入
+    一個個的 單獨的 字符.
+  <br/>
+  <i>% xxd -c1 &lt; /dev/term/b &amp;</i>
+  <br/>
+  <i>% stty &lt; /dev/term/b -echo -opost -isig -icanon min 1</i>
+  <br/>
+  <i>% echo -n foo &gt; /dev/term/b</i></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="返回值_(RETURN_VALUES)">返回值 (RETURN VALUES)<a class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC_(RETURN_VALUES)">¶</a></h1>
+此 程序 返回 如下的
+  錯誤碼:
+<dl class="Bl-tag">
+  <dt>0</dt>
+  <dd>一切 正常.</dd>
+  <dt>-1</dt>
+  <dd>不支持 此 操作 ( <i>xxd -r -i</i>
+      仍然 不行).</dd>
+  <dt>1</dt>
+  <dd>解析 選項 錯誤.</dd>
+  <dt>2</dt>
+  <dd>輸入 文件 出錯.</dd>
+  <dt>3</dt>
+  <dd>輸出 文件 出錯.</dd>
+  <dt>4,5</dt>
+  <dd>指定 的 偏移量 地址
+      不可 到達.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_(SEE_ALSO)">參見 (SEE ALSO)<a class="anchor" href="#%E5%8F%83%E8%A6%8B_(SEE_ALSO)">¶</a></h1>
+<a href="../../buster/manpages-zh/uuencode.1.zh_TW.html">uuencode(1)</a>, <a href="../../buster/sharutils/uudecode.1.en.html">uudecode(1)</a>, <a href="../../buster/patch/patch.1.en.html">patch(1)</a>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="警告_(WARNINGS)">警告 (WARNINGS)<a class="anchor" href="#%E8%AD%A6%E5%91%8A_(WARNINGS)">¶</a></h1>
+這個 工具 古怪的 念頭
+  是其 作者的 意思. 使用
+  這個 工具的 任何 結果
+  都由 自己 負責. 使用它,
+  探索它, 你 終會 成爲
+  一個 高手.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="版本_(VERSION)">版本 (VERSION)<a class="anchor" href="#%E7%89%88%E6%9C%AC_(VERSION)">¶</a></h1>
+此 手冊頁 爲 1.7 版本的 xxd
+  而寫.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者_(AUTHOR)">作者 (AUTHOR)<a class="anchor" href="#%E4%BD%9C%E8%80%85_(AUTHOR)">¶</a></h1>
+(c) 1990-1997 by Juergen Weigert
+<br/>
+&lt;jnweiger@informatik.uni-erlangen.de&gt;
+<p class="Pp">Distribute freely and credit me,
+  <br/>
+  make money and share with me,
+  <br/>
+  lose money and don&#39;t ask me.</p>
+<p class="Pp">Tony Nugent
+  <br/>
+  &lt;tony@sctnugen.ppp.gu.edu.au&gt; &lt;T.Nugent@sct.gu.edu.au&gt;
+    最先 開始 寫 本 手冊頁
+  <br/>
+  Bram Moolenaar
+    做了一些小的改動，
+    Juergen Weigert
+    完成了手冊頁的編寫。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>唐友 &lt;tony_ty@263.net&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2002/1/22</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中國Linux論壇man手冊頁翻譯計劃]">[中國Linux論壇man手冊頁翻譯計劃]<a class="anchor" href="#%5B%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%5D">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">August 1996</td>
+    <td class="foot-os">Manual page for xxd</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+xxd.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-09T21:41:05Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"xxd(1)\"}}]}"
+</script>

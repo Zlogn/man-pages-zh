@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>systemd(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/systemd.1.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/systemd/systemd.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/systemd.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/systemd.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; systemd(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/systemd.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/systemd.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS" title="SYNOPSIS">SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%B8%E9%A0%85" title="選項">選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%A6%82%E5%BF%B5" title="概念">概念</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%9B%AE%E9%8C%84" title="目錄">目錄</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BF%A1%E8%99%9F" title="信號">信號</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%92%B0%E5%A2%83%E8%AE%8A%E9%87%8F" title="環境變量">環境變量</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%85%A7%E6%A0%B8%E5%BC%95%E5%B0%8E%E9%81%B8%E9%A0%85" title="內核引導選項">內核引導選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SOCKETS_%E8%88%87_FIFOS" title="SOCKETS 與 FIFOS">SOCKETS 與 FIFOS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B" title="參見">參見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES" title="NOTES">NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/systemd.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/systemd.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/systemd.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/systemd.1.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/systemd/systemd.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/systemd.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/systemd.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">SYSTEMD(1)</td>
+    <td class="head-vol">systemd</td>
+    <td class="head-rtitle">SYSTEMD(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+systemd, init - systemd
+  系統與服務管理器
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS">SYNOPSIS<a class="anchor" href="#SYNOPSIS">¶</a></h1>
+<p class="Pp HP"><b>systemd </b><b>[OPTIONS...]</b></p>
+<p class="Pp HP"><b>init </b><b>[OPTIONS...]</b><b> </b><b>{COMMAND}</b></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+systemd 是一個專用於 Linux
+  操作系統的系統與服務管理器。
+  當作爲啓動進程(PID=1)運行時，它將作爲初始化系統運行，
+  也就是啓動並維護各種用戶空間的服務。
+<p class="Pp">爲了與傳統的 SysV
+    兼容，如果將 systemd 以
+    <b>init</b>
+    名稱啓動，並且&#34;PID≠1&#34;，那麼它將執行
+    <b>telinit</b>
+    命令並將所有命令行參數原封不動的傳遞過去。
+    這樣對於普通的登陸會話來說，無論是調用
+    <b>init</b> 還是調用 <b>telinit</b>
+    都是等價的。 詳見
+    <a href="../../buster/systemd-sysv/telinit.8.en.html">telinit(8)</a> 手冊。</p>
+<p class="Pp">當作爲系統實例運行時，
+    systemd 將會按照 system.conf
+    配置文件 以及 system.conf.d
+    配置目錄中的指令工作；
+    當作爲用戶實例運行時，systemd
+    將會按照 user.conf 配置文件
+    以及 user.conf.d
+    配置目錄中的指令工作。詳見
+    <a href="../../buster/systemd/systemd-system.conf.5.en.html">systemd-system.conf(5)</a> 手冊。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="選項">選項<a class="anchor" href="#%E9%81%B8%E9%A0%85">¶</a></h1>
+能夠識別的命令行選項如下：
+<p class="Pp"><b>--test</b></p>
+<div class="Bd-indent">檢測並輸出啓動序列，然後退出。
+  僅用於調試目的。</div>
+<p class="Pp"><b>--dump-configuration-items</b></p>
+<div class="Bd-indent">輸出一個單元(unit)列表。
+  此列表簡明且完整的列出了
+  所有單元文件中定義的&#34;unit&#34;。</div>
+<p class="Pp"><b>--unit=</b></p>
+<div class="Bd-indent">設置啓動時默認啓動的單元(unit)。
+  默認值是 default.target</div>
+<p class="Pp"><b>--system</b>, <b>--user</b></p>
+<div class="Bd-indent"><b>--system</b>
+  表示強制作爲系統實例運行(即使&#34;PID≠1&#34;)，
+  <b>--user</b>
+  表示強制作爲用戶實例運行(即使&#34;PID=1&#34;)。
+  通常不應該使用此選項。
+  此選項僅用於調試目的，
+  而且 <b>--system</b> 僅在與 <b>--test</b>
+  一起使用時纔有實際意義。</div>
+<p class="Pp"><b>--dump-core</b></p>
+<div class="Bd-indent">在崩潰時進行內核轉儲。
+  當作爲用戶實例運行時，此選項沒有實際意義。
+  此選項還可以通過內核引導選項
+  <i>systemd.dump_core=</i> 開啓
+  (參見&#34;內核引導選項&#34;小節)。</div>
+<p class="Pp"><b>--crash-vt=</b><i>VT</i></p>
+<div class="Bd-indent">在崩潰時切換到指定的虛擬控制檯(VT)。
+  當作爲用戶實例運行時，此選項沒有實際意義。
+  可以設爲一個 1–63
+  之間的整數或布爾值。
+  若設爲整數則切換到指定編號的虛擬控制檯；
+  若設爲 <b>yes</b>
+  則表示使用內核消息所使用的虛擬控制檯；
+  若設爲 <b>no</b>
+  則表示不切換到任何虛擬控制檯。
+  此選項還可以通過內核引導選項
+  <i>systemd.crash_vt=</i> 設置
+  (參見&#34;內核引導選項&#34;小節)。</div>
+<p class="Pp"><b>--crash-shell</b></p>
+<div class="Bd-indent">在崩潰時啓動一個
+  shell 。
+  當作爲用戶實例運行時，此選項沒有實際意義。
+  此選項還可以通過內核引導選項
+  <i>systemd.crash_shell=</i> 開啓
+  (參見&#34;內核引導選項&#34;小節)。</div>
+<p class="Pp"><b>--crash-reboot</b></p>
+<div class="Bd-indent">在崩潰時自動重啓系統。
+  當作爲用戶實例運行時，此選項沒有實際意義。
+  此選項還可以通過內核引導選項
+  <i>systemd.crash_reboot=</i> 開啓
+  (參見&#34;內核引導選項&#34;小節)。</div>
+<p class="Pp"><b>--confirm-spawn</b></p>
+<div class="Bd-indent">在派生新進程時進行確認提示。
+  當作爲用戶實例運行時，此選項沒有實際意義。</div>
+<p class="Pp"><b>--show-status=</b></p>
+<div class="Bd-indent">在系統啓動過程中顯示簡明的服務狀態信息。
+  當作爲用戶實例運行時，此選項沒有實際意義。
+  其參數必須是一個表示真假的布爾值，
+  如果未指定則相當於設爲
+  <b>yes</b></div>
+<p class="Pp"><b>--log-target=</b></p>
+<div class="Bd-indent">設置日誌的目標，其參數必須是
+  <b>console</b>, <b>journal</b>, <b>kmsg</b>, <b>journal-or-kmsg</b>,
+  <b>null</b> 之一(小寫)。</div>
+<p class="Pp"><b>--log-level=</b></p>
+<div class="Bd-indent">設置日誌的等級，
+  其參數必須是一個數字或者
+  符合 <a href="../../buster/manpages-dev/syslog.3.en.html">syslog(3)</a> 習慣的 <b>emerg</b>,
+  <b>alert</b>, <b>crit</b>, <b>err</b>, <b>warning</b>, <b>notice</b>,
+  <b>info</b>, <b>debug</b> 之一(小寫)。</div>
+<p class="Pp"><b>--log-color=</b></p>
+<div class="Bd-indent">高亮重要的日誌信息，其參數必須是一個表示真假的布爾值，
+  若未指定則相當於設爲
+  <b>yes</b></div>
+<p class="Pp"><b>--log-location=</b></p>
+<div class="Bd-indent">在日誌中包含代碼的位置，
+  其參數必須是一個表示真假的布爾值，
+  若未指定則相當於設爲
+  <b>yes</b>
+  。僅用於調試目的。</div>
+<p class="Pp"><b>--default-standard-output=</b>,
+    <b>--default-standard-error=</b></p>
+<div class="Bd-indent">爲所有的 service 與 socket
+  設置默認的標準輸出與標準錯誤，
+  相當於設置 <b>StandardOutput=</b> 與
+  <b>StandardError=</b> 指令的值(參見
+  <a href="../../buster/systemd/systemd.exec.5.en.html">systemd.exec(5)</a>
+  手冊)。其參數必須是
+  <b>inherit</b>, <b>null</b>, <b>tty</b>, <b>journal</b>,
+  <b>journal+console</b>, <b>syslog</b>, <b>syslog+console</b>, <b>kmsg</b>,
+  <b>kmsg+console</b> 之一(小寫)。
+  <b>--default-standard-output=</b> 的默認值是
+  <b>journal</b> ；而 <b>--default-standard-error=</b>
+  的默認值是 <b>inherit</b></div>
+<p class="Pp"><b>--machine-id=</b></p>
+<div class="Bd-indent">覆蓋文件系統上的
+  machine-id 設置，
+  常用於網絡啓動或容器。
+  禁止設爲全零的值。</div>
+<p class="Pp"><b>-h</b>, <b>--help</b></p>
+<div class="Bd-indent">顯示簡短的幫助信息並退出。</div>
+<p class="Pp"><b>--version</b></p>
+<div class="Bd-indent">顯示簡短的版本信息並退出。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="概念">概念<a class="anchor" href="#%E6%A6%82%E5%BF%B5">¶</a></h1>
+systemd
+  將各種系統啓動和運行相關的對象，
+  表示爲各種不同類型的單元(unit)，
+  並提供了處理不同單元之間依賴關係的能力。
+  大部分單元都靜態的定義在單元文件中
+  (參見 <a href="../../buster/systemd/systemd.unit.5.en.html">systemd.unit(5)</a> 手冊)，
+  但是有少部分單元則是動態自動生成的：
+  其中一部分來自於其他傳統的配置文件(爲了兼容性)，
+  而另一部分則動態的來自於系統狀態或可編程的運行時狀態。
+  單元既可以處於活動(active)狀態也可以處於停止(inactive)狀態，
+  當然也可以處於啓動中(activating)或停止中(deactivating)的狀態。
+  還有一個特殊的失敗(failed)狀態，
+  意思是單元以某種方式失敗了
+  (進程崩潰了、或者觸碰啓動頻率限制、或者退出時返回了錯誤代碼、或者遇到了操作超時之類的故障)。
+  當進入失敗(failed)狀態時，
+  導致故障的原因將被記錄到日誌中以方便日後排查。
+  需要注意的是，
+  不同的單元可能還會有各自不同的&#34;子狀態&#34;，
+  但它們都被映射到上述五種狀態之一。
+<p class="Pp">各種不同的單元類型如下：</p>
+<p class="Pp"></p>
+<div class="Bd-indent"> 1.service
+  單元。用於封裝一個後臺服務進程。
+  參見 <a href="../../buster/systemd/systemd.service.5.en.html">systemd.service(5)</a> 手冊。</div>
+<p class="Pp"></p>
+<div class="Bd-indent"> 2.socket 單元。
+  用於封裝一個系統套接字(UNIX)或互聯網套接字(INET/INET6)或FIFO管道。
+  相應的服務在第一個&#34;連接&#34;進入套接字時纔會被啓動。
+  有關套接字單元的詳情，參見
+  <a href="../../buster/systemd/systemd.socket.5.en.html">systemd.socket(5)</a>
+  手冊；有關基於套接字或其他方式的啓動，參見
+  <a href="../../buster/manpages-zh/daemon.7.zh_TW.html">daemon(7)</a> 手冊。</div>
+<p class="Pp"></p>
+<div class="Bd-indent"> 3.target 單元。
+  用於將多個單元在邏輯上組合在一起。參見
+  <a href="../../buster/systemd/systemd.target.5.en.html">systemd.target(5)</a> 手冊。</div>
+<p class="Pp"></p>
+<div class="Bd-indent"> 4.device
+  單元。用於封裝一個設備文件，可用於基於設備的啓動。
+  並非每一個設備文件都需要一個
+  device 單元，
+  但是每一個被 udev
+  規則標記的設備都必須作爲一個
+  device 單元出現。參見
+  <a href="../../buster/systemd/systemd.device.5.en.html">systemd.device(5)</a> 手冊。</div>
+<p class="Pp"></p>
+<div class="Bd-indent"> 5.mount 單元。
+  用於封裝一個文件系統掛載點(也向後兼容傳統的
+  /etc/fstab 文件)。參見 <a href="../../buster/systemd/systemd.mount.5.en.html">systemd.mount(5)</a>
+  手冊。</div>
+<p class="Pp"></p>
+<div class="Bd-indent"> 6.automount 單元。
+  用於封裝一個文件系統自動掛載點，也就是僅在掛載點確實被訪問的情況下才進行掛載。
+  它取代了傳統的 autofs
+  服務。參見 <a href="../../buster/systemd/systemd.automount.5.en.html">systemd.automount(5)</a>
+  手冊。</div>
+<p class="Pp"></p>
+<div class="Bd-indent"> 7.timer 單元。
+  用於封裝一個基於時間觸發的動作。它取代了傳統的
+  atd, crond
+  等任務計劃服務。參見
+  <a href="../../buster/systemd/systemd.timer.5.en.html">systemd.timer(5)</a> 手冊。</div>
+<p class="Pp"></p>
+<div class="Bd-indent"> 8.swap 單元。
+  用於封裝一個交換分區或者交換文件。
+  它與 mount
+  單元非常類似。參見
+  <a href="../../buster/systemd/systemd.swap.5.en.html">systemd.swap(5)</a> 手冊。</div>
+<p class="Pp"></p>
+<div class="Bd-indent"> 9.path 單元。
+  用於根據文件系統上特定對象的變化來啓動其他服務。參見
+  <a href="../../buster/systemd/systemd.path.5.en.html">systemd.path(5)</a> 手冊。</div>
+<p class="Pp"></p>
+<div class="Bd-indent">10.slice 單元。
+  用於控制特定 CGroup
+  內(例如一組 service 與 scope
+  單元)所有進程的總體資源佔用。
+  參見 <a href="../../buster/systemd/systemd.slice.5.en.html">systemd.slice(5)</a> 手冊。</div>
+<p class="Pp"></p>
+<div class="Bd-indent">11.scope 單元。它與 service
+  單元類似，但是由 systemd
+  根據 D-bus
+  接口接收到的信息自動創建，
+  可用於管理外部創建的進程。參見
+  <a href="../../buster/systemd/systemd.scope.5.en.html">systemd.scope(5)</a> 手冊。</div>
+<p class="Pp">單元的名稱由單元文件的名稱決定，
+    某些特定的單元名稱具有特殊的含義，詳情參見
+    <a href="../../buster/systemd/systemd.special.7.en.html">systemd.special(7)</a> 手冊。</p>
+<p class="Pp">systemd
+    能夠處理各種類型的依賴關係，
+    包括依賴與衝突(也就是
+    <i>Requires=</i> 與 <i>Conflicts=</i> 指令)，
+    以及先後順序(也就是
+    <i>After=</i> 與 <i>Before=</i> 指令)。
+    注意，
+    上述兩種類型的依賴關係(依賴與衝突、先後順序)之間是相互獨立的(無關的)。
+    舉例來說，假定 foo.service
+    依賴於(Requires) bar.service
+    但並未指定先後順序，
+    那麼這兩個服務將被同時並行啓動。
+    不過在兩個單元之間既存在依賴關係也存在先後順序的情形也很常見。
+    另外需要注意的是，
+    大多數依賴關係都是由
+    systemd
+    隱式創建和維護的，
+    因此沒有必要額外手動創建它們。</p>
+<p class="Pp">應用程序和單元(透過依賴關係)可能會查詢其他單元的狀態變化。
+    在 systemd 中，
+    這種查詢被包裝爲&#34;任務&#34;(job)並被作爲&#34;任務隊列&#34;進行管理。
+    任務的執行結果可能成功也可能失敗，
+    但是任務的執行順序是依照任務所屬單元之間的先後順序確定的。</p>
+<p class="Pp">在系統啓動時，systemd
+    默認啓動 default.target 單元，
+    該單元中應該包含所有你想在開機時默認啓動的單元。
+    但實際上，它通常只是一個指向
+    graphical.target (圖形界面) 或
+    multi-user.target
+    (命令行界面，常用於嵌入式或服務器環境，
+    一般是 graphical.target
+    的一個子集)的符號連接。
+    詳見 <a href="../../buster/systemd/systemd.special.7.en.html">systemd.special(7)</a> 手冊。</p>
+<p class="Pp">systemd
+    依賴於內核提供的
+    <b>cgroups</b>[1]
+    特性控制進程的派生，
+    從而確保可以追蹤到所有子進程。
+    cgroups
+    信息由內核負責維護，
+    並且可以通過 /sys/fs/cgroup/systemd/
+    接口進行訪問。此外，還可以通過
+    <a href="../../buster/manpages-zh/systemd-cgls.1.zh_TW.html">systemd-cgls(1)</a> 或 <a href="../../buster/procps/ps.1.en.html">ps(1)</a>
+    之類的工具進行查看
+    (<b>ps xawf -eo pid,user,cgroup,args</b>)</p>
+<p class="Pp">systemd
+    幾乎完全兼容傳統的
+    SysV init 系統： SysV init
+    腳本可以作爲另一種配置文件格式被識別；
+    提供與 SysV 兼容的 /dev/initctl
+    接口； 提供各種 SysV
+    工具的兼容實現；
+    依然兼容例如 /etc/fstab 或者
+    utmp 之類傳統的 Unix
+  特性。</p>
+<p class="Pp">systemd
+    還有一個小型的事務系統：
+    如果要啓動或關閉一個單元，
+    那麼該單元所依賴的
+    所有其他單元都會被一起加入到同一個臨時事務中。
+    這樣，就可以校驗整個事務的一致性，
+    也就是檢查是否存在循環依賴。
+    如果存在循環依賴，
+    那麼 systemd 將會嘗試通過
+    去掉弱依賴(want)來解決這個問題，
+    如果最終實在無法解決循環依賴的問題，
+    那麼 systemd 將會報錯。</p>
+<p class="Pp">systemd
+    內置了許多系統啓動過程中必需的操作，
+    例如，設置 hostname
+    以及配置 loopback
+    網絡設備， 以及掛載
+    /sys 和 /proc 文件系統。</p>
+<p class="Pp">在系統啓動或者執行
+    <b>systemctl reload ...</b> 時， systemd
+    可以根據其他配置文件或者內核引導選項動態生成單元，參見
+    <a href="../../buster/systemd/systemd.generator.7.en.html">systemd.generator(7)</a> 手冊。</p>
+<p class="Pp">如果要從容器中調用
+    systemd 那麼必須遵守 <b>Container
+    Interface</b>[2] 規範。 如果要從
+    initrd 中調用 systemd
+    那麼必須遵守 <b>initrd Interface</b>[3]
+    規範。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="目錄">目錄<a class="anchor" href="#%E7%9B%AE%E9%8C%84">¶</a></h1>
+系統單元目錄
+<div class="Bd-indent">systemd
+  會從多個優先級不同的系統單元目錄中讀取系統單元，
+  軟件包應該將系統單元文件安裝在
+  <b>pkg-config systemd --variable=systemdsystemunitdir</b>
+  命令所返回的系統單元目錄中(通常是
+  /usr/lib/systemd/system)。 此外， systemd
+  還會讀取優先級較高的
+  /usr/local/lib/systemd/system
+  目錄以及優先級較低的
+  /usr/lib/systemd/system
+  目錄中的系統單元文件。
+  優先級最高的系統單元目錄是
+  <b>pkg-config systemd --variable=systemdsystemconfdir</b>
+  命令所返回的目錄(通常是
+  /etc/systemd/system)。
+  注意，軟件包應該僅使用
+  <a href="../../buster/manpages-zh/systemctl.1.zh_TW.html">systemctl(1)</a> 的 <b>enable</b> 與 <b>disable</b>
+  命令修改上述目錄中的內容。
+  完整的目錄列表參見
+  <a href="../../buster/systemd/systemd.unit.5.en.html">systemd.unit(5)</a> 手冊。</div>
+<p class="Pp">用戶單元目錄</p>
+<div class="Bd-indent">用戶單元目錄所遵守的規則與系統單元目錄類似，
+  軟件包應該將用戶單元文件安裝在
+  <b>pkg-config systemd --variable=systemduserunitdir</b>
+  命令所返回的用戶單元目錄中(通常是/usr/lib/systemd/user)。
+  此外，因爲用戶單元目錄還遵守
+  <b>XDG Base Directory specification</b>[4] 規範，
+  所以 systemd 還會讀取
+  $XDG_DATA_HOME/systemd/user(僅在已設置
+  $XDG_DATA_HOME 的情況下) 或
+  ~/.local/share/systemd/user(僅在未設置
+  $XDG_DATA_HOME 的情況下)
+  目錄中的用戶單元。
+  全局用戶單元目錄(針對所有用戶)是
+  <b>pkg-config systemd --variable=systemduserconfdir</b>
+  命令所返回的目錄(通常是/etc/systemd/user)。
+  注意，軟件包應該僅使用
+  <a href="../../buster/manpages-zh/systemctl.1.zh_TW.html">systemctl(1)</a> 的 <b>enable</b> 與 <b>disable</b>
+  命令修改上述目錄中的內容。
+  無論這種修改是全局的(針對所有用戶)、還是私有的(針對單個用戶)。
+  完整的目錄列表參見
+  <a href="../../buster/systemd/systemd.unit.5.en.html">systemd.unit(5)</a> 手冊。</div>
+<p class="Pp">SysV啓動腳本目錄(不同發行版之間差別可能很大)</p>
+<div class="Bd-indent">如果 systemd
+  找不到指定服務所對應的單元文件，
+  那麼就會到SysV啓動腳本目錄中
+  去尋找同名腳本(去掉
+  .service 後綴)。</div>
+<p class="Pp">SysV運行級目錄(不同發行版之間差別可能很大)</p>
+<div class="Bd-indent">systemd
+  在決定是否啓用一個服務的時候，
+  會參照SysV運行級目錄對該服務的設置。
+  注意，
+  這個規則不適用於那些已經擁有原生單元文件的服務。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="信號">信號<a class="anchor" href="#%E4%BF%A1%E8%99%9F">¶</a></h1>
+<b>SIGTERM</b>
+<div class="Bd-indent">systemd
+  系統實例將會保存其當前狀態，
+  然後重新執行它自身，再恢復到先前保存的狀態。
+  基本上相當於執行 <b>systemctl
+  daemon-reexec</b> 命令。
+<p class="Pp">systemd
+    用戶實例將會啓動 exit.target
+    單元。
+    基本上相當於執行
+    <b>systemctl --user start exit.target</b> 命令。</p>
+</div>
+<p class="Pp"><b>SIGINT</b></p>
+<div class="Bd-indent">systemd
+  系統實例將會啓動
+  ctrl-alt-del.target 單元。
+  基本上相當於執行 <b>systemctl
+  start ctl-alt-del.target</b> 命令。
+  在控制檯上按 Ctrl-Alt-Del
+  組合鍵即可觸發這個信號。
+  但是，如果在2秒內連續收到超過7次這個信號，那麼將會不顧一切的立即強制重啓。
+  因此，如果系統在重啓過程中僵死，
+  那麼可以通過快速連按7次
+  Ctrl-Alt-Del
+  組合鍵來強制立即重啓。
+<p class="Pp">systemd
+    用戶實例處理此信號的方式與
+    <b>SIGTERM</b> 相同。</p>
+</div>
+<p class="Pp"><b>SIGWINCH</b></p>
+<div class="Bd-indent">systemd
+  系統實例將會啓動
+  kbrequest.target 單元。
+  基本上相當於執行 <b>systemctl
+  start kbrequest.target</b> 命令。
+<p class="Pp">systemd
+    用戶實例將會完全忽略此信號。</p>
+</div>
+<p class="Pp"><b>SIGPWR</b></p>
+<div class="Bd-indent">systemd 將會啓動 sigpwr.target
+  單元。
+  基本上相當於執行 <b>systemctl
+  start sigpwr.target</b> 命令。</div>
+<p class="Pp"><b>SIGUSR1</b></p>
+<div class="Bd-indent">systemd
+  將會嘗試重新連接到 D-Bus
+  總線。</div>
+<p class="Pp"><b>SIGUSR2</b></p>
+<div class="Bd-indent">systemd
+  將會以人類易讀的格式將其完整的狀態記錄到日誌中。
+  日期的格式與 <b>systemd-analyze dump</b>
+  的輸出格式相同。</div>
+<p class="Pp"><b>SIGHUP</b></p>
+<div class="Bd-indent">重新加載守護進程的配置文件。
+  基本上相當於執行 <b>systemctl
+  daemon-reload</b> 命令。</div>
+<p class="Pp"><b>SIGRTMIN+0</b></p>
+<div class="Bd-indent">進入默認模式，啓動
+  default.target 單元。
+  基本上相當於執行 <b>systemctl
+  start default.target</b> 命令。</div>
+<p class="Pp"><b>SIGRTMIN+1</b></p>
+<div class="Bd-indent">進入救援模式，啓動
+  rescue.target 單元。
+  基本上相當於執行 <b>systemctl
+  isolate rescue.target</b> 命令。</div>
+<p class="Pp"><b>SIGRTMIN+2</b></p>
+<div class="Bd-indent">進入緊急維修模式，啓動
+  emergency.target 單元。
+  基本上相當於執行 <b>systemctl
+  isolate emergency.target</b> 命令。</div>
+<p class="Pp"><b>SIGRTMIN+3</b></p>
+<div class="Bd-indent">關閉系統，啓動
+  halt.target 單元。
+  基本上相當於執行 <b>systemctl
+  start halt.target</b> 命令。</div>
+<p class="Pp"><b>SIGRTMIN+4</b></p>
+<div class="Bd-indent">關閉系統並切斷電源，啓動
+  poweroff.target 單元。
+  基本上相當於執行 <b>systemctl
+  start poweroff.target</b> 命令。</div>
+<p class="Pp"><b>SIGRTMIN+5</b></p>
+<div class="Bd-indent">重新啓動，啓動
+  reboot.target 單元。
+  基本上相當於執行 <b>systemctl
+  start reboot.target</b> 命令。</div>
+<p class="Pp"><b>SIGRTMIN+6</b></p>
+<div class="Bd-indent">通過內核的 kexec
+  接口重新啓動，啓動
+  kexec.target 單元。
+  基本上相當於執行 <b>systemctl
+  start kexec.target</b> 命令。</div>
+<p class="Pp"><b>SIGRTMIN+13</b></p>
+<div class="Bd-indent">立即關閉機器</div>
+<p class="Pp"><b>SIGRTMIN+14</b></p>
+<div class="Bd-indent">立即關閉機器並切斷電源</div>
+<p class="Pp"><b>SIGRTMIN+15</b></p>
+<div class="Bd-indent">立即重新啓動</div>
+<p class="Pp"><b>SIGRTMIN+16</b></p>
+<div class="Bd-indent">立即通過內核的
+  kexec 接口重新啓動</div>
+<p class="Pp"><b>SIGRTMIN+20</b></p>
+<div class="Bd-indent">在控制檯上顯示狀態消息。
+  相當於使用 <i>systemd.show_status=1</i>
+  內核引導選項。</div>
+<p class="Pp"><b>SIGRTMIN+21</b></p>
+<div class="Bd-indent">禁止在控制檯上顯示狀態消息。
+  相當於使用 <i>systemd.show_status=0</i>
+  內核引導選項。</div>
+<p class="Pp"><b>SIGRTMIN+22</b>, <b>SIGRTMIN+23</b></p>
+<div class="Bd-indent">將日誌等級設爲
+  &#34;debug&#34;(22) 或 &#34;info&#34;(23)。
+  相當於使用 <i>systemd.log_level=debug</i>
+  或 <i>systemd.log_level=info</i>
+  內核引導選項。</div>
+<p class="Pp"><b>SIGRTMIN+24</b></p>
+<div class="Bd-indent">立即退出 systemd
+  用戶實例(也就是僅對
+  --user 實例有效)。</div>
+<p class="Pp"><b>SIGRTMIN+26</b>, <b>SIGRTMIN+27</b>, <b>SIGRTMIN+28</b></p>
+<div class="Bd-indent">將日誌等級設爲
+  &#34;journal-or-kmsg&#34;(26) 或 &#34;console&#34;(27) 或
+  &#34;kmsg&#34;(28)。 相當於使用
+  <i>systemd.log_target=journal-or-kmsg</i> 或
+  <i>systemd.log_target=console</i> 或 <i>systemd.log_target=kmsg</i>
+  內核引導選項。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="環境變量">環境變量<a class="anchor" href="#%E7%92%B0%E5%A2%83%E8%AE%8A%E9%87%8F">¶</a></h1>
+<i>$SYSTEMD_LOG_LEVEL</i>
+<div class="Bd-indent">systemd 日誌等級。
+  可以被 <b>--log-level=</b>
+  選項覆蓋。</div>
+<p class="Pp"><i>$SYSTEMD_LOG_TARGET</i></p>
+<div class="Bd-indent">systemd 日誌目標。
+  可以被 <b>--log-target=</b>
+  選項覆蓋。</div>
+<p class="Pp"><i>$SYSTEMD_LOG_COLOR</i></p>
+<div class="Bd-indent">systemd
+  是否應該高亮重要的日誌信息。
+  可以被 <b>--log-color=</b>
+  選項覆蓋。</div>
+<p class="Pp"><i>$SYSTEMD_LOG_LOCATION</i></p>
+<div class="Bd-indent">systemd
+  是否應該在日誌信息中包含代碼位置(code
+  location)。 可以被 <b>--log-location=</b>
+  選項覆蓋。</div>
+<p class="Pp"><i>$XDG_CONFIG_HOME</i>, <i>$XDG_DATA_HOME</i></p>
+<div class="Bd-indent">systemd 用戶實例根據
+  <b>XDG Base Directory specification</b>[4]
+  規範使用這些變量加載單元文件及其
+  .{d,wants,requires}/ 目錄。</div>
+<p class="Pp"><i>$SYSTEMD_UNIT_PATH</i></p>
+<div class="Bd-indent">單元目錄</div>
+<p class="Pp"><i>$SYSTEMD_SYSVINIT_PATH</i></p>
+<div class="Bd-indent">SysV啓動腳本目錄</div>
+<p class="Pp"><i>$SYSTEMD_SYSVRCND_PATH</i></p>
+<div class="Bd-indent">SysV運行級目錄</div>
+<p class="Pp"><i>$SYSTEMD_COLORS</i></p>
+<div class="Bd-indent">控制輸出內容的色彩方案</div>
+<p class="Pp"><i>$LISTEN_PID</i>, <i>$LISTEN_FDS</i>, <i>$LISTEN_FDNAMES</i></p>
+<div class="Bd-indent">在基於套接字啓動的過程中由
+  systemd 設置此變量，
+  以供管理程序使用。詳見
+  <a href="../../buster/libsystemd-dev/sd_listen_fds.3.en.html">sd_listen_fds(3)</a> 手冊。</div>
+<p class="Pp"><i>$NOTIFY_SOCKET</i></p>
+<div class="Bd-indent">由 systemd
+  設置此變量，
+  以報告狀態以及提供啓動完畢的通知，以供管理程序使用。詳見
+  <a href="../../buster/libsystemd-dev/sd_notify.3.en.html">sd_notify(3)</a> 手冊。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="內核引導選項">內核引導選項<a class="anchor" href="#%E5%85%A7%E6%A0%B8%E5%BC%95%E5%B0%8E%E9%81%B8%E9%A0%85">¶</a></h1>
+當作爲系統實例運行的時候，
+  systemd
+  能夠接受下面列出的內核引導選項。[5]
+<p class="Pp"><i>systemd.unit=</i>, <i>rd.systemd.unit=</i></p>
+<div class="Bd-indent">設置默認啓動的單元。
+  默認值是 default.target 。
+  可用於臨時修改啓動目標(例如
+  rescue.target 或 emergency.target
+  )。詳情參見 <a href="../../buster/systemd/systemd.special.7.en.html">systemd.special(7)</a>
+  手冊。 有 &#34;rd.&#34;
+  前綴的參數專用於
+  initrd(initial RAM disk) 環境，
+  而無前綴的參數則用於常規環境。</div>
+<p class="Pp"><i>systemd.dump_core=</i></p>
+<div class="Bd-indent">如果設爲默認值
+  <b>yes</b> ，那麼 systemd(PID=1)
+  將會在崩潰時進行核心轉儲，
+  否則不進行任何轉儲。</div>
+<p class="Pp"><i>systemd.crash_chvt=</i></p>
+<div class="Bd-indent">可以設爲一個 1-63
+  之間的整數或布爾值。
+  若設爲整數則 systemd(PID=1)
+  將在崩潰時切換到指定編號的虛擬控制檯；
+  若設爲 <b>yes</b> ，
+  則表示切換到內核消息所使用的虛擬控制檯；
+  若設爲 <b>no</b>(默認值)
+  則不切換到任何虛擬控制檯。</div>
+<p class="Pp"><i>systemd.crash_shell=</i></p>
+<div class="Bd-indent">如果設爲 <b>yes</b> ，
+  那麼 systemd(PID=1)
+  將在崩潰10秒後啓動一個
+  shell ， 默認值 <b>no</b>
+  則表示即使崩潰也不啓動任何
+  shell 。 由於被啓動的 shell
+  不需要任何密碼認證，
+  所以使用這個特性時需要注意其帶來的安全隱患。</div>
+<p class="Pp"><i>systemd.crash_reboot=</i></p>
+<div class="Bd-indent">如果設爲 <b>yes</b>，
+  那麼 systemd(PID=1)
+  將在崩潰10秒後自動重啓整個機器，
+  默認值 <b>no</b>
+  則表示即使崩潰也不重啓(無限制的死在那裏)，
+  這樣可以避免進入循環重啓。
+  如果與 <i>systemd.crash_shell=yes</i>
+  同時使用，
+  那麼系統將在退出 shell
+  之後重啓。</div>
+<p class="Pp"><i>systemd.confirm_spawn=</i></p>
+<div class="Bd-indent">設爲 <b>yes</b> 表示
+  systemd(PID=1)
+  在派生新進程時進行確認提示。
+  默認值 <b>no</b>
+  表示不提示。</div>
+<p class="Pp"><i>systemd.show_status=</i></p>
+<div class="Bd-indent">啓動時是否在控制檯上顯示簡明的服務狀態。
+  可以接受 <b>yes</b>(顯示),
+  <b>no</b>(不顯示),
+  <b>auto</b>(自動)三個值。 <b>auto</b>
+  與 <b>no</b> 相似，
+  不同之處在於當某個服務啓動失敗或者啓動耗時太長時，將會顯示其狀態。
+  當使用了 <b>quiet</b>
+  內核引導選項的時候，
+  默認值是 <b>auto</b> ，
+  否則默認值是 <b>yes</b> 。</div>
+<p class="Pp"><i>systemd.log_target=</i>, <i>systemd.log_level=</i>,
+    <i>systemd.log_color=</i>, <i>systemd.log_location=</i></p>
+<div class="Bd-indent">用於控制日誌輸出，含義與之前的
+  <i>$SYSTEMD_LOG_TARGET</i>, <i>$SYSTEMD_LOG_LEVEL</i>,
+  <i>$SYSTEMD_LOG_COLOR</i>, <i>$SYSTEMD_LOG_LOCATION</i>
+  環境變量相同。</div>
+<p class="Pp"><i>systemd.default_standard_output=</i>,
+    <i>systemd.default_standard_error=</i></p>
+<div class="Bd-indent">設置服務的默認標準輸出與標準錯誤，
+  含義與相應的
+  <b>--default-standard-output=</b> 和 <b>--default-standard-error=</b>
+  命令行選項相同。</div>
+<p class="Pp"><i>systemd.setenv=</i></p>
+<div class="Bd-indent">接受&#34;VARIABLE=VALUE&#34;格式的字符串，
+  可用於爲派生的子進程設置默認環境變量。
+  可以多次使用以設置多個變量。</div>
+<p class="Pp"><i>systemd.machine_id=</i></p>
+<div class="Bd-indent">接受一個32字符表示的16進制值，
+  用作該主機的 machine-id 。
+  主要用於網絡啓動，以確保每次啓動都能得到相同的
+  machine-id 值。</div>
+<p class="Pp"><i>quiet</i></p>
+<div class="Bd-indent">關閉啓動過程中的狀態輸出。相當於
+  <i>systemd.show_status=no</i> 的效果。
+  注意，因爲此選項也同樣被內核所識別，
+  並用于禁止輸出內核日誌，
+  所以使用此選項會導致同時關閉內核與
+  systemd 的輸出。</div>
+<p class="Pp"><i>debug</i></p>
+<div class="Bd-indent">開啓調試輸出，
+  等價於設置了
+  <i>systemd.log_level=debug</i> 。
+  注意，因爲此選項也同樣被內核所識別，
+  並用於開啓內核的調試輸出，
+  所以使用此選項會導致同時開啓內核與
+  systemd 的調試輸出。</div>
+<p class="Pp"><i>emergency</i>, <i>rd.emergency</i>, <i>-b</i></p>
+<div class="Bd-indent">啓動到緊急維修模式。等價於設置了
+  <i>systemd.unit=emergency.target</i> 或
+  <i>rd.systemd.unit=emergency.target</i></div>
+<p class="Pp"><i>rescue</i>, <i>rd.rescue</i>, <i>single</i>, <i>s</i>,
+    <i>S</i>, <i>1</i></p>
+<div class="Bd-indent">啓動到救援模式。等價於設置了
+  <i>systemd.unit=rescue.target</i> 或
+  <i>rd.systemd.unit=rescue.target</i></div>
+<p class="Pp"><i>2</i>, <i>3</i>, <i>4</i>, <i>5</i></p>
+<div class="Bd-indent">啓動到對應的 SysV
+  運行級。
+  等價於設置了對應的
+  <i>systemd.unit=runlevel2.target</i>, <i>systemd.unit=runlevel3.target</i>,
+  <i>systemd.unit=runlevel4.target</i>,
+  <i>systemd.unit=runlevel5.target</i>,</div>
+<p class="Pp"><i>locale.LANG=</i>, <i>locale.LANGUAGE=</i>,
+    <i>locale.LC_CTYPE=</i>, <i>locale.LC_NUMERIC=</i>, <i>locale.LC_TIME=</i>,
+    <i>locale.LC_COLLATE=</i>, <i>locale.LC_MONETARY=</i>,
+    <i>locale.LC_MESSAGES=</i>, <i>locale.LC_PAPER=</i>, <i>locale.LC_NAME=</i>,
+    <i>locale.LC_ADDRESS=</i>, <i>locale.LC_TELEPHONE=</i>,
+    <i>locale.LC_MEASUREMENT=</i>, <i>locale.LC_IDENTIFICATION=</i></p>
+<div class="Bd-indent">設置相應的系統
+  locale ， 會覆蓋 /etc/locale.conf
+  中的設置。 參見
+  <a href="../../buster/manpages-zh/locale.conf.5.zh_TW.html">locale.conf(5)</a> 與 <a href="../../buster/manpages-zh/locale.7.zh_TW.html">locale(7)</a> 手冊。</div>
+<p class="Pp">更多內核引導選項的解釋，
+    參見 <a href="../../buster/manpages-zh/kernel-command-line.7.zh_TW.html">kernel-command-line(7)</a> 手冊。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SOCKETS_與_FIFOS">SOCKETS 與 FIFOS<a class="anchor" href="#SOCKETS_%E8%88%87_FIFOS">¶</a></h1>
+/run/systemd/notify
+<div class="Bd-indent">通知守護進程狀態的
+  UNIX socket 文件， 用於實現
+  <a href="../../buster/libsystemd-dev/sd_notify.3.en.html">sd_notify(3)</a>
+  中實現的守護進程通知邏輯。</div>
+<p class="Pp">/run/systemd/private</p>
+<div class="Bd-indent">僅被 <a href="../../buster/manpages-zh/systemctl.1.zh_TW.html">systemctl(1)</a>
+  工具內部用於與 systemd
+  進程通信的 UNIX socket 文件。
+  其他進程不應該使用它。</div>
+<p class="Pp">/dev/initctl</p>
+<div class="Bd-indent">由 systemd-initctl.service
+  單元提供的與傳統 SysV
+  兼容的客戶端接口(FIFO)。
+  這是一個即將被廢棄的接口，儘量不要使用它。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見">參見<a class="anchor" href="#%E5%8F%83%E8%A6%8B">¶</a></h1>
+<b>systemd Homepage</b>[6], <a href="../../buster/systemd/systemd-system.conf.5.en.html">systemd-system.conf(5)</a>,
+  <a href="../../buster/manpages-zh/locale.conf.5.zh_TW.html">locale.conf(5)</a>, <a href="../../buster/manpages-zh/systemctl.1.zh_TW.html">systemctl(1)</a>, <a href="../../buster/manpages-zh/journalctl.1.zh_TW.html">journalctl(1)</a>,
+  <a href="../../buster/manpages-zh/systemd-notify.1.zh_TW.html">systemd-notify(1)</a>, <a href="../../buster/manpages-zh/daemon.7.zh_TW.html">daemon(7)</a>, <a href="../../buster/libsystemd-dev/sd-daemon.3.en.html">sd-daemon(3)</a>,
+  <a href="../../buster/systemd/systemd.unit.5.en.html">systemd.unit(5)</a>, <b>systemd.special</b>(5), <a href="../../buster/pkgconf/pkg-config.1.en.html">pkg-config(1)</a>,
+  <a href="../../buster/manpages-zh/kernel-command-line.7.zh_TW.html">kernel-command-line(7)</a>, <a href="../../buster/manpages-zh/bootup.7.zh_TW.html">bootup(7)</a>, <a href="../../buster/systemd/systemd.directives.7.en.html">systemd.directives(7)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES">NOTES<a class="anchor" href="#NOTES">¶</a></h1>
+<dl class="Bl-tag">
+  <dt> 1.</dt>
+  <dd>cgroups</dd>
+</dl>
+<div class="Bd-indent"><a href="../../doc/Documentation/cgroups/cgroups.txt">../../doc/Documentation/cgroups/cgroups.txt</a></div>
+<dl class="Bl-tag">
+  <dt> 2.</dt>
+  <dd>Container Interface</dd>
+</dl>
+<div class="Bd-indent"><a href="../../wiki/Software/systemd/ContainerInterface">../../wiki/Software/systemd/ContainerInterface</a></div>
+<dl class="Bl-tag">
+  <dt> 3.</dt>
+  <dd>initrd Interface</dd>
+</dl>
+<div class="Bd-indent"><a href="../../wiki/Software/systemd/InitrdInterface">../../wiki/Software/systemd/InitrdInterface</a></div>
+<dl class="Bl-tag">
+  <dt> 4.</dt>
+  <dd>XDG Base Directory specification</dd>
+</dl>
+<div class="Bd-indent"><a href="../../basedir-spec/basedir-spec-latest.html">../../basedir-spec/basedir-spec-latest.html</a></div>
+<dl class="Bl-tag">
+  <dt> 5.</dt>
+  <dd>當 systemd 在 Linux
+      容器中運行的時候，
+      這些參數可以直接在
+      systemd
+      命令行上傳遞(放置在所有命令行選項之後)，
+      當 systemd 不在 Linux
+      容器中運行的時候，
+      這些參數將從 /proc/cmdline
+      中獲取。</dd>
+  <dt> 6.</dt>
+  <dd>systemd Homepage</dd>
+</dl>
+<div class="Bd-indent"><a href="../../wiki/Software/systemd/">../../wiki/Software/systemd/</a></div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<p class="Pp">翻譯人員：金步國
+  <br/>
+  金步國作品集：https://www.jinbuguo.com
+  <br/>
+  中文 man
+    手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os">systemd 231</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+systemd.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-30T03:48:33Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"systemd(1)\"}}]}"
+</script>

@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pppd(8) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/ppp/pppd.8.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-ja/pppd.8.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/pppd.8.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/pppd.8.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/pppd.8.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="8">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; pppd(8)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/pppd.8">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/pppd.8.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%80%BB%E8%A7%88_SYNOPSIS" title="总览 SYNOPSIS">总览 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#_%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9_FREQUENTLY_USED_OPTIONS" title=" 常用选项 FREQUENTLY USED OPTIONS"> 常用选项 FREQUENTLY USED OPTIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%89%E9%A1%B9_OPTIONS" title="选项 OPTIONS">选项 OPTIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%89%E9%A1%B9%E6%96%87%E4%BB%B6_OPTIONS_FILES" title="选项文件 OPTIONS FILES">选项文件 OPTIONS FILES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%AE%89%E5%85%A8_SECURITY" title="安全 SECURITY">安全 SECURITY</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#AUTHENTICATION" title="AUTHENTICATION">AUTHENTICATION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%AF%E7%94%B1_ROUTING" title="路由 ROUTING">路由 ROUTING</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#MULTILINK" title="MULTILINK">MULTILINK</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%8C%83%E4%BE%8B_EXAMPLE_S" title="范例 EXAMPLE S">范例 EXAMPLE S</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AF%8A%E6%96%AD_DIAGNOSTICS" title="诊断 DIAGNOSTICS">诊断 DIAGNOSTICS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#EXIT_STATUS" title="EXIT STATUS">EXIT STATUS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SCRIPTS" title="SCRIPTS">SCRIPTS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6_FILES" title="文件 FILES">文件 FILES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E8%A7%81_SEE_ALSO" title="参见 SEE ALSO">参见 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#_%E6%B3%A8%E6%84%8F_NOTES" title=" 注意 NOTES"> 注意 NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85_AUTHOR_S" title="作者 AUTHOR S">作者 AUTHOR S</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D" title="[中文版维护人]">[中文版维护人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/pppd.8.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/pppd.8.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/pppd.8.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/ppp/pppd.8.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/pppd.8.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/pppd.8.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/pppd.8.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/pppd.8.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">PPPD(8)</td>
+    <td class="head-vol">System Manager&#39;s Manual</td>
+    <td class="head-rtitle">PPPD(8)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+pppd - 点对点协议守护进程
+</section>
+<section class="Sh">
+<h1 class="Sh" id="总览_SYNOPSIS">总览 SYNOPSIS<a class="anchor" href="#%E6%80%BB%E8%A7%88_SYNOPSIS">¶</a></h1>
+<b>pppd</b> [ <i>tty_name</i> ] [ <i>speed</i> ] [ <i>options</i> ]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+点对点协议 (PPP)
+  提供一种在点对点串列线路上传输资料流
+  (datagrams)的方法。PPP是由三个部份所组成的：一个在串列线
+  路上封装(encapsulating)资料流的方法，一个可延伸的连结控制
+  协定(LinkControlProtocol:LCP)，以及一些用来建立并配置不
+  同网路层协定的网路控制协定(NetworkControlProtocols:NCP)
+<p class="Pp">封装的机制(scheme)是由核心中的驱动程式码来提供。pppd提供
+    基本的LCP，验证(authentication)的支援，以及一个用来建立
+    并配置网际网路协定(InternatProtocol(IP))（叫做IP控制
+    协定，IPCP）的NCP。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="_常用选项_FREQUENTLY_USED_OPTIONS"> 常用选项 FREQUENTLY USED OPTIONS<a class="anchor" href="#_%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9_FREQUENTLY_USED_OPTIONS">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><i>&lt;tty_name&gt;</i></dt>
+  <dd>
+    
+      在该名称的设备上进行通讯。如果需要的话可以前置一个
+      &#34;/dev/&#34;字串。如果没有给设备名称，pppd将会使用控制
+      台的终端机(controllingteriminal)，并且产生(fork)出
+      来时将不会把自己放到背景去。</dd>
+  <dt><i>&lt;speed&gt;</i></dt>
+  <dd>
+    
+      将波特率设为speed。在像是4.4BSD以及NetBSA的系
+      统上，可以指定任何速率。其他系统(e.g.SunOs)只允
+      许有限的几种速率。</dd>
+  <dt><b>asyncmap <i>&lt;map&gt;</i></b></dt>
+  <dd>
+    
+      把非同步(async)字元设为对照到。这个对照表
+      描述哪些控制字元不能在串列线路上成功地接收。pppd将
+      会要求彼端以两个位元组的逸出序列(escapesequence)来
+      传送这些字元。其参数是32位元的十六进位数字而每个
+      位元代表一个得避开(escape)的字元。位元0(00000001)
+      代表字元0x00；位元31(80000000)代表字元0x1f或
+      是^_。如果给了多个asyncmap选项，这些数值会以逻
+      辑的或(OR)合在一起。如果没有给asyncmap选项，将没
+      有非同步字元对照表会被加以协商来导引接收。这样彼端
+      将会避开所有的控制字元。</dd>
+  <dt><b>auth</b></dt>
+  <dd>要求彼端在允许传送或接收网路封包之前先验证它自己。
+      This option is the default if the system has a default route. If neither
+      this option nor the <i>noauth</i> option is specified, pppd will only
+      allow the peer to use IP addresses to which the system does not already
+      have a route.</dd>
+  <dt><b>call <i>name</i></b></dt>
+  <dd>Read options from the file /etc/ppp/peers/<i>name</i>. This file may
+      contain privileged options, such as <i>noauth</i>, even if pppd is not
+      being run by root. The <i>name</i> string may not begin with / or include
+      .. as a pathname component. The format of the options file is described
+      below.</dd>
+  <dt><b>connect <i>script</i></b></dt>
+  <dd>
+    
+      使用以所指定的可执行指令或是shell指令来设定
+      串列线路。这个指令稿一般会使用&#34;chat&#34;程式来拨数据
+      机并开始远端ppp区段作业(session)。
+      A value for this option from a privileged source cannot be overridden by a
+      non-privileged user.</dd>
+  <dt><b>crtscts</b></dt>
+  <dd>使用硬体流量控制(i.e.RTS/CTS)来控制串列埠上的资料流。
+      If neither the <i>crtscts</i>, the <i>nocrtscts</i>, the <i>cdtrcts</i>
+      nor the <i>nocdtrcts</i> option is given, the hardware flow control
+      setting for the serial port is left unchanged. Some serial ports (such as
+      Macintosh serial ports) lack a true RTS output. Such serial ports use this
+      mode to implement unidirectional flow control. The serial port will
+      suspend transmission when requested by the modem (via CTS) but will be
+      unable to request the modem stop sending to the computer. This mode
+      retains the ability to use DTR as a modem control line.</dd>
+  <dt><b>defaultroute</b></dt>
+  <dd>
+    
+      当IPCP协商完全成功时，增加一个预设递送路径到系统
+      的递送表，将彼端当作闸道器使用。这个项目在ppp连线
+      中断后会移除。</dd>
+  <dt><b>disconnect <i>script</i></b></dt>
+  <dd>
+    
+      在pppd已经终结该连线之后执行以所指定的可执行
+      指令或是shell指令。这个指令稿可以用来，例如，如果
+      硬体的数据机控制信号无法使用时，发出指令给数据机使
+      其挂断电话。 The disconnect script is
+      not run if the modem has already hung up. A value for this option from a
+      privileged source cannot be overridden by a non-privileged user.</dd>
+  <dt><b>escape <i>xx,yy,...</i></b></dt>
+  <dd>
+    
+      指定在传输上确实应该要避开的字元（不管对方是否有用
+      它的非同步控制字元对照表要求避开它们）。这些要被避
+      开的字元是以用逗号隔开的一串十六进位数字指定的。要
+      注意到几乎任何字元都可以用escape选项指定避开，不
+      像asyncmap选项只允许指定控制字元。不能避开的字元
+      是那些有十六进位值0x20-0x3f或是0x5e者。</dd>
+  <dt><b>file <i>name</i></b></dt>
+  <dd>
+    
+      从档案里读取选项（其格式叙述在后）
+      The file must be readable by the user who has invoked pppd.</dd>
+  <dt><b>init <i>script</i></b></dt>
+  <dd>Run the executable or shell command specified by <i>script</i> to
+      initialize the serial line. This script would typically use the <a href="../../buster/manpages-zh/chat.8.zh_CN.html">chat(8)</a>
+      program to configure the modem to enable auto answer. A value for this
+      option from a privileged source cannot be overridden by a non-privileged
+      user.</dd>
+  <dt><b>lock</b></dt>
+  <dd>指定pppd应该在此串列设备上使用UUCP式的锁定以确
+      定对该设备为互斥(exclusive)存取。</dd>
+  <dt><b>mru <i>n</i></b></dt>
+  <dd>把MRU[MaximumReceiveUnit最大接收单元]的值设为
+      n来进行协商。pppd将会要求彼端传送不比位元组
+      更长的封包。最小的MRU值是128。预设的MRU值则是
+      1500。对于慢速线路上的建议值是296（其中40个位元
+      组给TCP/IP表头+256个位元组的资料）。
+     (Note that for IPv6 MRU must be at least 1280)</dd>
+  <dt><b>mtu <i>n</i></b></dt>
+  <dd>
+    
+      将MTU[MaximumTransmitUnit最大传输单元]的值设
+      为<i>n</i>。除非彼端经由MRU协商要求一个更小的值，pppd
+      将会要求核心网路程式码透过PPP网路界面所传送的资料
+      封包不超过n个位元组。
+     (Note that for IPv6 MTU must be at least 1280)</dd>
+  <dt><b>passive</b></dt>
+  <dd>
+    
+      在LCP中开启&#34;passive&#34;选项。加上这个选项，pppd将
+      会试图初使一个连线；如果没有从彼端接收到回应，那么
+      pppd将只会被动地等待从彼端所传来的一个有效LCP封
+      包（代替结束离开，就像它在没有这个选项时所作的）。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="选项_OPTIONS">选项 OPTIONS<a class="anchor" href="#%E9%80%89%E9%A1%B9_OPTIONS">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><i>&lt;local_IP_address&gt;<b>:</b><i>&lt;remote_IP_address&gt;</i></i></dt>
+  <dd>
+    
+      设定本地以及／或是远端界面的IP位址。两者之中的任
+      何一个都可以省略。该IP位址可以利用主机名称或者是
+      十进位数值加小数点符号指定(e.g.150.234.56.78)。
+      预设的本地位址是系统的（第一个）IP位址（除非有加上
+      noipdefault选项）。远端位址如果没有在任何选项中指
+      定的话将从彼端取得。因此，在简单的案例中，这个选项
+      不是必须的。如果有一个本地以及／或是远端的IP位址
+      以这个选项加以指定的话，pppd将不会接受在IPCP协商
+      中从彼端所传来不同的值，除非加上ipcp-accept-local
+      以及／或是ipcp-accept-remote选项，个别地。</dd>
+  <dt><b>ipv6
+    <i>&lt;local_interface_identifier&gt;</i>,<i>&lt;remote_interface_identifier&gt;</i></b></dt>
+  <dd>Set the local and/or remote 64-bit interface identifier. Either one may be
+      omitted. The identifier must be specified in standard ascii notation of
+      IPv6 addresses (e.g. ::dead:beef). If the <i>ipv6cp-use-ipaddr</i> option
+      is given, the local identifier is the local IPv4 address (see above). On
+      systems which supports a unique persistent id, such as EUI-48 derived from
+      the Ethernet MAC address, <i>ipv6cp-use-persistent</i> option can be used
+      to replace the <i>ipv6 &lt;local&gt;,&lt;remote&gt;</i> option. Otherwise
+      the identifier is randomized.</dd>
+  <dt><b>active-filter <i>filter-expression</i></b></dt>
+  <dd>Specifies a packet filter to be applied to data packets to determine which
+      packets are to be regarded as link activity, and therefore reset the idle
+      timer, or cause the link to be brought up in demand-dialling mode. This
+      option is useful in conjunction with the <b>idle</b> option if there are
+      packets being sent or received regularly over the link (for example,
+      routing information packets) which would otherwise prevent the link from
+      ever appearing to be idle. The <i>filter-expression</i> syntax is as
+      described for tcpdump(1), except that qualifiers which are inappropriate
+      for a PPP link, such as <b>ether</b> and <b>arp</b>, are not permitted.
+      Generally the filter expression should be enclosed in single-quotes to
+      prevent whitespace in the expression from being interpreted by the shell.
+      This option is currently only available under NetBSD, and then only if
+      both the kernel and pppd were compiled with PPP_FILTER defined.</dd>
+  <dt><b>allow-ip <i>address(es)</i></b></dt>
+  <dd>Allow peers to use the given IP address or subnet without authenticating
+      themselves. The parameter is parsed as for each element of the list of
+      allowed IP addresses in the secrets files (see the AUTHENTICATION section
+      below).</dd>
+  <dt><b>bsdcomp <i>nr,nt</i></b></dt>
+  <dd>Request that the peer compress packets that it sends, using the
+      BSD-Compress scheme, with a maximum code size of <i>nr</i> bits, and agree
+      to compress packets sent to the peer with a maximum code size of <i>nt</i>
+      bits. If <i>nt</i> is not specified, it defaults to the value given for
+      <i>nr</i>. Values in the range 9 to 15 may be used for <i>nr</i> and
+      <i>nt</i>; larger values give better compression but consume more kernel
+      memory for compression dictionaries. Alternatively, a value of 0 for
+      <i>nr</i> or <i>nt</i> disables compression in the corresponding
+      direction. Use <i>nobsdcomp</i> or <i>bsdcomp 0</i> to disable
+      BSD-Compress compression entirely.</dd>
+  <dt><b>cdtrcts</b></dt>
+  <dd>Use a non-standard hardware flow control (i.e. DTR/CTS) to control the
+      flow of data on the serial port. If neither the <i>crtscts</i>, the
+      <i>nocrtscts</i>, the <i>cdtrcts</i> nor the <i>nocdtrcts</i> option is
+      given, the hardware flow control setting for the serial port is left
+      unchanged. Some serial ports (such as Macintosh serial ports) lack a true
+      RTS output. Such serial ports use this mode to implement true
+      bi-directional flow control. The sacrifice is that this flow control mode
+      does not permit using DTR as a modem control line.</dd>
+  <dt><b>chap-interval <i>n</i></b></dt>
+  <dd>
+    
+      如果有给这个选项，pppd将会每n
+      秒重新盘查彼端。</dd>
+  <dt><b>chap-max-challenge <i>n</i></b></dt>
+  <dd>
+    
+      将CHAP盘查(challenge)传输的最大数目设为n（预
+      设为10）。</dd>
+  <dt><b>chap-restart <i>n</i></b></dt>
+  <dd>
+    
+      将CHAP重新开始的间隔（重新传输的时间限制）设为n
+      秒钟（预设为3）。</dd>
+  <dt><b>connect-delay <i>n</i></b></dt>
+  <dd>Wait for up <i>n</i> milliseconds after the connect script finishes for a
+      valid PPP packet from the peer. At the end of this time, or when a valid
+      PPP packet is received from the peer, pppd will commence negotiation by
+      sending its first LCP packet. The default value is 1000 (1 second). This
+      wait period only applies if the <b>connect</b> or <b>pty</b> option is
+      used.</dd>
+  <dt><b>debug</b></dt>
+  <dd>递增侦错层级（与-d相同）。如果加上这个选项，pppd
+      将以可供阅读的格式记录所有传送或接收的控制封包内容。
+      这些封包透过syslog以facilitydaemon还有level
+      debug加以记录。该资讯可以适当设定/etc/syslog.conf
+      来导向到一个档案去。（参阅syslog.conf(5)）。(如果
+      pppd以开启扩充侦错(extradebugging)编译的话，它将
+      会使用facilitylocal2取代daemon来记录讯息）。</dd>
+  <dt><b>default-asyncmap</b></dt>
+  <dd>Disable asyncmap negotiation, forcing all control characters to be escaped
+      for both the transmit and the receive direction.</dd>
+  <dt><b>default-mru</b></dt>
+  <dd>Disable MRU [Maximum Receive Unit] negotiation. With this option, pppd
+      will use the default MRU value of 1500 bytes for both the transmit and
+      receive direction.</dd>
+  <dt><b>deflate <i>nr,nt</i></b></dt>
+  <dd>Request that the peer compress packets that it sends, using the Deflate
+      scheme, with a maximum window size of <i>2**nr</i> bytes, and agree to
+      compress packets sent to the peer with a maximum window size of
+      <i>2**nt</i> bytes. If <i>nt</i> is not specified, it defaults to the
+      value given for <i>nr</i>. Values in the range 9 to 15 may be used for
+      <i>nr</i> and <i>nt</i>; larger values give better compression but consume
+      more kernel memory for compression dictionaries. Alternatively, a value of
+      0 for <i>nr</i> or <i>nt</i> disables compression in the corresponding
+      direction. Use <i>nodeflate</i> or <i>deflate 0</i> to disable Deflate
+      compression entirely. (Note: pppd requests Deflate compression in
+      preference to BSD-Compress if the peer can do either.)</dd>
+  <dt><b>demand</b></dt>
+  <dd>Initiate the link only on demand, i.e. when data traffic is present. With
+      this option, the remote IP address must be specified by the user on the
+      command line or in an options file. Pppd will initially configure the
+      interface and enable it for IP traffic without connecting to the peer.
+      When traffic is available, pppd will connect to the peer and perform
+      negotiation, authentication, etc. When this is completed, pppd will
+      commence passing data packets (i.e., IP packets) across the link.
+    <p class="Pp">The <i>demand</i> option implies the <i>persist</i> option. If
+        this behaviour is not desired, use the <i>nopersist</i> option after the
+        <i>demand</i> option. The <i>idle</i> and <i>holdoff</i> options are
+        also useful in conjuction with the <i>demand</i> option.</p>
+  </dd>
+  <dt><b>domain <i>d</i></b></dt>
+  <dd>
+    
+      新增领域名称到本地主机名称以支援验证。例如，如
+      果gethostname()回应porsche这个名称，但是完整合
+      格的领域名称是porsche.Quotron.COM的话，你可以使用
+      domain选项来将领域名称设为Quotron.COM。
+     Pppd would then use the name <i>porsche.Quotron.COM</i> for looking up
+      secrets in the secrets file, and as the default name to send to the peer
+      when authenticating itself to the peer. This option is privileged.</dd>
+  <dt><b>dryrun</b></dt>
+  <dd>With the <b>dryrun</b> option, pppd will print out all the option values
+      which have been set and then exit, after parsing the command line and
+      options files and checking the option values, but before initiating the
+      link. The option values are logged at level info, and also printed to
+      standard output unless the device on standard output is the device that
+      pppd would be using to communicate with the peer.</dd>
+  <dt><b>dump</b></dt>
+  <dd>With the <b>dump</b> option, pppd will print out all the option values
+      which have been set. This option is like the <b>dryrun</b> option except
+      that pppd proceeds as normal rather than exiting.</dd>
+  <dt><b>endpoint <i>&lt;epdisc&gt;</i></b></dt>
+  <dd>Sets the endpoint discriminator sent by the local machine to the peer
+      during multilink negotiation to <i>&lt;epdisc&gt;</i>. The default is to
+      use the MAC address of the first ethernet interface on the system, if any,
+      otherwise the IPv4 address corresponding to the hostname, if any, provided
+      it is not in the multicast or locally-assigned IP address ranges, or the
+      localhost address. The endpoint discriminator can be the string
+      <b>null</b> or of the form <i>type</i>:<i>value</i>, where type is a
+      decimal number or one of the strings <b>local</b>, <b>IP</b>, <b>MAC</b>,
+      <b>magic</b>, or <b>phone</b>. The value is an IP address in
+      dotted-decimal notation for the <b>IP</b> type, or a string of bytes in
+      hexadecimal, separated by periods or colons for the other types. For the
+      MAC type, the value may also be the name of an ethernet or similar network
+      interface. This option is currently only available under Linux.</dd>
+  <dt><b>hide-password</b></dt>
+  <dd>When logging the contents of PAP packets, this option causes pppd to
+      exclude the password string from the log. This is the default.</dd>
+  <dt><b>holdoff <i>n</i></b></dt>
+  <dd>Specifies how many seconds to wait before re-initiating the link after it
+      terminates. This option only has any effect if the <i>persist</i> or
+      <i>demand</i> option is used. The holdoff period is not applied if the
+      link was terminated because it was idle.</dd>
+  <dt><b>idle <i>n</i></b></dt>
+  <dd>Specifies that pppd should disconnect if the link is idle for <i>n</i>
+      seconds. The link is idle when no data packets (i.e. IP packets) are being
+      sent or received. Note: it is not advisable to use this option with the
+      <i>persist</i> option without the <i>demand</i> option. If the
+      <b>active-filter</b> option is given, data packets which are rejected by
+      the specified activity filter also count as the link being idle.</dd>
+  <dt><b>ipcp-accept-local</b></dt>
+  <dd>加上这个选项的话，pppd将会接受彼端对于本地IP位址
+      的意见，即使本地的IP位址已经在某个选项中指定。</dd>
+  <dt><b>ipcp-accept-remote</b></dt>
+  <dd>加上这个选项的话，pppd将会接受彼端对于它的IP位址
+      的意见，即使远端的IP位址已经在某个选项中指定。</dd>
+  <dt><b>ipcp-max-configure <i>n</i></b></dt>
+  <dd>
+    
+      将IPCP配置要求(configure-request)传输的最大数目设
+      为n（预设为10）。</dd>
+  <dt><b>ipcp-max-failure <i>n</i></b></dt>
+  <dd>将开始传送配置拒绝(configure-Rejects)之前的IPCP配
+      置未接收(configure-NAKs)的最大数目以取代n（预设
+      为10）。</dd>
+  <dt><b>ipcp-max-terminate <i>n</i></b></dt>
+  <dd>
+    
+      将IPCP终结要求(terminate-request)传输的最大数目设
+      为 n（预设为3）。</dd>
+  <dt><b>ipcp-restart <i>n</i></b></dt>
+  <dd>
+    
+      将IPCP重新开始的间隔（重新传输的时间限制）设为n
+      秒钟（预设为3）。</dd>
+  <dt><b>ipparam <i>string</i></b></dt>
+  <dd>Provides an extra parameter to the ip-up and ip-down scripts. If this
+      option is given, the <i>string</i> supplied is given as the 6th parameter
+      to those scripts.</dd>
+  <dt><b>ipv6cp-max-configure <i>n</i></b></dt>
+  <dd>Set the maximum number of IPv6CP configure-request transmissions to
+      <i>n</i> (default 10).</dd>
+  <dt><b>ipv6cp-max-failure <i>n</i></b></dt>
+  <dd>Set the maximum number of IPv6CP configure-NAKs returned before starting
+      to send configure-Rejects instead to <i>n</i> (default 10).</dd>
+  <dt><b>ipv6cp-max-terminate <i>n</i></b></dt>
+  <dd>Set the maximum number of IPv6CP terminate-request transmissions to
+      <i>n</i> (default 3).</dd>
+  <dt><b>ipv6cp-restart <i>n</i></b></dt>
+  <dd>Set the IPv6CP restart interval (retransmission timeout) to <i>n</i>
+      seconds (default 3).</dd>
+  <dt><b>ipx</b></dt>
+  <dd>Enable the IPXCP and IPX protocols. This option is presently only
+      supported under Linux, and only if your kernel has been configured to
+      include IPX support.</dd>
+  <dt><b>ipx-network <i>n</i></b></dt>
+  <dd>Set the IPX network number in the IPXCP configure request frame to
+      <i>n</i>, a hexadecimal number (without a leading 0x). There is no valid
+      default. If this option is not specified, the network number is obtained
+      from the peer. If the peer does not have the network number, the IPX
+      protocol will not be started.</dd>
+  <dt><b>ipx-node <i>n</i><b>:</b><i>m</i></b></dt>
+  <dd>Set the IPX node numbers. The two node numbers are separated from each
+      other with a colon character. The first number <i>n</i> is the local node
+      number. The second number <i>m</i> is the peer&#39;s node number. Each node
+      number is a hexadecimal number, at most 10 digits long. The node numbers
+      on the ipx-network must be unique. There is no valid default. If this
+      option is not specified then the node numbers are obtained from the
+    peer.</dd>
+  <dt><b>ipx-router-name <i>&lt;string&gt;</i></b></dt>
+  <dd>Set the name of the router. This is a string and is sent to the peer as
+      information data.</dd>
+  <dt><b>ipx-routing <i>n</i></b></dt>
+  <dd>Set the routing protocol to be received by this option. More than one
+      instance of <i>ipx-routing</i> may be specified. The &#39;<i>none</i>&#39; option
+      (0) may be specified as the only instance of ipx-routing. The values may
+      be <i>0</i> for <i>NONE</i>, <i>2</i> for <i>RIP/SAP</i>, and <i>4</i> for
+      <i>NLSP</i>.</dd>
+  <dt><b>ipxcp-accept-local</b></dt>
+  <dd>Accept the peer&#39;s NAK for the node number specified in the ipx-node
+      option. If a node number was specified, and non-zero, the default is to
+      insist that the value be used. If you include this option then you will
+      permit the peer to override the entry of the node number.</dd>
+  <dt><b>ipxcp-accept-network</b></dt>
+  <dd>Accept the peer&#39;s NAK for the network number specified in the ipx-network
+      option. If a network number was specified, and non-zero, the default is to
+      insist that the value be used. If you include this option then you will
+      permit the peer to override the entry of the node number.</dd>
+  <dt><b>ipxcp-accept-remote</b></dt>
+  <dd>Use the peer&#39;s network number specified in the configure request frame. If
+      a node number was specified for the peer and this option was not
+      specified, the peer will be forced to use the value which you have
+      specified.</dd>
+  <dt><b>ipxcp-max-configure <i>n</i></b></dt>
+  <dd>Set the maximum number of IPXCP configure request frames which the system
+      will send to <i>n</i>. The default is 10.</dd>
+  <dt><b>ipxcp-max-failure <i>n</i></b></dt>
+  <dd>Set the maximum number of IPXCP NAK frames which the local system will
+      send before it rejects the options. The default value is 3.</dd>
+  <dt><b>ipxcp-max-terminate <i>n</i></b></dt>
+  <dd>Set the maximum nuber of IPXCP terminate request frames before the local
+      system considers that the peer is not listening to them. The default value
+      is 3.</dd>
+  <dt><b>kdebug <i>n</i></b></dt>
+  <dd>开启核心层级中的PPP驱动程式侦错码。The
+      argument values depend on the specific kernel driver, but in general a
+      value of 1 will enable general kernel debug messages. (Note that these
+      messages are usually only useful for debugging the kernel driver itself.)
+      For the Linux 2.2.x kernel driver,
+      参数n是一个
+      由下列值所组合的数字：1开启一般侦错讯息，2要求印
+      出所接收到的封包内容，而4要求印出传输的封包内容。
+      On most systems, messages printed by the kernel are logged by syslog(1) to
+      a file as directed in the /etc/syslog.conf configuration file.</dd>
+  <dt><b>ktune</b></dt>
+  <dd>Enables pppd to alter kernel settings as appropriate. Under Linux, pppd
+      will enable IP forwarding (i.e. set /proc/sys/net/ipv4/ip_forward to 1) if
+      the <i>proxyarp</i> option is used, and will enable the dynamic IP address
+      option (i.e. set /proc/sys/net/ipv4/ip_dynaddr to 1) in demand mode if the
+      local address changes.</dd>
+  <dt><b>lcp-echo-failure <i>n</i></b></dt>
+  <dd>
+    
+      如果有给这个选项，那么如果传送n个LCP回应要求没
+      有接收到有效的LCP回应回复的话pppd将会推测彼端是
+      死掉的。如果发生这种情形，pppd将会终结该连线。这个
+      选项的使用要求一个非零的lcp-echo-interval参数值。
+      这个选项可以用在硬体数据机控制线路无法使用的情况下
+      当实际连线被中断之后（e.g.,数据机已经挂断）终结
+      pppd的执行。</dd>
+  <dt><b>lcp-echo-interval <i>n</i></b></dt>
+  <dd>如果有给这个选项，pppd每秒将会送出一个LCP回
+      应要求(echo-request)封包(frame)给彼端。在Linux系
+      统下，回应要求在n秒内没有从彼端接收到封包时会被送
+      出。一般彼端应该以传送一个回应回复(echo-reply)来反
+      应该回应要求。这个选项可以与lcp-echo-failure选项
+      一起使用来侦测不再连线的彼端。</dd>
+  <dt><b>lcp-max-configure <i>n</i></b></dt>
+  <dd>
+    
+      将LCP配置要求(configure-request)传输的最大数目设
+      为n（预设为10）。</dd>
+  <dt><b>lcp-max-failure <i>n</i></b></dt>
+  <dd>
+    
+      将开始传送配置拒绝(configure-Rejects)之前的LCP配
+      置未接收(configure-NAKs)的最大数目设置为n（预设
+      为10）。</dd>
+  <dt><b>lcp-max-terminate <i>n</i></b></dt>
+  <dd>
+    
+      将LCP终结要求(terminate-request)传输的最大数目设
+      为n（预设为3）。</dd>
+  <dt><b>lcp-restart <i>n</i></b></dt>
+  <dd>将LCP重新开始的间隔（重新传输的时间限制）设为
+      秒钟（预设为3）。</dd>
+  <dt><b>linkname <i>name</i></b></dt>
+  <dd>Sets the logical name of the link to <i>name</i>. Pppd will create a file
+      named <b>ppp-</b><i>name</i><b>.pid</b> in /var/run (or /etc/ppp on some
+      systems) containing its process ID. This can be useful in determining
+      which instance of pppd is responsible for the link to a given peer system.
+      This is a privileged option.</dd>
+  <dt><b>local</b></dt>
+  <dd>不要使用数据机控制线路。
+      With this option, pppd will ignore the state of the CD (Carrier Detect)
+      signal from the modem and will not change the state of the DTR (Data
+      Terminal Ready) signal.</dd>
+  <dt><b>logfd <i>n</i></b></dt>
+  <dd>Send log messages to file descriptor <i>n</i>. Pppd will send log messages
+      to at most one file or file descriptor (as well as sending the log
+      messages to syslog), so this option and the <b>logfile</b> option are
+      mutually exclusive. The default is for pppd to send log messages to stdout
+      (file descriptor 1), unless the serial port is already open on
+    stdout.</dd>
+  <dt><b>logfile <i>filename</i></b></dt>
+  <dd>Append log messages to the file <i>filename</i> (as well as sending the
+      log messages to syslog). The file is opened with the privileges of the
+      user who invoked pppd, in append mode.</dd>
+  <dt><b>login</b></dt>
+  <dd>使用系统密码资料库验证使用PAP的彼端。
+      and record the user in the system wtmp file. Note that the peer must have
+      an entry in the /etc/ppp/pap-secrets file as well as the system password
+      database to be allowed access.</dd>
+  <dt><b>maxconnect <i>n</i></b></dt>
+  <dd>Terminate the connection when it has been available for network traffic
+      for <i>n</i> seconds (i.e. <i>n</i> seconds after the first network
+      control protocol comes up).</dd>
+  <dt><b>maxfail <i>n</i></b></dt>
+  <dd>Terminate after <i>n</i> consecutive failed connection attempts. A value
+      of 0 means no limit. The default value is 10.</dd>
+  <dt><b>modem</b></dt>
+  <dd>使用数据机控制线路。This
+      option is the default. With this option, pppd will wait for the CD
+      (Carrier Detect) signal from the modem to be asserted when opening the
+      serial device (unless a connect script is specified), and it will drop the
+      DTR (Data Terminal Ready) signal briefly when the connection is terminated
+      and before executing the connect script.
+      在Ultrix上，这个选项会实作硬
+      体流量控制，像crtsct选项作的。</dd>
+  <dt><b>mp</b></dt>
+  <dd>Enables the use of PPP multilink; this is an alias for the `multilink&#39;
+      option. This option is currently only available under Linux.</dd>
+  <dt><b>mpshortseq</b></dt>
+  <dd>Enables the use of short (12-bit) sequence numbers in multilink headers,
+      as opposed to 24-bit sequence numbers. This option is only available under
+      Linux, and only has any effect if multilink is enabled (see the multilink
+      option).</dd>
+  <dt><b>mrru <i>n</i></b></dt>
+  <dd>Sets the Maximum Reconstructed Receive Unit to <i>n</i>. The MRRU is the
+      maximum size for a received packet on a multilink bundle, and is analogous
+      to the MRU for the individual links. This option is currently only
+      available under Linux, and only has any effect if multilink is enabled
+      (see the multilink option).</dd>
+  <dt><b>ms-dns <i>&lt;addr&gt;</i></b></dt>
+  <dd>If pppd is acting as a server for Microsoft Windows clients, this option
+      allows pppd to supply one or two DNS (Domain Name Server) addresses to the
+      clients. The first instance of this option specifies the primary DNS
+      address; the second instance (if given) specifies the secondary DNS
+      address. (This option was present in some older versions of pppd under the
+      name <b>dns-addr</b>.)</dd>
+  <dt><b>ms-wins <i>&lt;addr&gt;</i></b></dt>
+  <dd>If pppd is acting as a server for Microsoft Windows or &#34;Samba&#34;
+      clients, this option allows pppd to supply one or two WINS (Windows
+      Internet Name Services) server addresses to the clients. The first
+      instance of this option specifies the primary WINS address; the second
+      instance (if given) specifies the secondary WINS address.</dd>
+  <dt><b>multilink</b></dt>
+  <dd>Enables the use of the PPP multilink protocol. If the peer also supports
+      multilink, then this link can become part of a bundle between the local
+      system and the peer. If there is an existing bundle to the peer, pppd will
+      join this link to that bundle, otherwise pppd will create a new bundle.
+      See the MULTILINK section below. This option is currently only available
+      under Linux.</dd>
+  <dt><b>name <i>name</i></b></dt>
+  <dd>将本地系统的名称设为用来进行验证。
+      This is a privileged option. With this option, pppd will use lines in the
+      secrets files which have <i>name</i> as the second field when looking for
+      a secret to use in authenticating the peer. In addition, unless overridden
+      with the <i>user</i> option, <i>name</i> will be used as the name to send
+      to the peer when authenticating the local system to the peer. (Note that
+      pppd does not append the domain name to <i>name</i>.)</dd>
+  <dt><b>netmask <i>n</i></b></dt>
+  <dd>
+    
+      把该界面网路掩码设为，这是一个以″十进位数值加
+      小数点″(&#34;decimaldot&#34;)符号表示的32位元网路掩码
+      (e.g.255.255.255.0)。If this option is given, the value specified is
+      ORed with the default netmask. The default netmask is chosen based on the
+      negotiated remote IP address; it is the appropriate network mask for the
+      class of the remote IP address, ORed with the netmasks for any non
+      point-to-point network interfaces in the system which are on the same
+      network. (Note: on some platforms, pppd will always use 255.255.255.255
+      for the netmask, if that is the only appropriate value for a
+      point-to-point interface.)</dd>
+  <dt><b>noaccomp</b></dt>
+  <dd>Disable Address/Control compression in both directions (send and
+    receive).</dd>
+  <dt><b>noauth</b></dt>
+  <dd>Do not require the peer to authenticate itself. This option is
+    privileged.</dd>
+  <dt><b>nobsdcomp</b></dt>
+  <dd>Disables BSD-Compress compression; <b>pppd</b> will not request or agree
+      to compress packets using the BSD-Compress scheme.</dd>
+  <dt><b>noccp</b></dt>
+  <dd>Disable CCP (Compression Control Protocol) negotiation. This option should
+      only be required if the peer is buggy and gets confused by requests from
+      pppd for CCP negotiation.</dd>
+  <dt><b>nocrtscts</b></dt>
+  <dd>Disable hardware flow control (i.e. RTS/CTS) on the serial port. If
+      neither the <i>crtscts</i> nor the <i>nocrtscts</i> nor the <i>cdtrcts</i>
+      nor the <i>nocdtrcts</i> option is given, the hardware flow control
+      setting for the serial port is left unchanged.</dd>
+  <dt><b>nocdtrcts</b></dt>
+  <dd>This option is a synonym for <i>nocrtscts</i>. Either of these options
+      will disable both forms of hardware flow control.</dd>
+  <dt><b>nodefaultroute</b></dt>
+  <dd>Disable the <i>defaultroute</i> option. The system administrator who
+      wishes to prevent users from creating default routes with pppd can do so
+      by placing this option in the /etc/ppp/options file.</dd>
+  <dt><b>nodeflate</b></dt>
+  <dd>Disables Deflate compression; pppd will not request or agree to compress
+      packets using the Deflate scheme.</dd>
+  <dt><b>nodetach</b></dt>
+  <dd>Don&#39;t detach from the controlling terminal. Without this option, if a
+      serial device other than the terminal on the standard input is specified,
+      pppd will fork to become a background process.</dd>
+  <dt><b>noendpoint</b></dt>
+  <dd>Disables pppd from sending an endpoint discriminator to the peer or
+      accepting one from the peer (see the MULTILINK section below). This option
+      should only be required if the peer is buggy.</dd>
+  <dt><b>noip</b></dt>
+  <dd>Disable IPCP negotiation and IP communication. This option should only be
+      required if the peer is buggy and gets confused by requests from pppd for
+      IPCP negotiation.</dd>
+  <dt><b>noipv6</b></dt>
+  <dd>Disable IPv6CP negotiation and IPv6 communication. This option should only
+      be required if the peer is buggy and gets confused by requests from pppd
+      for IPv6CP negotiation.</dd>
+  <dt><b>noipdefault</b></dt>
+  <dd>关闭在没有指定本地IP位址时所进行的预设动作，这是
+      用来由从主机名称决定（如果可能的话）决定本地IP位
+      址。加上这个选项的话，彼端将必须在进行IPCP协商时
+      （除非在指令列或在选项档中明确地指定它）提供本地的
+      IP位址。</dd>
+  <dt><b>noipx</b></dt>
+  <dd>Disable the IPXCP and IPX protocols. This option should only be required
+      if the peer is buggy and gets confused by requests from pppd for IPXCP
+      negotiation.</dd>
+  <dt><b>noktune</b></dt>
+  <dd>Opposite of the <i>ktune</i> option; disables pppd from changing system
+      settings.</dd>
+  <dt><b>nolog</b></dt>
+  <dd>Do not send log messages to a file or file descriptor. This option cancels
+      the <b>logfd</b> and <b>logfile</b> options.</dd>
+  <dt><b>nomagic</b></dt>
+  <dd>Disable magic number negotiation. With this option, pppd cannot detect a
+      looped-back line. This option should only be needed if the peer is
+    buggy.</dd>
+  <dt><b>nomp</b></dt>
+  <dd>Disables the use of PPP multilink. This option is currently only available
+      under Linux.</dd>
+  <dt><b>nompshortseq</b></dt>
+  <dd>Disables the use of short (12-bit) sequence numbers in the PPP multilink
+      protocol, forcing the use of 24-bit sequence numbers. This option is
+      currently only available under Linux, and only has any effect if multilink
+      is enabled.</dd>
+  <dt><b>nomultilink</b></dt>
+  <dd>Disables the use of PPP multilink. This option is currently only available
+      under Linux.</dd>
+  <dt><b>nopcomp</b></dt>
+  <dd>Disable protocol field compression negotiation in both the receive and the
+      transmit direction.</dd>
+  <dt><b>nopersist</b></dt>
+  <dd>Exit once a connection has been made and terminated. This is the default
+      unless the <i>persist</i> or <i>demand</i> option has been specified.</dd>
+  <dt><b>nopredictor1</b></dt>
+  <dd>Do not accept or agree to Predictor-1 compression.</dd>
+  <dt><b>noproxyarp</b></dt>
+  <dd>Disable the <i>proxyarp</i> option. The system administrator who wishes to
+      prevent users from creating proxy ARP entries with pppd can do so by
+      placing this option in the /etc/ppp/options file.</dd>
+  <dt><b>notty</b></dt>
+  <dd>Normally, pppd requires a terminal device. With this option, pppd will
+      allocate itself a pseudo-tty master/slave pair and use the slave as its
+      terminal device. Pppd will create a child process to act as a `character
+      shunt&#39; to transfer characters between the pseudo-tty master and its
+      standard input and output. Thus pppd will transmit characters on its
+      standard output and receive characters on its standard input even if they
+      are not terminal devices. This option increases the latency and CPU
+      overhead of transferring data over the ppp interface as all of the
+      characters sent and received must flow through the character shunt
+      process. An explicit device name may not be given if this option is
+    used.</dd>
+  <dt><b>novj</b></dt>
+  <dd>Disable Van Jacobson style TCP/IP header compression in both the transmit
+      and the receive direction.</dd>
+  <dt><b>novjccomp</b></dt>
+  <dd>Disable the connection-ID compression option in Van Jacobson style TCP/IP
+      header compression. With this option, pppd will not omit the connection-ID
+      byte from Van Jacobson compressed TCP/IP headers, nor ask the peer to do
+      so.</dd>
+  <dt><b>papcrypt</b></dt>
+  <dd>Indicates that all secrets in the /etc/ppp/pap-secrets file which are used
+      for checking the identity of the peer are encrypted, and thus pppd should
+      not accept a password which, before encryption, is identical to the secret
+      from the /etc/ppp/pap-secrets file.</dd>
+  <dt><b>pap-max-authreq <i>n</i></b></dt>
+  <dd>
+    
+      将PAP验证要求(authenticate-request)传输的最大数目
+      设为n（预设为10）。</dd>
+  <dt><b>pap-restart <i>n</i></b></dt>
+  <dd>
+    
+      将PAP重新开始的间隔（重新传输的时间限制）设为n
+      秒钟（预设为3）。</dd>
+  <dt><b>pap-timeout <i>n</i></b></dt>
+  <dd>Set the maximum time that pppd will wait for the peer to authenticate
+      itself with PAP to <i>n</i> seconds (0 means no limit).</dd>
+  <dt><b>pass-filter <i>filter-expression</i></b></dt>
+  <dd>Specifies a packet filter to applied to data packets being sent or
+      received to determine which packets should be allowed to pass. Packets
+      which are rejected by the filter are silently discarded. This option can
+      be used to prevent specific network daemons (such as routed) using up link
+      bandwidth, or to provide a basic firewall capability. The
+      <i>filter-expression</i> syntax is as described for tcpdump(1), except
+      that qualifiers which are inappropriate for a PPP link, such as
+      <b>ether</b> and <b>arp</b>, are not permitted. Generally the filter
+      expression should be enclosed in single-quotes to prevent whitespace in
+      the expression from being interpreted by the shell. Note that it is
+      possible to apply different constraints to incoming and outgoing packets
+      using the <b>inbound</b> and <b>outbound</b> qualifiers. This option is
+      currently only available under NetBSD, and then only if both the kernel
+      and pppd were compiled with PPP_FILTER defined.</dd>
+  <dt><b>persist</b></dt>
+  <dd>Do not exit after a connection is terminated; instead try to reopen the
+      connection.</dd>
+  <dt><b>plugin <i>filename</i></b></dt>
+  <dd>Load the shared library object file <i>filename</i> as a plugin. This is a
+      privileged option.</dd>
+  <dt><b>predictor1</b></dt>
+  <dd>Request that the peer compress frames that it sends using Predictor-1
+      compression, and agree to compress transmitted frames with Predictor-1 if
+      requested. This option has no effect unless the kernel driver supports
+      Predictor-1 compression.</dd>
+  <dt><b>privgroup <i>group-name</i></b></dt>
+  <dd>Allows members of group <i>group-name</i> to use privileged options. This
+      is a privileged option. Use of this option requires care as there is no
+      guarantee that members of <i>group-name</i> cannot use pppd to become root
+      themselves. Consider it equivalent to putting the members of
+      <i>group-name</i> in the kmem or disk group.</dd>
+  <dt><b>proxyarp</b></dt>
+  <dd>以彼端的IP位址以及该系统的乙太网路位址增加一个项
+      目到系统的ARP[AddressResolutionProtocol位址解
+      译协定]表格。 This will have the
+      effect of making the peer appear to other systems to be on the local
+      ethernet.</dd>
+  <dt><b>pty <i>script</i></b></dt>
+  <dd>Specifies that the command <i>script</i> is to be used to communicate
+      rather than a specific terminal device. Pppd will allocate itself a
+      pseudo-tty master/slave pair and use the slave as its terminal device. The
+      <i>script</i> will be run in a child process with the pseudo-tty master as
+      its standard input and output. An explicit device name may not be given if
+      this option is used. (Note: if the <i>record</i> option is used in
+      conjuction with the <i>pty</i> option, the child process will have pipes
+      on its standard input and output.)</dd>
+  <dt><b>receive-all</b></dt>
+  <dd>With this option, pppd will accept all control characters from the peer,
+      including those marked in the receive asyncmap. Without this option, pppd
+      will discard those characters as specified in RFC1662. This option should
+      only be needed if the peer is buggy.</dd>
+  <dt><b>record <i>filename</i></b></dt>
+  <dd>Specifies that pppd should record all characters sent and received to a
+      file named <i>filename</i>. This file is opened in append mode, using the
+      user&#39;s user-ID and permissions. This option is implemented using a
+      pseudo-tty and a process to transfer characters between the pseudo-tty and
+      the real serial device, so it will increase the latency and CPU overhead
+      of transferring data over the ppp interface. The characters are stored in
+      a tagged format with timestamps, which can be displayed in readable form
+      using the <a href="../../buster/ppp/pppdump.8.en.html">pppdump(8)</a> program.</dd>
+  <dt><b>remotename <i>name</i></b></dt>
+  <dd>将远端系统的假设名称设为以进行验证。</dd>
+  <dt><b>refuse-chap</b></dt>
+  <dd>With this option, pppd will not agree to authenticate itself to the peer
+      using CHAP.</dd>
+  <dt><b>refuse-pap</b></dt>
+  <dd>With this option, pppd will not agree to authenticate itself to the peer
+      using PAP.</dd>
+  <dt><b>require-chap</b></dt>
+  <dd>Require the peer to authenticate itself using CHAP [Challenge Handshake
+      Authentication Protocol] authentication.</dd>
+  <dt><b>require-pap</b></dt>
+  <dd>Require the peer to authenticate itself using PAP [Password Authentication
+      Protocol] authentication.</dd>
+  <dt><b>show-password</b></dt>
+  <dd>When logging the contents of PAP packets, this option causes pppd to show
+      the password string in the log message.</dd>
+  <dt><b>silent</b></dt>
+  <dd>加上这个选项，pppd将不会传输LCP封包来初使一个连
+      线一直到从彼端接收到一个有效的LCP封包。（就像是给
+      旧版pppd使用的&#34;passive&#34;选项）。</dd>
+  <dt><b>sync</b></dt>
+  <dd>Use synchronous HDLC serial encoding instead of asynchronous. The device
+      used by pppd with this option must have sync support. Currently supports
+      Microgate SyncLink adapters under Linux and FreeBSD 2.2.8 and later.</dd>
+  <dt><b>updetach</b></dt>
+  <dd>With this option, pppd will detach from its controlling terminal once it
+      has successfully established the ppp connection (to the point where the
+      first network control protocol, usually the IP control protocol, has come
+      up).</dd>
+  <dt><b>usehostname</b></dt>
+  <dd>强迫主机名称使用本地系统的名称来进行验证。（这会盖过name选项）。
+      This option is not normally needed since the <i>name</i> option is
+      privileged.</dd>
+  <dt><b>usepeerdns</b></dt>
+  <dd>Ask the peer for up to 2 DNS server addresses. The addresses supplied by
+      the peer (if any) are passed to the /etc/ppp/ip-up script in the
+      environment variables DNS1 and DNS2. In addition, pppd will create an
+      /etc/ppp/resolv.conf file containing one or two nameserver lines with the
+      address(es) supplied by the peer.</dd>
+  <dt><b>user <i>name</i></b></dt>
+  <dd>将使用者名称设为以便让使用PAP的彼端验证这台机器时使用。</dd>
+  <dt><b>vj-max-slots <i>n</i></b></dt>
+  <dd>Sets the number of connection slots to be used by the Van Jacobson TCP/IP
+      header compression and decompression code to <i>n</i>, which must be
+      between 2 and 16 (inclusive).</dd>
+  <dt><b>welcome <i>script</i></b></dt>
+  <dd>Run the executable or shell command specified by <i>script</i> before
+      initiating PPP negotiation, after the connect script (if any) has
+      completed. A value for this option from a privileged source cannot be
+      overridden by a non-privileged user.</dd>
+  <dt><b>xonxoff</b></dt>
+  <dd>使用软体流量控制(i.e.XON/XOFF)来控制串列埠上的资料流。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="选项文件_OPTIONS_FILES">选项文件 OPTIONS FILES<a class="anchor" href="#%E9%80%89%E9%A1%B9%E6%96%87%E4%BB%B6_OPTIONS_FILES">¶</a></h1>
+选项可以从档案取出使用就如同使用命令列一般。pppd在查看指
+  令列之前先从档案/etc/ppp/options以及~/.ppprc读取选项。
+  <i>ttyname</i> (in that order) before processing the options on the command
+  line. (In fact, the command-line options are scanned to find the terminal name
+  before the options.<i>ttyname</i> file is read.) In forming the name of the
+  options.<i>ttyname</i> file, the initial /dev/ is removed from the terminal
+  name, and any remaining / characters are replaced with dots.
+<p class="Pp">一个选项档案以空白字元为界被剖析成一串单字。空白字元可以用
+    双引号(&#34;)包括在一个单字里。倒斜线引用其后的字元。而hash
+    (#)符号开始一段注解持续到该行结束。
+    There is no restriction on using the <i>file</i> or <i>call</i> options
+    within an options file.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="安全_SECURITY">安全 SECURITY<a class="anchor" href="#%E5%AE%89%E5%85%A8_SECURITY">¶</a></h1>
+<i>pppd</i>
+  提供系统管理人员充份的存取控制能力这表示以PPP存取一
+  台伺服机器可以提供给合法的使用者使用而不必担心危及该伺服器
+  或所在网路的安全性。这有一部份是以/etc/ppp/options档案来
+  提供，在这里系统管理人员可以放置在执行pppd的时候用来要求
+  验证的选项，而部份是由PAP以及CHAP暗号档案来提供，其中
+  系统管理人员可以限制个别的使用者可以使用的一群IP位址。
+<p class="Pp">The default behaviour of pppd is to allow an unauthenticated peer
+    to use a given IP address only if the system does not already have a route
+    to that IP address. For example, a system with a permanent connection to the
+    wider internet will normally have a default route, and thus all peers will
+    have to authenticate themselves in order to set up a connection. On such a
+    system, the <i>auth</i> option is the default. On the other hand, a system
+    where the PPP link is the only connection to the internet will not normally
+    have a default route, so the peer will be able to use almost any IP address
+    without authenticating itself.</p>
+<p class="Pp">As indicated above, some security-sensitive options are
+    privileged, which means that they may not be used by an ordinary
+    non-privileged user running a setuid-root pppd, either on the command line,
+    in the user&#39;s ~/.ppprc file, or in an options file read using the
+    <i>file</i> option. Privileged options may be used in /etc/ppp/options file
+    or in an options file read using the <i>call</i> option. If pppd is being
+    run by the root user, privileged options can be used without
+  restriction.</p>
+<p class="Pp">When opening the device, pppd uses either the invoking user&#39;s user
+    ID or the root UID (that is, 0), depending on whether the device name was
+    specified by the user or the system administrator. If the device name comes
+    from a privileged source, that is, /etc/ppp/options or an options file read
+    using the <i>call</i> option, pppd uses full root privileges when opening
+    the device. Thus, by creating an appropriate file under /etc/ppp/peers, the
+    system administrator can allow users to establish a ppp connection via a
+    device which they would not normally have permission to access. Otherwise
+    pppd uses the invoking user&#39;s real UID when opening the device.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="AUTHENTICATION">AUTHENTICATION<a class="anchor" href="#AUTHENTICATION">¶</a></h1>
+Authentication is the process whereby one peer convinces the other of its
+  identity. This involves the first peer sending its name to the other, together
+  with some kind of secret information which could only come from the genuine
+  authorized user of that name. In such an exchange, we will call the first peer
+  the &#34;client&#34; and the other the &#34;server&#34;. The client has a
+  name by which it identifies itself to the server, and the server also has a
+  name by which it identifies itself to the client. Generally the genuine client
+  shares some secret (or password) with the server, and authenticates itself by
+  proving that it knows that secret. Very often, the names used for
+  authentication correspond to the internet hostnames of the peers, but this is
+  not essential.
+<p class="Pp">At present, pppd supports two authentication protocols: the
+    Password Authentication Protocol (PAP) and the Challenge Handshake
+    Authentication Protocol (CHAP). PAP involves the client sending its name and
+    a cleartext password to the server to authenticate itself. In contrast, the
+    server initiates the CHAP authentication exchange by sending a challenge to
+    the client (the challenge packet includes the server&#39;s name). The client
+    must respond with a response which includes its name plus a hash value
+    derived from the shared secret and the challenge, in order to prove that it
+    knows the secret.</p>
+<p class="Pp">The PPP protocol, being symmetrical, allows both peers to require
+    the other to authenticate itself. In that case, two separate and independent
+    authentication exchanges will occur. The two exchanges could use different
+    authentication protocols, and in principle, different names could be used in
+    the two exchanges.</p>
+<p class="Pp">
+  
+    pppd预设的动作是如果有要求就同意进行验证，并且不要求从彼
+    端做验证。然而如果没有可以用来验证的暗号则pppd将不会同意
+    以特殊的协定来验证它自己。</p>
+<p class="Pp">
+  
+    验证的基础是由暗号档案选择的暗号（/etc/ppp/pap-secrets是
+    给PAP使用的，/etc/ppp/chap-secrets则是给CHAP使用）。
+    这两个暗号档案都具有相同的格式，而且两者都可以储放暗号给数
+    种伺服器（验证彼端）及客户（被验证端）组合使用。注意pppd
+    可以最为伺服端以及客户端，而且如果需要的话两方可以使用不同
+    的协定。</p>
+<p class="Pp">
+  
+    一个暗号档案如同选项档案一般被剖析成单字。一个暗号是由最少
+    包含3个单字的一行所指定，依序是客户，伺服器，暗号。在同
+    一行中任何跟在其后的单字都被当作是给客户的可接受IP位址列
+    表。如果该行只有3个单字，这假设任何IP位址都可以；不允
+    许所有的IP位址的话，使用&#34;-&#34;。如果暗号是以&#39;@&#39;开始，其
+    后所接的单字将被假设为可以从中读取暗号的档案名称。而以一个
+    &#34;*&#34;字元作为客户或伺服端的名称会符合任何名称。在选择一个暗
+    号时，pppd会选择最符合的，i.e.最少万用字元的那个。</p>
+<p class="Pp">如此一个暗号档案包含用来验证其它主机，以及用来为其它主机验
+    证自己两者的暗号。选择使用哪个暗号是根据该主机（本地名称）
+    以及其彼端（远端名称）而定。本地名称的设定如下：</p>
+<p class="Pp">If the secret starts with an `@&#39;, what follows is assumed to be
+    the name of a file from which to read the secret. A &#34;*&#34; as the
+    client or server name matches any name. When selecting a secret, pppd takes
+    the best match, i.e. the match with the fewest wildcards.</p>
+<p class="Pp">Any following words on the same line are taken to be a list of
+    acceptable IP addresses for that client. If there are only 3 words on the
+    line, or if the first word is &#34;-&#34;, then all IP addresses are
+    disallowed. To allow any address, use &#34;*&#34;. A word starting with
+    &#34;!&#34; indicates that the specified address is <i>not</i> acceptable.
+    An address may be followed by &#34;/&#34; and a number <i>n</i>, to
+    indicate a whole subnet, i.e. all addresses which have the same value in the
+    most significant <i>n</i> bits. In this form, the address may be followed by
+    a plus sign (&#34;+&#34;) to indicate that one address from the subnet is
+    authorized, based on the ppp network interface unit number in use. In this
+    case, the host part of the address will be set to the unit number plus
+  one.</p>
+<p class="Pp">Thus a secrets file contains both secrets for use in
+    authenticating other hosts, plus secrets which we use for authenticating
+    ourselves to others. When pppd is authenticating the peer (checking the
+    peer&#39;s identity), it chooses a secret with the peer&#39;s name in the first
+    field and the name of the local system in the second field. The name of the
+    local system defaults to the hostname, with the domain name appended if the
+    <i>domain</i> option is used. This default can be overridden with the
+    <i>name</i> option, except when the <i>usehostname</i> option is used.</p>
+<p class="Pp">When pppd is choosing a secret to use in authenticating itself to
+    the peer, it first determines what name it is going to use to identify
+    itself to the peer. This name can be specified by the user with the
+    <i>user</i> option. If this option is not used, the name defaults to the
+    name of the local system, determined as described in the previous paragraph.
+    Then pppd looks for a secret with this name in the first field and the
+    peer&#39;s name in the second field. Pppd will know the name of the peer if CHAP
+    authentication is being used, because the peer will have sent it in the
+    challenge packet. However, if PAP is being used, pppd will have to determine
+    the peer&#39;s name from the options specified by the user. The user can specify
+    the peer&#39;s name directly with the <i>remotename</i> option. Otherwise, if
+    the remote IP address was specified by a name (rather than in numeric form),
+    that name will be used as the peer&#39;s name. Failing that, pppd will use the
+    null string as the peer&#39;s name.</p>
+<p class="Pp">
+  
+    当以PAP验证彼端时，一个&#34;&#34;暗号符合任何由彼端所提供密码。
+    如果密码不符合暗号，密码被以crypt()编码并且再次检查暗号；
+    因此验证彼端的暗号可以编码方式储放。</p>
+<p class="Pp">如果指定有login选项，
+    使用者名称以及密码也会被以系统的密码资料库检查。因此系统管
+    理人员可以设定pap-secrets档案以便只允许某些使用者以PPP
+    连线，并且限制每个使用者可以使用一些IP位址。
+    Typically, when using the <i>login</i> option, the secret in
+    /etc/ppp/pap-secrets would be &#34;&#34;, which will match any password
+    supplied by the peer. This avoids the need to have the same secret in two
+    places.</p>
+<p class="Pp">
+  
+    验证必须在IPCP（或任何其它网路控制协定）开始之前被完全地
+    满足。如果验证失败，pppd将会终结连线（关闭LCP）。如果
+    IPCP协商出一个无法接受的远端主机IP位址，IPCP将会关闭。
+    IP封包只有在IPCP打开的时候才能传送或接收。</p>
+<p class="Pp">
+  
+    即使本地主机一般会要求验证，在某些案例中会希望允一些无法验
+    证它们自己的主机连线并使用所限制的IP位址其中之一。如果彼
+    在被要求时拒绝验证它自己，pppd将会把它当成等于是在使用者
+    名称以及密码上使用空字串来以PAP验证。所以，借由增加一行
+    指定空字串为客户以及密码到pap-secrets档案去，允许拒绝验
+    证自己的主机进行有限制的存取是可能的。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="路由_ROUTING">路由 ROUTING<a class="anchor" href="#%E8%B7%AF%E7%94%B1_ROUTING">¶</a></h1>
+
+  当IPCP协商成功地完成时，pppd将会通知核心该ppp界面本地
+  以及远端的IP位址。这足够用来建立一个主机到该连线远端的递
+  送路径，该路径将使两端能交换IP封包。与其它的机器进行通讯
+  往往需要更进一步地修改递送表格(routingtables)以及／或是
+  ARP（位址解译协定）表格。在某些案例中这将透过routed或是
+  gated隐形程式的动作自动地完成，但是在大部分的案例中需要更
+  进一步的介入。
+<p class="Pp">
+  
+    有时候会希望透过远端主机来增加一个预设递送路径，像是在一台
+    只透过ppp界面连线到Internet的机器。此defaultroute选
+    项使得pppd在IPCP完成时建立起这么一个预设的递送路径，并
+    且在该线路被终结时将之删除。</p>
+<p class="Pp">
+  
+    在某些情况下会希望使用proxyARP，例如在一台连结到区域网
+    路的伺服机器上，为了能够允许其它的主机与远端主机进行通讯。
+    proxyarp选项引发pppd去寻找一个与远端主机在相同子网路上
+    的网路界面（一个支援广播(boardcast)以及ARP的界面，不但要
+    是可用的并且不是一个点对点或回授界面）。如果找到，pppd会
+    以该远端主机的IP位址以及所找到的网路界面之硬体位址建立一
+    个永久的，公开的ARP项目。</p>
+<p class="Pp">When the <i>demand</i> option is used, the interface IP addresses
+    have already been set at the point when IPCP comes up. If pppd has not been
+    able to negotiate the same addresses that it used to configure the interface
+    (for example when the peer is an ISP that uses dynamic IP address
+    assignment), pppd has to change the interface IP addresses to the negotiated
+    addresses. This may disrupt existing connections, and the use of demand
+    dialling with peers that do dynamic IP address assignment is not
+    recommended.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="MULTILINK">MULTILINK<a class="anchor" href="#MULTILINK">¶</a></h1>
+Multilink PPP provides the capability to combine two or more PPP links between a
+  pair of machines into a single `bundle&#39;, which appears as a single virtual PPP
+  link which has the combined bandwidth of the individual links. Currently,
+  multilink PPP is only supported under Linux.
+<p class="Pp">Pppd detects that the link it is controlling is connected to the
+    same peer as another link using the peer&#39;s endpoint discriminator and the
+    authenticated identity of the peer (if it authenticates itself). The
+    endpoint discriminator is a block of data which is hopefully unique for each
+    peer. Several types of data can be used, including locally-assigned strings
+    of bytes, IP addresses, MAC addresses, randomly strings of bytes, or E-164
+    phone numbers. The endpoint discriminator sent to the peer by pppd can be
+    set using the endpoint option.</p>
+<p class="Pp">In circumstances the peer may send no endpoint discriminator or a
+    non-unique value. The optional bundle option adds an extra string which is
+    added to the peer&#39;s endpoint discriminator and authenticated identity when
+    matching up links to be joined together in a bundle. The bundle option can
+    also be used to allow the establishment of multiple bundles between the
+    local system and the peer. Pppd uses a TDB database in /var/run/pppd.tdb to
+    match up links.</p>
+<p class="Pp">Assuming that multilink is enabled and the peer is willing to
+    negotiate multilink, then when pppd is invoked to bring up the first link to
+    the peer, it will detect that no other link is connected to the peer and
+    create a new bundle, that is, another ppp network interface unit. When
+    another pppd is invoked to bring up another link to the peer, it will detect
+    the existing bundle and join its link to it. Currently, if the first pppd
+    terminates (for example, because of a hangup or a received signal) the
+    bundle is destroyed.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="范例_EXAMPLE_S">范例 EXAMPLE S<a class="anchor" href="#%E8%8C%83%E4%BE%8B_EXAMPLE_S">¶</a></h1>
+The following examples assume that the /etc/ppp/options file contains the
+  <i>auth</i> option (as in the default /etc/ppp/options file in the ppp
+  distribution).
+<p class="Pp">Probably the most common use of pppd is to dial out to an ISP.
+    This can be done with a command such as</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>pppd call isp</dd>
+</dl>
+<p class="Pp">where the /etc/ppp/peers/isp file is set up by the system
+    administrator to contain something like this:</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>ttyS0 19200 crtscts
+    <br/>
+    connect &#39;/usr/sbin/chat -v -f /etc/ppp/chat-isp&#39;
+    <br/>
+    noauth</dd>
+</dl>
+<p class="Pp">In this example, we are using chat to dial the ISP&#39;s modem and go
+    through any logon sequence required. The /etc/ppp/chat-isp file contains the
+    script used by chat; it could for example contain something like this:</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>ABORT &#34;NO CARRIER&#34;
+    <br/>
+    ABORT &#34;NO DIALTONE&#34;
+    <br/>
+    ABORT &#34;ERROR&#34;
+    <br/>
+    ABORT &#34;NO ANSWER&#34;
+    <br/>
+    ABORT &#34;BUSY&#34;
+    <br/>
+    ABORT &#34;Username/Password Incorrect&#34;
+    <br/>
+    &#34;&#34; &#34;at&#34;
+    <br/>
+    OK &#34;at&amp;d0&amp;c1&#34;
+    <br/>
+    OK &#34;atdt2468135&#34;
+    <br/>
+    &#34;name:&#34; &#34;^Umyuserid&#34;
+    <br/>
+    &#34;word:&#34; &#34;\qmypassword&#34;
+    <br/>
+    &#34;ispts&#34; &#34;\q^Uppp&#34;
+    <br/>
+    &#34;~-^Uppp-~&#34;</dd>
+</dl>
+<p class="Pp">See the <a href="../../buster/manpages-zh/chat.8.zh_CN.html">chat(8)</a> man page for details of chat scripts.</p>
+<p class="Pp">Pppd can also be used to provide a dial-in ppp service for users.
+    If the users already have login accounts, the simplest way to set up the ppp
+    service is to let the users log in to their accounts and run pppd (installed
+    setuid-root) with a command such as</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>pppd proxyarp</dd>
+</dl>
+<p class="Pp">To allow a user to use the PPP facilities, you need to allocate an
+    IP address for that user&#39;s machine and create an entry in
+    /etc/ppp/pap-secrets or /etc/ppp/chap-secrets (depending on which
+    authentication method the PPP implementation on the user&#39;s machine
+    supports), so that the user&#39;s machine can authenticate itself. For example,
+    if Joe has a machine called &#34;joespc&#34; which is to be allowed to
+    dial in to the machine called &#34;server&#34; and use the IP address
+    joespc.my.net, you would add an entry like this to /etc/ppp/pap-secrets or
+    /etc/ppp/chap-secrets:</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>joespc	server	&#34;joe&#39;s secret&#34;	joespc.my.net</dd>
+</dl>
+<p class="Pp">Alternatively, you can create a username called (for example)
+    &#34;ppp&#34;, whose login shell is pppd and whose home directory is
+    /etc/ppp. Options to be used when pppd is run this way can be put in
+    /etc/ppp/.ppprc.</p>
+<p class="Pp">
+  
+    如果你的串列连线比直接以线路连接更复杂的话，你可能会需要做
+    些调整以便避开一些控制字元。特别是，通常避开XON(^Q)以及
+    XOFF(^S)是有用的，可以使用asyncmapa0000。如果该路径包
+    含telnet的话，你可能应该也要避开^](asyncmap200a0000)。
+    如果该路径包含rlogin的话，你将需要在执行rlogin的客户端
+    上使用escapeff选项，因为许多rlogin的实作并非是透通的；
+    它们将会从资料流中移除[0xff,0xff,0x73,0x73,跟随的任何
+    8位元组]这些序列。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="诊断_DIAGNOSTICS">诊断 DIAGNOSTICS<a class="anchor" href="#%E8%AF%8A%E6%96%AD_DIAGNOSTICS">¶</a></h1>
+
+  讯息使用facilityLOG_DAEMON送到syslog隐形程式。（这个
+  可以藉著以所要的facility定义LOG_PPP巨集来重新编译pppd
+  加以改变。）为了能够看到错误以及侦错讯息，你将需要编辑你的
+  /etc/syslog.conf档案来将讯息导向到所希望的设备或档案。
+<p class="Pp">debug选项使得所有送出以及接收的控制封包内容都被记录下来，
+    这是指所有的LCP,PAP,CHAP,或是IPCP封包。如果PPP协商
+    没有成功的话那么这可能会有用。如果在编译时期开启侦错功能的
+    话，pppd会使用facilityLOG_LOCAL2来取代LOG_DAEMON，而
+    且debug选项会使得额外的侦错讯息被记录下来。</p>
+<p class="Pp">侦错功能也可以藉著传送一个SIGUSR1到pppd程序来启动。侦
+    错功能可以藉著传送一个SIGUSR2到pppd程序来关闭。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXIT_STATUS">EXIT STATUS<a class="anchor" href="#EXIT_STATUS">¶</a></h1>
+The exit status of pppd is set to indicate whether any error was detected, or
+  the reason for the link being terminated. The values used are:
+<dl class="Bl-tag">
+  <dt><b>0</b></dt>
+  <dd>Pppd has detached, or otherwise the connection was successfully
+      established and terminated at the peer&#39;s request.</dd>
+  <dt><b>1</b></dt>
+  <dd>An immediately fatal error of some kind occurred, such as an essential
+      system call failing, or running out of virtual memory.</dd>
+  <dt><b>2</b></dt>
+  <dd>An error was detected in processing the options given, such as two
+      mutually exclusive options being used.</dd>
+  <dt><b>3</b></dt>
+  <dd>Pppd is not setuid-root and the invoking user is not root.</dd>
+  <dt><b>4</b></dt>
+  <dd>The kernel does not support PPP, for example, the PPP kernel driver is not
+      included or cannot be loaded.</dd>
+  <dt><b>5</b></dt>
+  <dd>Pppd terminated because it was sent a SIGINT, SIGTERM or SIGHUP
+    signal.</dd>
+  <dt><b>6</b></dt>
+  <dd>The serial port could not be locked.</dd>
+  <dt><b>7</b></dt>
+  <dd>The serial port could not be opened.</dd>
+  <dt><b>8</b></dt>
+  <dd>The connect script failed (returned a non-zero exit status).</dd>
+  <dt><b>9</b></dt>
+  <dd>The command specified as the argument to the <i>pty</i> option could not
+      be run.</dd>
+  <dt><b>10</b></dt>
+  <dd>The PPP negotiation failed, that is, it didn&#39;t reach the point where at
+      least one network protocol (e.g. IP) was running.</dd>
+  <dt><b>11</b></dt>
+  <dd>The peer system failed (or refused) to authenticate itself.</dd>
+  <dt><b>12</b></dt>
+  <dd>The link was established successfully and terminated because it was
+    idle.</dd>
+  <dt><b>13</b></dt>
+  <dd>The link was established successfully and terminated because the connect
+      time limit was reached.</dd>
+  <dt><b>14</b></dt>
+  <dd>Callback was negotiated and an incoming call should arrive shortly.</dd>
+  <dt><b>15</b></dt>
+  <dd>The link was terminated because the peer is not responding to echo
+      requests.</dd>
+  <dt><b>16</b></dt>
+  <dd>The link was terminated by the modem hanging up.</dd>
+  <dt><b>17</b></dt>
+  <dd>The PPP negotiation failed because serial loopback was detected.</dd>
+  <dt><b>18</b></dt>
+  <dd>The init script failed (returned a non-zero exit status).</dd>
+  <dt><b>19</b></dt>
+  <dd>We failed to authenticate ourselves to the peer.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SCRIPTS">SCRIPTS<a class="anchor" href="#SCRIPTS">¶</a></h1>
+Pppd invokes scripts at various stages in its processing which can be used to
+  perform site-specific ancillary processing. These scripts are usually shell
+  scripts, but could be executable code files instead. Pppd does not wait for
+  the scripts to finish. The scripts are executed as root (with the real and
+  effective user-id set to 0), so that they can do things such as update routing
+  tables or run privileged daemons. Be careful that the contents of these
+  scripts do not compromise your system&#39;s security. Pppd runs the scripts with
+  standard input, output and error redirected to /dev/null, and with an
+  environment that is empty except for some environment variables that give
+  information about the link. The environment variables that pppd sets are:
+<dl class="Bl-tag">
+  <dt><b>DEVICE</b></dt>
+  <dd>The name of the serial tty device being used.</dd>
+  <dt><b>IFNAME</b></dt>
+  <dd>The name of the network interface being used.</dd>
+  <dt><b>IPLOCAL</b></dt>
+  <dd>The IP address for the local end of the link. This is only set when IPCP
+      has come up.</dd>
+  <dt><b>IPREMOTE</b></dt>
+  <dd>The IP address for the remote end of the link. This is only set when IPCP
+      has come up.</dd>
+  <dt><b>PEERNAME</b></dt>
+  <dd>The authenticated name of the peer. This is only set if the peer
+      authenticates itself.</dd>
+  <dt><b>SPEED</b></dt>
+  <dd>The baud rate of the tty device.</dd>
+  <dt><b>ORIG_UID</b></dt>
+  <dd>The real user-id of the user who invoked pppd.</dd>
+  <dt><b>PPPLOGNAME</b></dt>
+  <dd>The username of the real user-id that invoked pppd. This is always
+    set.</dd>
+</dl>
+<p class="Pp">For the ip-down and auth-down scripts, pppd also sets the
+    following variables giving statistics for the connection:</p>
+<dl class="Bl-tag">
+  <dt><b>CONNECT_TIME</b></dt>
+  <dd>The number of seconds from when the PPP negotiation started until the
+      connection was terminated.</dd>
+  <dt><b>BYTES_SENT</b></dt>
+  <dd>The number of bytes sent (at the level of the serial port) during the
+      connection.</dd>
+  <dt><b>BYTES_RCVD</b></dt>
+  <dd>The number of bytes received (at the level of the serial port) during the
+      connection.</dd>
+  <dt><b>LINKNAME</b></dt>
+  <dd>The logical name of the link, set with the <i>linkname</i> option.</dd>
+</dl>
+<p class="Pp">Pppd invokes the following scripts, if they exist. It is not an
+    error if they don&#39;t exist.</p>
+<dl class="Bl-tag">
+  <dt><b>/etc/ppp/auth-up</b></dt>
+  <dd>A program or script which is executed after the remote system successfully
+      authenticates itself. It is executed with the parameters</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><i>interface-name peer-name user-name tty-device speed</i></dd>
+  <dt></dt>
+  <dd>Note that this script is not executed if the peer doesn&#39;t authenticate
+      itself, for example when the <i>noauth</i> option is used.</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt><b>/etc/ppp/auth-down</b></dt>
+  <dd>A program or script which is executed when the link goes down, if
+      /etc/ppp/auth-up was previously executed. It is executed in the same
+      manner with the same parameters as /etc/ppp/auth-up.</dd>
+  <dt><b>/etc/ppp/ip-up</b></dt>
+  <dd>当线路可以传送以及接收IP封包时（也就是IPCP完成
+      时）执行的一支程式或指令稿。它是以界面的名称、终端
+      设备、速度、本地-IP-位址、远端-IP-位址为参数执行。</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><i>interface-name tty-device speed local-IP-address</i>
+      <i>remote-IP-address ipparam</i></dd>
+</dl>
+<dl class="Bl-tag">
+  <dt><b>/etc/ppp/ip-down</b></dt>
+  <dd>当线路不再允许传送以及接收IP封包时执行的一支程式
+      或指令稿。这个指令稿可以用来回复/etc/ppp/ip-up指
+      令稿的影响。它以与ip-up指令稿相同的参数启动。</dd>
+  <dt><b>/etc/ppp/ipv6-up</b></dt>
+  <dd>Like /etc/ppp/ip-up, except that it is executed when the link is available
+      for sending and receiving IPv6 packets. It is executed with the
+    parameters</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><i>interface-name tty-device speed local-link-local-address</i>
+      <i>remote-link-local-address ipparam</i></dd>
+</dl>
+<dl class="Bl-tag">
+  <dt><b>/etc/ppp/ipv6-down</b></dt>
+  <dd>Similar to /etc/ppp/ip-down, but it is executed when IPv6 packets can no
+      longer be transmitted on the link. It is executed with the same parameters
+      as the ipv6-up script.</dd>
+  <dt><b>/etc/ppp/ipx-up</b></dt>
+  <dd>A program or script which is executed when the link is available for
+      sending and receiving IPX packets (that is, IPXCP has come up). It is
+      executed with the parameters</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><i>interface-name tty-device speed network-number
+      local-IPX-node-address</i> <i>remote-IPX-node-address
+      local-IPX-routing-protocol remote-IPX-routing-protocol</i>
+      <i>local-IPX-router-name remote-IPX-router-name ipparam pppd-pid</i></dd>
+  <dt></dt>
+  <dd>The local-IPX-routing-protocol and remote-IPX-routing-protocol field may
+      be one of the following:</dd>
+  <dt></dt>
+  <dd>NONE to indicate that there is no routing protocol
+    <br/>
+    RIP to indicate that RIP/SAP should be used
+    <br/>
+    NLSP to indicate that Novell NLSP should be used
+    <br/>
+    RIP NLSP to indicate that both RIP/SAP and NLSP should be used</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt><b>/etc/ppp/ipx-down</b></dt>
+  <dd>A program or script which is executed when the link is no longer available
+      for sending and receiving IPX packets. This script can be used for undoing
+      the effects of the /etc/ppp/ipx-up script. It is invoked in the same
+      manner and with the same parameters as the ipx-up script.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件_FILES">文件 FILES<a class="anchor" href="#%E6%96%87%E4%BB%B6_FILES">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>/var/run/ppp<i>n</i><b>.pid </b>(BSD or Linux),
+    <b>/etc/ppp/ppp</b><i>n</i> <b>.pid </b>(others)</b></dt>
+  <dd>在ppp界面单元n上的ppp程序之Process-ID。</dd>
+  <dt><b>/var/run/ppp-<i>name</i><b>.pid </b>(BSD or Linux),
+    <b>/etc/ppp/ppp-</b> <i>name</i><b>.pid </b>(others)</b></dt>
+  <dd>Process-ID for pppd process for logical link <i>name</i> (see the
+      <i>linkname</i> option).</dd>
+  <dt><b>/etc/ppp/pap-secrets</b></dt>
+  <dd>
+    
+      由PAP验证所使用的使用者名称、密码以及IP位址。
+      This file should be owned by root and not readable or writable by any
+      other user. Pppd will log a warning if this is not the case.</dd>
+  <dt><b>/etc/ppp/chap-secrets</b></dt>
+  <dd>
+    
+      由CHAP验证所使用的名称、暗号以及IP位址。
+     As for /etc/ppp/pap-secrets, this file should be owned by root and not
+      readable or writable by any other user. Pppd will log a warning if this is
+      not the case.</dd>
+  <dt><b>/etc/ppp/options</b></dt>
+  <dd>
+    
+      pppd的系统预设选项，在使用者预设选项或指令列选项之前读取。</dd>
+  <dt><b>~/.ppprc</b></dt>
+  <dd>
+    
+      使用者预设选项，在指令列选项之前读取。</dd>
+  <dt><b>/etc/ppp/options.<i>ttyname</i></b></dt>
+  <dd>
+    
+      所要使用之串列埠的系统预设选项，在指令列之后读取。read
+      after ~/.ppprc. In forming the <i>ttyname</i> part of this filename, an
+      initial /dev/ is stripped from the port name (if present), and any slashes
+      in the remaining part are converted to dots.</dd>
+  <dt><b>/etc/ppp/peers</b></dt>
+  <dd>A directory containing options files which may contain privileged options,
+      even if pppd was invoked by a user other than root. The system
+      administrator can create options files in this directory to permit
+      non-privileged users to dial out without requiring the peer to
+      authenticate, but only to certain trusted peers.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参见_SEE_ALSO">参见 SEE ALSO<a class="anchor" href="#%E5%8F%82%E8%A7%81_SEE_ALSO">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>RFC1144</b></dt>
+  <dd>Jacobson, V. <i>Compressing TCP/IP headers for low-speed serial links.</i>
+      February 1990.</dd>
+  <dt><b>RFC1321</b></dt>
+  <dd>Rivest, R. <i>The MD5 Message-Digest Algorithm.</i> April 1992.</dd>
+  <dt><b>RFC1332</b></dt>
+  <dd>McGregor, G. <i>PPP Internet Protocol Control Protocol (IPCP).</i> May
+      1992.</dd>
+  <dt><b>RFC1334</b></dt>
+  <dd>Lloyd, B.; Simpson, W.A. <i>PPP authentication protocols.</i> October
+      1992.</dd>
+  <dt><b>RFC1661</b></dt>
+  <dd>Simpson, W.A. <i>The Point-to-Point Protocol (PPP).</i> July 1994.</dd>
+  <dt><b>RFC1662</b></dt>
+  <dd>Simpson, W.A. <i>PPP in HDLC-like Framing.</i> July 1994.</dd>
+  <dt><b>RFC2472</b></dt>
+  <dd>Haskin, D. <i>IP Version 6 over PPP</i> December 1998.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="_注意_NOTES"> 注意 NOTES<a class="anchor" href="#_%E6%B3%A8%E6%84%8F_NOTES">¶</a></h1>
+下列信号传送到pppd程序时有特别的影响
+<dl class="Bl-tag">
+  <dt><b>SIGINT, SIGTERM</b></dt>
+  <dd>这些信号使得pppd终止该连线（关闭LCP），回存串列
+      串列设备的设定，并结束离开。</dd>
+  <dt><b>SIGHUP</b></dt>
+  <dd>指出实体层已经被断线。pppd将会试图回存串列设备的设
+      定（这可能会在Suns上产生错误讯息），然后结束离开。
+     If the <i>persist</i> or <i>demand</i> option has been specified, pppd will
+      try to reopen the serial device and start another connection (after the
+      holdoff period). Otherwise pppd will exit. If this signal is received
+      during the holdoff period, it causes pppd to end the holdoff period
+      immediately.</dd>
+  <dt><b>SIGUSR1</b></dt>
+  <dd>This signal toggles the state of the <i>debug</i> option.</dd>
+  <dt><b>SIGUSR2</b></dt>
+  <dd>This signal causes pppd to renegotiate compression. This can be useful to
+      re-enable compression after it has been disabled as a result of a fatal
+      decompression error. (Fatal decompression errors generally indicate a bug
+      in one or other implementation.)
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者_AUTHOR_S">作者 AUTHOR S<a class="anchor" href="#%E4%BD%9C%E8%80%85_AUTHOR_S">¶</a></h1>
+Paul Mackerras (Paul.Mackerras@cs.anu.edu.au), based on earlier work by Drew
+  Perkins, Brad Clements, Karl Fox, Greg Christy, and Brad Parker.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版维护人]">[中文版维护人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D">¶</a></h1>
+<b>软件教程之Linux Man
+  &lt;asdchen@pc2.hinet.net&gt;</b> <b>&lt;Best Linux&gt; 1999</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>1995/10/08</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9B%BDlinux%E8%AE%BA%E5%9D%9Bman%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+pppd.8.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:26Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"pppd(8)\"}}]}"
+</script>

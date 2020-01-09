@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>select(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/select.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/select.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; select(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/select.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/select.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS" title="SYNOPSIS">SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#PARAMETERS_%E5%8F%83%E6%95%B8" title="PARAMETERS 參數">PARAMETERS 參數</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#EXAMPLES_%E4%BE%8B%E5%AD%90" title="EXAMPLES 例子">EXAMPLES 例子</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#COMPATIBILITY_%E5%85%BC%E5%AE%B9%E6%80%A7" title="COMPATIBILITY 兼容性">COMPATIBILITY 兼容性</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AD%AF%E8%80%85" title="譯者">譯者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/select.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/select.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/select.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/select.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/select.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-dev/select.2.en.html">2 (<span title="System calls (functions provided by the kernel)">syscalls</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/freebsd-manpages/select.2freebsd.en.html">2freebsd (<span title="System calls (functions provided by the kernel)">syscalls</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/opencl-1.2-man-doc/select.3clc.en.html">3clc (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/select.7.zh_TW.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle"><a href="../../buster/postgresql-client-11/SELECT.7.en.html">SELECT(7)</a></td>
+    <td class="head-vol">SQL Commands</td>
+    <td class="head-rtitle"><a href="../../buster/postgresql-client-11/SELECT.7.en.html">SELECT(7)</a></td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+SELECT -
+  從表或視圖中取出若干行
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS">SYNOPSIS<a class="anchor" href="#SYNOPSIS">¶</a></h1>
+<pre>SELECT [ ALL | DISTINCT [ ON ( <i>expression</i> [, ...] ) ] ]
+    * | <i>expression</i> [ AS <i>output_name</i> ] [, ...]
+    [ FROM <i>from_item</i> [, ...] ]
+    [ WHERE <i>condition</i> ]
+    [ GROUP BY <i>expression</i> [, ...] ]
+    [ HAVING <i>condition</i> [, ...] ]
+    [ { UNION | INTERSECT | EXCEPT } [ ALL ] <i>select</i> ]
+    [ ORDER BY <i>expression</i> [ ASC | DESC | USING <i>operator</i> ] [, ...] ]
+    [ LIMIT { <i>count</i> | ALL } ]
+    [ OFFSET <i>start</i> ]
+    [ FOR UPDATE [ OF <i>table_name</i> [, ...] ] ]
+where <i>from_item</i> can be one of:
+    [ ONLY ] <i>table_name</i> [ * ] [ [ AS ] <i>alias</i> [ ( <i>column_alias</i> [, ...] ) ] ]
+    ( <i>select</i> ) [ AS ] <i>alias</i> [ ( <i>column_alias</i> [, ...] ) ]
+    <i>function_name</i> ( [ <i>argument</i> [, ...] ] ) [ AS ] <i>alias</i> [ ( <i>column_alias</i> [, ...] | <i>column_definition</i> [, ...] ) ]
+    <i>function_name</i> ( [ <i>argument</i> [, ...] ] ) AS ( <i>column_definition</i> [, ...] )
+    <i>from_item</i> [ NATURAL ] <i>join_type</i> <i>from_item</i> [ ON <i>join_condition</i> | USING ( <i>join_column</i> [, ...] ) ]
+
+</pre>
+[Comment: FIXME: This last syntax is incorrect if the join type is an INNER or
+  OUTER join (in which case one of NATURAL, ON ..., or USING ... is mandatory,
+  not optional). What&#39;s the best way to fix this?]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>SELECT</b>
+  將從一個或更多表中返回記錄行。
+  SELECT 通常的處理如下：
+<dl class="Bl-tag">
+  <dt>1.</dt>
+  <dd>
+     計算列出在 FROM
+      中的所有元素。（FROM
+      中的每個元素都是一個真正的或者虛擬的表。）如果在
+      FROM
+      列表裏聲明瞭多過一個元素，那麼他們就交叉連接在一起。（參閱下面的
+      FROM Clause [<a href="../../buster/manpages-zh/select.7.zh_TW.html">select(7)</a>] ）。</dd>
+  <dt>2.</dt>
+  <dd>
+     如果聲明瞭 WHERE
+      子句，那麼在輸出中消除所有
+      不滿足條件的行。（參閱下面的
+      WHERE Clause [<a href="../../buster/manpages-zh/select.7.zh_TW.html">select(7)</a>] ）。</dd>
+  <dt>3.</dt>
+  <dd>
+     如果聲明瞭 GROUP BY
+      子句，輸出就分成匹配一個或多個數值的不同組裏。
+      如果出現了 HAVING
+      子句，那麼它消除那些不滿足給出條件的組。（參閱下面的
+      GROUP BY Clause [<a href="../../buster/manpages-zh/select.7.zh_TW.html">select(7)</a>] 和 HAVING Clause
+      [<a href="../../buster/manpages-zh/select.7.zh_TW.html">select(7)</a>] ）。</dd>
+  <dt>4.</dt>
+  <dd>
+     使用 UNION，INTERSECT， 和
+      EXCEPT，我們可以把多個
+      SELECT
+      語句的輸出合併成一個結果集。UNION
+      操作符返回在兩個結果集或者其中一箇中的行，
+      INTERSECT
+      操作符返回嚴格地在兩個結果集中都有的行。
+      EXCEPT
+      操作符返回在第一個結果集中，但是不在第二個結果集中的行。不管哪種情況，
+      重複的行都被刪除，除非聲明瞭
+      ALL。（參閱下面的 UNION Clause
+      [<a href="../../buster/manpages-zh/select.7.zh_TW.html">select(7)</a>], INTERSECT Clause [<b>select</b>(l)], 和 EXCEPT
+      Clause [<a href="../../buster/manpages-zh/select.7.zh_TW.html">select(7)</a>] ）。</dd>
+  <dt>5.</dt>
+  <dd>
+    
+      實際輸出行的時候，SELECT
+      先爲每個選出的行計算輸出表達式
+      （參閱下面的 SELECT List
+      [<a href="../../buster/manpages-zh/select.7.zh_TW.html">select(7)</a>] ）。</dd>
+  <dt>6.</dt>
+  <dd>
+     如果聲明瞭 ORDER BY
+      子句，那麼返回的行是按照指定的順序排序的。
+      如果沒有給出 ORDER
+      BY，那麼數據行是按照系統認爲可以最快生成的方法給出的。
+      （參閱下面的 ORDER BY Clause
+      [<a href="../../buster/manpages-zh/select.7.zh_TW.html">select(7)</a>] ）。</dd>
+  <dt>7.</dt>
+  <dd>
+     如果給出了 LIMIT 或者 OFFSET
+      子句，那麼 SELECT
+      語句只返回結果行的一個子集。（參閱下面的
+      LIMIT Clause [<a href="../../buster/manpages-zh/select.7.zh_TW.html">select(7)</a>] ）。</dd>
+  <dt>8.</dt>
+  <dd>DISTINCT
+      從結果中刪除那些重複的行。
+      DISTINCT ON
+      刪除那些匹配所有指定表達式的行。
+      ALL
+      （缺省）將返回所有候選行，包括重複的。
+      （參閱下面的 DISTINCT Clause
+      [<a href="../../buster/manpages-zh/select.7.zh_TW.html">select(7)</a>] ）。</dd>
+  <dt>9.</dt>
+  <dd>FOR UPDATE 子句導致 SELECT
+      語句對併發的更新鎖住選定的行。（參閱下面的
+      FOR UPDATE Clause [<a href="../../buster/manpages-zh/select.7.zh_TW.html">select(7)</a>] ）。</dd>
+</dl>
+<p class="Pp">
+   你必須有 SELECT
+    權限用來從表中讀取數值。
+    使用 FOR UPDATE 還要求 UPDATE
+    權限。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="PARAMETERS_參數">PARAMETERS 參數<a class="anchor" href="#PARAMETERS_%E5%8F%83%E6%95%B8">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="FROM_子句">FROM 子句<a class="anchor" href="#FROM_%E5%AD%90%E5%8F%A5">¶</a></h2>
+FROM 子句爲 SELECT
+  聲明一個或者多個源表。
+  如果聲明瞭多個源表，那麼結果就是所有源表的笛卡兒積（交叉連接）。
+  但是通常我們會添加一些條件，把返回行限制成笛卡兒積的一個小的結果集。
+<p class="Pp">FROM-子句可以包括：</p>
+<dl class="Bl-tag">
+  <dt><b></b><i>table_name</i><b></b></dt>
+  <dd>
+    
+      一個現存的表或視圖的名字（可以有模式修飾）。
+      如果聲明瞭ONLY，則只掃描該表。
+      如果沒有聲明ONLY，該表和所有其派生表（如果有的話）都被掃描。
+      可以在表名後面跟一個*來表示掃所有其後代表，
+      但在目前的版本里，這是缺省特性。
+      （在 PostgreSQL 7.1
+      以前的版本里，ONLY是缺省特性。）
+      缺省的特性可以通過修改配置選項
+      sql_interitance 來改變。</dd>
+  <dt><b></b><i>alias</i><b></b></dt>
+  <dd>
+     爲那些包含別名的 FROM
+      項目取的別名。別名用於縮寫或者在自連接中消除歧義（自連接裏，同一個表掃描了多次）。
+      如果提供了別名，那麼它就會完全隱藏表或者函數的實際名字；
+      比如，如果給出 FROM foo AS
+      f，那麼 SELECT
+      剩下的東西必須吧這個
+      FROM 項以 f 而不是 foo
+      引用。如果寫了別名，
+      我們也可以提供一個字段別名列表，這樣可以替換表中一個或者多個字段的名字。</dd>
+  <dt><b></b><i>select</i><b></b></dt>
+  <dd>
+     一個子 SELECT 在 FROM
+      子句裏出現的。
+      它的輸出作用好象是爲這條
+      SELECT
+      命令在其生存期裏創建一個臨時表。
+      請注意這個子 SELECT
+      必須用園括弧包圍。
+      並且必須給它加別名。</dd>
+  <dt><b></b><i>function_name</i><b></b></dt>
+  <dd>
+     函數調用可以出現在
+      FROM 子句裏。
+      （對於那些返回結果集的函數特別有用，但是任何函數都能用。）
+      這麼做就好像在這個
+      SELECT 命令的生命期中，
+      把函數的輸出創建爲一個臨時表一樣。我們也可以使用別名。如果寫了別名，
+      我們還可以寫一個字段別名列表，爲函數返回的複合類型的一個或多個屬性提供名字替換。
+      如果函數定義爲了 record
+      數據類型，
+      那麼必須出現一個 AS
+      關鍵字或者別名，後面跟着一個字段定義列表，
+      形如：( column_name data_type [, ... ])。
+      這個字段定義列表必須匹配函數返回的字段的實際數目和類型。</dd>
+  <dt><b></b><i>join_type</i><b></b></dt>
+  <dd></dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt>•</dt>
+  <dd>[ INNER ] JOIN</dd>
+  <dt>•</dt>
+  <dd>LEFT [ OUTER ] JOIN</dd>
+  <dt>•</dt>
+  <dd>RIGHT [ OUTER ] JOIN</dd>
+  <dt>•</dt>
+  <dd>FULL [ OUTER ] JOIN</dd>
+  <dt>•</dt>
+  <dd>CROSS JOIN</dd>
+</dl>
+</div>
+<p class="Pp">
+   之一。 就 INNER 和 OUTER
+    連接類型，
+    我們必須聲明一個連接條件，也就是說一個
+    NATURAL， ON join_condition， 或者 USING
+    (join_column [, ...])。
+    見下文獲取它們的含義，對於
+    CROSS
+    JOIN，這些子句都不能出現。</p>
+<p class="Pp">
+   一個 JOIN
+    子句，組合了兩個 FROM
+    項。
+    必要時使用圓括弧以決定嵌套的順序。
+    如果沒有圓括弧，JOIN
+    的嵌套從左向右。
+    在任何情況下，JOIN
+    都比逗號分隔的 FROM
+    項綁定得更緊。</p>
+<p class="Pp">CROSS JOIN 和 INNER JOIN
+    生成一個簡單的笛卡兒積，和你在
+    FROM
+    的頂層列出兩個項的結果相同。
+    CROSS JOIN 等效於 INNER JOIN ON (true)，
+    也就是說，沒有被條件刪除的行。這種連接類型只是符號上的方便，
+    因爲它們和你用簡單的
+    FROM 和 WHERE
+    乾的事情是一樣的。</p>
+<p class="Pp">LEFT OUTER JOIN
+    返回有條件的笛卡兒積（也就是說，
+    所有組合出來的行都通過了連接條件）中的行，加上左手邊的表中沒有對應的右手邊表的行可以一起匹配通過連接條件的那些行。
+    這樣的左手邊的行擴展成連接生成表的全長，方法是在那些右手邊表對應的字段位置填上空。請注意，只有在決定那些行是匹配的時候，
+    之計算 JOIN
+    子句自己的條件。外層的條件是在這之後施加的。</p>
+<p class="Pp">
+   對應的是，RIGHT OUTER JOIN
+    返回所有連接出來的行，
+    加上每個不匹配的右手邊行（左邊用空值擴展）。這只是一個符號上的便利，因爲我們總是可以把它轉換成一個
+    LEFT OUTER JOIN，
+    只要把左邊和右邊的輸入對掉一下即可。</p>
+<p class="Pp">FULL OUTER JOIN
+    返回所有連接出來的行，加上每個不匹配的左手邊的行（右邊用空值擴展），
+    加上每個不匹配的右手邊的行（左邊用空值擴展）。</p>
+<dl class="Bl-tag">
+  <dt><b>ON </b><i>join_condition</i><b></b></dt>
+  <dd><i>join_condition</i>
+      是一個表達式，
+      生成類型爲 boolean
+      的結果（類似WHERE
+      子句），
+      表示連接中那些行被認爲是匹配的。</dd>
+  <dt><b>USING (</b><i>join_column</i><b> [, ...])</b></dt>
+  <dd>
+     一個形如 USING ( a, b, ... )
+      的子句， 是ON left_table.a = right_table.a
+      AND left_table.b = right_table.b ...
+      的縮寫。同樣，USING
+      蘊涵着：每對等效字段中只有一個包含在連接輸出中，而不是兩個都輸出的意思。</dd>
+  <dt><b>NATURAL</b></dt>
+  <dd>NATURAL 是一個 USING
+      列表的縮寫，這個列表說的是兩個表中同名的的字段。</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="WHERE_子句">WHERE 子句<a class="anchor" href="#WHERE_%E5%AD%90%E5%8F%A5">¶</a></h2>
+ 可選的 WHERE
+  條件有如下常見的形式：
+<p class="Pp"></p>
+<pre>WHERE <i>condition</i>
+
+</pre>
+ 這裏 condition
+  可以是任意生成類型爲
+  boolean 的表達式。
+  任何不滿足這個條件的行都會從輸出中刪除。如果一個行的數值替換到條件的引用中計算出來的條件爲真，那麼該行就算滿足條件。
+</section>
+<section class="Ss">
+<h2 class="Ss" id="GROUP_BY_子句">GROUP BY 子句<a class="anchor" href="#GROUP_BY_%E5%AD%90%E5%8F%A5">¶</a></h2>
+ 可選的 GROUP BY
+  子句的一般形式
+<p class="Pp"></p>
+<pre>GROUP BY <i>expression</i> [, ...]
+
+</pre>
+<p class="Pp">GROUP BY
+    將把所有在組合了的表達式上共享同樣的值的行壓縮成一行。
+    expression
+    可以是一個輸入字段名字，
+    或者是一個輸入字段（SELECT
+    列表）的序號，或者也可以是任意從輸入字段值形成的任意表達式。
+    在有歧義的情況下，一個
+    GROUP BY
+    的名字將被解釋成輸入字段的名字，而不是輸出字段的名字。</p>
+<p class="Pp">
+  
+    如果使用了聚集函數，那麼就會對組成一組的所有行進行計算，爲每個組生成一個獨立的值（而如果沒有
+    GROUP BY，
+    那麼聚集對選出來的所有行計算出一個值）。如果出現了
+    GROUP BY， 那麼 SELECT
+    列表表達式中再引用那些沒有分組的字段就是非法的，
+    除非放在聚集函數裏，因爲對於未分組的字段，可能會返回多個數值。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="HAVING_子句">HAVING 子句<a class="anchor" href="#HAVING_%E5%AD%90%E5%8F%A5">¶</a></h2>
+ 可選的 HAVING
+  子句有如下形式：
+<p class="Pp"></p>
+<pre>HAVING <i>condition</i>
+
+</pre>
+ 這裏 condition 和爲 WHERE
+  子句裏聲明的相同。
+<p class="Pp">HAVING
+    去除了一些不滿足條件的組行。
+    HAVING 與 WHERE 不同： WHERE
+    在使用 GROUP BY
+    之前過濾出單獨的行，而
+    HAVING 過濾由 GROUP BY
+    創建的行。 在 condition
+    裏引用的每個字段都必須無歧義地引用一個分組的行，除非引用出現在一個聚集函數裏。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="UNION_子句">UNION 子句<a class="anchor" href="#UNION_%E5%AD%90%E5%8F%A5">¶</a></h2>
+UNION 子句的一般形式是：
+<p class="Pp"></p>
+<pre><i>select_statement</i> UNION [ ALL ] <i>select_statement</i>
+
+</pre>
+ 這裏 <i>select_statement</i>
+  是任意沒有 ORDER
+  BY，LIMIT，或者 FOR UPDATE 子句的
+  SELECT語句。
+  （如果用圓括弧包圍，ORDER
+  BY 和 LIMIT
+  可以附着在子表達式裏。
+  如果沒有圓括弧，這些子句將交給
+  UNION 的結果使用，
+  而不是給它們右手邊的輸入表達式。）
+<p class="Pp">UNION
+    操作符計算那些涉及到的所有
+    SELECT
+    語句返回的行的結果聯合。
+    一個行如果至少在兩個結果集中的一個裏面出現，那麼它就會在這兩個結果集的集合聯合中。
+    兩個做爲 UNION
+    直接操作數的SELECT必須生成相同數目的字段，
+    並且對應的字段必須有兼容的數據類型。</p>
+<p class="Pp">
+   缺省地，UNION
+    的結果不包含任何重複的行，除非聲明瞭
+    ALL 子句。 ALL
+    制止了消除重複的動作。</p>
+<p class="Pp">
+   同一SELECT語句中的多個 UNION
+    操作符是從左向右計算的，
+    除非用圓括弧進行了標識。</p>
+<p class="Pp">
+   目前，FOR UPDATE 不能在 UNION
+    的結果或輸入中聲明。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="INTERSECT_子句">INTERSECT 子句<a class="anchor" href="#INTERSECT_%E5%AD%90%E5%8F%A5">¶</a></h2>
+INTERSECT
+  子句的一般形式是：
+<p class="Pp"></p>
+<pre><i>select_statement</i> INTERSECT [ ALL ] <i>select_statement</i>
+
+</pre>
+<i>select_statement</i> 是任何不帶 ORDER
+  BY， LIMIT，或者 FOR UPDATE 子句的
+  SELECT 語句。
+<p class="Pp">
+   INTERSECT 計算涉及的 SELECT
+    語句返回的行的集合交集。
+    如果一個行在兩個結果集中都出現，那麼它就在兩個結果集的交集中。</p>
+<p class="Pp">
+   NTERSECT
+    的結果不包含任何重複行，除非你聲明瞭
+    ALL 選項。 用了 ALL
+    以後，一個在左手邊的表裏有
+    m
+    個重複而在右手邊表裏有
+    n 個重複的行將出現 min(m,n)
+    次。</p>
+<p class="Pp">
+  
+    除非用圓括號指明順序，
+    同一 SELECT 語句中的多個
+    INTERSECT
+    操作符是從左向右計算的。
+    INTERSECT 比 UNION 綁定得更緊 ---
+    也就是說 A UNION B INTERSECT C
+    將讀做 A UNION (B INTERSECT
+    C)，除非你用圓括弧聲明。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="EXCEPT_子句">EXCEPT 子句<a class="anchor" href="#EXCEPT_%E5%AD%90%E5%8F%A5">¶</a></h2>
+EXCEPT
+  子句有如下的通用形式：
+<p class="Pp"></p>
+<pre><i>select_statement</i> EXCEPT [ ALL ] <i>select_statement</i>
+
+</pre>
+ 這裏 fIselect_statement 是任何沒有
+  ORDER BY，LIMIT，或者 FOR UPDATE
+  子句的 SELECT 表達式。
+<p class="Pp">EXCEPT
+    操作符計算存在於左邊SELECT
+    語句的輸出而不存在於右邊語句輸出的行。</p>
+<p class="Pp">EXCEPT
+    的結果不包含任何重複的行，除非聲明瞭
+    ALL 選項。 使用 ALL
+    時，一個在左手邊表中有
+    m
+    個重複而在右手邊表中有
+    n 個重複的行將出現
+    max(m-n,0) 次。</p>
+<p class="Pp">
+  
+    除非用圓括弧指明順序，同一
+    SELECT 語句中的多個 EXCEPT
+    操作符是從左向右計算的。
+    EXCEPT 和 UNION
+    綁定級別相同。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="SELECT_列表">SELECT 列表<a class="anchor" href="#SELECT_%E5%88%97%E8%A1%A8">¶</a></h2>
+<b>SELECT</b> 列表（在關鍵字 SELECT
+  和 FROM)
+  之間的東西）聲明一個表達式，這個表達式形成
+  SELECT
+  語句的輸出行。這個表達式可以（通常也的確是）引用那些在
+  FROM 子句裏計算的字段。
+  通過使用 AS output_name，
+  我們可以爲一個輸出行聲明另外一個名字。這個名字主要用做顯示該行的標籤。
+  它也可以在 ORDER BY 和 GROUP BY
+  子句裏當作字段值的引用，
+  但是不能在 WHERE 或者 HAVING
+  子句裏這麼用；在那裏，你必須寫出表達式。
+<p class="Pp">
+  
+    除了表達式之外，我們也可以在輸出列表上寫一個
+    *
+    表示選出的行的所有字段的縮寫。同樣，我們可以寫
+    <i>table_name.</i>*
+    作爲來自某個特定表的字段的縮寫。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="ORDER_BY_子句">ORDER BY 子句<a class="anchor" href="#ORDER_BY_%E5%AD%90%E5%8F%A5">¶</a></h2>
+ 可選的 ORDER BY
+  子句有下面的一般形式：
+<p class="Pp"></p>
+<pre>ORDER BY <i>expression</i> [ ASC | DESC | USING <i>operator</i> ] [, ...]
+
+</pre>
+<i>expression</i>
+  可以是一個輸出字段（SELECT
+  列表）的名字或者序號，
+  或者也可以是用輸入字段的數值組成的任意表達式。
+<p class="Pp">ORDER BY
+    子句導致結果行根據指定的表達式進行排序。
+    如果根據最左邊的表達式，兩行的結果相同，那麼就根據下一個表達式進行比較，
+    依此類推。如果對於所有聲明的表達式他們都相同，那麼以隨機順序返回。</p>
+<p class="Pp">
+  
+    序數指的是列/字段按順序（從左到右）的位置。
+    這個特性讓我們可以對沒有唯一名稱的列/字段進行排序。
+    這一點從來不是必須的，
+    因爲總是可以通過 AS
+    子句給一個要計算的列/字段賦予一個名稱。</p>
+<p class="Pp">
+   在 ORDER BY
+    裏還可以使用任意表達式，
+    包括那些沒有出現在SELECT結果列表裏面的字段。
+    因此下面的語句現在是合法的：</p>
+<p class="Pp"></p>
+<pre>SELECT name FROM distributors ORDER BY code;
+
+</pre>
+
+  這個特性的一個侷限就是應用於
+  UNION，INTERSECT， 或者 EXCEPT
+  查詢的 ORDER BY
+  子句只能在一個輸出字段名或者數字上聲明，而不能在一個表達式上聲明。
+<p class="Pp">
+   請注意如果一個 ORDER BY
+    表達式是一個簡單名稱，
+    同時匹配結果字段和輸入字段，
+    ORDER BY
+    將把它解釋成結果字段名稱。
+    這和 GROUP BY
+    在同樣情況下做的選擇正相反。
+    這樣的不一致是由 SQL
+    標準強制的。</p>
+<p class="Pp">
+   我們可以給 ORDER BY
+    子句裏每個列/字段加一個關鍵字
+    DESC （降序）或
+    ASC（升序）。如果不聲明，
+    ASC 是缺省。
+    我們還可以在 USING
+    子句裏聲明一個排序操作符來實現排序。
+    ASC 等效於使用 USING &lt; 而 DESC
+    等效於使用 USING &gt;。 (But the creator
+    of a user-defined data type can define exactly what the default sort
+    ordering is, and it might correspond to operators with other names.)</p>
+<p class="Pp">
+  
+    在一個域裏，空值排序時排在其它數值前面。換句話說，升序排序時，
+    空值排在末尾，而降序排序時空值排在開頭。</p>
+<p class="Pp">
+  
+    字符類型的數據是按照區域相關的字符集順序排序的，這個區域是在數據庫集羣初始化的時候建立的。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="LIMIT_子句">LIMIT 子句<a class="anchor" href="#LIMIT_%E5%AD%90%E5%8F%A5">¶</a></h2>
+LIMIT
+  子句由兩個獨立的子句組成：
+<p class="Pp"></p>
+<pre>LIMIT { <i>count</i> | ALL }
+OFFSET <i>start</i>
+
+</pre>
+ 這裏 <i>count</i>
+  聲明返回的最大行數，而
+  <i>start</i>
+  聲明開始返回行之前忽略的行數。
+ .PP
+ LIMIT
+  允許你檢索由查詢其他部分生成的行的某一部分。
+  如果給出了限制計數，那麼返回的行數不會超過哪個限制。
+  如果給出了一個偏移量，那麼開始返回行之前會忽略那個數量的行。
+<p class="Pp">
+   在使用 LIMIT 時，
+    一個好習慣是使用一個
+    ORDER BY
+    子句把結果行限制成一個唯一的順序。
+    否則你會得到無法預料的查詢返回的子集
+    ---
+    你可能想要第十行到第二十行，
+    但以什麼順序？除非你聲明
+    ORDER
+    BY，否則你不知道什麼順序。</p>
+<p class="Pp">
+  
+    查詢優化器在生成查詢規劃時把
+    LIMIT 考慮進去了，
+    所以你很有可能因給出的
+    LIMIT 和 OFFSET
+    值不同而得到不同的規劃（生成不同的行序）。
+    因此用不同的 LIMIT/OFFSET
+    值選擇不同的查詢結果的子集將不會產生一致的結果，
+    除非你用 ORDER BY
+    強制生成一個可預計的結果順序。
+    這可不是毛病；這是 SQL
+    生來的特點，因爲除非用了
+    ORDER BY 約束順序， SQL
+    不保證查詢生成的結果有任何特定的順序。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="DISTINCT_子句">DISTINCT 子句<a class="anchor" href="#DISTINCT_%E5%AD%90%E5%8F%A5">¶</a></h2>
+ 如果聲明瞭
+  DISTINCT，那麼就從結果集中刪除所有重複的行（每個有重複的組都保留一行）。
+  ALL
+  聲明相反的作用：所有行都被保留；這個是缺省。
+<p class="Pp">DISTINCT ON ( <i>expression</i> [, ...] )
+    只保留那些在給出的表達式上運算出相同結果的行集合中的第一行。
+    DISTINCT ON 表達式是使用與 ORDER
+    BY （見上文）
+    相同的規則進行解釋的。請注意，除非我們使用了
+    ORDER BY
+    來保證我們需要的行首先出現，否則，每個
+    &#34;第一行&#34;
+    是不可預測的。
+    比如，</p>
+<p class="Pp"></p>
+<pre>SELECT DISTINCT ON (location) location, time, report
+    FROM weather_reports
+    ORDER BY location, time DESC;
+
+</pre>
+
+  爲每個地點檢索最近的天氣報告。但是如果我們沒有使用
+  ORDER BY
+  來強制對每個地點的時間值進行降序排序，那麼我們就會得到每個地點的不知道什麼時候的報告。
+<p class="Pp">
+   DISTINCT ON
+    表達式必須匹配最左邊的
+    ORDER BY 表達式。 ORDER BY
+    子句將通常包含額外的表達式來判斷每個
+    DISTINCT ON
+    組裏面需要的行的優先級。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="FOR_UPDATE_子句">FOR UPDATE 子句<a class="anchor" href="#FOR_UPDATE_%E5%AD%90%E5%8F%A5">¶</a></h2>
+FOR UPDATE 子句有下面的形式
+<p class="Pp"></p>
+<pre>FOR UPDATE [ OF <i>table_name</i> [, ...] ]
+
+</pre>
+<p class="Pp">FOR UPDATE 令那些被 SELECT
+    語句檢索出來的行被鎖住，就像要更新一樣。
+    這樣就避免它們在當前事務結束前被其它事務修改或者刪除；
+    也就是說，其它視圖
+    UPDATE，DELETE， 或者 SELECT FOR UPDATE
+    這些行的事務將被阻塞，
+    直到當前事務結束。同樣，如果一個來自其它事務的
+    UPDATE， DELETE，或者 SELECT FOR UPDATE
+    已經鎖住了某個或某些選定的行，SELECT
+    FOR UPDATE
+    將等到那些事務結束，
+    並且將隨後鎖住並返回更新的行（或者不返回行，如果行已經被刪除）。更多的討論參閱
+    Chapter 12 ``Concurrency Control&#39;&#39; 。</p>
+<p class="Pp">
+   如果特定的表在 FOR UPDATE
+    中，那麼只有來自這些表中的行才被鎖住；
+    任何在 SELECT
+    中使用的其它表都只是和平常一樣讀取。</p>
+<p class="Pp">FOR UPDATE
+    不能在那些無法使用獨立的表數據行清晰標識返回行的環境裏；
+    比如，它不能和聚集一起使用。</p>
+<p class="Pp">FOR UPDATE 可以在 LIMIT
+    前面出現，
+    主要是爲了和 7.3
+    之前的 PostgreSQL 兼容。
+    不過，它在 LIMIT
+    後面執行更高效，因此我們建議放在
+    LIMIT 後面。</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES_例子">EXAMPLES 例子<a class="anchor" href="#EXAMPLES_%E4%BE%8B%E5%AD%90">¶</a></h1>
+ 將表 films 和表 distributors
+  連接在一起：
+<p class="Pp"></p>
+<pre>SELECT f.title, f.did, d.name, f.date_prod, f.kind
+    FROM distributors d, films f
+    WHERE f.did = d.did
+       title       | did |     name     | date_prod  |   kind
+-------------------+-----+--------------+------------+----------
+ The Third Man     | 101 | British Lion | 1949-12-23 | Drama
+ The African Queen | 101 | British Lion | 1951-08-11 | Romantic
+ ...
+
+</pre>
+<p class="Pp">
+   統計用kind
+    分組的所有電影和組的列/字段的
+    len（長度）的和：</p>
+<p class="Pp"></p>
+<pre>SELECT kind, sum(len) AS total FROM films GROUP BY kind;
+   kind   | total
+----------+-------
+ Action   | 07:34
+ Comedy   | 02:58
+ Drama    | 14:28
+ Musical  | 06:42
+ Romantic | 04:38
+
+</pre>
+<p class="Pp">
+  
+    統計所有電影（films），組的列/字段
+    len（長度）的和，用 kind
+    分組並且顯示小於5小時的組總和：</p>
+<p class="Pp"></p>
+<pre>SELECT kind, sum(len) AS total
+    FROM films
+    GROUP BY kind
+    HAVING sum(len) &lt; interval &#39;5 hours&#39;;
+   kind   | total
+----------+-------
+ Comedy   | 02:58
+ Romantic | 04:38
+
+</pre>
+<p class="Pp">
+  
+    下面兩個例子是根據第二列（name）的內容對單獨的結果排序的經典的方法：</p>
+<p class="Pp"></p>
+<pre>SELECT * FROM distributors ORDER BY name;
+SELECT * FROM distributors ORDER BY 2;
+ did |       name
+-----+------------------
+ 109 | 20th Century Fox
+ 110 | Bavaria Atelier
+ 101 | British Lion
+ 107 | Columbia
+ 102 | Jean Luc Godard
+ 113 | Luso films
+ 104 | Mosfilm
+ 103 | Paramount
+ 106 | Toho
+ 105 | United Artists
+ 111 | Walt Disney
+ 112 | Warner Bros.
+ 108 | Westward
+
+</pre>
+<p class="Pp">
+  
+    下面這個例子演示如何獲得表
+    distributors 和 actors的連接，
+    只將每個表中以字母 W
+    開頭的取出來。
+    因爲只取了不相關的行，所以關鍵字
+    ALL 被省略了：</p>
+<p class="Pp"></p>
+<pre>distributors:               actors:
+ did |     name              id |     name
+-----+--------------        ----+----------------
+ 108 | Westward               1 | Woody Allen
+ 111 | Walt Disney            2 | Warren Beatty
+ 112 | Warner Bros.           3 | Walter Matthau
+ ...                         ...
+SELECT distributors.name
+    FROM distributors
+    WHERE distributors.name LIKE &#39;W%&#39;
+UNION
+SELECT actors.name
+    FROM actors
+    WHERE actors.name LIKE &#39;W%&#39;;
+      name
+----------------
+ Walt Disney
+ Walter Matthau
+ Warner Bros.
+ Warren Beatty
+ Westward
+ Woody Allen
+
+</pre>
+<p class="Pp">
+  
+    這個例子顯示瞭如何在
+    FROM
+    子句中使用一個函數，
+    包括帶有和不帶字段定義列表的。</p>
+<p class="Pp"></p>
+<pre>CREATE FUNCTION distributors(int) RETURNS SETOF distributors AS &#39;
+    SELECT * FROM distributors WHERE did = $1;
+´ LANGUAGE SQL;
+SELECT * FROM distributors(111);
+ did |    name
+-----+-------------
+ 111 | Walt Disney
+CREATE FUNCTION distributors_2(int) RETURNS SETOF record AS &#39;
+    SELECT * FROM distributors WHERE did = $1;
+´ LANGUAGE SQL;
+SELECT * FROM distributors_2(111) AS (f1 int, f2 text);
+ f1  |     f2
+-----+-------------
+ 111 | Walt Disney
+
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="COMPATIBILITY_兼容性">COMPATIBILITY 兼容性<a class="anchor" href="#COMPATIBILITY_%E5%85%BC%E5%AE%B9%E6%80%A7">¶</a></h1>
+ 當然，SELECT 語句和 SQL
+  標準兼容。但是還有一些擴展和一些缺少的特性。
+<section class="Ss">
+<h2 class="Ss" id="省略_FROM_子句">省略 FROM 子句<a class="anchor" href="#%E7%9C%81%E7%95%A5_FROM_%E5%AD%90%E5%8F%A5">¶</a></h2>
+PostgreSQL
+  允許我們在一個查詢裏省略
+  FROM 子句。
+  它的最直接用途就是計算簡單的常量表達式的結果：
+<p class="Pp"></p>
+<pre>SELECT 2+2;
+ ?column?
+----------
+        4
+
+</pre>
+ 其它有些 SQL
+  數據庫不能這麼做，除非引入一個單行的僞表做
+  SELECT 的數據源。
+<p class="Pp">
+  
+    這個特性的另外一個不太明顯的用途是把一個普通的從一個或多個表的
+    SELECT 縮寫：</p>
+<p class="Pp"></p>
+<pre>SELECT distributors.* WHERE distributors.name = &#39;Westward&#39;;
+ did |   name
+-----+----------
+ 108 | Westward
+
+</pre>
+這樣也可以運行是因爲我們給
+  SELECT 中引用了但沒有在 FROM
+  中提到的每個表都加了一個隱含的
+  FROM 項。
+<p class="Pp">
+  
+    儘管這是個很方便的寫法，但它卻容易誤用。
+    比如，下面的查詢</p>
+<p class="Pp"></p>
+<pre>SELECT distributors.* FROM distributors d;
+
+</pre>
+可能就是個錯誤；用戶最有可能的意思是
+<p class="Pp"></p>
+<pre>SELECT d.* FROM distributors d;
+
+</pre>
+而不是下面的他實際上得到的無約束的連接
+<p class="Pp"></p>
+<pre>SELECT distributors.* FROM distributors d, distributors distributors;
+
+</pre>
+爲了幫助檢測這種錯誤，
+  PostgreSQL
+  以及以後的版本將在你使用一條即有隱含
+  FROM 特性又有明確的 FROM
+  子句的查詢的時候給出警告。
+  Also, it is possible to disable the implicit-FROM feature by setting the
+  ADD_MISSING_FROM parameter to false.
+</section>
+<section class="Ss">
+<h2 class="Ss" id="AS_關鍵字">AS 關鍵字<a class="anchor" href="#AS_%E9%97%9C%E9%8D%B5%E5%AD%97">¶</a></h2>
+ 在 SQL
+  標準裏，可選的關鍵字
+  AS
+  是多餘的，可以忽略掉而不對語句產生任何影響。
+  PostgreSQL
+  分析器在重命名列/字段時需要這個關鍵字，
+  因爲類型擴展的特性會導致在這個環境裏的歧義。
+  不過，AS 在 FROM
+  項裏是可選的。
+</section>
+<section class="Ss">
+<h2 class="Ss" id="GROUP_BY_和_ORDER_BY_裏可用的名字空間">GROUP BY 和 ORDER BY 裏可用的名字空間<a class="anchor" href="#GROUP_BY_%E5%92%8C_ORDER_BY_%E8%A3%8F%E5%8F%AF%E7%94%A8%E7%9A%84%E5%90%8D%E5%AD%97%E7%A9%BA%E9%96%93">¶</a></h2>
+ 在 SQL92 標準裏，ORDER BY
+  子句只能使用結果字段名或者編號，
+  而 GROUP BY
+  子句只能用基於輸入字段名的表達式。
+  PostgreSQL
+  對這兩個子句都進行了擴展，
+  允許另外一種選擇（但是如果存在歧義，則使用標準的解釋）。
+  PostgreSQL
+  還允許兩個子句聲明任意的表達式。
+  請注意在表達式中出現的名字強總是被當作輸入字段名，而不是結果字段名。
+<p class="Pp">SQL99 uses a slightly different definition which is not upward
+    compatible with SQL92. In most cases, however, PostgreSQL will interpret an
+    ORDER BY or GROUP BY expression the same way SQL99 does.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="非標準子句">非標準子句<a class="anchor" href="#%E9%9D%9E%E6%A8%99%E6%BA%96%E5%AD%90%E5%8F%A5">¶</a></h2>
+DISTINCT ON, LIMIT, 和 OFFSET 都沒有在 SQL
+  標準中定義。
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="譯者">譯者<a class="anchor" href="#%E8%AD%AF%E8%80%85">¶</a></h1>
+<b>Postgresql 中文網站</b> <b>何偉平
+  &lt;laser@pgsqldb.org&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-02</td>
+    <td class="foot-os">SQL - Language Statements</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+select.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-26T15:38:36Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"select(7)\"}}]}"
+</script>

@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Object(3tcl) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/Object.3tcl.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/Object.3tcl.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="3tcl">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; Object(3tcl)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/Object.3tcl">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/Object.3tcl.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS" title="總覽 SYNOPSIS">總覽 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E6%95%B8_ARGUMENTS" title="參數 ARGUMENTS">參數 ARGUMENTS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BB%8B%E7%B4%B9_INTRODUCTION" title="介紹 INTRODUCTION">介紹 INTRODUCTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%B0%8D%E8%B1%A1%E7%B5%90%E6%A7%8B_THE_TCL_OBJ_STRUCTURE" title="對象結構 THE TCL_OBJ STRUCTURE">對象結構 THE TCL_OBJ STRUCTURE</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%B0%8D%E8%B1%A1%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F%E7%A4%BA%E4%BE%8B_EXAMPLE_OF_THE_LIFETIME_OF_AN_OBJECT" title="對象生命週期示例 EXAMPLE OF THE LIFETIME OF AN OBJECT">對象生命週期示例 EXAMPLE OF THE LIFETIME OF AN OBJECT</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%B0%8D%E8%B1%A1%E7%9A%84%E5%AD%98%E5%84%B2%E7%AE%A1%E7%90%86_STORAGE_MANAGEMENT_OF_OBJECTS" title="對象的存儲管理 STORAGE MANAGEMENT OF OBJECTS">對象的存儲管理 STORAGE MANAGEMENT OF OBJECTS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO" title="參見 SEE ALSO">參見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS" title="關鍵字 KEYWORDS">關鍵字 KEYWORDS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國 Linux 論壇 man 手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/Object.3tcl.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/Object.3tcl.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/Object.3tcl.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/Object.3tcl.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/Object.3tcl.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/libmotif-dev/Object.3.en.html">3 (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/nsf/Object.3nx.en.html">3nx (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/Object.3tcl.zh_TW.html">3tcl (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">Tcl_Obj(3tcl)</td>
+    <td class="head-vol">Tcl Library Procedures</td>
+    <td class="head-rtitle">Tcl_Obj(3tcl)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<pre>
+
+</pre>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+Tcl_NewObj, Tcl_DuplicateObj, Tcl_IncrRefCount, Tcl_DecrRefCount, Tcl_IsShared,
+  Tcl_InvalidateStringRep - 操縱 Tcl 對象
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_SYNOPSIS">總覽 SYNOPSIS<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS">¶</a></h1>
+<pre><b>#include &lt;tcl.h&gt;</b>
+
+Tcl_Obj *
+<b>Tcl_NewObj</b>()
+
+Tcl_Obj *
+<b>Tcl_DuplicateObj</b>(<i>objPtr</i>)
+
+<b>Tcl_IncrRefCount</b>(<i>objPtr</i>)
+
+<b>Tcl_DecrRefCount</b>(<i>objPtr</i>)
+
+int
+<b>Tcl_IsShared</b>(<i>objPtr</i>)
+
+<b>Tcl_InvalidateStringRep</b>(<i>objPtr</i>)
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參數_ARGUMENTS">參數 ARGUMENTS<a class="anchor" href="#%E5%8F%83%E6%95%B8_ARGUMENTS">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>Tcl_Obj	<i>*objPtr</i>	(in)</dt>
+  <dd>指向一個對象；必須是以前調用
+      <b>Tcl_NewObj</b> 返回的結果。
+    <pre>
+
+    </pre>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="介紹_INTRODUCTION">介紹 INTRODUCTION<a class="anchor" href="#%E4%BB%8B%E7%B4%B9_INTRODUCTION">¶</a></h1>
+這個手冊頁提供了對 Tcl
+  對象以及如何使用它們的一個概述。它還描述了管理
+  Tcl
+  對象的一些一般過程。使用這些過程來建立和複製對象，和增加和減少到對象的引用(指針)計數。這些過程與那些在特定類型的對象如
+  <b>Tcl_GetIntFromObj</b> 和 <b>Tcl_ListObjAppendElement</b>
+  上進行操作的過程聯合使用。單獨的過程和它們所操縱的數據結構被放在一起描述。
+<p class="Pp">Tcl
+    的雙端口(<i>dual-ported</i>)對象爲存儲和交換
+    Tcl
+    值提供了一個通用的機制。它們在很大程度上替代了
+    Tcl
+    中字符串的使用。例如，它們被用來存儲變量值、命令參數、命令結果、和腳本。Tcl
+    對象外在表現很象字符串，但它還持有可以被更加有效的操縱的內部表示。例如，現在一個
+    Tcl
+    列表被表示爲持有列表的字符串表示的一個對象，如同到每個列表元素的指針的一個數組。雙端口對象避免了運行時的類型轉換。它們還提高了許多操作的速度，原因是可以立即獲得一個適當的表示。編譯器自身使用
+    Tcl
+    對象來緩存(cache)作爲編譯腳本的結果的字節碼指令。</p>
+<p class="Pp">這兩種表示互爲緩存並且被以懶惰方式計算。就是說，每個表示都只在需要時才被計算，它被從另一種表示計算出來，而一旦被計算出來了，它就被保存起來。除此之外，其中一個表示的改變將使另一個表示成爲無效
+    。舉個例子，一個做整數運算的
+    Tcl
+    程序可以在一個變量的內部機器整數表示上進行直接操作，而不需要經常性的在整數和字符串之間進行轉換。只有在需要這個變量的值的一個字符串表示的時候，比如打印它，程序才重新生成這個整數的字符串表示。儘管對象包含一個內部表示，但它們的語義仍是依據字符串定義的:
+    總是可以獲取最新的字符串，在取回對象的字符串表示的時候，對對象的任何改變都將反映到取回的那個字符串上。因爲這個表示是無效的並被重新生成了，擴展作者直接訪問
+    <b>Tcl_Obj</b>
+    的字段是很危險的。最好使用
+    <b>Tcl_GetStringFromObj</b> 和 <b>Tcl_GetString</b>
+    這樣的過程來訪問
+    <b>Tcl_Obj</b> 信息。</p>
+<p class="Pp">在堆上分配對象，使用到它們的
+    <b>Tcl_Obj</b>
+    結構的指針引用對象。對象要儘可能的共享。這將顯著的縮減存儲需求，原因是一些對象比如長列表是非常大的。還有，多數
+    Tcl
+    值只是被讀而從不被修改。尤其是過程參數，它們可以在調用和被調用的過程之間共享。賦值和參數綁定是通過簡單的賦予到這個值的一個指針完成的。使用引用計數來確定什麼時候歸還一個對象的存儲是安全的。</p>
+<p class="Pp">Tcl
+    對象是有類型的(typed)。一個對象的內部表示由它自己的類型來控制。在
+    Tcl
+    核心中預定義了七種類型，其中包括：整數、雙精度浮點數、列表、和字節碼。擴展作者可是使用
+    <b>Tcl_RegisterObjType</b>
+    過程來擴展類型的集合。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="對象結構_THE_TCL_OBJ_STRUCTURE">對象結構 THE TCL_OBJ STRUCTURE<a class="anchor" href="#%E5%B0%8D%E8%B1%A1%E7%B5%90%E6%A7%8B_THE_TCL_OBJ_STRUCTURE">¶</a></h1>
+每個 Tcl
+  對象都被表示爲一個
+  <b>Tcl_Obj</b>
+  結構，其定義如下。
+<div class="Bd-indent">
+<pre>typedef struct Tcl_Obj {
+	int <i>refCount</i>;
+	char *<i>bytes</i>;
+	int <i>length</i>;
+	Tcl_ObjType *<i>typePtr</i>;
+	union {
+		long <i>longValue</i>;
+		double <i>doubleValue</i>;
+		VOID *<i>otherValuePtr</i>;
+		struct {
+			VOID *<i>ptr1</i>;
+			VOID *<i>ptr2</i>;
+		} <i>twoPtrValue</i>;
+	} <i>internalRep</i>;
+} Tcl_Obj;
+</pre>
+</div>
+<i>bytes</i> 和 <i>length</i>
+  成員一起持有一個對象的字符串表示，這是一個已計數的
+  (<i>counted</i>)
+  字符串或二進制串 (<i>binary
+  string</i>)，二進制串可能包含有嵌入的
+  null
+  字節的二進制串。<i>bytes</i>
+  指向這個字符串表示的第一個字節。<i>length</i>
+  成員給出字節數。字節數組的在偏移量
+  <i>length</i>
+  上，也就是最後一個字節後面必須總是有一個
+  null；這允許不包含 null
+  的字符串表示被作爲一個常規的用
+  null 終結的 C
+  語言字符串來對待。 C
+  程序使用 <b>Tcl_GetStringFromObj</b> 和
+  <b>Tcl_GetString</b>
+  來得到一個對象的字符串表示。如果
+  <i>bytes</i> 是
+  NULL，則字符串表示無效。
+<p class="Pp">一個對象的類型管理它的內部表示。成員
+    <i>typePtr</i> 指向描述類型的
+    Tcl_ObjType 結構。如果 <i>typePtr</i> is
+    是
+    NULL，則內部表示無效。</p>
+<p class="Pp"><i>internalRep</i>
+    聯合成員持有一個對象的內部表示。它可以是一個(長)整數，一個雙精度浮點數，或者一個指針、它指向包含這個類型的對象要表示對象所需要的補充信息的值，或者是兩個任意的指針。</p>
+<p class="Pp">使用 <i>refCount</i>
+    成員來通告在什麼時候釋放一個對象的存儲是安全的。它持有到這個對象的活躍引用的計數。維護正確的引用計數是擴展作者的一個關鍵性的責任。在下面的對象的存儲管理
+    (<b>STORAGE MANAGEMENT OF OBJECTS</b>)
+    章節中討論了引用計數。</p>
+<p class="Pp">儘管擴展的作者可以直接訪問一個
+    Tcl_Obj
+    結構的成員，但最好還是使用恰當的過程和宏。例如，擴展作者永遠不要直接讀或修改
+    <i>refCount</i>；作爲替代，他們應當使用象
+    <b>Tcl_IncrRefCount</b> 和 <b>Tcl_IsShared</b>
+    這樣的宏。</p>
+<p class="Pp">Tcl
+    對象的一個關鍵屬性是它持有兩個表示。典型的，一個對象開始時只包含一個字符串表示:
+    它是無類型的並且<i>typePtr</i>
+    是一個 NULL。分別使用
+    <b>Tcl_NewObj</b> 或 <b>Tcl_NewStringObj</b>
+    建立包含一個空串的一個對象或一個指定字符串的一個復件。一個對象的字符串值可以使用
+    <b>Tcl_GetStringFromObj</b> 或 <b>Tcl_GetString</b>
+    來獲取並使用 <b>Tcl_SetStringObj</b>
+    來改變它。如果如果這個對象以後被傳遞給象
+    <b>Tcl_GetIntFromObj</b>
+    這樣的要求一個特定的內部表示的過程，則這個過程將建立一個內部表示並設置這個對象的
+    <i>typePtr</i>。從字符串表示來計算它的內部表示。一個對象的兩個表示是雙重的:
+    對一個的改變也將反映到另一個上。例如，<b>Tcl_ListObjReplace</b>
+    將修改一個對象的內部表示，下一個到
+    <b>Tcl_GetStringFromObj</b> 或 <b>Tcl_GetString</b>
+    的調用將反映這個改變。</p>
+<p class="Pp">出於效率的原因以懶惰方式重計算表示。一個過程如
+    <b>Tcl_ListObjReplace</b>
+    對一個表示的改變不立即反映到另一個表示上。作爲替代，把另一個表示標記爲無效，如果以後需要的話再重新生成。多數
+    C
+    程序員永遠無須關心這是如何完成的，他們只是簡單的使用象
+    <b>Tcl_GetBooleanFromObj</b> 或 <b>Tcl_ListObjIndex</b>
+    這樣的過程。而實現自己的對象類型的程序員必須檢查無效表示和在需要時標記一個表示爲無效。使用過程
+    <b>Tcl_InvalidateStringRep</b>
+    來標記一個對象的字符串表示爲無效並釋放與這個字符串表示相關聯的存儲。</p>
+<p class="Pp">對象在它的一生當中通常保持一種類型，但是有時一個對象必須從一種類型轉換成另一種類型。例如，一個
+    C
+    程序可以通過重複調用
+    <b>Tcl_AppendToObj</b>
+    來在一個對象中建造一個字符串，並接着調用
+    <b>Tcl_ListObjIndex</b>
+    來從一個對象中提取一個列表元素。持有相同字符串的同樣的對象在不同的時候可能有多種不同的內部表示。擴展作者可以使用
+    <b>Tcl_ConvertToType</b>
+    過程強制把一個對象從一種類型轉換成另一種類型。只有建立新對象類型的程序員才需要關心這是如何作的。作爲對象類型實現的一部分，需要定義爲一個對象建立一個新的內部表示和改變它
+    <i>typePtr</i>
+    的一個過程。如何建立一個新對象類型請參見
+    <b>Tcl_RegisterObjType</b> 手冊頁。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="對象生命週期示例_EXAMPLE_OF_THE_LIFETIME_OF_AN_OBJECT">對象生命週期示例 EXAMPLE OF THE LIFETIME OF AN OBJECT<a class="anchor" href="#%E5%B0%8D%E8%B1%A1%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F%E7%A4%BA%E4%BE%8B_EXAMPLE_OF_THE_LIFETIME_OF_AN_OBJECT">¶</a></h1>
+作爲一個對象生命週期的一個例子，考慮下列命令序列:
+<div class="Bd-indent">
+<pre><b>set x 123</b>
+</pre>
+</div>
+這裏把一個未知類型的對象賦值給
+  <i>x</i>，這個對象的 <i>bytes</i>
+  成員指向 <b>123</b> 而 <i>length</i>
+  成員包含 3。對象的
+  <i>typePtr</i> 成員是 NULL。
+<div class="Bd-indent">
+<pre><b>puts &#34;x is $x&#34;</b>
+</pre>
+</div>
+<i>x</i>
+  的字符表示是有效的(因爲
+  <i>bytes</i> 是非
+  NULL)並被這個命令取回。
+<div class="Bd-indent">
+<pre><b>incr x</b>
+</pre>
+</div>
+<b>incr</b> 命令首先通過調用
+  <b>Tcl_GetIntFromObj</b> 從 x
+  (所引用的)的對象的得到一個整數。這個過程檢查這個對象是否已經是一個整數對象。由於它不是，就通過把這個對象的
+  <i>internalRep.longValue</i>
+  成員設置爲整數
+  <b>123</b>，並把這個對象的
+  <i>typePtr</i>
+  設置爲指向整數的 Tcl_ObjType
+  結構，此過程把這個對象轉換成了整數對象。兩個表示現在都是有效的。<b>incr</b>
+  增加這個對象的整數內部表示，接着使它的字符串表示無效(通過調用
+  <b>Tcl_InvalidateStringRep</b>)，原因是這個字符串表示不再與內部表示相對應了。
+<div class="Bd-indent">
+<pre><b>puts &#34;x is now $x&#34;</b>
+</pre>
+</div>
+現在需要 <i>x</i>
+  (所引用的)的對象的字符串表示，要重新計算它。字符串表示現在是
+  <b>124</b>。兩個表示又都是有效的了。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="對象的存儲管理_STORAGE_MANAGEMENT_OF_OBJECTS">對象的存儲管理 STORAGE MANAGEMENT OF OBJECTS<a class="anchor" href="#%E5%B0%8D%E8%B1%A1%E7%9A%84%E5%AD%98%E5%84%B2%E7%AE%A1%E7%90%86_STORAGE_MANAGEMENT_OF_OBJECTS">¶</a></h1>
+Tcl
+  對象在堆上分配，並且要儘可能的共享對象來縮減存儲需求。使用引用計數來確定何時一個對象不再被需要並可以被安全的釋放。剛用
+  <b>Tcl_NewObj</b> 或 <b>Tcl_NewStringObj</b>
+  建立的對象的 <i>refCount</i> 是
+  0。當建立到這個對象的一個新引用時，使用宏
+  <b>Tcl_IncrRefCount</b>
+  增加引用計數。當不再需要一個引用的時候
+  ，使用 <b>Tcl_DecrRefCount</b>
+  減少引用計數，而且如果這個對象的引用計數下降到零，就釋放它的存儲。被不同的代碼或數據結構共享的一個對象的
+  <i>refCount</i> 大於
+  1。增加一個對象的引用計數來確保它不會被過早釋放或者它的值被意外的改變。
+<p class="Pp">舉個例子，字節碼解釋器在調用者和被調用的過程之間共享參數對象，以避免複製對象。它把調用者的實際參數的對象賦值給過程的形式參數變量。此時，它調用
+    <b>Tcl_IncrRefCount</b>
+    來增加每個實際參數(所引用的)的對象的引用計數，原因是有了從形式參數到這個對象的一個新引用。在被調用的過程返回的時候，解釋器調用
+    <b>Tcl_DecrRefCount</b>
+    來減少每個參數的引用計數。當一個對象的引用下降到小於等於零的時候，
+    <b>Tcl_DecrRefCount</b>
+    歸還它的存儲。多數命令過程不是必須關心引用計數的，原因是它們立即使用一個對象的值並且在它們返回之後不保留到這個對象的指針。但是，如果它們把到一個對象的指針保留到一個數據結構中，則他們必須注意要增加它的引用計數，原因是這個保留的指針是一個新引用。</p>
+<p class="Pp">象 <b>lappend</b> 和 <b>linsert</b>
+    這樣的直接修改對象的命令過程必須注意要在修改一個共享的對象之前複製它。
+    他們必須首先調用
+    <b>Tcl_IsShared</b>
+    來檢查這個對象是否是共享的。如果對象是共享的，則他們必須使用
+    <b>Tcl_DuplicateObj</b>
+    複製這個對象；它返回原始對象的一個新複製品，其
+    <i>refCount</i> 是
+    0。如果對象未被共享，則命令過程“擁有”這個對象並可以安全的直接修改它。例如，下列代碼出現在實現
+    <b>linsert</b>
+    的命令過程當中。通過在
+    <i>index</i> 的前面插入 <i>objc-3</i>
+    新元素，這個過程修改在
+    <i>objv[1]</i>
+    中傳遞給它的列表對象
+    。</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>listPtr = objv[1];
+if (Tcl_IsShared(listPtr)) {
+	listPtr = Tcl_DuplicateObj(listPtr);
+}
+result = Tcl_ListObjReplace(interp, listPtr, index, 0, (objc-3), &amp;(objv[3]));
+</pre>
+</div>
+<p class="Pp">另一個例子，<b>incr</b>
+    的命令過程在增加變量(所引用的)對象內部表示中的整數之前，必須檢查這個變量(所引用的)對象是否是共享的。如果它是共享的，則需要複製這個對象，目的是避免意外的改變在其他數據結構中值。</p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_SEE_ALSO">參見 SEE ALSO<a class="anchor" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO">¶</a></h1>
+Tcl_ConvertToType, Tcl_GetIntFromObj, Tcl_ListObjAppendElement,
+  Tcl_ListObjIndex, Tcl_ListObjReplace, Tcl_RegisterObjType
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="關鍵字_KEYWORDS">關鍵字 KEYWORDS<a class="anchor" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS">¶</a></h1>
+internal representation, object, object creation, object type, reference
+  counting, string representation, type conversion
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>寒蟬退士</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/10/30</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國_Linux_論壇_man_手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8B_Linux_%E8%AB%96%E5%A3%87_man_%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">8.0</td>
+    <td class="foot-os">Tcl</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+Object.3tcl.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:29Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"Object(3tcl)\"}}]}"
+</script>

@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sed(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/sed.1.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/sed/sed.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-hu/sed.1.hu.html" hreflang="hu">
+<link rel="alternate" href="../../buster/manpages-ja/sed.1.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/sed.1.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/sed.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/sed.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; sed(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/sed.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/sed.1.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%90%8D%E7%A7%B0" title="名称">名称</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%91%98%E8%A6%81" title="摘要">摘要</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%91%BD%E4%BB%A4%E6%91%98%E8%A6%81" title="命令摘要">命令摘要</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%9C%B0%E5%9D%80" title="地址">地址</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F" title="正则表达式">正则表达式</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85" title="作者">作者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%89%88%E6%9D%83" title="版权">版权</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E8%A7%81" title="参见">参见</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/sed.1.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/sed.1.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/sed.1.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/sed.1.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/sed/sed.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-hu/sed.1.hu.html" title="Hungarian (hu)">magyar</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/sed.1.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/sed.1.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/sed.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/sed.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/sed.1.zh_CN.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/9base/sed.1plan9.en.html">1plan9 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">SED(1)</td>
+    <td class="head-vol">用户命令</td>
+    <td class="head-rtitle">SED(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="名称">名称<a class="anchor" href="#%E5%90%8D%E7%A7%B0">¶</a></h1>
+sed -
+  文本筛选和格式转换的流式编辑器
+</section>
+<section class="Sh">
+<h1 class="Sh" id="摘要">摘要<a class="anchor" href="#%E6%91%98%E8%A6%81">¶</a></h1>
+<b>sed</b> [<i>选项</i>]... <i>{script-only-if-no-other-script}
+  </i>[<i>输入文件</i>]...
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<i>Sed</i>是一个流式编辑器。流式编辑器是用来在输入流（一个文件或者管道输入）中
+  完成基本文本转换的。当在一些允许脚本编辑的编辑器中（比如<i>ed</i>），<i>sed</i>通过将
+  输入传输为一个输入来工作，这样更高效。但是是<i>sed</i>的功能来过滤管道的文本并
+  从其他类型的编辑器中特别识别出这些文本。
+<p class="Pp HP"><b>-n</b>, <b>--quiet</b>, <b>--silent</b></p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>不自动打印模式空间的内容</dd>
+</dl>
+<p class="Pp HP"><b>-e</b> 脚本,
+    <b>--expression</b>=<i>脚本</i></p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>添加脚本到将要执行的命令</dd>
+</dl>
+<p class="Pp HP"><b>-f</b> 脚本文件,
+    <b>--file</b>=<i>脚本文件</i></p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>添加脚本文件的内容到即将执行的命令</dd>
+</dl>
+<p class="Pp HP"><b>--follow-symlinks</b></p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>处理已存在文件时跟随链接</dd>
+</dl>
+<p class="Pp HP"><b>-i[SUFFIX]</b>, <b>--in-place</b>[=<i>SUFFIX</i>]</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>编辑已存在的文件（如果提供了SUFFIX作为后缀则做备份）</dd>
+</dl>
+<p class="Pp HP"><b>-l</b> N, <b>--line-length</b>=<i>N</i></p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>指定&#39;l&#39;命令需要的自动换行长度</dd>
+</dl>
+<p class="Pp HP"><b>--posix</b></p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>禁用所有GNU插件。</dd>
+</dl>
+<p class="Pp HP"><b>-E</b>, <b>-r</b>, <b>--regexp-extended</b></p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>在脚本中使用扩展正则表达式（为了可移植性，请使用符合POSIX的<b>-E</b>）</dd>
+</dl>
+<p class="Pp HP"><b>-s</b>, <b>--separate</b></p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>将多个文件分别看待，而非统一视作同个连续的流。</dd>
+</dl>
+<p class="Pp HP"><b>--sandbox</b></p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>在沙箱模式下操作。</dd>
+</dl>
+<p class="Pp HP"><b>-u</b>, <b>--unbuffered</b></p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>从输入文件中读取最少量的数据并更频繁地刷新输出缓冲区</dd>
+</dl>
+<p class="Pp HP"><b>-z</b>, <b>--null-data</b></p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>用NUL字符分割行</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt><b>--help</b></dt>
+  <dd>显示这个帮助并退出</dd>
+  <dt><b>--version</b></dt>
+  <dd>输出版本信息并退出</dd>
+</dl>
+<p class="Pp">如果没有给出<b>-e</b>，<b>--expression</b>，<b>-f</b>，或者<b>--file</b>选项，
+    那么第一个非选项参数会被当作sed脚本解释。所有余下的参数是输入文件的名称；
+    如果没有指定输入文件，那么就会读取标准输入。</p>
+<p class="Pp">GNU
+    sed主页：&lt;<a href="../../software/sed/">../../software/sed/</a>&gt;。使用GNU软件的通用帮助
+    ：&lt;<a href="../../gethelp/">../../gethelp/</a>&gt;。Bug报告请发送电子邮件至：&lt;bug-sed@gnu.org&gt;。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="命令摘要">命令摘要<a class="anchor" href="#%E5%91%BD%E4%BB%A4%E6%91%98%E8%A6%81">¶</a></h1>
+这只是为已经知道<i>sed</i>命令和相关文档（例如texinfo文档），需要翻阅命令完整
+  描述的人准备的<i>sed</i>命令的简短摘要。
+<section class="Ss">
+<h2 class="Ss" id="零地址“命令”">零地址“命令”<a class="anchor" href="#%E9%9B%B6%E5%9C%B0%E5%9D%80%E2%80%9C%E5%91%BD%E4%BB%A4%E2%80%9D">¶</a></h2>
+<dl class="Bl-tag">
+  <dt>: <i>label</i></dt>
+  <dd><b>b</b> 和 <b>t</b>
+      命令的标签。</dd>
+  <dt>#<i>comment</i></dt>
+  <dd>注释将会延长到下一个新行
+      (或者一个 <b>-e</b>
+      脚本片段的结尾。）</dd>
+  <dt>}</dt>
+  <dd>一个{ }块的闭括号。</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="零或一地址命令">零或一地址命令<a class="anchor" href="#%E9%9B%B6%E6%88%96%E4%B8%80%E5%9C%B0%E5%9D%80%E5%91%BD%E4%BB%A4">¶</a></h2>
+<dl class="Bl-tag">
+  <dt>=</dt>
+  <dd>答应当前行的行号。</dd>
+  <dt>a \</dt>
+  <dd></dd>
+  <dt><i>text</i></dt>
+  <dd>追加 <i>text</i>,
+      text可以通过预先写入反斜杠来嵌入新行。</dd>
+  <dt>i \</dt>
+  <dd></dd>
+  <dt><i>text</i></dt>
+  <dd>插入 <i>text</i>,
+      text可以通过预先写入反斜杠来嵌入新行。</dd>
+  <dt>q [<i>exit-code</i>]</dt>
+  <dd>立即退出<i>sed</i>脚本而不处理其他输入，除非自动打印没有禁用使得当前模式
+      空间将会被打印。[<i>exit-code</i>]是GNU插件（扩展）。</dd>
+  <dt>Q [<i>exit-code</i>]</dt>
+  <dd>立即退出<i>sed</i>脚本而不处理其他输入。这是一个GNU插件。</dd>
+  <dt>r <i>文件名</i></dt>
+  <dd>从 <i>文件名</i>
+      读取内容并追加到最后。</dd>
+  <dt>R <i>文件名</i></dt>
+  <dd>从 <i>文件名</i>
+      读取一行并追加到最后。每次调用这个命令就从文件中读取一
+      行。这是一个GNU插件。</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="接受范围地址的命令">接受范围地址的命令<a class="anchor" href="#%E6%8E%A5%E5%8F%97%E8%8C%83%E5%9B%B4%E5%9C%B0%E5%9D%80%E7%9A%84%E5%91%BD%E4%BB%A4">¶</a></h2>
+<dl class="Bl-tag">
+  <dt>{</dt>
+  <dd>开始一个命令块（以一个}结束）。</dd>
+  <dt>b <i>label</i></dt>
+  <dd>程序跳转到<i>label</i>处;如果<i>label</i>被省略，跳转到脚本尾部。</dd>
+  <dt>c \</dt>
+  <dd></dd>
+  <dt><i>text</i></dt>
+  <dd>用 <i>text</i> 代替选择的行,
+      <i>text</i>
+      可以通过预先写入反斜杠来嵌入新行。</dd>
+  <dt>d</dt>
+  <dd>删除模式空间。
+      开始下一个循环。</dd>
+  <dt>D</dt>
+  <dd>如果模式空间包含新行，在d命令发布之后开始一个新的普通循环。否则，
+      删除模式空间中的text直到新行，并且在不读入新行的情况下，用结果的
+      模式空间开始一个循环。</dd>
+  <dt>h H</dt>
+  <dd>复制/追加模式空间到保存空间。</dd>
+  <dt>g G</dt>
+  <dd>复制/追加保存空间到模式空间。</dd>
+  <dt>l</dt>
+  <dd>用“直观明确”的格式列出当前行。</dd>
+  <dt>l <i>width</i></dt>
+  <dd>用“直观明确”的格式列出当前行，在<i>width</i>字符处结束。这是一个GNU插件。</dd>
+  <dt>n N</dt>
+  <dd>读取/追加下一行输入到模式空间。</dd>
+  <dt>p</dt>
+  <dd>输出当前的模式空间。</dd>
+  <dt>P</dt>
+  <dd>输出直到遇到当前模式空间的第一个嵌入的换行符。</dd>
+  <dt>s/<i>regexp</i>/<i>replacement</i>/</dt>
+  <dd>尝试与模式空间匹配<i>regexp</i>，如果成功，用<i>replacement</i>代替匹配的部分
+      。<i>replacement</i>可能包含特殊字符<b>&amp;</b>来引用模式空间中匹配的部分，而特殊
+      字符\1到\9则引用<i>regexp</i>中对应匹配的子表达式。</dd>
+  <dt>t <i>label</i></dt>
+  <dd>自上次输入行读取之后并且上次执行了t或者T命令之后，如果一个s///被
+      成功替换，那么跳转到<i>label</i>处;如果<i>label</i>被忽略，跳转到脚本结尾。</dd>
+  <dt>T <i>label</i></dt>
+  <dd>自上此输入行读取之后并借上次执行了t或者T命令之后，如果一个s///被
+      成功替换，那么跳转到<i>label</i>处;如果<i>label</i>被忽略，跳转到脚本结尾。这是
+      一个GNU插件。</dd>
+  <dt>w <i>filename</i></dt>
+  <dd>将当前的模式空间写入到<i>filename</i>中。</dd>
+  <dt>W <i>filename</i></dt>
+  <dd>写入当前模式空间的第一行到<i>filename</i>中。这是一个GNU插件。</dd>
+  <dt>x</dt>
+  <dd>交换模式空间和保存空间的内容。</dd>
+  <dt>y/<i>source</i>/<i>dest</i>/</dt>
+  <dd>将模式空间中显示为<i>source</i>的字符用<i>dest</i>字符来写出。</dd>
+</dl>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="地址">地址<a class="anchor" href="#%E5%9C%B0%E5%9D%80">¶</a></h1>
+<i>Sed</i>命令可以没有指定地址，这样将会为所有行执行命令。如果给出了一个地址，
+  这样命令就只会为匹配此地址的行执行；如果给出了两个地址，这样命令将会对
+  从匹配的第一个地址到第二个地址的区域的所有输入行执行命令。
+  关于地址范围有三点：语法为：<i>addr1
+  ,
+  addr2</i>（比如，地址要用逗号分开）；
+  <i>addr1</i>匹配的行一定会被接受，即使<i>addr2</i>选定的是更靠前的行；并且如果<i>addr2</i>是
+  一个<i>regexp</i>（正则表达式），它将不会重复测试<i>addr</i>匹配的行。
+<p class="Pp">在地址（或地址范围）之后，在命令之前，可以插入一个<b>!</b>，这个符号定义的命令
+    只有在地址（地址范围）<b>不</b>匹配的时候才能执行。</p>
+<p class="Pp">支持下面的地址类型：</p>
+<dl class="Bl-tag">
+  <dt><i>number</i></dt>
+  <dd>只匹配行号为<i>number</i>的行。（除非<b>-s</b>选项在命令行中被指定，number值将
+      会按照文件数渐增。）</dd>
+  <dt><i>first</i>~<i>step</i></dt>
+  <dd>匹配每一个第<i>step</i>行并从<i>first</i>开始计数。举个栗子，``sed
+      -n 1~2p&#39;&#39;将
+      打印出输入流所有奇数行，而地址2~5将匹配从第2行开始的，以5为步长的
+      行。<i>first</i>可以是零；这样，<i>sed</i>按其为<i>step</i>来操作。（这是一个插件。）</dd>
+  <dt>$</dt>
+  <dd>匹配最近的行。</dd>
+  <dt>/<i>regexp</i>/</dt>
+  <dd>匹配符合正则表达式<i>regexp</i>的行。</dd>
+  <dt><b>\c</b><i>regexp</i><b>c</b></dt>
+  <dd>匹配符合正则表达式<i>regexp</i>的行。
+      其中<b>c</b>可以是任意字符。</dd>
+</dl>
+<p class="Pp">GNU<i>sed</i>同样支持某些特殊2地址格式：</p>
+<dl class="Bl-tag">
+  <dt>0,<i>addr2</i></dt>
+  <dd>从“匹配了第一个地址”状态始，直到发现<i>addr2</i>。这和<i>1,
+      addr2</i>很相似，
+      除了当<i>addr2</i>匹配了输入的第一行，<i>0,
+      addr2</i>形式将在该范围的结尾；而
+      <i>1,
+      addr2</i>形式仍然在该范围的开始。这种形式只有在<i>addr2</i>是正则表达式
+      的情况下才有效。</dd>
+  <dt><i>addr1</i>,+<i>N</i></dt>
+  <dd>将会匹配 <i>addr1</i> 和在
+      <i>addr1</i> 之后的 <i>N</i> 行。</dd>
+  <dt><i>addr1</i>,~<i>N</i></dt>
+  <dd>将会匹配 <i>addr1</i> 和 <i>addr1</i>
+      之后的输入行数是 <i>N</i>
+      倍的下一行。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="正则表达式">正则表达式<a class="anchor" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F">¶</a></h1>
+POSIX.2
+  BREs<i>应该</i>是支持的，但是由于性能的原因，这个特性还不完全。其中
+  <b>\n</b>序列匹配换行符，<b>\a</b>、<b>\t</b>和其他序列也是类似的。<i>-E</i>选项开关用来选择是否使用扩展正则
+  表达式；-E选项已经由GNU
+  sed支持了很多年，现已包含于POSIX中。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+请将错误报告发送至<b>bug-sed@gnu.org</b>。另外，请在邮件正文中尽量包含
+  ``sed --version&#39;&#39;的信息。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者">作者<a class="anchor" href="#%E4%BD%9C%E8%80%85">¶</a></h1>
+由 Jay Fenlason, Tom Lord, Ken Pizzini, 和 Paolo
+  Bonzini写成。 GNU sed 主页:
+  &lt;<a href="../../software/sed/">../../software/sed/</a>&gt;. 使用 GNU
+  软件的一般性手册:
+  &lt;<a href="../../gethelp/">../../gethelp/</a>&gt;. E-mail bug 报告到:
+  &lt;bug-sed@gnu.org&gt;.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="版权">版权<a class="anchor" href="#%E7%89%88%E6%9D%83">¶</a></h1>
+Copyright © 2017 Free Software Foundation, Inc. License GPLv3+: GNU GPL
+  version 3 or later &lt;<a href="../../licenses/gpl.html">../../licenses/gpl.html</a>&gt;.
+<br/>
+This is free software: you are free to change and redistribute it. There is NO
+  WARRANTY, to the extent permitted by law.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参见">参见<a class="anchor" href="#%E5%8F%82%E8%A7%81">¶</a></h1>
+<a href="../../buster/9base/awk.1plan9.en.html">awk(1)</a>, <a href="../../buster/ed/ed.1.en.html">ed(1)</a>, <a href="../../buster/manpages-zh/grep.1.zh_CN.html">grep(1)</a>, <a href="../../buster/coreutils/tr.1.en.html">tr(1)</a>, <a href="../../buster/perl-doc/perlre.1.en.html">perlre(1)</a>,
+  sed.info,
+  任何和<i>sed</i>相关的书籍，
+  <i>sed</i>常见问题(<a href="../../grabbag/tutorials/sedfaq.txt%29%EF%BC%8C">../../grabbag/tutorials/sedfaq.txt)，</a>
+  <a href="../../grabbag/%E3%80%82">../../grabbag/。</a>
+<p class="Pp"><b>sed</b>
+    的完整文档是作为Texinfo手册维护的。如果<b>info</b>和<b>sed</b>程序正确的安装，
+    可以执行</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd><b>info sed</b></dd>
+</dl>
+<p class="Pp">命令来访问完整的手册。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<p class="Pp">翻译人员：Means Lee
+  <br/>
+  翻译日期：2017-05-15
+  <br/>
+  原始软件：sed
+  <br/>
+  中文 man
+    手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2017年2月</td>
+    <td class="foot-os">sed 4.4</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+sed.1.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-17T21:40:52Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"sed(1)\"}}]}"
+</script>

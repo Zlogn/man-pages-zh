@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>html(3tcl) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/tcllib/html.3tcl.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/html.3tcl.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/html.3tcl.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="3tcl">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; html(3tcl)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/html.3tcl">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/html.3tcl.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%80%BB%E8%A7%88_SYNOPSIS" title="总览 SYNOPSIS">总览 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E8%A7%81_SEE_ALSO" title="参见 SEE ALSO">参见 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%85%B3%E9%94%AE%E5%AD%97_KEYWORDS" title="关键字 KEYWORDS">关键字 KEYWORDS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D" title="[中文版维护人]">[中文版维护人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中国 Linux 论坛 man 手册页翻译计划》:">《中国 Linux 论坛 man 手册页翻译计划》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/html.3tcl.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/html.3tcl.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/html.3tcl.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/tcllib/html.3tcl.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/html.3tcl.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/html.3tcl.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">html(3tcl)</td>
+    <td class="head-vol">HTML Generation</td>
+    <td class="head-rtitle">html(3tcl)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+html - 产生 HTML 框架的子程序
+</section>
+<section class="Sh">
+<h1 class="Sh" id="总览_SYNOPSIS">总览 SYNOPSIS<a class="anchor" href="#%E6%80%BB%E8%A7%88_SYNOPSIS">¶</a></h1>
+package require <b>Tcl 8.2</b>
+<p class="Pp">package require <b>html ?1.2.1?</b></p>
+<p class="Pp"><b>::html::author</b> <i>author</i></p>
+<p class="Pp"><b>::html::bodyTag</b> <i>args</i></p>
+<p class="Pp"><b>::html::cell</b> <i>param value</i> ?<i>tag</i>?</p>
+<p class="Pp"><b>::html::checkbox</b> <i>name value</i></p>
+<p class="Pp"><b>::html::checkSet</b> <i>key sep list</i></p>
+<p class="Pp"><b>::html::checkValue</b> <i>name</i> ?<i>value</i>?</p>
+<p class="Pp"><b>::html::closeTag</b> </p>
+<p class="Pp"><b>::html::default</b> <i>key</i> ?<i>param</i>?</p>
+<p class="Pp"><b>::html::description</b> <i>description</i></p>
+<p class="Pp"><b>::html::end</b> </p>
+<p class="Pp"><b>::html::eval</b> <i>arg</i> ?<i>args</i>?</p>
+<p class="Pp"><b>::html::extractParam</b> <i>param key</i> ?<i>varName</i>?</p>
+<p class="Pp"><b>::html::font</b> <i>args</i></p>
+<p class="Pp"><b>::html::for</b> <i>start test next body</i></p>
+<p class="Pp"><b>::html::foreach</b> <i>varlist1 list1</i> ?<i>varlist2 list2
+    ...</i>? <i>body</i></p>
+<p class="Pp"><b>::html::formValue</b> <i>name</i> ?<i>defvalue</i>?</p>
+<p class="Pp"><b>::html::getFormInfo</b> <i>args</i></p>
+<p class="Pp"><b>::html::getTitle</b> </p>
+<p class="Pp"><b>::html::h</b> <i>level string</i> ?<i>param</i>?</p>
+<p class="Pp"><b>::html::h1</b> <i>string</i> ?<i>param</i>?</p>
+<p class="Pp"><b>::html::h2</b> <i>string</i> ?<i>param</i>?</p>
+<p class="Pp"><b>::html::h3</b> <i>string</i> ?<i>param</i>?</p>
+<p class="Pp"><b>::html::h4</b> <i>string</i> ?<i>param</i>?</p>
+<p class="Pp"><b>::html::h5</b> <i>string</i> ?<i>param</i>?</p>
+<p class="Pp"><b>::html::h6</b> <i>string</i> ?<i>param</i>?</p>
+<p class="Pp"><b>::html::hdrRow</b> <i>args</i></p>
+<p class="Pp"><b>::html::head</b> <i>title</i></p>
+<p class="Pp"><b>::html::headTag</b> <i>string</i></p>
+<p class="Pp"><b>::html::if</b> <i>expr1 body1</i> ?<b>elseif</b> <i>expr2 body2
+    ...</i>? ?<b>else</b> <i>bodyN</i>?</p>
+<p class="Pp"><b>::html::keywords</b> <i>args</i></p>
+<p class="Pp"><b>::html::mailto</b> <i>email</i> ?<i>subject</i>?</p>
+<p class="Pp"><b>::html::meta</b> <i>args</i></p>
+<p class="Pp"><b>::html::minorMenu</b> <i>list</i> ?<i>sep</i>?</p>
+<p class="Pp"><b>::html::minorList</b> <i>list</i> ?<i>ordered</i>?</p>
+<p class="Pp"><b>::html::openTag</b> <i>tag args</i></p>
+<p class="Pp"><b>::html::passwordInput</b> ?<i>name</i>?</p>
+<p class="Pp"><b>::html::passwordInputRow</b> <i>label</i> ?<i>name</i>?</p>
+<p class="Pp"><b>::html::quoteFormValue</b> <i>value</i></p>
+<p class="Pp"><b>::html::radioSet</b> <i>key sep list</i></p>
+<p class="Pp"><b>::html::radioValue</b> <i>name value</i></p>
+<p class="Pp"><b>::html::refresh</b> <i>seconds url</i></p>
+<p class="Pp"><b>::html::init</b> ?<i>list</i>?</p>
+<p class="Pp"><b>::html::row</b> <i>args</i></p>
+<p class="Pp"><b>::html::paramRow</b> <i>list</i> ?<i>rparam</i>?
+    ?<i>cparam</i>?</p>
+<p class="Pp"><b>::html::select</b> <i>name param choices</i>
+  ?<i>current</i>?</p>
+<p class="Pp"><b>::html::selectPlain</b> <i>name param choices</i>
+    ?<i>current</i>?</p>
+<p class="Pp"><b>::html::submit</b> <i>label</i> ?<i>name</i>?</p>
+<p class="Pp"><b>::html::set</b> <i>var val</i></p>
+<p class="Pp"><b>::html::tableFromArray</b> <i>arrname</i> ?<i>param</i>?
+    ?<i>pat</i>?</p>
+<p class="Pp"><b>::html::tableFromList</b> <i>querylist</i> ?<i>param</i>?</p>
+<p class="Pp"><b>::html::textarea</b> <i>name</i> ?<i>param</i>?
+    ?<i>current</i>?</p>
+<p class="Pp"><b>::html::textInput</b> <i>name args</i></p>
+<p class="Pp"><b>::html::textInputRow</b> <i>label name args</i></p>
+<p class="Pp"><b>::html::title</b> <i>title</i></p>
+<p class="Pp"><b>::html::varEmpty</b> <i>name</i></p>
+<p class="Pp"><b>::html::while</b> <i>test body</i></p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+<b>html</b> 包提供了产生 HTML
+  的命令。这些命令一般返回
+  HTML
+  字符串作为结果。特殊的是，它们不向
+  <b>stdout</b> 输出结果。
+<p class="Pp"><b>::html::init</b>
+    命令应当最早调用，从而初始化整个模块。也可以使用这个子程序来定义
+    HTML
+    标记参数的默认值。</p>
+<dl class="Bl-tag">
+  <dt><b>::html::author</b> <i>author</i></dt>
+  <dd><b>Side effect only</b>. 在调用 <b>::html::head</b>
+      之前调用它，来定义页面的作者。作者以
+      HEAD
+      段中的注释形式给出。</dd>
+  <dt><b>::html::bodyTag</b> <i>args</i></dt>
+  <dd>产生一个 BODY
+      标签。标签参数来自
+      <i>args</i> 或是在 <b>::html::init</b>
+      中定义的 body.* 属性。</dd>
+  <dt><b>::html::cell</b> <i>param value</i> ?<i>tag</i>?</dt>
+  <dd>产生一个 TD (或 TH)
+      标签，一个值，和一个关闭
+      TD (或 TH)
+      标签。标签参数来自<i>param</i>
+      或是在 <b>::html::init</b>
+      中定义的 TD.*
+      属性。它使用 <b>::html::font</b>
+      来在表格单元中插入一个标准的
+      FONT 标签。 <i>tag</i>
+      参数默认是 &#34;td&#34;.</dd>
+  <dt><b>::html::checkbox</b> <i>name value</i></dt>
+  <dd>产生一个 CHECKBOX
+      表单元素，使用指定的名称和值。这使用了
+      <b>::html::checkValue</b>.</dd>
+  <dt><b>::html::checkSet</b> <i>key sep list</i></dt>
+  <dd>产生一个 CHECKBOX
+      表单元素和相关标签的集合。<i>list</i>
+      应当包含一个可选标签和值的列表。这使用了
+      <b>::html::checkbox</b>.</dd>
+  <dt><b>::html::checkValue</b> <i>name</i> ?<i>value</i>?</dt>
+  <dd>为一个 CHECKBOX
+      表单元素产生一个
+      &#34;name=<i>name</i> value=<i>value</i>&#34; . 如果 CGI
+      变量 <i>name</i> 的值是
+      <i>value</i>，那么 SELECTED
+      将加入到返回值中。<i>value</i>
+      默认值是 &#34;1&#34;.</dd>
+  <dt><b>::html::closeTag</b> </dt>
+  <dd>从 <b>::html::openTag</b>
+      创建的栈中弹出一个标签，产生相应的关闭标签
+      (例如，/BODY)。</dd>
+  <dt><b>::html::default</b> <i>key</i> ?<i>param</i>?</dt>
+  <dd>这个子程序由 <b>::html::tagParam</b>
+      用来产生标签的参数名称和值列表。<b>::html::default</b>
+      子程序用来为那些不在
+      <i>param</i>
+      中的项目产生默认值。如果
+      <i>key</i> 代表的值匹配 <i>param</i>
+      中的一个值，那么这个子程序返回孔字符串。否则，它为
+      <i>key</i>
+      代表的表单元素返回一个
+      &#34;parameter=value&#34; 字符串。<i>key</i>
+      的形式是 &#34;tag.parameter&#34;
+      (例如，body.bgcolor)。使用
+      <b>::html::init</b>
+      来注册默认值。<i>param</i>
+      默认是空字符串。</dd>
+  <dt><b>::html::description</b> <i>description</i></dt>
+  <dd><b>Side effect only</b>. 在调用 <b>::html::head</b>
+      前调用它来为页面定义一个
+      META
+      标签。这个标签在随后调用
+      <b>::html::head</b> 时产生。</dd>
+  <dt><b>::html::end</b> </dt>
+  <dd>从栈中弹出所有开标签，产生相应的关闭标签
+      (例如，&lt;/body&gt;&lt;/html&gt;)。</dd>
+  <dt><b>::html::eval</b> <i>arg</i> ?<i>args</i>?</dt>
+  <dd>这个子程序类似于内置的
+      Tcl <b>eval</b>
+      命令，唯一的区别是它返回
+      &#34;&#34;, 因此可以在一个
+      HTML
+      模板文件中调用，不会添加不需要的结果。</dd>
+  <dt><b>::html::extractParam</b> <i>param key</i> ?<i>varName</i>?</dt>
+  <dd>这是一个解释程序，从
+      <i>param</i> ，一个 HTML 式样的
+      &#34;name=quotedvalue&#34;
+      列表中得到所有 <i>key</i>
+      的值。<i>varName</i> 用作一个
+      Tcl
+      变量名，赋以参数中找到的值。这个函数返回
+      1，如果 <i>param</i>
+      中找到了参数，否则返回
+      0。如果没有指定 <i>varName</i>
+      ，将使用 <i>key</i>
+      作为变量名。</dd>
+  <dt><b>::html::font</b> <i>args</i></dt>
+  <dd>产生一个标准的 FONT
+      标签。标签的参数来自
+      <i>args</i> 和 <b>::html::init</b> 定义的 HTML
+      默认值。</dd>
+  <dt><b>::html::for</b> <i>start test next body</i></dt>
+  <dd>这个子程序与内置的
+      Tcl <b>for</b>
+      控制结构相似。但它返回联接的
+      (subst&#39;ed) <i>body</i> 而不是去计算
+      body
+      的值。循环的每一次都会在返回值中联接另外一个字符串。</dd>
+  <dt><b>::html::foreach</b> <i>varlist1 list1</i> ?<i>varlist2 list2 ...</i>?
+    <i>body</i></dt>
+  <dd>这个子程序与内置的
+      Tcl <b>foreach</b>
+      控制结构相似。但它返回联接的
+      <i>body</i> 而不是去计算 body
+      的值。循环的每一次都会将另外一个字符串联接到返回值中。</dd>
+  <dt><b>::html::formValue</b> <i>name</i> ?<i>defvalue</i>?</dt>
+  <dd>返回一个名称-值对，使用现有的
+      CGI
+      数据来初始化值。结果有以下形式：
+    <p class="Pp"></p>
+    <pre>  name=&#34;fred&#34; value=&#34;freds value&#34;
+    </pre>
+  </dd>
+  <dt><b>::html::getFormInfo</b> <i>args</i></dt>
+  <dd>产生隐藏的字段来捕获表单值。如果
+      <i>args</i>
+      是空，那么为所有 CGI
+      值创建隐藏字段。否则
+      <i>args</i>
+      是一个匹配表单元素名称的字符串模式的列表。</dd>
+  <dt><b>::html::getTitle</b> </dt>
+  <dd>返回 title
+      字符串，没有包围的
+      TITLE 标签。title
+      以一个先前调用的
+      <b>::html::title</b> 定义。</dd>
+  <dt><b>::html::h</b> <i>level string</i> ?<i>param</i>?</dt>
+  <dd>产生一个标题 (例如, H1)
+      标签。<i>string</i>
+      嵌于标题中，<i>param</i>
+      用作标签参数。</dd>
+  <dt><b>::html::h1</b> <i>string</i> ?<i>param</i>?</dt>
+  <dd>产生一个 H1
+      标签。参见 <b>::html::h</b>.</dd>
+  <dt><b>::html::h2</b> <i>string</i> ?<i>param</i>?</dt>
+  <dd>产生一个 H2
+      标签。参见 <b>::html::h</b>.</dd>
+  <dt><b>::html::h3</b> <i>string</i> ?<i>param</i>?</dt>
+  <dd>产生一个 H3
+      标签。参见 <b>::html::h</b>.</dd>
+  <dt><b>::html::h4</b> <i>string</i> ?<i>param</i>?</dt>
+  <dd>产生一个 H4
+      标签。参见 <b>::html::h</b>.</dd>
+  <dt><b>::html::h5</b> <i>string</i> ?<i>param</i>?</dt>
+  <dd>产生一个 H5
+      标签。参见 <b>::html::h</b>.</dd>
+  <dt><b>::html::h6</b> <i>string</i> ?<i>param</i>?</dt>
+  <dd>产生一个 H6
+      标签。参见 <b>::html::h</b>.</dd>
+  <dt><b>::html::hdrRow</b> <i>args</i></dt>
+  <dd>产生一个表格行，包含
+      TR 和 TH 标签。<i>args</i>
+      中的每个值都置入自己的表格单元中。这使用了
+      <b>::html::cell</b>.</dd>
+  <dt><b>::html::head</b> <i>title</i></dt>
+  <dd>产生一个 HEAD
+      段，包含页面的
+      TITLE。如果先前调用了
+      <b>::html::author</b>, <b>::html::keywords</b>,
+      <b>::html::description</b>, 或 <b>::html::meta</b>
+      那么附加的标签将插入到
+      HEAD 段中。它使用
+      <b>::html::openTag</b> 将一个开 HTML
+      标签入栈.</dd>
+  <dt><b>::html::headTag</b> <i>string</i></dt>
+  <dd>保存一个包含于
+      <b>::html::head</b> 产生的 HEAD
+      段中的标签。<i>string</i>
+      是一个标签中除了尖括号之外的所有东西。</dd>
+  <dt><b>::html::if</b> <i>expr1 body1</i> ?<b>elseif</b> <i>expr2 body2
+    ...</i>? ?<b>else</b> <i>bodyN</i>?</dt>
+  <dd>这个子程序与内置的
+      Tcl <b>if</b>
+      控制结构相似。但它返回联接的
+      <i>body</i>
+      而不是去计算它每个分支
+      body
+      的值。注意这个语法与内置的
+      Tcl <b>if</b>
+      控制结构相比稍有限制。</dd>
+  <dt><b>::html::keywords</b> <i>args</i></dt>
+  <dd><b>Side effect only</b>. 在调用 <b>::html::head</b>
+      之前调用它来定义一个页面的关键字
+      META 标签。在 <b>::html::head</b>
+      结果中将包含这个 META
+      标签。</dd>
+  <dt><b>::html::mailto</b> <i>email</i> ?<i>subject</i>?</dt>
+  <dd>产生一个到 mailto: URL
+      的超链接。</dd>
+  <dt><b>::html::meta</b> <i>args</i></dt>
+  <dd><b>Side effect only</b>. 在调用 <b>::html::head</b>
+      之前调用它来定义一个页面的
+      META 标签。 <i>args</i> 是一个 Tcl
+      样式的名称和值列表，用作
+      META 标签的 name= 和 value=
+      参数。在 <b>::html::head</b>
+      结果中将包含这个 META
+      标签。</dd>
+  <dt><b>::html::minorMenu</b> <i>list</i> ?<i>sep</i>?</dt>
+  <dd>产生一系列超链接。<i>list</i>
+      是一个 Tcl
+      样式的名称和值列表，内容是链接的标签和地址。<i>sep</i>
+      是分隔每个链接的文本，默认是
+      &#34; | &#34;.</dd>
+  <dt><b>::html::minorList</b> <i>list</i> ?<i>ordered</i>?</dt>
+  <dd>产生一个排序的或未排序的链接列表。<i>list</i>
+      是一个 Tcl
+      样式的名称和值列表，内容是链接的标签和地址。<i>ordered</i>
+      是一个布尔值，用来选择有序表或无序表，默认是
+      <b>false</b>.</dd>
+  <dt><b>::html::openTag</b> <i>tag args</i></dt>
+  <dd>将 <i>tag</i>
+      入栈，为它产生一个开标签。使用
+      <b>::html::closeTag</b>
+      来从栈中弹出标签。</dd>
+  <dt><b>::html::passwordInput</b> ?<i>name</i>?</dt>
+  <dd>产生一个 PASSWORD 类型的 INPUT
+      标签。 <i>name</i> 默认为
+      &#34;password&#34;.</dd>
+  <dt><b>::html::passwordInputRow</b> <i>label</i> ?<i>name</i>?</dt>
+  <dd>格式化一个包含一个标签和一个
+      PASSWORD 类型的 INPUT
+      标签的表格行。<i>name</i>
+      默认为 &#34;password&#34;.</dd>
+  <dt><b>::html::quoteFormValue</b> <i>value</i></dt>
+  <dd>使用 HTML 实体 (quotes, ampersand, and angle
+      brackets.) 来替换 <i>value</i>
+      中的特殊字符，从而可以引用它们。</dd>
+  <dt><b>::html::radioSet</b> <i>key sep list</i></dt>
+  <dd>产生一个 RADIO 类型的 INPUT
+      标签集合以及一个相关的文本标签。所有单选按钮共享同样的
+      <i>key</i>
+      作为它们的名字。<i>sep</i>
+      是用来分隔各元素的文本。<i>list</i>
+      是一个 Tcl
+      风格的标签，值列表。</dd>
+  <dt><b>::html::radioValue</b> <i>name value</i></dt>
+  <dd>为一个 RADIO
+      表单元素产生一个
+      &#34;name=<i>name</i> value=<i>value</i>&#34; .如果 CGI
+      变量 <i>name</i> 值为 <i>value</i>,
+      那么 SELECTED
+      将被加入返回值中。</dd>
+  <dt><b>::html::refresh</b> <i>seconds url</i></dt>
+  <dd>建立一个刷新 META
+      标签。在调用 <b>::html::head</b>
+      之前调用它，HEAD
+      段中将包含一个 META
+      标签使得页面每 <i>seconds</i>
+      刷新一次。 <i>url</i>
+      是可选的，如果指定的话它指定了刷新间隔之后读取的新页面。</dd>
+  <dt><b>::html::init</b> ?<i>list</i>?</dt>
+  <dd><b>::html::init</b> 接受一个 Tcl
+      样式的 name-value
+      列表，定义了名称是
+      &#34;tag.parameter&#34;
+      形式的对象的值。例如，
+      &#34;body.bgcolor&#34; 默认将为 BODY
+      标签定义背景色。</dd>
+  <dt><b>::html::row</b> <i>args</i></dt>
+  <dd>产生一个表格行，包含
+      TR 和 TD 标签。<i>args</i>
+      的每个值都置入各自的表格单元中。它使用了
+      <b>::html::cell</b>.</dd>
+  <dt><b>::html::paramRow</b> <i>list</i> ?<i>rparam</i>? ?<i>cparam</i>?</dt>
+  <dd>产生一个表格行，包含
+      TR 和 TD 标签。<i>args</i>
+      的每个值都置入各自的表格单元中。它使用了
+      <b>::html::cell</b>. <i>rparam</i> 用作 TR
+      标签的参数，<i>cparam</i>
+      的值被传给
+      <b>::html::cell</b>，作为 TD
+      标签的参数。</dd>
+  <dt><b>::html::select</b> <i>name param choices</i> ?<i>current</i>?</dt>
+  <dd>产生一个 SELECT
+      表单元素以及内置的
+      OPTION 标签。 <i>name</i> 和 <i>param</i>
+      用来产生 SELECT 标签。
+      <i>choices</i> 列表是一个 Tcl
+      样式的 name-value 列表。</dd>
+  <dt><b>::html::selectPlain</b> <i>name param choices</i> ?<i>current</i>?</dt>
+  <dd>类似 <b>::html::select</b> 但 <i>choices</i>
+      是一个 Tcl
+      值的列表，用于 OPTION
+      标签。每个 OPTION
+      的标签和值是相同的。</dd>
+  <dt><b>::html::submit</b> <i>label</i> ?<i>name</i>?</dt>
+  <dd>产生一个 SUBMIT 类型的 INPUT
+      标签。 <i>name</i> 默认是
+      &#34;submit&#34;.</dd>
+  <dt><b>::html::set</b> <i>var val</i></dt>
+  <dd>这个子程序与内置的
+      Tcl <b>set</b>
+      控制结构相似。主要区别是它返回
+      &#34;&#34; 因此可以在一个 HTML
+      模板文件中调用，不会产生奇怪的结果。另外的区别是它需要两个参数。</dd>
+  <dt><b>::html::tableFromArray</b> <i>arrname</i> ?<i>param</i>?
+    ?<i>pat</i>?</dt>
+  <dd>产生一个 TABLE
+      和内置的行，来显示一个
+      Tcl 数组。<i>param</i> 是为 TABLE
+      标签准备的。<i>pat</i>
+      是一个 <b>string match</b>
+      模式，用来选择数组元素，默认是
+      &#34;*&#34;.</dd>
+  <dt><b>::html::tableFromList</b> <i>querylist</i> ?<i>param</i>?</dt>
+  <dd>产生一个 TABLE
+      和内置的行来显示
+      <i>querylist</i>, 一个 Tcl
+      样式的名称和值列表。<i>param</i>
+      是为 TABLE
+    标签设置的。</dd>
+  <dt><b>::html::textarea</b> <i>name</i> ?<i>param</i>? ?<i>current</i>?</dt>
+  <dd>产生一个 TEXTAREA
+      标签，包围 (wrapped)
+      在它的当前值</dd>
+  <dt><b>::html::textInput</b> <i>name args</i></dt>
+  <dd>产生一个 TEXT 类型的 INPUT
+      表单标签。这使用了
+      <b>::html::formValue</b>. 参数是你想在
+      INPUT
+      标签中添加的任何附加标签属性。</dd>
+  <dt><b>::html::textInputRow</b> <i>label name args</i></dt>
+  <dd>产生一个 TEXT 类型的 INPUT
+      标签，和一个相关标签一起格式化到一个表格行中。参数是你想在
+      INPUT
+      标签中添加的任何附加标签属性。</dd>
+  <dt><b>::html::title</b> <i>title</i></dt>
+  <dd><b>Side effect only</b>. 在调用 <b>::html::head</b>
+      调用它来定义页面的
+      TITLE。</dd>
+  <dt><b>::html::varEmpty</b> <i>name</i></dt>
+  <dd>如果指定名称的变量不存在或者为空值则返回
+      1 。</dd>
+  <dt><b>::html::while</b> <i>test body</i></dt>
+  <dd>这个子程序类似于内置的
+      Tcl <b>while</b>
+      空值结构。但它返回联接的
+      <i>body</i> 而不是计算
+      body。循环的每一次都将另一个字符串联接到返回值中。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参见_SEE_ALSO">参见 SEE ALSO<a class="anchor" href="#%E5%8F%82%E8%A7%81_SEE_ALSO">¶</a></h1>
+ncgi, htmlparse
+</section>
+<section class="Sh">
+<h1 class="Sh" id="关键字_KEYWORDS">关键字 KEYWORDS<a class="anchor" href="#%E5%85%B3%E9%94%AE%E5%AD%97_KEYWORDS">¶</a></h1>
+html, form, table, checkbox, radiobutton, checkbutton
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版维护人]">[中文版维护人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D">¶</a></h1>
+<b>袁乙钧</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2003/11/10</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中国_Linux_论坛_man_手册页翻译计划》:">《中国 Linux 论坛 man 手册页翻译计划》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9B%BD_Linux_%E8%AE%BA%E5%9D%9B_man_%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">1.2.1</td>
+    <td class="foot-os">html</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+html.3tcl.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-10T15:43:19Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"html(3tcl)\"}}]}"
+</script>

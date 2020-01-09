@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ftpaccess(5) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/ftpaccess.5.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/ftpaccess.5.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="5">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; ftpaccess(5)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ftpaccess.5">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ftpaccess.5.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6_FILES" title="文件 FILES">文件 FILES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D" title="[中文版维护人]">[中文版维护人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中国 Linux 论坛 man 手册页翻译计划》:">《中国 Linux 论坛 man 手册页翻译计划》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/ftpaccess.5.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/ftpaccess.5.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/ftpaccess.5.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/ftpaccess.5.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ftpaccess.5.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle"><a href="../../buster/manpages-zh/ftpaccess.5.zh_CN.html">ftpaccess(5)</a></td>
+    <td class="head-vol">File Formats Manual</td>
+    <td class="head-rtitle"><a href="../../buster/manpages-zh/ftpaccess.5.zh_CN.html">ftpaccess(5)</a></td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<p class="Pp"></p>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+ftpaccess - ftpd的配置档
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+这个ftpaccess档案是用来配置下述功能的运作
+<p class="Pp"></p>
+<p class="Pp">存取功能(AccessCapabilities)</p>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt>autogroup&lt;群组名称&gt;&lt;类别&gt;[&lt;类别&gt;...]</dt>
+  <dd>如果一个匿名的(ANONYMOUS)使用者是任何&lt;类别&gt;的成员，那么ftp伺服器将会实行一次setegid()到该&lt;群组名称&gt;。这允许特殊类别的匿名使用者存取group-and-owner-read-only的档案以及目录。&lt;群组名称&gt;是/etc/group里的一个有效群组（或是你的getgrent()呼叫所查阅的地方）。
+    <p class="Pp"></p>
+  </dd>
+  <dt>class&lt;类别&gt;&lt;类型列表&gt;&lt;全球位址&gt;[&lt;全球位址&gt;...]</dt>
+  <dd>定义使用者的&lt;类别&gt;，使用&lt;全球位址&gt;格式的来源位址。可以定义&lt;类别&gt;多个成员。可以有多个&#34;class&#34;指令列出该类别额外的成员。如果多个&#34;calss&#34;指令可以应用到该次的连线期间，会使用在access档案中第一个列出的。尝试为一台主机定义一个有效的类别失败的话将会引起存取被拒绝。&lt;类型列表&gt;是一个以任何&#34;anonymous&#34;,&#34;guest&#34;及&#34;real&#34;关键字所组成使用逗点隔开的列表。如果包含&#34;real&#34;关键字，该类别可以符合使用FTP存取真实的帐号的使用者，而如果包含&#34;anonymous&#34;关键字该类别可以符合使用匿名FTP的使用者。而&#34;guest&#34;关键字符合访客存取帐号（参阅&#34;guestgroup&#34;以取得更多资讯）
+    <p class="Pp">
+      
+        &lt;全球位址&gt;可以是一个全球的领域名称或是一个全球的数字
+        位址。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>deny&lt;全球位址&gt;&lt;讯息档案&gt;</dt>
+  <dd>永远拒绝符合&lt;全球位址&gt;主机的存取。显示&lt;讯息档案&gt;。&lt;全球位址&gt;可以是&#34;!nameserved&#34;用来拒绝没有名称伺服器服务中的节点的存取。
+    <p class="Pp"></p>
+  </dd>
+  <dt>guestgroup&lt;群组名称&gt;[&lt;群组名称&gt;...]</dt>
+  <dd>如果一个真实的(REAL)使用者是任何&lt;群组名称&gt;的成员，该次连线期间的设立完全如同匿名的FTP一般。换句话说，会执行一次chroot()，而且该使用者不再被允许发出USER及PASS指令。&lt;群组名称&gt;是/etc/group里的一个有效群组（或是你的getgrent()呼叫所查阅的地方）。
+    <p class="Pp">该使用者的home目录必须适当地加以设定，跟匿名FTP所要做的完全一样。在passwd项目里的home目录栏位被分成两个目录。第一个栏位将是chroot()呼叫的根目录参数。第二个部份是相对于该根目录的使用者home目录。这两半是以&#34;/./&#34;分隔开的。</p>
+    <p class="Pp">在/etc/passwd里，该真实的项目：</p>
+    <p class="Pp"></p>
+    <pre>guest1::100:92:Guest
+Account:/ftp/./incoming:/etc/ftponly
+    </pre>
+    <p class="Pp">当guest1成功地签入的时候，此ftp伺服器将会执行一次chroot(&#34;/ftp&#34;)然后接著chdir(&#34;/incoming&#34;)。该guest使用者将只能够存取/ftp下的目录结构（此目录对guest1而言看起来跟用起来就像是/目录），就如同一个匿名FTP使用者所见到的。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>
+  
+    limit&lt;类别&gt;&lt;时间&gt;&lt;讯息档案&gt;</dt>
+  <dd>在某&lt;时间&gt;将某&lt;类别&gt;限制为个使用者，若使用者的存取被拒绝则显示&lt;讯息档案&gt;内容。限制的检查只在签入时期实行。如果多个&#34;limit&#34;指令可以应用到该次连线期间的话，会使用第一个适合的。尝试定义一个有效的限制失败，或是值为-1的限制，等于不设限。&lt;时间&gt;使用UUCPL.sys档案相同的格式。
+    <p class="Pp"></p>
+  </dd>
+  <dt>loginfails&lt;数字&gt;</dt>
+  <dd>在&lt;数字&gt;签入失败后，记录一个重复签入失败(repeated
+      loginfailures)讯息并且终止该FTP连线。预设值是5。
+    <p class="Pp"></p>
+  </dd>
+  <dt>private</dt>
+  <dd>使用者签入之后，SITEGROUP及SITEGPASS指令可以用来指定一增强存取的群组以及与之有关的密码。如果该群组名称以及密码是有效的，该使用者变成（经由setegid()）一个在群组存取档案/etc/ftpgroups中所指定群组的成员。
+    <p class="Pp">该群组存取档案的格式是：</p>
+    <p class="Pp">存取群组名称：经编码的密码：真实群组名称</p>
+    <p class="Pp">其中的存取群组是一个随意的（文数字＋标点）字串。经编码的密码是经由crypt(3)编码过的密码，与/etc/passwd里的完全一样。真实群组名称是/etc/group里所列出有效群组其中的一个名称。</p>
+    <p class="Pp">注意：要使这个选项能运作于匿名的FTP使用者，该FTP伺服器必须保持使/etc/group永久开启而且将群组存取档案载入记忆体。这意指(1)该ftp伺服器现在使一个额外的档案描述子(filedescriptor)开启，以及(2)经由SITEGROUP使用者必须的密码以及存取权利的承认在一次FTP连线期间以内将会是静态的。如果你有紧急的需求要＊现在＊改变存取群组以及／或是密码，那么你只要砍掉(kill)所有正在执行中的FTP伺服器。</p>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<p class="Pp">资讯功能(InformationalCapabilities)</p>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt>banner&lt;路径&gt;</dt>
+  <dd>作用与message指令类似，除了此banner是在使用者键入使用者名称／密码之前显示以外。该&lt;路径&gt;系相对于真实的系统根目录，不是匿名FTP所使用的根目录。
+    <p class="Pp">警告：这个指令的使用可以完全地防止不相容的FTP客户端程式使用该FTP伺服器。并非所有的客户端都能够处理多行回应(multi-lineresponses)（这正是banner显示的方式）</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>email&lt;名称&gt;</dt>
+  <dd>定义ftp档案处(archive)维护者的电子邮递位址。这个字串将会在每一次使用%E代换变数(magiccookie)的时候印出。
+    <p class="Pp"></p>
+  </dd>
+  <dt>message&lt;路径&gt;{&lt;时机&gt;{&lt;类别&gt;...}}</dt>
+  <dd>定义一个配合&lt;路径&gt;的档案名称在使用者签入时或是在使用切换工作目录指令的时候ftpd将会显示该档案的内容。该项&lt;时机&gt;参数可以是&#34;LOGIN&#34;或&#34;CWD=&lt;目录&gt;&#34;。如果&lt;时机&gt;是&#34;CWD=&lt;目录&gt;&#34;的话，&lt;目录&gt;指定将会引发该通知的新预设目录。
+    <p class="Pp">该选择性的&lt;类别&gt;指定允许该讯息只对特殊类别的成员显示。可以指定超过一个类别。</p>
+    <p class="Pp">在说明档中可以有代换变数(magiccookies)这会使ftp伺服器以指定的文字字串取代
+        该变数：</p>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt>%T</dt>
+  <dd>本地时间(form ThuNov1517:12:42 1990)</dd>
+  <dt>%F</dt>
+  <dd>CWD所在分割区的剩馀空间(kbytes)[并非所有系统都有支援]</dd>
+  <dt>%C</dt>
+  <dd>目前的工作目录</dd>
+  <dt>%E</dt>
+  <dd>定义在ftpaccess中维护者的电子邮递位址</dd>
+  <dt>%R</dt>
+  <dd>远端主机名称</dd>
+  <dt>%L</dt>
+  <dd>本地主机名称</dd>
+  <dt>%U</dt>
+  <dd>签入时所给的使用者名称</dd>
+  <dt>%M</dt>
+  <dd>这个类别所允许的最大使用者数目</dd>
+  <dt>%N</dt>
+  <dd>这个类别目前的使用者数目</dd>
+</dl>
+</div>
+<p class="Pp">此项message将只显示一次以避免惹使用者讨厌。要记得当MESSAGEs被一匿名的FTP使用者引发时，该&lt;路径&gt;必须是相对于匿名FTP目录树的根目录。</p>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt>readme&lt;路径&gt;{&lt;时机&gt;{&lt;类别&gt;}}</dt>
+  <dd>定义一个配合&lt;路径&gt;的档案名称在使用者签入时或是在使用切换工作目录指令的时候ftpd将会告知使用者该档案存在及修改的日期。&lt;时机&gt;参数可以是&#34;LOGIN&#34;或&#34;CWD=&lt;目录&gt;&#34;。若&lt;时机&gt;是&#34;CWD=&lt;目录&gt;&#34;的话，&lt;目录&gt;指定将会引发该通知的新预设目录。此项讯息将只显示一次以避免打扰使用者。要记得当README讯息被一匿名的FTP使用者引发时，该&lt;路径&gt;必须是相对于匿名FTP目录树的根目录。
+    <p class="Pp">该选择性的&lt;类别&gt;指定允许该讯息只对特殊类别的成员显示。可以指定超过一个类别。</p>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<p class="Pp">记录功能(LoggingCapabilities)</p>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt>logcommands&lt;类型列表&gt;</dt>
+  <dd>以使用者启动个别的记录指令。&lt;类型列表&gt;是一个以任何的&#34;anonymous&#34;,&#34;guest&#34;及&#34;real&#34;关键字所组成使用逗点隔开的列表。如果包含&#34;real&#34;关键字，将会为使用FTP存取真实帐号的使用者做记录，而如果包含&#34;anonymous&#34;关键字则将会为使用匿名FTP的使用者做记录。&#34;guest&#34;关键字符合访客存取帐号（参阅&#34;guestgroup&#34;以取得更多资讯）
+    <p class="Pp"></p>
+  </dd>
+  <dt>logtransfers&lt;类型列表&gt;&lt;目录&gt;</dt>
+  <dd>启动对真实的或匿名的FTP使用者的档案传输记录。对传输到伺服器（进来）的记录可以跟从伺服器传输（出去）分开来启动。&lt;类型列表&gt;是一个以任何的&#34;anonymous&#34;,&#34;guest&#34;及&#34;real&#34;关键字所组成使用逗点隔开的列表。如果其中包含有&#34;real&#34;关键字，将会为使用FTP存取真实帐号的使用者做记录，而如果包含&#34;anonymous&#34;关键字则将会为使用匿名FTP的使用者做记录。而&#34;guest&#34;关键字符合访客存取帐号（参阅&#34;guestgroup&#34;以取得更多资讯）。&lt;目录&gt;是一个以任何的&#34;inbound&#34;以及&#34;outbound&#34;两个关键字所组成以逗点隔开的列表，而且将会分别引发对送往该伺服器以及从该伺服器送出的传输记录。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<p class="Pp">其它功能(MiscellaneousCapabilities)</p>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt>alias&lt;字串&gt;&lt;目录&gt;</dt>
+  <dd>为一个目录定义一个别名，&lt;字串&gt;。可以用来加入逻辑目录的其它概念。
+    <p class="Pp">例如：</p>
+    <p class="Pp">aliasrfc:/pub/doc/rfc</p>
+    <p class="Pp">允许使用者从任何目录以指令&#34;cdrfc:&#34;存取/pub/doc/rfc。别名只应用于cd指令上。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>cdpath&lt;目录&gt;</dt>
+  <dd>定义cdpath里的一个项目。这定义一个在改变目录时使用的搜寻路径。
+    <p class="Pp">例如：</p>
+    <p class="Pp"></p>
+    <pre>cdpath/pub/packages
+cdpath/.aliases
+    </pre>
+    <p class="Pp">允许使用者直接cd到任何/pub/packages或/.alias目录以下的目录。该搜寻路径系以该行出现在ftpaccess档案里的顺序定义。</p>
+    <p class="Pp">如果使用者所下的指令是：</p>
+    <p class="Pp"></p>
+    <pre>cdfoo
+    </pre>
+    <p class="Pp">则会以下列的顺序搜寻该目录：</p>
+    <p class="Pp"><i>./foo</i>
+        一个称为&#34;foo&#34;的别名
+        <i>/pub/packages/foo</i> <i>/.aliases/foo</i></p>
+    <p class="Pp">该cdpath只能够配合cd指令使用。如果你有数量很大的别名那么你可能想要设立一个目录别名链结到所有你希望能让使用者使用的区域。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>compress[...]</dt>
+  <dd>
+    <pre>tar[...]
+    </pre>
+    为任何符合任何的类别启动压缩(compress)或包裹(tar)功能。实际的转换(conversions)定义在外部的档案FTPLIB/ftpconversions之中。
+    <p class="Pp"></p>
+  </dd>
+  <dt>shutdown&lt;路径&gt;</dt>
+  <dd>如果&lt;路径&gt;所指的档案存在，伺服器将会规律地检查该档案以便得知该伺服器是否将要被停机。如果计画一次停机，则会通告使用者，新的连线在停机之前的一段指定的时间之后会被拒绝且目前的连线在停机之前的一段指定的时间之后会被停止。&lt;路径&gt;指到一个结构如下的档案：
+    <p class="Pp"></p>
+    <pre>&lt;年&gt;&lt;月&gt;&lt;日&gt;&lt;时&gt;&lt;分&gt;&lt;拒绝_期间&gt;&lt;抛弃_期间&gt;&lt;本文&gt;
+    </pre>
+  </dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt>&lt;年&gt;</dt>
+  <dd>任何&gt;1970的年份</dd>
+  <dt>&lt;月&gt;</dt>
+  <dd>0-11&lt;----注意!</dd>
+  <dt>&lt;时&gt;</dt>
+  <dd>0-23</dd>
+  <dt>&lt;分&gt;</dt>
+  <dd>0-59</dd>
+</dl>
+</div>
+<p class="Pp">&lt;拒绝_期间&gt;以及&lt;抛弃_期间&gt;是在停机之前新的连线将会被拒绝以及存在的连线将会被抛弃的一段格式为HHMM的期间。</p>
+<p class="Pp">&lt;本文&gt;跟从任何讯息（参阅&#34;message&#34;）的一般规则，配合下列额外可用的代换变数：</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt>%s</dt>
+  <dd>系统将要停机的时间</dd>
+  <dt>%r</dt>
+  <dd>新的连线将会被拒绝的时间</dd>
+  <dt>%d</dt>
+  <dd>目前的连线将会被抛弃的时间</dd>
+</dl>
+</div>
+<p class="Pp">所有时间的格式都是：dddMMMDDhh:mm:ssYYYY。在该配置档中只能有一个&#34;shutdown&#34;指令。</p>
+<p class="Pp">外部程式ftpshut(8)可以用来自动化产生这个档案的程序。</p>
+<p class="Pp"></p>
+<p class="Pp">许可功能(PermissionCapabilities)</p>
+<dl class="Bl-tag">
+  <dt>chmod&lt;类型列表&gt;</dt>
+  <dd>
+    <pre>delete&lt;类型列表&gt;
+overwrite&lt;类型列表&gt;
+umask&lt;类型列表&gt;
+    </pre>
+    允许或不允许执行指定功能的能力。依照预设值，允许所有的使用者执行。
+    <p class="Pp">&lt;类型列表&gt;是一个以任何&#34;anonymous&#34;,&#34;guest&#34;及&#34;real&#34;关键字所组成使用逗点隔开的列表。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>passwd-check()</dt>
+  <dd>定义该伺服器对匿名ftp密码检查的层级与执行。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt>none</dt>
+  <dd>不执行密码检查。</dd>
+  <dt>trivial</dt>
+  <dd>密码中必须包含一个&#39;@&#39;字元。</dd>
+  <dt>rfc822</dt>
+  <dd>密码必须是一个rfc822相容的位址。</dd>
+  <dt>warn</dt>
+  <dd>警告该使用者，但是允许他们签入。</dd>
+  <dt>enforce</dt>
+  <dd>警告该使用者，并且接著将之踢出。</dd>
+</dl>
+</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt>path-filter&lt;类型列表&gt;&lt;讯息&gt;&lt;允许的字元集&gt;{&lt;不允许的正规表示式&gt;...}</dt>
+  <dd>对于属于&lt;类型列表&gt;的使用者，path-filter定义控制何种档案名称允许或不允许的正规表示式(regularexpressions)。可以有多个不允许的正规表示式。如果一个档案名称因为不符合正规表示式的标准而无效的话，将会显示&lt;讯息&gt;给该使用者。例如：
+    <p class="Pp"></p>
+    <pre>path-filteranonymous/etc/pathmsg^[-A-Za-z0-9._]*$^.^-
+    </pre>
+    <p class="Pp">指定所有匿名使用者所上传的档案名称只能以A-Z,a-z,0-9以及&#34;._-&#34;组成而且不能以一个&#34;.&#34;或是一个&#34;-&#34;开始。如果该档案名称是不合法的，则将会显示/etc/pathmsg给该使用者。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>upload&lt;拥有者&gt;&lt;群组&gt;[&#34;dirs&#34;|&#34;nodirs&#34;]</dt>
+  <dd>配合定义一个认可或拒绝上传的目录。
+    <p class="Pp">如果其认可上传，所有档案将会由&lt;拥有者&gt;以及&lt;群组&gt;所拥有而且将会具有根据设置的权限(permission)。</p>
+    <p class="Pp">目录系以最佳-符合(best-match)为基础。</p>
+    <p class="Pp">例如：</p>
+    <p class="Pp"></p>
+    <pre>upload*no
+upload/incomingyesftpdaemon0666
+upload/incoming/gifsyesjlcguest0600
+nodirs
+    </pre>
+    <p class="Pp">这将仅允许上传到/incoming以及/incoming/gifs。上传到/incoming的档案将由ftp/daemon所拥有并且具有0666的权限。上传到/incoming/gifs的档案将由jlc/guest拥有并且具有0600的权限。</p>
+    <p class="Pp">选择性的&#34;dir&#34;以及&#34;nodir&#34;关键字可以指定允许或不允许使用mkdir指令建立新的子目录。</p>
+    <p class="Pp">该upload关键字只应用于匿名的使用者。</p>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件_FILES">文件 FILES<a class="anchor" href="#%E6%96%87%E4%BB%B6_FILES">¶</a></h1>
+FTPLIB/ftpaccess
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版维护人]">[中文版维护人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D">¶</a></h1>
+<b>&lt;asdchen@pc2.hinet.net&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>1995/12/26</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中国_Linux_论坛_man_手册页翻译计划》:">《中国 Linux 论坛 man 手册页翻译计划》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9B%BD_Linux_%E8%AE%BA%E5%9D%9B_man_%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+ftpaccess.5.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:23Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"ftpaccess(5)\"}}]}"
+</script>

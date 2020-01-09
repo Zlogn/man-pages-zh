@@ -1,0 +1,2515 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tcpdump(8) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/tcpdump/tcpdump.8.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-ja/tcpdump.8.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-zh/tcpdump.8.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/tcpdump.8.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="8">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; tcpdump(8)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/tcpdump.8">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/tcpdump.8.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_%28SYNOPSIS%29" title="總覽 (SYNOPSIS)">總覽 (SYNOPSIS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_%28DESCRIPTION%29" title="描述 (DESCRIPTION)">描述 (DESCRIPTION)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%B8%E9%A0%85_%28OPTIONS%29" title="選項 (OPTIONS)">選項 (OPTIONS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%A4%BA%E4%BE%8B_%28EXAMPLES%29" title="示例 (EXAMPLES)">示例 (EXAMPLES)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%BC%B8%E5%87%BA%E6%A0%BC%E5%BC%8F_%28OUTPUT_FORMAT%29" title="輸出格式 (OUTPUT FORMAT)">輸出格式 (OUTPUT FORMAT)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%A6%E8%A6%8B_%28SEE_ALSO%29" title="另見 (SEE ALSO)">另見 (SEE ALSO)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85_%28AUTHORS%29" title="作者 (AUTHORS)">作者 (AUTHORS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B" title="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/tcpdump.8.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/tcpdump.8.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/tcpdump.8.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/tcpdump/tcpdump.8.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/tcpdump.8.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/tcpdump.8.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/tcpdump.8.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">TCPDUMP(8)</td>
+    <td class="head-vol">System Manager&#39;s Manual</td>
+    <td class="head-rtitle">TCPDUMP(8)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+tcpdump -
+  轉儲網絡上的數據流
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_(SYNOPSIS)">總覽 (SYNOPSIS)<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_(SYNOPSIS)">¶</a></h1>
+<b>tcpdump</b> [ <b>-adeflnNOpqStvx</b> ] [ <b>-c</b> <i>count</i> ] [ <b>-F</b>
+  <i>file</i> ]
+<br/>
+[ <b>-i</b> <i>interface</i> ] [ <b>-r</b> <i>file</i> ] [ <b>-s</b>
+  <i>snaplen</i> ]
+<br/>
+[ <b>-T</b> <i>type</i> ] [ <b>-w</b> <i>file</i> ] [ <i>expression</i> ]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_(DESCRIPTION)">描述 (DESCRIPTION)<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_(DESCRIPTION)">¶</a></h1>
+<i>Tcpdump</i> 打印出 在某個
+  網絡界面 上, 匹配
+  布爾表達式 <i>expression</i>
+  的報文 的 報頭.
+<p class="Pp"><b>對於 SunOS 的 nit 或 bpf
+    界面:</b> 要 運行 <i>tcpdump ,</i> 你
+    必須 有 <i>/dev/nit</i> 或 <i>/dev/bpf*</i> 的
+    讀訪問 權限.</p>
+<p class="Pp"><b>對於 Solaris 的 dlpi:</b> 你
+    必須 有 網絡仿真設備
+    (network pseudo device), 如 <i>/dev/le</i> 的
+    讀訪問 權限.</p>
+<p class="Pp"><b>對於 HP-UX 的 dlpi:</b> 你
+    必須 是 root, 或者 把它
+    安裝成 root 的 設置uid
+  程序.</p>
+<p class="Pp"><b>對於 IRIX 的 snoop:</b> 你
+    必須 是 root, 或者 把它
+    安裝成 root 的 設置uid
+  程序.</p>
+<p class="Pp"><b>對於 Linux:</b> 你 必須 是
+    root, 或者 把它 安裝成 root
+    的 設置uid 程序.</p>
+<p class="Pp"><b>對於 Ultrix 和 Digital UNIX:</b>
+    一旦 超級用戶 使用
+    <i>pfconfig</i>(8) 開放了 promiscuous
+    操作模式 (promiscuous-mode),
+    任何用戶 都可以 運行
+    <b>tcpdump</b>.</p>
+<p class="Pp"><b>對於 BSD:</b> 你 必須 有
+    <i>/dev/bpf*</i> 的 讀訪問 權限.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="選項_(OPTIONS)">選項 (OPTIONS)<a class="anchor" href="#%E9%81%B8%E9%A0%85_(OPTIONS)">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>-a</b></dt>
+  <dd>試着 把
+      網絡和廣播地址
+      轉換成 名稱.</dd>
+  <dt><b>-c</b></dt>
+  <dd>當 收到 <i>count</i> 報文 後
+      退出.</dd>
+  <dt><b>-d</b></dt>
+  <dd>把 編譯好的
+      報文匹配代碼 (packet-matching code)
+      翻譯成 可讀形式,
+      傳往 標準輸出,
+      然後退出.</dd>
+  <dt><b>-dd</b></dt>
+  <dd>把 報文匹配代碼 (packet-matching
+      code) 以 <b>C</b> 程序片斷 的
+      形式 輸出.</dd>
+  <dt><b>-ddd</b></dt>
+  <dd>把 報文匹配代碼 (packet-matching
+      code) 以 十進制數 形式
+      輸出 (前面 加上
+    總數).</dd>
+  <dt><b>-e</b></dt>
+  <dd>顯示 鏈路層報頭.</dd>
+  <dt><b>-f</b></dt>
+  <dd>以 數字形式 顯示
+      &#39;外部的&#39; 互聯網地址,
+      而不是 字符形式
+      (這個 選項 用來 繞開
+      腦殼壞光的 SUN
+      黃頁服務器 的 問題
+      — 一般說來 當它
+      翻譯 外部網絡 的
+      數字地址 時
+      會長期掛起).</dd>
+  <dt><b>-F</b></dt>
+  <dd>把 <i>file</i> 的內容 用作
+      過濾表達式. 忽略
+      命令行 上 的 表達式.</dd>
+  <dt><b>-i</b></dt>
+  <dd>監聽 <i>interface</i>. 如果
+      不指定 接口, <i>tcpdump</i> 在
+      系統 的 接口 清單 中,
+      尋找 號碼最小, 已經
+      配置好的 接口 (loopback
+      除外). 選中的時候 會
+      中斷 連接.</dd>
+  <dt><b>-l</b></dt>
+  <dd>行緩衝 標準輸出.
+      可用於 捕捉 數據 的
+      同時 查看 數據. 例如,
+    <br/>
+    ``tcpdump  -l  |  tee dat&#39;&#39; or
+      ``tcpdump  -l   &gt;
+      dat  &amp;  tail  -f  dat&#39;&#39;.</dd>
+  <dt><b>-n</b></dt>
+  <dd>不要把 地址 轉換成
+      名字 (指的是
+      主機地址, 端口號等)</dd>
+  <dt><b>-N</b></dt>
+  <dd>不顯示 主機名字 中的
+      域名 部分. 例如, 如果
+      使用 這個 選項, <i>tcpdump</i>
+      只顯示 ``nic&#39;&#39;, 而不是
+      ``nic.ddn.mil&#39;&#39;.</dd>
+  <dt><b>-O</b></dt>
+  <dd>禁止運行
+      報文匹配代碼 的
+      優化器. 這個選項
+      只有 當你 懷疑
+      優化器 有 bug 時
+    纔有用.</dd>
+  <dt><b>-p</b></dt>
+  <dd><i>禁止</i> 把 接口 置成
+      promiscuous(雜湊) 模式. 注意,
+      接口 有可能 因
+      其他原因 而 處於 promiscuous
+      模式; 因此, &#39;-p&#39; 不能 作爲
+      `ether host {local-hw-addr} 或 ether broadcast&#39; 的
+      簡寫.</dd>
+  <dt><b>-q</b></dt>
+  <dd>快速輸出. 顯示
+      較少的 協議信息,
+      輸出行 會 短一點點.</dd>
+  <dt><b>-r</b></dt>
+  <dd>從 <i>file</i> 中 讀入 數據報
+      (文件 是用 -w 選項
+      創建的). 如果 <i>file</i> 是 ``-&#39;&#39;,
+      就從 標準輸入 讀入.</dd>
+  <dt><b>-s</b></dt>
+  <dd>從每個 報文 中 截取
+      <i>snaplen</i> 字節的數據,
+      而不是 缺省的 68
+      (如果是 SunOS 的 NIT,
+      最小值是 96). 68 個字節
+      適用於 IP, ICMP, TCP 和 UDP, 但是
+      有可能 截掉
+      名字服務器 和 NFS 報文
+      的 協議 信息 (見下文).
+      輸出時 如果指定
+      ``[|<i>proto</i>]&#39;&#39;, tcpdump 可以 指出
+      那些 捕捉量過小 的
+      數據報, 這裏的 <i>proto</i> 是
+      截斷髮生處 的 協議層
+      名稱. 注意, 採用
+      更大的 捕捉範圍 不但
+      增加了 處理 報文 的
+      時間, 而且 減少了
+      報文的 緩衝 數量,
+      可能 導致
+      報文的丟失. 你 應該
+      把 <i>snaplen</i> 設的 儘量小,
+      只要 能夠 容納 你
+      需要 的 協議信息
+      就可以了.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-T</b></dt>
+  <dd>把 通過 &#34;<i>expression</i>&#34;
+      挑選出來的 報文
+      解釋成 指定的 <i>type</i>.
+      目前 已知 的 類型 有:
+      <b>rpc</b> (遠程過程調用 Remote
+      Procedure Call), <b>rtp</b>
+      (實時應用協議 Real-Time Applications
+      protocol), <b>rtcp</b>
+      (實時應用控制協議
+      Real-Time Applications control protocol), <b>vat</b>
+      (可視音頻工具 Visual Audio Tool),
+      和 <b>wb</b> (分佈式白板 distributed
+      White Board).</dd>
+  <dt><b>-S</b></dt>
+  <dd>顯示 絕對的, 而不是
+      相對的 TCP 流序號.</dd>
+  <dt><b>-t</b></dt>
+  <dd><i>禁止</i> 顯示
+    時戳標誌.</dd>
+  <dt><b>-tt</b></dt>
+  <dd>顯示 未格式化的
+      時戳標誌.</dd>
+  <dt><b>-v</b></dt>
+  <dd>(稍微多一點)
+      繁瑣的輸出. 例如,
+      顯示 IP 數據報 中的
+      生存週期 和
+      服務類型.</dd>
+  <dt><b>-vv</b></dt>
+  <dd>更繁瑣的輸出. 例如,
+      顯示 NFS 應答報文 的
+      附加域.</dd>
+  <dt><b>-w</b></dt>
+  <dd>把 原始報文 存進 <i>file</i>,
+      不做 分析 和 顯示.
+      它們 可以 以後 用 -r
+      選項 顯示. 如果 <i>file</i> 是
+      ``-&#39;&#39;, 就 寫往 標準輸出.</dd>
+  <dt><b>-x</b></dt>
+  <dd>以 16 進制數 形式 顯示
+      每一個 報文
+      (去掉鏈路層報頭後) .
+      可以 顯示 較小的
+      完整 報文, 否則 只
+      顯示 <i>snaplen</i> 個 字節 .</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt><i>expression</i></dt>
+  <dd></dd>
+</dl>
+<div class="Bd-indent">用來 選擇 要
+  轉儲 的 數據報. 如果
+  沒有 指定 <i>expression</i> , 就
+  轉儲 網絡的 全部 報文.
+  否則, 只轉儲 相對 <i>expression</i>
+  爲 `true&#39; 的 數據報.
+<p class="Pp"><i>expression</i> 由
+    一個或多個 <i>原語 (primitive)</i>
+    組成. 原語 通常 由
+    一個 <i>標識</i> (id,
+    名稱或數字), 和 標識
+    前面的 一個或多個
+    修飾子(qualifier) 組成.
+    修飾子 有 三種
+    不同的類型:</p>
+<dl class="Bl-tag">
+  <dt><i>type</i></dt>
+  <dd>類型修飾子 指出
+      標識名稱 或 標識數字
+      代表 什麼
+      類型的東西.
+      可以使用的 類型 有
+      <b>host</b>, <b>net</b> 和 <b>port</b>. 例如, `host
+      foo&#39;, `net 128.3&#39;, `port 20&#39;. 如果 不指定
+      類型修飾子, 就使用
+      缺省的 <b>host .</b>
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>dir</i></dt>
+  <dd>方向修飾子 指出
+      相對於 <b>標識</b> 的
+      傳輸方向 (數據是
+      傳入還是傳出 標識).
+      可以使用的 方向 有
+      <b>src</b>, <b>dst</b>, <b>src or dst</b> 和 <b>src and</b>
+      <b>dst</b>. 例如, `src foo&#39;, `dst net 128.3&#39;, `src or dst port
+      ftp-data&#39;. 如果 不指定
+      方向修飾子, 就使用
+      缺省的 <b>src or dst .</b> 對於 `null&#39;
+      鏈路層 (就是說 象 slip
+      之類的 點到點 協議),
+      用 <b>inbound</b> 和 <b>outbound</b> 修飾子
+      指定 所需的
+      傳輸方向.</dd>
+  <dt><i>proto</i></dt>
+  <dd>協議修飾子 要求 匹配
+      指定的協議.
+      可以使用的 協議 有:
+      <b>ether</b>, <b>fddi</b>, <b>ip</b>, <b>arp</b>, <b>rarp</b>,
+      <b>decnet</b>, <b>lat</b>, <b>sca</b>, <b>moprc</b>, <b>mopdl</b>,
+      <b>tcp</b> 和 <b>udp</b>. 例如, `ether src foo&#39;, `arp
+      net 128.3&#39;, `tcp port 21&#39;. 如果 不指定
+      協議修飾子, 就使用
+      所有 符合 類型 的
+      協議. 例如, `src foo&#39; 指 `(ip 或 arp
+      或 rarp) src foo&#39;
+      (注意後者不符合語法),
+      `net bar&#39; 指 `(ip 或 arp 或 rarp) net bar&#39;, `port 53&#39;
+      指 `(tcp 或 udp) port 53&#39;.</dd>
+</dl>
+<p class="Pp">[`fddi&#39; 實際上 是 `ether&#39; 的
+    別名; 分析器 把 它們
+    視爲 ``用在 指定
+    網絡接口 上的
+    數據鏈路層.&#39;&#39; FDDI 報頭
+    包含 類似於 以太協議
+    的 源目地址, 而且 通常
+    包含 類似於 以太協議
+    的 報文類型, 因此 你
+    可以 過濾 FDDI 域, 就象
+    分析 以太協議 一樣. FDDI
+    報頭 也 包含 其他 域,
+    但是 你 不能 在 過濾器
+    表達式 裏 顯式描述.]</p>
+<p class="Pp"></p>
+<p class="Pp">作爲 上述 的 補充,
+    有一些 特殊的 `原語&#39;
+    關鍵字: <b>gateway</b>, <b>broadcast</b>, <b>less</b>,
+    <b>greater</b> 和 數學表達式.
+    它們 不同於
+    上面的模式, 這些 在
+    後面 有 敘述.</p>
+<p class="Pp">更復雜的
+    過濾器表達式 可以
+    通過 <b>and</b>, <b>or</b> 和 <b>not</b> 連接
+    原語 來 組建. 例如, `host foo and
+    not port ftp and not port ftp-data&#39;.
+    爲了少敲點鍵,
+    可以忽略 相同的
+    修飾子. 例如, `tcp dst port ftp or ftp-data or
+    domain&#39; 實際上 就是 `tcp dst port ftp or tcp
+    dst port ftp-data or tcp dst port domain&#39;.</p>
+<p class="Pp">允許的 原語 有:</p>
+<dl class="Bl-tag">
+  <dt><b>dst host </b><i>host</i></dt>
+  <dd>如果 報文中 IP 的
+      目的地址域 是 <i>host</i>, 則
+      邏輯 爲 真. <i>host</i> 既可以
+      是 地址, 也可以 是
+      主機名.</dd>
+  <dt><b>src host </b><i>host</i></dt>
+  <dd>如果 報文中 IP 的
+      源地址域 是 <i>host</i>, 則
+      邏輯 爲 真.</dd>
+  <dt><b>host </b><i>host</i><b></b></dt>
+  <dd>如果 報文中 IP 的
+      源地址域 或者
+      目的地址域 是 <i>host</i>, 則
+      邏輯 爲 真. 上面
+      所有的 host 表達式
+      都可以 加上 <b>ip</b>, <b>arp</b>, 或
+      <b>rarp</b> 關鍵字 做 前綴,
+      就象:
+    <br/>
+    <pre><b>ip host </b><i>host</i>
+    </pre>
+    <br/>
+    它等價於:
+    <br/>
+    <pre><b>ether proto </b><i>\ip</i><b> and host </b><i>host</i>
+    </pre>
+    <br/>
+    如果 <i>host</i> 是 擁有 多個 IP
+      地址 的 主機名, 它的
+      每個地址 都會
+      被查驗.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>ether dst </b><i>ehost</i><b></b></dt>
+  <dd>如果 報文的
+      以太目的地址 是 <i>ehost</i>,
+      則 邏輯 爲 真. <i>Ehost</i>
+      既可以是 名字 (/etc/ethers
+      裏有), 也可以是 數字
+      (有關 數字格式 另見
+      <i>ethers</i>(3N) ).</dd>
+  <dt><b>ether src </b><i>ehost</i><b></b></dt>
+  <dd>如果 報文的
+      以太源地址 是 <i>ehost</i>, 則
+      邏輯 爲 真.</dd>
+  <dt><b>ether host </b><i>ehost</i><b></b></dt>
+  <dd>如果 報文的
+      以太源地址 或
+      以太目的地址 是 <i>ehost</i>,
+      則 邏輯 爲 真.</dd>
+  <dt><b>gateway</b> <i>host</i></dt>
+  <dd>如果 報文 把 <i>host</i> 當做
+      網關, 則 邏輯 爲 真.
+      也就是說, 報文的
+      以太源或目的地址 是
+      <i>host</i>, 但是 IP 的 源目地址
+      都不是 <i>host</i>. <i>host</i> 必須
+      是個 主機名, 而且
+      必須 存在 /etc/hosts 和 /etc/ethers
+      中.
+      (一個等價的表達式是
+    <br/>
+    <pre><b>ether host </b><i>ehost </i><b>and not host </b><i>host</i>
+    </pre>
+    <br/>
+    對於 <i>host / ehost</i>,
+      它既可以是 名字,
+      也可以是 數字.)</dd>
+  <dt><b>dst net </b><i>net</i></dt>
+  <dd>如果 報文的 IP
+      目的地址 屬於 網絡號
+      <i>net</i>, 則 邏輯 爲 真. <i>net</i>
+      既可以 是 名字 (存在
+      /etc/networks 中), 也可以是
+      網絡號. (詳見 <i>networks(4)</i>).</dd>
+  <dt><b>src net </b><i>net</i></dt>
+  <dd>如果 報文的 IP 源地址
+      屬於 網絡號 <i>net</i>, 則
+      邏輯 爲 真.</dd>
+  <dt><b>net </b><i>net</i></dt>
+  <dd>如果 報文的 IP 源地址
+      或 目的地址 屬於
+      網絡號 <i>net</i>, 則 邏輯 爲
+      真.</dd>
+  <dt><b>net </b><i>net</i> <b>mask </b><i>mask</i></dt>
+  <dd>如果 IP 地址 匹配 指定
+      網絡掩碼(netmask) 的 <i>net</i>, 則
+      邏輯 爲 真. 本原語
+      可以用 <b>src</b> 或 <b>dst</b>
+    修飾.</dd>
+  <dt><b>net </b><i>net</i>/<i>len</i></dt>
+  <dd>如果 IP 地址 匹配 指定
+      網絡掩碼 的 <i>net</i>, 則
+      邏輯 爲 真, 掩碼 的
+      有效位寬 爲 <i>len</i>.
+      本原語 可以用 <b>src</b> 或
+      <b>dst</b> 修飾.</dd>
+  <dt><b>dst port </b><i>port</i></dt>
+  <dd>如果 報文 是 ip/tcp 或 ip/udp,
+      並且 目的端口 是 <i>port</i>,
+      則 邏輯 爲 真. <i>port</i>
+      是一個 數字,
+      也可以是 /etc/services 中
+      說明過的 名字 (參看
+      <i>tcp</i>(4P) 和 <i>udp</i>(4P)). 如果 使用
+      名字, 則 檢查 端口號
+      和 協議. 如果 使用
+      數字, 或者
+      有二義的名字, 則
+      只檢查 端口號 (例如,
+      <b>dst port 513</b> 將顯示 tcp/login
+      的數據 和 udp/who 的數據,
+      而 <b>port domain</b> 將顯示 tcp/domain 和
+      udp/domain 的數據).</dd>
+  <dt><b>src port </b><i>port</i></dt>
+  <dd>如果 報文 的
+      源端口號 是 <i>port</i>, 則
+      邏輯 爲 真.</dd>
+  <dt><b>port </b><i>port</i></dt>
+  <dd>如果 報文 的 源端口
+      或 目的端口 是 <i>port</i>, 則
+      邏輯 爲 真. 上述的
+      任意一個 端口表達式
+      都可以 用 關鍵字 <b>tcp</b>
+      或 <b>udp</b> 做 前綴, 就象:
+    <br/>
+    <pre><b>tcp src port </b><i>port</i>
+    </pre>
+    <br/>
+    它 只匹配 源端口 是
+      <i>port</i> 的 TCP 報文.</dd>
+  <dt><b>less </b><i>length</i></dt>
+  <dd>如果 報文 的 長度
+      小於等於 <i>length</i>, 則 邏輯
+      爲 真. 它等同於:
+    <br/>
+    <pre><b>len &lt;= </b><i>length</i><b>.</b>
+    </pre>
+    <br/>
+  </dd>
+  <dt><b>greater </b><i>length</i></dt>
+  <dd>如果 報文 的 長度
+      大於等於 <i>length</i>, 則 邏輯
+      爲 真. 它等同於:
+    <br/>
+    <pre><b>len &gt;= </b><i>length</i><b>.</b>
+    </pre>
+    <br/>
+  </dd>
+  <dt><b>ip proto </b><i>protocol</i></dt>
+  <dd>如果 報文 是 IP
+      數據報(參見 <i>ip</i>(4P))<i>,</i> 其
+      內容 的 協議類型 是
+      <i>protocol</i>, 則 邏輯 爲 真.
+      <i>Protocol</i> 可以是 數字,
+      也可以是 下列 名稱
+      中的 一個: <i>icmp</i>, <i>igrp</i>, <i>udp</i>,
+      <i>nd</i>, 或 <i>tcp</i>. 注意 這些
+      標識符 <i>tcp</i>, <i>udp</i>, 和 <i>icmp</i>
+      也是 關鍵字, 所以
+      必須 用 反斜槓(\) 轉義,
+      在 C-shell 中 應該是 \\ .</dd>
+  <dt><b>ether broadcast</b></dt>
+  <dd>如果 報文 是
+      以太廣播報文, 則
+      邏輯 爲 真. 關鍵字 <i>ether</i>
+      是 可選的.</dd>
+  <dt><b>ip broadcast</b></dt>
+  <dd>如果 報文 是
+      IP廣播報文, 則 邏輯 爲
+      真. Tcpdump 檢查 全0 和 全1
+      廣播約定, 並且 檢查
+      本地 的 子網掩碼.</dd>
+  <dt><b>ether multicast</b></dt>
+  <dd>如果 報文 是
+      以太多目傳送報文(multicast),
+      則 邏輯 爲 真. 關鍵字
+      <i>ether</i> 是 可選的.
+      這實際上 是 `<b>ether[0] &amp; 1 != 0</b>&#39;
+      的簡寫.</dd>
+  <dt><b>ip multicast</b></dt>
+  <dd>如果 報文 是
+      IP多目傳送報文, 則
+      邏輯 爲 真.</dd>
+  <dt><b>ether proto </b><i>protocol</i></dt>
+  <dd>如果 報文協議 屬於
+      以太類型 的 <i>protocol</i>, 則
+      邏輯 爲 真. <i>Protocol</i>
+      可以是 數字,
+      也可以是 名字, 如 <i>ip</i>,
+      <i>arp</i>, 或 <i>rarp</i>. 注意 這些
+      標識符 也是 關鍵字,
+      所以 必須 用 反斜槓(\)
+      轉義. [如果是 FDDI (例如,
+      `<b>fddi protocol arp</b>&#39;), 協議 標識
+      來自 802.2
+      邏輯鏈路控制(LLC)報頭,
+      它 通常 位於 FDDI 報頭 的
+      頂層. 當 根據
+      協議標識 過濾 報文
+      時, <i>Tcpdump</i> 假設 所有的 FDDI
+      報文 含有 LLC 報頭, 而且
+      LLC 報頭 用的是 SNAP 格式.]
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>decnet src </b><i>host</i></dt>
+  <dd>如果 DECNET 的 源地址 是
+      <i>host</i>, 則 邏輯 爲 真, 該
+      主機地址 的 形式
+      可能 是 ``10.123&#39;&#39;, 或者是 DECNET
+      主機名. [只有 配置成
+      運行 DECNET 的 Ultrix 系統 支持
+      DECNET 主機名.]</dd>
+  <dt><b>decnet dst </b><i>host</i></dt>
+  <dd>如果 DECNET 的 目的地址 是
+      <i>host</i>, 則 邏輯 爲 真.</dd>
+  <dt><b>decnet host </b><i>host</i></dt>
+  <dd>如果 DECNET 的 源地址 或
+      目的地址 是 <i>host</i>, 則
+      邏輯 爲 真.</dd>
+  <dt><b>ip</b>, <b>arp</b>, <b>rarp</b>, <b>decnet</b></dt>
+  <dd>是:
+    <br/>
+    <pre><b>ether proto </b><i>p</i>
+    </pre>
+    <br/>
+    的 簡寫 形式, 其中 <i>p</i>
+      爲 上述 協議 的 一種.</dd>
+  <dt><b>lat</b>, <b>moprc</b>, <b>mopdl</b></dt>
+  <dd>是:
+    <br/>
+    <pre><b>ether proto </b><i>p</i>
+    </pre>
+    <br/>
+    的 簡寫 形式, 其中 <i>p</i>
+      爲 上述 協議 的 一種.
+      注意 <i>tcpdump</i> 目前 不知道
+      如何 分析 這些 協議.</dd>
+  <dt><b>tcp</b>, <b>udp</b>, <b>icmp</b></dt>
+  <dd>是:
+    <br/>
+    <pre><b>ip proto </b><i>p</i>
+    </pre>
+    <br/>
+    的 簡寫 形式, 其中 <i>p</i>
+      爲 上述 協議 的 一種.</dd>
+  <dt><i>expr relop expr</i></dt>
+  <dd>如果 這個 關係式
+      成立, 則 邏輯 爲 真,
+      其中 <i>relop</i> 是 &gt;, &lt;, &gt;=, &lt;=, =, !=
+      之一, <i>expr</i> 是
+      數學表達式, 由
+      常整數(標準C語法形式),
+      普通的 二進制運算符
+      [+, -, *, /, &amp;, |], 一個
+      長度運算符, 和
+      指定的
+      報文數據訪問算符
+      組成. 要 訪問 報文內
+      的 數據, 使用 下面的
+      語法:
+    <br/>
+    <pre><i>proto</i><b> [ </b><i>expr</i><b> : </b><i>size</i><b> ]</b>
+    </pre>
+    <br/>
+    <i>Proto</i> 是 <b>ether, fddi,</b> <b>ip, arp, rarp, tcp, udp, </b>or
+      <b>icmp</b> 之一, 同時
+      也指出了 下標 操作
+      的 協議層. <i>expr</i> 給出
+      字節單位 的 偏移量,
+      該 偏移量 相對於
+      指定的 協議層. <i>Size</i> 是
+      可選項, 指出
+      感興趣的 字節數;
+      它可以 是 1, 2, 4, 缺省爲 1
+      字節. 由 關鍵字 <b>len</b>
+      給出的 長度運算符
+      指明 報文 的 長度.
+    <p class="Pp">例如, `<b>ether[0] &amp; 1 != 0</b>&#39;
+        捕捉 所有的
+        多目傳送 報文.
+        表達式 `<b>ip[0] &amp; 0xf != 5</b>&#39; 捕捉
+        所有 帶 可選域 的 IP
+        報文. 表達式 `<b>ip[6:2] &amp; 0x1fff =
+        0</b>&#39; 只捕捉 未分片 和
+        片偏移爲0 的 數據報.
+        這種 檢查 隱含在 <b>tcp</b>
+        和 <b>udp</b> 下標操作 中.
+        例如, <b>tcp[0]</b> 一定是 TCP
+        <i>報頭</i> 的 第一個
+        字節, 而不是 其中
+        某個 IP片 的 第一個
+        字節.</p>
+  </dd>
+</dl>
+<p class="Pp">原語 可以 用 下述
+    方法 結合使用:</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>園括弧 括起來的 原語
+      和 操作符 (園括弧 在 Shell
+      中 有專用,
+      所以必須轉義).</dd>
+  <dt></dt>
+  <dd>取反操作 (`<b>!</b>&#39; or `<b>not</b>&#39;).</dd>
+  <dt></dt>
+  <dd>連結操作 (`<b>&amp;&amp;</b>&#39; or
+    `<b>and</b>&#39;).</dd>
+  <dt></dt>
+  <dd>或操作 (`<b>||</b>&#39; or `<b>or</b>&#39;).</dd>
+</dl>
+<p class="Pp">取反操作 有
+    最高優先級. 或操作 和
+    連結操作 有 相同的
+    優先級, 運算時
+    從左到右 結合. 注意
+    連結操作 需要 顯式的
+    <b>and</b> 算符, 而不是
+    並列放置.</p>
+<p class="Pp">如果 給出 標識符,
+    但沒給 關鍵字, 那麼
+    暗指 最近使用 的
+    關鍵字. 例如,
+  <br/>
+</p>
+<pre><b>not host vs and ace</b>
+</pre>
+<br/>
+作爲
+<br/>
+<pre><b>not host vs and host ace</b>
+</pre>
+<br/>
+的 簡寫形式, 不應該 和
+<br/>
+<pre><b>not ( host vs or ace )</b>
+</pre>
+<br/>
+混淆.
+<p class="Pp">表達式參數 可以
+    作爲 單個 參數, 也可以
+    作爲 複合參數 傳給 tcpdump,
+    後者 更方便 一些.
+    一般說來, 如果 表達式
+    包含 Shell 元字符(metacharacter),
+    傳遞 單個 括起來 的
+    參數 要 容易 一些.
+    複合參數 在 被解析前
+    用 空格 聯接 一起.</p>
+<p class="Pp"></p>
+</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="示例_(EXAMPLES)">示例 (EXAMPLES)<a class="anchor" href="#%E7%A4%BA%E4%BE%8B_(EXAMPLES)">¶</a></h1>
+顯示 所有 進出 <i>sundown</i> 的
+  報文:
+<div class="Bd-indent">
+<pre><b>tcpdump host sundown</b>
+</pre>
+</div>
+<p class="Pp">顯示 <i>helios</i> 和 主機
+    <i>hot</i>, <i>ace</i> 之間 的 報文
+    傳送:</p>
+<div class="Bd-indent">
+<pre><b>tcpdump host helios and \( hot or ace \)</b>
+</pre>
+</div>
+<p class="Pp">顯示 <i>ace</i> 和 除了
+    <i>helios</i> 以外的 所有 主機
+    的 IP報文:</p>
+<div class="Bd-indent">
+<pre><b>tcpdump ip host ace and not helios</b>
+</pre>
+</div>
+<p class="Pp">顯示 本地的主機 和
+    Berkeley的主機 之間 的
+    網絡數據:</p>
+<div class="Bd-indent">
+<pre><b>tcpdump net ucb-ether</b>
+</pre>
+</div>
+<p class="Pp">顯示 所有 通過
+    網關 <i>snup</i> 的 ftp 報文 (注意
+    這個 表達式 被 單引號
+    括起, 防止 shell 解釋
+    園括弧):</p>
+<div class="Bd-indent">
+<pre><b>tcpdump &#39;gateway snup and (port ftp or ftp-data)&#39;</b>
+</pre>
+</div>
+<p class="Pp">顯示 既不是 來自
+    本地主機, 也不是 傳往
+    本地主機 的 網絡數據
+    (如果 報文 通過 網關
+    進入 其他網絡, 那麼 它
+    絕不可能 到達 你的
+    本地網絡).</p>
+<div class="Bd-indent">
+<pre><b>tcpdump ip and not net <i>localnet</i></b>
+</pre>
+</div>
+<p class="Pp">顯示 每個 TCP會話 的
+    起始 和 結束 報文 (SYN 和
+    FIN 報文), 而且 會話方 中
+    有一個 遠程主機.</p>
+<div class="Bd-indent">
+<pre><b>tcpdump &#39;tcp[13] &amp; 3 != 0 and not src and dst net <i>localnet</i>&#39;</b>
+</pre>
+</div>
+<p class="Pp">顯示 經過 網關 <i>snup</i>
+    中 大於 576 字節的 IP
+    數據報:</p>
+<div class="Bd-indent">
+<pre><b>tcpdump &#39;gateway snup and ip[2:2] &gt; 576&#39;</b>
+</pre>
+</div>
+<p class="Pp">顯示 IP 廣播 或
+    多目傳送 的 數據報,
+    但這些 報文 <i>不是</i>
+    通過 以太廣播 或
+    以太多目傳送 形式
+    傳送的:</p>
+<div class="Bd-indent">
+<pre><b>tcpdump &#39;ether[0] &amp; 1 = 0 and ip[16] &gt;= 224&#39;</b>
+</pre>
+</div>
+<p class="Pp">顯示 所有 不是
+    迴響請求/應答 的 ICMP
+    報文 (也就是說, 不是 ping
+    報文):</p>
+<div class="Bd-indent">
+<pre><b>tcpdump &#39;icmp[0] != 8 and icmp[0] != 0&#34;</b>
+</pre>
+</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="輸出格式_(OUTPUT_FORMAT)">輸出格式 (OUTPUT FORMAT)<a class="anchor" href="#%E8%BC%B8%E5%87%BA%E6%A0%BC%E5%BC%8F_(OUTPUT_FORMAT)">¶</a></h1>
+<i>tcpdump</i> 的 輸出格式
+  取決於 協議. 下面的
+  描述 給出 大多數 格式
+  的 簡要說明 和 範例.
+<p class="Pp"><b>鏈路層報頭 (Link Level
+    Headers)</b></p>
+<p class="Pp">如果 給出 &#39;-e&#39; 選項 就
+    顯示 鏈路層報頭.</p>
+<p class="Pp">在 以太網上, 顯示
+    報文的 源目地址, 協議
+    和 報文長度.</p>
+<p class="Pp">在 FDDI 網絡上, &#39;-e&#39; 選項
+    導致 <i>tcpdump</i> 顯示出
+    `幀控制(frame control)&#39; 域,
+    源目地址 和 報文長度.
+    (`幀控制&#39; 域 負責 解釋
+    其餘的 報文. 普通報文
+    (例如 裝載 IP數據報 的
+    報文) 是 `異步&#39; 報文,
+    優先級 介於 0 到 7 (例如,
+    `<b>async4</b>&#39;). 那些 被認爲
+    攜帶了 802.2
+    邏輯鏈路控制(LLC) 報文;
+    如果 它們 <i>不是</i> ISO
+    數據報 或者 所謂的 SNAP
+    報文, 就顯示 LLC 報頭.</p>
+<p class="Pp"><i>(注意: 以下 描述中
+    假設 你 熟悉 RFC-1144
+    中說明的 SLIP
+  壓縮算法.)</i></p>
+<p class="Pp">在 SLIP 鏈路上, <i>tcpdump</i>
+    顯示出 方向指示 (``I&#39;&#39; 指
+    inbound(進入), ``O&#39;&#39; 指 outbound(離開)),
+    報文類型 和 壓縮信息.
+    首先顯示的 是
+    報文類型. 有三種 類型
+    <i>ip</i>, <i>utcp</i> 和 <i>ctcp</i>. 對於 <i>ip</i>
+    報文 不再 顯示 更多的
+    鏈路信息. 對於 TCP 報文,
+    在 類型 後面 顯示
+    連接標識. 如果 報文 是
+    壓縮過的, 就顯示出
+    它的 編碼報頭. 這種
+    特殊情況 以 <b>*S+</b><i>n</i> 和
+    <b>*SA+</b><i>n</i> 的 形式 顯示,
+    這裏的 <i>n</i> 是 流序號
+    (或者 流序號 和 ack) 的
+    變化總量. 如果 不是
+    特殊情況, 就顯示出 0
+    或 多個 變化. 變化 由 U
+    (urgent pointer), W (window), A (ack), S (sequence number) 和 I
+    (packet ID) 指明, 後跟 一個
+    變化量(+n or -n), 或者
+    是一個 新值(=n).
+    最後顯示 報文中 的
+    數據總量, 以及
+    壓縮報頭 的 長度.</p>
+<p class="Pp">例如, 下面一行
+    顯示了 一個 傳出的
+    壓縮的 TCP 報文, 有一個
+    隱含的 連接標識;
+    確認(ack)的 變化量是 6,
+    流序號 增加 49, 報文ID
+    增加 6;
+    有三個字節的數據 和
+    六個字節 的
+  壓縮報頭:</p>
+<div class="Bd-indent">
+<pre><b>O ctcp * A+6 S+49 I+6 3 (6)</b>
+</pre>
+</div>
+<p class="Pp"><b>ARP/RARP 報文</b></p>
+<p class="Pp">Arp/rarp 報文 的 輸出 是
+    請求類型 及其 參數.
+    輸出格式 大體上 能夠
+    自我解釋. 這裏 是一個
+    簡單的例子, 來自 主機
+    <i>rtsg</i> 到 主機 <i>csam</i> 的 &#39;rlogin&#39;
+    開始 部分:</p>
+<div class="Bd-indent">
+<pre>
+
+<span class="Li">arp who-has csam tell rtsg</span>
+<span class="Li">arp reply csam is-at CSAM</span>
+
+</pre>
+</div>
+第一行 說明 rtsg 發出 一個
+  arp 報文 詢問 internet 主機 csam 的
+  以太網地址. Csam 用 它的
+  以太地址 作應答
+  (這個例子中, 以太地址
+  是 大寫的, internet 地址 爲
+  小寫).
+<p class="Pp">如果 用 <b>tcpdump -n</b> 看 就
+    清楚一些:</p>
+<div class="Bd-indent">
+<pre>
+
+<span class="Li">arp who-has 128.3.254.6 tell 128.3.254.68</span>
+<span class="Li">arp reply 128.3.254.6 is-at 02:07:01:00:01:c4</span>
+</pre>
+</div>
+<p class="Pp">如果 用 <b>tcpdump -e</b>, 可以
+    看到 實際上 第一個
+    報文 是 廣播, 第二個
+    報文 是 點到點 的:</p>
+<div class="Bd-indent">
+<pre>
+
+<span class="Li">RTSG Broadcast 0806  64: arp who-has csam tell rtsg</span>
+<span class="Li">CSAM RTSG 0806  64: arp reply csam is-at CSAM</span>
+
+</pre>
+</div>
+這裏 第一個 報文 指出
+  以太網源地址是 RTSG,
+  目的地址 是
+  以太網廣播地址,
+  類型域 爲 16進制數 0806
+  (類型 ETHER_ARP), 報文全長 64
+  字節.
+<p class="Pp"><b>TCP 報文</b></p>
+<p class="Pp"><i>(注意:
+    以下的描述中 假設 你
+    熟悉 RFC-793 中 說明的 TCP
+    協議, 如果 你</i> <i>不瞭解
+    這個 協議, 無論是 本文
+    還是 tcpdump 都對你 用處
+    不大)</i></p>
+<p class="Pp">一般說來 tcp 協議的
+    輸出格式是:</p>
+<div class="Bd-indent">
+<pre>
+
+<i>src &gt; dst: flags data-seqno ack window urgent options</i>
+
+</pre>
+</div>
+<i>Src</i> 和 <i>dst</i> 是
+  源目IP地址和端口. <i>Flags</i>
+  是 S (SYN), F (FIN), P (PUSH) 或 R (RST) 或
+  單獨的 `.&#39;(無標誌),
+  或者是 它們的 組合.
+  <i>Data-seqno</i> 說明了
+  本報文中的數據 在
+  流序號 中的 位置
+  (見下例). <i>Ack</i> 是
+  在這條連接上 信源機
+  希望 下一個 接收的
+  字節的 流序號 (sequence number).
+  <i>Window</i> 是 在這條連接上
+  信源機 接收緩衝區 的
+  字節大小. <i>Urg</i> 表明
+  報文內 是 `緊急(urgent)&#39; 數據.
+  <i>Options</i> 是 tcp 選項, 用
+  尖括號 括起 (例如, &lt;mss
+  1024&gt;).
+<p class="Pp"><i>Src, dst</i> 和 <i>flags</i> 肯定
+    存在. 其他域 依據
+    報文的 tcp 報頭 內容,
+    只輸出 有必要 的
+  部分.</p>
+<p class="Pp">下面 是 從 主機 <i>rtsg</i>
+    rlogin 到 主機 <i>csam</i> 的
+    開始部分.</p>
+<div class="Bd-indent">
+<pre>
+
+<span class="Li">rtsg.1023 &gt; csam.login: S 768512:768512(0) win 4096 &lt;mss 1024&gt;</span>
+<span class="Li">csam.login &gt; rtsg.1023: S 947648:947648(0) ack 768513 win 4096 &lt;mss 1024&gt;</span>
+<span class="Li">rtsg.1023 &gt; csam.login: . ack 1 win 4096</span>
+<span class="Li">rtsg.1023 &gt; csam.login: P 1:2(1) ack 1 win 4096</span>
+<span class="Li">csam.login &gt; rtsg.1023: . ack 2 win 4096</span>
+<span class="Li">rtsg.1023 &gt; csam.login: P 2:21(19) ack 1 win 4096</span>
+<span class="Li">csam.login &gt; rtsg.1023: P 1:2(1) ack 21 win 4077</span>
+<span class="Li">csam.login &gt; rtsg.1023: P 2:3(1) ack 21 win 4077 urg 1</span>
+<span class="Li">csam.login &gt; rtsg.1023: P 3:4(1) ack 21 win 4077 urg 1</span>
+
+</pre>
+</div>
+第一行 是說 從 rtsg 的 tcp
+  端口 1023 向 csam 的 <i>login</i> 端口
+  發送 報文. <b>S</b> 標誌 表明
+  設置了 <i>SYN</i> 標誌. 報文
+  的 流序號 是 768512, 沒有
+  數據. (這個寫成 `first:last(nbytes)&#39;,
+  意思是 `從 流序號 <i>first</i>
+  到 <i>last</i>, 不包括 <i>last</i>, 有
+  <i>nbytes</i> 字節的 用戶數據&#39;.)
+  此時 沒有
+  捎帶確認(piggy-backed ack), 有效的
+  接收窗口 是 4096 字節,
+  有一個
+  最大分段長度(max-segment-size) 的
+  選項, 請求 設置 mss 爲 1024
+  字節.
+<p class="Pp">Csam 用類似的 形式
+    應答, 只是 增加了 一個
+    對 rtsg SYN 的 捎帶確認.
+    然後 Rtsg 確認 csam 的 SYN. `.&#39;
+    意味着 沒有 設置 標誌.
+    這個 報文 不包含 數據,
+    因此 也就 沒有
+    數據的流序號.
+    注意這個 確認流序號
+    是一個 小整數(1). 當
+    <b>tcpdump</b> 第一次 發現 一個
+    tcp 會話時, 它 顯示 報文
+    攜帶的 流序號. 在
+    隨後收到的 報文裏, 它
+    顯示 當前 報文 和
+    最初那個 報文 的
+    流序號 之 差. 這
+    意味着 從第一個報文
+    開始, 以後的 流序號
+    可以 理解成 數據流
+    中的 相對位移
+    (每個報文 的 第一個
+    數據字節 從 &#39;1&#39; 計數). `-S&#39;
+    選項 能夠 改變 這個
+    特性, 直接 顯示 原始的
+    流序號.</p>
+<p class="Pp">在 第六行, rtsg 傳給 csam 19
+    個字節 的 數據 (字節 2
+    到 20). 報文中 設置了 PUSH
+    標誌. 第七行 csam 表明 它
+    收到了 rtsg 的 數據,
+    字節序號 是 21,
+    但不包括 第21個 字節.
+    顯然 大多數 數據 在 socket
+    的 緩衝區內, 因爲 csam 的
+    接收窗口 收到的 數據
+    小於 19 個 字節. 同時 csam
+    向 rtsg 發送了 一個字節
+    的 數據. 第八和第九行
+    顯示 csam 發送了
+    兩個字節 的 緊急數據
+    到 rtsg.</p>
+<p class="Pp">如果 捕捉區 設置的
+    過小, 以至於 <b>tcpdump</b> 不能
+    捕捉到 完整的 TCP 報頭,
+    <b>tcpdump</b> 會 儘可能的 翻譯
+    已捕獲的 部分, 然後
+    顯示 ``[|<i>tcp</i>]&#39;&#39;, 表明 無法
+    翻譯 其餘 部分. 如果
+    報頭 包含 有問題的
+    選項 (選項表 長度 太小
+    或者 超出 報頭範圍), tcpdump
+    顯示 ``[<i>bad opt</i>]&#39;&#39; 並且 不再
+    翻譯 其他 選項部分
+    (因爲 它 不可能 判斷出
+    從哪兒 開始). 如果
+    報頭長度 表明 存在
+    選項, 但是 IP 數據報
+    長度 不夠, 不可能 真的
+    保存 選項, tcpdump 就顯示
+    ``[<i>bad hdr length</i>]&#39;&#39;.</p>
+<p class="Pp"><b><b>UDP 報文</b></b></p>
+<p class="Pp">UDP 格式 就象 這個 rwho
+    報文 顯示的:</p>
+<div class="Bd-indent">
+<pre>
+
+<span class="Li">actinide.who &gt; broadcast.who: udp 84</span>
+
+</pre>
+</div>
+就是說 把一個 udp 數據報
+  從 主機 <i>actinide</i> 的 <i>who</i> 端口
+  發送到 <i>broadcast</i>, Internet
+  廣播地址 的 <i>who</i> 端口.
+  報文 包含 84字節 的
+  用戶數據.
+<p class="Pp">某些 UDP 服務 能夠
+    識別出來(從
+    源目端口號 上), 因而
+    顯示出 更高層的
+    協議信息. 特別是
+    域名服務請求(RFC-1034/1035) 和 NFS
+    的 RPC 調用(RFC-1050).</p>
+<p class="Pp"><b>UDP 名字服務請求 (Name
+    Server Requests)</b></p>
+<p class="Pp"><i>(注意:
+    以下的描述中 假設 你
+    熟悉 RFC-1035 說明的
+    域名服務協議.</i>
+    <i>如果你 不熟悉
+    這個協議, 下面的內容
+    可能 看起來是 天書.)</i></p>
+<p class="Pp">名字服務請求 的
+    格式 是</p>
+<div class="Bd-indent">
+<pre>
+
+<i>src &gt; dst: id op? flags qtype qclass name (len)</i>
+
+<span class="Li">h2opolo.1538 &gt; helios.domain: 3+ A? ucbvax.berkeley.edu. (37)</span>
+
+</pre>
+</div>
+主機 <i>h2opolo</i> 訪問 <i>helios</i> 上的
+  域名服務, 詢問 和
+  <i>ucbvax.berkeley.edu.</i> 關聯的
+  地址記錄(qtype=A). 查詢號是
+  `3&#39;. `+&#39; 表明 設置了
+  <i>遞歸請求</i> 標誌.
+  查詢長度是 37 字節,
+  不包括 UDP 和 IP 頭.
+  查詢操作 是 普通的
+  <i>Query</i> 操作, 因此 op 域 可以
+  忽略. 如果 op 設置成
+  其他什麼東西, 它應該
+  顯示在 `3&#39; 和 `+&#39; 之間.
+  類似的, qclass 是 普通的 <i>C_IN</i>
+  類型, 也被 忽略了.
+  其他類型的 qclass 應該 在 `A&#39;
+  後面 顯示.
+<p class="Pp">Tcpdump 會檢查 一些
+    不規則 情況, 相應的
+    結果 作爲 補充域 放在
+    方括號內: 如果 某個
+    查詢 包含 回答,
+    名字服務 或
+    管理機構部分, 就把
+    <i>ancount</i>, <i>nscount</i>, 或 <i>arcount</i>
+    顯示成 `[<i>n</i>a]&#39;, `[<i>n</i>n]&#39; 或
+    `[<i>n</i>au]&#39;, 這裏的 <i>n</i> 代表
+    相應的 數量. 如果 在
+    第二和第三字節 中,
+    任何一個 回答位(AA, RA 或
+    rcode) 或 任何一個
+    `必須爲零&#39; 的位 被
+    置位, 就顯示 `[b2&amp;3=<i>x</i>]&#39;,
+    這裏的 <i>x</i> 是 報頭
+    第二和第三字節 的
+    16進制數.</p>
+<p class="Pp"><b>UDP 名字服務回答</b></p>
+<p class="Pp">名字服務回答的
+    格式 是</p>
+<div class="Bd-indent">
+<pre>
+
+<i>src &gt; dst:  id op rcode flags a/n/au type class data (len)</i>
+
+<span class="Li">helios.domain &gt; h2opolo.1538: 3 3/3/7 A 128.32.137.3 (273)</span>
+<span class="Li">helios.domain &gt; h2opolo.1537: 2 NXDomain* 0/1/0 (97)</span>
+
+</pre>
+</div>
+第一個例子裏, <i>helios</i>
+  回答了 <i>h2opolo</i> 發出的
+  標識爲3 的 詢問, 一共是
+  3 個 回答記錄, 3 個
+  名字服務記錄 和 7
+  個管理結構記錄.
+  第一個 回答紀錄 的
+  類型是 A (地址), 數據是
+  internet 地址 128.32.137.3. 回答的
+  全長 爲 273 字節, 不包括 UDP
+  和 IP 報頭. 作爲 A 記錄的
+  class(C_IN) 可以 忽略 op (詢問) 和
+  rcode (NoError).
+<p class="Pp">在第二個例子裏,
+    <i>helios</i> 對 標識爲2 的 詢問
+    作出 域名不存在 (NXDomain)
+    的 回答, 沒有
+    回答記錄, 一個
+    名字服務記錄, 沒有
+    管理結構部分.
+   `*&#39; 表明 設置了
+    <i>權威回答(authoritative answer)</i>.
+    由於 沒有 回答記錄,
+    這裏就 不顯示 type, class 和
+  data.</p>
+<p class="Pp">其他 標誌 字符
+    可以 顯示爲 `-&#39;
+    (<i>沒有</i>設置遞歸有效(RA))
+    和 `|&#39; (設置 消息截短(TC)).
+    如果 `問題&#39; 部分 沒有
+    有效的 內容, 就 顯示
+    `[<i>n</i>q]&#39;.</p>
+<p class="Pp">注意 名字服務的
+    詢問和回答 一般說來
+    比較大, 68 字節的 <i>snaplen</i>
+    可能 無法 捕捉到
+    足夠的 報文內容. 如果
+    你 的確 在 研究
+    名字服務 的 情況, 可以
+    使用 <b>-s</b> 選項 增大
+    捕捉緩衝區. `<b>-s 128</b>&#39; 應該
+    效果 不錯了.</p>
+<p class="Pp"></p>
+<p class="Pp"><b>NFS 請求和響應</b></p>
+<p class="Pp">Sun NFS (網絡文件系統)
+    的 請求和響應
+    顯示格式 是:</p>
+<div class="Bd-indent">
+<pre>
+
+<i>src.xid &gt; dst.nfs: len op args</i>
+<i>src.nfs &gt; dst.xid: reply stat len op results</i>
+
+<span class="Li"></span>
+<span class="Li">sushi.6709 &gt; wrl.nfs: 112 readlink fh 21,24/10.73165</span>
+<span class="Li">wrl.nfs &gt; sushi.6709: reply ok 40 readlink &#34;../var&#34;</span>
+<span class="Li">sushi.201b &gt; wrl.nfs:</span>
+<span class="Li">        144 lookup fh 9,74/4096.6878 &#34;xcolors&#34;</span>
+<span class="Li">wrl.nfs &gt; sushi.201b:</span>
+<span class="Li">        reply ok 128 lookup fh 9,74/4134.3150</span>
+<span class="Li"></span>
+
+</pre>
+</div>
+在第一行, 主機 <i>sushi</i> 向
+  <i>wrl</i> 發送 號碼爲 <i>6709</i> 的
+  交互會話 (注意 源主機
+  後面的 數字 是 交互號,
+  <i>不是</i> 端口). 這項請求
+  長 112 字節, 不包括 UDP 和 IP
+  報頭. 在 文件句柄 (fh<i>)</i>
+  <i>21,24/10.731657119 上執行 </i><i>readlink</i><i>
+  (讀取 符號連接) 操作.</i>
+  <i>(如果 運氣 不錯, 就象
+  這種情況, 文件句柄
+  可以 依次翻譯成
+  主次設備號,</i> <i>i 節點號,
+  和 事件號(generation number). )</i>
+  <i></i><i>Wrl</i><i> 回答 `ok&#39; 和 連接的
+  內容.</i>
+<p class="Pp">在第三行, <i>sushi</i> 請求
+    <i>wrl</i> 在 目錄文件 9,74/4096.6878 中
+    查找 `<i>xcolors</i>&#39;. 注意 數據的
+    打印格式 取決於
+    操作類型. 格式 應該
+    可以 自我說明.</p>
+<p class="Pp">給出 -v (verbose) 選項 可以
+    顯示 附加信息. 例如:</p>
+<div class="Bd-indent">
+<pre>
+
+<span class="Li"></span>
+<span class="Li">sushi.1372a &gt; wrl.nfs:</span>
+<span class="Li">        148 read fh 21,11/12.195 8192 bytes @ 24576</span>
+<span class="Li">wrl.nfs &gt; sushi.1372a:</span>
+<span class="Li">        reply ok 1472 read REG 100664 ids 417/0 sz 29388</span>
+<span class="Li"></span>
+
+</pre>
+</div>
+(-v 同時 使它 顯示 IP
+  報頭的 TTL, ID, 和 分片域, 在
+  這個例子裏 把它們
+  省略了.) 在第一行, <i>sushi</i>
+  請求 <i>wrl</i> 從 文件 21,11/12.195 的
+  偏移位置 24576 開始, 讀取 8192
+  字節. <i>Wrl</i> 回答 `ok&#39;; 第二行
+  顯示的 報文 是 應答的
+  第一個 分片, 因此 只有
+  1472 字節 (其餘數據 在
+  後續的 分片中 傳過來,
+  但由於 這些分片裏
+  沒有 NFS 甚至 UDP 報頭, 因此
+  根據 所使用的
+  過濾器表達式, 有可能
+  不再顯示). -v 選項 還會
+  顯示 一些 文件屬性
+  (它們 作爲 文件數據 的
+  附帶部分 傳回來):
+  文件類型 (普通文件 ``REG&#39;&#39;),
+  存取模式 (八進制數), uid
+  和 gid, 以及 文件大小.
+<p class="Pp">如果再給一個 -v
+    選項 (-vv), 還能 顯示
+    更多的細節.</p>
+<p class="Pp">注意 NFS 請求 的
+    數據量 非常大, 除非
+    增加 <i>snaplen</i>, 否則
+    很多細節 無法顯示.
+    試一試 `<b>-s 192</b>&#39; 選項.</p>
+<p class="Pp">NFS 應答報文
+    沒有明確 標明 RPC 操作.
+    因此 <i>tcpdump</i> 保留有
+    ``近來的&#39;&#39; 請求 記錄,
+    根據 交互號 匹配
+    應答報文. 如果
+    應答報文 沒有 相應的
+    請求報文, 它 就
+    無法分析.</p>
+<p class="Pp"><b>KIP Appletalk (UDP 上的 DDP)</b></p>
+<p class="Pp">Appletalk DDP 報文 封裝在 UDP
+    數據報 中, 解包後 按 DDP
+    報文 轉儲 (也就是說,
+    忽略 所有的 UDP 報頭
+    信息). 文件 <i>/etc/atalk.names</i> 用來
+    把 appletalk 網絡和節點號
+    翻譯成 名字. 這個文件
+    的 行格式 是</p>
+<div class="Bd-indent">
+<pre>
+
+<i>number       name</i>
+<span class="Li">1.254              ether</span>
+<span class="Li">16.1            icsd-net</span>
+<span class="Li">1.254.110       ace</span>
+
+</pre>
+</div>
+前兩行 給出了 appletalk 的
+  網絡名稱. 第三行 給出
+  某個主機 的 名字
+  (主機和網絡 依據
+  第三組 數字 區分 -
+  網絡號 <i>一定</i> 是
+  兩組數字, 主機號
+  <i>一定</i> 是 三組 數字.)
+  號碼 和 名字 用
+  空白符(空格或tab) 隔開.
+  <i>/etc/atalk.names</i> 文件 可以 包含
+  空行 或
+  註釋行(以`#&#39;開始的行).
+<p class="Pp">Appletalk 地址 按
+    這個格式 顯示</p>
+<div class="Bd-indent">
+<pre>
+
+<i>net.host.port</i>
+<span class="Li">144.1.209.2 &gt; icsd-net.112.220</span>
+<span class="Li">office.2 &gt; icsd-net.112.220</span>
+<span class="Li">jssmag.149.235 &gt; icsd-net.2</span>
+
+</pre>
+</div>
+(如果 不存在 <i>/etc/atalk.names ,</i>
+  或者 裏面 缺少
+  有效項目, 就以
+  數字形式 顯示 地址.)
+  第一個例子裏, 網絡 144.1
+  的 209 節點的 NBP (DDP 端口 2) 向
+  網絡 icsd 的 112 節點 的 220
+  端口 發送數據. 第二行
+  和 上面 一樣, 只是
+  知道了 源節點 的 全稱
+  (`office&#39;). 第三行 是從 網絡 jssmag
+  的 149 節點 的 235 端口 向 icsd-net
+  的 NBP 端口 廣播 (注意
+  廣播地址 (255) 隱含在
+  無主機號的 網絡名字
+  中 - 所以 在 /etc/atalk.names 中
+  區分 節點名 和 網絡名
+  是個 好主意).
+<p class="Pp">Tcpdump 可以 翻譯 NBP
+    (名字聯結協議) 和 ATP (Appletalk
+    交互協議) 的 報文
+    內容. 其他協議 只轉儲
+    協議名稱 (或號碼, 如果
+    還 沒給 這個協議 註冊
+    名稱) 和 報文大小.</p>
+<p class="Pp"><b>NBP 報文</b> 的
+    輸出格式 就象 下面的
+    例子:</p>
+<div class="Bd-indent">
+<pre>
+
+<span class="Li">icsd-net.112.220 &gt; jssmag.2: nbp-lkup 190: &#34;=:LaserWriter@*&#34;</span>
+<span class="Li">jssmag.209.2 &gt; icsd-net.112.220: nbp-reply 190: &#34;RM1140:LaserWriter@*&#34; 250</span>
+<span class="Li">techpit.2 &gt; icsd-net.112.220: nbp-reply 190: &#34;techpit:LaserWriter@*&#34; 186</span>
+
+</pre>
+</div>
+第一行 是 網絡 icsd 的 112
+  主機 在 網絡 jssmag 上的
+  廣播, 對 名字 laserwriter 做
+  名字查詢請求.
+  名字查詢請求 的 nbp
+  標識號 是 190. 第二行
+  顯示的是 對 這個請求
+  的 回答 (注意 它們 有
+  同樣的 標識號), 主機
+  jssmag.209 表示 在它的 250 端口
+  註冊了 一個 laserwriter 的
+  資源, 名字是 &#34;RM1140&#34;.
+  第三行 是 這個請求 的
+  其他回答, 主機 techpit 的 186
+  端口 有 laserwriter 註冊的
+  &#34;techpit&#34;.
+<p class="Pp"><b>ATP 報文</b> 格式 如
+    下例 所示:</p>
+<div class="Bd-indent">
+<pre>
+
+<span class="Li">jssmag.209.165 &gt; helios.132: atp-req  12266&lt;0-7&gt; 0xae030001</span>
+<span class="Li">helios.132 &gt; jssmag.209.165: atp-resp 12266:0 (512) 0xae040000</span>
+<span class="Li">helios.132 &gt; jssmag.209.165: atp-resp 12266:1 (512) 0xae040000</span>
+<span class="Li">helios.132 &gt; jssmag.209.165: atp-resp 12266:2 (512) 0xae040000</span>
+<span class="Li">helios.132 &gt; jssmag.209.165: atp-resp 12266:3 (512) 0xae040000</span>
+<span class="Li">helios.132 &gt; jssmag.209.165: atp-resp 12266:4 (512) 0xae040000</span>
+<span class="Li">helios.132 &gt; jssmag.209.165: atp-resp 12266:5 (512) 0xae040000</span>
+<span class="Li">helios.132 &gt; jssmag.209.165: atp-resp 12266:6 (512) 0xae040000</span>
+<span class="Li">helios.132 &gt; jssmag.209.165: atp-resp*12266:7 (512) 0xae040000</span>
+<span class="Li">jssmag.209.165 &gt; helios.132: atp-req  12266&lt;3,5&gt; 0xae030001</span>
+<span class="Li">helios.132 &gt; jssmag.209.165: atp-resp 12266:3 (512) 0xae040000</span>
+<span class="Li">helios.132 &gt; jssmag.209.165: atp-resp 12266:5 (512) 0xae040000</span>
+<span class="Li">jssmag.209.165 &gt; helios.132: atp-rel  12266&lt;0-7&gt; 0xae030001</span>
+<span class="Li">jssmag.209.133 &gt; helios.132: atp-req* 12267&lt;0-7&gt; 0xae030002</span>
+
+</pre>
+</div>
+Jssmag.209 向 主機 helios 發起 12266 號
+  交互操作, 請求 8 個
+  報文(`&lt;0-7&gt;&#39;). 行尾的
+  十六進制數 是 請求中
+  `userdata&#39; 域 的 值.
+<p class="Pp">Helios 用 8 個 512字節 的
+    報文 應答. 跟在 交互號
+    後面的 `:digit&#39; 給出了
+    交互過程中 報文的
+    序列號, 括弧內的 數字
+    是 報文的 數據量,
+    不包括 atp 報頭. 報文 7 的
+    `*&#39; 表明 設置了 EOM 位.</p>
+<p class="Pp">然後 Jssmag.209 請求 重傳
+    第 3 &amp; 5 報文. Helios 做了
+    重傳後 jssmag.209 結束 這次
+    交互操作. 最後, jssmag.209
+    發起 下一次 交互請求.
+    請求中的 `*&#39; 表明
+    <i>沒有</i> 設置 XO (exactly once) 位.</p>
+<p class="Pp"></p>
+<p class="Pp"><b>IP 分片</b></p>
+<p class="Pp">分片的 Internet 數據報
+    顯示爲</p>
+<div class="Bd-indent">
+<pre>
+
+<b>(frag </b><i>id</i><b>:</b><i>size</i><b>@</b><i>offset</i><b>+)</b>
+<b>(frag </b><i>id</i><b>:</b><i>size</i><b>@</b><i>offset</i><b>)</b>
+
+</pre>
+</div>
+(第一種 形式 表明 還有
+  更多的 分片. 第二種
+  形式 表明 這是 最後
+  一片.)
+<p class="Pp"><i>Id</i> 是 分片 標識號.
+    <i>Size</i> 是 分片 大小 (字節),
+    不包括 IP 報頭. <i>Offset</i> 是
+    該分片 在 原數據報 中
+    的 偏移 (單位是字節).</p>
+<p class="Pp">每一個 分片 的
+    信息 都可以 打印出來.
+    第一個 分片 包含了
+    高層 協議 報頭, 顯示
+    協議信息 後 顯示 分片
+    的 信息. 第一個 分片
+    以後的 分片 不再 含有
+    高層協議 報頭, 所以 在
+    源目地址 後面 只顯示
+    分片 信息. 例如,
+    下面是 從 arizona.edu 到 lbl-rtsg.arpa
+    的 一部分 ftp 傳輸,
+    途經的 CSNET 看上去
+    處理不了 576 字節的
+    數據報:</p>
+<div class="Bd-indent">
+<pre>
+
+<span class="Li">arizona.ftp-data &gt; rtsg.1170: . 1024:1332(308) ack 1 win 4096 (frag 595a:328@0+)</span>
+<span class="Li">arizona &gt; rtsg: (frag 595a:204@328)</span>
+<span class="Li">rtsg.1170 &gt; arizona.ftp-data: . ack 1536 win 2560</span>
+
+</pre>
+</div>
+這裏 有幾點 需要注意:
+  首先, 第二行的 地址
+  不包括 端口號.
+  這是因爲 TCP 協議 信息
+  全部 裝到了 第一個
+  分片內, 所以 顯示
+  後續分片的 時候
+  不可能 知道 端口 或
+  流序號. 其次, 第一行的
+  tcp 流序號部分 看上去有
+  308 字節的 用戶數據,
+  實際上 是 512 字節
+  (第一個 分片的 308 和
+  第二個 分片的 204 字節).
+  如果 你 正在 尋找
+  流序號中 的 空洞, 或者
+  試圖 匹配 報文 的
+  確認(ack), 那你上當了.
+<p class="Pp">如果 報文的 IP 標有
+    <i>不要分片</i> 標誌, 那麼
+    在尾部 顯示 <b>(DF)</b>.</p>
+<p class="Pp"><b>時戳</b></p>
+<p class="Pp">缺省情況下, 所有
+    輸出行 的 前面 都有
+    時戳. 時戳 就是
+    當前時間,
+  顯示格式爲</p>
+<div class="Bd-indent">
+<pre><i>hh:mm:ss.frac</i>
+</pre>
+</div>
+精度 和 內核時鐘 一樣.
+  時戳 反映了 內核 收到
+  報文 的 時間. 從
+  以太接口 收到 報文 到
+  內核 響應 &#39;報文就緒&#39;
+  中斷 有一個 滯後, 該
+  滯後 不被考慮.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="另見_(SEE_ALSO)">另見 (SEE ALSO)<a class="anchor" href="#%E5%8F%A6%E8%A6%8B_(SEE_ALSO)">¶</a></h1>
+traffic(1C), nit(4P), <a href="../../buster/freebsd-manpages/bpf.4freebsd.en.html">bpf(4)</a>, <a href="../../buster/libpcap0.8-dev/pcap.3pcap.en.html">pcap(3)</a>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者_(AUTHORS)">作者 (AUTHORS)<a class="anchor" href="#%E4%BD%9C%E8%80%85_(AUTHORS)">¶</a></h1>
+Van Jacobson, Craig Leres and Steven McCanne, all of the Lawrence Berkeley
+  National Laboratory, University of California, Berkeley, CA.
+<p class="Pp">當前 版本 可以 從
+    匿名ftp 獲得:</p>
+<p class="Pp"></p>
+<div class="Bd-indent"><i><a href="ftp://ftp.ee.lbl.gov/tcpdump.tar.Z">ftp://ftp.ee.lbl.gov/tcpdump.tar.Z</a></i></div>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+請把 臭蟲 報告 傳往
+  tcpdump@ee.lbl.gov.
+<p class="Pp">NIT 不允許 監視
+    你自己的 傳出數據, BPF
+    可以. 我們 建議 你
+    使用 後者.</p>
+<p class="Pp">應該 試着 重組 IP
+    分片, 至少可以 爲
+    更高層的 協議 計算出
+    正確的 長度.</p>
+<p class="Pp">名字服務逆向詢問
+    轉儲的 不正確: 打印出
+    (空的)問題部分,
+    而實際上 詢問 放在了
+    回答部分. 有人 認爲
+    這種 逆向詢問
+    本身就是 bug, 應該 修改
+    產生問題 的 程序, 而非
+    tcpdump.</p>
+<p class="Pp">蘋果 Ethertalk DDP 的 報文
+    應該 象 KIP DDP 的 報文 一樣
+    容易 轉儲, 事實 卻
+    不是 這樣. 即使 我們
+    有意 作點什麼 來 促銷
+    Ethertalk (我們沒有), LBL
+    也不允許 Ethertalk 出現在
+    它的 任何網絡上, 所以
+    我們 沒辦法 測試
+    這些代碼.</p>
+<p class="Pp">如果 報文的 路徑上
+    出現 夏時制時間 變化,
+    可能 導致 時戳 混亂.
+    (這個時間變化將忽略)</p>
+<p class="Pp">操作 FDDI 報頭的
+    過濾器表達式 假設
+    所有的 FDDI 報文
+    被封裝在 以太報文 中.
+    這對 IP, ARP 和 DECNET Phase IV 無疑是
+    正確的, 但對 某些 協議
+    如 ISO CLNS 不正確. 因此,
+    過濾器 有可能會
+    糊里糊塗的 的 接收
+    一些 並不真正 匹配
+    過濾器表達式 的
+  報文.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>徐明 &lt;xuming@users.sourceforge.net&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2003/05/13</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">30 June 1997</td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+tcpdump.8.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2020-01-01T15:43:58Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"tcpdump(8)\"}}]}"
+</script>

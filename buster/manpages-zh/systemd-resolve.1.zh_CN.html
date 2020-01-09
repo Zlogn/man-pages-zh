@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>systemd-resolve(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/systemd-resolve.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/systemd-resolve.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; systemd-resolve(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/systemd-resolve.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/systemd-resolve.1.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS" title="SYNOPSIS">SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%89%E9%A1%B9" title="选项">选项</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BE%8B%E5%AD%90" title="例子">例子</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E8%A7%81" title="参见">参见</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES" title="NOTES">NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/systemd-resolve.1.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/systemd-resolve.1.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/systemd-resolve.1.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/systemd-resolve.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/systemd-resolve.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">SYSTEMD-RESOLVE(1)</td>
+    <td class="head-vol">systemd-resolve</td>
+    <td class="head-rtitle">SYSTEMD-RESOLVE(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+systemd-resolve -
+  解析主机名、IP地址、域名、DNS资源记录、服务
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS">SYNOPSIS<a class="anchor" href="#SYNOPSIS">¶</a></h1>
+<p class="Pp HP"><b>systemd-resolve</b> [OPTIONS...] <i>HOSTNAME</i>...</p>
+<p class="Pp HP"><b>systemd-resolve</b> [OPTIONS...] <i>ADDRESS</i>...</p>
+<p class="Pp HP"><b>systemd-resolve</b> [OPTIONS...] --type=<i>TYPE</i>
+    <i>DOMAIN</i>...</p>
+<p class="Pp HP"><b>systemd-resolve</b> [OPTIONS...] --service
+    [[<i>NAME</i>] <i>TYPE</i>] <i>DOMAIN</i></p>
+<p class="Pp HP"><b>systemd-resolve</b> [OPTIONS...] --openpgp
+    <i>USER@DOMAIN</i></p>
+<p class="Pp HP"><b>systemd-resolve</b> [OPTIONS...] --tlsa
+    <i>DOMAIN</i><i>[:PORT]</i></p>
+<p class="Pp HP"><b>systemd-resolve</b> [OPTIONS...] --statistics</p>
+<p class="Pp HP"><b>systemd-resolve</b> [OPTIONS...] --reset-statistics</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>systemd-resolve</b> 利用 <a href="../../buster/systemd/systemd-resolved.service.8.en.html">systemd-resolved.service(8)</a>
+  系统服务解析主机名、IP地址、域名、DNS资源记录、服务。
+  默认情况下，参数列表将被视为域名/主机名的列表，程序的输出将是它们所对应的
+  IPv4 或 IPv6 地址。
+  如果参数符合 IPv4 或 IPv6
+  格式，那么表示反解析IP地址所对应的主机名。
+<p class="Pp">程序的输出包括查找所使用的协议与网络接口，
+    还包括查找到的信息是否是可靠的。
+    所有通过 DNSSEC
+    认证的信息将被视为是可靠的，
+    所有从本地可信源获取的信息也被视为是可靠的，
+    包括对本机主机名的解析、特殊的
+    &#34;localhost&#34;
+    主机名、所有来自 /etc/hosts
+    中的结果。</p>
+<p class="Pp"><b>--type=</b>
+    用于指定仅查询特定类型的DNS资源记录(A,
+    AAAA, SOA, MX, ...)，
+    而不是默认的地址解析/反解析。
+    特殊值 &#34;help&#34;
+    可用于列出所有可用的记录类型。</p>
+<p class="Pp"><b>--service</b> 用于解析 <b>SRV</b>[1]
+    与 <b>DNS-SD</b>[2] 服务(见下文)。
+    需要一至三个参数。如果指定了三个参数，那么第一个是
+    DNS-SD 服务名， 第二个是 SRV
+    服务类型，第三个是要查找的域。在这种情况下，将会执行一次完整的
+    DNS-SD 风格的 SRV 与 TXT 查询。
+    如果只指定了二个参数，那么第一个是
+    SRV 服务类型，
+    第二个是要查找的域。在这种情况下，将省略
+    TXT
+    查询。最后，如果只指定了一个参数，
+    那么该参数将被视为域名，并且已经加上了
+    SRV
+    类型前缀。在这种情况下，将会执行一个
+    SRV 查询(不含 TXT)</p>
+<p class="Pp"><b>--openpgp</b>
+    用于查询存储在DNS的
+    <b>OPENPGPKEY</b>[3]
+    类型的资源记录中的 PGP
+    公钥。
+    需要指定至少一个Email地址。</p>
+<p class="Pp"><b>--tlsa</b>
+    用于查询存储在DNS的
+    <b>TLSA</b>[4]
+    类型的资源记录中的 TLS
+    公钥。
+    需要指定至少一个域名。</p>
+<p class="Pp"><b>--statistics</b>
+    用于显示解析统计，
+    包括 DNSSEC
+    验证成功与失败的数量。</p>
+<p class="Pp"><b>--reset-statistics</b>
+    用于重置各种解析统计的计数器，
+    包括所有 <b>--statistics</b>
+    输出的统计数据。此操作需要超级用户权限。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="选项">选项<a class="anchor" href="#%E9%80%89%E9%A1%B9">¶</a></h1>
+<b>-4</b>, <b>-6</b>
+<div class="Bd-indent">在解析主机名时，默认同时查询
+  IPv4 与 IPv6 地址。 使用 <b>-4</b>
+  表示仅查询 IPv4 地址，
+  使用 <b>-6</b> 表示仅查询 IPv6
+  地址。</div>
+<p class="Pp"><b>-i</b> <i>INTERFACE</i>,
+  <b>--interface=</b><i>INTERFACE</i></p>
+<div class="Bd-indent">指定使用哪个网络接口。
+  可以使用网卡的数字序号，也可以使用例如
+  &#34;en0&#34;
+  这样的网卡名称。
+  注意，在使用全局DNS(位于
+  /etc/resolv.conf 与 /etc/systemd/resolve.conf)
+  的时候，此选项没有效果。</div>
+<p class="Pp"><b>-p</b> <i>PROTOCOL</i>, <b>--protocol=</b><i>PROTOCOL</i></p>
+<div class="Bd-indent">指定查询所用的协议。可以设为下列四个值之一：
+  &#34;dns&#34;(经典的单播DNS)、
+  &#34;llmnr&#34;(<b>Link-Local Multicast Name Resolution</b>[5])、
+  &#34;llmnr-ipv4&#34; 、 &#34;llmnr-ipv6&#34; 。
+  默认使用所有适合的协议。
+  可以多次使用此选项以指定多个查询协议。
+  注意：(1)设置 &#34;llmnr&#34;
+  等价于同时设置
+  &#34;llmnr-ipv4&#34; 与 &#34;llmnr-ipv6&#34;
+  。(2)此选项并不强制
+  <a href="../../buster/systemd/systemd-resolved.service.8.en.html">systemd-resolved.service(8)</a>
+  必须使用指定的查询协议，因为某个必需的网络接口与相应的配置可能不存在。
+  (3)特殊值 &#34;help&#34;
+  可用于列出所有可用的协议。</div>
+<p class="Pp"><b>-t</b> <i>TYPE</i>, <b>--type=</b><i>TYPE</i>, <b>-c</b>
+    <i>CLASS</i>, <b>--class=</b><i>CLASS</i></p>
+<div class="Bd-indent">指定查找的DNS资源记录的
+  type(A, AAAA, MX, ...) 与 class(IN, ANY, ...)。
+  如果使用了此选项，那么仅查询与指定的
+  type/class 匹配的DNS资源记录。
+  如果仅指定了 type
+  的话，那么 class
+  的默认值是&#34;IN&#34;。
+  特殊值 &#34;help&#34;
+  可用于列出所有可用的值。</div>
+<p class="Pp"><b>--service</b></p>
+<div class="Bd-indent">根据指定的参数列表，开启
+  DNS-SD 与 简单 SRV 服务解析。
+  详见前文。</div>
+<p class="Pp"><b>--service-address=</b><i>BOOL</i></p>
+<div class="Bd-indent">默认值 yes
+  表示在使用 <b>--service</b>
+  查找服务时，同时也解析包含在
+  SRV
+  资源记录内的主机名。</div>
+<p class="Pp"><b>--service-txt=</b><i>BOOL</i></p>
+<div class="Bd-indent">默认值 yes
+  表示在使用 <b>--service</b> 查找
+  DNS-SD
+  服务时，同时也解析 TXT
+  服务元数据记录。</div>
+<p class="Pp"><b>--openpgp</b></p>
+<div class="Bd-indent">查询存储在DNS的
+  OPENPGPKEY
+  类型的资源记录中的 PGP
+  公钥(参见前文)。
+  指定的Email地址将被转换为对应的DNS域名，并打印出所有
+  OPENPGPKEY 公钥。</div>
+<p class="Pp"><b>--tlsa</b></p>
+<div class="Bd-indent">为每一个带有 port
+  与 family 前缀的名字
+  (&#34;_<i>port</i>._<i>family</i>.<i>domain</i>&#34;)
+  查询存储在DNS的 TLSA
+  类型的资源记录中的 TLS
+  公钥(参见前文)。
+  端口号可以明确的写在冒号(:)之后，
+  否则将使用默认的 <b>443</b>
+  端口。 family 可以作为 <b>--tlsa</b>
+  的参数指定，否则将使用默认值
+  <b>tcp</b> 。</div>
+<p class="Pp"><b>--cname=</b><i>BOOL</i></p>
+<div class="Bd-indent">默认值 yes
+  表示追踪 DNS 的 CNAME 或 DNAME
+  重定向。
+  否则，在接收到 CNAME 或 DNAME
+  应答后，直接返回错误。</div>
+<p class="Pp"><b>--search=</b><i>BOOL</i></p>
+<div class="Bd-indent">默认值 yes
+  表示所有不含&#34;.&#34;的主机名都将在搜索域列表(若非空)中进行搜索。</div>
+<p class="Pp"><b>--raw</b>[=payload|packet]</p>
+<div class="Bd-indent">以原始的二进制格式显示应答的数据。
+  &#34;payload&#34;(缺省值)表示导出数据包的荷载。
+  &#34;packet&#34;
+  表示导出原始的数据帧，并在前面加上一个小端序形式表示的64位整数。
+  此选项仅用于调试目的。</div>
+<p class="Pp"><b>--legend=</b><i>BOOL</i></p>
+<div class="Bd-indent">默认值 yes
+  表示显示应答内容的标题头与元数据。</div>
+<p class="Pp"><b>--statistics</b></p>
+<div class="Bd-indent">显示解析统计，包括
+  DNSSEC 是否可用， 以及 DNSSEC
+  验证成功与失败的数量。</div>
+<p class="Pp"><b>--reset-statistics</b></p>
+<div class="Bd-indent">重置各种解析统计的计数器，包括所有
+  <b>--statistics</b>
+  输出的统计数据。此操作需要超级用户权限。</div>
+<p class="Pp"><b>--flush-caches</b></p>
+<div class="Bd-indent">刷新本地DNS资源记录缓存。</div>
+<p class="Pp"><b>--status</b></p>
+<div class="Bd-indent">显示全局DNS设置、以及针对每个连接的DNS设置。</div>
+<p class="Pp"><b>-h</b>, <b>--help</b></p>
+<div class="Bd-indent">显示简短的帮助信息并退出。</div>
+<p class="Pp"><b>--version</b></p>
+<div class="Bd-indent">显示简短的版本信息并退出。</div>
+<p class="Pp"><b>--no-pager</b></p>
+<div class="Bd-indent">不将程序的输出内容管道(pipe)给分页程序。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="例子">例子<a class="anchor" href="#%E4%BE%8B%E5%AD%90">¶</a></h1>
+<b>Example 1. 解析 &#34;www.0pointer.net&#34;
+  域名所对应的地址</b>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>$ systemd-resolve www.0pointer.net
+www.0pointer.net: 2a01:238:43ed:c300:10c3:bcf3:3266:da74
+                  85.214.157.71
+-- Information acquired via protocol DNS in 611.6ms.
+-- Data is authenticated: no
+</pre>
+</div>
+<p class="Pp"><b>Example 2. 反解析
+    &#34;85.214.157.71&#34;
+    地址所对应的域名</b></p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>$ systemd-resolve 85.214.157.71
+85.214.157.71: gardel.0pointer.net
+-- Information acquired via protocol DNS in 1.2997s.
+-- Data is authenticated: no
+</pre>
+</div>
+<p class="Pp"><b>Example 3. 查找
+    &#34;0pointer.net&#34; 域名的 MX
+  记录</b></p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>$ systemd-resolve -t MX yahoo.com --legend=no
+yahoo.com. IN MX    1 mta7.am0.yahoodns.net
+yahoo.com. IN MX    1 mta6.am0.yahoodns.net
+yahoo.com. IN MX    1 mta5.am0.yahoodns.net
+</pre>
+</div>
+<p class="Pp"><b>Example 4. 查找一个 SRV
+    服务</b></p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>$ systemd-resolve --service _xmpp-server._tcp gmail.com
+_xmpp-server._tcp/gmail.com: alt1.xmpp-server.l.google.com:5269 [priority=20, weight=0]
+                             173.194.210.125
+                             alt4.xmpp-server.l.google.com:5269 [priority=20, weight=0]
+                             173.194.65.125
+                             ...
+</pre>
+</div>
+<p class="Pp"><b>Example 5. 查找一个 PGP
+    公钥</b></p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>$ systemd-resolve --openpgp zbyszek@fedoraproject.org
+d08ee310438ca124a6149ea5cc21b6313b390dce485576eff96f8722._openpgpkey.fedoraproject.org. IN OPENPGPKEY
+        mQINBFBHPMsBEACeInGYJCb+7TurKfb6wGyTottCDtiSJB310i37/6ZYoeIay/5soJjlMyf
+        MFQ9T2XNT/0LM6gTa0MpC1st9LnzYTMsT6tzRly1D1UbVI6xw0g0vE5y2Cjk3xUwAynCsSs
+        ...
+</pre>
+</div>
+<p class="Pp"><b>Example 6. 查找一个 TLS
+    公钥 (可以省略 &#34;=tcp&#34; 与
+    &#34;:443&#34;)</b></p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>$ systemd-resolve --tlsa=tcp fedoraproject.org:443
+_443._tcp.fedoraproject.org IN TLSA 0 0 1 19400be5b7a31fb733917700789d2f0a2471c0c9d506c0e504c06c16d7cb17c0
+        -- Cert. usage: CA constraint
+        -- Selector: Full Certificate
+        -- Matching type: SHA-256
+</pre>
+</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参见">参见<a class="anchor" href="#%E5%8F%82%E8%A7%81">¶</a></h1>
+<a href="../../buster/manpages-zh/systemd.1.zh_CN.html">systemd(1)</a>, <a href="../../buster/systemd/systemd-resolved.service.8.en.html">systemd-resolved.service(8)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES">NOTES<a class="anchor" href="#NOTES">¶</a></h1>
+<dl class="Bl-tag">
+  <dt> 1.</dt>
+  <dd>SRV</dd>
+</dl>
+<div class="Bd-indent"><a href="../../html/rfc2782">../../html/rfc2782</a></div>
+<dl class="Bl-tag">
+  <dt> 2.</dt>
+  <dd>DNS-SD</dd>
+</dl>
+<div class="Bd-indent"><a href="../../html/rfc6763">../../html/rfc6763</a></div>
+<dl class="Bl-tag">
+  <dt> 3.</dt>
+  <dd>OPENPGPKEY</dd>
+</dl>
+<div class="Bd-indent"><a href="../../html/draft-wouters-dane-openpgp-02">../../html/draft-wouters-dane-openpgp-02</a></div>
+<dl class="Bl-tag">
+  <dt> 4.</dt>
+  <dd>TLSA</dd>
+</dl>
+<div class="Bd-indent"><a href="../../html/rfc6698">../../html/rfc6698</a></div>
+<dl class="Bl-tag">
+  <dt> 5.</dt>
+  <dd>Link-Local Multicast Name Resolution</dd>
+</dl>
+<div class="Bd-indent"><a href="../../html/rfc4795">../../html/rfc4795</a></div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<p class="Pp">翻译人员：金步国
+  <br/>
+  金步国作品集：https://www.jinbuguo.com
+  <br/>
+  中文 man
+    手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os">systemd 231</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+systemd-resolve.1.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:18Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"systemd-resolve(1)\"}}]}"
+</script>

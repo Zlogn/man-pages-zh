@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>grep(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/grep.1.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/grep/grep.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es-extra/grep.1.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-hu/grep.1.hu.html" hreflang="hu">
+<link rel="alternate" href="../../buster/manpages-ja/grep.1.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/grep.1.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/grep.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/grep.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; grep(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/grep.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/grep.1.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%80%BB%E8%A7%88_SYNOPSIS" title="总览 SYNOPSIS">总览 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%89%E9%A1%B9_OPTIONS" title="选项 OPTIONS">选项 OPTIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F_REGULAR_EXPRESSIONS" title="正则表达式 REGULAR EXPRESSIONS">正则表达式 REGULAR EXPRESSIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F_ENVIRONMENT_VARIABLES" title="环境变量 ENVIRONMENT VARIABLES">环境变量 ENVIRONMENT VARIABLES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AF%8A%E6%96%AD_DIAGNOSTICS" title="诊断 DIAGNOSTICS">诊断 DIAGNOSTICS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D" title="[中文版维护人]">[中文版维护人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/grep.1.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/grep.1.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/grep.1.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/grep.1.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/grep/grep.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es-extra/grep.1.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-hu/grep.1.hu.html" title="Hungarian (hu)">magyar</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/grep.1.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/grep.1.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/grep.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/grep.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/grep.1.zh_CN.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/9base/grep.1plan9.en.html">1plan9 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">GREP(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">GREP(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+grep, egrep, fgrep -
+  打印匹配给定模式的行
+</section>
+<section class="Sh">
+<h1 class="Sh" id="总览_SYNOPSIS">总览 SYNOPSIS<a class="anchor" href="#%E6%80%BB%E8%A7%88_SYNOPSIS">¶</a></h1>
+<b>grep</b> [<i>options</i>] <i>PATTERN</i> [<i>FILE</i>...]
+<br/>
+<b>grep</b> [<i>options</i>] [<b>-e</b> <i>PATTERN</i> | <b>-f</b> <i>FILE</i>]
+  [<i>FILE</i>...]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+<b>Grep</b> 搜索以 <i>FILE</i>
+  命名的文件输入
+  (或者是标准输入，如果没有指定文件名，或者给出的文件名是
+  <b>-</b>
+  的话)，寻找含有与给定的模式
+  <i>PATTERN</i>
+  相匹配的内容的行。
+  默认情况下， <b>grep</b>
+  将把含有匹配内容的行打印出来。
+<p class="Pp">另外，也可以使用两个变种程序
+    <b>egrep</b> 和 <b>fgrep</b> 。 <b>Egrep</b> 与
+    <b>grep -E</b> 相同。 <b>Fgrep</b> 与
+    <b>grep -F</b> 相同。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="选项_OPTIONS">选项 OPTIONS<a class="anchor" href="#%E9%80%89%E9%A1%B9_OPTIONS">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>-A</b><i> NUM</i><b>, --after-context=</b><i>NUM</i></dt>
+  <dd>打印出紧随匹配的行之后的下文
+      <i>NUM</i>
+      行。在相邻的匹配组之间将会打印内容是
+      <b>--</b> 的一行。</dd>
+  <dt><b>-a</b>, <b>--text</b></dt>
+  <dd>将一个二进制文件视为一个文本文件来处理；它与
+      <b>--binary-files=text</b> 选项等价。</dd>
+  <dt><b>-B</b><i> NUM</i><b>, --before-context=</b><i>NUM</i></dt>
+  <dd>打印出匹配的行之前的上文
+      <i>NUM</i>
+      行。在相邻的匹配组之间将会打印内容是
+      <b>--</b> 的一行。</dd>
+  <dt><b>-C</b><i> NUM</i><b>, --context=</b><i>NUM</i></dt>
+  <dd>打印出匹配的行的上下文前后各
+      <i>NUM</i>
+      行。在相邻的匹配组之间将会打印内容是
+      <b>--</b> 的一行。</dd>
+  <dt><b>-b</b>, <b>--byte-offset</b></dt>
+  <dd>在输出的每行前面同时打印出当前行在输入文件中的字节偏移量。</dd>
+  <dt><b>--binary-files=</b><i>TYPE</i></dt>
+  <dd>如果一个文件的起始几个字节表明文件包含二进制数据，那么假定文件是
+      <i>TYPE</i>
+      类型的。默认情况下，
+      <i>TYPE</i> 是 <b>binary</b> ，并且 <b>grep</b>
+      一般会输出一个一行的消息说一个二进制文件匹配，或者如果没有匹配的话就没有消息输出。如果类型
+      <i>TYPE</i> 是 <b>without-match</b> ，那么
+      <b>grep</b>
+      假定二进制文件不会匹配；这样做与
+      <b>-I</b>
+      选项等价。如果类型
+      <i>TYPE</i> 是 <b>text</b> ，那么 <b>grep</b>
+      将一个二进制文件视为文本文件来处理；它与
+      <b>-a</b> 选项等价。
+      <i>警告：</i> <b>grep --binary-files=text</b>
+      可能会输出二进制的无用内容。如果输出设备是一个终端，并且终端的驱动将这些输出中的一些当作命令，可能会带来恶劣的副作用。</dd>
+  <dt><b>--colour[=<i>WHEN</i>]</b><i>, </i><b>--color[=<i>WHEN</i>]</b></dt>
+  <dd>在匹配的行周围以
+      <b>GREP_COLOR</b>
+      环境变量中指定的记号来标记。WHEN
+      可以是 `never&#39;, `always&#39;, 或是
+      `auto&#39;。</dd>
+  <dt><b>-c</b>, <b>--count</b></dt>
+  <dd>禁止通常的输出；作为替代，为每一个输入文件打印一个匹配的行的总数。如果使用
+      <b>-v</b>, <b>--invert-match</b> 选项
+      (参见下面)，将是不匹配的行的总数。</dd>
+  <dt><b>-D</b><i> ACTION</i><b>, --devices=</b><i>ACTION</i></dt>
+  <dd>如果输入文件是一个设备，FIFO
+      或是套接字 (socket)
+      ，使用动作 <i>ACTION</i>
+      来处理它。默认情况下，动作
+      <i>ACTION</i> 是 <b>read</b>
+      ，意味着设备将视为普通文件那样来读。如果动作
+      <i>ACTION</i> 是 <b>skip</b>
+      ，将不处理而直接跳过设备。</dd>
+  <dt><b>-d</b><i> ACTION</i><b>, --directories=</b><i>ACTION</i></dt>
+  <dd>如果输入文件是一个目录，使用动作
+      <i>ACTION</i>
+      来处理它。默认情况下，动作
+      <i>ACTION</i> 是 <b>read</b>
+      ，意味着目录将视为普通文件那样来读。如果动作
+      <i>ACTION</i> 是 <b>skip</b>
+      ，将不处理而直接跳过目录。如果动作
+      <i>ACTION</i> 是 <b>recurse</b> ， <b>grep</b>
+      将递归地读每一目录下的所有文件。这样做和
+      <b>-r</b> 选项等价。</dd>
+  <dt><b>-E</b>, <b>--extended-regexp</b></dt>
+  <dd>将模式 <i>PATTERN</i>
+      作为一个扩展的正则表达式来解释
+      (参见下面)。</dd>
+  <dt><b>-e</b><i> PATTERN</i><b>, --regexp=</b><i>PATTERN</i></dt>
+  <dd>使用模式 <i>PATTERN</i>
+      作为模式；在保护以
+      <b>-</b>
+      为起始的模式时有用。</dd>
+  <dt><b>-F</b>, <b>--fixed-strings</b></dt>
+  <dd>将模式 <i>PATTERN</i>
+      视为一个固定的字符串的列表，用新行
+      (newlines)
+      分隔，只要匹配其中之一即可。</dd>
+  <dt><b>-P</b>, <b>--perl-regexp</b></dt>
+  <dd>将模式 <i>PATTERN</i> 作为一个
+      Perl
+      正则表达式来解释。</dd>
+  <dt><b>-f</b><i> FILE</i><b>, --file=</b><i>FILE</i></dt>
+  <dd>从文件 <i>FILE</i>
+      中获取模式，每行一个。空文件含有0个模式，因此不匹配任何东西。</dd>
+  <dt><b>-G</b>, <b>--basic-regexp</b></dt>
+  <dd>将模式 <i>PATTERN</i>
+      作为一个基本的正则表达式
+      (参见下面)
+      来解释。这是默认值。</dd>
+  <dt><b>-H</b>, <b>--with-filename</b></dt>
+  <dd>为每个匹配打印文件名。</dd>
+  <dt><b>-h</b>, <b>--no-filename</b></dt>
+  <dd>当搜索多个文件时，禁止在输出的前面加上文件名前缀。</dd>
+  <dt><b>--help</b></dt>
+  <dd>输出一个简短的帮助信息。</dd>
+  <dt><b>-I</b></dt>
+  <dd>处理一个二进制文件，但是认为它不包含匹配的内容。这和
+      <b>--binary-files=without-match</b>
+      选项等价。</dd>
+  <dt><b>-i</b>, <b>--ignore-case</b></dt>
+  <dd>忽略模式 <i>PATTERN</i>
+      和输入文件中的大小写的分别。</dd>
+  <dt><b>-L</b>, <b>--files-without-match</b></dt>
+  <dd>禁止通常的输出；作为替代，打印出每个在通常情况下不会产生输出的输入文件的名字。对每个文件的扫描在遇到第一个匹配的时候就会停止。</dd>
+  <dt><b>-l</b>, <b>--files-with-matches</b></dt>
+  <dd>禁止通常的输出；作为替代，打印出每个在通常情况下会产生输出的输入文件的名字。对每个文件的扫描在遇到第一个匹配的时候就会停止。</dd>
+  <dt><b>-m</b><i> NUM</i><b>, --max-count=</b><i>NUM</i></dt>
+  <dd>在找到 <i>NUM</i>
+      个匹配的行之后，不再读这个文件。如果输入是来自一个普通文件的标准输入，并且已经输出了
+      <i>NUM</i> 个匹配的行， <b>grep</b>
+      保证标准输入被定位于退出时的最后一次匹配的行之后，不管是否指定了要输出紧随的下文的行。这样可以使一个调用程序恢复搜索。当
+      <b>grep</b> 在 <i>NUM</i>
+      个匹配的行之后停止，它会输出任何紧随的下文的行。当使用了
+      <b>-c</b> 或 <b>--count</b>
+      选项的时候， <b>grep</b>
+      不会输出比 <i>NUM</i>
+      更多的行。当指定了
+      <b>-v</b> 或 <b>--invert-match</b>
+      选项的时候， <b>grep</b>
+      会在输出 <i>NUM</i>
+      个不匹配的行之后停止。</dd>
+  <dt><b>--mmap</b></dt>
+  <dd>如果可能的话，使用
+      <a href="../../buster/manpages-dev/mmap.2.en.html">mmap(2)</a>
+      系统调用来读取输入，而不是默认的
+      <a href="../../buster/manpages-zh/read.2.zh_CN.html">read(2)</a>
+      系统调用。在一些情况下，
+      <b>--mmap</b>
+      提供较好的性能。但是，如果一个输入文件在
+      <b>grep</b>
+      正在操作时大小发生变化，或者如果发生了一个
+      I/O 错误， <b>--mmap</b>
+      可能导致不可知的行为
+      (包括core dumps)。</dd>
+  <dt><b>-n</b>, <b>--line-number</b></dt>
+  <dd>在输出的每行前面加上它所在的文件中它的行号。</dd>
+  <dt><b>-o</b>, <b>--only-matching</b></dt>
+  <dd>只显示匹配的行中与
+      <i>PATTERN</i>
+    相匹配的部分。</dd>
+  <dt><b>--label=</b><i>LABEL</i></dt>
+  <dd>将实际上来自标准输入的输入视为来自输入文件
+      <i>LABEL</i> 。这对于 zgrep
+      这样的工具非常有用，例如：
+      <b>gzip -cd foo.gz |grep --label=foo something</b></dd>
+  <dt><b>--line-buffering</b></dt>
+  <dd>使用行缓冲，it can be a performance
+      penality.</dd>
+  <dt><b>-q</b>, <b>--quiet</b>, <b>--silent</b></dt>
+  <dd>安静。不向标准输出写任何东西。如果找到任何匹配的内容就立即以状态值
+      0
+      退出，即使检测到了错误。
+      参见 <b>-s</b> 或 <b>--no-messages</b>
+      选项。</dd>
+  <dt><b>-R</b>, <b>-r</b>, <b>--recursive</b></dt>
+  <dd>递归地读每一目录下的所有文件。这样做和
+      <b>-d recurse</b> 选项等价。</dd>
+  <dt><b> --include=</b>PATTERN</dt>
+  <dd>仅仅在搜索匹配 <i>PATTERN</i>
+      的文件时在目录中递归搜索。</dd>
+  <dt><b> --exclude=</b>PATTERN</dt>
+  <dd>在目录中递归搜索，但是跳过匹配
+      <i>PATTERN</i> 的文件。</dd>
+  <dt><b>-s</b>, <b>--no-messages</b></dt>
+  <dd>禁止输出关于文件不存在或不可读的错误信息。
+      对于可移植性需要注意：与
+      GNU <b>grep</b> 不同，传统的
+      <b>grep</b> 不遵守 POSIX.2
+      规范，因为传统的
+      <b>grep</b> 缺少一个 <b>-q</b>
+      选项，而它的 <b>-s</b>
+      选项与 GNU <b>grep</b> 的 <b>-q</b>
+      选项行为相似。需要可移植到传统
+      <b>grep</b> 的 shell
+      脚本应当避免使用 <b>-q</b>
+      和 <b>-s</b>
+      选项，而应当将输出重定向到
+      /dev/null 。</dd>
+  <dt><b>-U</b>, <b>--binary</b></dt>
+  <dd>将文件视为二进制。默认情况下，在
+      MS-DOS 和 MS-Windows 系统中， <b>grep</b>
+      通过从文件中读取头部的
+      32kB
+      内容来判断它的文件类型。如果
+      <b>grep</b>
+      判断文件是一个文本文件，它将原始文件内容中的
+      CR 字符去除 (使得含有
+      <b>^</b> 和 <b>$</b>
+      的正则表达式可以正常工作)。指定
+      <b>-U</b>
+      将不进行这些工作，而使所有文件保持不变地读取并传递给匹配机制。如果文件是一个以
+      CR/LF
+      换行的文本文件，这样作将导致一些正则表达式失败。这个选项在
+      MS-DOS 和 MS-Windows
+      之外的系统中无效。</dd>
+  <dt><b>-u</b>, <b>--unix-byte-offsets</b></dt>
+  <dd>报告 Unix
+      风格的字节偏移量。这个开关使得
+      <b>grep</b>
+      报告字节偏移量时，将文件作为
+      Unix
+      风格的文本文件看待，也就是说将
+      CR
+      字符去掉。这将产生与在一台
+      Unix 主机上运行 <b>grep</b>
+      完全相同的结果。除非同时使用
+      <b>-b</b>
+      选项，否则这个选项无效。这个选项在
+      MS-DOS 和 MS-Windows
+      之外的系统中无效。</dd>
+  <dt><b>-V</b>, <b>--version</b></dt>
+  <dd>向标准错误输出打印
+      <b>grep</b>
+      的版本号。版本号应当包含在所有的
+      bug 报告中
+    (参见下面)。</dd>
+  <dt><b>-v</b>, <b>--invert-match</b></dt>
+  <dd>改变匹配的意义，只选择不匹配的行。</dd>
+  <dt><b>-w</b>, <b>--word-regexp</b></dt>
+  <dd>只选择含有能组成完整的词的匹配的行。判断方法是匹配的子字符串必须是一行的开始，或者是在一个不可能是词的组成的字符之后。与此相似，它必须是一行的结束，或者是在一个不可能是词的组成的字符之前。词的组成字符是字母，数字，还有下划线。</dd>
+  <dt><b>-x</b>, <b>--line-regexp</b></dt>
+  <dd>只选择能匹配完整一行的匹配。</dd>
+  <dt><b>-y</b></dt>
+  <dd><b>-i</b>
+      的同义词，废弃不用。</dd>
+  <dt><b>-Z</b>, <b>--null</b></dt>
+  <dd>输出一个全零字节 (ASCII
+      码中的 <b>NUL</b> 字符)
+      而不是一般情况下输出在文件名之后的字符。例如，
+      <b>grep -lZ</b>
+      在每个文件名之后输出一个全零字节而不是普通的新行符。这个选项使得输出清楚明白，即使文件名的表示中包含特殊字符比如新行符。这个选项可以与命令
+      <b>find -print0</b>, <b>perl -0</b>, <b>sort -z</b>, 和 <b>xargs
+      -0</b>
+      一起使用，来处理任意的文件名，即使是那些含有新行符的文件名。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="正则表达式_REGULAR_EXPRESSIONS">正则表达式 REGULAR EXPRESSIONS<a class="anchor" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F_REGULAR_EXPRESSIONS">¶</a></h1>
+一个正则表达式是一个描述了一个字符串集合的模式。正则表达式的构造类似于算术表达式，使用各种各样的操作符来将更小的表达式连在一起。
+<p class="Pp"><b>Grep</b>
+    能理解两种不同版本的正则表达式语法：“basic”
+    和 “extended”。在 GNU <b>grep</b>
+    中，两种语法可以实现的功能是没有区别的。在其他实现中，基本
+    (basic)
+    正则表达式表达能力要弱一点。下面的描述适用于扩展的
+    (extended)
+    正则表达式，它与基本正则表达式的区别会在最后做一个总结。</p>
+<p class="Pp">基本的构造块是匹配单个字符的正则表达式。大部分字符，包括所有字母和数字，是匹配它们自身的正则表达式。任何具有特殊含义的元字符可以通过前置一个反斜杠来引用。(may
+    be quoted by preceding it with a backslash.)</p>
+<p class="Pp"><i>方括号表达式 (bracket)</i>
+    是一个字符序列，放在
+    <b>[</b> 和 <b>]</b>
+    当中。它匹配序列中的任何一个字符；如果序列中的第一个字符是脱字符
+    (caret) <b>^</b> 那么它匹配
+    <i>不在</i>
+    序列中的任何一个字符。例如，正则表达式
+    <b>[0123456789]</b>
+    匹配任何一个数字。</p>
+<p class="Pp">在方括号表达式之中，一个
+    <i>范围表达式 (range)</i>
+    由两个字符组成，中间用一个连字符
+    (hyphen)
+    分隔。它匹配在这两个字符之间的任何一个字符，使用本地化的序列顺序和字符集。(that
+    sorts between the two characters,inclusive, using the locale&#39;s collating
+    sequence and character set.)
+    例如，在默认的 C
+    locale中， <b>[a-d]</b> 与 <b>[abcd]</b>
+    等价。典型的，许多
+    locale
+    将字符以字典顺序排序，在这些
+    locale 中， <b>[a-d]</b> 不与 <b>[abcd]</b>
+    等价；例如它可能与
+    <b>[aBbCcDd]</b>
+    等价。要获得传统的对方括号表达式的解释，可以设定环境变量
+    <b>LC_ALL</b> 值为 <b>C</b> 来使用 locale C
+    。</p>
+<p class="Pp">最后，在方括号表达式中有一些预定义的字符类，如下所示。它们的名字是自说明的，它们是
+    <b>[:alnum:]</b>(字母和数字),
+    <b>[:alpha:]</b>(字母), <b>[:cntrl:]</b>(),
+    <b>[:digit:]</b>(数字), <b>[:graph:]</b>(),
+    <b>[:lower:]</b>(小写字母),
+    <b>[:print:]</b>(可打印字符),
+    <b>[:punct:]</b>(), <b>[:space:]</b>(空格),
+    <b>[:upper:]</b>(大写字母), 和
+    <b>[:xdigit:]</b> 。例如， <b>[[:alnum:]]</b>
+    意思是 <b>[0-9A-Za-z]</b>
+    ，但是后一种表示方法依赖于
+    locale C 和ASCII
+    字符编码，而前一种是与
+    locale
+    和字符集无关的。(注意这些字符类名中的方括号也是符号名称的一部分，必须包含在用来为序列定界的方括号之中。)</p>
+<p class="Pp">大多数元字符处于序列中时会失去它们的特殊意义。为了包含一个字面意义
+    (literal) 的 <b>]</b>
+    ，需要将它放在序列的最前。与此相似，为了包含一个字面意义
+    (literal) 的 <b>^</b>
+    ，需要将它放在除了序列最前之外的其他位置。最后，为了包含一个字面意义
+    (literal) 的 <b>-</b>
+    ，需要将它放在序列最后。</p>
+<p class="Pp">句点符 (period) <b>.</b>
+    匹配任何一个字符。符号
+    <b>\w</b> 是 <b>[[:alnum:]]</b>
+    的同义词， <b>\W</b> 是
+    <b>[^[:alnum]]</b> 的同义词。</p>
+<p class="Pp">脱字符 (caret) <b>^</b>
+    和美元标记 (dollar) <b>$</b>
+    分别是匹配一行的首部和尾部的空字串的元字符。符号
+    <b>\&lt;</b> 和 <b>\&gt;</b>
+    分别是匹配一个词的首部和尾部的空字串的元字符。符号
+    <b>\b</b> 匹配一个词边缘 (edge)
+    的空字串，符号 <b>\B</b>
+    匹配 <i>不</i>
+    处于一个词的边缘的空字串。</p>
+<p class="Pp">一个正则表达式后面可以跟随多种重复操作符之一。</p>
+<dl class="Bl-tag">
+  <dt><b>?</b></dt>
+  <dd>先前的项是可选的，最多匹配一次。</dd>
+  <dt><b>*</b></dt>
+  <dd>先前的项可以匹配零次或多次。</dd>
+  <dt><b>+</b></dt>
+  <dd>先前的项可以匹配一次或多次。</dd>
+  <dt><b>{</b><i>n</i><b>}</b></dt>
+  <dd>先前的项将匹配恰好
+      <i>n</i> 次。</dd>
+  <dt><b>{</b><i>n</i><b>,}</b></dt>
+  <dd>先前的项可以匹配 <i>n</i>
+      或更多次。</dd>
+  <dt><b>{</b><i>n</i><b>,</b><i>m</i><b>}</b></dt>
+  <dd>先前的项将匹配至少
+      <i>n</i> 词，但是不会超过
+      <i>m</i> 次。</dd>
+</dl>
+<p class="Pp">两个正则表达式可以连接到一起；得出的正则表达式可以匹配任何由两个分别匹配连接前的子表达式的子字符串连接而成的字符串。</p>
+<p class="Pp">两个正则表达式可以用中缀操作符
+    <b>|</b>
+    联合到一起，得出的正则表达式可以匹配任何匹配联合前的任何一个子表达式的字符串。</p>
+<p class="Pp">重复操作符的优先级比连接高，接下来又比选择的优先级高。一个完整的子表达式可以用圆括号
+    (parentheses)
+    括住来超越这些优先级规则。(to
+    override these precedence rules.)</p>
+<p class="Pp">反向引用 <b>\</b><i>n</i> 中，
+    <i>n</i>
+    是一个数字，匹配正则表达式中，以第
+    <i>n</i>
+    个圆括号括住的子表达式已匹配的子字符串。</p>
+<p class="Pp">在基本正则表达式中，元字符
+    <b>?</b>, <b>+</b>, <b>{</b>, <b>|</b>, <b>(</b>, 和 <b>)</b>
+    丧失了它们的特殊意义；作为替代，使用加反斜杠的
+    (backslash) 版本 <b>\?</b>, <b>\+</b>, <b>\{</b>, <b>\|</b>,
+    <b>\(</b>, 和 <b>\)</b> 。</p>
+<p class="Pp">传统的 <b>egrep</b>
+    不支持元字符 <b>{</b>
+    ，并且一些 <b>egrep</b>
+    的实现通过支持 <b>\{</b>
+    来代替它，因此可移植的脚本应当避免
+    在 <b>egrep</b> 中使用 <b>{</b>
+    模式，应当使用 <b>[{]</b>
+    来匹配一个字面意义
+    (literal) 的 <b>{</b> 。</p>
+<p class="Pp">GNU <b>egrep</b> 通过假设如果
+    <b>{</b> 处于 an invalid interval specification
+    的起始，就不是一个特殊字符，来支持传统的用法。例如，shell
+    命令 <b>egrep &#39;{1&#39;</b>
+    将会搜索这个两字符的字符串
+    <b>{1</b>
+    而不是报告在正则表达式中发生了语法错误。POSIX.2
+    允许这个行为，将其视为一个扩展，但是可移植的脚本应当避免使用它。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="环境变量_ENVIRONMENT_VARIABLES">环境变量 ENVIRONMENT VARIABLES<a class="anchor" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F_ENVIRONMENT_VARIABLES">¶</a></h1>
+<b>Grep</b>
+  的行为受下列环境变量影响。
+<p class="Pp">一个 locale <b>LC_</b><i>foo</i>
+    是通过按下面的顺序，
+    <b>LC_ALL</b>, <b>LC_<i>foo</i></b>, <b>LANG</b>,
+    检查这三个环境变量的取值而确定的。设置了的第一个变量指定了
+    locale。例如，如果 <b>LC_ALL</b>
+    没有设置，但是 <b>LC_MESSAGES</b>
+    设置为 <b>pt_BR</b>
+    ，那么巴西的葡萄牙语
+    (Brazilian Portuguese) 将用作 <b>LC_MESSAGES</b> locale
+    的值。如果没有设置这其中任何一个环境变量，或者没有安装所设置的
+    locale 目录，或者如果 <b>grep</b>
+    没有将国家和语言支持
+    (national language support (NLS))
+    编译在内，将默认使用
+    locale C。</p>
+<dl class="Bl-tag">
+  <dt><b>GREP_OPTIONS</b></dt>
+  <dd>这个变量指定了将放在所有显式指定的选项之前的默认选项。例如，如果
+      <b>GREP_OPTIONS</b> 是 <b>&#39;--binary-files=without-match
+      --directories=skip&#39;</b> 的话， <b>grep</b>
+      将像已经在任何显式指定的选项之前指定了
+      <b>--binary-files=without-match</b> 和 <b>--directories=skip</b>
+      选项那样来运作。选项以空白
+      (whitespace)
+      分隔。一个反斜杠
+      (backslash)
+      使得下一个字符转义
+      (escape)，因此可以用来指定一个含有空白或者反斜杠的选项。</dd>
+  <dt><b>GREP_COLOR</b></dt>
+  <dd>指定用来高亮显示的标记。</dd>
+  <dt><b>LC_ALL</b>, <b>LC_COLLATE</b>, <b>LANG</b></dt>
+  <dd>这些变量指定了 locale
+      <b>LC_COLLATE</b>
+      ，决定了解释类似
+      <b>[a-z]</b>
+      的范围表达式时的序列顺序
+      (collating sequence) 。</dd>
+  <dt><b>LC_ALL</b>, <b>LC_CTYPE</b>, <b>LANG</b></dt>
+  <dd>这些选项指定了 locale
+      <b>LC_CTYPE</b>
+      ，决定了字符的类型，例如，哪些字符是空白
+      (whitespace) 。</dd>
+  <dt><b>LC_ALL</b>, <b>LC_MESSAGES</b>, <b>LANG</b></dt>
+  <dd>这些选项指定了 locale
+      <b>LC_MESSAGES</b> ，决定了 <b>grep</b>
+      的消息使用的语言。默认的
+      locale C
+      使用美国英语的消息。</dd>
+  <dt><b>POSIXLY_CORRECT</b></dt>
+  <dd>如果设置了的话，
+      <b>grep</b> 将像 POSIX.2
+      要求的那样来运作；否则，
+      <b>grep</b> 将像其他 GNU
+      程序一样来运作。POSIX.2
+      要求文件名之后的选项必须视为文件名；默认情况下，这些选项被交换到操作数列表的前面，被当作选项来处理。同时，
+      POSIX.2
+      要求不可识别的选项在诊断消息中表示为
+      “illegal”，但是既然它们没有真正触犯法律，因此默认情况下它们在诊断
+      (diagnose) 消息中表示为
+      “invalid”。 <b>POSIXLY_CORRECT</b>
+      同时禁止了下面描述的
+      <b>_</b><i>N</i><b>_GNU_nonoption_argv_flags_</b>。</dd>
+  <dt><b>_</b><i>N</i><b>_GNU_nonoption_argv_flags_</b></dt>
+  <dd>(这里 <i>N</i> 是 <b>grep</b>&#39;s
+      数字形式的进程ID。)
+      如果这个环境变量的值的第
+      <i>i</i> 个字符是 <b>1</b>
+      ，那么不将 <b>grep</b> 的第
+      <i>i</i>
+      个操作数视为一个选项，即使它看上去像。shell
+      可以将这个变量设置在它运行的每个命令的环境中，指定哪个操作数是文件名通配符扩展的结果，因此不应当被视为选项。这个行为只有在使用
+      GNU C
+      库时有效，并且只有在
+      <b>POSIXLY_CORRECT</b>
+      没有设置的时候。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="诊断_DIAGNOSTICS">诊断 DIAGNOSTICS<a class="anchor" href="#%E8%AF%8A%E6%96%AD_DIAGNOSTICS">¶</a></h1>
+一般地，如果找到了选择的行，退出时状态值为0，否则为1。但是如果发生错误，退出时状态值是2，除非指定了
+  <b>-q</b> 或 <b>--quiet</b> 或 <b>--silent</b>
+  选项，并且找到了选择的行。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+bug
+  报告的电子邮件地址是
+  <b>bug-gnu-utils@gnu.org</b>。
+  一定要在“Subject:”中带有
+  “grep” 这个词。
+<p class="Pp">在 <b>{</b><i>n</i><b>,</b><i>m</i><b>}</b>
+    结构中重复次数过多会导致
+    <b>grep</b>
+    使用大量内存。另外，一些过分晦涩的正则表达式需要指数级的时间和空间，可能会导致
+    <b>grep</b> 耗尽所有内存。</p>
+<p class="Pp">向后引用 (backreferences)
+    非常慢，可能需要指数级的时间。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版维护人]">[中文版维护人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D">¶</a></h1>
+<b>袁乙钧 &lt;bbbush@163.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2003.11.03</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9B%BDlinux%E8%AE%BA%E5%9D%9Bman%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">GNU Project</td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+grep.1.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-17T21:40:43Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"grep(1)\"}}]}"
+</script>

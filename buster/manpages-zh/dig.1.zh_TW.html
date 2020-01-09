@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dig(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/dnsutils/dig.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-ja/dig.1.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-zh/dig.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/dig.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; dig(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/dig.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/dig.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME%28%E5%90%8D%E7%A8%B1%29" title="NAME(名稱)">NAME(名稱)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS%28%E7%B8%BD%E8%A6%BD%29" title="SYNOPSIS(總覽)">SYNOPSIS(總覽)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION%28%E6%8F%8F%E8%BF%B0%29" title="DESCRIPTION(描述)">DESCRIPTION(描述)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ENVIRONMENT%28%E7%92%B0%E5%A2%83%E8%AE%8A%E9%87%8F%29" title="ENVIRONMENT(環境變量)">ENVIRONMENT(環境變量)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#FILES%28%E7%9B%B8%E9%97%9C%E6%96%87%E4%BB%B6%29" title="FILES(相關文件)">FILES(相關文件)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SEE_ALSO%28%E5%8F%A6%E8%A6%8B%29" title="SEE ALSO(另見)">SEE ALSO(另見)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#STANDARDS%28%E6%A8%99%E6%BA%96%29" title="STANDARDS(標準)">STANDARDS(標準)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#AUTHOR%28%E4%BD%9C%E8%80%85%29" title="AUTHOR(作者)">AUTHOR(作者)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ACKNOWLEDGMENTS%28%E8%87%B4%E8%AC%9D%29" title="ACKNOWLEDGMENTS(致謝)">ACKNOWLEDGMENTS(致謝)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B" title="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/dig.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/dig.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/dig.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/dnsutils/dig.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/dig.1.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/dig.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/dig.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">DIG(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">DIG(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME(名稱)">NAME(名稱)<a class="anchor" href="#NAME(%E5%90%8D%E7%A8%B1)">¶</a></h1>
+<code class="Nm">dig</code> —
+<div class="Nd">發送域名查詢信息包到域名服務器</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS(總覽)">SYNOPSIS(總覽)<a class="anchor" href="#SYNOPSIS(%E7%B8%BD%E8%A6%BD)">¶</a></h1>
+<code class="Nm">dig</code>
+  [<code class="Ic">@</code><var class="Ar">server</var>]
+  <var class="Ar">domain</var>
+  [⟨<var class="Ar">query-type</var>⟩]
+  [⟨<var class="Ar">query-class</var>⟩]
+  [<code class="Ic">+</code>⟨<var class="Ar">query-option</var>⟩]
+  [<code class="Fl">-</code>⟨<var class="Ar">dig-option</var>⟩]
+  [<var class="Ar">%comment</var>]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION(描述)">DESCRIPTION(描述)<a class="anchor" href="#DESCRIPTION(%E6%8F%8F%E8%BF%B0)">¶</a></h1>
+<code class="Ic">Dig</code> (domain information groper
+  域名信息搜索)是一個靈活的
+  命令行工具,
+  它可以用來從域名系統服務器中收集信息.
+  <code class="Ic">Dig</code>
+  有兩種模式:簡單交互模式
+  用於簡單的查詢,而批處理模式則可以對
+  包含多個查詢條目的列表執行查詢.
+  所有查詢選項都可以從命令行輸入.
+<p class="Pp">通常簡單的
+    <code class="Ic">dig</code>
+    用法爲下列格式:</p>
+<div class="Bd Pp Bd-indent"><code class="Ic">dig @</code><var class="Ar">server
+  domain query-type query-class</var></div>
+<p class="Pp">這裏:</p>
+<dl class="Bl-tag">
+  <dt><var class="Ar">server</var></dt>
+  <dd>可爲域名或者以點分隔的Internet地址.
+      如果省略該可選字段,
+      <code class="Ic">dig</code>
+      會嘗試使用你機器的默認域名服務器.
+    <p class="Pp"><i class="Em">注意:</i>
+        如果指定了一個域名,那麼將使用域名系統解析程序
+        (即BIND)來進行解析.
+        如果你的系統不支持DNS,那麼可能
+        <i class="Em">必須</i>
+        指定一個以點分隔的地址.另外一種選擇是,
+        如果在你配置的某個地方有一臺這樣的服務器,
+        那麼你所要做的就是建立
+        <span class="Pa">/etc/resolv.conf</span>
+        並在其中指明默認域名服務器的位置,這樣
+        <var class="Ar">server</var>
+        自身就可以解析了.參看
+        <a class="Xr"><a href="../../buster/manpages-zh/resolver.5.zh_TW.html">resolver(5)</a></a> 以獲得
+        <span class="Pa">/etc/resolv.conf</span>
+        相關的信息.
+        <b class="Sy">警告:</b> 修改
+        <span class="Pa">/etc/resolv.conf</span>
+        同樣會對標準的解析程序庫產生影響,而
+        (潛在地)
+        某些程序會要用到它.
+        作爲一種選擇,用戶可設置環境變量
+        <code class="Ev">LOCALRES</code>
+        爲指定的文件,這將用來取代
+        <span class="Pa">/etc/resolv.conf</span>
+        (<code class="Ev">LOCALRES</code>
+        是特定針對 <code class="Ic">dig</code>
+        解析程序的,並不會牽涉到標準解析程序).
+        如果 <code class="Ev">LOCALRES</code>
+        變量未設置或者指定的文件不能讀,那麼就使用
+        <span class="Pa">/etc/resolf.conf</span>.</p>
+  </dd>
+  <dt><var class="Ar">domain</var></dt>
+  <dd>是指一個你請求信息的域名.
+      參看 <code class="Fl">-x</code>
+      選項(在該部分的
+      <a class="Sx" href="#OTHER_OPTIONS">OTHER OPTIONS</a>
+      節中有介紹)以獲知指定反向地址查詢的便捷方法.</dd>
+  <dt><var class="Ar">query-type</var></dt>
+  <dd>是指你所請求的信息類型(DNS查詢類型).
+      如果省略,默認爲
+      “<var class="Ar">a</var>” (<code class="Dv">T_A =</code>
+      <var class="Ar">address</var>).
+      以下類型是可識別的:
+    <p class="Pp"></p>
+    <dl class="Bl-hang Bl-compact">
+      <dt><var class="Ar">a      </var>
+        <code class="Dv">T_A</code></dt>
+      <dd>網絡地址</dd>
+      <dt><var class="Ar">any    </var>
+        <code class="Dv">T_ANY</code></dt>
+      <dd>所有/任何與指定域相關的信息</dd>
+      <dt><var class="Ar">mx     </var>
+        <code class="Dv">T_MX</code></dt>
+      <dd>該域的郵件網關</dd>
+      <dt><var class="Ar">ns     </var>
+        <code class="Dv">T_NS</code></dt>
+      <dd>域名服務器</dd>
+      <dt><var class="Ar">soa    </var>
+        <code class="Dv">T_SOA</code></dt>
+      <dd>區域的授權記錄</dd>
+      <dt><var class="Ar">hinfo  </var>
+        <code class="Dv">T_HINFO</code></dt>
+      <dd>主機信息</dd>
+      <dt><var class="Ar">axfr   </var>
+        <code class="Dv">T_AXFR</code></dt>
+      <dd>區域傳輸記錄(必須是詢問一臺授權的服務器)</dd>
+      <dt><var class="Ar">txt    </var>
+        <code class="Dv">T_TXT</code></dt>
+      <dd>任意的字符串信息</dd>
+    </dl>
+    <p class="Pp">(參看RFC
+        1035以獲得完整的列表.)</p>
+  </dd>
+  <dt><var class="Ar">query-class</var></dt>
+  <dd>是指在查詢中請求的網絡等級.如果省略,默認爲
+      “<var class="Ar">in</var>” (<code class="Dv">C_IN =</code>
+      <var class="Ar">Internet</var>).
+      以下的等級是可識別的:
+    <p class="Pp"></p>
+    <dl class="Bl-tag Bl-compact">
+      <dt><var class="Ar">in     </var>
+        <code class="Dv">C_IN</code></dt>
+      <dd>Internet等級的域</dd>
+      <dt><var class="Ar">any    </var>
+        <code class="Dv">C_ANY</code></dt>
+      <dd>所有/任何等級的信息</dd>
+    </dl>
+    <p class="Pp">(參看RFC
+        1035以獲得完整的列表.)</p>
+    <p class="Pp"><i class="Em">注意:</i>
+        “<var class="Ar">Any</var>”
+        可以用來指定一個
+        <i class="Em">等級</i>
+        和/或查詢的一種
+        <i class="Em">類型</i>. <code class="Ic">Dig</code>
+        會將第一次出現的
+        “<var class="Ar">any</var>” 解釋爲
+        <var class="Ar">query-type =</var> <code class="Dv">T_ANY</code>.
+        爲了指明 <var class="Ar">query-class =</var>
+        <code class="Dv">C_ANY</code>,
+        你必須或者指定
+        “any” 兩次,或者使用
+        <code class="Fl">-c</code>
+        選項(見下面)設置
+        <var class="Ar">query-class</var>.</p>
+  </dd>
+</dl>
+<section class="Ss">
+<h2 class="Ss" id="OTHER_OPTIONS(其它選項)">OTHER OPTIONS(其它選項)<a class="anchor" href="#OTHER_OPTIONS(%E5%85%B6%E5%AE%83%E9%81%B8%E9%A0%85)">¶</a></h2>
+<dl class="Bl-tag">
+  <dt>%<var class="Ar">ignored-comment</var></dt>
+  <dd>“%”
+      用來引用一個不用作解釋的參數.
+      如果正以批處理的模式運行
+      <code class="Ic">dig</code>
+      這可能很有用.
+      因爲不用對一組查詢中的每個
+      <var class="Ar">@server-domain-name</var>
+      進行解析,你就可以避免這樣做的額外開銷,
+      並且仍然能夠在命令行上以域名作爲參數.
+      例如:
+    <div class="Bd Pp Bd-indent"><code class="Ic">dig @128.9.0.32
+      %venera.isi.edu mx isi.edu</code></div>
+  </dd>
+  <dt><code class="Fl">-</code>⟨<var class="Ar">dig
+    option</var>⟩</dt>
+  <dd>“<code class="Fl">-</code>”
+      用來指定一個影響
+      <code class="Ic">dig</code> 操作的選項.
+      當前可用的選項有(儘管不能保證都有用):
+    <dl class="Bl-tag">
+      <dt><a class="permalink" href="#x"><code class="Fl" id="x">-x</code></a>
+        <var class="Ar">dot-notation-address</var></dt>
+      <dd>這是指定反向地址映射的便捷的方法.
+          不用寫 “<code class="Ic">dig
+          32.0.9.128.in-addr.arpa</code>”,
+          你可以簡單地寫成
+          “<code class="Ic">dig -x 128.9.0.32</code>”.</dd>
+      <dt><a class="permalink" href="#f"><code class="Fl" id="f">-f</code></a>
+        <var class="Ar">file</var></dt>
+      <dd><a class="permalink" href="#dig"><code class="Ic" id="dig">dig</code></a>
+          批處理模式的文件.該文件包含了一組查詢清單
+          ( <code class="Ic">dig</code>
+          命令行),它們將一個接一個地執行.以
+          ‘; ，’ ‘#’ 或
+          ‘\n’
+          開頭的行將忽略.其它選項
+          仍然可以在命令行上出現,而且對
+          每個批處理查詢都有效.</dd>
+      <dt><a class="permalink" href="#T"><code class="Fl" id="T">-T</code></a>
+        <var class="Ar">time</var></dt>
+      <dd>當運行於批處理模式下時,兩次接着的查詢之間的
+          時間間隔,以秒計.
+          可以用來保持兩個或多個批處理
+          <code class="Ic">dig</code>
+          命令大致同步運行.默認爲零.</dd>
+      <dt><a class="permalink" href="#p"><code class="Fl" id="p">-p</code></a>
+        <var class="Ar">port</var></dt>
+      <dd>端口號.通過監聽非標準端口號來查詢
+          域名服務器.默認爲53.</dd>
+      <dt><a class="permalink" href="#P"><code class="Fl" id="P">-P</code></a>[<var class="Ar">ping-string</var>]</dt>
+      <dd>在查詢返回之後,執行一次
+          <a class="Xr"><a href="../../buster/manpages-zh/ping.8.zh_TW.html">ping(8)</a></a>
+          命令以獲得響應時間的對照關係.這在調用shell上
+          顯得不那麼自然.
+          該命令顯示的最後三行統計信息爲:
+        <div class="Bd Pp Bd-indent"><code class="Ic">ping</code>
+          <code class="Fl">-s</code> <code class="Fl">-server_name</code>
+          <code class="Fl">-56</code> <code class="Fl">-3</code></div>
+        <p class="Pp">如果可選的
+            “<var class="Ar">ping_string</var>”
+            存在,那麼
+            會覆蓋shell命令中的
+            “<code class="Ic">ping</code>
+            <code class="Fl">-s</code>”.</p>
+      </dd>
+      <dt><a class="permalink" href="#t"><code class="Fl" id="t">-t</code></a>
+        <var class="Ar">query-type</var></dt>
+      <dd>指定查詢類型.可以指定爲一個將包含在類型字段
+          中的整數值,也可以使用
+          上面討論的縮寫助記符(即
+          <var class="Ar">mx =</var> <code class="Dv">T_MX</code>).</dd>
+      <dt><a class="permalink" href="#c"><code class="Fl" id="c">-c</code></a>
+        <var class="Ar">query-class</var></dt>
+      <dd>指定查詢等級.可以指定爲一個將包含在等級字段
+          中的整數值,也可以使用
+          上面討論的縮寫助記符(即in
+          = C_IN).</dd>
+      <dt><a class="permalink" href="#k"><code class="Fl" id="k">-k</code></a>
+        <var class="Ar">keydir:keyname</var></dt>
+      <dd>用TSIG密鑰指定的的密鑰名來簽署這次查詢,
+          該密鑰名在目錄keydir下.</dd>
+      <dt><a class="permalink" href="#envsav"><code class="Fl" id="envsav">-envsav</code></a></dt>
+      <dd>該標識指定 <code class="Ic">dig</code>
+          的環境變量
+          (默認的,顯示選項,等等.),在所有參數都解釋了之後,
+          應保存它們到
+          一個文件中以使之成爲默認的環境變量.
+          如果你不喜歡默認的標準設置而又不想在每次使用
+          <code class="Ic">dig</code>
+          時帶大量的選項,那麼這很有用.
+          環境變量包括解析程序狀態變量標識,超時和重試次數
+          以及詳細控制
+          <code class="Ic">dig</code>
+          輸出的標識(見下面).
+          如果shell環境變量
+          <code class="Ev">LOCALDEF</code>
+          設置爲一個文件的名字,那麼此即爲默認的
+          <code class="Ic">dig</code>
+          環境變量所保存的地方.如果沒有,那麼會在當前
+          工作目錄下創建
+          “<span class="Pa">DiG.env</span>”.
+        <p class="Pp"><i class="Em">注意:</i>
+            <code class="Ev">LOCALDEF</code>
+            是特定針對 <code class="Ic">dig</code>
+            解析程序,
+            而它不會影響標準解析程序庫的操作.</p>
+        <p class="Pp">每當 <code class="Ic">dig</code>
+            執行時,它會查找
+            “<span class="Pa">./DiG.env</span>”
+            或者在shell環境變量
+            <code class="Ev">LOCALDEF</code>
+            中指定的文件.
+            如果這樣的文件存在而且可讀,那麼在解釋
+            任何參數之前, 先從
+            該文件中
+            恢復環境變量.</p>
+      </dd>
+      <dt><a class="permalink" href="#envset"><code class="Fl" id="envset">-envset</code></a></dt>
+      <dd>該標識隻影響批處理查詢的運行.當在
+          <code class="Ic">dig</code>
+          的批處理文件一行上指定了
+          “<code class="Fl">-envset</code>”
+          時,在參數之後的
+          <code class="Ic">dig</code>
+          環境變量會被解釋爲批處理文件執行期間
+          默認的環境變量,
+          或者 直到指定了
+          “<code class="Fl">-envset</code>”
+          的下一行爲止.</dd>
+      <dt><code class="Fl">-</code>[<code class="Cm">no</code>] cm stick</dt>
+      <dd>該標識隻影響批處理查詢的運行.
+          它指定 <code class="Ic">dig</code>
+          環境變量(通過
+          “<code class="Fl">-envset</code>”
+          開關變量初始化讀入或設置)會在
+          <code class="Ic">dig</code>
+          批處理文件每次查詢(行)之前重建.
+          默認的
+          “<code class="Fl">-nostick</code>” 表示
+          <code class="Ic">dig</code>
+          環境變量不是固定的,因而在
+          <code class="Ic">dig</code>
+          批處理文件中單行上指定的選項將對剩餘的行
+          繼續產生作用(也即,它們不會恢復成
+          “sticky(固定的)”
+          默認值).</dd>
+    </dl>
+  </dd>
+  <dt><a class="permalink" href="#+"><code class="Ic" id="+">+</code></a>⟨<var class="Ar">query-option</var>⟩</dt>
+  <dd>“+”
+      用來指定一個在查詢信息包中需修改的或者
+      需用來修改 <code class="Ic">dig</code>
+      輸出細節的選項.這些選項中的許多與
+      <a class="Xr"><a href="../../buster/manpages-ja/nslookup.8.ja.html">nslookup(8)</a></a>
+      所承認的參數相同.
+      如果一個選項需帶參數,那麼格式如下:
+    <div class="Bd Pp Bd-indent"><code class="Ic">+</code>
+      <var class="Ar">keyword</var> [=<var class="Ar">value</var>]</div>
+    <p class="Pp">絕大多數關鍵字可簡寫.
+        “+”
+        選項的解釋是非常直白的
+        —
+        值與它的關鍵字之間
+        千萬不能用空格分隔.
+        當前可用的關鍵字有:</p>
+    <p class="Pp">Keyword Abbrev. Meaning [default]</p>
+    <p class="Pp">(關鍵字) (縮寫)
+        (含義) [默認值]</p>
+    <p class="Pp"></p>
+    <dl class="Bl-tag Bl-compact">
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">debug    </code>
+        (<code class="Cm">deb</code>)</dt>
+      <dd>打開/關閉調試模式
+          [<code class="Cm">deb</code>]</dd>
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">d2          </code></dt>
+      <dd>打開/關閉特殊的調試模式
+          [<code class="Cm">nod2</code>]</dd>
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">recurse  </code>
+        (<code class="Cm">rec</code>)</dt>
+      <dd>使用/不使用遞歸查詢
+          [<code class="Cm">rec</code>]</dd>
+      <dt><a class="permalink" href="#retry="><code class="Cm" id="retry=">retry=</code></a><var class="Ar">#</var>
+        <code class="Cm">     </code>
+        (<code class="Cm">ret</code>)</dt>
+      <dd>設置重試次數爲# [4]</dd>
+      <dt><a class="permalink" href="#time="><code class="Cm" id="time=">time=</code></a><var class="Ar">#</var>
+        <code class="Cm">      </code>
+        (<code class="Cm">ti</code>)</dt>
+      <dd>設置超時長度爲#秒
+        [4]</dd>
+      <dt>[<code class="Cm">no</code>] <code class="Cm">ko</code></dt>
+      <dd>保留公開的選項(keep open
+          options)(隱含vc) [<code class="Cm">noko</code>]</dd>
+      <dt>[<code class="Cm">no</code>] <code class="Cm">vc</code></dt>
+      <dd>使用/不使用虛擬電路
+          [<code class="Cm">novc</code>]</dd>
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">defname  </code>
+        (<code class="Cm">def</code>)</dt>
+      <dd>使用/不使用默認的域名
+          [<code class="Cm">def</code>]</dd>
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">search   </code>
+        (<code class="Cm">sea</code>)</dt>
+      <dd>使用/不使用域搜索列表
+          [<code class="Cm">sea</code>]</dd>
+      <dt><a class="permalink" href="#domain="><code class="Cm" id="domain=">domain=</code></a><var class="Ar">NAME  </var>
+        (<code class="Cm">do</code>)</dt>
+      <dd>設置默認的域名爲
+          <var class="Ar">NAME</var></dd>
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">ignore   </code>
+        (<code class="Cm">i</code>)</dt>
+      <dd>忽略/不忽略截斷(trunc.)錯誤
+          [<code class="Cm">noi</code>]</dd>
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">primary  </code>
+        (<code class="Cm">pr</code>)</dt>
+      <dd>使用/不使用主服務器
+          [<code class="Cm">nopr</code>]</dd>
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">aaonly   </code>
+        (<code class="Cm">aa</code>)</dt>
+      <dd>表示只包含授權查詢的標識
+          [<code class="Cm">noaa</code>]</dd>
+      <dt>[<code class="Cm">no</code>] <code class="Cm">cmd</code></dt>
+      <dd>重複(echo)解釋的參數
+          [<code class="Cm">cmd</code>]</dd>
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">stats    </code>
+        (<code class="Cm">st</code>)</dt>
+      <dd>顯示查詢統計信息
+          [<code class="Cm">st</code>]</dd>
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">Header   </code>
+        (<code class="Cm">H</code>)</dt>
+      <dd>顯示基本的包頭
+          [<code class="Cm">H</code>]</dd>
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">header   </code>
+        (<code class="Cm">he</code>)</dt>
+      <dd>顯示包頭的標識
+          [<code class="Cm">he</code>]</dd>
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">ttlid    </code>
+        (<code class="Cm">tt</code>)</dt>
+      <dd>顯示TTLs(Time to Live) [<code class="Cm">tt</code>]</dd>
+      <dt>[<code class="Cm">no</code>] <code class="Cm">cl</code></dt>
+      <dd>顯示等級信息
+          [<code class="Cm">nocl</code>]</dd>
+      <dt>[<code class="Cm">no</code>] <code class="Cm">qr</code></dt>
+      <dd>顯示向外的查詢
+          [<code class="Cm">noqr</code>]</dd>
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">reply    </code>
+        (<code class="Cm">rep</code>)</dt>
+      <dd>顯示響應信息
+          [<code class="Cm">rep</code>]</dd>
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">ques     </code>
+        (<code class="Cm">qu</code>)</dt>
+      <dd>顯示詢問部分
+          [<code class="Cm">qu</code>]</dd>
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">answer   </code>
+        (<code class="Cm">an</code>)</dt>
+      <dd>顯示應答部分
+          [<code class="Cm">an</code>]</dd>
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">author   </code>
+        (<code class="Cm">au</code>)</dt>
+      <dd>顯示授權的部分
+          [<code class="Cm">au</code>]</dd>
+      <dt>[<code class="Cm">no</code>]
+        <code class="Cm">addit    </code>
+        (<code class="Cm">ad</code>)</dt>
+      <dd>顯示附加的部分
+          [<code class="Cm">ad</code>]</dd>
+      <dt><a class="permalink" href="#pfdef"><code class="Cm" id="pfdef">pfdef</code></a></dt>
+      <dd>設置爲默認顯示位</dd>
+      <dt><a class="permalink" href="#pfmin"><code class="Cm" id="pfmin">pfmin</code></a></dt>
+      <dd>設置爲最小的默認顯示位</dd>
+      <dt><a class="permalink" href="#pfset="><code class="Cm" id="pfset=">pfset=</code></a><var class="Ar">#</var></dt>
+      <dd>設置顯示位爲#
+          (#可以爲十六進制/八進制/十進制)</dd>
+      <dt><a class="permalink" href="#pfand="><code class="Cm" id="pfand=">pfand=</code></a><var class="Ar">#</var></dt>
+      <dd>位和顯示位設爲#(bitwise and
+          print flags with #)</dd>
+      <dt><a class="permalink" href="#pfor="><code class="Cm" id="pfor=">pfor=</code></a><var class="Ar">#</var></dt>
+      <dd>位或顯示位設爲#(bitwise or
+          print flags with #)</dd>
+    </dl>
+    <p class="Pp">當發送數據報查詢時,
+        <code class="Cm">retry</code> 和 <code class="Cm">time</code>
+        選項會影響解析程序庫的重傳策略.其算法如下:</p>
+    <div class="Bd Pp Bd-indent">
+    <pre>for i = 0 to retry - 1
+    for j = 1 to num_servers
+	send_query
+	wait((time * (2**i)) / num_servers)
+    end
+end
+    </pre>
+    </div>
+    <p class="Pp">(注意: <code class="Ic">dig</code>
+        通常取
+        “<code class="Li">num_servers</code>”
+        的值爲1 . )</p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="DETAILS(細節)">DETAILS(細節)<a class="anchor" href="#DETAILS(%E7%B4%B0%E7%AF%80)">¶</a></h2>
+<code class="Ic">Dig</code> 以前要求BIND的
+  <a class="Xr"><a href="../../buster/manpages-dev/resolver.3.en.html">resolver(3)</a></a>
+  庫的版本作一些細微的修改.
+  從BIND
+  4.9起,BIND的解析程序已經修補好
+  並可以正常地與
+  <code class="Ic">dig</code> 一起工作.
+  實質上, <code class="Ic">dig</code>
+  在解釋參數和設置適合的參數時是
+  直來直去的
+  (雖然並不巧妙) <code class="Ic">Dig</code>
+  會用到 <a class="Xr"><a href="../../buster/manpages-dev/resolver.3.en.html">resolver(3)</a></a>
+  的例程 <code class="Fn">res_init</code>(),
+  <code class="Fn">res_mkquery</code>(), <code class="Fn">res_send</code>()
+  以及訪問 <var class="Ft">_res</var> 結構.
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ENVIRONMENT(環境變量)">ENVIRONMENT(環境變量)<a class="anchor" href="#ENVIRONMENT(%E7%92%B0%E5%A2%83%E8%AE%8A%E9%87%8F)">¶</a></h1>
+<dl class="Bl-tag Bl-compact">
+  <dt><a class="permalink" href="#LOCALRES"><code class="Ev" id="LOCALRES">LOCALRES</code></a></dt>
+  <dd>用來替換Pa
+      /etc/resolv.conf的文件</dd>
+  <dt><a class="permalink" href="#LOCALDEF"><code class="Ev" id="LOCALDEF">LOCALDEF</code></a></dt>
+  <dd>默認的環境變量文件</dd>
+</dl>
+<p class="Pp">另見上面對
+    <code class="Fl">-envsav</code>, <code class="Fl">-envset</code>, 和
+    <code class="Fl">-</code>[<code class="Cm">no</code>]
+    <code class="Cm">stick</code> 選項的說明.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="FILES(相關文件)">FILES(相關文件)<a class="anchor" href="#FILES(%E7%9B%B8%E9%97%9C%E6%96%87%E4%BB%B6)">¶</a></h1>
+<dl class="Bl-tag Bl-compact">
+  <dt><span class="Pa">/etc/resolv.conf	</span></dt>
+  <dd>初始化的域名和域名服務器地址</dd>
+  <dt><span class="Pa">./DiG.env</span></dt>
+  <dd>默認的保存默認選項的文件</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO(另見)">SEE ALSO(另見)<a class="anchor" href="#SEE_ALSO(%E5%8F%A6%E8%A6%8B)">¶</a></h1>
+<a class="Xr"><a href="../../buster/bind9/named.8.en.html">named(8)</a></a>, <a class="Xr"><a href="../../buster/manpages-dev/resolver.3.en.html">resolver(3)</a></a>,
+  <a class="Xr"><a href="../../buster/manpages-zh/resolver.5.zh_TW.html">resolver(5)</a></a>, <a class="Xr"><a href="../../buster/manpages-ja/nslookup.8.ja.html">nslookup(8)</a></a>.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="STANDARDS(標準)">STANDARDS(標準)<a class="anchor" href="#STANDARDS(%E6%A8%99%E6%BA%96)">¶</a></h1>
+RFC 1035.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="AUTHOR(作者)">AUTHOR(作者)<a class="anchor" href="#AUTHOR(%E4%BD%9C%E8%80%85)">¶</a></h1>
+Steve Hotz hotz@isi.edu
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ACKNOWLEDGMENTS(致謝)">ACKNOWLEDGMENTS(致謝)<a class="anchor" href="#ACKNOWLEDGMENTS(%E8%87%B4%E8%AC%9D)">¶</a></h1>
+<code class="Ic">Dig</code> 使用了源自
+  <a class="Xr"><a href="../../buster/manpages-ja/nslookup.8.ja.html">nslookup(8)</a></a> 的函數,
+  其作者爲Andrew Cherenson.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+<code class="Ic">Dig</code>
+  是蠕變特色(&#34;creeping
+  featurism&#34;)的一個 典型實例 --
+  這是因在其開發
+  過程中就考慮到了一些潛在應用而導致的結果.
+  它可能會從這種嚴格的限定中受益.同樣,
+  他們設立的顯示位以及條目的間隔尺寸
+  很明顯地也是一種十分特別的創意.
+<p class="Pp">當問題出在解析程序身上時,
+    <code class="Ic">Dig</code>
+    不會總是能夠正常地退出(在適合的狀況下)
+    (<b class="Sy">注意:</b>
+    絕大多數一般的exit情況是能夠處理的).
+    當運行於批處理模式下時尤其惱火.
+    如果不能正常退出(又無法俘獲)的話,
+    那麼整個批處理將終止;如果俘獲了這樣的事件,
+    <code class="Ic">dig</code>
+    就只是繼續下一個查詢罷了.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+riser &lt;boomer@ccidnet.com&gt;
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+2001/7/19
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B">¶</a></h1>
+<a href="../..//cmpp.linuxforum.net</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">1990年8月30日</td>
+    <td class="foot-os">BSD 4</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+dig.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2020-01-03T03:33:25Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"dig(1)\"}}]}"
+</script>

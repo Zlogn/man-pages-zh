@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>create_table(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-tr/create_table.7.tr.html" hreflang="tr">
+<link rel="alternate" href="../../buster/manpages-zh/create_table.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/create_table.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; create_table(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/create_table.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/create_table.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS" title="SYNOPSIS">SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#PARAMETERS_%E5%8F%83%E6%95%B8" title="PARAMETERS 參數">PARAMETERS 參數</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES_%E6%B3%A8%E6%84%8F" title="NOTES 注意">NOTES 注意</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#EXAMPLES_%E4%BE%8B%E5%AD%90" title="EXAMPLES 例子">EXAMPLES 例子</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#COMPATIBILITY_%E5%85%BC%E5%AE%B9%E6%80%A7" title="COMPATIBILITY 兼容性">COMPATIBILITY 兼容性</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SEE_ALSO_%E5%8F%83%E8%A6%8B" title="SEE ALSO 參見">SEE ALSO 參見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AD%AF%E8%80%85" title="譯者">譯者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/create_table.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/create_table.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/create_table.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-tr/create_table.7.tr.html" title="Turkish (tr)">Türkçe</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/create_table.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/create_table.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">CREATE <a href="../../buster/postgresql-client-11/TABLE.7.en.html">TABLE(7)</a></td>
+    <td class="head-vol">SQL Commands</td>
+    <td class="head-rtitle">CREATE <a href="../../buster/postgresql-client-11/TABLE.7.en.html">TABLE(7)</a></td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+CREATE TABLE - 定義一個新表
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS">SYNOPSIS<a class="anchor" href="#SYNOPSIS">¶</a></h1>
+<pre>CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } ] TABLE <i>table_name</i> (
+    { <i>column_name</i> <i>data_type</i> [ DEFAULT <i>default_expr</i> ] [ <i>column_constraint</i> [, ... ] ]
+    | <i>table_constraint</i>
+    | LIKE <i>parent_table</i> [ { INCLUDING | EXCLUDING } DEFAULTS ] }  [, ... ]
+)
+[ INHERITS ( <i>parent_table</i> [, ... ] ) ]
+[ WITH OIDS | WITHOUT OIDS ]
+[ ON COMMIT { PRESERVE ROWS | DELETE ROWS | DROP } ]
+where <i>column_constraint</i> is:
+[ CONSTRAINT <i>constraint_name</i> ]
+{ NOT NULL | NULL | UNIQUE | PRIMARY KEY |
+  CHECK (<i>expression</i>) |
+  REFERENCES <i>reftable</i> [ ( <i>refcolumn</i> ) ] [ MATCH FULL | MATCH PARTIAL | MATCH SIMPLE ]
+    [ ON DELETE <i>action</i> ] [ ON UPDATE <i>action</i> ] }
+[ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
+and <i>table_constraint</i> is:
+[ CONSTRAINT <i>constraint_name</i> ]
+{ UNIQUE ( <i>column_name</i> [, ... ] ) |
+  PRIMARY KEY ( <i>column_name</i> [, ... ] ) |
+  CHECK ( <i>expression</i> ) |
+  FOREIGN KEY ( <i>column_name</i> [, ... ] ) REFERENCES <i>reftable</i> [ ( <i>refcolumn</i> [, ... ] ) ]
+    [ MATCH FULL | MATCH PARTIAL | MATCH SIMPLE ] [ ON DELETE <i>action</i> ] [ ON UPDATE <i>action</i> ] }
+[ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
+
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>CREATE TABLE</b>
+  將在當前數據庫創建一個新的，
+  初始爲空的表。該表將由發出此命令的用戶所有。
+<p class="Pp">
+  
+    如果給出了模式名（比如，CREATE
+    TABLE myschema.mytable ...），
+    那麼表是在指定模式中創建的。否則它在當前模式中創建。臨時表存在於一個特殊的模式裏，
+    因此創建臨時表的時候不能給出模式名。表名字必需和同一模式中其他表，序列，索引或者視圖相區別。</p>
+<p class="Pp"><b>CREATE TABLE</b>
+    還自動創建一個數據類型，
+    該數據類型代表對應該表一行的複合類型。
+    因此，表不能和同模式中的現有數據類型同名。</p>
+<p class="Pp">
+  
+    一個表的字段數不能超過
+    1600。（實際上，真正的限制比這低，因爲還有元組長度的約束）。</p>
+<p class="Pp">
+  
+    可選的約束子句聲明約束（或者測試），新行或者更新的行必須滿足這些約束才能成功插入或更新。
+    約束是一個它是一個 SQL
+    對象，它以多種方式協助我們協助我們在表上定義有效的數值集合。</p>
+<p class="Pp">
+  
+    定義約束又兩種方法：表約束和列約束。一個列約束是作爲一個列定義的一部分定義的。
+    而表約束並不和某個列綁在一起，
+    它可以作用於多於一個列上。每個列約束也可以寫成表約束；
+    如果某個約束隻影響一個列，那麼列約束只是符號上的簡潔方式而已。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="PARAMETERS_參數">PARAMETERS 參數<a class="anchor" href="#PARAMETERS_%E5%8F%83%E6%95%B8">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>TEMPORARY 或 TEMP</b></dt>
+  <dd>
+    
+      如果聲明瞭此參數，則該表創建爲臨時表。臨時表在會話結束時自動刪除，
+      或者是（可選）在當前事務的結尾（參閱下面的
+      ON COMMIT）。
+      現有同名永久表在臨時表存在期間在本會話過程中是不可見的，
+      除非它們是用模式修飾的名字引用的。
+      任何在臨時表上創建的索引也都會自動刪除。
+    <p class="Pp">
+       我們可以選擇在 TEMPORARY
+        或 TEMP 前面放上 GLOBAL 或者
+        LOCAL。 這樣對 PostgreSQL
+        沒有任何區別，可以參閱
+        Compatibility [<a href="../../buster/manpages-zh/create_table.7.zh_TW.html">create_table(7)</a>]。</p>
+  </dd>
+  <dt><b></b><i>table_name</i><b></b></dt>
+  <dd>
+    
+      要創建的表的名字（可以用模式修飾）。</dd>
+  <dt><b></b><i>column_name</i><b></b></dt>
+  <dd>
+    
+      在新表中要創建的字段名字。</dd>
+  <dt><b></b><i>data_type</i><b></b></dt>
+  <dd>
+    
+      該字段的數據類型。它可以包括數組說明符。</dd>
+  <dt><b>DEFAULT</b></dt>
+  <dd>DEFAULT
+      子句給它所出現的字段一個缺省數值。
+      該數值可以是任何不含變量的表達式（不允許使用子查詢和對本表中的其它字段的交叉引用）。
+      缺省表達式的數據類型必須和字段類型匹配。
+    <p class="Pp">
+      
+        缺省表達式將被用於任何未聲明該字段數值的插入操作。
+        如果字段上沒有缺省值，那麼缺省是
+        NULL。</p>
+  </dd>
+  <dt>LIKE
+    子句聲明一個表，新表自動從這個表裏面繼承所有字段名，
+    他們的數據類型，以及非空約束。</dt>
+  <dd>
+    <p class="Pp">
+       和 INHERITS
+        不同，新表與繼承過來的表之間在創建動作完畢之後是完全無關的。
+        插入新表的數據不會在父表中表現出來。</p>
+    <p class="Pp">
+      
+        字段缺省表達式只有在聲明瞭
+        INCLUDING DEFAULTS
+        之後纔會繼承過來。
+        缺省是排除缺省表達式。</p>
+  </dd>
+  <dt><b>INHERITS ( </b><i>parent_table</i><b> [, ... ] )</b></dt>
+  <dd>
+     可選的 INHERITS
+      子句聲明一列表，這個新表自動從這列表中繼承所有字段。
+      如果在多於一個父表中存在同名的字段，那麼就會報告一個錯誤，除非這些字段的數據類型在每個父表裏都是匹配的。
+      如果沒有衝突，那麼重複的字段在新表中融合成一個字段。
+      如果新表的字段名列表中包括和繼承的字段同名的，那麼它的數據類型也必須和上面一樣與繼承字段匹配，並且這些字段定義會融合成一個。
+      不過，同名的繼承和新字段聲明可以聲明不同的約束：所有的繼承過來的約束以及聲明的約束都融合到一起，並且全部應用於新表。
+      如果新表爲該字段明確的聲明瞭一個缺省數值，那麼此缺省數值覆蓋任何來自繼承字段聲明的缺省值。
+      否則，任何爲該字段聲明瞭缺省數值的父表都必須聲明相同的缺省，否則就會報告一個錯誤。</dd>
+  <dt><b>WITH OIDS</b></dt>
+  <dd></dd>
+  <dt><b>WITHOUT OIDS</b></dt>
+  <dd>
+    
+      這個可選的子句聲明新表中的行是否應該擁有賦予它們的
+      OID （對象標識）。
+      缺省是有
+      OID。（如果新表從任何有
+      OID
+      的表繼承而來，那麼就算這條命令說了
+      WITHOUT OIDS， 也會強制 WITH
+      OIDS。）
+    <p class="Pp">
+       聲明 WITHOUT OIDS
+        允許用戶禁止爲行或者表生成
+        OID。
+        這麼做對大表是值得的，因爲這樣可以減少
+        OID 消耗並且推遲 32 位 OID
+        計數器的消耗。
+        一旦該計數器重疊，那麼就不能再假設
+        OID
+        的唯一，這樣它的實用性就大打折扣。
+        聲明 WITHOUT OIDS
+        還會減少在磁盤上存儲每行的空間，每行減少
+        4
+        字節，因此也可以改進性能。</p>
+  </dd>
+  <dt><b>CONSTRAINT </b><i>constraint_name</i><b></b></dt>
+  <dd>
+    
+      列或表約束的可選名字。如果沒有聲明，則由系統生成一個名字。</dd>
+  <dt><b>NOT NULL</b></dt>
+  <dd>
+     字段不允許包含 NULL
+      數值。</dd>
+  <dt><b>NULL</b></dt>
+  <dd>
+     該字段允許包含 NULL
+      數值。這是缺省。
+    <p class="Pp">
+      
+        這個子句的存在只是爲和那些非標準
+        SQL 數據庫兼容。
+        我們不建議在新應用中使用它。</p>
+  </dd>
+  <dt><b>UNIQUE (column constraint)</b></dt>
+  <dd></dd>
+  <dt><b>UNIQUE ( </b><i>column_name</i><b> [, ... ] ) (table
+    constraint)</b></dt>
+  <dd>UNIQUE
+      聲明一個規則，表示一個表裏的一個或者多個獨立的字段組合的分組只能包含唯一的數值。
+      表的唯一約束的行爲和列約束的一樣，只不過多了跨多行的能力。
+    <p class="Pp">
+      
+        對於唯一約束的用途而言，系統認爲
+        NULL
+      數值是不相等的。</p>
+    <p class="Pp">
+      
+        每個唯一表約束都必須命名一個字段的集合，該集合必須和其它唯一約束命名字段集合或者該表定義的主鍵約束不同。
+        （否則就只是同樣的約束寫了兩次。）</p>
+  </dd>
+  <dt><b>PRIMARY KEY (column constraint)</b></dt>
+  <dd></dd>
+  <dt><b>PRIMARY KEY ( </b><i>column_name</i><b> [, ... ] ) (table
+    constraint)</b></dt>
+  <dd>
+    
+      主鍵約束表明表中的一個或者一些字段只能包含唯一（不重複）非
+      NULL 的數值。
+      從技術上講，PRIMARY KEY
+      只是 UNIQUE 和 NOT NULL
+      的組合，不過把一套字段標識爲主鍵同時也體現了模式設計的元數據，
+      因爲主鍵意味着其它表可以拿這套字段用做行的唯一標識。
+    <p class="Pp">
+      
+        一個表只能聲明一個主鍵，不管是作爲字段約束還是表約束。</p>
+    <p class="Pp">
+      
+        主鍵約束應該定義在同個表上的一個與其它唯一約束所定義的不同的字段集合上。</p>
+  </dd>
+  <dt><b>CHECK (</b><i>expression</i><b>)</b></dt>
+  <dd>CHECK
+      約束聲明一個生成布爾結果的子句，
+      一次插入或者更新操作若想成功則裏面的新行或者被更新的行必須滿足這個條件。
+      聲明爲字段約束的檢查約束應該只引用該字段的數值，而在表約束裏出現的表達式可以引用多個字段。
+    <p class="Pp">
+       目前，CHECK
+        表達式不能包含子查詢也不能引用除當前行字段之外的變量。</p>
+  </dd>
+  <dt><b>REFERENCES </b><i>reftable</i><b> [ ( </b><i>refcolumn</i><b> ) ] [
+    MATCH </b><i>matchtype</i><b> ] [ ON DELETE </b><i>action</i><b> ] [ ON
+    UPDATE </b><i>action</i><b> ] (column constraint)</b></dt>
+  <dd></dd>
+  <dt><b>FOREIGN KEY ( </b><i>column</i><b> [, ... ] )</b></dt>
+  <dd>
+    
+      這些子句聲明一個外鍵約束，外鍵約束聲明一個由新表中一列或者多列組成的組應該只包含匹配引用的表
+      reftable 中對應引用的字段
+      refcolumn 中的數值。
+      如果省略 refcolumn，
+      則使用 reftable 的主鍵。
+      被引用字段必須是被引用表中的唯一字段或者主鍵。
+    <p class="Pp">
+      
+        向這些字段插入的數值將使用給出的匹配類型與參考表中的參考列中的數值進行匹配。
+        有三種匹配類型：MATCH
+        FULL， MATCH PARTIAL，和 MATCH
+        SIMPLE，它也是缺省匹配類型。
+        MATCH FULL
+        將不允許一個多字段外鍵的字段爲
+        NULL，除非所有外鍵字段都爲
+        NULL。 MATCH SIMPLE
+        允許某些外鍵字段爲
+        NULL
+        而外鍵的其它部分不是
+        NULL。MATCH PARTIAL 還沒實現。</p>
+    <p class="Pp">
+      
+        另外，當被參考字段中的數據改變的時候，那麼將對本表的字段中的數據執行某種操作。
+        ON DELETE
+        子句聲明當被參考表中的被參考行將被刪除的時候要執行的操作。
+        類似，ON UPDATE
+        子句聲明被參考表中被參考字段更新爲新值的時候要執行的動作。
+        如果該行被更新，但被參考的字段實際上沒有變化，那麼就不會有任何動作。
+        下面是每個子句的可能的動作：</p>
+  </dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>NO ACTION</b></dt>
+  <dd>
+    
+      生成一個錯誤，表明刪除或者更新將產生一個違反外鍵約束的動作。
+      它是缺省動作。</dd>
+  <dt><b>RESTRICT</b></dt>
+  <dd>
+     和 NO ACTION
+      一樣，只是動作不可推遲，
+      即使約束剩下的部分是可以推遲的也馬上發生。</dd>
+  <dt><b>CASCADE</b></dt>
+  <dd>
+    
+      刪除任何引用了被刪除行的行，或者分別把引用行的字段值更新爲被參考字段的新數值。</dd>
+  <dt><b>SET NULL</b></dt>
+  <dd>
+     把引用行數值設置爲
+      NULL。</dd>
+  <dt><b>SET DEFAULT</b></dt>
+  <dd>
+    
+      把引用列的數值設置爲它們的缺省值。</dd>
+</dl>
+</div>
+<p class="Pp">
+  
+    如果主鍵字段經常更新，那麼我們給
+    REFERENCES
+    字段增加一個索引可能是合適的，這樣與
+    REFERENCES 字段相關聯的 NO ACTION
+    和 CASCADE
+    動作可以更有效地執行。</p>
+<dl class="Bl-tag">
+  <dt><b>DEFERRABLE</b></dt>
+  <dd></dd>
+  <dt><b>NOT DEFERRABLE</b></dt>
+  <dd>
+    
+      這兩個關鍵字設置該約束是否可推遲。一個不可推遲的約束將在每條命令之後馬上檢查。
+      可以推遲的約束檢查可以推遲到事務結尾（使用
+      SET CONSTRAINTS [<a href="../../buster/manpages-zh/set_constraints.7.zh_TW.html">set_constraints(7)</a>]
+      命令）。 缺省是 NOT
+      DEFERRABLE。目前只有外鍵約束接受這個子句。所有其它約束類型都是不可推遲的。</dd>
+  <dt><b>INITIALLY IMMEDIATE</b></dt>
+  <dd></dd>
+  <dt><b>INITIALLY DEFERRED</b></dt>
+  <dd>
+    
+      如果約束是可推遲的，那麼這個子句聲明檢查約束的缺省時間。
+      如果約束是 INITIALLY IMMEDIATE，
+      那麼每條語句之後就檢查它。這個是缺省。如果約束是
+      INITIALLY
+      DEFERRED，那麼只有在事務結尾才檢查它。
+      約束檢查的時間可以用
+      SET CONSTRAINTS [<a href="../../buster/manpages-zh/set_constraints.7.zh_TW.html">set_constraints(7)</a>]
+      命令修改。</dd>
+  <dt><b>ON COMMIT</b></dt>
+  <dd>
+     我們可以用 ON COMMIT
+      控制臨時表在事務塊結尾的行爲。這三個選項是：</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>PRESERVE ROWS</b></dt>
+  <dd>
+    
+      在事務結尾不發生任何特定的動作。這是缺省行爲。</dd>
+  <dt><b>DELETE ROWS</b></dt>
+  <dd>
+    
+      臨時表的所有行在每次事務結尾都被刪除。實際上，在每次提交的時候都自動
+      <a href="../../buster/manpages-zh/truncate.7.zh_TW.html">truncate(7)</a> 。</dd>
+  <dt><b>DROP</b></dt>
+  <dd>
+    
+      在當前事務塊的結尾，臨時表將被刪除。</dd>
+</dl>
+</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES_注意">NOTES 注意<a class="anchor" href="#NOTES_%E6%B3%A8%E6%84%8F">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>•</dt>
+  <dd>
+     如果一個應用使用了
+      OID
+      標識表中的特定行，那麼我們建議在該表的
+      oid
+      字段上創建一個唯一約束，以確保該表的
+      OID
+      即使在計數器重疊之後也是唯一的。如果你需要一個整個數據庫範圍的唯一標識，
+      那麼就要避免假設 OID
+      是跨表唯一的，你可以用
+      tableoid 和行 OID
+      的組合來實現這個目的。
+      （將來的 PostgreSQL
+      很可能爲每個表使用獨立的
+      OID 計數器， 因此包括
+      tableoid
+      組成數據庫範圍內的唯一標識將是必須的，而不是可選的。）
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>提示:</b>
+  對那些沒有主鍵的表，我們不建議使用
+  WITHOUT OIDS， 因爲如果既沒有
+  OID
+  又沒有唯一數據鍵字，那麼就很難標識特定的行。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt>•</dt>
+  <dd>PostgreSQL
+      自動爲每個唯一約束和主鍵約束創建一個索引以確保唯一性。
+      因此，我們不必爲主鍵字段創建明確的索引。（參閱
+      CREATE INDEX
+      [<a href="../../buster/manpages-zh/create_index.7.zh_TW.html">create_index(7)</a>]獲取更多信息。）</dd>
+  <dt>•</dt>
+  <dd>
+    
+      唯一約束和主鍵在目前的實現裏是不能繼承的。
+      這樣，如果把繼承和唯一約束組合在一起會導致無法運轉。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES_例子">EXAMPLES 例子<a class="anchor" href="#EXAMPLES_%E4%BE%8B%E5%AD%90">¶</a></h1>
+ 創建表 films 和 distributors：
+<p class="Pp"></p>
+<pre>CREATE TABLE films (
+    code        char(5) CONSTRAINT firstkey PRIMARY KEY,
+    title       varchar(40) NOT NULL,
+    did         integer NOT NULL,
+    date_prod   date,
+    kind        varchar(10),
+    len         interval hour to minute
+);
+
+</pre>
+<p class="Pp"></p>
+<pre>CREATE TABLE distributors (
+     did    integer PRIMARY KEY DEFAULT nextval(&#39;serial&#39;),
+     name   varchar(40) NOT NULL CHECK (name &lt;&gt; &#39;&#39;)
+);
+
+</pre>
+<p class="Pp">
+   創建一個帶有 2
+    維數組的表：</p>
+<p class="Pp"></p>
+<pre>CREATE TABLE array (
+    vector  int[][]
+);
+
+</pre>
+<p class="Pp">
+   爲表 films
+    定義一個唯一表約束。
+    唯一表約束可以在表的一個或多個字段上定義：</p>
+<p class="Pp"></p>
+<pre>CREATE TABLE films (
+    code        char(5),
+    title       varchar(40),
+    did         integer,
+    date_prod   date,
+    kind        varchar(10),
+    len         interval hour to minute,
+    CONSTRAINT production UNIQUE(date_prod)
+);
+
+</pre>
+<p class="Pp">
+  
+    定義一個檢查列約束：</p>
+<p class="Pp"></p>
+<pre>CREATE TABLE distributors (
+    did     integer CHECK (did &gt; 100),
+    name    varchar(40)
+);
+
+</pre>
+<p class="Pp">
+  
+    定義一個檢查表約束：</p>
+<p class="Pp"></p>
+<pre>CREATE TABLE distributors (
+    did     integer,
+    name    varchar(40)
+    CONSTRAINT con1 CHECK (did &gt; 100 AND name &lt;&gt; &#39;&#39;)
+);
+
+</pre>
+<p class="Pp">
+   爲表 films
+    定義一個主鍵表約束。
+    主鍵表約束可以定義在表上的一個或多個字段。</p>
+<p class="Pp"></p>
+<pre>CREATE TABLE films (
+    code        char(5),
+    title       varchar(40),
+    did         integer,
+    date_prod   date,
+    kind        varchar(10),
+    len         interval hour to minute,
+    CONSTRAINT code_title PRIMARY KEY(code,title)
+);
+
+</pre>
+<p class="Pp">
+   爲表 distributors
+    定義一個主鍵約束。
+    下面兩個例子是等效的，第一個例子使用了表約束語法，
+    第二個使用了列約束表示法。</p>
+<p class="Pp"></p>
+<pre>CREATE TABLE distributors (
+    did     integer,
+    name    varchar(40),
+    PRIMARY KEY(did)
+); 
+
+</pre>
+<p class="Pp"></p>
+<pre>CREATE TABLE distributors (
+    did     integer PRIMARY KEY,
+    name    varchar(40)
+);
+
+</pre>
+<p class="Pp">
+   下面這個例子給字段 name
+    賦予了一個文本常量缺省值，
+    並且將字段 did
+    的缺省值安排爲通過選擇序列對象的下一個值生成。
+    modtime
+    的缺省值將是該行插入的時候的時間。</p>
+<p class="Pp"></p>
+<pre>CREATE TABLE distributors (
+    name      varchar(40) DEFAULT &#39;Luso Films&#39;,
+    did       integer DEFAULT nextval(&#39;distributors_serial&#39;),
+    modtime   timestamp DEFAULT current_timestamp
+);
+
+</pre>
+<p class="Pp">
+   在表 distributors 上定義兩個 NOT
+    NULL
+    列約束，其中之一明確給出了名字：</p>
+<p class="Pp"></p>
+<pre>CREATE TABLE distributors (
+    did     integer CONSTRAINT no_null NOT NULL,
+    name    varchar(40) NOT NULL
+);
+
+</pre>
+<p class="Pp">
+   爲 name
+    字段定義一個唯一約束：</p>
+<p class="Pp"></p>
+<pre>CREATE TABLE distributors (
+    did     integer,
+    name    varchar(40) UNIQUE
+);
+
+</pre>
+
+  上面的和下面這樣作爲一個表約束聲明是一樣的：
+<p class="Pp"></p>
+<pre>CREATE TABLE distributors (
+    did     integer,
+    name    varchar(40),
+    UNIQUE(name)
+);
+
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="COMPATIBILITY_兼容性">COMPATIBILITY 兼容性<a class="anchor" href="#COMPATIBILITY_%E5%85%BC%E5%AE%B9%E6%80%A7">¶</a></h1>
+<b>CREATE TABLE</b> 遵循 SQL92 和 SQL99
+  的一個子集，一些例外情況在下面列出。
+<section class="Ss">
+<h2 class="Ss" id="TEMPORARY_TABLES_臨時表">TEMPORARY TABLES 臨時表<a class="anchor" href="#TEMPORARY_TABLES_%E8%87%A8%E6%99%82%E8%A1%A8">¶</a></h2>
+ 儘管 CREATE TEMPORARY TABLE 的語法和 SQL
+  標準的類似，
+  但是效果是不同的。在標準裏，臨時表只是定義一次並且自動存在（從空內容開始）於任何需要它們的會話中。
+  PostgreSQL
+  要求每個會話爲它們使用的每個臨時表發出它們自己的
+  CREATE TEMPORARY TABLE 命令。
+  這樣就允許不同的會話將相同的臨時表名字用於不同的目的，而標準的實現方法則把一個臨時表名字約束爲具有相同的表結構。
+<p class="Pp">
+  
+    標準定義的臨時表的行爲被廣泛地忽略了。PostgreSQL
+    在這方面上地行爲類似於許多其它
+    SQL 數據庫</p>
+<p class="Pp">
+  
+    標準中在全局和局部地臨時表之間的區別在
+    PostgreSQL
+    裏不存在，因爲這種區別取決於模塊的概念，而
+    PostgreSQL
+    沒有這個概念。出於兼容考慮，PostgreSQL
+    將接受臨時表聲明中的
+    GLOBAL 和 LOCAL 關鍵字，
+    但是他們沒有作用。</p>
+<p class="Pp">
+   臨時表的 ON COMMIT
+    子句也類似於 SQL
+    標準，
+    但是有些區別。如果忽略了
+    ON COMMIT 子句，SQL
+    聲明缺省的行爲是 ON COMMIT
+    DELETE ROWS。 但是 PostgreSQL
+    裏的缺省行爲是 ON COMMIT PRESERVE
+    ROWS。 在 SQL 裏不存在 ON COMMIT
+    DROP。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="COLUMN_CHECK_CONSTRAINTS_字段檢查約束">COLUMN CHECK CONSTRAINTS 字段檢查約束<a class="anchor" href="#COLUMN_CHECK_CONSTRAINTS_%E5%AD%97%E6%AE%B5%E6%AA%A2%E6%9F%A5%E7%B4%84%E6%9D%9F">¶</a></h2>
+ SQL 標準說 CHECK
+  字段約束只能引用他們施用的字段；
+  只有 CHECK
+  表約束才能引用多個字段。PostgreSQL
+  並不強制這個限制；它把字段和表約束看作相同的東西。
+</section>
+<section class="Ss">
+<h2 class="Ss" id="NULL_``CONSTRAINT&#39;&#39;_NULL約束">NULL ``CONSTRAINT&#39;&#39; NULL約束<a class="anchor" href="#NULL_%60%60CONSTRAINT%27%27_NULL%E7%B4%84%E6%9D%9F">¶</a></h2>
+NULL
+  &#34;約束&#34;（實際上不是約束）是
+  PostgreSQL 對 SQL 標準的擴展，
+  包括它是爲了和其它一些數據庫系統兼容（以及爲了和
+  NOT NULL
+  約束對稱）。因爲它是任何字段的缺省，所以它的出現只是噪音而已。
+</section>
+<section class="Ss">
+<h2 class="Ss" id="INHERITANCE_繼承">INHERITANCE 繼承<a class="anchor" href="#INHERITANCE_%E7%B9%BC%E6%89%BF">¶</a></h2>
+ 通過 INHERITS
+  子句的多重繼承是 PostgreSQL
+  語言的擴展。
+  SQL99（但不包括
+  SQL92）使用不同的語法和語義定義了單繼承。
+  SQL99 風格的繼承還沒有在
+  PostgreSQL 中實現。
+</section>
+<section class="Ss">
+<h2 class="Ss" id="OBJECT_IDS_對象ID">OBJECT IDS 對象ID<a class="anchor" href="#OBJECT_IDS_%E5%B0%8D%E8%B1%A1ID">¶</a></h2>
+PostgreSQL 的 OID 的概念不標準。
+</section>
+<section class="Ss">
+<h2 class="Ss" id="ZERO-COLUMN_TABLES_零行表">ZERO-COLUMN TABLES 零行表<a class="anchor" href="#ZERO-COLUMN_TABLES_%E9%9B%B6%E8%A1%8C%E8%A1%A8">¶</a></h2>
+PostgreSQL
+  允許創建沒有字段的表
+  （比如，CREATE TABLE
+  foo();）。這是對 SQL
+  標準的擴展，
+  標準不允許存在零字段表。零字段表本身沒什麼用，但是禁止他們會給
+  ALTER TABLE DROP
+  COLUMN帶來很奇怪的情況，所以，這個時候忽視標準的限制好想很清楚。
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO_參見">SEE ALSO 參見<a class="anchor" href="#SEE_ALSO_%E5%8F%83%E8%A6%8B">¶</a></h1>
+ALTER TABLE [<a href="../../buster/manpages-zh/alter_table.7.zh_TW.html">alter_table(7)</a>], DROP TABLE [<b>drop_table</b>(l)]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="譯者">譯者<a class="anchor" href="#%E8%AD%AF%E8%80%85">¶</a></h1>
+<b>Postgresql 中文網站</b> <b>何偉平
+  &lt;laser@pgsqldb.org&gt;</b>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-02</td>
+    <td class="foot-os">SQL - Language Statements</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+create_table.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:33Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"create_table(7)\"}}]}"
+</script>

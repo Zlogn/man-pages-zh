@@ -1,0 +1,2300 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>perlfaq8(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/perlfaq8.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/perlfaq8.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; perlfaq8(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlfaq8.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlfaq8.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#AUTHOR_AND_COPYRIGHT" title="AUTHOR AND COPYRIGHT">AUTHOR AND COPYRIGHT</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AD%AF%E8%80%85" title="譯者">譯者</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlfaq8.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/perlfaq8.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/perlfaq8.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlfaq8.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlfaq8.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/perl-doc/perlfaq8.1.en.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlfaq8.7.zh_TW.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">PERLFAQ8(7)</td>
+    <td class="head-vol">Perl Programmers Reference Guide</td>
+    <td class="head-rtitle">PERLFAQ8(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+perlfaq8 - 系統交互 (2003/01/26 17:44:04 )
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+Perl FAQ
+  的這一節覆蓋了與系統交互有關的問題。主題包括進程間通信
+  (IPC)，用戶界面控制
+  (鍵盤，屏幕和指點設備)，以及其他與數據操作不相關的事項
+<p class="Pp">閱讀你係統中的 perl
+    自帶的 FAQ 和文檔
+    (例如，perlvms,perlplan9...)。它們會包含有關你的
+    perl
+    版本的更詳細的信息。
+  <br/>
+</p>
+<p class="Pp"><b>如何找出正在運行的操作系統？</b></p>
+<p class="Pp"><b>爲什麼 exec()
+  不返回?</b></p>
+<p class="Pp">因爲這正是它所做的：它用另一個不同的程式來取代你當時所執行的。如果你的程
+    式需要繼續跑下去（這可能正是你問此問題的原因吧？），改用
+    system() 。
+  <br/>
+</p>
+<p class="Pp"><b>如何對鍵盤／螢幕／滑鼠做些花樣？</b></p>
+<p class="Pp">連接／控制
+    鍵盤、螢幕和指標裝置（「滑鼠」）的方法因作業系統的不同而有不
+    同；不妨試試下列模組：</p>
+<dl class="Bl-tag">
+  <dt>Keyboard</dt>
+  <dd>
+    <pre>    Term::Cap                   標準內建模組
+    Term::ReadKey               CPAN
+    Term::ReadLine::Gnu         CPAN
+    Term::ReadLine::Perl        CPAN
+    Term::Screen                CPAN
+    </pre>
+  </dd>
+  <dt>Screen</dt>
+  <dd>
+    <pre>    Term::Cap                   標準內建模組
+    Curses                      CPAN
+    Term::ANSIColor             CPAN
+    </pre>
+  </dd>
+  <dt>Mouse</dt>
+  <dd>
+    <pre>    Tk                          CPAN
+    </pre>
+  </dd>
+</dl>
+<p class="Pp">Some of these specific cases are shown below.
+  <br/>
+</p>
+<p class="Pp"><b>How do I print something out in color?</b></p>
+<p class="Pp">In general, you don&#39;t, because you don&#39;t know whether the
+    recipient has a color-aware display device. If you know that they have an
+    ANSI terminal that understands color, you can use the Term::ANSIColor module
+    from CPAN:</p>
+<p class="Pp"></p>
+<pre>    use Term::ANSIColor;
+    print color(&#34;red&#34;), &#34;Stop!\n&#34;, color(&#34;reset&#34;);
+    print color(&#34;green&#34;), &#34;Go!\n&#34;, color(&#34;reset&#34;);
+</pre>
+<p class="Pp">Or like this:</p>
+<p class="Pp"></p>
+<pre>    use Term::ANSIColor qw(:constants);
+    print RED, &#34;Stop!\n&#34;, RESET;
+    print GREEN, &#34;Go!\n&#34;, RESET;
+</pre>
+<br/>
+<p class="Pp"><b>How do I read just one key without waiting for a return
+    key?</b></p>
+<p class="Pp">Controlling input buffering is a remarkably system-dependent
+    matter. On many systems, you can just use the <b>stty</b> command as shown
+    in &#34;getc&#34; in perlfunc, but as you see, that&#39;s already getting you
+    into portability snags.</p>
+<p class="Pp"></p>
+<pre>    open(TTY, &#34;+&lt;/dev/tty&#34;) or die &#34;no tty: $!&#34;;
+    system &#34;stty  cbreak &lt;/dev/tty &gt;/dev/tty 2&gt;&amp;1&#34;;
+    $key = getc(TTY);           # perhaps this works
+    # OR ELSE
+    sysread(TTY, $key, 1);      # probably this does
+    system &#34;stty -cbreak &lt;/dev/tty &gt;/dev/tty 2&gt;&amp;1&#34;;
+</pre>
+<p class="Pp">The Term::ReadKey module from CPAN offers an easy-to-use interface
+    that should be more efficient than shelling out to <b>stty</b> for each key.
+    It even includes limited support for Windows.</p>
+<p class="Pp"></p>
+<pre>    use Term::ReadKey;
+    ReadMode(&#39;cbreak&#39;);
+    $key = ReadKey(0);
+    ReadMode(&#39;normal&#39;);
+</pre>
+<p class="Pp">However, using the code requires that you have a working C
+    compiler and can use it to build and install a CPAN module. Here&#39;s a
+    solution using the standard POSIX module, which is already on your systems
+    (assuming your system supports POSIX).</p>
+<p class="Pp"></p>
+<pre>    use HotKey;
+    $key = readkey();
+</pre>
+<p class="Pp">And here&#39;s the HotKey module, which hides the somewhat mystifying
+    calls to manipulate the POSIX termios structures.</p>
+<p class="Pp"></p>
+<pre>    # HotKey.pm
+    package HotKey;
+</pre>
+<p class="Pp"></p>
+<pre>    @ISA = qw(Exporter);
+    @EXPORT = qw(cbreak cooked readkey);
+</pre>
+<p class="Pp"></p>
+<pre>    use strict;
+    use POSIX qw(:termios_h);
+    my ($term, $oterm, $echo, $noecho, $fd_stdin);
+</pre>
+<p class="Pp"></p>
+<pre>    $fd_stdin = fileno(STDIN);
+    $term     = POSIX::Termios-&gt;new();
+    $term-&gt;getattr($fd_stdin);
+    $oterm     = $term-&gt;getlflag();
+</pre>
+<p class="Pp"></p>
+<pre>    $echo     = ECHO ⎪ ECHOK ⎪ ICANON;
+    $noecho   = $oterm &amp; ~$echo;
+</pre>
+<p class="Pp"></p>
+<pre>    sub cbreak {
+        $term-&gt;setlflag($noecho);  # ok, so i don&#39;t want echo either
+        $term-&gt;setcc(VTIME, 1);
+        $term-&gt;setattr($fd_stdin, TCSANOW);
+    }
+</pre>
+<p class="Pp"></p>
+<pre>    sub cooked {
+        $term-&gt;setlflag($oterm);
+        $term-&gt;setcc(VTIME, 0);
+        $term-&gt;setattr($fd_stdin, TCSANOW);
+    }
+</pre>
+<p class="Pp"></p>
+<pre>    sub readkey {
+        my $key = &#39;&#39;;
+        cbreak();
+        sysread(STDIN, $key, 1);
+        cooked();
+        return $key;
+    }
+</pre>
+<p class="Pp"></p>
+<pre>    END { cooked() }
+</pre>
+<p class="Pp"></p>
+<pre>    1;
+</pre>
+<br/>
+<p class="Pp"><b>How do I check whether input is ready on the keyboard?</b></p>
+<p class="Pp">The easiest way to do this is to read a key in nonblocking mode
+    with the Term::ReadKey module from CPAN, passing it an argument of -1 to
+    indicate not to block:</p>
+<p class="Pp"></p>
+<pre>    use Term::ReadKey;
+</pre>
+<p class="Pp"></p>
+<pre>    ReadMode(&#39;cbreak&#39;);
+</pre>
+<p class="Pp"></p>
+<pre>    if (defined ($char = ReadKey(-1)) ) {
+        # input was waiting and it was $char
+    } else {
+        # no input was waiting
+    }
+</pre>
+<p class="Pp"></p>
+<pre>    ReadMode(&#39;normal&#39;);                  # restore normal tty settings
+</pre>
+<br/>
+<p class="Pp"><b>How do I clear the screen?</b></p>
+<p class="Pp">If you only have do so infrequently, use
+    <span class="Li">&#34;system&#34;</span>:</p>
+<p class="Pp"></p>
+<pre>    system(&#34;clear&#34;);
+</pre>
+<p class="Pp">If you have to do this a lot, save the clear string so you can
+    print it 100 times without calling a program 100 times:</p>
+<p class="Pp"></p>
+<pre>    $clear_string = `clear`;
+    print $clear_string;
+</pre>
+<p class="Pp">If you&#39;re planning on doing other screen manipulations, like
+    cursor positions, etc, you might wish to use Term::Cap module:</p>
+<p class="Pp"></p>
+<pre>    use Term::Cap;
+    $terminal = Term::Cap-&gt;Tgetent( {OSPEED =&gt; 9600} );
+    $clear_string = $terminal-&gt;Tputs(&#39;cl&#39;);
+</pre>
+<br/>
+<p class="Pp"><b>How do I get the screen size?</b></p>
+<p class="Pp">If you have Term::ReadKey module installed from CPAN, you can use
+    it to fetch the width and height in characters and in pixels:</p>
+<p class="Pp"></p>
+<pre>    use Term::ReadKey;
+    ($wchar, $hchar, $wpixels, $hpixels) = GetTerminalSize();
+</pre>
+<p class="Pp">This is more portable than the raw
+    <span class="Li">&#34;ioctl&#34;</span>, but not as illustrative:</p>
+<p class="Pp"></p>
+<pre>    require &#39;sys/ioctl.ph&#39;;
+    die &#34;no TIOCGWINSZ &#34; unless defined &amp;TIOCGWINSZ;
+    open(TTY, &#34;+&lt;/dev/tty&#34;)                     or die &#34;No tty: $!&#34;;
+    unless (ioctl(TTY, &amp;TIOCGWINSZ, $winsize=&#39;&#39;)) {
+        die sprintf &#34;$0: ioctl TIOCGWINSZ (%08x: $!)\n&#34;, &amp;TIOCGWINSZ;
+    }
+    ($row, $col, $xpixel, $ypixel) = unpack(&#39;S4&#39;, $winsize);
+    print &#34;(row,col) = ($row,$col)&#34;;
+    print &#34;  (xpixel,ypixel) = ($xpixel,$ypixel)&#34; if $xpixel ⎪⎪ $ypixel;
+    print &#34;\n&#34;;
+</pre>
+<br/>
+<p class="Pp"><b>如何向使用者詢問密碼？</b></p>
+<p class="Pp">(這個問題跟全球資訊網一點關係也沒有。如果你要找的是跟
+    WWW 有關的，那就
+    看另一份常見問題集吧。)</p>
+<p class="Pp">在 perlfunc 中的 &#34;crypt&#34;
+    裏面有個範例。首先，將你的終端機設爲「無迴應」&#34;no
+    echo&#34;
+    模式，然後就用平常的方法將密碼讀入。你可以用老式的
+    ioctl() 函數、 POSIX
+    終端機控制函數（參看
+    POSIX
+    ，和駱駝書第七章），或是呼叫
+    stty
+    程式，這些方法的可攜性／移植性程度都不一樣。</p>
+<p class="Pp">你也可以在大部份系統上使用
+    CPAN 裏的 Term::ReadKey
+    模組，這個模組較易使用而且理論上也較據可攜性／移植性。</p>
+<p class="Pp"></p>
+<pre>    use Term::ReadKey;
+</pre>
+<p class="Pp"></p>
+<pre>    ReadMode(&#39;noecho&#39;);
+    $password = ReadLine(0);
+</pre>
+<br/>
+<p class="Pp"><b>如何讀寫串口？</b></p>
+<p class="Pp">這端看你在什麼作業系統上執行你的程式。以
+    Unix
+    來說，序列埠可以透過
+    /dev
+    目錄下的檔案來擷取;
+    而在其他系統上，設備的名稱無疑地會不一樣。以下是一些在設備互動時可能遭遇的共同問題：</p>
+<dl class="Bl-tag">
+  <dt>lockfiles</dt>
+  <dd>你的系統可能會使用鎖檔來控制多重讀寫的情況。確定你用的是正確的協定。因爲當多個程序同時對一個裝置做讀取時可能會發生意想不到的情況。</dd>
+  <dt>open mode</dt>
+  <dd>如果你打算對一個裝置同時做讀與寫的動作，你得將它開到更新的模式（
+      在 perlfunc 中的 open
+      裏有更詳細的解說）。如果你不希望冒着阻擋其他程序讀取
+      這個裝置的風險，那就得用
+      sysopen() 和 Fcntl 模組（標準 perl
+      的一部分）內 的
+      <span class="Li">&#34;O_RDWR⎪O_NDELAY⎪O_NOCTTY&#34;</span>。在
+      perlfunc 中的 sysopen
+      裏有對此方法更
+      詳盡的解說。</dd>
+  <dt>end of line</dt>
+  <dd>有些裝置會等着在每行結尾處看到一個
+      &#34;\r&#34;，而非
+      &#34;\n&#34;。在某些平臺上的
+      perl， &#34;\r&#34;和 &#34;\n&#34;
+      與它們平常（在 Unix
+      上）所指的 ASCII 值 &#34;\015&#34;
+      和 &#34;\012&#34; 有
+      所不同。你也許得直接給定數值，例如用八進位
+      (&#34;\015&#34;)、十六進位
+      (&#34;0x0D&#34;)，
+      或指定控制字元
+      (&#34;\cM&#34;)。
+    <p class="Pp"></p>
+    <pre>    print DEV &#34;atv1\012&#34;;       # wrong, for some devices
+    print DEV &#34;atv1\015&#34;;       # right, for some devices
+    </pre>
+    <p class="Pp">儘管對普通的文字檔案，一個
+        &#34;\n&#34;
+        便可解決斷行的問題，但目前在不同作業系統
+        間（Unix、DOS/Win 和
+        Macintosh），對於斷行記號仍無統一標準，而只有用
+        &#34;\015\012&#34; 來當成
+        每行的結尾，然後再視需要去掉輸出中不想要的部份。這
+        個做法尤其常用於
+        socket輸出／輸入
+        與自動刷新
+        (autoflushing)，也是接下來
+        要討論的主題。</p>
+  </dd>
+  <dt>flushing output</dt>
+  <dd>如果你希望 print()
+      的時候每個字元都要送到你指定的裝置去，那你應自動刷新文件句柄。可以使用
+      <i>select()</i> 和 <span class="Li">$⎪</span>
+      變量控制自動刷新，參見
+      perlvar 中的 &#34;$⎪&#34; 和 perlfunc
+      中的 &#34;select&#34;，或 perlfaq5, ``How do I
+      flush/unbuffer an output filehandle? Why must I do this?&#39;&#39;):
+    <p class="Pp"></p>
+    <pre>    $oldh = select(DEV);
+    $⎪ = 1;
+    select($oldh);
+    </pre>
+    <p class="Pp">你也可能看到不使用額外的暫存變數的寫法，例如：</p>
+    <p class="Pp"></p>
+    <pre>    select((select(DEV), $⎪ = 1)[0]);
+    </pre>
+    <p class="Pp">Or if you don&#39;t mind pulling in a few thousand lines of code
+        just because you&#39;re afraid of a little $⎪ variable:</p>
+    <p class="Pp"></p>
+    <pre>    use IO::Handle;
+    DEV-&gt;autoflush(1);
+    </pre>
+    <p class="Pp">As mentioned in the previous item, this still doesn&#39;t work
+        when using socket I/O between Unix and Macintosh. You&#39;ll need to hard
+        code your line terminators, in that case.</p>
+  </dd>
+  <dt>non-blocking input</dt>
+  <dd>如果你正在做一個阻塞的
+      read() 或 sysread()
+      動作，則你需要安排一個鬧
+      鈴把手或提供一個逾時設定（參看
+      alarm）。如果你是用非阻擋式的
+      開檔，那麼就要配合非阻擋性的讀取，也就是說得用到4
+      個參數的 select() 來確
+      定此裝置的 輸出／入
+      是否已準備好了（參考
+      perlfunc 中的 select ）。</dd>
+</dl>
+<p class="Pp">While trying to read from his caller-id box, the notorious Jamie
+    Zawinski &lt;jwz@netscape.com&gt;, after much gnashing of teeth and fighting
+    with sysread, sysopen, POSIX&#39;s tcgetattr business, and various other
+    functions that go bump in the night, finally came up with this:</p>
+<p class="Pp"></p>
+<pre>    sub open_modem {
+        use IPC::Open2;
+        my $stty = `/bin/stty -g`;
+        open2( \*MODEM_IN, \*MODEM_OUT, &#34;cu -l$modem_device -s2400 2&gt;&amp;1&#34;);
+        # starting cu hoses /dev/tty&#39;s stty settings, even when it has
+        # been opened on a pipe...
+        system(&#34;/bin/stty $stty&#34;);
+        $_ = &lt;MODEM_IN&gt;;
+        chomp;
+        if ( !m/^Connected/ ) {
+            print STDERR &#34;$0: cu printed `$_&#39; instead of `Connected&#39;\n&#34;;
+        }
+    }
+</pre>
+<br/>
+<p class="Pp"><b>如何解碼加密的口令文件？</b></p>
+<p class="Pp">花大把大把的錢去買破解專用的硬體，這會讓你成爲焦點話題。</p>
+<p class="Pp">說正經的，如果是碰到
+    Unix 密碼檔的話就不行 - Unix
+    密碼系統用的是單向的加
+    密函數。像 Crack
+    之類的程式可以暴力地（並聰明地）試着猜出密碼，但無法
+    （也不能）保證速戰速決。</p>
+<p class="Pp">如果你耽心的是使用者選取不良的密碼，你應該在使用者換密碼時主動審覈（例如說修改
+    <a href="../../buster/passwd/passwd.1.zh_CN.html">passwd(1)</a>
+    程式加入這個功能）。
+  <br/>
+</p>
+<p class="Pp"><b>如何在後臺開啓進程？</b></p>
+<p class="Pp">Several modules can start other processes that do not block your
+    Perl program. You can use IPC::Open3, Parallel::Jobs, IPC::Run, and some of
+    the POE modules. See CPAN for more details.</p>
+<p class="Pp">你可以使用：</p>
+<p class="Pp"></p>
+<pre>    system(&#34;cmd &amp;&#34;)
+</pre>
+<p class="Pp">或是用 fork，像 perlfunc
+    中的 fork 裏寫的（在 perlipc
+    裏有更進一步的
+    範例）。如果你在 Unix
+    類的系統上的話，請注意以下幾件事情：</p>
+<dl class="Bl-tag">
+  <dt>STDIN, STDOUT, and STDERR are shared</dt>
+  <dd>主程序和背景程序（即「子」程序）共用同一個
+      STDIN、STDOUT 和 STDERR 檔案
+      把手。如果兩個程序想同時去讀、寫同一個檔案把手，就可能有怪事會發生。你也
+      許應該替子程序關閉或重新開啓這些把手。你可以用開啓一個管道
+      (pipe) 的方法
+      避免這些問題（參看
+      open）但是在某些系統上這樣做會強迫子程序
+      必須比父程序早死。</dd>
+  <dt>信號</dt>
+  <dd>SIGCHLD、可能還有 SIGPIPE
+      這兩個訊號要抓到。當背景程序執行完成後就會送出
+      SIGCHLD
+      訊號。而當你寫入一個子程序已經關閉的檔案把手時就會收到
+      SIGPIPE
+      訊號（一個未抓住的
+      SIGPIPE
+      可能導致你的程式無聲無息地死去）。用
+      system(&#34;cmd&amp;&#34;)
+      的話不會有這樣的問題。</dd>
+  <dt>殭屍進程</dt>
+  <dd>你得做準備，在子程序結束時「收成」它：
+    <p class="Pp"></p>
+    <pre>    $SIG{CHLD} = sub { wait };
+    </pre>
+    <p class="Pp"></p>
+    <pre>    $SIG{CHLD} = &#39;IGNORE&#39;;
+    </pre>
+    <p class="Pp">You can also use a double fork. You immediately <i>wait()</i>
+        for your first child, and the init daemon will <i>wait()</i> for your
+        grandchild once it exits.</p>
+    <p class="Pp"></p>
+    <pre>        unless ($pid = fork) {
+                unless (fork) {
+            exec &#34;what you really wanna do&#34;;
+            die &#34;exec failed!&#34;;
+                }
+        exit 0;
+        }
+    waitpid($pid,0);
+    </pre>
+    <p class="Pp">在 Signals
+        有範例程式教你怎麼做。用
+        system(&#34;prog &amp;&#34;) 的
+        話不會有僵
+        程序的問題。
+      <br/>
+    </p>
+  </dd>
+</dl>
+<p class="Pp"><b>如何截獲控制字符/信號？</b></p>
+<p class="Pp">你並不能真的
+    ``捕捉&#39;&#39;
+    一個控制字元。而是控制字元產生一個訊號讓你捕捉。關於訊號的資料可以在
+    Signals
+    以及駱駝書第六章裏找到。</p>
+<p class="Pp">要小心的是，大多 C
+    程式庫無法重新進入
+    [re-entrant]。因此當你要嘗試着在一
+    個處理器裏做 print()
+    動作，而這個處理器是由另一個stdio
+    的動作所叫出來的
+    話，你的內部結構可能會處於失調狀態，而程式可能會丟出記憶核心
+    (dump core)。
+    有的時候你可以用 syswrite()
+    取代 print()
+    以避免這個狀況。</p>
+<p class="Pp">除非你極爲小心，否則在一個訊號處理器中，唯一安全可做的是：設定一個變數後離開。而在第一個情況下，你在設定變數的時候應確定
+    malloc() 不會被叫出來
+    （譬如，設定一個已經有值的變數）。</p>
+<p class="Pp">例如：</p>
+<p class="Pp"></p>
+<pre>    $Interrupted = 0;   # 確定它有個值
+    $SIG{INT} = sub {
+        $Interrupted++;
+        syswrite(STDERR, &#34;ouch\n&#34;, 5);
+    }
+</pre>
+<p class="Pp">然而，因爲系統呼叫會自己重新啓動，你將會發現如果你用的是「慢的」呼叫，像
+    &lt; FH&gt;、read()、connect() 或
+    wait()，那麼將它們停下的唯一辦法是使
+    用「跳遠」的方式跳出來；也就是產生一個例外訊號。參看在
+    Signals 裏對阻擋性 flock()
+    的逾時處理器的說明，或駱駝書第六
+    章。
+  <br/>
+</p>
+<p class="Pp"><b>在 Unix
+    系統中如何修改 shadow
+    文件？</b></p>
+<p class="Pp">如果你的 perl
+    安裝正確的話，在 perlfunc
+    裏描述的 getpw*()
+    函數應該就能夠讀取隱式密碼檔了（只有讀取權）。要更動該檔案內容，做一個新的密碼檔（這個檔案的格式因系統而異，請看
+    <a href="../../buster/passwd/passwd.5.zh_TW.html">passwd(5)</a> ）然後用
+    pwd_mkdb(8)（參考
+    pwd_mkdb(5)）來安裝新的密碼檔。
+  <br/>
+</p>
+<p class="Pp"><b>如何設置時間和日期？</b></p>
+<p class="Pp">假設你有足夠的權限，你應該可以用
+    <a href="../../buster/manpages-zh/date.1.zh_TW.html">date(1)</a>
+    程式來設定系統的時間與日期。
+    （但沒有針對個別程序修改時間日期的方法）這機制在
+    Unix、MS-DOS、Windows 和 NT
+    下都能用；VMS 下則要用
+    set time 。</p>
+<p class="Pp">然而，如果你只是要更動你的時區，只消設定一個環境變數即可：</p>
+<p class="Pp"></p>
+<pre>    $ENV{TZ} = &#34;MST7MDT&#34;;                  # unixish
+    $ENV{&#39;SYS$TIMEZONE_DIFFERENTIAL&#39;}=&#34;-5&#34; # vms
+    system &#34;trn comp.lang.perl.misc&#34;;
+</pre>
+<br/>
+<p class="Pp"><b>如何 sleep() 或 alarm()
+    少於一秒的時間?</b></p>
+<p class="Pp">如果你要比 sleep()
+    所提供的最小單位一秒更精細的話，最簡單的方法就是用
+    select 裏面寫的 select()
+    函數。試一試 Time::HiRes 和
+    BSD::Itimer 模塊 (可以從 CPAN
+    下載，從 Perl 5.8 開始 Time::HiRes
+    成爲標準發行的一部分).
+  <br/>
+</p>
+<p class="Pp"><b>如何測度少於一秒的時間？</b></p>
+<p class="Pp">一般來說，你可能做不到。
+    Time::HiRes 模組（CPAN 有，從 Perl 5.8
+    開始成爲標準發行的一部分）在某些系統上能達到此
+    功能。</p>
+<p class="Pp">總之，你可能做不到。但是如果你的
+    Perl 支援 syscall()
+    函數並支援類似 <a href="../../buster/manpages-dev/gettimeofday.2.en.html">gettimeofday(2)</a>
+    的系統呼叫，你也許可以這麼做：</p>
+<p class="Pp"></p>
+<pre>    require &#39;sys/syscall.ph&#39;;
+</pre>
+<p class="Pp"></p>
+<pre>    $TIMEVAL_T = &#34;LL&#34;;
+</pre>
+<p class="Pp"></p>
+<pre>    $done = $start = pack($TIMEVAL_T, ());
+</pre>
+<p class="Pp"></p>
+<pre>    syscall(&amp;SYS_gettimeofday, $start, 0) != -1
+               or die &#34;gettimeofday: $!&#34;;
+</pre>
+<p class="Pp"></p>
+<pre>       ##########################
+       # DO YOUR OPERATION HERE #
+       ##########################
+</pre>
+<p class="Pp"></p>
+<pre>    syscall( &amp;SYS_gettimeofday, $done, 0) != -1
+           or die &#34;gettimeofday: $!&#34;;
+</pre>
+<p class="Pp"></p>
+<pre>    @start = unpack($TIMEVAL_T, $start);
+    @done  = unpack($TIMEVAL_T, $done);
+</pre>
+<p class="Pp"></p>
+<pre>    # fix microseconds
+    for ($done[1], $start[1]) { $_ /= 1_000_000 }
+</pre>
+<p class="Pp"></p>
+<pre>    $delta_time = sprintf &#34;%.4f&#34;, ($done[0]  + $done[1]  )
+                                            -
+                                 ($start[0] + $start[1] );
+</pre>
+<br/>
+<p class="Pp"><b>如何做 atexit()或
+    setjmp()/longjmp()的動作？（異常處理）</b></p>
+<p class="Pp">第五版的 Perl 增加了 END
+    區塊，可以用來模擬
+    atexit()的效果。當程式或執行
+    緒(thread)
+    終了時就會去呼叫該包裝的
+    END 區塊（參考 perlmod
+    文件）。</p>
+<p class="Pp">For example, you can use this to make sure your filter program
+    managed to finish its output without filling up the disk:</p>
+<p class="Pp"></p>
+<pre>    END {
+        close(STDOUT) ⎪⎪ die &#34;stdout close failed: $!&#34;;
+    }
+</pre>
+<p class="Pp">如果當程式被沒有抓到的訊號終結了，END
+    區塊就不會被呼叫到，所以當你用
+    END 時應再加上</p>
+<p class="Pp"></p>
+<pre>        use sigtrap qw(die normal-signals);
+</pre>
+<p class="Pp">Perl
+    的例外處理機制就是它的
+    eval() 運算子。你可以把
+    eval() 當做 setjmp 而die()當做 longjmp
+    來使用。更詳細的說明請參考
+    Signals 和
+    Camel書第六章裏關於訊號的那段，尤其是描述有關
+    flock()
+    的逾時處理器那段。</p>
+<p class="Pp">如果你只對例外處理的部分有興趣，試試
+    exceptions.pl
+    程式庫（包含在標準
+    perl裏）。</p>
+<p class="Pp">如果你要的是 atexit()
+    語法（以及
+    rmexit()），試試 CPAN 裏的 AtExit
+    模組。
+  <br/>
+</p>
+<p class="Pp"><b>爲何我的
+    sockets程式在 System V
+    (Solaris)系統下不能用？「不支持的協議」這個錯誤訊息又是什麼意思？</b></p>
+<p class="Pp">有些 Sys-V
+    根底的系統，特別像
+    Solaris
+    2.X，已重新將一些標準的
+    socket常數
+    定義過了。由於這些常數在各種架構下都是定值，所以在
+    perl程式碼中常被人寫
+    死在裏面。處理此問題的適當方式
+    是用 ``use Socket&#39;&#39;
+    來取得正確的值。</p>
+<p class="Pp">須注意儘管 SunOS 和 Solaris
+    在二進位執行檔上相容，這些值是相異的。自己去
+    想爲什麼吧。
+  <br/>
+</p>
+<p class="Pp"><b>如何從
+    Perl裏呼叫系統中獨特的
+    C函數？</b></p>
+<p class="Pp">通常是寫個外部的模組來處理
+    -
+    參看「我要如何學到將
+    C 與 Perl 連結在一起？ [h2xs,
+    xsubpp]」
+    這問題的答案。然而，如果此函數是個系統呼叫，而你的系統
+    有支援
+    syscall()，那麼可以用 syscall
+    函數（說明在 perlfunc
+    裏）。</p>
+<p class="Pp">切記先查查看你的
+    perl
+    版本中所附的模組以及
+    CPAN
+    裏的模組，因爲也許某人已
+    經寫了個這樣的模組。
+    On Windows, try Win32::API. On Macs, try Mac::Carbon. If no module has an
+    interface to the C function, you can inline a bit of C in your Perl source
+    with Inline::C.
+  <br/>
+</p>
+<p class="Pp"><b>在哪裏可以找引入檔來做
+    ioctl()或 syscall()？</b></p>
+<p class="Pp">以前這些檔案會由標準
+    perl 發行中所附的 h2ph
+    工具來產生。這個程式將
+    C 標 頭檔案裏的
+    <a href="../../buster/manpages-ja/cpp.1.ja.html">cpp(1)</a>指令轉換成內含副程式定義的檔案，像
+    &amp;SYS_getitimer，你可
+    以把它當做函數的參數。這樣做並不怎麼完美，但通常可達成任務。簡單的像
+    errno.h 、syscall.h 和socket.h
+    這些檔案都沒問題，但像
+    ioctl.h
+    這種較難的檔案總是需要人工編輯。以下是安裝
+    *.ph 檔案的步驟：</p>
+<p class="Pp"></p>
+<pre>    1.  成爲超級用戶
+    2.  cd /usr/include
+    3.  h2ph *.h */*.h
+</pre>
+<p class="Pp">如果你的系統支援動態載入，那麼爲了可移植性、而且合理的做法是使用
+    h2xs（也 是
+    perl的標準配備）。這個工具將
+    C 標頭檔案轉換成 Perl
+    的衍伸檔案 (extensions)。 h2xs
+    的入門要看 perlxstut 。</p>
+<p class="Pp">如果你的系統不支援動態載入，你可能仍應使用
+    h2xs。參看 perlxstut 和 MakeMaker
+    （簡單來說，就是用
+    make perl 、而非 make 來重
+    建一份使用新的靜態連結的
+    perl）。
+  <br/>
+</p>
+<p class="Pp"><b>爲何 setuid
+    perl程式會抱怨關於系統核心的問題？</b></p>
+<p class="Pp">有些作業系統的核心有臭蟲使得
+    setuid
+    程式在先天上就不安全。Perl提供你一些方法（在
+    perlsec
+    裏有寫）可跳過這些系統的缺陷。
+  <br/>
+</p>
+<p class="Pp"><b>如何打開對某程式既輸入又輸出的管道
+    (pipe)？</b></p>
+<p class="Pp">IPC::Open2 模組（perl
+    的標準配件）是個好用的方法，它在內部是藉着pipe()、
+    fork() 和 exec()
+    來完成此工作。不過切記要讀它文件裏關於鎖死的警告
+    ( 參見 IPC::Open2 )。參見 perlipc
+    中的 &#34;Bidirectional Communication with Another
+    Process&#34; 和 &#34;Bidirectional Communication with
+  Yourself&#34;</p>
+<p class="Pp">You may also use the IPC::Open3 module (part of the standard perl
+    distribution), but be warned that it has a different order of arguments from
+    IPC::Open2 (see IPC::Open3).
+  <br/>
+</p>
+<p class="Pp"><b>爲何用
+    system()卻得不到一個指令的輸出呢？</b></p>
+<p class="Pp">你把 system() 和反向引號
+    (``) 的用法搞混了。 system()
+    會執行一個指令然後
+    傳回指令結束時的狀況資訊（以一個
+    16
+    進位值表示：低位元是程序中止所收到的
+    訊號，高位元纔是真正離開時的傳回值）。反向引號
+    (``)
+    執行一個指令並且把它
+    所送出的東西送到
+    STDOUT。</p>
+<p class="Pp"></p>
+<pre>    $exit_status   = system(&#34;mail-users&#34;);
+    $output_string = `ls`;
+</pre>
+<br/>
+<p class="Pp"><b>如何捕捉外部指令的
+    STDERR？</b></p>
+<p class="Pp">有叄種基本方式執行外部指令：</p>
+<p class="Pp"></p>
+<pre>    system $cmd;                # 使用 system()
+    $output = `$cmd`;           # 使用 backticks (``)
+    open (PIPE, &#34;cmd ⎪&#34;);       # 使用 open()
+</pre>
+<p class="Pp">在 system() 下，STDOUT 和 STDERR
+    都會輸出到和 script
+    本身的 STDOUT,
+    STDERR相同的出處，除非指令本身將它們導向它處。反向引號和
+    open() 則 只 讀取指令的 STDOUT
+    部份。</p>
+<p class="Pp">你也可以使用 IPC::Open3
+    模組. Benjamin Goldberg provides some sample code:</p>
+<p class="Pp">To capture a program&#39;s STDOUT, but discard its STDERR:</p>
+<p class="Pp"></p>
+<pre>    use IPC::Open3;
+    use File::Spec;
+    use Symbol qw(gensym);
+    open(NULL, &#34;&gt;&#34;, File::Spec-&gt;devnull);
+    my $pid = open3(gensym, \*PH, &#34;&gt;&amp;NULL&#34;, &#34;cmd&#34;);
+    while( &lt;PH&gt; ) { }
+    waitpid($pid, 0);
+</pre>
+<p class="Pp">To capture a program&#39;s STDERR, but discard its STDOUT:</p>
+<p class="Pp"></p>
+<pre>    use IPC::Open3;
+    use File::Spec;
+    use Symbol qw(gensym);
+    open(NULL, &#34;&gt;&#34;, File::Spec-&gt;devnull);
+    my $pid = open3(gensym, &#34;&gt;&amp;NULL&#34;, \*PH, &#34;cmd&#34;);
+    while( &lt;PH&gt; ) { }
+    waitpid($pid, 0);
+</pre>
+<p class="Pp">To capture a program&#39;s STDERR, and let its STDOUT go to our own
+    STDERR:</p>
+<p class="Pp"></p>
+<pre>    use IPC::Open3;
+    use Symbol qw(gensym);
+    my $pid = open3(gensym, &#34;&gt;&amp;STDERR&#34;, \*PH, &#34;cmd&#34;);
+    while( &lt;PH&gt; ) { }
+    waitpid($pid, 0);
+</pre>
+<p class="Pp">To read both a command&#39;s STDOUT and its STDERR separately, you can
+    redirect them to temp files, let the command run, then read the temp
+  files:</p>
+<p class="Pp"></p>
+<pre>    use IPC::Open3;
+    use Symbol qw(gensym);
+    use IO::File;
+    local *CATCHOUT = IO::File-&gt;new_tempfile;
+    local *CATCHERR = IO::File-&gt;new_tempfile;
+    my $pid = open3(gensym, &#34;&gt;&amp;CATCHOUT&#34;, &#34;&gt;&amp;CATCHERR&#34;, &#34;cmd&#34;);
+    waitpid($pid, 0);
+    seek $_, 0, 0 for \*CATCHOUT, \*CATCHERR;
+    while( &lt;CATCHOUT&gt; ) {}
+    while( &lt;CATCHERR&gt; ) {}
+</pre>
+<p class="Pp">But there&#39;s no real need for *both* to be tempfiles... the
+    following should work just as well, without deadlocking:</p>
+<p class="Pp"></p>
+<pre>    use IPC::Open3;
+    use Symbol qw(gensym);
+    use IO::File;
+    local *CATCHERR = IO::File-&gt;new_tempfile;
+    my $pid = open3(gensym, \*CATCHOUT, &#34;&gt;&amp;CATCHERR&#34;, &#34;cmd&#34;);
+    while( &lt;CATCHOUT&gt; ) {}
+    waitpid($pid, 0);
+    seek CATCHERR, 0, 0;
+    while( &lt;CATCHERR&gt; ) {}
+</pre>
+<p class="Pp">And it&#39;ll be faster, too, since we can begin processing the
+    program&#39;s stdout immediately, rather than waiting for the program to
+  finish.</p>
+<p class="Pp">在上述方法中，你可以在呼叫前更改文件描述符
+    (file descriptor) 名稱：</p>
+<p class="Pp"></p>
+<pre>    open(STDOUT, &#34;&gt;logfile&#34;);
+    system(&#34;ls&#34;);
+</pre>
+<p class="Pp">或者使用 Bourne shell
+    的文件描述符重導功能：</p>
+<p class="Pp"></p>
+<pre>    $output = `$cmd 2&gt;some_file`;
+    open (PIPE, &#34;cmd 2&gt;some_file ⎪&#34;);
+</pre>
+<p class="Pp">也可以用檔案描述元重導功能將
+    STDERR 複製爲 STDOUT：</p>
+<p class="Pp"></p>
+<pre>    $output = `$cmd 2&gt;&amp;1`;
+    open (PIPE, &#34;cmd 2&gt;&amp;1 ⎪&#34;);
+</pre>
+<p class="Pp">注意你 不能 光是將
+    STDERR 開成 STDOUT
+    的複製，而不呼叫
+    shell來做這個
+    重導的工作。這樣是不行的：</p>
+<p class="Pp"></p>
+<pre>    open(STDERR, &#34;&gt;&amp;STDOUT&#34;);
+    $alloutput = `cmd args`;  # stderr still escapes
+</pre>
+<p class="Pp">失敗的原因是，open()
+    讓 STDERR 在呼叫 open() 時往
+    STDOUT的方向走。然後反
+    向引號讓
+    STDOUT的內容跑到一個字串變數裏，但是沒有改變
+    STDERR 的去向（它
+    仍然往舊的
+    STDOUT那裏跑）。</p>
+<p class="Pp">注意，在反向引號裏你
+    必須 使用 Bourne shell (sh(1))
+    重導的語法而非
+    <a href="../../buster/tcsh/csh.1.en.html">csh(1)</a>的！至於爲何 Perl 的
+    system()、反向引號和開管道都用
+    Bourne
+    shell語法的原因，可在下址找到：&#34;Far
+    More Than You Ever Wanted To Know&#34;，
+    <a href="../../misc/olddoc/FMTEYEWTK.tgz">../../misc/olddoc/FMTEYEWTK.tgz</a> .
+    要同時捕捉一個命令的
+    STDERR 和 STDOUT:</p>
+<p class="Pp"></p>
+<pre>    $output = `cmd 2&gt;&amp;1`;                       # either with backticks
+    $pid = open(PH, &#34;cmd 2&gt;&amp;1 ⎪&#34;);              # or with an open pipe
+    while (&lt;PH&gt;) { }                            #    plus a read
+</pre>
+<p class="Pp">To capture a command&#39;s STDOUT but discard its STDERR:</p>
+<p class="Pp"></p>
+<pre>    $output = `cmd 2&gt;/dev/null`;                # either with backticks
+    $pid = open(PH, &#34;cmd 2&gt;/dev/null ⎪&#34;);       # or with an open pipe
+    while (&lt;PH&gt;) { }                            #    plus a read
+</pre>
+<p class="Pp">To capture a command&#39;s STDERR but discard its STDOUT:</p>
+<p class="Pp"></p>
+<pre>    $output = `cmd 2&gt;&amp;1 1&gt;/dev/null`;           # either with backticks
+    $pid = open(PH, &#34;cmd 2&gt;&amp;1 1&gt;/dev/null ⎪&#34;);  # or with an open pipe
+    while (&lt;PH&gt;) { }                            #    plus a read
+</pre>
+<p class="Pp">To exchange a command&#39;s STDOUT and STDERR in order to capture the
+    STDERR but leave its STDOUT to come out our old STDERR:</p>
+<p class="Pp"></p>
+<pre>    $output = `cmd 3&gt;&amp;1 1&gt;&amp;2 2&gt;&amp;3 3&gt;&amp;-`;        # either with backticks
+    $pid = open(PH, &#34;cmd 3&gt;&amp;1 1&gt;&amp;2 2&gt;&amp;3 3&gt;&amp;-⎪&#34;);# or with an open pipe
+    while (&lt;PH&gt;) { }                            #    plus a read
+</pre>
+<p class="Pp">To read both a command&#39;s STDOUT and its STDERR separately, it&#39;s
+    easiest and safest to redirect them separately to files, and then read from
+    those files when the program is done:</p>
+<p class="Pp"></p>
+<pre>    system(&#34;program args 1&gt;/tmp/program.stdout 2&gt;/tmp/program.stderr&#34;);
+</pre>
+<p class="Pp">Ordering is important in all these examples. That&#39;s because the
+    shell processes file descriptor redirections in strictly left to right
+    order.</p>
+<p class="Pp"></p>
+<pre>    system(&#34;prog args 1&gt;tmpfile 2&gt;&amp;1&#34;);
+    system(&#34;prog args 2&gt;&amp;1 1&gt;tmpfile&#34;);
+</pre>
+<p class="Pp">The first command sends both standard out and standard error to
+    the temporary file. The second command sends only the old standard output
+    there, and the old standard error shows up on the old standard out.
+  <br/>
+</p>
+<p class="Pp"><b>爲何當管道開啓失敗時
+    open()不會傳回錯誤訊息？</b></p>
+<p class="Pp">If the second argument to a piped <i>open()</i> contains shell
+    metacharacters, perl <i>fork()</i>s, then <i>exec()</i>s a shell to decode
+    the metacharacters and eventually run the desired program. If the program
+    couldn&#39;t be run, it&#39;s the shell that gets the message, not Perl. All your
+    Perl program can find out is whether the shell itself could be successfully
+    started. You can still capture the shell&#39;s STDERR and check it for error
+    messages. See &#34;How can I capture STDERR from an external command?&#34;
+    elsewhere in this document, or use the IPC::Open3 module.</p>
+<p class="Pp">If there are no shell metacharacters in the argument of
+    <i>open()</i>, Perl runs the command directly, without using the shell, and
+    can correctly report whether the command started.
+  <br/>
+</p>
+<p class="Pp"><b>在忽略返回值的上下文裏使用反向引號有何不對？</b></p>
+<p class="Pp">嚴格說起來，沒啥不對。但從程式寫作嚴謹與否來說，這樣無法寫出較易維護的程式碼。Perl
+    有多種方法可以運行外部命令。反引號只是其中一個；它收集命令的輸出，在程序中加以應用。
+    <span class="Li">&#34;system&#34;</span>
+    函數是另一個，它不這樣做</p>
+<p class="Pp">Writing backticks in your program sends a clear message to the
+    readers of your code that you wanted to collect the output of the command.
+    Why send a clear message that isn&#39;t true?</p>
+<p class="Pp">再看看下列這一行：</p>
+<p class="Pp"></p>
+<pre>    `cat /etc/termcap`;
+</pre>
+<p class="Pp">你還沒有指定輸出，所以它會浪費記憶體（就那麼一下子)。另外你也忘了檢查
+    <span class="Li">$?</span>
+    看看程式是否正確的執行。即使你寫成</p>
+<p class="Pp"></p>
+<pre>    print `cat /etc/termcap`;
+</pre>
+<p class="Pp">但在大部份情況下，這本來可以、而且也應該寫成</p>
+<p class="Pp"></p>
+<pre>    system(&#34;cat /etc/termcap&#34;) == 0
+        or die &#34;cat program failed!&#34;;
+</pre>
+<p class="Pp">這樣可快速地得到輸出（一產生出來就會得到，不用等到最後），並且檢查傳回值。</p>
+<p class="Pp"><i>system()</i>
+    同時具有直接決定是否先做
+    shell 萬用字元
+    (wildcard)處理的功能，
+    反向引號就不行。
+  <br/>
+</p>
+<p class="Pp"><b>如何不經過
+    shell處理來呼叫反向引號？</b></p>
+<p class="Pp">這需要些技巧。不能寫成這樣：</p>
+<p class="Pp"></p>
+<pre>    @ok = `grep @opts &#39;$search_string&#39; @filenames`;
+</pre>
+<p class="Pp">在 Perl 5.8.0
+    中，你可以使用有多個參數的
+    <i>open()</i>。類似 <i>system()</i> 和 <i>exec()</i>
+    的列表形式，不會進行
+    shell 轉義。</p>
+<p class="Pp"></p>
+<pre>   open( GREP, &#34;-⎪&#34;, &#39;grep&#39;, @opts, $search_string, @filenames );
+   chomp(@ok = &lt;GREP&gt;);
+   close GREP;
+</pre>
+<p class="Pp">也可以這樣：</p>
+<p class="Pp"></p>
+<pre>    my @ok = ();
+    if (open(GREP, &#34;-⎪&#34;)) {
+        while (&lt;GREP&gt;) {
+            chomp;
+            push(@ok, $_);
+        }
+        close GREP;
+    } else {
+        exec &#39;grep&#39;, @opts, $search_string, @filenames;
+    }
+</pre>
+<p class="Pp">一如 system()，當你 exec()
+    一個序列時不會有 shell
+    解譯的情況發生。更多示例可以從
+    perlipc 的 &#34;Safe Pipe Opens&#34;
+    中找到。</p>
+<p class="Pp">Note that if you&#39;re use Microsoft, no solution to this vexing
+    issue is even possible. Even if Perl were to emulate <i>fork()</i>, you&#39;d
+    still be stuck, because Microsoft does not have a argc/argv-style API.
+  <br/>
+</p>
+<p class="Pp"><b>爲何給了
+    EOF（Unix上是 ^D，MS-DOS上是
+    ^Z）後我的程式就不能從
+    STDIN 讀取東西了呢？</b></p>
+<p class="Pp">因爲某些 stdio 的 set error 和
+    eof
+    旗標需要清除。你可以用
+    POSIX 模組裏定
+    義的clearerr()。這是在技術上正確的解決之道。還有一些較不保險的方法：</p>
+<dl class="Bl-tag">
+  <dt>1</dt>
+  <dd>試着保存搜尋指標然後去找它，例如：
+    <p class="Pp"></p>
+    <pre>    $where = tell(LOG);
+    seek(LOG, $where, 0);
+    </pre>
+  </dd>
+  <dt>2</dt>
+  <dd>如果那樣行不通，試着去
+      seek()
+      檔案的另一部份然後再找回來。</dd>
+  <dt>3</dt>
+  <dd>如果還是行不通，試着
+      seek()
+      檔案另一個相異的的部份，讀點東西，再回去找。</dd>
+  <dt>4</dt>
+  <dd>如果依然不行，放棄使用
+      stdio 改用 sysread。
+    <br/>
+  </dd>
+</dl>
+<p class="Pp"><b>如何把 shell程式轉成
+    perl？</b></p>
+<p class="Pp">學習 Perl
+    然後重寫。說真的，沒有簡單的轉換方式。用
+    shell 做起來很笨的工
+    作可以用 Perl
+    很輕鬆的做到，而就是這些麻煩之處使得
+    shell-&gt;perl 轉換程式
+    非常不可能寫得出來。在重新撰寫程式的過程裏，你會認清自己真正要做的工作爲
+    何，也希望能夠跳脫
+    shell 的管線資料流機制
+    [pipeline datastream paradigm]，
+    這東西雖對某些事情很方便，但也常造成低效率。
+  <br/>
+</p>
+<p class="Pp"><b>perl能處理 telnet或 ftp
+    會話嗎？</b></p>
+<p class="Pp">試試 Net::FTP、TCP::Client 和 NET::Telnet
+    模組（CPAN 有）。
+    <a href="../../CPAN/scripts/netstuff/telnet.emul.shar">../../CPAN/scripts/netstuff/telnet.emul.shar</a>
+    也有助於模擬 telnet
+    協定，但是 Net::Telnet
+    可能較容易使用。</p>
+<p class="Pp">如果你所要做的只是假裝
+    telnet 但又不要起始 telnet
+    時的溝通程序，那麼以下這個標準的雙程序方式就可以滿足你的需要了：</p>
+<p class="Pp"></p>
+<pre>    use IO::Socket;             # new in 5.004
+    $handle = IO::Socket::INET-&gt;new(&#39;www.perl.com:80&#39;)
+            ⎪⎪ die &#34;can&#39;t connect to port 80 on www.perl.com: $!&#34;;
+    $handle-&gt;autoflush(1);
+    if (fork()) {               # XXX: undef means failure
+        select($handle);
+        print while &lt;STDIN&gt;;    # everything from stdin to socket
+    } else {
+        print while &lt;$handle&gt;;  # everything from socket to stdout
+    }
+    close $handle;
+    exit;
+</pre>
+<br/>
+<p class="Pp"><b>如何在 Perl裏達到
+    Expect的功能？</b></p>
+<p class="Pp">很久很久以前，有個叫做
+    chat2.pl 的程式庫（perl
+    標準配備之一），但一直沒
+    真正完工。如果遇到它的話，不要去用它。現在，你的最佳選擇就是從
+    CPAN 來的 Expect
+    模塊，同時它需要 CPAN
+    的另兩個模塊， IO::Pty 和
+    IO::Stty.
+  <br/>
+</p>
+<p class="Pp"><b>有沒有可能將
+    perl的指令列隱藏起來，以躲避像
+    </b></p>
+<p class="Pp">首先要注意的是，如果你的目的是爲了安全（例如避免人們偷看到密碼），那你應該重寫你的程式，把重要的資訊從參數中剔除。光是隱藏起來不會讓你的程式變得完全安全。</p>
+<p class="Pp">如要真的把看得見的指令列改掉，你可以設定
+    $0 這個變數值，如同 perlvar
+    裏寫的。但這方法並非各種作業系統都適用。像
+    sendmail之類的背景程式 (daemons)
+    就將它們的狀態放在那兒：</p>
+<p class="Pp"></p>
+<pre>    $0 = &#34;orcus [accepting connections]&#34;;
+</pre>
+<br/>
+<p class="Pp"><b>我在 perl script裏
+    {更動目錄，更改我的使用環境}。爲何這些改變在程式執行完後就消失了呢？如何讓我做的修改顯露出來？</b></p>
+<dl class="Bl-tag">
+  <dt>Unix</dt>
+  <dd>嚴格的說起來，這是做不到的－一個
+      script
+      的執行是從啓動它的
+      shell 生出一
+      個不同的程序來執行。這個程序的任何變動不會反映到它的父程序，只會反映到更
+      改之後它自己創造出來的子程序。有個
+      shell
+      魔術可以讓你藉着在
+      shell 裏 eval()你 script
+      的輸出來裝出這種效果，在
+      comp.unix.questions FAQ 裏有詳
+      細內容。
+    <br/>
+  </dd>
+</dl>
+<p class="Pp"><b>如何關閉一個程序的文件句柄而不用等它完成呢？</b></p>
+<p class="Pp">假設你的系統支援這種功能，那就只要送個適當的訊號給此程序（參看
+    kill）。通常是先送一個
+    TERM
+    訊號，等一下下，然後再送個
+    KILL 訊號去終結它。
+  <br/>
+</p>
+<p class="Pp"><b>如何 fork
+    一個守護進程？</b></p>
+<p class="Pp">如果你所指的是離線的程序（未與
+    tty
+    連線者），那下列的程序據說在大部份的
+    Unix系統都能用。非 Unix
+    系統的使用者應該檢查
+    Your_OS::Process 模組看看有
+    沒有其他的解決方案。</p>
+<ul class="Bl-bullet">
+  <li>打開 /dev/tty 然後對它用
+      TIOCNOTTY ioctl。請參考 <a href="../../buster/manpages/tty.4.en.html">tty(4)</a>
+      。更好的辦法，你可以只用
+      <i>POSIX::setsid()</i>
+      函數，從而不必擔心進程組。</li>
+  <li>把目錄換到 /</li>
+  <li>重開 STDIN、STDOUT 和 STDERR
+      使它們不會與舊的 tty
+      連接。</li>
+  <li>用下列方法把程式丟到後臺：
+    <p class="Pp"></p>
+    <pre>    fork &amp;&amp; exit;
+    </pre>
+  </li>
+</ul>
+<p class="Pp">The Proc::Daemon module, available from CPAN, provides a function
+    to perform these actions for you.
+  <br/>
+</p>
+<p class="Pp"><b>如何知道自己是否在交互地運行？</b></p>
+<p class="Pp">問得好。有的時候
+    <span class="Li">&#34;-t STDIN&#34;</span>N 和
+    <span class="Li">&#34;-t STDOUT&#34;</span>
+    可以提供線索，有時不行。</p>
+<p class="Pp"></p>
+<pre>    if (-t STDIN &amp;&amp; -t STDOUT) {
+        print &#34;Now what? &#34;;
+    }
+</pre>
+<p class="Pp">在 POSIX
+    系統中，你可以用以下方法測試你自己的程序羣組與現在控制你終端機
+    的是否相同：</p>
+<p class="Pp"></p>
+<pre>    use POSIX qw/getpgrp tcgetpgrp/;
+    open(TTY, &#34;/dev/tty&#34;) or die $!;
+    $tpgrp = tcgetpgrp(fileno(*TTY));
+    $pgrp = getpgrp();
+    if ($tpgrp == $pgrp) {
+        print &#34;foreground\n&#34;;
+    } else {
+        print &#34;background\n&#34;;
+    }
+</pre>
+<br/>
+<p class="Pp"><b>如何爲緩慢的事件設置超時？</b></p>
+<p class="Pp">如同 Signals 和 Camel
+    書第六章裏所描述的，用
+    alarm() 函數，
+    或許再配合上一個訊號處理器。你也可以改用
+    CPAN 裏更具彈性的 Sys::AlarmCall
+    模組來做。</p>
+<p class="Pp">The <i>alarm()</i> function is not implemented on all versions of
+    Windows. Check the documentation for your specific version of Perl.
+  <br/>
+</p>
+<p class="Pp"><b>如何設置 CPU 限額?</b></p>
+<p class="Pp">使用 CPAN 裏的 BSD::Resource
+    模組。
+  <br/>
+</p>
+<p class="Pp"><b>如何避免在 Unix
+    系統中產生殭屍進程？</b></p>
+<p class="Pp">使用 Signals 裏面叫 reaper
+    的程式碼，在接到 SIGCHLD
+    時會呼 叫wait()，或是用
+    perlfaq8 中的 &#34;How do I start a process in the
+    background?&#34; 裏面寫的雙 fork
+    技巧。
+  <br/>
+</p>
+<p class="Pp"><b>如何使用 SQL
+    數據庫?</b></p>
+<p class="Pp">The DBI module provides an abstract interface to most database
+    servers and types, including Oracle, DB2, Sybase, mysql, Postgresql, ODBC,
+    and flat files. The DBI module accesses each database type through a
+    database driver, or DBD. You can see a complete list of available drivers on
+    CPAN: <a href="../../modules/by-module/DBD/">../../modules/by-module/DBD/</a> . You can read more about
+    DBI on <a href="../..//dbi.perl.org</a> .</p>
+<p class="Pp">Other modules provide more specific access: Win32::ODBC, Alzabo,
+    iodbc, and others found on CPAN Search: <a href="../..//search.cpan.org</a> .
+  <br/>
+</p>
+<p class="Pp"><b>如何使 system() 在收到
+    control-C 時退出?</b></p>
+<p class="Pp">做不到。你需要摹仿
+    system() 呼叫（參看 perlipc
+    裏的範例程式），然後設計一個訊號處理器，讓它把
+    INT
+    訊號傳給子程序。或者可以檢測它：</p>
+<p class="Pp"></p>
+<pre>    $rc = system($cmd);
+    if ($rc &amp; 127) { die &#34;signal death&#34; }
+</pre>
+<br/>
+<p class="Pp"><b>如何無阻塞地打開一個文件？</b></p>
+<p class="Pp">如果你有幸使用到支援無阻塞讀的系統（大部份
+    Unix
+    般的系統都有支援），
+    你只需要用 Fcntl
+    模組裏的 O_NDELAY 或 O_NONBLOCK
+    旗標，配合 sysopen()：</p>
+<p class="Pp"></p>
+<pre>    use Fcntl;
+    sysopen(FH, &#34;/tmp/somefile&#34;, O_WRONLY⎪O_NDELAY⎪O_CREAT, 0644)
+        or die &#34;can&#39;t open /tmp/somefile: $!&#34;:
+</pre>
+<br/>
+<p class="Pp"><b>How do I install a module from CPAN?</b></p>
+<p class="Pp">最簡單的方法就是讓
+    CPAN
+    這個模組替你代勞。這個模組包含在
+    5.004及以後的版 本中。</p>
+<p class="Pp"></p>
+<pre>    $ perl -MCPAN -e shell
+</pre>
+<p class="Pp"></p>
+<pre>    cpan shell -- CPAN exploration and modules installation (v1.59_54)
+    ReadLine support enabled
+</pre>
+<p class="Pp"></p>
+<pre>    cpan&gt; install Some::Module
+</pre>
+<p class="Pp">如要手動安裝 CPAN
+    模組，或是任何按規矩發展的
+    CPAN模組，遵循以下步
+    驟：</p>
+<dl class="Bl-tag">
+  <dt>1</dt>
+  <dd>把源代碼解壓到臨時目錄</dd>
+  <dt>2</dt>
+  <dd>
+    <pre>    perl Makefile.PL
+    </pre>
+  </dd>
+  <dt>3</dt>
+  <dd>
+    <pre>    make
+    </pre>
+  </dd>
+  <dt>4</dt>
+  <dd>
+    <pre>    make test
+    </pre>
+  </dd>
+  <dt>5</dt>
+  <dd>
+    <pre>    make install
+    </pre>
+  </dd>
+</dl>
+<p class="Pp">如果你用的 perl
+    版本在編譯時沒有建入動態連結的功能，那你只消把第叄步
+    (make)換成 make perl
+    然後你就會得到一個新的
+    perl 執行檔，裏頭連
+    有你新加入的延伸。</p>
+<p class="Pp">在 ExtUtils::MakeMaker
+    裏面有更多關於建構模組的細節，並參考下一個問題，require
+    和 use
+    的區別是什麼？。
+  <br/>
+</p>
+<p class="Pp"><b>require 和 use
+    的區別是什麼？</b></p>
+<p class="Pp">Perl offers several different ways to include code from one file
+    into another. Here are the deltas between the various inclusion
+  constructs:</p>
+<p class="Pp"></p>
+<pre>    1)  do $file is like eval `cat $file`, except the former
+        1.1: searches @INC and updates %INC.
+        1.2: bequeaths an *unrelated* lexical scope on the eval&#39;ed code.
+</pre>
+<p class="Pp"></p>
+<pre>    2)  require $file is like do $file, except the former
+        2.1: checks for redundant loading, skipping already loaded files.
+        2.2: raises an exception on failure to find, compile, or execute $file.
+</pre>
+<p class="Pp"></p>
+<pre>    3)  require Module is like require &#34;Module.pm&#34;, except the former
+        3.1: translates each &#34;::&#34; into your system&#39;s directory separator.
+        3.2: primes the parser to disambiguate class Module as an indirect object.
+</pre>
+<p class="Pp"></p>
+<pre>    4)  use Module is like require Module, except the former
+        4.1: loads the module at compile time, not run-time.
+        4.2: imports symbols and semantics from that package to the current one.
+</pre>
+<p class="Pp">In general, you usually want
+    <span class="Li">&#34;use&#34;</span> and a proper Perl module.
+  <br/>
+</p>
+<p class="Pp"><b>如何設置我自己的模塊/庫路徑？</b></p>
+<p class="Pp">當你建構模組時，在產生
+    Makefiles 時使用 PREFIX 選項：</p>
+<p class="Pp"></p>
+<pre>    perl Makefile.PL PREFIX=/mydir/perl LIB=/mydir/perl/lib
+</pre>
+<p class="Pp">然後在執行用到此
+    模組／程式庫
+    的程式前先設好 PERL5LIB
+    環境變數（參考 perlrun
+    ），或是用</p>
+<p class="Pp"></p>
+<pre>    use lib &#39;/mydir/perl/lib&#39;;
+</pre>
+<p class="Pp">這樣與下面幾乎相同</p>
+<p class="Pp"></p>
+<pre>    BEGIN {
+        unshift(@INC, &#39;/mydir/perl/lib&#39;);
+    }
+</pre>
+<p class="Pp">但 lib
+    模塊檢測獨立於機器的子目錄。參見
+    Perl 的 lib
+    模塊來獲取詳細信息。
+  <br/>
+</p>
+<p class="Pp"><b>如何將我自己的程序的路徑加入到模塊/庫搜索路徑中？</b></p>
+<p class="Pp"></p>
+<pre>    use FindBin;
+    use lib &#34;$FindBin::Bin&#34;;
+    use your_own_modules;
+</pre>
+<br/>
+<p class="Pp"><b>如何在運行時將一個目錄加入到我的
+    include 路徑 (@INC) 中？</b></p>
+<p class="Pp">以下是我們建議更動引入路徑的方法：</p>
+<p class="Pp"></p>
+<pre>    環境變量 PERLLIB 
+    環境變量 PERL5LIB
+    perl -Idir 命令行標誌
+    use lib 編用，類似
+        use lib &#34;$ENV{HOME}/myown_perllib&#34;;
+</pre>
+<p class="Pp">後者特別有用，因爲它知道與機器相關的架構。lib.pm
+    機制模組是從 5.002 版開
+    始包含在 Perl 裏面的。
+  <br/>
+</p>
+<p class="Pp"><b>什麼是
+    socket.ph，從哪兒可以得到它？</b></p>
+<p class="Pp">It&#39;s a perl4-style file defining values for system networking
+    constants. Sometimes it is built using h2ph when Perl is installed, but
+    other times it is not. Modern programs <span class="Li">&#34;use
+    Socket;&#34;</span> instead.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="AUTHOR_AND_COPYRIGHT">AUTHOR AND COPYRIGHT<a class="anchor" href="#AUTHOR_AND_COPYRIGHT">¶</a></h1>
+Copyright (c) 1997-2003 Tom Christiansen and Nathan Torkington. All rights
+  reserved.
+<p class="Pp">This documentation is free; you can redistribute it and/or modify
+    it under the same terms as Perl itself.</p>
+<p class="Pp">Irrespective of its distribution, all code examples in this file
+    are hereby placed into the public domain. You are permitted and encouraged
+    to use this code in your own programs for fun or for profit as you see fit.
+    A simple comment in the code giving credit would be courteous but is not
+    required.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="譯者">譯者<a class="anchor" href="#%E8%AD%AF%E8%80%85">¶</a></h1>
+<b>陳彥銘，蕭百齡，兩隻老虎工作室</b>
+<br/>
+<p class="Pp"><b>跋</b></p>
+<p class="Pp">本頁面中文版由中文
+    man 手冊頁計劃提供。
+  <br/>
+  中文 man
+    手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-25</td>
+    <td class="foot-os">perl v5.8.3</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+perlfaq8.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-28T03:40:59Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"perlfaq8(7)\"}}]}"
+</script>

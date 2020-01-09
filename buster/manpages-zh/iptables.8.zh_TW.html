@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iptables(8) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/iptables/iptables.8.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-ja/iptables.8.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-zh/iptables.8.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/iptables.8.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="8">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; iptables(8)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/iptables.8">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/iptables.8.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD" title="總覽">總覽</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AA%AA%E6%98%8E" title="說明">說明</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#TARGETS" title="TARGETS">TARGETS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#TABLES" title="TABLES">TABLES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#OPTIONS" title="OPTIONS">OPTIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%B0%8D%E6%87%89%E7%9A%84%E6%93%B4%E5%B1%95" title="對應的擴展">對應的擴展</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#TARGET_EXTENSIONS" title="TARGET EXTENSIONS">TARGET EXTENSIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%A8%BA%E6%96%B7" title="診斷">診斷</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%87%AD%E8%9F%B2" title="臭蟲">臭蟲</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#COMPATIBILITY_WITH_IPCHAINS" title="COMPATIBILITY WITH IPCHAINS">COMPATIBILITY WITH IPCHAINS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B" title="參見">參見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85" title="作者">作者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/iptables.8.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/iptables.8.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/iptables.8.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/iptables/iptables.8.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/iptables.8.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/iptables.8.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/iptables.8.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">Iptables(8)</td>
+    <td class="head-vol">System Manager&#39;s Manual</td>
+    <td class="head-rtitle">Iptables(8)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+iptables - IP包過濾器管理
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽">總覽<a class="anchor" href="#%E7%B8%BD%E8%A6%BD">¶</a></h1>
+iptables -ADC 指定鏈的規則 [-A
+  添加 -D 刪除 -C 修改]
+<br/>
+iptables - RI
+<br/>
+iptables -D chain rule num[option]
+<br/>
+iptables -LFZ 鏈名 [選項]
+<br/>
+iptables -[NX] 指定鏈
+<br/>
+iptables -P chain target[options]
+<br/>
+iptables -E old-chain-name new-chain-name
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="說明">說明<a class="anchor" href="#%E8%AA%AA%E6%98%8E">¶</a></h1>
+Iptalbes
+  是用來設置、維護和檢查Linux內核的IP包過濾規則的。
+<p class="Pp">可以定義不同的表，每個表都包含幾個內部的鏈，也能包含用戶定義的鏈。
+    每個鏈都是一個規則列表，對對應的包進行匹配：每條規則指定應當如何處
+    理與之相匹配的包。這被稱作&#39;target&#39;（目標），也可以跳向同一個表內的用
+    戶定義的鏈。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="TARGETS">TARGETS<a class="anchor" href="#TARGETS">¶</a></h1>
+防火牆的規則指定所檢查包的特徵，和目標。如果包不匹配，將送往該鏈中
+  下一條規則檢查；如果匹配,那麼下一條規則由目標值確定.該目標值可以是
+  用戶定義的鏈名,或是某個專用值,如ACCEPT[通過],
+  DROP[刪除], QUEUE[排隊],或者
+  RETURN[返回]。
+<p class="Pp"><i>ACCEPT</i>
+   表示讓這個包通過。
+  <br/>
+  <i>DROP</i>
+   表示將這個包丟棄。
+  <br/>
+  <i>QUEUE</i>
+  
+    表示把這個包傳遞到用戶空間。
+  <br/>
+  <i>RETURN</i>
+  
+    表示停止這條鏈的匹配，到前一個鏈的規則重新開始。如果到達了一個內建的
+  
+    鏈(的末端)，或者遇到內建鏈的規則是
+    RETURN，包的命運將由鏈準則指定的
+   目標決定。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="TABLES">TABLES<a class="anchor" href="#TABLES">¶</a></h1>
+當前有三個表（哪個表是當前表取決於內核配置選項和當前模塊)。
+<dl class="Bl-tag">
+  <dt><b>-t table</b></dt>
+  <dd>這個選項指定命令要操作的匹配包的表。如果內核被配置爲自動加載模塊，這時
+      若模塊沒有加載，(系統)將嘗試(爲該表)加載適合的模塊。
+    <p class="Pp">這些表如下：</p>
+  </dd>
+  <dt><b>filter</b></dt>
+  <dd>,這是默認的表，包含了內建的鏈INPUT（處理進入的包）、FORWORD（處理通
+      過的包）和OUTPUT（處理本地生成的包）。</dd>
+  <dt><b>nat</b></dt>
+  <dd>這個表被查詢時表示遇到了產生新的連接的包,由三個內建的鏈構成：PREROUTING
+    
+      (修改到來的包)、OUTPUT（修改路由之前本地的包）、POSTROUTING
+    
+      （修改準備出去的包）。</dd>
+  <dt><b>mangle</b></dt>
+  <dd>
+    
+      這個表用來對指定的包進行修改。它有兩個內建規則：PREROUTING（修改路由之
+    
+      前進入的包）和OUTPUT（修改路由之前本地的包）。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="OPTIONS">OPTIONS<a class="anchor" href="#OPTIONS">¶</a></h1>
+這些可被iptables識別的選項可以區分不同的種類。
+<section class="Ss">
+<h2 class="Ss" id="COMMANDS">COMMANDS<a class="anchor" href="#COMMANDS">¶</a></h2>
+這些選項指定執行明確的動作：若指令行下沒有其他規定,該行只能指定一個選項.
+  對於長格式的命令和選項名,所用字母長度只要保證iptables能從其他選項中區
+  分出該指令就行了。
+<dl class="Bl-tag">
+  <dt><b>-A -append</b></dt>
+  <dd>在所選擇的鏈末添加一條或更多規則。當源（地址）或者/與
+      目的（地址）轉換
+      爲多於一個(多個)地址時，這條規則會加到所有可能的地址(組合)後面。</dd>
+  <dt><b>-D -delete</b></dt>
+  <dd>從所選鏈中刪除一條或更多規則。這條命令可以有兩種方法：可以把被刪除規則
+      指定爲鏈中的序號(第一條序號爲1),或者指定爲要匹配的規則。</dd>
+  <dt><b>-R -replace</b></dt>
+  <dd>從選中的鏈中取代一條規則。如果源（地址）或者/與
+      目的（地址）被轉換爲多地
+      址，該命令會失敗。規則序號從1開始。</dd>
+  <dt><b>-I -insert</b></dt>
+  <dd>根據給出的規則序號向所選鏈中插入一條或更多規則。所以，如果規則序號爲1，
+      規則會被插入鏈的頭部。這也是不指定規則序號時的默認方式。</dd>
+  <dt><b>-L -list</b></dt>
+  <dd>顯示所選鏈的所有規則。如果沒有選擇鏈，所有鏈將被顯示。也可以和z選項一起
+      使用，這時鏈會被自動列出和歸零。精確輸出受其它所給參數影響。</dd>
+  <dt><b>-F -flush</b></dt>
+  <dd>清空所選鏈。這等於把所有規則一個個的刪除。</dd>
+  <dt><b>--Z -zero</b></dt>
+  <dd>把所有鏈的包及字節的計數器清空。它可以和
+      -L配合使用，在清空前察看計數器，請參見前文。</dd>
+  <dt><b>-N -new-chain</b></dt>
+  <dd>根據給出的名稱建立一個新的用戶定義鏈。這必須保證沒有同名的鏈存在。</dd>
+  <dt><b>-X -delete-chain</b></dt>
+  <dd>刪除指定的用戶自定義鏈。這個鏈必須沒有被引用，如果被引用，在刪除之前你必須刪
+      除或者替換與之有關的規則。如果沒有給出參數，這條命令將試着刪除每個非
+      內建的鏈。</dd>
+  <dt><b>-P -policy</b></dt>
+  <dd>設置鏈的目標規則。</dd>
+  <dt><b>-E -rename-chain</b></dt>
+  <dd>根據用戶給出的名字對指定鏈進行重命名，這僅僅是修飾，對整個表的結構沒有影響。
+      TARGETS參數給出一個合法的目標。只有非用戶自定義鏈可以使用規則，而且內建鏈和用
+      戶自定義鏈都不能是規則的目標。</dd>
+  <dt><b>-h Help.</b></dt>
+  <dd>幫助。給出當前命令語法非常簡短的說明。</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="參數">參數<a class="anchor" href="#%E5%8F%83%E6%95%B8">¶</a></h2>
+以下參數構成規則詳述，如用於add、delete、replace、append
+  和 check命令。
+<dl class="Bl-tag">
+  <dt><b>-p -protocal [!]protocol</b></dt>
+  <dd>規則或者包檢查(待檢查包)的協議。指定協議可以是tcp、udp、icmp中的一個或
+      者全部，也可以是數值，代表這些協議中的某一個。當然也可以使用在/etc/pro
+      tocols中定義的協議名。在協議名前加上&#34;!&#34;表示相反的規則。數字0相當於所有
+      all。Protocol
+      all會匹配所有協議，而且這是缺省時的選項。在和check命令結合
+      時，all可以不被使用。</dd>
+  <dt><b>-s -source [!] address[/mask]</b></dt>
+  <dd>指定源地址，可以是主機名、網絡名和清楚的IP地址。mask說明可以是網絡掩碼
+      或清楚的數字，在網絡掩碼的左邊指定網絡掩碼左邊”1”的個數，因此，mask
+      值爲24等於255.255.255.0。在指定地址前加上&#34;!&#34;說明指定了相反的地址段。標誌
+     --src
+      是這個選項的簡寫。</dd>
+  <dt><b>-d --destination [!] address[/mask]</b></dt>
+  <dd>指定目標地址，要獲取詳細說明請參見
+      -s標誌的說明。標誌 --dst
+      是這個選項的簡寫。</dd>
+  <dt><b>-j --jump target</b></dt>
+  <dd>(-j
+      目標跳轉)指定規則的目標；也就是說，如果包匹配應當做什麼。目標可以是用
+      戶自定義鏈（不是這條規則所在的），某個會立即決定包的命運的專用內建目標，
+      或者一個擴展（參見下面的EXTENSIONS）。如果規則的這個選項被忽略，那麼匹
+      配的過程不會對包產生影響，不過規則的計數器會增加。</dd>
+  <dt><b>-i -in-interface [!] [name]</b></dt>
+  <dd>(i
+      -進入的（網絡）接口
+      [!][名稱])這是包經由該接口接收的可選的入口名稱，包通過
+      該接口接收（在鏈INPUT、FORWORD和PREROUTING中進入的包）。當在接口名
+      前使用&#34;!&#34;說明後，指的是相反的名稱。如果接口名後面加上&#34;+&#34;，則所有以此接口名
+      開頭的接口都會被匹配。如果這個選項被忽略，會假設爲&#34;+&#34;，那麼將匹配任意接口。</dd>
+  <dt><b>-o --out-interface [!][name]</b></dt>
+  <dd>(-o
+      --輸出接口[名稱])這是包經由該接口送出的可選的出口名稱，包通過該口輸出（在
+      鏈FORWARD、OUTPUT和POSTROUTING中送出的包）。當在接口名前使用&#34;!&#34;說明
+      後，指的是相反的名稱。如果接口名後面加上&#34;+&#34;，則所有以此接口名開頭的接口都會
+      被匹配。如果這個選項被忽略，會假設爲&#34;+&#34;，那麼將匹配所有任意接口。</dd>
+  <dt><b>[!] -f, --fragment</b></dt>
+  <dd>( [!] -f
+      --分片)這意味着在分片的包中，規則只詢問第二及以後的片。自那以後由於無
+      法判斷這種把包的源端口或目標端口（或者是ICMP類型的），這類包將不能匹配任
+      何指定對他們進行匹配的規則。如果&#34;!&#34;說明用在了&#34;-f&#34;標誌之前，表示相反的意思。
+      TP <b>-c, --set-counters PKTS BYTES</b> This enables the administrater to
+      initialize the packet and byte counters of a rule (during <b>INSERT,</b>
+      <b>APPEND,</b> <b>REPLACE</b> operations)
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="其他選項">其他選項<a class="anchor" href="#%E5%85%B6%E4%BB%96%E9%81%B8%E9%A0%85">¶</a></h2>
+還可以指定下列附加選項：
+<dl class="Bl-tag">
+  <dt><b>-v --verbose</b></dt>
+  <dd>詳細輸出。這個選項讓list命令顯示接口地址、規則選項（如果有）和TOS
+      （Type of
+      Service）掩碼。包和字節計數器也將被顯示，分別用K、M、G
+      (前綴)表示1000、1,000,000和1,000,000,000倍（不過請參看-x標誌改變它），
+      對於添加,插入,刪除和替換命令，這會使一個或多個規則的相關詳細信息被打印。</dd>
+  <dt><b>-n --numeric</b></dt>
+  <dd>數字輸出。IP地址和端口會以數字的形式打印。默認情況下，程序試顯
+      示主機名、網絡名或者服務（只要可用）。</dd>
+  <dt><b>-x -exact</b></dt>
+  <dd>擴展數字。顯示包和字節計數器的精確值，代替用K,M,G表示的約數。
+      這個選項僅能用於 -L
+      命令。</dd>
+  <dt><b>--line-numbers</b></dt>
+  <dd>當列表顯示規則時，在每個規則的前面加上行號，與該規則在鏈中的位置相對應。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="對應的擴展">對應的擴展<a class="anchor" href="#%E5%B0%8D%E6%87%89%E7%9A%84%E6%93%B4%E5%B1%95">¶</a></h1>
+iptables能夠使用一些與模塊匹配的擴展包。以下就是含於基本包內的
+  擴展包，而且他們大多數都可以通過在前面加上!來表示相反的意思。
+<p class="Pp"></p>
+<section class="Ss">
+<h2 class="Ss" id="tcp">tcp<a class="anchor" href="#tcp">¶</a></h2>
+當 --protocol tcp
+  被指定,且其他匹配的擴展未被指定時,這些擴展被裝載。它提供以下選項：
+<dl class="Bl-tag">
+  <dt><b>--source-port [!] [port[:port]]</b></dt>
+  <dd>源端口或端口範圍指定。這可以是服務名或端口號。使用格式端口：端口也可以
+      指定包含的（端口）範圍。如果首端口號被忽略，默認是&#34;0&#34;，如果末端口號被忽
+      略，默認是&#34;65535&#34;，如果第二?齠絲諍糯笥詰諞桓觶?敲此?腔岜喚換弧Ｕ飧鮁∠羈梢允褂?
+      --sport的別名。</dd>
+  <dt><b>--destionation-port [!] [port:[port]]</b></dt>
+  <dd>目標端口或端口範圍指定。這個選項可以使用
+      --dport別名來代替。</dd>
+  <dt><b>--tcp-flags [!] mask comp</b></dt>
+  <dd>匹配指定的TCP標記。第一個參數是我們要檢查的標記，一個用逗號分開的列表，
+      第二個參數是用逗號分開的標記表,是必須被設置的。標記如下：SYN
+      ACK FIN
+     RST URG PSH ALL
+      NONE。因此這條命令：iptables
+      -A FORWARD -p tcp --tcp-flags SYN, ACK,
+     FIN, RST
+      SYN只匹配那些SYN標記被設置而ACK、FIN和RST標記沒有設置的包。</dd>
+  <dt><b>[!] --syn</b></dt>
+  <dd>只匹配那些設置了SYN位而清除了ACK和FIN位的TCP包。這些包用於TCP連接初始
+      化時發出請求；例如，大量的這種包進入一個接口發生堵塞時會阻止進入的TCP連接
+      ，而出去的TCP連接不會受到影響。這等於
+      --tcp-flags SYN, RST, ACK SYN。如果
+      &#34;--syn&#34;前面有&#34;!&#34;標記，表示相反的意思。</dd>
+  <dt><b>--tcp-option [!] number</b></dt>
+  <dd>匹配設置了TCP選項的。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="udp">udp<a class="anchor" href="#udp">¶</a></h2>
+當protocol udp
+  被指定,且其他匹配的擴展未被指定時,這些擴展被裝載,它提供以下選項：
+<dl class="Bl-tag">
+  <dt><b>--source-port [!] [port:[port]]</b></dt>
+  <dd>源端口或端口範圍指定。詳見
+      TCP擴展的--source-port選項說明。</dd>
+  <dt><b>--destination-port [!] [port:[port]]</b></dt>
+  <dd>目標端口或端口範圍指定。詳見
+      TCP擴展的--destination-port選項說明。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="icmp">icmp<a class="anchor" href="#icmp">¶</a></h2>
+當protocol
+  icmp被指定,且其他匹配的擴展未被指定時,該擴展被裝載。它提供以下選項：
+<dl class="Bl-tag">
+  <dt><b>--icmp-type [!] typename</b></dt>
+  <dd>這個選項允許指定ICMP類型，可以是一個數值型的ICMP?嘈停?蛘呤悄掣鮎擅??
+    <br/>
+    iptables -p icmp -h
+    <br/>
+    所顯示的ICMP類型名。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="mac">mac<a class="anchor" href="#mac">¶</a></h2>
+<dl class="Bl-tag">
+  <dt><b>--mac-source [!] address</b></dt>
+  <dd>匹配物理地址。必須是XX:XX:XX:XX:XX這樣的格式。注意它只對來自以太設備並
+      進入PREROUTING、FORWORD和INPUT鏈的包有效。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="limit">limit<a class="anchor" href="#limit">¶</a></h2>
+這個模塊匹配標誌用一個標記桶過濾器一一定速度進行匹配,它和LOG
+  目標結合使用來給出有限的登陸數.當達到這個極限值時,使用這個擴展
+  包的規則將進行匹配.(除非使用了
+  ”!”標記)
+<dl class="Bl-tag">
+  <dt><b>--limit rate</b></dt>
+  <dd>最大平均匹配速率：可賦的值有&#39;/second&#39;,
+      &#39;/minute&#39;, &#39;/hour&#39;, or
+      &#39;/day&#39;這樣的單位，默認是3/hour。</dd>
+  <dt><b>--limit-burst number</b></dt>
+  <dd>待匹配包初始個數的最大值:若前面指定的極限還沒達到這個數值,則概數字加1.默認值爲5</dd>
+  <dt><b>multiport</b></dt>
+  <dd>這個模塊匹配一組源端口或目標端口,最多可以指定15個端口。只能和-p
+      tcp 或者 -p udp 連着使用。</dd>
+  <dt><b>--source-port [port[, port]]</b></dt>
+  <dd>如果源端口是其中一個給定端口則匹配</dd>
+  <dt><b>--destination-port [port[, port]]</b></dt>
+  <dd>如果目標端口是其中一個給定端口則匹配</dd>
+  <dt><b>--port [port[, port]]</b></dt>
+  <dd>若源端口和目的端口相等並與某個給定端口相等,則匹配。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="mark">mark<a class="anchor" href="#mark">¶</a></h2>
+這個模塊和與netfilter過濾器標記字段匹配（就可以在下面設置爲使用MARK標記）。
+<dl class="Bl-tag">
+  <dt><b>--mark value [/mask]</b></dt>
+  <dd>匹配那些無符號標記值的包（如果指定mask，在比較之前會給掩碼加上邏輯的標記）。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="owner">owner<a class="anchor" href="#owner">¶</a></h2>
+此模塊試爲本地生成包匹配包創建者的不同特徵。
+  只能用於OUTPUT鏈，而且即使這樣一些包（如ICMP
+  ping應答）還
+  可能沒有所有者，因此永遠不會匹配。
+<dl class="Bl-tag">
+  <dt><b>--uid-owner userid</b></dt>
+  <dd>如果給出有效的user
+      id，那麼匹配它的進程產生的包。</dd>
+  <dt><b>--gid-owner groupid</b></dt>
+  <dd>如果給出有效的group
+      id，那麼匹配它的進程產生的包。</dd>
+  <dt><b>--sid-owner seessionid</b></dt>
+  <dd>根據給出的會話組匹配該進程產生的包。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="state">state<a class="anchor" href="#state">¶</a></h2>
+此模塊，當與連接跟蹤結合使用時，允許訪問包的連接跟蹤狀態。
+<dl class="Bl-tag">
+  <dt><b>--state state</b></dt>
+  <dd>這裏state是一個逗號分割的匹配連接狀態列表。可能的狀態是:INVALID
+      表示包是未知連接，ESTABLISHED表示是雙向傳送的連接，NEW表示包
+      爲新的連接，否則是非雙向傳送的，而RELATED表示包由新連接開始，但
+      是和一個已存在的連接在一起，如FTP數據傳送，或者一個ICMP錯誤。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="unclean">unclean<a class="anchor" href="#unclean">¶</a></h2>
+此模塊沒有可選項，不過它試着匹配那些奇怪的、不常見的包。處在實驗中。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="tos">tos<a class="anchor" href="#tos">¶</a></h2>
+此模塊匹配IP包首部的8位tos（服務類型）字段（也就是說，包含在優先位中）。
+<dl class="Bl-tag">
+  <dt><b>--tos tos</b></dt>
+  <dd>這個參數可以是一個標準名稱，（用iptables
+      -m tos -h
+      察看該列表），或者數值。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="TARGET_EXTENSIONS">TARGET EXTENSIONS<a class="anchor" href="#TARGET_EXTENSIONS">¶</a></h1>
+iptables可以使用擴展目標模塊：以下都包含在標準版中。
+<p class="Pp"></p>
+<section class="Ss">
+<h2 class="Ss" id="LOG">LOG<a class="anchor" href="#LOG">¶</a></h2>
+爲匹配的包開啓內核記錄。當在規則中設置了這一選項後，linux內核會通
+  過printk()打印一些關於全部匹配包的信息（諸如IP包頭字段等）。
+<dl class="Bl-tag">
+  <dt><b>--log-level level</b></dt>
+  <dd>記錄級別（數字或參看
+      <a href="../../buster/inetutils-syslogd/syslog.conf.5.en.html">syslog.conf(5)</a>）。</dd>
+  <dt><b>--log-prefix prefix</b></dt>
+  <dd>在紀錄信息前加上特定的前綴：最多14個字母長，用來和記錄中其他信息區別。</dd>
+  <dt><b>--log-tcp-sequence</b></dt>
+  <dd>記錄TCP序列號。如果記錄能被用戶讀取那麼這將存在安全隱患。</dd>
+  <dt><b>--log-tcp-options</b></dt>
+  <dd>記錄來自TCP包頭部的選項。</dd>
+  <dt><b>--log-ip-options</b></dt>
+  <dd>記錄來自IP包頭部的選項。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="MARK">MARK<a class="anchor" href="#MARK">¶</a></h2>
+用來設置包的netfilter標記值。只適用於mangle表。
+<dl class="Bl-tag">
+  <dt><b>--set-mark mark</b></dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="REJECT">REJECT<a class="anchor" href="#REJECT">¶</a></h2>
+作爲對匹配的包的響應，返回一個錯誤的包：其他情況下和DROP相同。
+  此目標只適用於INPUT、FORWARD和OUTPUT鏈，和調用這些鏈的用
+  戶自定義鏈。這幾個選項控制返回的錯誤包的特性：
+<dl class="Bl-tag">
+  <dt><b>--reject-with type</b></dt>
+  <dd>Type可以是icmp-net-unreachable、icmp-host-unreachable、icmp-port-nreachable、icmp-prot
+      o-unreachable、 icmp-net-prohibited 或者
+    
+      icmp-host-prohibited，該類型會返回相應的ICMP錯誤信息（默認是port-unreachable）。選項
+    
+      echo-reply也是允許的；它只能用於指定ICMP
+    
+      ping包的規則中，生成ping的迴應。最後，選項tcp-reset可以用於在INPUT鏈中,或
+    
+      自INPUT鏈調用的規則，只匹配TCP協議：將回應一個TCP
+     RST包。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="TOS">TOS<a class="anchor" href="#TOS">¶</a></h2>
+用來設置IP包的首部八位tos。只能用於mangle表。
+<dl class="Bl-tag">
+  <dt><b>--set-tos tos</b></dt>
+  <dd>你可以使用一個數值型的TOS
+      值，或者用iptables -j TOS -h
+      來查看有效TOS名列表。</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="MIRROR">MIRROR<a class="anchor" href="#MIRROR">¶</a></h2>
+這是一個試驗示範目標，可用於轉換IP首部字段中的源地址和目標地址，
+  再傳送該包,並只適用於INPUT、FORWARD和OUTPUT鏈，以及只調用它們的用戶自定義鏈
+  。
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="SNAT">SNAT<a class="anchor" href="#SNAT">¶</a></h2>
+這個目標只適用於nat表的POSTROUTING鏈。它規定修改包的源地
+  址（此連接以後所有的包都會被影響），停止對規則的檢查，它包含選項：
+<dl class="Bl-tag">
+  <dt><b>--to-source &lt;ipaddr&gt;[-&lt;ipaddr&gt;][:port-port]</b></dt>
+  <dd>可以指定一個單一的新的IP地址，一個IP地址範圍，也可以附加一個端口範圍
+      （只能在指定-p tcp 或者-p
+      udp的規則裏）。如果未指定端口範圍，源端口中
+      512以下的（端口）會被安置爲其他的512以下的端口；512到1024之間的端口
+      會被安置爲1024以下的，其他端口會被安置爲1024或以上。如果可能，
+      端口不會被修改。</dd>
+  <dt><b>--to-destiontion &lt;ipaddr&gt;[-&lt;ipaddr&gt;][:port-port]</b></dt>
+  <dd>可以指定一個單一的新的IP地址，一個IP地址範圍，也可以附加一個端口範圍（只能在指定-p
+      tcp 或者-p
+    
+      udp的規則裏）。如果未指定端口範圍，目標端口不會被修改。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="MASQUERADE">MASQUERADE<a class="anchor" href="#MASQUERADE">¶</a></h2>
+只用於nat表的POSTROUTING鏈。只能用於動態獲取IP（撥號）連接：如果你擁有靜態IP
+  地址，你要用SNAT。僞裝相當於給包發出時所經過接口的IP地址設置一個映像，當接口關
+  閉連接會終止。這是因爲當下一次撥號時未必是相同的接口地址（以後所有建立的連接都將
+  關閉）。它有一個選項：
+<dl class="Bl-tag">
+  <dt><b>--to-ports &lt;port&gt;[-port&gt;]</b></dt>
+  <dd>指定使用的源端口範圍，覆蓋默認的SNAT源地址選擇（見上面）。這個選項只適用於指定
+      了-p tcp或者-p udp的規則。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="REDIRECT">REDIRECT<a class="anchor" href="#REDIRECT">¶</a></h2>
+只適用於nat表的PREROUTING和OUTPUT鏈，和只調用它們的用戶自定義鏈。它修改包的
+  目標IP地址來發送包到機器自身（本地生成的包被安置爲地址127.0.0.1）。它包含一
+  個選項：
+<dl class="Bl-tag">
+  <dt><b>--to-ports &lt;port&gt;[&lt;port&gt;]</b></dt>
+  <dd>指定使用的目的端口或端口範圍：不指定的話，目標端口不會被修改。只能用於指定了-p
+      tcp 或 -p udp的規則。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="診斷">診斷<a class="anchor" href="#%E8%A8%BA%E6%96%B7">¶</a></h1>
+不同的錯誤信息會打印成標準錯誤：退出代碼0表示正確。類似於不對的或者濫用的命令
+  行參數錯誤會返回錯誤代碼2，其他錯誤返回代碼爲1。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="臭蟲">臭蟲<a class="anchor" href="#%E8%87%AD%E8%9F%B2">¶</a></h1>
+檢查還未完成。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="COMPATIBILITY_WITH_IPCHAINS">COMPATIBILITY WITH IPCHAINS<a class="anchor" href="#COMPATIBILITY_WITH_IPCHAINS">¶</a></h1>
+與ipchains的兼容性
+<p class="Pp">This iptables is very similar to ipchains by Rusty Russell. The
+    main difference
+   is that the chains INPUT and OUTPUT are only traversed for packets coming
+    into
+   the local host and originating from the local host respectively. Hence every
+   pack only passes through one of the three chains; previously a forwarded
+    packet
+   would pass through all three. The other main difference is that -I refers to
+   input interface; -o refers to the output interface, and both are available
+    for
+   packets entering the FORWARD chain. iptables is a pure packet filter when
+    using
+   the default filter&#39; table, with optional extension modules. This should
+   simplify much of the previous confusion over the combination of IP
+    masquerading
+   and packet filtering seen previously. So the following options are handled
+   differently: -j MASQ -M -S -M -L There are several other chaines in iptables
+    iptables和Rusty
+    Russell的ipchains非常相似。主要區別是INPUT
+    鏈只用於進入本
+    地主機的包,而OUTPUT只用於自本地主機生成的包。因此每個包只經過三個鏈的
+    一個；以前轉發的包會經過所有三個鏈。其他主要區別是
+    -i 引用進入接口；-o引
+    用輸出接口，兩者都適用於進入FORWARD鏈的包。當和可選擴展模塊一起使用
+    默認過濾器表時，iptables是一個純粹的包過濾器。這能大大減少以前對IP僞裝和
+    包過濾結合使用的混淆，所以以下選項作了不同的處理：
+    -j MASQ -M -S -M -L
+    在iptables中有幾個不同的鏈。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見">參見<a class="anchor" href="#%E5%8F%83%E8%A6%8B">¶</a></h1>
+iptables-HOWTO有詳細的iptables用法,對netfilter-hacking-HOWTO也有詳細的本質說明。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者">作者<a class="anchor" href="#%E4%BD%9C%E8%80%85">¶</a></h1>
+Rusty Russell wrote iptables, in early consultation with Michael Neuling. Marc
+  Boucher made Rusty abandon ipnatctl by lobbying for a generic packet
+ selection framework in iptables, then wrote the mangle table, the owner match,
+ the mark stuff, and ranaround doing cool stuff everywhere. James Morris wrote
+  the TOS target, and tos match. Jozsef Kadlecsik wrote the REJECT target. The
+  Netfilter Core Team is: Marc Boucher, Rusty Russell.
+<dl class="Bl-tag">
+  <dt>
+   Mar 20, 2000</dt>
+  <dd>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>楊鵬·NetSnake &lt;netsnake@963.net&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2003.11.20</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8Blinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">iptables 中文手冊</td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+iptables.8.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-04T15:49:48Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"iptables(8)\"}}]}"
+</script>

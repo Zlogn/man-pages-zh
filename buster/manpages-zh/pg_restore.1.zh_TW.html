@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pg_restore(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/postgresql-client-11/pg_restore.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/pg_restore.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/pg_restore.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; pg_restore(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/pg_restore.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/pg_restore.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS" title="SYNOPSIS">SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#OPTIONS_%E9%81%B8%E9%A0%85" title="OPTIONS 選項">OPTIONS 選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ENVIRONMENT_%E7%92%B0%E5%A2%83" title="ENVIRONMENT 環境">ENVIRONMENT 環境</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DIAGNOSTICS_%E8%A8%BA%E6%96%B7" title="DIAGNOSTICS 診斷">DIAGNOSTICS 診斷</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES_%E6%B3%A8%E6%84%8F" title="NOTES 注意">NOTES 注意</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#EXAMPLES_%E4%BE%8B%E5%AD%90" title="EXAMPLES 例子">EXAMPLES 例子</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#HISTORY_%E6%AD%B7%E5%8F%B2" title="HISTORY 歷史">HISTORY 歷史</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SEE_ALSO_%E5%8F%83%E8%A6%8B" title="SEE ALSO 參見">SEE ALSO 參見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AD%AF%E8%80%85" title="譯者">譯者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/pg_restore.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/pg_restore.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/pg_restore.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/postgresql-client-11/pg_restore.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/pg_restore.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/pg_restore.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">PG_RESTORE(1)</td>
+    <td class="head-vol">PostgreSQL Client Applications</td>
+    <td class="head-rtitle">PG_RESTORE(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+pg_restore - 從一個由 pg_dump
+  創建的備份文件中恢復
+  PostgreSQL 數據庫。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS">SYNOPSIS<a class="anchor" href="#SYNOPSIS">¶</a></h1>
+<b>pg_restore</b> [ <b></b><i>option</i><b></b>...<b> </b>] [
+  <b></b><i>filename</i> <b> </b>]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>pg_restore</b>
+  是一種用於恢復由
+  <a href="../../buster/manpages-zh/pg_dump.1.zh_TW.html">pg_dump(1)</a>
+  創建的任何非純文本輸出格式中的
+  PostgreSQL 數據庫的應用。
+  它將發出必要的命令來重新構造數據庫，以便於把它恢復成保存它的時候的樣子。
+  歸檔（備份）文件還允許pg_restore
+  有選擇地進行恢復，
+  甚至在恢復前重新排列條目的順序。歸檔的文件設計成可以在不同的硬件體系之間移植。
+<p class="Pp"><b>pg_restore</b>
+    可以以兩種模式操作：如果聲明瞭數據庫名字，
+    那麼歸檔是直接恢復到數據庫裏。大對象只能用直接數據庫聯接進行恢復。
+    否則，先創建一個包含重建數據庫所必須的
+    SQL
+    命令的腳本（並且寫入到一個文件或者標準輸出），
+    類似 pg_dump
+    輸出純文本格式的時候創建的那種腳本。
+    因此，一些控制腳本輸出的選項就是摹擬
+    pg_dump 的操作。</p>
+<p class="Pp">顯然，<b>pg_restore</b>
+    無法恢復那些不存在歸檔文件中的信息；
+    比如，如果歸檔是用&#34;把數據轉儲爲
+    INSERT命令&#34;選項製作的，
+    那麼 pg_restore 將不能使用 COPY
+    語句裝載數據。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="OPTIONS_選項">OPTIONS 選項<a class="anchor" href="#OPTIONS_%E9%81%B8%E9%A0%85">¶</a></h1>
+<b>pg_restore</b>
+  接受下列命令行參數。
+<dl class="Bl-tag">
+  <dt><b></b><i>filename</i><b></b></dt>
+  <dd>
+    
+      聲明要恢復的備份文件的位置。如果沒有聲明，則使用標準輸入。</dd>
+  <dt><b>-a</b></dt>
+  <dd></dd>
+  <dt><b>--data-only</b></dt>
+  <dd>
+    
+      只恢復數據，而不恢復表模式（數據定義）。</dd>
+  <dt><b>-c</b></dt>
+  <dd></dd>
+  <dt><b>--clean</b></dt>
+  <dd>
+    
+      創建數據庫對象前先清理（刪除）它們。</dd>
+  <dt><b>-C</b></dt>
+  <dd></dd>
+  <dt><b>--create</b></dt>
+  <dd>
+    
+      在恢復數據庫之前先創建它。（如果出現了這個選項，和
+      <b>-d</b>
+      在一起的數據庫名只是用於發出最初的
+      CREATE DATABASE 命令。
+      所有數據都恢復到名字出現在歸檔中的數據庫中去。）</dd>
+  <dt><b>-d </b><i>dbname</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--dbname=</b><i>dbname</i><b></b></dt>
+  <dd>
+     與數據庫 dbname
+      聯接並且直接恢復到該數據庫中。</dd>
+  <dt><b>-f </b><i>filename</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--file=</b><i>filename</i><b></b></dt>
+  <dd>
+    
+      聲明生成的腳本的輸出文件，或者出現
+      <b>-l</b>
+      選項時用於列表的文件，缺省是標準輸出。</dd>
+  <dt><b>-F </b><i>format</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--format=</b><i>format</i><b></b></dt>
+  <dd>
+    
+      聲明備份文件的格式。因爲pg_restore
+      會自動判斷格式，所以如果聲明瞭，它可以是下面之一：</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>t</b></dt>
+  <dd>
+     備份是一個 tar 歸檔。
+      使用這個格式允許在恢復數據庫的時候重新排序和/或把表模式元素排除出去。
+      同時還可能在恢復的時候限制裝載的數據。</dd>
+  <dt><b>c</b></dt>
+  <dd>
+     備份的格式是來自 pg_dump
+      的客戶化格式。
+      這是最靈活的格式，因爲它允許重新對數據排序，也允許重載表模式元素。
+      缺省時這個格式是壓縮的。</dd>
+</dl>
+</div>
+<dl class="Bl-tag">
+  <dt><b>-i</b></dt>
+  <dd></dd>
+  <dt><b>--ignore-version</b></dt>
+  <dd>
+    
+      忽略數據庫版本檢查。</dd>
+  <dt><b>-I </b><i>index</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--index=</b><i>index</i><b></b></dt>
+  <dd>
+    
+    只恢復命名的索引。</dd>
+  <dt><b>-l</b></dt>
+  <dd></dd>
+  <dt><b>--list</b></dt>
+  <dd>
+    
+      列出備份的內容。這個操作的輸出可以用
+      -L
+      選項限制和重排所恢復的項目。</dd>
+  <dt><b>-L </b><i>list-file</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--use-list=</b><i>list-file</i><b></b></dt>
+  <dd>
+     只恢復在 list-file
+      裏面的元素，以它們在文件中出現的順序。
+      你可以移動各個行並且也可以通過在行開頭放
+      &#39;;&#39;
+      的方式註釋。（見下文獲取例子。）</dd>
+  <dt><b>-N</b></dt>
+  <dd></dd>
+  <dt><b>--orig-order</b></dt>
+  <dd>
+     以最初在 pg_dump
+      裏生成的轉儲順序恢復項目。
+      這個選項沒有什麼實際的用途，因爲
+      pg_dump
+      會以自己方便的順序生成項，
+      這個順序不可能是恢復這些數據的安全順序。
+      （這個順序不是項最後在歸檔的內容列表中列出的順序。）
+      又見 -r。</dd>
+  <dt><b>-o</b></dt>
+  <dd></dd>
+  <dt><b>--oid-order</b></dt>
+  <dd>
+     以 OID
+      順序恢復項目。這個選項用處很小，
+      因爲 OID
+      只是最初創建順序的一個近似指示。
+      如果還聲明瞭
+      -N，那麼這個選項還覆蓋它。又見
+      -r。</dd>
+  <dt><b>-O</b></dt>
+  <dd></dd>
+  <dt><b>--no-owner</b></dt>
+  <dd>
+    
+      不要輸出設置對象的權限，以便與最初的數據庫匹配的命令。
+      缺省時，pg_restore 發出 <b>SET SESSION
+      AUTHORIZATION</b>
+      語句設置創建出來的模式元素的所有者權限。
+      如果最初的數據庫連接不是由超級用戶（或者是擁有所有創建出來的對象的同一個用戶）發起的，那麼這些語句將失敗。
+      使用
+      -O，那麼任何用戶都可以用於初始的連接，並且這個用戶將擁有所有創建出來的對象。</dd>
+  <dt><b>-P </b><i>function-name(argtype [, ...])</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--function=</b><i>function-name(argtype [, ...])</i><b></b></dt>
+  <dd>
+    
+      只恢復指定的命名函數。請注意仔細拼寫函數名及其參數，應該和轉儲的內容列表中的完全一樣。</dd>
+  <dt><b>-r</b></dt>
+  <dd></dd>
+  <dt><b>--rearrange</b></dt>
+  <dd>
+    
+      以對象類型重排項目（這個發生在以
+      -N 或者 -o 排序之後）。
+      重排是爲了給出最大可能的性能。
+    <p class="Pp">如果沒有 <b>-N</b>, <b>-o</b>,
+        和<b>-r</b>，那麼 pg_restore
+        以項目出現在歸檔
+        的內容列表中的順序恢復他們，
+        或者按照他們在 list-file
+        裏面的順序恢復他們
+        — 假如給出了 -L
+        的話。 -o 和 -r
+        的組合複製了 pg_dump
+        在創建歸檔的內容列表
+        之前進行的排序，
+        因此，這個選項通常沒必要聲明。</p>
+  </dd>
+  <dt><b>-R</b></dt>
+  <dd></dd>
+  <dt><b>--no-reconnect</b></dt>
+  <dd>
+    
+      這個選項已經廢棄了，但是爲了保持向下兼容仍然接受。</dd>
+  <dt><b>-s</b></dt>
+  <dd></dd>
+  <dt><b>--schema-only</b></dt>
+  <dd>
+    
+      只恢復表結構（數據定義）。不恢復數據，序列值將重置。</dd>
+  <dt><b>-S </b><i>username</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--superuser=</b><i>username</i><b></b></dt>
+  <dd>
+    
+      設置關閉觸發器時聲明超級用戶的用戶名。
+      只有在設置了 <b>--disable-triggers</b>
+      的時候纔有用。</dd>
+  <dt><b>-t </b><i>table</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--table=</b><i>table</i><b></b></dt>
+  <dd>
+    
+      只恢復表指定的表的定義和/或數據。</dd>
+  <dt><b>-T </b><i>trigger</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--trigger=</b><i>trigger</i><b></b></dt>
+  <dd>
+    
+      只恢復指定的觸發器。</dd>
+  <dt><b>-v</b></dt>
+  <dd></dd>
+  <dt><b>--verbose</b></dt>
+  <dd>
+     聲明冗餘模式。</dd>
+  <dt><b>-x</b></dt>
+  <dd></dd>
+  <dt><b>--no-privileges</b></dt>
+  <dd></dd>
+  <dt><b>--no-acl</b></dt>
+  <dd>
+     避免 ACL 的恢復（grant/revoke
+      命令）。</dd>
+  <dt><b>-X use-set-session-authorization</b></dt>
+  <dd></dd>
+  <dt><b>--use-set-session-authorization</b></dt>
+  <dd>
+    
+      這個選項已經廢棄了，但是出於向下兼容，仍然接受。
+      pg_restore
+      現在總是表現得像以前選中這個選項一樣。</dd>
+  <dt><b>-X disable-triggers</b></dt>
+  <dd></dd>
+  <dt><b>--disable-triggers</b></dt>
+  <dd>
+    
+      這個選項只有在執行僅恢復數據的時候才相關。它告訴
+      pg_restore
+      在裝載數據的時候執行一些命令臨時關閉在目標表上的觸發器。
+      如果你在表上有完整性檢查或者其它觸發器，
+      而你又不希望在裝載數據的時候激活它們，那麼可以使用這個選項。
+    <p class="Pp">
+       目前，爲 <b>--disable-triggers</b>
+        發出的命令必須以超級用戶發出。
+        因此，你應該也要用
+        -S
+        聲明一個超級用戶名，或者更好是設置
+        <b>--use-set-session-authorization</b> 並且以
+        PostgreSQL
+        超級用戶身份運行
+        pg_restore。</p>
+  </dd>
+</dl>
+<p class="Pp"><b>pg_restore</b>
+    還接受下面的命令行參數做爲聯接參數：</p>
+<dl class="Bl-tag">
+  <dt><b>-h </b><i>host</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--host=</b><i>host</i><b></b></dt>
+  <dd>
+    
+      聲明服務器運行的機器的主機名。
+      如果數值以斜扛開頭，那麼它被用做
+      Unix 域套接字的目錄。
+      缺省是從 PGHOST
+      環境變量中獲取的（如果設置了），
+      否則將嘗試進行 Unix
+      域套接字。</dd>
+  <dt><b>-p </b><i>port</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--port=</b><i>port</i><b></b></dt>
+  <dd>
+     聲明服務器偵聽的 TCP
+      端口或者本地的 Unix
+      域套接字文件擴展。
+      缺省是環境變量 PGPORT
+      的值（如果設置了的話），
+      否則就說編譯的缺省。</dd>
+  <dt><b>-U </b><i>username</i><b></b></dt>
+  <dd>
+    
+      以給出用戶身分聯接。</dd>
+  <dt><b>-W</b></dt>
+  <dd>
+    
+      強制給出口令提示。如果服務器要求口令認證，那麼這個應該自動發生。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ENVIRONMENT_環境">ENVIRONMENT 環境<a class="anchor" href="#ENVIRONMENT_%E7%92%B0%E5%A2%83">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>PGHOST</b></dt>
+  <dd></dd>
+  <dt><b>PGPORT</b></dt>
+  <dd></dd>
+  <dt><b>PGUSER</b></dt>
+  <dd>
+     缺省連接參數。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DIAGNOSTICS_診斷">DIAGNOSTICS 診斷<a class="anchor" href="#DIAGNOSTICS_%E8%A8%BA%E6%96%B7">¶</a></h1>
+
+  當使用-d選項聲明瞭直接數據庫聯接時，
+  pg_restore 在內部執行 SQL
+  語句。如果你運行 pg_restore
+  出了毛病，
+  請確保你能用類似
+  <a href="../../buster/manpages-zh/psql.1.zh_TW.html">psql(1)</a>
+  這樣的東西從數據庫中選取信息。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES_注意">NOTES 注意<a class="anchor" href="#NOTES_%E6%B3%A8%E6%84%8F">¶</a></h1>
+
+  如果你的安裝給template1數據庫增加了任何你自己的東西，
+  那麼請注意把 pg_dump
+  的輸出恢復到一個真正空的數據庫中；
+  否則你可能會收到因爲重複定義所追加的對象而造成的錯誤信息。要製作一個沒有任何本地附屬物的數據庫，
+  可以從template0而不是template1拷貝，比如：
+<p class="Pp"></p>
+<pre>CREATE DATABASE foo WITH TEMPLATE template0;
+
+</pre>
+<p class="Pp"><b>pg_restore</b>
+    的侷限在下面列出。</p>
+<dl class="Bl-tag">
+  <dt>•</dt>
+  <dd>
+    
+      當向一個已經存在的表恢復數據，並且還使用了
+      <b>--disable-triggers</b> 選項時， pg_restore
+      在插入數據前放出一些查詢關閉用戶表上的觸發器，
+      在數據插入完成後重新打開它們。如果恢復的中途停止，那麼系統表可能處於錯誤狀態。</dd>
+  <dt>•</dt>
+  <dd><b>pg_restore</b>
+      將不會爲單一的表恢復大對象。
+      如果一個歸檔包含大對象，那麼所有大對象都將被恢復。</dd>
+</dl>
+<p class="Pp">
+   又見參閱 <a href="../../buster/manpages-zh/pg_dump.1.zh_TW.html">pg_dump(1)</a>
+    的文擋獲取有關 pg_dump
+    的侷限的細節。</p>
+<p class="Pp">
+  
+    一旦完成恢復，最好在每個恢復的對象上運行
+    <b>ANALYZE</b>，
+    以便給優化器有用的統計。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES_例子">EXAMPLES 例子<a class="anchor" href="#EXAMPLES_%E4%BE%8B%E5%AD%90">¶</a></h1>
+
+  把一個包含大對象的叫
+  mydb
+  的數據庫轉儲到一個tar文件：
+<p class="Pp"></p>
+<pre>$ <b>pg_dump -Ft -b mydb &gt; db.tar</b>
+
+</pre>
+<p class="Pp">
+  
+    把這個數據庫恢復到現有的叫
+    newdb
+    的數據庫中（連同BLOB）：</p>
+<p class="Pp"></p>
+<pre>$ <b>pg_restore -d newdb db.tar</b>
+
+</pre>
+<p class="Pp">
+  
+    要對項目重新排序，首先必須轉儲歸檔的目錄：</p>
+<p class="Pp"></p>
+<pre>$ <b>pg_restore -l archive.file &gt; archive.list</b>
+
+</pre>
+
+  這個文件由一行頭和每個項目一行組成，比如。
+<p class="Pp"></p>
+<pre>;
+; Archive created at Fri Jul 28 22:28:36 2000
+;     dbname: birds
+;     TOC Entries: 74
+;     Compression: 0
+;     Dump Version: 1.4-0
+;     Format: CUSTOM
+;
+;
+; Selected TOC Entries:
+;
+2; 145344 TABLE species postgres
+3; 145344 ACL species
+4; 145359 TABLE nt_header postgres
+5; 145359 ACL nt_header
+6; 145402 TABLE species_records postgres
+7; 145402 ACL species_records
+8; 145416 TABLE ss_old postgres
+9; 145416 ACL ss_old
+10; 145433 TABLE map_resolutions postgres
+11; 145433 ACL map_resolutions
+12; 145443 TABLE hs_old postgres
+13; 145443 ACL hs_old
+
+</pre>
+
+  這裏分號是註釋分隔符，而行開頭的數字代表賦給每個項目的內部歸檔
+  ID。
+<p class="Pp">
+  
+    文件內的行可以註釋掉，刪除和/或重新排列。比如，</p>
+<p class="Pp"></p>
+<pre>10; 145433 TABLE map_resolutions postgres
+;2; 145344 TABLE species postgres
+;4; 145359 TABLE nt_header postgres
+6; 145402 TABLE species_records postgres
+;8; 145416 TABLE ss_old postgres
+
+</pre>
+ 可以用做 pg_restore
+  的輸入並且只會恢復項目
+  10 和
+  6，（以這個順序）：
+<p class="Pp"></p>
+<pre>$ <b>pg_restore -L archive.list archive.file</b>
+
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="HISTORY_歷史">HISTORY 歷史<a class="anchor" href="#HISTORY_%E6%AD%B7%E5%8F%B2">¶</a></h1>
+<b>pg_restore</b>
+  工具第一次出現在 PostgreSQL
+  7.1。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO_參見">SEE ALSO 參見<a class="anchor" href="#SEE_ALSO_%E5%8F%83%E8%A6%8B">¶</a></h1>
+<a href="../../buster/manpages-zh/pg_dump.1.zh_TW.html">pg_dump(1)</a>, <a href="../../buster/manpages-zh/pg_dumpall.1.zh_TW.html">pg_dumpall(1)</a>, <a href="../../buster/manpages-zh/psql.1.zh_TW.html">psql(1)</a>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="譯者">譯者<a class="anchor" href="#%E8%AD%AF%E8%80%85">¶</a></h1>
+<b>Postgresql 中文網站</b> <b>何偉平
+  &lt;laser@pgsqldb.org&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-02</td>
+    <td class="foot-os">Application</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+pg_restore.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-10T09:38:50Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"pg_restore(1)\"}}]}"
+</script>

@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>create_type(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-tr/create_type.7.tr.html" hreflang="tr">
+<link rel="alternate" href="../../buster/manpages-zh/create_type.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/create_type.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; create_type(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/create_type.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/create_type.7.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS" title="SYNOPSIS">SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#PARAMETERS_%E5%8F%82%E6%95%B0" title="PARAMETERS 参数">PARAMETERS 参数</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES_%E6%B3%A8%E6%84%8F" title="NOTES 注意">NOTES 注意</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#EXAMPLES_%E4%BE%8B%E5%AD%90" title="EXAMPLES 例子">EXAMPLES 例子</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#COMPATIBILITY_%E5%85%BC%E5%AE%B9%E6%80%A7" title="COMPATIBILITY 兼容性">COMPATIBILITY 兼容性</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SEE_ALSO_%E5%8F%82%E8%A7%81" title="SEE ALSO 参见">SEE ALSO 参见</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AF%91%E8%80%85" title="译者">译者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/create_type.7.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/create_type.7.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/create_type.7.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-tr/create_type.7.tr.html" title="Turkish (tr)">Türkçe</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/create_type.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/create_type.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">CREATE TYPE(7)</td>
+    <td class="head-vol">SQL Commands</td>
+    <td class="head-rtitle">CREATE TYPE(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+CREATE TYPE -
+  定义一个新的数据类型
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS">SYNOPSIS<a class="anchor" href="#SYNOPSIS">¶</a></h1>
+<pre>CREATE TYPE <i>name</i> AS
+    ( <i>attribute_name</i> <i>data_type</i> [, ... ] )
+CREATE TYPE <i>name</i> (
+    INPUT = <i>input_function</i>,
+    OUTPUT = <i>output_function</i>
+    [ , RECEIVE = <i>receive_function</i> ]
+    [ , SEND = <i>send_function</i> ]
+    [ , INTERNALLENGTH = { <i>internallength</i> | VARIABLE } ]
+    [ , PASSEDBYVALUE ]
+    [ , ALIGNMENT = <i>alignment</i> ]
+    [ , STORAGE = <i>storage</i> ]
+    [ , DEFAULT = <i>default</i> ]
+    [ , ELEMENT = <i>element</i> ]
+    [ , DELIMITER = <i>delimiter</i> ]
+)
+
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>CREATE TYPE</b>
+  为当前数据库注册一个新的数据类型。
+  定义该类型的用户成为其所有者。
+<p class="Pp">
+  
+    如果给出模式名，那么该类型是在指定模式中创建。
+    否则它是在当前模式中创建。类型名必需和同一模式中任何现有的类型或者域不同。
+    （因为表和数据类型有联系，类型名不能和同模式中的表名字冲突。）</p>
+<section class="Ss">
+<h2 class="Ss" id="COMPOSITE_TYPES_复合类型">COMPOSITE TYPES 复合类型<a class="anchor" href="#COMPOSITE_TYPES_%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B">¶</a></h2>
+ 第一种形式的 CREATE TYPE
+  创建一个复合类型。
+  复合类型是通过一列属性名和数据类型声明的。这样实际上和一个表的行类型一样，
+  但是如果我们只是想定义一个类型，那么使用
+  CREATE TYPE
+  避免了直接创建实际的表。
+  一个独立的复合类型对于一个函数的返回类型非常有用。
+</section>
+<section class="Ss">
+<h2 class="Ss" id="BASE_TYPES_基本类型">BASE TYPES 基本类型<a class="anchor" href="#BASE_TYPES_%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B">¶</a></h2>
+ 第二种形式的CREATE
+  TYPE创建一种新的基本类型（标量类型）。
+  参数可以以任意的顺序出现，而不是上面显示的那样。并且大多数都是可选的。
+  它要求要在定义类型之前先注册两个函数（用CREATE
+  FUNCTION命令）。 支持函数
+  input_function 和 output_function
+  是必须的， 而函数
+  receive_function 和 send_function
+  是可选的。
+  通常，这些函数必须用
+  C
+  或者其它低层语言编写。
+<p class="Pp">
+   函数 input_function
+    将该类型的外部文本形式转换成可以被对该类型操作的操作符和函数识别的内部形式。
+    output_function 用做相反用途。
+    输入函数可以声明为接受一个类型为
+    c_string
+    的参数，或者接受三个类型分别为
+    c_string，oid，integer 的参数。
+    （第一个参数是 C
+    字串形式的输入文本，第二个是在该类型为数组类型时其元素的类型，
+    第三个是目标字段的typmod，如果已知的话。）
+    它应该返回一个该数据类型本身的数值。
+    输出函数可以声明为接受一个类型为新数据类型的参数，
+    或者接受两个类型，第二个参数的类型是
+    oid。
+    第二个参数也是用于数组类型的数组元素类型。输出函数应该返回类型
+    cstring。</p>
+<p class="Pp">
+   可选的 receive_function
+    把该类型的外部二进制表现形式转换成内部表现形式。
+    如果没有提供这个函数，那么该类型不能用二进制输入。二进制格式应该选取那种转换成内部格式比较容易的，同时还有一定移植性的。
+    （比如，标准的整数数据类型使用网络字节序作为外部的二进制表现形式，而内部表现形式是机器的本机字节序。）
+    接收函数应该声明为接受一个类型为
+    internal
+    的参数，或者两个类型分别为
+    internal 和 oid 的参数。
+    它必须返回一个数据类型自身的数值。（第一个参数是一个指向一个
+    StringInfo
+    缓冲区的，保存接受字节串的指针；
+    可选的第二个参数是元素类型——如果类型是一个数组类型的话。）类似的，可选的
+    send_function
+    把类型转换为外部二进制表现形式。
+    如果没有提供这些函数，那么类型就不能用二进制方式输出。发送函数可以声明为接收一个新数据类型，
+    或者接收两个参数，第二个参数的类型是
+    oid。第二个参数仍然是用做数组类型的。
+    发送函数必须返回
+    bytea。</p>
+<p class="Pp">
+  
+    这个时候你应该觉得奇怪，就是输入和输出函数怎么可以声明为返回新类型的结果或者是接受新类型的参数，
+    而且是在新类型创建之前就需要创建它们。
+    答案是输入函数必须先创建，然后是输出函数，最后是数据类型。
+    PostgreSQL
+    将首先把新数据类型的名字看作输入函数的返回类型。
+    它将创建一个&#34;壳&#34;类型，这个类型只是在
+    pg_type里面的一个占位符，然后把输入函数定义和这个壳类型连接起来。
+    类似的是输出函数将连接到（现在已经存在）的壳类型。最后，
+    CREATE TYPE
+    把这个壳类型替换成完整的类型定义，这样就可以使用新类型了。</p>
+<p class="Pp">
+  
+    尽管新类型的内部表现形式只有
+    I/O
+    函数和其它你创建来使用该类型的函数了解，
+    但内部表现还是有几个属性必须为
+    PostgreSQL 声明。
+    这些中最重要的是
+    internallength。
+    基本数据类型可定义成为定长，这时
+    internallength
+    是一个正整数，也可以是变长的，通过把
+    internallength 设置为 VARIABLE
+    表示。（在内部，这个状态
+    是通过将typlen设置为 -1
+    实现的。）所有变长类型的内部形式都必须以一个四字节整数开头，这个整数给出此类型这个数值的全长。</p>
+<p class="Pp">
+   可选的标记 PASSEDBYVALUE
+    表明该类型的数值是用值传递的，
+    而不是用引用。你不能传递那些内部形式大于
+    Datum （大多数机器上是 4
+    字节，有些是 8
+    字节）类型的尺寸的数据类型的值。</p>
+<p class="Pp">alignment
+    参数声明该数据类型要求的对齐存储方式。
+    允许的数值等效于按照
+    1，2，4，或者 8
+    字节边界对齐。请注意变长类型必须有至少
+    4 字节的对齐，
+    因为它们必须包含一个
+    int4
+    作为它们的第一个成份。</p>
+<p class="Pp">storage
+    参数允许为变长数据类型选择存储策略。
+    （定长类型只允许使用
+    plain）。 plain
+    声明该数据类型总是用内联的方式而不是压缩的方式存储。
+    extended
+    声明系统将首先试图压缩一个长的数据值，然后如果它仍然太长的话就将它的值移出主表的行，
+    但系统将不会压缩它。
+    main
+    允许压缩，但是不赞成把数值移动出主表。
+    （用这种存储策略的数据项可能仍将移动出主表，如果不能放在一行里的话，
+    但是它们将比 extended 和 external
+    项更愿意呆在主表里。）</p>
+<p class="Pp">
+  
+    如果用户希望字段的数据类型缺省时不是
+    NULL，而是其它什么东西，
+    那么你可以声明一个缺省值。
+    在 DEFAULT
+    关键字里面声明缺省值。
+    （这样的缺省可以被附着在特定字段上的明确的
+    DEFAULT 子句覆盖。）</p>
+<p class="Pp">
+  
+    要表示一个类型是数组，用
+    ELEMENT
+    关键字声明数组元素的类型。
+    比如，要定义一个 4
+    字节整数(int4)的数组，声明</p>
+<p class="Pp">ELEMENT = int4</p>
+<p class="Pp">。
+    有关数组类型的更多细节在下面描述。</p>
+<p class="Pp">
+  
+    要声明用于这种类型数组的外部形式的数值之间的分隔符，可用
+    delimiter
+    声明指定分隔符。缺省的分隔符是逗号（,）。
+    请注意分隔符是和数组元素类型相关联，而不是数组类型本身。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="ARRAY_TYPES_数组类型">ARRAY TYPES 数组类型<a class="anchor" href="#ARRAY_TYPES_%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B">¶</a></h2>
+
+  在创建用户定义数据类型的时候，PostgreSQL
+  自动创建一个与之关联的数组类型，其名字由该基本类型的名字前缀一个下划线组成。
+  分析器理解这个命名传统，并且把对类型为
+  foo[]
+  的字段的请求转换成对类型为
+  _foo
+  的字段的请求。这个隐含创建的数组类型是变长并且使用内建的输入和输出函数
+  array_in 和 array_out。
+<p class="Pp">
+  
+    你很可能会问如果系统自动制作正确的数组类型，那为什么有个
+    ELEMENT选项？使用 ELEMENT
+    有用的唯一的场合是在你制作的定长类型碰巧在内部是一个一定数目相同事物的数组，
+    而你又想允许这 N
+    个事物可以通过脚标直接关联，以及那些你准备把该类型当做整体进行的操作。
+    比如，类型 name
+    就允许其构成 char
+    用这种方法关联。
+    一个二维的 point
+    类型也可以允许其两个构成浮点型按照类似
+    point[0] 和 point[1] 的方法关联。
+    请注意这个功能只适用与那些内部形式是一个相同的定长域的序列的类型。
+    一个可以脚标化的变长类型必须有被
+    array_in 和 array_out
+    使用的一般化的内部表现形式。
+    出于历史原因（也就是说，那些明显错误但补救来得太迟的问题），定长数组类型的脚标从零开始，而不是象变长类型那样的从一开始。</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="PARAMETERS_参数">PARAMETERS 参数<a class="anchor" href="#PARAMETERS_%E5%8F%82%E6%95%B0">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b></b><i>name</i><b></b></dt>
+  <dd>
+    
+      将要创建的类型名（可以有模式修饰）。</dd>
+  <dt><b></b><i>attribute_name</i><b></b></dt>
+  <dd>
+    
+      复合类型的一个属性（字段）的名字。</dd>
+  <dt><b></b><i>data_type</i><b></b></dt>
+  <dd>
+    
+      一个要成为一个复合类型的字段的现有数据类型的名字。</dd>
+  <dt><b></b><i>input_function</i><b></b></dt>
+  <dd>
+     一个函数的名称，
+      将数据从外部类型转换成内部类型。</dd>
+  <dt><b></b><i>output_function</i><b></b></dt>
+  <dd>
+     一个函数的名称，
+      将数据从内部格式转换成适于显示的形式。</dd>
+  <dt><b></b><i>receive_function</i><b></b></dt>
+  <dd>
+    
+      把数据从类型的外部二进制形式转换成其内部形式的函数的名字。</dd>
+  <dt><b></b><i>send_function</i><b></b></dt>
+  <dd>
+    
+      把数据从类型的内部形式转换成其外部二进制形式的函数名。</dd>
+  <dt><b></b><i>internallength</i><b></b></dt>
+  <dd>
+    
+      一个数值常量，说明新类型的内部表现形式的长度。缺省的假设是它是变长的。</dd>
+  <dt><b></b><i>alignment</i><b></b></dt>
+  <dd>
+    
+      该数据类型的存储对齐要求。如果声明了，必须是
+      char， int2， int4 或 double；
+      缺省是 int4。</dd>
+  <dt><b></b><i>storage</i><b></b></dt>
+  <dd>
+    
+      该数据类型的存储策略。如果声明了，必须是
+      plain，external， extended，或 main；
+      缺省是 plain。</dd>
+  <dt><b></b><i>default</i><b></b></dt>
+  <dd>
+    
+      该类型的缺省值。通常是省略它的，所以缺省是
+      NULL。</dd>
+  <dt><b></b><i>element</i><b></b></dt>
+  <dd>
+    
+      被创建的类型是数组；这个声明数组元素的类型。</dd>
+  <dt><b></b><i>delimiter</i><b></b></dt>
+  <dd>
+    
+      将用做数组的数据元素之间分隔符的字符。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES_注意">NOTES 注意<a class="anchor" href="#NOTES_%E6%B3%A8%E6%84%8F">¶</a></h1>
+
+  用户定义类型名不能以下划线（_）
+  开头而且只能有 62
+  个字符长。（或者通常是
+  NAMEDATALEN-2，
+  而不是其它名字那样的可以有
+  NAMEDATALEN-1 个字符）。
+  以下划线开头的类型名被解析成内部创建的数组类型名。
+<p class="Pp">
+   在 PostgreSQL 版本 7.3
+    以前，我们要通过使用占位伪类型
+    opaque
+    代替函数的前向引用来避免创建壳类型。
+    7.3 之前 cstring
+    参数和结果同样需要声明伪
+    opaque。
+    要支持装载旧的转储外那间，CREATE
+    TYPE 将接受那些用
+    opaque声明的函数，
+    但是它回发出一条通知并且用正确的类型改变函数的声明。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES_例子">EXAMPLES 例子<a class="anchor" href="#EXAMPLES_%E4%BE%8B%E5%AD%90">¶</a></h1>
+
+  这个例子创建一个复合类型并且在一个函数定义中使用它：
+<p class="Pp"></p>
+<pre>CREATE TYPE compfoo AS (f1 int, f2 text);
+CREATE FUNCTION getfoo() RETURNS SETOF compfoo AS
+  &#39;SELECT fooid, fooname FROM foo&#39; LANGUAGE SQL;
+
+</pre>
+<p class="Pp">
+  
+    这个命令创建box数据类型，并且将这种类型用于一个表定义：</p>
+<p class="Pp"></p>
+<pre>CREATE TYPE box (
+    INTERNALLENGTH = 16,
+    INPUT = my_box_in_function,
+    OUTPUT = my_box_out_function
+);
+CREATE TABLE myboxes (
+    id integer,
+    description box
+);
+
+</pre>
+<p class="Pp">
+   如果 box
+    的内部结构是一个四个
+    float4
+    的数组，我们可以说</p>
+<p class="Pp"></p>
+<pre>CREATE TYPE box (
+    INTERNALLENGTH = 16,
+    INPUT = my_box_in_function,
+    OUTPUT = my_box_out_function,
+    ELEMENT = float4
+);
+
+</pre>
+ 它允许一个 box
+  的数值成分成员可以用脚标访问。
+  否则该类型和前面的行为一样。
+<p class="Pp">
+  
+    这条命令创建一个大对象类型并将其用于一个表定义：</p>
+<p class="Pp"></p>
+<pre>CREATE TYPE bigobj (
+    INPUT = lo_filein, OUTPUT = lo_fileout,
+    INTERNALLENGTH = VARIABLE
+);
+CREATE TABLE big_objs (
+    id integer,
+    obj bigobj
+);
+
+</pre>
+<p class="Pp">
+  
+    更多的例子，包括合适的输入和输出函数，在
+    Chapter 31``Extending SQL&#39;&#39; in the documentation。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="COMPATIBILITY_兼容性">COMPATIBILITY 兼容性<a class="anchor" href="#COMPATIBILITY_%E5%85%BC%E5%AE%B9%E6%80%A7">¶</a></h1>
+<b>CREATE TYPE</b> 命令是 PostgreSQL
+  扩展。在 SQL99 里有一个 CREATE
+  TYPE 语句，但是细节上和
+  PostgreSQL 的有比较大区别。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO_参见">SEE ALSO 参见<a class="anchor" href="#SEE_ALSO_%E5%8F%82%E8%A7%81">¶</a></h1>
+CREATE FUNCTION [<a href="../../buster/manpages-zh/create_function.7.zh_CN.html">create_function(7)</a>], DROP TYPE [<b>drop_type</b>(l)]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="译者">译者<a class="anchor" href="#%E8%AF%91%E8%80%85">¶</a></h1>
+<b>Postgresql 中文网站</b> <b>何伟平
+  &lt;laser@pgsqldb.org&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-02</td>
+    <td class="foot-os">SQL - Language Statements</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+create_type.7.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:24Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"create_type(7)\"}}]}"
+</script>

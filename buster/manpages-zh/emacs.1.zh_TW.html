@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>emacs(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/jove/emacs.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/emacs-gtk/emacs.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/emacs-nox/emacs.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/emacs.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/emacs.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; emacs(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/emacs.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/emacs.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_%28SYNOPSIS%29" title="總覽 (SYNOPSIS)">總覽 (SYNOPSIS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_%28DESCRIPTION%29" title="描述 (DESCRIPTION)">描述 (DESCRIPTION)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#_%E6%89%8B%E5%86%8A%E9%A0%81_%28MANUALS%29" title=" 手冊頁 (MANUALS)"> 手冊頁 (MANUALS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6_%28FILES%29" title="文件 (FILES)">文件 (FILES)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%8C%AF%E8%AA%A4_%28BUGS%29" title="錯誤 (BUGS)">錯誤 (BUGS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%84%A1%E9%99%90%E5%88%B6_%28UNRESTRICTIONS%29" title="無限制 (UNRESTRICTIONS)">無限制 (UNRESTRICTIONS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_%28SEE_ALSO%29" title="參見 (SEE ALSO)">參見 (SEE ALSO)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85_%28AUTHORS%29" title="作者 (AUTHORS)">作者 (AUTHORS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B" title="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/emacs.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/emacs.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/emacs.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/jove/emacs.1.en.html" title="English (en)">English</a>
+
+<span class="pkgname">jove</span>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/emacs-gtk/emacs.1.en.html" title="English (en)">English</a>
+
+<span class="pkgname">emacs-gtk</span>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/emacs-nox/emacs.1.en.html" title="English (en)">English</a>
+
+<span class="pkgname">emacs-nox</span>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/emacs.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/emacs.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">EMACS(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">EMACS(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<p class="Pp"></p>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+emacs - GNU Emacs
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_(SYNOPSIS)">總覽 (SYNOPSIS)<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_(SYNOPSIS)">¶</a></h1>
+<b>emacs</b> [ <i>command-line switches</i> ] [ <i>files ...</i> ]
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_(DESCRIPTION)">描述 (DESCRIPTION)<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_(DESCRIPTION)">¶</a></h1>
+<i>GNU Emacs</i> 是 <i>Emacs</i> 的 一個
+  版本, 是由 最早的 (PDP-10)
+  <i>Emacs</i> 的 作者 Richard Stallman 寫的.
+<br/>
+GNU Emacs 的 主要 文檔 都 在 GNU Emacs
+  手冊 裏, 可以 通過 Info (Emacs
+  的 一個 子系統) 在線
+  瀏覽. 請 在那兒 尋找
+  完整的 最新的 文檔.
+  自願者們 不定時 的
+  更新 這個 文檔; 而 Emacs 的
+  維護者們 就可以 抽出
+  更多的 時間 來 用在
+  其它 更有用的 項目上.
+<br/>
+對 用戶 來講, 其它 <i>Emacs</i>
+  提供的 功能 GNU Emacs 都有,
+  而且 因爲 它的 命令 是
+  用 Lisp 寫的, 所以 擴展性
+  很好.
+<p class="Pp"><i>Emacs</i> 擁有 一個
+    可擴展的 交互式的
+    幫助 功能, 但 這 要求
+    你 知道 怎麼 操縱 <i>Emacs</i>
+    窗口 和 緩衝區. CTRL-h (backspace
+    或者 CTRL-h) 進入 幫助 系統.
+    幫助 教程 (CTRL-h t) 是 一個
+    交互式的 教程, 可以 在
+    很短 的 時間內 教會
+    初學者 <i>Emacs</i> 的 基本
+    操作. 幫助 Apropos (CTRL-h a) 幫助
+    你 根據 其 功能 找到
+    命令, 幫助 字符 (CTRL-h c)
+    描述 一個 指定 的 字符
+    的 作用, 幫助 功能 (CTRL-h f)
+    描述 一個 由 名稱 指定
+    的 Lisp 函數.</p>
+<p class="Pp"><i>Emacs</i> 的 能夠 撤銷
+    你的 緩衝區 的 很多 層
+    修改, 所以 它 很 容易
+    從 編輯 錯誤 中 恢復.</p>
+<p class="Pp"><i>GNU Emacs</i> 的 很多 專門
+    的 包 能夠 收發 郵件
+    (RMail/Mail), 大綱 編輯 (Outline), 編譯
+    (Compile), 在 <i>Emacs</i> 窗口 中 運行
+    子 shell (Shell), 執行 Lisp
+    讀-估值-顯示 (read-eval-print)
+    循環 (Lisp-Interaction-Mode), 以及 自動
+    心理 療法 (Doctor).</p>
+<p class="Pp">這有 一個 可擴展
+    的 參考 手冊, 但是
+    就算 其它 Emacs 的 用戶
+    沒有 這個 手冊, 也能
+    很快 適應 的. 剛 開始
+    使用 <i>Emacs</i> 的 用戶 也
+    能夠 通過 它的 自包含
+    的 文檔 功能 學習
+    教程, 很快 就能 使用
+    其 基本 的 特性.</p>
+<p class="Pp"><small>Emacs Options</small></p>
+<p class="Pp">以下 是 常用 的
+    選項:</p>
+<dl class="Bl-tag">
+  <dt><i>file</i></dt>
+  <dd>編輯 <i>file.</i></dd>
+  <dt><b>+</b><i>number</i></dt>
+  <dd>跳到 <i>number</i> 指定 的 行
+      (不要 在 &#34;+&#34; 和 number 間
+      加個 空格).</dd>
+  <dt><b>-q</b></dt>
+  <dd>不 裝載 初始化 文件.</dd>
+  <dt><b>-u</b><i> user</i></dt>
+  <dd>裝載 <i>user</i> 的 初始化
+      文件.</dd>
+  <dt><b>-t</b><i> file</i></dt>
+  <dd>把 指定 的 <i>file</i> 作爲
+      終端, 而 不是 stdin/stdout. 這
+      必須 是 命令行 的
+      第一個 參數.</dd>
+</dl>
+<p class="Pp">下面 的 選項 是
+    面向 lisp 的(這些 選項
+    根據 先後 順序 處理):</p>
+<dl class="Bl-tag">
+  <dt><b>-f</b><i> function</i></dt>
+  <dd>執行 lisp 函數 <i>function.</i></dd>
+  <dt><b>-l</b><i> file</i></dt>
+  <dd>裝載 文件 <i>file</i> 裏面 的
+      lisp 代碼.</dd>
+</dl>
+<p class="Pp">下面 的 選項 在 把
+    <i>Emacs</i> 作爲 批處理
+    編輯器 時 很有用:</p>
+<dl class="Bl-tag">
+  <dt><b>-batch</b></dt>
+  <dd>當 批處理 模式 編輯.
+      編輯器 會 把 消息
+      發送 至 stderr. 這個 選項
+      必須 是 參數 列表 中
+      的 第一個. 你 必須 用 -l
+      和 -f 來 指定 執行 的
+      文件 和 調用 的 函數.</dd>
+  <dt><b>-kill</b></dt>
+  <dd>在 批處理 模式 時
+      退出 <i>Emacs.</i></dd>
+</dl>
+<p class="Pp"><small>在 X 下 用 Emacs</small></p>
+<p class="Pp"><i>Emacs</i> 已經 被 修改 爲
+    在 X 窗口 系統 下 能
+    很好的 運行. 如果 你在
+    X 下 運行 <i>Emacs,</i> 它會 創建
+    它 自己 的 窗口 來
+    顯示. 也許 你想 把
+    編輯器 作爲 後臺 進程
+    運行, 這樣 你 仍然
+    可以 用 你原來 的
+    窗口.</p>
+<p class="Pp">啓動 <i>Emacs</i> 可以 用
+    下面 的 X 選項:</p>
+<dl class="Bl-tag">
+  <dt><b>-name</b><i> name</i></dt>
+  <dd>指定 初始 <i>Emacs</i> 窗口 的
+      名字. 這個 選項 不僅
+      控制 窗口 標題 也
+      控制 X 資源 的 查找.</dd>
+  <dt><b>-title</b><i> name</i></dt>
+  <dd>指定 初始 X 窗口 的
+      標題.</dd>
+  <dt><b>-r</b></dt>
+  <dd>用 翻轉 影像(reverse video) 顯示
+      <i>Emacs</i> 窗口.</dd>
+  <dt><b>-i</b></dt>
+  <dd>當 圖標化 <i>Emacs</i> 窗口 時
+      用 &#34;kitchen sink&#34; 位圖 圖標.</dd>
+  <dt><b>-font</b><i> font, </i><b>-fn</b><i> font</i></dt>
+  <dd>把 <i>Emacs</i> 窗口 的 字體
+      設置 成 <i>font</i> 指定 的
+      字體. 你會在 <i>/usr/lib/X11/fonts</i>
+      目錄 下 找到 許多 <i>X</i>
+      字體. 注意 <i>Emacs</i> 只 接受
+      固定 寬度 字體. 根據 X11R4
+      字體 命名 規定, 所有
+      字體名 第 7 字段 是
+      &#34;m&#34; 或者 &#34;c&#34; 的 字體
+      都是 固定 寬度 字體.
+      還有, 字體名 是
+      <i>width</i>x<i>height</i> 形式 的 字體
+      一般 也是 固定
+      寬度的, 就像 <i>fixed</i> 字體
+      一樣. 更多 的 信息
+      參見 <a href="../../buster/x11-utils/xlsfonts.1.en.html">xlsfonts(1)</a>. 在 指定
+      字體 的 時候 請注意
+      在 選項 和 字體名
+      中間 加 一個 空格.</dd>
+  <dt><b>-b</b><i> pixels</i></dt>
+  <dd>Set the 把 <i>Emacs</i> 窗口 邊框
+      寬度 設置 成 <i>pixels</i> 指定
+      的 像素. 默認的 是
+      窗口 每邊 都是 一個
+      像素.</dd>
+  <dt><b>-ib</b><i> pixels</i></dt>
+  <dd>把 窗口 內邊框 寬度
+      設置 成 <i>pixels</i> 指定 的
+      像素. 默認的 是 窗口
+      每邊 都 填充 一個
+      像素.</dd>
+  <dt><b>-geometry</b><i> geometry</i></dt>
+  <dd>設置 <i>Emacs</i> 窗口 的 寬度,
+      高度, 以及 位置, 其
+      格式 是 標準 的 X 格式;
+      具體 參見 <i>X</i>(1)<i>.</i> 寬度
+      和 高度 是 用 字符
+      指定的; 默認 的 是 80
+      乘以 24.</dd>
+  <dt><b>-fg</b><i> color</i></dt>
+  <dd>如果 是 彩色 顯示器,
+      設置 文本 的 顏色. 在
+      <i>/usr/lib/X11/rgb.txt</i> 文件 中 有
+      可用 的 顏色 名字
+      列表.</dd>
+  <dt><b>-bg</b><i> color</i></dt>
+  <dd>如果 是 彩色 顯示器,
+      設置 窗口 背景 顏色.</dd>
+  <dt><b>-bd</b><i> color</i></dt>
+  <dd>如果 是 彩色 顯示器,
+      設置 窗口 邊框 顏色.</dd>
+  <dt><b>-cr</b><i> color</i></dt>
+  <dd>如果 是 彩色 顯示器,
+      設置 窗口 文本 光標
+      的 顏色.</dd>
+  <dt><b>-ms</b><i> color</i></dt>
+  <dd>如果 是 彩色 顯示器,
+      設置 窗口 鼠標 光標
+      的 顏色.</dd>
+  <dt><b>-d</b><i> displayname, </i><b>-display</b><i> displayname</i></dt>
+  <dd>在 <i>displayname</i> 指定 的
+      顯示器 上 創建 <i>Emacs</i>
+      窗口. 它 必須 是
+      命令行 的 第一個
+      參數.</dd>
+  <dt><b>-nw</b></dt>
+  <dd>告訴 <i>Emacs</i> 不要 用 它的 X
+      界面. 如果 你 在 一個
+      <a href="../../buster/xterm/xterm.1.en.html">xterm(1)</a> 窗口 中 調用 <i>Emacs</i>
+      並且 加上了 這個
+      選項, 會在 這個 窗口
+      中 顯示, 而 不是 新建
+      一個 X 窗口. 它 必須 是
+      命令行 的 第一個
+      參數.</dd>
+</dl>
+<p class="Pp">你 可以 在 你的
+    <i>.Xresources</i> 文件 裏面 爲
+    你的 <i>Emacs</i> 窗口 設置 其
+    <i>X</i> 的 默認 值(見 <a href="../../buster/x11-xserver-utils/xrdb.1.en.html">xrdb(1)</a>).
+    用 如下 的 格式:</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>emacs.keyword:value</dd>
+</dl>
+<p class="Pp"><i>value</i> 指定 了 <i>keyword</i> 的
+    默認值. <i>Emacs</i> 允許 你
+    設置 如下 關鍵字 的
+    默認值:</p>
+<dl class="Bl-tag">
+  <dt><b>font (<b>class</b><b> Font)</b></b></dt>
+  <dd>設置 窗口 文本 字體.</dd>
+  <dt><b>reverseVideo (<b>class</b><b> ReverseVideo)</b></b></dt>
+  <dd>如果 <i>reverseVideo</i> 的值 是 <i>on,</i>
+      窗口 就會 以 翻轉
+      影像 顯示.</dd>
+  <dt><b>bitmapIcon (<b>class</b><b> BitmapIcon)</b></b></dt>
+  <dd>如果 <i>bitmapIcon&#39;s</i> 的值 是 <i>on,</i>
+      窗口 就會 圖標化 爲
+      &#34;kitchen sink.&#34;</dd>
+  <dt><b>borderWidth (<b>class</b><b> BorderWidth)</b></b></dt>
+  <dd>以 像素 爲 單位 設置
+      窗口 的 邊框 寬度.</dd>
+  <dt><b>internalBorder (<b>class</b><b> BorderWidth)</b></b></dt>
+  <dd>以 像素 爲 單位 設置
+      窗口 的 內邊框 寬度.</dd>
+  <dt><b>foreground (<b>class</b><b> Foreground)</b></b></dt>
+  <dd>只對 彩色 顯示器
+      有用, 設置 窗口 的
+      文本 顏色.</dd>
+  <dt><b>background (<b>class</b><b> Background)</b></b></dt>
+  <dd>只對 彩色 顯示器
+      有用, 設置 窗口 的
+      背景 顏色.</dd>
+  <dt><b>borderColor (<b>class</b><b> BorderColor)</b></b></dt>
+  <dd>只對 彩色 顯示器
+      有用, 設置 窗口 的
+      邊框 顏色.</dd>
+  <dt><b>cursorColor (<b>class</b><b> Foreground)</b></b></dt>
+  <dd>只對 彩色 顯示器
+      有用, 設置 窗口 的
+      文本 光標 的 顏色.</dd>
+  <dt><b>pointerColor (<b>class</b><b> Foreground)</b></b></dt>
+  <dd>只對 彩色 顯示器
+      有用, 設置 窗口 的
+      鼠標 光標 的 顏色.</dd>
+  <dt><b>geometry (<b>class</b><b> Geometry)</b></b></dt>
+  <dd>設置 <i>Emacs</i> 窗口 的 寬度,
+      高度, 以及 位置 (同
+      上面 描述 的 一樣).</dd>
+  <dt><b>title (<b>class</b><b> Title)</b></b></dt>
+  <dd>設置 <i>Emacs</i> 窗口 的
+    標題.</dd>
+  <dt><b>iconName (<b>class</b><b> Title)</b></b></dt>
+  <dd>設置 <i>Emacs</i> 窗口 圖標 的
+      圖標名.</dd>
+</dl>
+<p class="Pp">如果 你 用的 是
+    黑白 顯示器, 窗口 特性
+    將會是 下面的 默認值:
+    前景 顏色 爲 黑色,
+    背景 顏色 爲 白色,
+    邊框 顏色 爲 灰色,
+    文本 和 鼠標 光標 顏色
+    爲 黑色.</p>
+<p class="Pp"><small>Using the Mouse</small></p>
+<p class="Pp">以下 是 X11 下 <i>Emacs</i> 的
+    鼠標鍵 綁定.</p>
+<p class="Pp">
+  <br/>
+  鼠標鍵	作用
+  <br/>
+  左鍵	設置點.
+  <br/>
+  中鍵	粘貼 文本.
+  <br/>
+  右鍵	把 文本 剪切 到 X
+    剪切 緩衝區.
+  <br/>
+  SHIFT-中鍵	把 文本 剪切 到 X
+    剪切 緩衝區.
+  <br/>
+  SHIFT-右鍵	粘貼 文本.
+  <br/>
+  CTRL-中鍵	把 文本 剪切 到 X
+    剪切 緩衝區 並且 刪除.
+  <br/>
+  CTRL-右鍵	選擇 窗口, 然後
+    分拆 成 2 個 窗口. 同
+    鍵入 CTRL-x 2 一樣.
+  <br/>
+  CTRL-SHIFT-左鍵	X buffer 菜單 -- 保持
+    按住 按鍵, 等 菜單
+    顯示 出來, 選擇
+    緩衝區, 釋放 按鍵. 要
+    取消, 把 鼠標 移出
+    菜單 然後 釋放 按鍵.
+  <br/>
+  CTRL-SHIFT-中鍵	X help 菜單 -- 彈處 Emacs
+    幫助 的 索引 菜單.
+  <br/>
+  CTRL-SHIFT-右鍵	用 鼠標 選擇
+    窗口, 關閉 其它 所有
+    窗口. 同 鍵入 CTRL-x 1 一樣.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="_手冊頁_(MANUALS)"> 手冊頁 (MANUALS)<a class="anchor" href="#_%E6%89%8B%E5%86%8A%E9%A0%81_(MANUALS)">¶</a></h1>
+你 可以 向 自由 軟件
+  基金會(GNU 軟件 的
+  開發者) 定購 GNU Emacs 手冊頁
+  的 印刷 拷貝. 定購 信息
+  參見 ORDERS 文件.
+<br/>
+你的 本地的 Emacs 維護者
+  可能 有 拷貝. 象 所有 FSF
+  的 軟件 和 印刷品 一樣 ,
+  所有的 人 都被 准許
+  製作 或 分發 Emacs 手冊頁,
+  同時 Emacs 源文件包 裏面
+  也 包含 手冊頁 的 Tex
+  源文件.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件_(FILES)">文件 (FILES)<a class="anchor" href="#%E6%96%87%E4%BB%B6_(FILES)">¶</a></h1>
+/usr/local/info - 所有 Info 文檔
+  瀏覽器(Emacs 的 一個
+  子系統) 文檔 的 所在地.
+  現在 不是 許多 Unix 系統
+  在 這裏 都有 文檔, 但是
+  所有 Emacs 手冊頁 文檔 都
+  以 一種 樹 結構 保存 在
+  這裏.
+<p class="Pp">/usr/local/share/emacs/$VERSION/src - C 源文件
+    以及 目標文件</p>
+<p class="Pp">/usr/local/share/emacs/$VERSION/lisp - Lisp
+    源文件 和 一些 定義
+    常用的 編輯 命令 的
+    已經 編譯 了的 文件.
+    有一些 文件 是 預先
+    裝載 了的; 另外 一些
+    則是 要用 的 時候 自動
+    裝載.</p>
+<p class="Pp">/usr/local/share/emacs/$VERSION/etc - GNU Emacs 用到
+    的 許多 程序, 還有
+    一些 包含 常用 信息 的
+    文件.</p>
+<p class="Pp">/usr/local/share/emacs/$VERSION/etc/DOC.* - 包含 GNU
+    Emacs 的 Lisp primitive 和 預先 裝載
+    的 Lisp 函數 的 文檔 描述
+    字符串. 這樣 可以 減小
+    Emacs 本身 的 大小.</p>
+<p class="Pp">/usr/local/share/emacs/$VERSION/etc/OTHER.EMACSES 討論
+    GNU Emacs vs. 其它 版本 的 Emacs.
+  <br/>
+  /usr/local/share/emacs/$VERSION/etc/SERVICE 向 GNU Emacs
+    用戶 提供 各種 服務
+    的人 的 列表, 包括
+    教育, 疑難 排解, 移植
+    和 定製 等.
+  <br/>
+  這些 文件 包含 一些 對
+    那些 想用 Emacs Lisp 擴展
+    語言(現在 還 沒有 這個
+    語言 的 完整 的 文檔)
+    寫 程序 的人 有用 的
+    信息.</p>
+<p class="Pp">/usr/local/com/emacs/lock - 爲 Emacs 正在
+    編輯 的 所有 的 文件
+    的 上鎖 文件 都在
+    這裏, 這些 文件 可以
+    防止 兩個 用戶 同時
+    編輯 同一個 文件.</p>
+<p class="Pp">/usr/lib/X11/rgb.txt - 合法 X 顏色
+    名稱 的 列表.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="錯誤_(BUGS)">錯誤 (BUGS)<a class="anchor" href="#%E9%8C%AF%E8%AA%A4_(BUGS)">¶</a></h1>
+在 英特網 上 有一個
+  郵件 列表 bug-gnu-emacs@prep.ai.mit.edu (在
+  UUCPnet 上 是 ucbvax!prep.ai.mit.edu!bug-gnu-emacs),
+  可以 通過 這個 郵件
+  列表 報告 Emacs 的 錯誤 和
+  補丁. 但是 在 報告 一個
+  錯誤 之前 請 確認 它
+  的確 是個 錯誤, 不要 把
+  一個 一些 特性 誤認爲
+  是 錯誤. 我們 建議 你
+  讀讀 手冊頁(或者 Info
+  系統) 末尾 的 ``報告 Emacs
+  錯誤&#39;&#39; 一節, 那裏 有
+  如何 以及 什麼 時候
+  報告 錯誤 的 一些 描述.
+  還有 不要 忘了 在
+  <i>所有</i> 錯誤 報告 裏
+  包含 你 運行 的 Emacs 的
+  版本號.
+<p class="Pp">請 不要 指望 就
+    錯誤 報告 獲得 個人
+    回答. 報告 錯誤 的
+    目的 是 在 下一個
+    發行版 中 清除 錯誤,
+    如果 可能. 如果 要
+    尋求 個人 幫助, 在 SERVICE
+    文件 (見上) 裏 有 提供
+    服務 的人 的 名單.</p>
+<p class="Pp">請 不要 發送 任何
+    與 錯誤 報告 無關 的
+    東西 到 這個 郵件 列表
+    中. 請把 加入 郵件
+    列表 的 請求 發送 到
+    info-gnu-emacs-request@prep.ai.mit.edu (或者 相
+    對應 的 UUCP 地址 裏). 在
+    /usr/local/emacs/etc/MAILINGLISTS 文件 裏 有
+    更多 關於 郵件 列表 的
+    信息. 如果 我們 能
+    找到 導致 錯誤 的
+    代碼, 那麼 錯誤 多半
+    都能 被 清除, 所以 你
+    應該 儘量 詳細 的 報告
+    錯誤, 使得 我們 能夠
+    使 錯誤 重新 發生.</p>
+<p class="Pp">我 知道 的 錯誤 有:
+    在 一些 版本 的 Unix 中, shell
+    不能 正常 運行 一些 在
+    原始 模式 (Raw mode) 下 運行
+    的 程序.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="無限制_(UNRESTRICTIONS)">無限制 (UNRESTRICTIONS)<a class="anchor" href="#%E7%84%A1%E9%99%90%E5%88%B6_(UNRESTRICTIONS)">¶</a></h1>
+<i>Emacs</i> 是 自由 軟件;
+  每個人 都可以 在 <i>Emacs</i>
+  通用 公共 許可證 中
+  申明 的 條款 下 把 <i>Emacs</i>
+  發佈 給 每個人, 每個
+  <i>Emacs</i> 中 都 附帶 有 此
+  條款, 在 手冊頁 中 也
+  包含 有 此 條款.
+<p class="Pp"><i>Emacs</i> 的 拷貝 可能 被
+    打包 包含 在 一些 Unix
+    系統 中, 但是 它
+    並不在 那些 系統 所用
+    的 許可證 的 保護 下.
+    這種 行爲 違背 了 允許
+    分發 的 條款. 事實上,
+    通用 公共 許可證 的
+    主要 目的 就是 禁止
+    任何人 在 <i>Emacs</i> 的 發佈
+    上 加入 其它 任何 的
+    限制。</p>
+<p class="Pp">Richard Stallman 倡導 大家 來
+    改進 擴展 <i>Emacs,</i> 並且
+    鼓勵 大家 爲 GNU 庫 的
+    擴展 做出 貢獻. 事實上
+    GNU (Gnu&#39;s Not Unix) 將會 成爲 Berkeley Unix
+    的 代替品. 每個人
+    都可以 自由 的 使用,
+    拷貝, 學習 以及 改變 GNU
+    系統.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_(SEE_ALSO)">參見 (SEE ALSO)<a class="anchor" href="#%E5%8F%83%E8%A6%8B_(SEE_ALSO)">¶</a></h1>
+X(1), <a href="../../buster/x11-utils/xlsfonts.1.en.html">xlsfonts(1)</a>, <a href="../../buster/xterm/xterm.1.en.html">xterm(1)</a>, <a href="../../buster/x11-xserver-utils/xrdb.1.en.html">xrdb(1)</a>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者_(AUTHORS)">作者 (AUTHORS)<a class="anchor" href="#%E4%BD%9C%E8%80%85_(AUTHORS)">¶</a></h1>
+<i>Emacs</i> 是 Richard Stallman
+  和自由軟件基金會寫的。
+  Joachim Martillo 和 Robert Krawitz 加入了 X
+  特性。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>唐友 &lt;tony_ty@263.net&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/9/20</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">1995 December 7</td>
+    <td class="foot-os">4th Berkeley Distribution</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+emacs.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-15T09:42:05Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"emacs(1)\"}}]}"
+</script>

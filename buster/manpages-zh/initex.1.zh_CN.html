@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>initex(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/texlive-binaries/initex.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/initex.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/initex.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; initex(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/initex.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/initex.1.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS_%E6%80%BB%E8%A7%88" title="SYNOPSIS 总览">SYNOPSIS 总览</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#OPTIONS_%E9%80%89%E9%A1%B9" title="OPTIONS 选项">OPTIONS 选项</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ENVIRONMENT_%E7%8E%AF%E5%A2%83" title="ENVIRONMENT 环境">ENVIRONMENT 环境</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#FILES_%E6%96%87%E4%BB%B6" title="FILES 文件">FILES 文件</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SEE_ALSO_%E5%8F%82%E8%A7%81" title="SEE ALSO 参见">SEE ALSO 参见</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#TRIVIA_%E6%8F%90%E9%86%92" title="TRIVIA 提醒">TRIVIA 提醒</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#AUTHORS_%E4%BD%9C%E8%80%85" title="AUTHORS 作者">AUTHORS 作者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/initex.1.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/initex.1.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/initex.1.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/texlive-binaries/initex.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/initex.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/initex.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">TEX(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">TEX(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+tex, virtex, initex -
+  文本格式化和排版
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS_总览">SYNOPSIS 总览<a class="anchor" href="#SYNOPSIS_%E6%80%BB%E8%A7%88">¶</a></h1>
+<b>tex</b> [<i>options</i>] [<i>commands</i>]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+这份手册页并不全面。此版本的
+  TeX 完整的文档可以从 info
+  文件或者手册 <i>Web2C: A TeX
+  implementation</i> 中找到。
+<p class="Pp">TeX
+    格式化指定的文件中包含着命令的文本，输出一个设备无关的文件
+    (称为 <i>DVI</i> ，即
+    “设备无关” <i>DeVice Independent</i>
+    的缩写)。在 <i>The TeXbook</i>
+    中讲述了 TeX
+    的功能和语言。 TeX
+    通常与一个大型的预编译的宏包同时使用，有一些特定的排版系统，例如
+    LaTeX,
+    通常需要很多宏包的支持。</p>
+<p class="Pp">这个版本的 TeX
+    通过查看它的命令行，查找自身是以什么名称被调用的。
+    <b>initex</b> 和 <b>virtex</b>
+    都是到可执行文件 <b>tex</b>
+    的符号链接。当作为
+    <b>initex</b> 调用时
+    (或者使用了 <b>--ini</b>
+    选项时)，它可以用于将宏预编译，输出到一个
+    <i>.fmt</i> 文件中。当作为
+    <b>virtex</b>
+    调用时，它将使用
+    <i>plain</i>
+    格式。当以任何其他名称调用时，TeX
+    将使用那个名称作为要使用的格式名称。例如，当作为
+    <b>tex</b> 调用时，将使用
+    <i>tex</i> 格式，这与 <i>plain</i>
+    格式是相同的。 <i>plain</i>
+    格式中定义的命令记载在
+    <i>The TeXbook</i>
+    中。其他常用的格式包括
+    <i>latex</i> 和 <i>amstex</i> 。</p>
+<p class="Pp">调用 TeX
+    时，命令行给出的
+    <i>commands</i>
+    被传递给它作为输入的第一行。(但是通常将扩展的参数作为输入的第一行要简单许
+    多，因为 UNIX
+    命令解释器总是会
+    “吃掉”
+    或者错误地解释 TeX
+    的符号，例
+    如反斜杠，除非你引用它们。)
+    同 <i>The TeXbook</i>
+    书中描述的一致，第一行应当以一个文件名开始，或者是一个控制序列
+    <i>\controlsequence</i>,
+    或者是一个格式名称
+    <i>&amp;formatname</i>.</p>
+<p class="Pp">通常的用法是输入</p>
+<div class="Bd-indent"><i>tex paper</i></div>
+来处理 <i>paper.tex</i> 。名称 <i>paper</i>
+  将作为任务名
+  (``jobname&#39;&#39;)，也用来产生输出文件名。
+  如果 TeX
+  没有在第一行获得一个文件名，jobname
+  将是 <i>texput</i>
+  。当查找一个文件时，TeX
+  查找带有和不带默认扩展名
+  (<i>.tex</i>)
+  的文件，除非名称中已包含了此扩展名。如果
+  <i>paper</i>
+  是任务名(``jobname&#39;&#39;)，错误消息的日志记录，包含着比通常屏幕上显示的内容更加详细的内容，将保存为
+  <i>paper.log</i>
+  ，输出文件将保存为
+  <i>paper.dvi</i> 。
+<p class="Pp">这个版本的 TeX
+    可以查看文件 <i>paper.tex</i>
+    的第一行，看它是否以特殊序列
+    <i>%&amp;</i>
+    开始。如果第一行以
+    <b>%&amp;</b><i>format</i> <b>--translate-file</b><i> tcxname</i>
+    开始，那么 TeX
+    将使用指定的格式和转换表
+    <i>tcxname</i>
+    来处理源文件。格式名称和
+    <b>--translate-file</b>
+    转换定义都可以被忽略，但是不能同时忽略。这个设定超越了基于可执行文件名称的格式选择。
+    选项 <b>--parse-first-line</b>
+    或者配置中的变量
+    <b>parse_first_line</b>
+    控制了是否允许这样的行为。</p>
+<p class="Pp">在 TeX
+    的错误提示下回应 <i>e</i>
+    将使得系统默认的编辑器被启动，修改当前文件的当前行。环境变量
+    TEXEDIT
+    可以用来修改所用的编辑器。它可以包含一个字符串
+    &#34;%s&#34;，指定文件名要替换的位置，以及字符串
+    &#34;%d&#34;，指定行号
+    (如果有的话)
+    要替换的位置。例如，要使用
+    <b>emacs</b> ，可以这样设置
+    TEXEDIT 字符串，使用 <b>sh</b>
+    命令</p>
+<div class="Bd-indent"><i>TEXEDIT=&#34;emacs +%d %s&#34;; export
+  TEXEDIT</i></div>
+<p class="Pp">为了方便，库中有一个文件
+    <i>null.tex</i> ，内容为空。当 TeX
+    找不到可能的输入时，它会一直让用户输入另一个文件名；如果不想输入任何东西，回应
+    `null&#39;
+    可以跳出这个循环。也可以输入
+    EOF 字符 (通常是 control-D)。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="OPTIONS_选项">OPTIONS 选项<a class="anchor" href="#OPTIONS_%E9%80%89%E9%A1%B9">¶</a></h1>
+这个版本的 TeX
+  可以解释下列命令行选项。
+<dl class="Bl-tag">
+  <dt><b>--file-line-error-style</b></dt>
+  <dd>
+    <br/>
+    打印错误消息，以
+      <i>file:line:error</i>
+      的形式，与大多数编译器格式化消息的方式相似。</dd>
+  <dt><b>--fmt</b><i> format</i></dt>
+  <dd>
+    <br/>
+    使用 <i>format</i>
+      作为要使用的格式名，而不是调用
+      TeX 的名称或者 <i>%&amp;</i>
+      一行指定的内容。</dd>
+  <dt><b>--help</b></dt>
+  <dd>
+    <br/>
+    打印帮助信息，然后退出。</dd>
+  <dt><b>--ini</b></dt>
+  <dd>
+    <br/>
+    成为 <b>initex</b>
+      ，用于转储格式 (dump
+      formats)；如果调用的程序名是
+      <b>initex</b>
+      ，那么隐含这个选项。</dd>
+  <dt><b>--interaction</b><i> mode</i></dt>
+  <dd>
+    <br/>
+    设置交互模式。mode
+      可以是 <i>batchmode</i>, <i>nonstopmode</i>,
+      <i>scrollmode</i>, 和 <i>errorstopmode</i>
+      其中之一。这些模式的含义与相应的
+      \commands 相同。</dd>
+  <dt><b>--ipc</b></dt>
+  <dd>
+    <br/>
+    将 DVI 输出发送到一个
+      socket，同时像通常那样输出到文件。这个选项是否可用取决于安装程序的选择。</dd>
+  <dt><b>--ipc-start</b></dt>
+  <dd>
+    <br/>
+    与 <b>--ipc</b>
+      类似，并且同时也在另一段启动服务器。这个选项是否可用取决于安装程序的选择。</dd>
+  <dt><b>--jobname</b><i> name</i></dt>
+  <dd>
+    <br/>
+    使用 <i>name</i>
+      作为作业名，而不是从输入文件名获得。</dd>
+  <dt><b>--kpathsea-debug</b><i> bitmask</i></dt>
+  <dd>
+    <br/>
+    根据位掩码，设置路径搜索调试标志。细节请参见
+      <i>Kpathsea</i> 手册页。</dd>
+  <dt><b>--maketex</b><i> fmt</i></dt>
+  <dd>
+    <br/>
+    启用 mktex<i>fmt</i> ，这里 <i>fmt</i>
+      必须是 <i>tex</i> 或者 <i>tfm</i>
+      之一。</dd>
+  <dt><b>--mltex</b></dt>
+  <dd>
+    <br/>
+    启用 MLTeX 扩展。</dd>
+  <dt><b>--no-maketex</b><i> fmt</i></dt>
+  <dd>
+    <br/>
+    禁用 mktex<i>fmt</i> 这里 <i>fmt</i>
+      必须是 <i>tex</i> 或者 <i>tfm</i>
+      之一。</dd>
+  <dt><b>--output-comment</b><i> string</i></dt>
+  <dd>
+    <br/>
+    使用 <i>string</i> 作为 DVI
+      文件的注释，而不是时间。</dd>
+  <dt><b>--parse-first-line</b></dt>
+  <dd>
+    <br/>
+    如果主输入文件的第一行以
+      <i>%&amp;</i>
+      开始，就解释它，从中查找一个转储名称或者一个
+      <b>--translate-file</b> 选项。</dd>
+  <dt><b>--progname</b><i> name</i></dt>
+  <dd>
+    <br/>
+    伪装是程序 <i>name</i>
+      。这对所用格式和搜索路径都有影响。</dd>
+  <dt><b>--recorder</b></dt>
+  <dd>
+    <br/>
+    启用文件名记录。这将在一个扩展名为
+      <i>.fls</i>
+      的文件中记录输入和输出中打开的所有文件。</dd>
+  <dt><b>--shell-escape</b></dt>
+  <dd>
+    <br/>
+    启用 <b>\write18{</b><i>command</i><b>}</b>
+      结构。 <i>command</i>
+      可以是任何 Bourne shell
+      命令。出于安全原因，这个结构通常被禁止。</dd>
+  <dt><b>--translate-file</b><i> tcxname</i></dt>
+  <dd>
+    <br/>
+    使用 <i>tcxname</i> 转换表。</dd>
+  <dt><b>--version</b></dt>
+  <dd>
+    <br/>
+    显示版本信息，然后退出。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ENVIRONMENT_环境">ENVIRONMENT 环境<a class="anchor" href="#ENVIRONMENT_%E7%8E%AF%E5%A2%83">¶</a></h1>
+参见 Kpathsearch 库的文档
+  (手册页的 `Path specifications&#39; 节点)
+  来查看使用环境变量的精确的细节。
+  <b>kpsewhich</b>
+  实用工具可以用来查询变量的值。
+<p class="Pp">警告：在大多数 TeX
+    格式中，不能直接传给
+    TeX 带有 ~
+    的文件名，因为 ~
+    是一个有特殊意义的字符，它将被扩展，不会作为文件名的一部分。其他程序，例如
+    Metafont，没有这个问题。</p>
+<dl class="Bl-tag">
+  <dt>TEXMFOUTPUT</dt>
+  <dd>通常，TeX
+      将输出文件放在当前目录。如果不能在那里创建任何输出文件，它试着在环境变量
+      TEXMFOUTPUT
+      指定的目录中创建它。这个参数没有默认值。例如，假设命令是
+      <i>tex paper</i>
+      并且当前目录不可写，如果
+      TEXMFOUTPUT 设置为 <i>/tmp</i> ，TeX
+      试图创建 <i>/tmp/paper.log</i> (还有
+      <i>/tmp/paper.dvi</i>
+      ，如果产生了任何输出。)</dd>
+  <dt>TEXINPUTS</dt>
+  <dd><i>\input</i> 和 <i>\openin</i>
+      文件的搜索路径。它们一般应当以
+      ``.&#39;&#39;
+      开始，使得用户文件可以先于系统文件被找到。空路径成分将被替换为
+      <i>texmf.cnf</i>
+      文件中定义的路径。例如，设置
+      TEXINPUTS 为 &#34;.:/home/usr/tex:&#34;
+      来将当前目录和
+      ``/home/user/tex&#39;&#39;
+      添加到标准的搜索路径之前。</dd>
+  <dt>TEXEDIT</dt>
+  <dd>切换为编辑器的命令模板。默认值通常是
+      <b>vi</b> ，在 TeX
+      编译时进行设置。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="FILES_文件">FILES 文件<a class="anchor" href="#FILES_%E6%96%87%E4%BB%B6">¶</a></h1>
+下面提到的文件的位置在各个系统中是不相同的。使用
+  <b>kpsewhich</b>
+  实用工具来找到它们的位置。
+<dl class="Bl-tag">
+  <dt><i>texmf.cnf</i></dt>
+  <dd>配置文件。它包含着搜索路径的定义，还有其他配置参数，例如
+      <b>parse_first_line</b>.</dd>
+  <dt><i>tex.pool</i></dt>
+  <dd>编码的文本，是 TeX
+      的提示消息。</dd>
+  <dt><i>texfonts.map</i></dt>
+  <dd>文件名映射定义。</dd>
+  <dt><i>*.tfm</i></dt>
+  <dd>TeX
+      字体的度量的文件。</dd>
+  <dt><i>*.fmt</i></dt>
+  <dd>简写的 TeX 格式 (.fmt)
+      文件。</dd>
+  <dt><i>$TEXMFMAIN/tex/plain/base/plain.tex</i></dt>
+  <dd>基本的宏包，在 TeXbook
+      中有详细描述。
+    <br/>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+这个版本的 TeX
+  实现了大量的可选的扩展。实际上，其中大部分与
+  TeX
+  的定义有或多或少的冲突。当启用这样的扩展时，TeX
+  启动时打印的提示信息将是
+  <b>TeXk</b> 而不是 <b>TeX</b> 。
+<p class="Pp">这个版本的 TeX
+    在面积增加或减少时不能捕获算术下溢错误。这种情况很少见，但是一旦出现，产生的
+    <i>DVI</i>
+  文件将是无效的。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO_参见">SEE ALSO 参见<a class="anchor" href="#SEE_ALSO_%E5%8F%82%E8%A7%81">¶</a></h1>
+<a href="../../buster/texlive-binaries/mf.1.en.html">mf(1)</a>,
+<br/>
+Donald E. Knuth, <i>The TeXbook</i>, Addison-Wesley, 1986, ISBN 0-201-13447-0.
+<br/>
+Leslie Lamport, <i>LaTeX - A Document Preparation System</i>, Addison-Wesley,
+  1985, ISBN 0-201-15790-X.
+<br/>
+K. Berry, <i>Eplain: Expanded plain TeX</i>,
+  <a href="ftp://ftp.cs.umb.edu/pub/tex/eplain/doc.">ftp://ftp.cs.umb.edu/pub/tex/eplain/doc.</a>
+<br/>
+Michael Spivak, <i>The Joy of TeX</i>, 2nd edition, Addison-Wesley, 1990, ISBN
+  0-8218-2997-1.
+<br/>
+<i>TUGboat</i> (the journal of the TeX Users Group).
+</section>
+<section class="Sh">
+<h1 class="Sh" id="TRIVIA_提醒">TRIVIA 提醒<a class="anchor" href="#TRIVIA_%E6%8F%90%E9%86%92">¶</a></h1>
+TeX，如果发音正确的话，与
+  ``blecchhh&#39;&#39; 押韵 (rhymes)。使用 typewriter
+  字体时，正确的拼写是
+  ``TeX&#39;&#39; 而不是 ``TEX&#39;&#39; 或者 ``tex&#39;&#39;。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="AUTHORS_作者">AUTHORS 作者<a class="anchor" href="#AUTHORS_%E4%BD%9C%E8%80%85">¶</a></h1>
+TeX 的设计者是 by Donald E.
+  Knuth，他用他的 Web
+  系统实现了它。后来，它分别被
+  Stanford 的 Howard Tricky 和 Cornell 的 Pavel Curtis
+  移植到了 Unix。当前随 Unix TeX
+  发行的这个版本使用了
+  Web 到 C 的翻译系统 (<b>web2c</b>)
+  来产生， (<b>web2c</b>) 最初由 Tomas
+  Rokicki 和 Tim Morgan 实现。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">10 November 2001</td>
+    <td class="foot-os">Web2C 7.4.5</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+initex.1.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:36Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"initex(1)\"}}]}"
+</script>

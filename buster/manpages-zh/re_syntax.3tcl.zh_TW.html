@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>re_syntax(3tcl) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/tcl8.6-doc/re_syntax.3tcl.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/re_syntax.3tcl.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/re_syntax.3tcl.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="3tcl">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; re_syntax(3tcl)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/re_syntax.3tcl">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/re_syntax.3tcl.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#RE_%E7%9A%84%E4%B8%8D%E5%90%8C%E9%A2%A8%E6%A0%BC_DIFFERENT_FLAVORS_OF_REs" title="RE 的不同風格 DIFFERENT FLAVORS OF REs">RE 的不同風格 DIFFERENT FLAVORS OF REs</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%AD%A3%E5%89%87%E8%A1%A8%E9%81%94%E5%BC%8F%E7%9A%84%E8%AA%9E%E6%B3%95_REGULAR_EXPRESSION_SYNTAX" title="正則表達式的語法 REGULAR EXPRESSION SYNTAX">正則表達式的語法 REGULAR EXPRESSION SYNTAX</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%B9%E6%8B%AC%E8%99%9F%E8%A1%A8%E9%81%94%E5%BC%8F_BRACKET_EXPRESSIONS" title="方括號表達式 BRACKET EXPRESSIONS">方括號表達式 BRACKET EXPRESSIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%BD%89%E7%BE%A9_ESCAPES" title="轉義 ESCAPES">轉義 ESCAPES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%85%83%E8%AA%9E%E6%B3%95_METASYNTAX" title="元語法 METASYNTAX">元語法 METASYNTAX</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8C%B9%E9%85%8D_MATCHING" title="匹配 MATCHING">匹配 MATCHING</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%99%90%E5%88%B6%E5%92%8C%E5%85%BC%E5%AE%B9%E6%80%A7_LIMITS_AND_COMPATIBILITY" title="限制和兼容性 LIMITS AND COMPATIBILITY">限制和兼容性 LIMITS AND COMPATIBILITY</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%9F%BA%E6%9C%AC%E6%AD%A3%E5%89%87%E8%A1%A8%E9%81%94%E5%BC%8F_BASIC_REGULAR_EXPRESSIONS" title="基本正則表達式 BASIC REGULAR EXPRESSIONS">基本正則表達式 BASIC REGULAR EXPRESSIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO" title="參見 SEE ALSO">參見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS" title="關鍵字 KEYWORDS">關鍵字 KEYWORDS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國 Linux 論壇 man 手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/re_syntax.3tcl.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/re_syntax.3tcl.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/re_syntax.3tcl.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/tcl8.6-doc/re_syntax.3tcl.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/re_syntax.3tcl.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/re_syntax.3tcl.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">re_syntax(3tcl)</td>
+    <td class="head-vol">Tcl Built-In Commands</td>
+    <td class="head-rtitle">re_syntax(3tcl)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<pre>
+
+</pre>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+re_syntax - Tcl
+  正則表達式的語法。
+<pre>
+
+</pre>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+一個<b>正則表達式</b> (<i>regular
+  expression</i> )
+  描述了一類字符串。它是匹配特定字符串而不匹配其他的字符串的一個模式。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="RE_的不同風格_DIFFERENT_FLAVORS_OF_REs">RE 的不同風格 DIFFERENT FLAVORS OF REs<a class="anchor" href="#RE_%E7%9A%84%E4%B8%8D%E5%90%8C%E9%A2%A8%E6%A0%BC_DIFFERENT_FLAVORS_OF_REs">¶</a></h1>
+正則表達式(“RE”)由 POSIX
+  定義，有兩種風格(flavor):
+  <b>擴展</b>
+  RE(``EREs&#39;&#39;)和<b>基本</b>RE(``BREs&#39;&#39;)。ERE
+  粗略的相當於傳統的
+  <b>egrep</b>
+  <i></i>的正則表達式，而 BRE
+  粗略的相當於傳統的
+  <b>ed</b>
+  的正則表達式。這個實現增加了第三種風格，<b>高級</b>RE(``AREs&#39;&#39;)，它基本上是
+  ERE
+  再加上一些重要的擴展。
+<p class="Pp">譯註：grep 缺省支持
+    BRE，通過指定 -E
+    選項來支持
+    ERE，歷史上的 egrep 和 fgrep
+    已經合併入 grep 中。ed、sed
+    支持 BRE，lex、AWK 支持 ERE。</p>
+<p class="Pp">這個手冊頁主要描述
+    ARE。提供 BRE
+    主要是爲了在一些老程序中反向(backward)兼容；它們將最後討論。POSIX
+    ERE 基本上是 ARE
+    的一個真子集。在 ERE
+    中不存在的 ARE
+    的特徵將被指示出來。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="正則表達式的語法_REGULAR_EXPRESSION_SYNTAX">正則表達式的語法 REGULAR EXPRESSION SYNTAX<a class="anchor" href="#%E6%AD%A3%E5%89%87%E8%A1%A8%E9%81%94%E5%BC%8F%E7%9A%84%E8%AA%9E%E6%B3%95_REGULAR_EXPRESSION_SYNTAX">¶</a></h1>
+實現 Tcl
+  正則表達式使用了 Henry Spencer
+  寫的包，基於 POSIX 1003.2
+  規定和一些(不是全部)
+  Perl5 擴展 (感謝
+  Henry!)。下面的許多正則表達式描述是原封不動的從他的手冊頁複製過來的。
+<p class="Pp">譯註：Perl5
+    的正則表達式也是從
+    Henry Spencer
+    所寫的包演變而來。</p>
+<p class="Pp">一個 ARE
+    是一個或多個由`<b>|</b>&#39;分隔的<b>分支</b>(branch)(構成的)，它匹配與任何一個分支匹配的一個字符序列。</p>
+<p class="Pp">一個分支是零或多個串聯起來的<b>約束</b>(constraint)或<b>定量</b><b>原子</b>(quantified
+    atom)(構成的)。它與每個構件(約束或定量原子)所匹配的任何字符序列的一個串聯相匹配，組成這個字符序列的串聯的第一個字符序列與這個分支的第一個構件相匹配，第二個字符序列與第二個構件相匹配，以此類推。一個空分支匹配空串。</p>
+<p class="Pp">一個定量原子是可能跟隨一個單一的<b>定量符</b>
+    (quantifier)
+    的原子。不加定量符，它匹配這個原子的一個匹配。定量符和它所定量的原子的匹配如下:</p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>*</b></dt>
+  <dd>零個或多個這個原子的匹配的一個序列</dd>
+  <dt><b>+</b></dt>
+  <dd>一個或多個這個原子的匹配的一個序列</dd>
+  <dt><b>?</b></dt>
+  <dd>零個或一個這個原子的匹配的一個序列</dd>
+  <dt><b>{</b><i>m</i><b>}</b></dt>
+  <dd>嚴格的 <i>m</i>
+      個這個原子的匹配的一個序列</dd>
+  <dt><b>{</b><i>m</i><b>,}</b></dt>
+  <dd><i>m</i>
+      或更多個這個原子的匹配的一個序列</dd>
+  <dt><b>{</b><i>m</i><b>,</b><i>n</i><b>}</b></dt>
+  <dd>從 <i>m</i> 到 <i>n</i>
+      (包括二者)個這個原子的匹配的一個序列；<i>m</i>
+      不能超過 <i>n</i></dd>
+  <dt><b>*? +? ?? {</b><i>m</i><b>}? {</b><i>m</i><b>,}?
+    {</b><i>m</i><b>,</b><i>n</i><b>}?</b></dt>
+  <dd>不貪婪的 (<i>non-greedy</i>)
+      定量符，它匹配與上面相同的可能性，但偏好最小字符數而不是最大字符數的匹配(參見MATCHING
+      匹配)。</dd>
+</dl>
+</div>
+<p class="Pp">使用 <b>{</b> 和 <b>}</b>
+    的形式叫做<b>束縛</b>(bound)。數
+    <i>m</i> 和 <i>n</i>
+    是無符號十進制整數，允許的值從
+    0 到 255(包括0 及 255)。</p>
+<p class="Pp"><b>原子</b>是下列之一:</p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>(</b><i>re</i><b>)</b></dt>
+  <dd>(這裏的 <i>re</i>
+      是任何正則表達式)
+      匹配對 <i>re
+      </i>的一個匹配，爲可能的報告而記錄(最長和最短的)匹配
+    <p class="Pp">譯註：使用圓括號來組合原子。例如，ab*
+        被識別爲原子 a
+        和原子 b 的閉包 b*
+        的串聯
+        a(b)*，而不是原子 a
+        和原子 b 的串聯 ab
+        的閉包
+        (ab)*。捕獲的意思是把在圓括號中的子表達式所匹配的字符序列保存下來，由後續的後引用去使用。</p>
+  </dd>
+  <dt><b>(?:</b><i>re</i><b>)</b></dt>
+  <dd>同上，但不報告(設置爲“非捕獲”的圓括號)</dd>
+  <dt><b>()</b></dt>
+  <dd>匹配一個空串，爲可能的報告而記錄(匹配)</dd>
+  <dt><b>(?:)</b></dt>
+  <dd>匹配一個空串，不報告</dd>
+  <dt><b>[</b><i>chars</i><b>]</b></dt>
+  <dd>一個方括號表達式
+      (<i>bracket expression</i>) ，匹配 <b>chars</b>
+      中的任何一個字符(詳情參見
+      BRACKET EXPRESSIONS 方括號表達式)</dd>
+  <dt>
+   <b>.</b></dt>
+  <dd>匹配任何單一字符</dd>
+  <dt><b>\</b><i>k</i></dt>
+  <dd>(這裏的 <i>k</i> 是一個非
+      alphanumeric
+      (字母或數字)字符)，匹配被接受爲普通字符的這個字符，例如，\\
+      匹配一個反斜槓字符</dd>
+  <dt><b>\</b><i>c</i></dt>
+  <dd>(這裏的 <i>c</i> 是一個 alphanumeric
+      字符(可能跟隨着其他字符))，一個<b>轉義
+      (escape)</b>(專屬
+      ARE)，參見後面的ESCAPES
+      轉義)</dd>
+  <dt><b>{</b></dt>
+  <dd>當跟隨着不是數字的一個字符的時候，匹配左花括號字符`<b>{</b>&#39;；在跟隨着一個數字的時候，它是一個<b>束縛</b>的開始(參見前面)</dd>
+  <dt><i>x</i></dt>
+  <dd>這裏 <i>x</i>
+      是沒有其他意義的一個單一字符，匹配這個字符。</dd>
+</dl>
+</div>
+<p class="Pp"><b>約束</b> (constraint)
+    在指定條件滿足的時候匹配一個空串。一個約束不能跟隨一個定量符。簡單的約束如下；其他的在以後的
+    ESCAPES 轉義
+  章節中介紹。</p>
+<p class="Pp">譯註：約束的術語叫錨定</p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>^</b></dt>
+  <dd>匹配一行的開始</dd>
+  <dt><b>$</b></dt>
+  <dd>匹配一行的結束</dd>
+  <dt><b>(?=</b><i>re</i><b>)</b></dt>
+  <dd><b>正前行</b>(positive lookahead) (專屬
+      ARE)，匹配任何與 <i>re</i>
+      相匹配的子串的開始端點</dd>
+  <dt><b>(?!</b><i>re</i><b>)</b></dt>
+  <dd><b>負前行</b>(negative lookahead) (專屬
+      ARE)，匹配任何不與 <i>re</i>
+      相匹配的子串的開始端點</dd>
+</dl>
+</div>
+<p class="Pp">前行約束不能包括後引用(參見後面)，並且其中的所有圓括號被認爲是非捕獲的。</p>
+<p class="Pp">一個 RE
+    不能結束於`<b>\</b>&#39;.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="方括號表達式_BRACKET_EXPRESSIONS">方括號表達式 BRACKET EXPRESSIONS<a class="anchor" href="#%E6%96%B9%E6%8B%AC%E8%99%9F%E8%A1%A8%E9%81%94%E5%BC%8F_BRACKET_EXPRESSIONS">¶</a></h1>
+一個方括號表達式是一個在`<b>[]</b>&#39;中包圍的一個列表。它通常匹配列表中的任意一個單一字符(參見後面)。如果這個列表以“<b>^</b>”爲開始，它匹配不屬於這個列表剩餘部分的任意一個單一字符(參見後面)。
+<p class="Pp">如果在這個列表中的兩個字符被`<b>-</b>&#39;分割，這是在歸併序列(collating
+    sequence)中這兩個字符之間(包括二者)的字符的完整範圍的簡寫，例如，<b>[0-9]</b>
+    在 ASCII
+    中匹配任何十進制數字。兩個範圍不能共享同一個端點，比如
+    <b>a-c-e</b>
+    是非法的。範圍是很依賴於整理序列的，可移植程序應該避免依靠它們。</p>
+<p class="Pp">譯註：<b>整理元素</b> --
+    用來確定字符或寬字符字符串的邏輯次序的最小實體。一個整理元素的組成要麼是一個單一字符，要麼是被整理爲一個實體的兩個或更多字符。由當前地域(locale)中的
+    LC_COLLATE
+    類屬的值確定整理元素的當前設置。</p>
+<p class="Pp">譯註：<b>整理序列</b> --
+    當前地域中的 LC_COLLATE
+    類屬的設置確定
+    整理元素的相對次序。這個字符次序定義所有整理元素的相對位置，在這個次序中每個元素都佔有一個唯一的位置。</p>
+<p class="Pp">要在這個列表中包括一個文字的
+    <b>]</b> 或者 <b>-</b>
+    ，最簡單的方法是把它包圍在
+    <b>[.</b> 和 <b>.]</b>
+    中使它成爲一個整理元素(見後)。可替代的，使它成爲第一個字符(跟隨在可能的‘<b>^</b>’的後面)，或(專屬
+    ARE) 加以
+    ‘<b>\fR’先導。可選的，對於‘</b><b>-</b>’，使它成爲最後的字符，或一個範圍的第二端點。要使用一個文字
+    <b>-</b>
+    作爲一個範圍的開始端點，可以使它成爲一個整理元素或(專屬
+    ARE)
+    加以‘<b>\</b>’先導。除了這些例外、一些使用
+    <b>[</b>
+    (參見下段)的組合、和轉義，在一個方括號表達式中的所有其他特殊字符失去其特殊意義。</p>
+<p class="Pp">在一個方括號表達式當中，在
+    <b>[.</b> 和 <b>.]</b>
+    當中包圍一個<b>歸併元素</b>(collating
+    element)(一個字符、一個多字符序列被整理爲如同一個單一字符，或給二者的一個整理序列名字)表示這個整理元素的一個字符序列。這個序列是這個方括號表達式列表中的一個單一元素。在有多字符整理元素的地域中，一個方括號表達式可以匹配多於一個字符。
+    所以(潛藏的)，即使在方括號表達式中未出現多字符整理元素，以
+    <b>^</b>
+    爲開始的一個方括號表達式仍可以匹配多字符整理元素!
+    (注意：Tcl
+    目前沒有多字符整理元素。這些信息只是用來解釋概念。)</p>
+<p class="Pp">例如，假定整理序列包含一個
+    <b>ch</b>
+    多字符整理元素，則 RE
+    <b>[[.ch.]]*c</b> (後面跟隨着
+    <b>c</b>的零或多個 <b>ch</b>)
+    匹配`<b>chchcc</b>&#39;的最先的5個字符。還有
+    <b>[^c]b</b> 匹配整個`<b>chb</b>&#39;(因爲
+    <b>[^c]</b> 匹配多字符 <b>ch</b>)。</p>
+<p class="Pp">在一個方括號表達式中，在
+    <b>[=</b> 和 <b>=]</b>
+    當中包含的一個整理元素是一個equivalence
+    class
+    等價類，表示等價於這個整理元素的所有整理元素的字符序列，包括它自身。(如果沒有其他等價的整理元素，與在分界符`<b>[.</b>&#39;和`<b>.]</b>&#39;中包含一樣對待。)
+    例如，如果 <b>o</b> 和<b>^</b>
+    是一個等價類的成員，則`<b>[[=o=]]</b>&#39;、`<b>[[=^=]]</b>&#39;、和`<b>[o^]</b>&#39;都是同義詞。一個等價類不能是一個範圍的端點。
+    (注意：Tcl
+    目前只實現了 Unicode
+    地域。它不定義任何等價類。上面的例子只是用來解釋概念。)</p>
+<p class="Pp">在一個方括號表達式中，在
+    <b>[:</b> 和 <b>:]</b>
+    中包含的一個<i>character class</i>
+    字符類
+    的名字表示屬於這個類的所有字符的列表(不是所有整理元素!)。標準字符類有:</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre><b>alpha</b>	一個字母
+<b>upper</b>	一個大寫字母
+<b>lower</b>	一個小寫字母 
+<b>digit</b>	一個十進制數字
+<b>xdigit</b>	一個十六進制數字
+<b>alnum</b>	一個 alphanumeric (字母或數字)
+<b>print</b>	一個 alphanumeric (同於 alnum)
+<b>blank</b>	一個空格或 tab 字符
+<b>space</b>	在顯示的文本中產生白空格的一個字符 
+<b>punct</b>	一個標點字符
+<b>graph</b>	有圖形表示的一個字符
+<b>cntrl</b>	一個控制字符
+</pre>
+</div>
+<p class="Pp">一個地域可以提供其他的字符類。
+    (注意：Tcl
+    目前只實現了一個地域：Unicode
+    地域。)
+    一個字符類不能用做一個範圍的端點。</p>
+<p class="Pp">方括號表達式有兩個特殊情況:
+    方括號表達式 <b>[[:&lt;:]]</b> 和
+    <b>[[:&gt;:]]</b>
+    是約束，分別匹配在一個字開始處和結束處的空串。定義一個字爲既沒有前導的又沒有尾隨的單詞字符的單詞字符的一個序列。一個單詞字符是一個
+    <b>alnum
+    </b>字符或一個下劃線(<b>_</b>)。這些特殊的方括號表達式已被淘汰；ARE
+    用戶應當轉而使用約束轉義(見後)。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="轉義_ESCAPES">轉義 ESCAPES<a class="anchor" href="#%E8%BD%89%E7%BE%A9_ESCAPES">¶</a></h1>
+轉義(專屬 ARE)，它以 <b>\</b>
+  爲開始後面跟隨着一個字母字符，存在一些變體:
+  字符錄入(entry)、類簡寫、約束轉義、和後引用。在
+  ARE 中，跟隨着一個 alphanumeric
+  字符但不約束一個有效轉義的
+  <b>\</b> 是非法的。在 ERE
+  中，沒有轉義:
+  在方括號表達式外部，跟隨着一個
+  alphanumeric 字符的一個 <b>\</b>
+  僅表示這個字符爲一個普通字符，而在一個方括號表達式內部，
+  <b>\</b>
+  是一個普通字符。(後者是在
+  ERE 和 ARE
+  之間的一個實際上的不兼容。)
+<p class="Pp">字符錄入轉義 (Character-entry
+    escapes) (專屬 ARE)
+    的存在簡便了在 RE
+    中指定一個非打印和其他非常規字符:</p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>\a</b></dt>
+  <dd>警報(震鈴)字符，如同
+      C 語言</dd>
+  <dt><b>\b</b></dt>
+  <dd>退格，如同 C 語言</dd>
+  <dt><b>\B</b></dt>
+  <dd><b>\</b>
+      的同義詞，在有多層反斜槓處理的一些應用中用來減少雙反斜槓</dd>
+  <dt><b>\c</b><i>X</i></dt>
+  <dd>(這裏的 X 是任何字符)
+      字符的低端5位與 <i>X
+      </i>的低端5位相同，而其他位全是零</dd>
+  <dt><b>\e</b></dt>
+  <dd>其整理序列名字是‘<b>ESC</b>’的字符，如果嘗試失敗，這個字符有八進制值
+      033</dd>
+  <dt><b>\f</b></dt>
+  <dd>換頁，如同 C 語言</dd>
+  <dt><b>\n</b></dt>
+  <dd>換行，如同 C 語言</dd>
+  <dt><b>\r</b></dt>
+  <dd>回車，如同 C 語言</dd>
+  <dt><b>\t</b></dt>
+  <dd>水平 tab，如同 C 語言</dd>
+  <dt><b>\u</b><i>wxyz</i></dt>
+  <dd>(這裏的 <i>wxyz</i>
+      是嚴格的四個十六進制數字)
+      在本地字節次序中的
+      Unicode 字符 <b>U+</b><i>wxyz</i></dd>
+  <dt><b>\U</b><i>stuvwxyz</i></dt>
+  <dd>(這裏的 <i>stuvwxyz</i>
+      是嚴格的八個十六進制數字)
+      保留給假定的某種擴展到32位的
+      Unicode</dd>
+  <dt><b>\v</b></dt>
+  <dd>垂直 tab，如同 C 語言</dd>
+  <dt><b>\x</b><i>hhh</i></dt>
+  <dd>(這裏的 <i>hhh</i>
+      是十六進制數字的任意序列)
+      其十六進制值爲
+      <b>0x</b><i>hhh</i>
+      的字符(不管使用了多少十六進制數字它都是一個單一字符)。</dd>
+  <dt><b>\0</b></dt>
+  <dd>其值爲 <b>0 </b>的字符</dd>
+  <dt><b>\</b><i>xy</i></dt>
+  <dd>(這裏的 <i>xy</i>
+      是嚴格的兩個八進制數字，並且不是一個<b>後引用</b>(參見後面))
+      其八進制值爲<b>0</b><i>xy</i>
+      的字符</dd>
+  <dt><b>\</b><i>xyz</i></dt>
+  <dd>(這裏的 <i>xyz</i>
+      是嚴格的兩個八進制數字，並且不是一個<b>後引用</b>(參見後面))
+      其八進制值爲
+      <b>0</b><i>xyz</i>的字符</dd>
+</dl>
+</div>
+<p class="Pp">十六進制數字是
+    `<b>0</b>&#39;-`<b>9</b>&#39;, `<b>a</b>&#39;-`<b>f</b>&#39;, 和`<b>A</b>&#39;-`<b>F</b>&#39;.
+    八進制數字是 `<b>0</b>&#39;-`<b>7</b>&#39;.</p>
+<p class="Pp">字符錄入轉義總是被接受爲普通字符。例如，
+    <b>\135</b> 是ASCII中的 <b>]</b> 而 <b>\135</b>
+    不終結一個方括號表達式。但是要小心，一些應用(例如
+    C
+    編譯器)在正則表達式包得到它們之前要自己解釋這些序列，這可能就要求寫兩次(四次
+    (quadrupling)，等等) `<b>\</b>&#39;。</p>
+<p class="Pp">類簡寫轉義 Class-shorthand escapes
+    (專屬 ARE)
+    爲特定的通用字符類提供簡寫:</p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>\d</b></dt>
+  <dd><b>[[:digit:]]</b></dd>
+  <dt><b>\s</b></dt>
+  <dd><b>[[:space:]]</b></dd>
+  <dt><b>\w</b></dt>
+  <dd><b>[[:alnum:]_]</b>
+    (注意有下劃線)</dd>
+  <dt><b>\D</b></dt>
+  <dd><b>[^[:digit:]]</b></dd>
+  <dt><b>\S</b></dt>
+  <dd><b>[^[:space:]]</b></dd>
+  <dt><b>\W</b></dt>
+  <dd><b>[^[:alnum:]_]</b>
+    (注意有下劃線)</dd>
+</dl>
+</div>
+<p class="Pp">W在方括號表達式中，沒有外面的方括號的`<b>\d</b>&#39;,
+    `<b>\s</b>&#39;, 和 `<b>\w</b>&#39; ，還有 `<b>\D</b>&#39;,
+    `<b>\S</b>&#39;, 和 `<b>\W</b>&#39;
+    都是非法的。
+    (所以，等價於<b>[a-c[:digit:]]</b>
+    的 <b>[a-c\d]</b> 和等價於
+    <b>[a-c^[:digit:]]</b> 的<b>[a-c\D]</b>
+    是非法的)</p>
+<p class="Pp">約束轉義 constraint escape (AREs only)
+    是如果指定條件滿足則匹配空串的一個約束，它被寫成一個轉義:</p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>\A</b></dt>
+  <dd>只在字符串開始處匹配(與
+      `<b>^</b>&#39;的不同之處請參見下面的
+      MATCHING 章節)</dd>
+  <dt><b>\m</b></dt>
+  <dd>只在一個字開始處匹配</dd>
+  <dt><b>\M</b></dt>
+  <dd>在一個字的結束處匹配</dd>
+  <dt><b>\y</b></dt>
+  <dd>只在一個字的開始處或結束處匹配</dd>
+  <dt><b>\Y</b></dt>
+  <dd>只在一個字的不是開始處或結束處的某點上匹配</dd>
+  <dt><b>\Z</b></dt>
+  <dd>只在一個字符串的結束處匹配(與
+      `<b>$</b>&#39;的不同之處請參見下面的
+      MATCHING 章節)</dd>
+  <dt><b>\</b><i>m</i></dt>
+  <dd>(這裏的 <i>m</i>
+      是一個非零數字)一個<i>back
+      reference</i> 後引用，
+      參見後面</dd>
+  <dt><b>\</b><i>mnn</i></dt>
+  <dd>(這裏的 <i>m</i>
+      是一個非零數字，而
+      <i>nn</i>
+      是一些更多的數字，並且十進制值
+      <i>mnn</i>
+      不大於目前爲止閉合的捕獲圓括號的數目)
+      一個<b>後引用</b>，參見下面　</dd>
+</dl>
+</div>
+<p class="Pp">同於上面規定的
+    <b>[[:&lt;:]]</b> 和 <b>[[:&gt;:]]</b>
+    ，字定義爲既沒有前導的又沒有尾隨的單詞字符的一個序列。
+    一個單詞字符是一個
+    <b>alnum
+    </b>字符或一個下劃線(<b>_</b>)。
+    在方括號表達式中，約束轉義是非法的。</p>
+<p class="Pp">一個<b>後引用</b>(專屬
+    ARE)
+    匹配的字符串與用數字指定的在圓括號中的子表達式所匹配的字符串相同，所以(例如)
+    <b>([bc])\1</b> 匹配 <b>bb</b> 或 <b>cc</b>
+    而不是 ‘<b>bc</b>’。在 RE
+    中，子表達式必須全部在後引用的前面。以前導的圓括號(左圓括號)的次序給子表達式編號。非捕獲圓括號不定義子表達式。</p>
+<p class="Pp">譯註：後引用是原屬
+    BRE 的特徵，ERE
+    無此特徵。例如，表達式
+    ^(.*)\1$
+    匹配由同一個字符串的兩個毗連的出現組成的一行，而表達式
+    (a)*\1 不匹配 a。(a)(b)\1 匹配
+    aba，(a)(b)\2 匹配 abb，(a(b))\1 匹配
+    abab，(a(b))\2 匹配abb。(a)\1
+    等價於 a{2,2}。</p>
+<p class="Pp">在八進制字符錄入轉義和後引用之間有一個歷史遺留的二義性，只能象上面提示的那樣用啓發式的方法來解決。一個前導的零總是指示一個八進制轉義。一個單一的非零數字，不跟隨着其他數字，總是接受爲一個後引用。不以一個零爲開始的一個多數字序列如果在一個合適的子表達式後面，則被接受爲一個後引用
+    (比如給出的後引用的序號在合法範圍內)，否則被接受爲一個八進制轉義。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="元語法_METASYNTAX">元語法 METASYNTAX<a class="anchor" href="#%E5%85%83%E8%AA%9E%E6%B3%95_METASYNTAX">¶</a></h1>
+除了上面描述的主要的語法之外，還可獲得特殊形式和雜項的一些語法性的設施。
+<p class="Pp">一般通過應用相關的方式指定使用的
+    RE
+    的風格。但是，可以用<b>指示符</b>(<i>director</i>)來屏棄它們。如果某種風格的一個
+    RE
+    以‘<b>***:</b>’爲開始，則
+    RE 的剩餘部分是一個
+    ARE。如果某種風格的一個
+    RE
+    以‘<b>***=</b>’爲開始，則
+    RE
+    的剩餘部分被接受爲一個文字串，並且其中的所有字符被認爲是普通字符。</p>
+<p class="Pp">一個 ARE 可以以<i>embedded
+    options</i> 嵌入選項爲開始:
+    一個序列 <b>(?</b><i>xyz</i><b>)</b>
+    (這裏的 <i>xyz</i>
+    是一個或更多的字母字符)
+    指定影響 RE
+    剩餘部分的選項。它們提供和屏棄由應用指定的任何選項。可獲得的選項字母有:</p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>b</b></dt>
+  <dd>RE 的剩餘部分是一個
+    BRE</dd>
+  <dt><b>c</b></dt>
+  <dd>大小寫敏感
+      (通常是缺省的)</dd>
+  <dt><b>e</b></dt>
+  <dd>RE 的剩餘部分是一個
+    ERE</dd>
+  <dt><b>i</b></dt>
+  <dd>大小寫不敏感
+      (參見下面的 MATCHING 匹配)</dd>
+  <dt><b>m</b></dt>
+  <dd>歷史上的 <b>n
+    </b>的同義詞</dd>
+  <dt><b>n</b></dt>
+  <dd>換行敏感匹配
+      (參見下面的 MATCHING 匹配)</dd>
+  <dt><b>p</b></dt>
+  <dd>部分換行敏感匹配
+      (參見下面的 MATCHING 匹配)</dd>
+  <dt><b>q</b></dt>
+  <dd>RE
+      的剩餘部分是一個文字
+      (被引用起來的
+      ``quoted&#39;&#39;)字符串，都是普通字符</dd>
+  <dt><b>s</b></dt>
+  <dd>非換行敏感匹配
+      (通常是缺省的)</dd>
+  <dt><b>t</b></dt>
+  <dd>緊湊語法
+      (通常是缺省的；參見後面)</dd>
+  <dt><b>w</b></dt>
+  <dd>反向部分換行敏感
+      (離奇的 ``weird&#39;&#39;) 匹配
+      (參見下面的 MATCHING 匹配)</dd>
+  <dt><b>x</b></dt>
+  <dd>展開語法 (參見後面)</dd>
+</dl>
+</div>
+<p class="Pp">嵌入選項影響的序列被
+    <b>)</b>
+    終結。它們只在一個 ARE
+    的開始處有效，此後不可以在其中使用。</p>
+<p class="Pp">除了通常的(緊湊) RE
+    語法，其中所有字符都有意義，還有一個展開語法，在所有風格的
+    RE 中都可以使用 <b>-expanded</b>
+    開關來獲得它，或者在
+    ARE 中使用嵌入的 x
+    選項。在展開語法中，忽略白空格和在
+    <b>#</b> 和隨後的換行(或 RE
+    結束)之間的所有字符，這就允許了在一個複雜的
+    RE
+    中進行分段和註釋。有對這些基本規則的三個例外:</p>
+<div class="Bd-indent">
+<p class="Pp">保留有前導`<b>\</b>&#39;的白空格或
+    `<b>#</b>&#39;</p>
+<p class="Pp">保留在方括號表達式中的白空格或
+    `<b>#</b>&#39;</p>
+<p class="Pp">在多字符符號如 ARE
+    `<b>(?:</b>&#39; 或 `<b>\(</b>&#39;
+    中間的白空格或註釋是非法的</p>
+</div>
+<p class="Pp">展開語法中的白空格是
+    blank、tab
+    、和屬於空格字符類的任何字符。</p>
+<p class="Pp">最後，在 ARE
+    中，在方括號表達式外面，序列
+    `<b>(?#</b><i>ttt</i><b>)</b>&#39; (這裏的 <i>ttt</i>
+    是不包含 `<b>)</b>&#39;
+    的任何文本)
+    是一個註釋，它將被完全忽略。同樣，不允許它在多字符符號如
+    `<b>(?:</b>&#39;中間的出現。這種註釋是歷史產物而不是很有用的設施，它的使用被淘汰了；應使用展開語法來替代。</p>
+<p class="Pp">如果應用(或一個啓始的
+    <b>***=</b>
+    指示符)指定用戶的輸入被作爲一個文字串而不是一個
+    RE
+    來對待，則不能獲得這些元語法擴展。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="匹配_MATCHING">匹配 MATCHING<a class="anchor" href="#%E5%8C%B9%E9%85%8D_MATCHING">¶</a></h1>
+譯註：下述引自 XBD RE
+  規定中的匹配定義，略有變更。
+<p class="Pp">譯註：零個或多個字符的一個序列被稱爲與
+    RE
+    匹配的條件是在這個序列中的字符對應於這個模式定義的一個字符序列。</p>
+<p class="Pp">譯註：對一個匹配的序列的查找開始於一個字符串的開始處，停止於找到第一個匹配字符串的時候，這裏定義<b>第一個</b>的意思爲“字符串中最早開始的”。如果模式允許匹配的字符有可變的數目，因此在這個點開始的序列多於一個，則匹配最長的那個序列。例如:
+    RE bb* 匹配 abbbc
+    中的第2到第4個字符，而
+    RE (wee|week)(knights|night) 匹配 weeknights
+    的所有10個字符。</p>
+<p class="Pp">譯註：與整個匹配是最長的最左匹配相一致，從左到右的每個子模式，匹配最長的可能的字符串。爲此，一個空串被認爲比根本沒有匹配長。例如，針對(against)
+    abcdef 匹配 RE (.*).* ,子表達式 (1)
+    是 abcdef，而針對 bc 匹配 RE
+    (a*)*，子表達式 (1)
+    是空串。</p>
+<p class="Pp">譯註：通過向每個子表達式遞歸的提供最左最長匹配來確定什麼(子)字符串對應於子表達式是可能的，而附帶條件是整體匹配是最左的、最長的。例如，針對acdacaaa
+    匹配 (ac*)c*d[ac]*1 匹配出 acdacaaa
+    (這裏 1=a)； 而簡單的給
+    (ac*) 匹配最長的將生成
+    1=ac，但整體匹配將變小
+    (acdac)。概念上，實現必須檢查每種可能的匹配，並在生成的最左最長的總體匹配中，爲最左子表達式挑出一個最長的匹配(子串)並以此類推。注意，這意味着子表達式的匹配是上下文相關的:
+    在一個很大的 RE
+    中的一個子表達式所匹配的字符串可能與它作爲一個獨立的
+    RE
+    時不同，還有，即使在類似的字符序列中，在同一個很大的
+    RE
+    中的同一個子表達式的兩個實例可能匹配不同的長度。例如，在
+    RE (a.*b)(a.*b)
+    中，兩個完全相同的子表達式將分別的匹配
+    accbaccccb
+    的四個和六個字符。</p>
+<p class="Pp">如果一個 RE
+    能匹配一個給定字符串中的多於一個的子串，RE
+    匹配在這個字符串中最先開始的子串。如果
+    RE能匹配的在這一點上開始的子串多於一個，它的選擇決定於它的<b>偏好</b>(preference):
+    要麼是最長的子串，要麼是最短的子串。</p>
+<p class="Pp">多數原子和所有約束，都沒有偏好。一個有圓括號的
+    RE 與 RE
+    有相同的偏好(有可能沒有)。一個有
+    <b>{</b><i>m</i><b>}</b> 或 <b>{</b><i>m</i><b>}?</b>
+    定量符的定量原子與原子自身有相同的偏好(有可能沒有)。一個有其他平常的定量符的定量原子(包括在
+    <b>{</b><i>m</i><b>,</b><i>n</i><b>}</b> 中 <i>m</i> 等於
+    <i>n</i>)
+    偏好最長的匹配。一個有不貪婪定量符的定量原子(包括在
+    <b>{</b><i>m</i><b>,</b><i>n</i><b>}?</b> 中 <i>m</i> 等於
+    <i>n</i> 的情況)
+    偏好最短的匹配。一個分支與在它的裏面的第一個定量原子有相同的偏好。用
+    <b>|</b>
+    操作符連接起來的一個由兩個或多個分支組成的
+    RE 偏好最長的匹配。</p>
+<p class="Pp">取決於匹配整個 RE
+    的規則所強加的約束，基於可能子串的表現，子表達式可以匹配最長或最短的可能子串，在
+    RE
+    中開始較早的子表達式優先於開始較晚的。注意，外部的子表達式優先於其中的構件子表達式。</p>
+<p class="Pp">注意，可以分別的使用定量符
+    <b>{1,1}</b> 和 <b>{1,1}?</b>
+    在子表達式或整個 RE
+    上強制最長和最短偏好。</p>
+<p class="Pp">用字符數而不是整理元素數來測量匹配長度。一個空串被當作比根本沒有匹配長
+    ，例如 <b>bb*</b> 匹配
+    `<b>abbbc</b>&#39;中間的三個字符，
+    <b>(week|wee)(night|knights)</b> 匹配
+    `<b>weeknights</b>&#39;的所有10個字符，在針對(against)
+    <b>abc</b> 匹配 <b>(.*).*</b>
+    的時候圓括號中的子表達式匹配所有這三個字符，而在針對
+    <b>bc</b> 匹配 <b>(a*)*</b>
+    的時候整個 RE
+    和圓括號中子表達式都匹配一個空串。</p>
+<p class="Pp">如果指定了大小寫無關匹配，效果如同所有字母的大小寫區別都消失了。當存在大小寫區別的一個字符在方括號表達式外面作爲一個普通字符出現的時候，它被有效的轉變成包含大小寫二者的一個方括號表達式，
+    所以 <b>x</b>
+    變成了`<b>[xX]</b>&#39;。當它出現在一個方括號表達式中，把它對應的所有大小寫添加到方括號中，所以<b>[x]</b>
+    變成 <b>[xX]</b>而 <b>[^x]</b> 變成
+    `<b>[^xX]</b>&#39;。</p>
+<p class="Pp">如果指定了換行敏感匹配，則
+    <b>.</b> 和使用 <b>^</b>
+    的方括號表達式永不匹配換行字符(所以除非
+    RE
+    顯式安排，否則永不會跨越換行來進行匹配)，並且
+    <b>^</b> 和 <b>$</b>
+    除了分別匹配字符串的開始和結束之外，還分別的匹配在換行之後和之前的空串。ARE
+    <b>[u548C]
+    </b><b>[u7E7C]續</b><b>只</b>匹配字符串的開始和結束。</p>
+<p class="Pp">如果指定了部分換行敏感，這將致使
+    <b>.</b>
+    和方括號表達式成爲換行敏感匹配，但不影響
+    <b>^</b> 和‘<b>$</b>’。</p>
+<p class="Pp">如果指定了反向部分換行敏感，這將致使
+    <b>^</b> 和 <b>$</b>
+    成爲換行敏感匹配，但不影響
+    <b>.</b>
+    和方括號。這不是很有用，提供它只是爲了對稱。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="限制和兼容性_LIMITS_AND_COMPATIBILITY">限制和兼容性 LIMITS AND COMPATIBILITY<a class="anchor" href="#%E9%99%90%E5%88%B6%E5%92%8C%E5%85%BC%E5%AE%B9%E6%80%A7_LIMITS_AND_COMPATIBILITY">¶</a></h1>
+對於 RE
+  的長度沒有強加特定的限制。想要高度可移植的程序不應該依賴比
+  256 字節長的
+  RE，因爲遵從 POSIX
+  的實現可能拒絕接受這樣的
+  RE。
+<p class="Pp">專屬 ARE
+    並且實際上與 POSIX ERE
+    不相容的特徵是在方括號表達式中的
+    <b>\</b>
+    不失去它的特殊意義。所有其他
+    ARE 特徵使用的語法在 POSIX
+    ERE
+    中是非法的，或着有未定義或未指定的效果；指示符的
+    <b>***</b> 語法同樣不屬於 BRE
+    和 ERE 二者的 POSIX 語法。</p>
+<p class="Pp">許多 ARE 擴展取自
+    Perl，爲了整理它們而進行了一些變更，還有一些
+    Perl
+    擴展未提供。要注意的不相容包括：‘<b>\b</b>’、‘<b>\B</b>’，缺乏對尾隨的換行的特殊對待，爲受換行敏感匹配影響的
+    RE
+    增加了方括號表達式補全，在先行約束中對圓括號和後引用的限制，和最長/最短匹配的匹配語義。</p>
+<p class="Pp">自從這個包的一個早期的
+    beta
+    測試版本做了變更以來，RE
+    的匹配的規則包含正常的和非貪婪的定量符二者。(新規則更加簡單和清晰，而不在猜測用戶的真實意圖上費很大力氣。)</p>
+<p class="Pp">Henry Spencer 的原始的 1986 <i>regexp</i>
+    包，仍被廣泛的使用(例如，在
+    Tcl 8.1
+    之前的發行中)，它實現了今天的
+    ERE 的一個早期版本。在
+    <i>regexp </i>的近似 ERE (簡寫爲
+    RRE)和 ARE
+    之間有四點不相容:　 In
+    roughly increasing order of significance:</p>
+<p class="Pp"></p>
+<div class="Bd-indent">在 ARE
+  中，跟隨着一個字母字符的
+  <b>\</b>
+  要麼是轉義要麼是一個錯誤，而在
+  RRE
+  中，它只是寫字母的另一種方式。這不應該是一個問題，因爲在
+  RRE
+  中沒有理由寫出這樣的一個序列。
+<p class="Pp">在 ARE
+    中跟隨着一個數字的
+    <b>{</b>
+    是一個束縛的開始，而在
+    RRE 中，<b>{</b>
+    總是一個普通字符。這樣的序列是少見的，並且經常導致一個錯誤，原因是隨後的字符看起來不象一個有效的束縛。</p>
+<p class="Pp">在 ARE 中，在`<b>[]</b>&#39;內 <b>\</b>
+    保持是一個特殊字符，所以在`<b>[]</b>&#39;內一個文字
+    <b>\</b> 必須寫成`<b>\\</b>&#39;。在 RRE
+    中，在<b>[]</b>內 `<b>\\</b>&#39;
+    也給出一個文字
+    <b>\</b>，但只有真正的偏執狂程序員才例行公事的雙寫反斜槓。</p>
+<p class="Pp">ARE 爲 RE
+    報告最長的和最短的匹配，而不是按指定的查找次序找到的第一個匹配。這可能影響寄希望於第一個匹配不被報告的一些
+    RRE。(廢棄了爲快速匹配而優化查找次序的
+    RRE 細緻工藝(ARE
+    並行的檢查所有可能的匹配，並且它們的性能在很大程度上不敏感於它們的複雜性)，而爲故意的找尋非最長或最短的一個匹配而開發的查找次序需要重寫。)</p>
+</div>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="基本正則表達式_BASIC_REGULAR_EXPRESSIONS">基本正則表達式 BASIC REGULAR EXPRESSIONS<a class="anchor" href="#%E5%9F%BA%E6%9C%AC%E6%AD%A3%E5%89%87%E8%A1%A8%E9%81%94%E5%BC%8F_BASIC_REGULAR_EXPRESSIONS">¶</a></h1>
+BRE 在一些方面與 ERE
+  有所區別。 `<b>|</b>&#39;, `<b>+</b>&#39;, 和
+  <b>?</b>
+  是普通字符並且沒有與之等價的功能。用於束縛的分界符是
+  <b>\{</b> 和 `<b>\}</b>&#39;, 而 <b>{</b> 和 <b>}</b>
+  本身是普通字符。用於嵌套子表達式的圓括號是
+  <b>\(</b> 和`<b>\)</b>&#39;, 而 <b>(</b> 和 <b>)</b>
+  自身是普通字符。除了在
+  RE
+  或一個圓括號中的子表達式的開始處之外，
+  <b>^</b>
+  是一個普通字符，除了在
+  RE
+  或一個圓括號中的子表達式的結束處之外，
+  <b>$</b>
+  是一個普通字符，而在
+  RE
+  或一個圓括號中的子表達式的開始處之外出現的
+  <b>*</b>
+  是一個普通字符(在可能的前導
+  `<b>^</b>&#39;
+  之後)。最後，可獲得單一數字的後引用，
+  <b>\&lt;</b> 和 <b>\&gt;</b> 分別是 <b>[[:&lt;:]]</b>
+  和 <b>[[:&gt;:]]</b>
+  的同義詞；沒有其他可獲得的轉義。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_SEE_ALSO">參見 SEE ALSO<a class="anchor" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO">¶</a></h1>
+<a href="../../buster/tcl8.6-doc/RegExp.3tcl.en.html">RegExp(3)</a>, regexp(n), regsub(n), lsearch(n), switch(n), text(n)
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="關鍵字_KEYWORDS">關鍵字 KEYWORDS<a class="anchor" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS">¶</a></h1>
+match, regular expression, string
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>寒蟬退士</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/10/26</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國_Linux_論壇_man_手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8B_Linux_%E8%AB%96%E5%A3%87_man_%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">8.1</td>
+    <td class="foot-os">Tcl</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+re_syntax.3tcl.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-26T21:44:42Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"re_syntax(3tcl)\"}}]}"
+</script>

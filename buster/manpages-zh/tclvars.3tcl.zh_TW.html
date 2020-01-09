@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tclvars(3tcl) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/tclvars.3tcl.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/tclvars.3tcl.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="3tcl">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; tclvars(3tcl)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/tclvars.3tcl">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/tclvars.3tcl.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO" title="參見 SEE ALSO">參見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS" title="關鍵字 KEYWORDS">關鍵字 KEYWORDS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國 Linux 論壇 man 手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/tclvars.3tcl.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/tclvars.3tcl.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/tclvars.3tcl.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/tclvars.3tcl.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/tclvars.3tcl.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">tclvars(3tcl)</td>
+    <td class="head-vol">Tcl Built-In Commands</td>
+    <td class="head-rtitle">tclvars(3tcl)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+tclvars - Tcl 使用的變量
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+Tcl
+  庫自動的建立和管理下列全局變量。除了下面專做說明的地方之外，對特定於應用的代碼和用戶，這些變量通常應當作爲只讀的來對待。
+<dl class="Bl-tag">
+  <dt><b>env</b></dt>
+  <dd>Tcl
+      把這個變量維護爲一個數組，它的元素是這個進程的環境變量。讀取一個元素將返回相應的環境變量的值。設置這個數組的一個元素將修改相應的環境變量，如果它不存在則建立一個新的。刪除
+      <b>env</b>
+      的一個元素將刪除相應的環境變量。對
+      <b>env</b>
+      數組的變更將影響通過象
+      <b>exec
+      </b>這樣的命令傳遞給子進程的環境變量。如果刪除了整個
+      <b>env</b> 數組，則 Tcl
+      將停止監視 <b>env</b>
+      訪問並且將不更新環境變量。</dd>
+</dl>
+<div class="Bd-indent">在 Windows
+  下，任何大小寫形式的環境變量
+  PATH 和 COMSPEC 都被自動轉換成
+  大寫的。例如，PATH
+  環境變量可以被操作系統導出爲“path”、“Path”、“PaTh”、
+  等，這導致其他簡單 Tcl
+  代碼必須支持許多特殊的寫法。Tcl
+  繼承的所有其他
+  環境變量保持不變。</div>
+<div class="Bd-indent">在 Macintosh 上，Tcl
+  把環境變量構造爲非現存的全局環境變量。爲
+  Tcl 建立的環境變量包括:
+<dl class="Bl-tag">
+  <dt><b>LOGIN</b></dt>
+  <dd>它持有 Macintosh 的 Chooser
+      名字。</dd>
+  <dt><b>USER</b></dt>
+  <dd>它也持有 Macintosh 的 Chooser
+      名字。</dd>
+  <dt><b>SYS_FOLDER</b></dt>
+  <dd>到系統目錄的路徑。</dd>
+  <dt><b>APPLE_M_FOLDER</b></dt>
+  <dd>到 Apple
+      菜單目錄的路徑。</dd>
+  <dt><b>CP_FOLDER</b></dt>
+  <dd>到控制面板目錄的路徑。</dd>
+  <dt><b>DESK_FOLDER</b></dt>
+  <dd>到桌面目錄的路徑。</dd>
+  <dt><b>EXT_FOLDER</b></dt>
+  <dd>到系統擴展目錄的路徑。</dd>
+  <dt><b>PREF_FOLDER</b></dt>
+  <dd>到偏好目錄的路徑。</dd>
+  <dt><b>PRINT_MON_FOLDER</b></dt>
+  <dd>到打印監控器目錄的路徑。</dd>
+  <dt><b>SHARED_TRASH_FOLDER</b></dt>
+  <dd>到網絡垃圾箱目錄的路徑。</dd>
+  <dt><b>TRASH_FOLDER</b></dt>
+  <dd>到垃圾箱目錄的路徑。</dd>
+  <dt><b>START_UP_FOLDER</b></dt>
+  <dd>到啓動目錄的路徑。</dd>
+  <dt><b>HOME</b></dt>
+  <dd>到應用程序的缺省目錄的路徑。</dd>
+</dl>
+<p class="Pp">你還可以爲 Macintosh
+    建立你自己的環境變量。叫做
+    <b>Tcl Environment Variables</b>
+    的一個文件將被放置到
+    Mac
+    系統文件夾中的偏好文件夾中。這個文件中的每行的形式都是
+    <i>VAR_NAME=var_data</i>。</p>
+<p class="Pp">最後的選擇是把環境變量放置到這個應用的叫做
+    <b>Tcl Environment</b> <b>Variables</b>
+    的一個`STR#&#39;資源文件中。這被認爲是更象“Mac
+    式”而不是 一個 Unix
+    式樣的環境變量文件。`STR#&#39;資源中每個條目有與上述相同的格式。源
+    代碼文件 <i>tclMacEnv.c</i> 包含 env
+    機制的實現。這個文件包含許多
+    #define ，它們允許你定製 env
+    機制來適合你的應用的需要。</p>
+</div>
+<dl class="Bl-tag">
+  <dt><b>errorCode</b></dt>
+  <dd>在發生了一個錯誤之後，設置這個變量爲持有關於錯誤的補充信息，它的形式易於用程序處理。<b>errorCode</b>
+      由有一個或多個元素的一個
+      Tcl
+      列表組成。這個列表的第一個元素標識錯誤的一個一般的類別，並決定列表餘下部分的格式。Tcl
+      核心爲 <b>errorCode</b>
+      使用下列格式；個別應用可以定義補充的格式。</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>ARITH</b><i> code msg</i></dt>
+  <dd>在發生一個算術錯誤的時候使用這個格式(例如，在
+      <b>expr</b>
+      命令中嘗試除以零)。<i>Code</i>
+      標識準確的錯誤而
+      <i>msg</i>
+      提供一個人可閱讀的對錯誤的描述。<i>Code</i>
+      將是下列之一：DIVZERO
+      (嘗試除以零)、DOMAIN
+      (如果函數的一個參數在它的作用域之外，比如
+      acos(-3))、IOVERFLOW (整數溢出)、
+      OVERFLOW (浮點數溢出)、或
+      UNKNOWN
+      (如果不能確定錯誤的原因)。</dd>
+  <dt><b>CHILDKILLED</b><i> pid sigName msg</i></dt>
+  <dd>在子進程被一個信號所終止的時候使用這個格式。<b>errorCode</b>
+      的第二個元素是這個進程的標識符(十進制數)。第三個元素標識導致進程終止的信號的符號名字；它將是在文件
+      signal.h
+      中包含的名字之一，比如
+      <b>SIGPIPE</b>。第四個元素是一個描述這個信號的人可閱讀的短消息，比如對
+      <b>SIGPIPE</b>是“write on pipe with no
+      readers”。</dd>
+  <dt><b>CHILDSTATUS</b><i> pid code</i></dt>
+  <dd>在子進程以非零狀態退出的時候使用這個格式。<b>errorCode
+      </b>的第二個元素是這個進程的標識符(十進制數)，而第三個元素是這個進程返回的退出代碼(也是十進制數)。</dd>
+  <dt><b>CHILDSUSP</b><i> pid sigName msg</i></dt>
+  <dd>在子進程被一個信號所掛起的時候使用這個格式。<b>errorCode</b>
+      的第二個元素是這個進程的標識符，是一個十進制數。第三個元素識導致進程掛起的信號的符號名字；它將是在文件signal.h
+      中包含的名字之一，比如
+      <b>SIGTTIN</b>。
+      第四個元素是一個描述這個信號的人可閱讀的短消息，比如對
+      <b>SIGTTIN </b>是“background tty read”。</dd>
+  <dt><b>NONE</b></dt>
+  <dd>對除了返回錯誤消息之外沒有其他可獲得的補充信息的錯誤使用這個格式。在這種情況下
+      <b>errorCode</b>
+      將由只有一個單一元素的一個列表組成，這個元素的內容是
+      <b>NONE</b>。</dd>
+  <dt><b>POSIX </b><i>errName msg</i></dt>
+  <dd>如果 <b>errorCode</b>
+      的第一個元素是
+      <b>POSIX</b>，則錯誤發生在一個
+      POSIX
+      內核調用期間。這個列表的第二個元素將包含發生的錯誤的符號名字，比如
+      <b>ENOENT</b>；它將是在包含文件
+      errno.h
+      中定義的值之一。這個列表的第三個元素是對應於
+      <i>errName</i>
+      的一個人可閱讀的消息，比如對
+      <b>ENOENT</b> 是“no such file or
+    directory”。</dd>
+</dl>
+<p class="Pp">要設置
+    <b>errorCode</b>，應用應當使用庫過程比如
+    <b>Tcl_SetErrorCode</b> 和
+    <b>Tcl_PosixError</b>，或者調用 <b>error</b>
+    命令。如果使用了這些方法之一，則
+    Tcl
+    解釋器將在下個錯誤之後重置這個變量爲
+    <b>NONE</b>。</p>
+</div>
+<dl class="Bl-tag">
+  <dt><b>errorInfo</b></dt>
+  <dd>在一個錯誤發生之後，這個字符串將包含標識在最新近的錯誤發生時正在執行的
+      Tcl
+      命令和過程的一行或多行。它的內容使用棧跟蹤的形式，展示在錯誤發生時調用的各個嵌套的
+      Tcl 命令。</dd>
+  <dt><b>tcl_library</b></dt>
+  <dd>這個變量持有包含系統
+      Tcl
+      腳本庫的一個目錄的名字，比如用於自動裝載的那些目錄。<b>info
+      library</b>
+      命令返回這個變量的值。關於
+      Tcl
+      腳本庫的詳情請參見
+      <b>library</b> 手冊條目。 除了
+      Tcl
+      腳本庫之外，每個應用或包通常都有它自己的特定於應用的腳本庫；每個應用都應該設置名字象
+      <b>$</b><i>app</i><b>_library</b>
+      這樣的一個全局變量(這裏的
+      <i>app</i>
+      是這個應用的名字)來持有這個應用的庫目錄的網絡文件名字。在建立解釋器的時候，通過查找許多不同目錄直到找到包含一個適當的
+      Tcl
+      啓動腳本的目錄，來設置
+      <b>tcl_library</b>
+      的最初的值。如果
+      <b>TCL_LIBRARY</b>
+      環境變量存在，則首先訪問它指名的目錄。如果
+      <b>TCL_LIBRARY</b>
+      未被設置或不參照一個適當的目錄，則
+      Tcl
+      檢查基於在其中編譯(compiled-in)的缺省位置的其他一些目錄、包含應用的二進制文件的位置、和當前工作目錄。</dd>
+  <dt><b>tcl_patchLevel</b></dt>
+  <dd>在建立解釋器的時候
+      Tcl
+      初始化這個變量來持有給出當前的
+      Tcl
+      補丁級別的一個字符串，比如
+      <b>7.3p2 </b>是Tcl 7.3
+      的第二次官方補丁，而
+      <b>7.4b4</b> 是 Tcl 7.4 的第四次 beta
+      發佈。<b>info patchlevel</b>
+      命令返回這個值。
+    <br/>
+  </dd>
+  <dt><b>tcl_pkgPath</b></dt>
+  <dd>這個變量持有一個目錄的列表，它一般指示把包安裝到哪裏。在
+      Windows 上不使
+      用它。它典型的包含一個或兩個條目；如果它包含兩個條目，第一個通常是依賴於
+      平臺的包的目錄(例如，共享庫的二進制文件)而第二個通常是平臺無關的包的目錄
+      (例如，腳本文件)。典型的把包安裝爲在
+      <b>$tcl_pkgPath</b>
+      中的一個條目的
+      一個子目錄。在
+      <b>$tcl_pkgPath</b>
+      中的目錄缺省的包含在
+      <b>auto_path</b> 變量中，所以
+      <b>package require</b>
+      命令期間自動的在它們和它們的直接子目
+      錄中查找包。注意:
+      不希望應用修改
+      <b>tcl_pkgPath</b>。在啓動時它的值被添加
+      到 <b>auto_path</b>；對 <b>tcl_pkgPath</b>
+      的變動不會反映到
+      <b>auto_path</b> 中。如果你想讓
+      Tcl
+      來在額外的目錄中查找包，你應該把這
+      些目錄的名字添加到
+      <b>auto_path</b>，而不是
+      <b>tcl_pkgPath</b>。</dd>
+  <dt><b>tcl_platform</b></dt>
+  <dd>這是一個關聯數組，它的元素包含關於應用在其上運行的平臺的信息，比如操作系統的名字、它的當前發行號、和機器的指令集。總是定義下列元素，但是如果
+      Tcl
+      不能檢索到任何有關的信息，則它們的值將是空串。除此之外，擴展和應用可以向這個數組添加補充的值。預先定義的元素是:
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>byteOrder</b></dt>
+  <dd>這個機器的本地字節序:
+      <b>littleEndian</b> 或 <b>bigEndian</b>。</dd>
+  <dt><b>debug</b></dt>
+  <dd>如果這個變量存在，則編譯解釋器時啓用了調試符號。只在
+      Windows
+      上存在這個變量，擴展作者可以依賴於所裝載的
+      C
+      運行時庫來指定裝載哪個包。</dd>
+  <dt><b>machine</b></dt>
+  <dd>這個機器執行的指令集，比如
+      <b>intel</b>、<b>PPC</b>、<b>68k</b>、或<b>sun4m</b>。在
+      UNIX 機器上，用 <b>uname -m</b>
+      返回這個值。</dd>
+  <dt><b>os</b></dt>
+  <dd>在這個機器上運行的操作系統的名字，比如
+      <b>Windows 95</b>、<b>Windows
+      NT</b>、<b>MacOS</b>、或 <b>SunOS</b>。 在
+      UNIX 機器上，用 <b>uname -s</b>
+      返回這個值。在 Windows 95
+      和 Windows 98
+      上，返回的值將是
+      <b>Windows 95</b> 來提供更好的對
+      Windows 95
+      的反向兼容；要區別二者，請檢查
+      <b>osVersion</b>。</dd>
+  <dt><b>osVersion</b></dt>
+  <dd>在這個機器上運行的操作系統的版本號。在
+      UNIX 機器上，用 <b>uname -r</b>
+      返回這個值。在 Windows 95
+      上，版本將是 4.0；在
+      Windows 98 上，版本將是
+    4.10。</dd>
+  <dt><b>platform</b></dt>
+  <dd><b>windows</b>、<b>macintosh</b>、或 <b>unix
+      </b>之一。它表示這個機器的一般操作環境。</dd>
+  <dt><b>threaded</b></dt>
+  <dd>如果這個變量存在，則編譯這個解釋器時啓用了線程。</dd>
+  <dt><b>user</b></dt>
+  <dd>它基於在平臺上獲得的登錄信息標識當前用戶。在
+      Unix 它源自 USER 或 LOGNAME
+      環境變量，在 Windows 和
+      Macintosh 上源自 GetUserName。</dd>
+</dl>
+</div>
+<dl class="Bl-tag">
+  <dt><b>tcl_precision</b></dt>
+  <dd>這個變量在把浮點數轉換成字符串時控制生成的數字的數目。它缺省的是
+      12。對於 IEEE 浮點數 17
+      位數字是“最佳的”，這樣允許雙精度值在二進制和字符串之間來回轉換而不丟失信息。但是，使用
+      17
+      位數字將禁止任何舍入，這將生成更長，而更不直觀的值。例如，<b>expr
+      1.4</b> 在設置 <b>tcl_precision</b> 爲 17
+      時返回
+      1.3999999999999999，而在設置
+      <b>tcl_precision</b> 爲 12 時返回 1.4
+    。</dd>
+</dl>
+<div class="Bd-indent">在一個進程中的所有解釋器共享一個單一的
+  <b>tcl_precision</b> 值:
+  在一個解釋器中改變它將同樣影響所有其他解釋器。但是，不允許安全解釋器修改這個變量。</div>
+<dl class="Bl-tag">
+  <dt><b>tcl_rcFileName</b></dt>
+  <dd>在初始化期間使用這個變量來指示特定於用戶的啓動文件的名字。如果在特定於應用的初始化中設置了它，則
+      Tcl
+      啓動代碼將檢查這個文件是否存在，並且如果它存在的話則
+      <b>source</b>
+      (載入)它。例如，對於
+      <b>wish</b>
+      ，這個變量被設置成給
+      Unix 的 <b>~/.wishrc</b> 和給 Windows 的
+      <b>~/wishrc.tcl</b>。</dd>
+  <dt><b>tcl_rcRsrcName</b></dt>
+  <dd>這個變量只在 Macintosh
+      系統上使用。在初始化期間使用這個變量來指示位於應用或擴展資源
+      fork
+      中的一個特定於應用的
+      <b>TEXT</b>
+      資源的名字。如果特定於應用的初始化設置了它，則
+      Tcl
+      啓動代碼將檢查資源是否存在，如果存在則
+      <b>source</b> 它。例如，Macintosh
+      <b>wish</b>
+      應用設置這個變量爲
+      <b>tclshrc</b>。</dd>
+  <dt><b>tcl_traceCompile</b></dt>
+  <dd>設置這個變量的值來控制在字節碼編譯期間顯示多少跟蹤信息。缺省的，tcl_traceCompile
+      是零且不顯示信息。設置
+      tcl_traceCompile 爲
+      1，在編譯一個過程或頂層命令的時候在標準輸出上生成一行總結。設置它爲
+      2，在標準輸出上詳細的列出在每次編譯期間散發(???
+      emit)的字節碼指令。在跟蹤懷疑是
+      Tcl
+      編譯器的問題時很有用。在把現存代碼轉換成
+      Tcl8.0 時也偶爾有用。</dd>
+  <dt><b>tcl_traceExec</b></dt>
+  <dd>設置這個變量的值來控制在字節碼執行期間顯示多少跟蹤信息。缺省的，tcl_traceExec
+      是零而不顯示信息。設置
+      tcl_traceExec 爲
+      1，在每次調用一個 Tcl
+      過程的時候在標準輸出上生成一行跟蹤。設置它爲
+      2，在用命令的名字和它的參數調用任何Tcl
+      命令的時候，生成一行輸出。設置它爲
+      3，生成一個詳細的跟蹤，展示每個字節碼指令的執行結果。注意在
+      tcl_traceExec 是 2 或 3
+      的時候，不展示象 set
+      和 incr
+      這樣已經被整個替換爲一個字節碼指令序列的命令。在跟蹤懷疑是
+      Tcl
+      編譯器和解釋器的問題時很有用。在把現存代碼轉換成
+      Tcl8.0 時也偶爾有用。</dd>
+  <dt><b>tcl_wordchars</b></dt>
+  <dd>這個變量的值是一個正則表達式，設置它來控制認把什麼字符認爲是“字”字
+      符。例如在 Tk
+      的文本框中用雙擊來選擇一個字。它是平臺相關的。在
+      Windows 上，它缺省爲
+      <b>\S</b>，意思是除了 Unicode
+      空格字符之外的任何字符。其他
+      平臺上缺省爲
+      <b>\w</b>，它是任何 Unicode
+      字字符(數字、字母、下劃線)。</dd>
+  <dt><b>tcl_nonwordchars</b></dt>
+  <dd>這個變量的值是一個正則表達式，設置它來控制認把什麼字符認爲是“非字”
+      字符。例如在 Tk
+      的文本框中用雙擊來選擇一個字。它是平臺相關的。在
+      Windows 上，它缺省爲
+      <b>\s</b>，意思是任何 Unicode
+      空格字符。其他平臺上缺
+      省爲 <b>\W</b>，它是除了 Unicode
+      字字符(數字、字母、下劃線)之外的任何字符
+      。</dd>
+  <dt><b>tcl_version</b></dt>
+  <dd>在建立解釋器的時候，Tcl
+      初始化這個變量來持有這個版本的
+      Tcl 的版本號，形式是
+      <i>x.y</i>。對 <i>x</i>
+      的變更表示可能導致不兼容的較大的變化，對
+      <i>y</i>
+      的變更表示保持反向兼容的小增強和缺陷修理，<b>info
+      tclversion</b>
+      命令返回這個變量的值。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_SEE_ALSO">參見 SEE ALSO<a class="anchor" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO">¶</a></h1>
+eval(n)
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="關鍵字_KEYWORDS">關鍵字 KEYWORDS<a class="anchor" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS">¶</a></h1>
+arithmetic, bytecode, compiler, error, environment, POSIX, precision,
+  subprocess, variables
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>寒蟬退士</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/12/10</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國_Linux_論壇_man_手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8B_Linux_%E8%AB%96%E5%A3%87_man_%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">8.0</td>
+    <td class="foot-os">Tcl</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+tclvars.3tcl.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:31Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"tclvars(3tcl)\"}}]}"
+</script>

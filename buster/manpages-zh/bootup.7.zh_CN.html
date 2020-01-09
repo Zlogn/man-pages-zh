@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bootup(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/bootup.7.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/systemd/bootup.7.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/bootup.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/bootup.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; bootup(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/bootup.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/bootup.7.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%B8%B8%E8%A7%84%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B" title="常规启动流程">常规启动流程</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#INITRD%28INITIAL_RAM_DISK%29_%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B" title="INITRD(INITIAL RAM DISK) 启动流程">INITRD(INITIAL RAM DISK) 启动流程</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%85%B3%E6%9C%BA%E6%B5%81%E7%A8%8B" title="关机流程">关机流程</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E8%A7%81" title="参见">参见</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/bootup.7.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/bootup.7.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/bootup.7.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/bootup.7.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/systemd/bootup.7.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/bootup.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/bootup.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">BOOTUP(7)</td>
+    <td class="head-vol">bootup</td>
+    <td class="head-rtitle">BOOTUP(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+bootup - 系统启动流程
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+在系统启动过程中要涉及多个不同的组件。
+  按下电源按钮后，首先BIOS/UEFI做最基本的硬件自检与初始化，
+  然后加载预设/手动选择的磁盘/网络上的引导加载器(例如GRUB2)，
+  引导加载器进一步从磁盘/网络上加载操作系统内核(例如Linux)。
+  对于Linux来说，内核将会(可选的)解压一个initrd(initial
+  RAM disk)镜像(可以用 <a href="../../buster/dracut-core/dracut.8.en.html">dracut(8)</a>
+  之类的工具生成)，
+  并执行由&#34;rdinit=&#34;内核引导选项指定的init程序(例如
+  <a href="../../buster/manpages-zh/systemd.1.zh_CN.html">systemd(1)</a>)
+  以寻找并挂载根文件系统。
+  完成根文件系统的挂载之后，内核启动由&#34;init=&#34;内核引导选项指定的init程序(例如
+  <a href="../../buster/manpages-zh/systemd.1.zh_CN.html">systemd(1)</a>)
+  以接管系统的控制权。
+  该init程序将会负责检测所有其他的硬件设备、挂载必要的文件系统、启动所有必要的服务，等等。
+<p class="Pp">关机时，
+    init程序将会停止所有服务、
+    卸载所有文件系统、
+    (可选的)返回initrd环境卸载根文件系统，
+    最后关闭电源。</p>
+<p class="Pp">其他有关系统启动流程的信息可以参考
+    <a href="../../buster/manpages/boot.7.en.html">boot(7)</a> 手册。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="常规启动流程">常规启动流程<a class="anchor" href="#%E5%B8%B8%E8%A7%84%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B">¶</a></h1>
+当成功挂载了&#34;root=&#34;内核引导选项指定的根文件系统之后，内核将启动由&#34;init=&#34;内核引导选项指定的init程序，
+  从这个时间点开始，即进入了&#34;常规启动流程&#34;：
+  检测硬件设备并加载驱动、挂载必要的文件系统、启动所有必要的服务，等等。对于
+  <a href="../../buster/manpages-zh/systemd.1.zh_CN.html">systemd(1)</a>
+  系统来说，上述&#34;init程序&#34;就是
+  systemd 进程，
+  而整个&#34;常规启动流程&#34;也以几个特殊的
+  target 单元(详见 <a href="../../buster/systemd/systemd.target.5.en.html">systemd.target(5)</a>)
+  作为节点，被划分为几个阶段性步骤。
+  在每个阶段性步骤内部，任务是高度并行的，
+  所以无法准确预测同一阶段内单元的先后顺序，
+  但是不同阶段之间的先后顺序总是固定的。
+<p class="Pp">当启动系统时， systemd
+    将会以 default.target
+    为启动目标，
+    借助单元之间环环相扣的依赖关系，即可完成&#34;常规启动流程&#34;。
+    default.target
+    通常只是一个指向
+    graphical.target(图形界面) 或
+    multi-user.target(文本控制台)
+    的软连接。
+    为了强制启动流程的规范性以及提高单元的并行性，
+    预先定义了一些具有特定含义的
+    target 单元。详见 <a href="../../buster/systemd/systemd.special.7.en.html">systemd.special(7)</a>
+    手册。</p>
+<p class="Pp">下面的图表解释了
+    这些具有特定含义的
+    target
+    单元之间的依赖关系
+    以及各自在启动流程中的位置。
+    图中的箭头表示了单元之间的依赖关系与先后顺序，
+    整个图表按照自上而下的时间顺序执行。</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>local-fs-pre.target
+         |
+         v
+ (各个 mounts 与       (各个 swap      (各个加密块设备
+ fsck services...)     devices...)        devices...)         (各个底层服务:      (各个底层虚拟
+         |                  |                  |              udevd, tmpfiles,    文件系统 mounts:
+         v                  v                  v              random seed,        mqueue, configfs,
+  local-fs.target      swap.target     cryptsetup.target          sysctl, ...)      debugfs, ...)
+         |                  |                  |                    |                    |
+         \__________________|_________________ | ___________________|____________________/
+                                              \|/
+                                               v
+                                        sysinit.target
+                                               |
+          ____________________________________/|\________________________________________
+         /                  |                  |                    |                    \
+         |                  |                  |                    |                    |
+         v                  v                  |                    v                    v
+      (各个               (各个                |                  (各个           rescue.service
+    timers...)          paths...)              |               sockets...)               |
+         |                  |                  |                    |                    v
+         v                  v                  |                    v              <i>rescue.target</i>
+   timers.target      paths.target             |             sockets.target
+         .                  |                  |                    |
+         .                  \_________________ | ___________________/
+         .................................... \|/
+                                               v
+                                         basic.target
+                                               |
+          ____________________________________/|                                 emergency.service
+         /                  |                  |                                         |
+         |                  |                  |                                         v
+         v                  v                  v                                 <i>emergency.target</i>
+     display-        (图形界面所必需    (各个系统服务)
+ manager.service      的各个系统服务)          |
+         |                  |                  |
+         |                  |                  v
+         |                  |           <i>multi-user.target</i>
+         |                  |                  |
+         \_________________ | _________________/
+                           \|/
+                            v
+                  <i>graphical.target</i>
+</pre>
+</div>
+<p class="Pp">用<i>斜体</i>标识的目标单元经常被用作启动目标。
+    有两种方法可以指定启动目标：
+    (1)使用 <i>systemd.unit=</i>
+    内核引导选项(参见
+    <a href="../../buster/manpages-zh/systemd.1.zh_CN.html">systemd(1)</a>)； (2)使用 default.target
+    软连接。</p>
+<p class="Pp">因为 timers.target
+    以异步方式包含在
+    basic.target 中， 所以 timer
+    单元可以依赖于在
+    basic.target
+    之后才启动的服务。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="INITRD(INITIAL_RAM_DISK)_启动流程">INITRD(INITIAL RAM DISK) 启动流程<a class="anchor" href="#INITRD(INITIAL_RAM_DISK)_%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B">¶</a></h1>
+在initrd内部， 也可以将 systemd
+  用作init程序(由&#34;rdinit=&#34;内核引导选项指定)。
+<p class="Pp">此时 initrd.target
+    将是默认目标。
+    initrd内部启动流程的上半部分与前一小节
+    basic.target
+    之前的部分完全相同。
+    随后的启动流程将以
+    initrd.target
+    为目标(如下图所示)。
+    当根文件系统设备可用时，将到达
+    initd-root-device.target 目标。
+    如果成功的将根文件系统挂载到
+    /sysroot 目录，那么 sysroot.mount
+    单元将被启动，然后进一步到达
+    initrd-root-fs.target 目标。 initrd-parse-etc.service
+    将会分析 /sysroot/etc/fstab
+    文件以挂载 /usr (若需要)
+    与带有 <i>x-initrd.mount</i>
+    标记的挂载点。
+    所有这些挂载点都将被挂载到
+    /sysroot
+    之下，然后流程到达
+    initrd-fs.target 目标。再接下来
+    initrd-cleanup.service 将会使用 <b>systemctl
+    --no-block isolate</b> 命令启动
+    initrd-switch-root.target 目标。 因为 isolate
+    表示立即停止所有在新的目标单元中不需要的进程，
+    所以此动作实际上是为接下来切换根目录做预先的准备(也就是清理环境)。
+    最后，启动 initrd-switch-root.service
+    服务，将系统的根目录切换至
+    /sysroot 目录。</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>                                    (之前的流程与上一小节完全相同)
+                                               :
+                                               v
+                                         basic.target
+                                               |                                 emergency.service
+                        ______________________/|                                         |
+                       /                       |                                         v
+                       |            initrd-root-device.target                    <i>emergency.target</i>
+                       |                       |
+                       |                       v
+                       |                  sysroot.mount
+                       |                       |
+                       |                       v
+                       |             initrd-root-fs.target
+                       |                       |
+                       |                       v
+                       v            initrd-parse-etc.service
+              (各个自定义的                    |
+             initrd services...)               v
+                       |            (sysroot-usr.mount 以及
+                       |             fstab 中带有 x-initrd.mount
+                       |               标记的各个挂载点)
+                       |                       |
+                       |                       v
+                       |                initrd-fs.target
+                       \______________________ |
+                                              \|
+                                               v
+                                          initrd.target
+                                               |
+                                               v
+                                     initrd-cleanup.service
+                          (使用 isolates 启动 initrd-switch-root.target)
+                                               |
+                                               v
+                        ______________________/|
+                       /                       v
+                       |        initrd-udevadm-cleanup-db.service
+                       v                       |
+              (各个自定义的                    |
+             initrd services...)               |
+                       \______________________ |
+                                              \|
+                                               v
+                                   initrd-switch-root.target
+                                               |
+                                               v
+                                   initrd-switch-root.service
+                                               |
+                                               v
+                                     切换到主机上的操作系统
+</pre>
+</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="关机流程">关机流程<a class="anchor" href="#%E5%85%B3%E6%9C%BA%E6%B5%81%E7%A8%8B">¶</a></h1>
+systemd
+  系统在关机时同样遵循固定的流程，
+  具体如下图所示：
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>     (与所有系统服务互斥)    (与所有文件系统 mounts, swaps, cryptsetup devices 互斥)
+            |                                             |
+            v                                             v
+     shutdown.target                                 umount.target
+            |                                             |
+            \____________________________________   ______/
+                                                 \ /
+                                                  v
+                                        (各个底层 services)
+                                                  |
+                                                  v
+                                            final.target
+                                                  |
+            _____________________________________/ \_________________________________
+           /                         |                        |                      \
+           |                         |                        |                      |
+           v                         v                        v                      v
+systemd-reboot.service   systemd-poweroff.service   systemd-halt.service   systemd-kexec.service
+           |                         |                        |                      |
+           v                         v                        v                      v
+    <i>reboot.target</i>             <i>poweroff.target</i>            <i>halt.target</i>           <i>kexec.target</i>
+</pre>
+</div>
+<p class="Pp">用<i>斜体</i>标识的目标单元经常被用作关机目标。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参见">参见<a class="anchor" href="#%E5%8F%82%E8%A7%81">¶</a></h1>
+<a href="../../buster/manpages-zh/systemd.1.zh_CN.html">systemd(1)</a>, <a href="../../buster/manpages/boot.7.en.html">boot(7)</a>, <a href="../../buster/systemd/systemd.special.7.en.html">systemd.special(7)</a>,
+  <a href="../../buster/systemd/systemd.target.5.en.html">systemd.target(5)</a>, <a href="../../buster/dracut-core/dracut.8.en.html">dracut(8)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<p class="Pp">翻译人员：金步国
+  <br/>
+  金步国作品集：https://www.jinbuguo.com
+  <br/>
+  中文 man
+    手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os">systemd 231</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+bootup.7.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-30T03:48:41Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"bootup(7)\"}}]}"
+</script>

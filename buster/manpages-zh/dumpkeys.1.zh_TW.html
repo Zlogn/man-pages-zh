@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dumpkeys(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/kbd/dumpkeys.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es-extra/dumpkeys.1.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-hu/dumpkeys.1.hu.html" hreflang="hu">
+<link rel="alternate" href="../../buster/manpages-pl/dumpkeys.1.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/dumpkeys.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/dumpkeys.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; dumpkeys(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/dumpkeys.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/dumpkeys.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_%28SYNOPSIS%29" title="總覽 (SYNOPSIS)">總覽 (SYNOPSIS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_%28DESCRIPTION%29" title="描述 (DESCRIPTION)">描述 (DESCRIPTION)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%B8%E9%A0%85_%28OPTION%29" title="選項 (OPTION)">選項 (OPTION)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6_%28FILE%29" title="文件 (FILE)">文件 (FILE)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%A6%E8%A6%8B_%28SEE_ALSO%29" title="另見 (SEE ALSO)">另見 (SEE ALSO)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B%EF%BC%9A" title="《中國Linux論壇man手冊頁翻譯計劃》：">《中國Linux論壇man手冊頁翻譯計劃》：</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/dumpkeys.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/dumpkeys.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/dumpkeys.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/kbd/dumpkeys.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es-extra/dumpkeys.1.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-hu/dumpkeys.1.hu.html" title="Hungarian (hu)">magyar</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/dumpkeys.1.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/dumpkeys.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/dumpkeys.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">DUMPKEYS(1)</td>
+    <td class="head-vol">Linux User&#39;s Manual</td>
+    <td class="head-rtitle">DUMPKEYS(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<p class="Pp"></p>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+dumpkeys -
+  轉儲顯示鍵盤翻譯表
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_(SYNOPSIS)">總覽 (SYNOPSIS)<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_(SYNOPSIS)">¶</a></h1>
+<b>dumpkeys [</b> <i>-hilfn1</i> <i>-S</i><b>shape</b> <i>-c</i><b>charset</b>
+  <i>--help --short-info --long-info --numeric --full-table</i>
+  <i>--separate-lines</i> <i>--shape=</i><b>shape</b> <i>--funcs-only
+  --keys-only --compose-only</i> <i>--charset=</i><b>charset</b> <b>]</b>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_(DESCRIPTION)">描述 (DESCRIPTION)<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_(DESCRIPTION)">¶</a></h1>
+<b>dumpkeys</b> 以 <a href="../../buster/manpages-zh/keymaps.5.zh_TW.html">keymaps(5)</a> 中 描述 的
+  格式, 在 標準輸出 顯示
+  鍵盤驅動程序 翻譯表
+  的 當前內容.
+<p class="Pp">下面 提供了 多種
+    選項, 可以 控制
+    輸出格式, 也可以 顯示
+    來自 內核 或 <a href="../../buster/manpages-zh/dumpkeys.1.zh_TW.html">dumpkeys(1)</a> 和
+    <a href="../../buster/manpages-zh/loadkeys.1.zh_TW.html">loadkeys(1)</a> 的 其他信息.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="選項_(OPTION)">選項 (OPTION)<a class="anchor" href="#%E9%81%B8%E9%A0%85_(OPTION)">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><i>-h --help</i></dt>
+  <dd>在 標準錯誤 上 顯示
+      版本號 和 簡短 的
+      用法, 然後 結束.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-i --short-info</i></dt>
+  <dd>顯示 內核
+      鍵盤驅動程序 的 某些
+      特徵:
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent">內核 支持的
+  鍵值(keycode) 範圍:
+<p class="Pp"></p>
+<div class="Bd-indent">這個特徵指, 在
+  鍵盤映射文件 中, <b>keycode</b>
+  關鍵字 後面 可以 使用
+  什麼值. 有關 這個文件
+  的 語法 和 其他信息
+  參看 <a href="../../buster/manpages-zh/keymaps.5.zh_TW.html">keymaps(5)</a>.</div>
+<p class="Pp">單鍵 可編聯(bind) 的
+    動作(action) 數:</p>
+<p class="Pp"></p>
+<div class="Bd-indent">這個特徵指,
+  通過 修飾鍵 的 組合,
+  一個鍵 能夠 發生
+  多少個 不同的 動作.
+  例如, 如果 該值是 16,
+  那麼 一個鍵 結合
+  修飾鍵 可以 產生 多達 16
+  個 動作. 此時, 內核 大約
+  知道 存在 四個 修飾鍵,
+  你可以 按下 不同的
+  修飾鍵 組合 獲得 所有
+  定義的 動作.</div>
+<p class="Pp">內核 支持的
+    動作碼(action code) 值域(range):</p>
+<p class="Pp"></p>
+<div class="Bd-indent">這一項 包含 用
+  十六進制 表示的
+  動作碼 值域. 這些值
+  能夠 用在 按鍵定義 的
+  右邊, 也就是 下面 這行
+  的 <i>vv</i> 部分:
+<p class="Pp"></p>
+<div class="Bd-indent"><b>keycode</b> <i>xx</i> = <i>vv vv vv vv</i></div>
+<p class="Pp">(有關 按鍵定義行
+    的 細節 參見 <a href="../../buster/manpages-zh/keymaps.5.zh_TW.html">keymaps(5)</a> ).
+    <a href="../../buster/manpages-zh/dumpkeys.1.zh_TW.html">dumpkeys(1)</a> 和 <a href="../../buster/manpages-zh/loadkeys.1.zh_TW.html">loadkeys(1)</a> 支持
+    符號表示法, 它 比
+    數字表示法 更優越,
+    內核 和 內核 之間的
+    動作碼 可能 不一樣, 而
+    符號名字 一般 不變.
+    然而, 動作碼值域 列表
+    可以 用來 判斷 內核
+    是否 支持 <a href="../../buster/manpages-zh/loadkeys.1.zh_TW.html">loadkeys(1)</a>
+    識別的 全部 符號, 或者
+    內核 支持的 動作 在
+    <a href="../../buster/manpages-zh/loadkeys.1.zh_TW.html">loadkeys(1)</a> 中 有沒有
+    對應的 符號名. 你 可以
+    比較一下 值域列表 和
+    動作符號表, 參見
+    下述的 <i>--long-info</i> 選項.</p>
+</div>
+<p class="Pp">內核 支持的
+    功能鍵(function key) 數目:</p>
+<p class="Pp"></p>
+<div class="Bd-indent">這個特徵 指
+  能夠 用來 輸出 字符串
+  的 動作碼 數目. 這些
+  動作碼 往往 編聯
+  鍵盤上的 功能鍵 和
+  編輯鍵, 輸出 標準 escape
+  序列. 然而 你 可以
+  重定義 這些鍵, 讓 它們
+  輸出 命令行,
+  電子郵件地址 或者
+  其他什麼. 特別是 某些
+  編號 的 功能鍵 和
+  編輯鍵 在 鍵盤上
+  不存在, 這樣 就有了
+  &#34;空閒的&#34; 動作碼,
+  例如, 把 它們 和
+  AltGr-字母組合 編聯, 用來
+  輸出 有用的 字符串.
+  詳情 參見 <a href="../../buster/manpages-zh/loadkeys.1.zh_TW.html">loadkeys(1)</a>.</div>
+<p class="Pp">功能串(function string):</p>
+<p class="Pp"></p>
+<div class="Bd-indent">可以 用 下面的
+  命令 查看 當前 的
+  功能鍵 定義
+<p class="Pp"></p>
+<div class="Bd-indent"><b>dumpkeys</b><i> --funcs-only</i></div>
+</div>
+</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><i>-l --long-info</i></dt>
+  <dd>這個選項 要求 <b>dumpkeys</b>
+      顯示 較多的 信息.
+      顯示 的 信息 除了
+      <i>--short-info</i> 選項 的 內容 外,
+      增加了 <a href="../../buster/manpages-zh/loadkeys.1.zh_TW.html">loadkeys(1)</a> 和 <a href="../../buster/manpages-zh/dumpkeys.1.zh_TW.html">dumpkeys(1)</a>
+      支持 的 動作 的
+      符號名 列表, 及
+      對應的 數值.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-n --numeric</i></dt>
+  <dd>這個選項 阻止 <b>dumpkeys</b> 把
+      動作碼 翻譯成
+      符號名, 只 顯示
+      十六進制數字.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-f --full-table</i></dt>
+  <dd>這個選項 使 <b>dumpkeys</b> 跳過
+      所有 速記形式(short-hand)
+      (參見 <a href="../../buster/manpages-zh/keymaps.5.zh_TW.html">keymaps(5)</a>), 以
+      行排格式(canonical) 輸出
+      鍵值編聯. 首先是 keymaps
+      行, 描述 當前 定義的
+      修飾鍵 及其 組合.
+      然後 每個鍵 顯示
+      一行, 其中 每個
+      修飾鍵 的 組合 佔
+      一列. 例如, 如果
+      鍵盤映射表 使用了
+      七個 修飾鍵組合,
+      那麼 每行 將顯示
+      七列 動作碼.
+      這種格式 用於 諸如
+      對 <b>dumpkeys</b> 輸出 的
+      後處理 等.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-1 --separate-lines</i></dt>
+  <dd>這個選項 使 <b>dumpkeys</b> 把
+      每個 (修飾鍵,鍵值)對
+      用 一行 顯示. 前綴 <i>plain</i>
+      表示 沒有 使用
+      修飾鍵.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-S --shape=</i><b>shape</b></dt>
+  <dd>這個選項 告訴 <b>dumpkeys</b>
+      使用 指定的
+      表格格式. 允許的
+      表格格式 有 <b>0</b><i>:</i>
+      缺省格式 (就象
+      沒使用 <i>-S</i> 一樣); <b>1</b>: 和
+      使用 選項 <i>--full-table</i> 一樣;
+      <b>2</b>: 和 使用 選項
+      <i>--separate-lines</i> 一樣; <b>3</b>: 每個
+      鍵值 佔用 一行 (就象
+      格式 <b>1</b> 一樣), 直到
+      遇到 第一個 空項(hole),
+      然後 每個
+      (修飾鍵,鍵值)對 一行
+      (就象 格式 <b>2</b> 一樣).
+    <p class="Pp">(譯註: 空項 位置
+        可參考 dumpkeys
+        不帶參數時 顯示的
+        第一行, keymaps 行)</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>--funcs-only</i></dt>
+  <dd>這個選項 使 <b>dumpkeys</b>
+      只顯示 功能鍵 定義的
+      字符串. 否則 <b>dumpkeys</b>
+      既顯示 串定義,
+      也顯示 鍵值編聯.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>--keys-only</i></dt>
+  <dd>這個選項 使 <b>dumpkeys</b>
+      只顯示 鍵值編聯.
+      否則 <b>dumpkeys</b> 既顯示
+      串定義, 也顯示
+      鍵值編聯.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>--compose-only</i></dt>
+  <dd>這個選項 使 <b>dumpkeys</b>
+      只顯示 組合鍵(compose key)
+      定義. 它 只對 支持
+      組合鍵 的 內核 有效.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-c</i><b>charset </b><i>--charset=</i><b>charset</b></dt>
+  <dd>這個選項 使 <b>dumpkeys</b> 根據
+      指定的 字符集 翻譯
+      字符碼值. 它 隻影響
+      字符碼值 對 符號名
+      的 翻譯. 用 <i>--help</i> 選項
+      可以 列出 <i>charset</i> 的
+      有效值. 如果 沒有
+      指定 <i>charset,</i> 缺省字符集
+      是 <b>iso-8859-1.</b> 這個選項
+      能夠 輸出 一個 `charset
+      &#34;iso-8859-X&#34;&#39; 行, 告訴 loadkeys
+      如何 翻譯
+      鍵盤映射表. (例如,
+      &#34;division&#34; 在 <b>iso-8859-1</b> 中 是 0xf7,
+      但在 <b>iso-8859-8</b> 中 是 0xba).
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件_(FILE)">文件 (FILE)<a class="anchor" href="#%E6%96%87%E4%BB%B6_(FILE)">¶</a></h1>
+<i>/usr/lib/kbd/keymaps/</i> 推薦 存放
+  鍵盤映射 文件 的 目錄.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="另見_(SEE_ALSO)">另見 (SEE ALSO)<a class="anchor" href="#%E5%8F%A6%E8%A6%8B_(SEE_ALSO)">¶</a></h1>
+<a href="../../buster/manpages-zh/loadkeys.1.zh_TW.html">loadkeys(1)</a>, <a href="../../buster/manpages-zh/keymaps.5.zh_TW.html">keymaps(5)</a>.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>徐明 &lt;xuming@iname.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/12/10</b> 第一版
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國Linux論壇man手冊頁翻譯計劃》：">《中國Linux論壇man手冊頁翻譯計劃》：<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B%EF%BC%9A">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">09 Oct 1997</td>
+    <td class="foot-os">Console tools</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+dumpkeys.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:27Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"dumpkeys(1)\"}}]}"
+</script>

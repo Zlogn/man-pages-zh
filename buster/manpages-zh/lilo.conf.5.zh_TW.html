@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>lilo.conf(5) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/lilo/lilo.conf.5.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-hu/lilo.conf.5.hu.html" hreflang="hu">
+<link rel="alternate" href="../../buster/manpages-ja/lilo.conf.5.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/lilo.conf.5.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-pt/lilo.conf.5.pt.html" hreflang="pt">
+<link rel="alternate" href="../../buster/manpages-tr/lilo.conf.5.tr.html" hreflang="tr">
+<link rel="alternate" href="../../buster/manpages-zh/lilo.conf.5.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/lilo.conf.5.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="5">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; lilo.conf(5)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/lilo.conf.5">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/lilo.conf.5.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%85%A8%E5%B1%80%E9%81%B8%E9%A0%85" title="全局選項">全局選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%90%84%E6%98%A0%E5%83%8F%E9%81%B8%E9%A0%85" title="各映像選項">各映像選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#Linux_%E6%A0%B8%E5%BF%83%E9%81%B8%E9%A0%85" title="Linux 核心選項">Linux 核心選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%80%83" title="參考">參考</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA" title="中文版維護人">中文版維護人</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0" title="中文版最新更新">中文版最新更新</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87_man_%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83" title="中文 man 手冊頁翻譯計劃">中文 man 手冊頁翻譯計劃</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/lilo.conf.5.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/lilo.conf.5.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/lilo.conf.5.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/lilo/lilo.conf.5.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-hu/lilo.conf.5.hu.html" title="Hungarian (hu)">magyar</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/lilo.conf.5.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/lilo.conf.5.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pt/lilo.conf.5.pt.html" title="Portuguese (pt)">português (pt)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-tr/lilo.conf.5.tr.html" title="Turkish (tr)">Türkçe</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/lilo.conf.5.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/lilo.conf.5.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">LILO.CONF(5)</td>
+    <td class="head-vol">File Formats Manual</td>
+    <td class="head-rtitle">LILO.CONF(5)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+lilo.conf - lilo 配置文件
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+默認情況下,本文件 (
+  <i>/etc/lilo.conf</i> )
+  由引導管理程序 lilo 讀取
+  (參考 <a href="../../buster/manpages-zh/lilo.8.zh_TW.html">lilo(8)</a>).
+<p class="Pp">它看起來可能象這樣:</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>
+    <pre>boot = /dev/hda
+delay = 40
+compact
+vga = normal
+root = /dev/hda1
+read-only
+image = /zImage-2.5.99
+        label = try
+image = /zImage-1.0.9
+        label = 1.0.9
+image = /tamu/vmlinuz
+	label = tamu
+	root = /dev/hdb2
+	vga = ask
+other = /dev/hda3
+	label = dos
+	table = /dev/hda
+    </pre>
+  </dd>
+</dl>
+<p class="Pp">該文件表明 lilo
+    使用設備 /dev/hda 的 Master Boot Record
+    (簡稱 MBR, 主引導記錄).
+    (有關 lilo 使用方法
+    及與其它操作系統
+    相互影響的討論, 參考
+    lilo 文檔中 user.tex 部分).</p>
+<p class="Pp">引導時,
+    引導載入程序會等待 4
+    秒 (40 個十分之一秒),
+    使你有機會按下 Shift 鍵.
+    如果沒有按鍵動作發生,
+    第一個核心映像文件
+    (/zImage-1.5.99, 也許你剛在
+    五分鐘之前
+    完成的安裝) 將被引導;
+    否則, 引導載入程序會
+    詢問你要引導哪一個映像.
+    如果你不知道
+    有哪些選項可以選擇,
+    按 [TAB] 鍵 (如果使用的
+    是美國鍵盤佈局,
+    還可以按 [?]),
+    可以得到一個菜單,
+    這時你就可以
+    選擇引導較新的核心,
+    或者是老的穩定的核心,
+    甚至是另外的
+    根文件系統上的核心,
+    也可以引導其它的操作系統,
+    在 lilo.conf 中可以配置最多
+    16 個映像.</p>
+<p class="Pp">正如上面所見,
+    配置文件以一定數量的全局
+    選項開始
+    (例子中開始的 6 行),
+    緊接着是各映像的描述選項,
+    在各映像中的選項會覆蓋全局選項.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="全局選項">全局選項<a class="anchor" href="#%E5%85%A8%E5%B1%80%E9%81%B8%E9%A0%85">¶</a></h1>
+這部分有許多
+  可能的關鍵字,
+  下面部分儘可能按照
+  user.tex 中的描述進行解釋.
+<dl class="Bl-tag">
+  <dt><b>backup=</b><i>backup-file</i></dt>
+  <dd>使用 <i>backup-file</i> 文件
+      (可能是一個設備,如
+      <i>/dev/null</i>) 代替原來的
+      <i>/boot/boot.NNNN</i>
+      存放引導扇區的備份.</dd>
+  <dt><b>boot=</b><i>boot-device</i></dt>
+  <dd>指定包含引導扇區的設備名稱
+      (如硬盤分區),
+      如果忽略了該關鍵字,
+      引導扇區就從
+      當前作爲 root 文件系統
+      安裝的設備讀取
+      (也可能是進行寫入).</dd>
+  <dt><b>change-rules</b></dt>
+  <dd>定義引導時用於改變分區類型的數字
+      (&#39;隱藏&#39;). 細節請參考 user.tex
+      中的 &#34;Partition type change rules&#34;
+    部分.</dd>
+  <dt><b>compact</b></dt>
+  <dd>盡力把讀取相鄰扇區的請求合併爲一次
+      讀取. 這可以顯著
+      縮短裝載時間並減小映像,
+      在用軟盤引導時,
+      強烈推薦使用 `compact&#39;
+      選項.</dd>
+  <dt><b>default=</b><i>name</i></dt>
+  <dd>使用指定的映像文件
+      作爲默認值加以引導.
+      如果忽略了 `default&#39; 選項,
+      配置文件中
+      第一個出現的映像會被引導.</dd>
+  <dt><b>delay=</b><i>tsecs</i></dt>
+  <dd>在裝載第一個映像之前等待的十分之一秒數.
+      這在需要激活鍵盤之後立即從硬盤
+      啓動系統非常有用,
+      如果忽略了本選項或設置爲
+      0 將不等待.</dd>
+  <dt><b>disk=</b><i>device-name</i></dt>
+  <dd>爲指定的磁盤給出非標準參數,
+      有關細節參考 user.tex 中的
+      &#34;Disk geometry&#34; 部分.
+      特別有用的是 `bios=&#39; 參數,
+      BIOS 爲磁盤編號爲0x80,
+      0x81等，但是它 不知道
+      Linux
+      磁盤對應的是哪一個
+      BIOS 盤 (因爲這依賴於 BIOS
+      的設置, 也依賴於 BIOS
+      的類型),
+      所以如果你使用的是設置很特殊的系統,
+      你就必須說明 Linux
+      磁盤與 BIOS
+      盤之間的對應關係.
+      例如:
+    <p class="Pp"></p>
+    <pre>    disk=/dev/sda
+            bios=0x80
+    disk=/dev/hda
+            bios=0x81
+    </pre>
+    <p class="Pp">意思是,
+        你的第一塊 SCSI 盤
+        (譯者注: 通常id=0)
+        對應一號 BIOS 盤, 第一個
+        IDE
+        口上的主盤對應二號
+        BIOS 盤.</p>
+  </dd>
+  <dt><b>disktab=</b><i>disktab-file</i></dt>
+  <dd>指定包含磁盤參數表的文件名稱.
+      如果忽略 `disktab&#39; 選項,
+      映像安裝程序查找
+      <i>/etc/disktab</i> , 不鼓勵使用 disktab
+    .</dd>
+  <dt><b>fix-table</b></dt>
+  <dd>允許 lilo
+      調整分區表中的三維地址
+      (sector/head/cylinder).
+      每個分區表項包含有本分區
+      起始扇區與結束扇區的三維地址和線性地址,
+      如果分區不是對應在整個磁道上並且
+      有其它的操作系統
+      (如PC/MS-DOS 或 OS/2) 在使用
+      同一磁盤,
+      它們可能會修改三維地址,
+      lilo
+      可以在分區上保存兩種地址
+      的引導扇區,
+      如果使用了 `fix-table&#39; 選項,
+      lilo
+      可以重新調整錯誤的三維開始地址.
+    <p class="Pp">警告:
+        這並不能保證其它的操作系統
+        隨後不重新修改地址,
+        並且發生其它的負作用.
+        正確的方法是對磁盤重新分區,
+        使得分區對應於整個磁道.</p>
+  </dd>
+  <dt><b>force-backup=</b><i>backup-file</i></dt>
+  <dd>類似 `backup&#39;,
+      如果原來有同名的備份文件就予以改寫.</dd>
+  <dt><b>ignore-table</b></dt>
+  <dd>通知 lilo
+      忽略混亂的分區表.</dd>
+  <dt><b>install=</b><i>boot-sector</i></dt>
+  <dd>把指定的文件作爲新的引導扇區進行安裝,
+      如果忽略 `install&#39;
+      選項,默認使用
+    <i>/boot/boot.b.</i></dd>
+  <dt><b>linear</b></dt>
+  <dd>生成線性的扇區地址代替
+      sector/head/cylinder
+      類型的三維地址.
+      線性地址是在運行時進行轉換,
+      它不依賴於磁盤的幾何結構.
+      注意如果使用 `linear&#39;
+      選項, 就不能使用
+      便攜式磁盤 (如軟盤)
+      作爲引導盤, 這是因爲
+      決定磁盤 幾何結構的
+      BIOS 服務 對於軟盤
+      不能可靠的工作.
+      對於大磁盤使用 `linear&#39;
+      選項時, <i>/sbin/lilo</i>
+      可以生成對不可到達
+      磁盤區域的引用,
+      這是由於
+      在引導完成之前
+      並不知道扇區的三維地址.</dd>
+  <dt><b>lba32</b></dt>
+  <dd>生成 32
+      位的邏輯塊地址代替
+      sector/head/cylinder
+      結構的三維地址. 如果
+      BIOS 支持數據分組 (packet)
+      定址,
+      就會使用這類調用去存取磁盤,
+      這樣就可以從大於 8.4Gb
+      的分區進行引導,
+      變換的幾何結構僅限於是
+      C:H:S 類型的地址 ; 如果 BIOS
+      不支持數據分組定址,
+      &#39;lba32&#39; 就如 &#39;linear&#39; 選項,
+      地址被轉換爲 C:H:S 結構.
+      使用 &#39;lba32&#39;
+      選項,所有的軟盤仍保持
+      C:H:S 類型的格式.</dd>
+  <dt><b>lock</b></dt>
+  <dd>允許自動記錄引導命令作爲下次引導的缺省值.
+      通過這種方法, lilo
+      可以&#34;鎖定&#34;一個選項直到
+      手工覆蓋它.</dd>
+  <dt><b>map=</b><i>map-file</i></dt>
+  <dd>指定映像文件的位置.
+      如果忽略了 `map&#39;
+      選項,就使用 <i>/boot/map .</i></dd>
+  <dt><b>message=</b><i>message-file</i></dt>
+  <dd>指定包含有在引導提示出現之前
+      顯示的消息的文件名稱.
+      在打印 &#34;LILO &#34;
+      之後等待按 Shift 鍵
+      過程中消息不會顯示.
+      在此消息中, FF 字符 ([Ctrl L])
+      清除本地屏幕,
+      消息文件的大小限制爲
+      65535 字節,
+      如果改變或刪除了此文件,
+      映像文件必須重建.</dd>
+  <dt><b>nowarn</b></dt>
+  <dd>禁止對後來的危險發出警告.</dd>
+  <dt><b>optional</b></dt>
+  <dd>每一個 `optional&#39; 選項
+      (參考下面) 都作用
+      於所有的映像.</dd>
+  <dt><b>password=</b><i>password</i></dt>
+  <dd>每一個 `password=...&#39; 選項
+      (參考下面) 都作用
+      於所有的映像.</dd>
+  <dt><b>prompt</b></dt>
+  <dd>在任何按鍵之前強制進入引導提示.
+      如果設置了 &#39;prompt&#39;
+      但是沒有設置 `timeout&#39;,
+      就不能自動引導機器
+      (需要人工干預).</dd>
+  <dt><b>restricted</b></dt>
+  <dd>每一個 `restricted&#39; 選項
+      (參考下面) 都作用
+      於所有的映像.</dd>
+  <dt><b>serial=</b><i>parameters</i></dt>
+  <dd>允許從串行線路進行控制.
+      指定的串行端口被初始化,
+      引導載入程序接受從此端口和
+      PC 鍵盤的輸入.
+      在串行線路上發送一箇中斷
+      (break)
+      相當於在控制檯按下
+      shift 鍵,
+      可以得到載入程序的注意.
+      允許串行線路控制時,
+      所有的引導映像都應該加上口令保護.
+      比如線路是連接在 modem
+      上時, 相對於控制檯,
+      這是最起碼的安全要求.
+      參數串有如下的語法格式:
+    <p class="Pp"></p>
+    <pre>    &lt;port&gt;[,&lt;bps&gt;[&lt;parity&gt;[&lt;bits&gt;]]]
+    </pre>
+    <p class="Pp">&lt;port&gt;: 串行端口號,
+        以 0 爲基準. 0 對應於 COM1,
+        也就是 /dev/ttyS0, 依此類推.
+        可以使用所有的四個端口
+        (如果有的話).</p>
+    <p class="Pp">&lt;bps&gt;:
+        本端口的波特率.
+        支持如下波特率: 110, 150, 300,
+        600, 1200, 2400, 4800 和 9600 bps. 默認是 2400
+        bps.</p>
+    <p class="Pp">&lt;parity&gt;:
+        線路上使用的奇偶校驗方式.
+        載入程序忽略
+        輸入的奇偶校驗,
+        即省略第八位,
+        下面字符描述校驗方式
+        (大小寫均可): n 無校驗,
+        e 偶校驗, o 奇校驗.</p>
+    <p class="Pp">&lt;bits&gt;: 字符位數.
+        僅支持 7 位或 8位,
+        如果無奇偶校驗,
+        默認爲 8 位,
+        有校驗則爲 7 位.</p>
+    <p class="Pp">如果設置了 `serial&#39;
+        選項, `delay&#39;
+        的值自動增加到 20.</p>
+    <p class="Pp">例如: serial=0,2400n8
+        用缺省的參數初始化
+        COM1 端口.</p>
+  </dd>
+  <dt><b>timeout=</b><i>tsecs</i></dt>
+  <dd>設置鍵盤輸入的超時時間
+      (以十分之一秒爲單位).
+      到了指定的時間沒有按鍵發生,
+      第一個映像被自動引導.
+      類似的,
+      如果用戶停頓時間太長,
+      口令輸入過程也被終止,
+      默認沒有超時時間.</dd>
+  <dt><b>verbose=</b><i>level</i></dt>
+  <dd>打開詳細報告過程.
+      更大的數字可以得到更多的輸出,
+      如果在 lilo
+      的命令行附加了 -v , level
+      值會再增加. 最大值爲
+      5.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<p class="Pp">另外, 核心配置參數
+    <b>append</b>, <b>ramdisk</b>, <b>read-only</b>, <b>read-write</b>,
+    <b>root</b> 和 <b>vga</b>
+    也在全局選項部分設置.
+    如果沒有在各核心映像部分
+    修改它們,
+    默認是使用了的.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="各映像選項">各映像選項<a class="anchor" href="#%E5%90%84%E6%98%A0%E5%83%8F%E9%81%B8%E9%A0%85">¶</a></h1>
+各個映像部分從任意一行開始.
+<p class="Pp"></p>
+<pre>    <b>image=</b><i>pathname</i>
+</pre>
+<p class="Pp">(用於指出包含有 Linux
+    核心的文件或設備),
+    或者如下面這行:</p>
+<p class="Pp"></p>
+<pre>    <b>other=</b><i>pathname</i>
+</pre>
+<p class="Pp">指出要引導的其它系統.</p>
+<p class="Pp">在以前, <b>image</b>
+    行指定引導的設備時,
+    就必須用</p>
+<dl class="Bl-tag">
+  <dt><b>range=</b><i>start-end</i></dt>
+  <dd>格式給出扇區的範圍.</dd>
+</dl>
+<p class="Pp">後來
+    (要引導其它系統)
+    使用了下面這三個選項
+    :</p>
+<dl class="Bl-tag">
+  <dt><b>loader=</b><i>chain-loader</i></dt>
+  <dd>指出使用的 chain
+      裝入程序. 默認時使用
+      <i>/boot/chain.b</i> ,
+      當不是從第一塊硬盤或軟盤引導時,
+      必須給出 chain
+    裝入程序.</dd>
+  <dt><b>table=</b><i>device</i></dt>
+  <dd>給出包含有分區表的設備.
+      如果忽略了此選項,
+      引導載入程序就
+      不會給被引導的操作系統傳送分區信息,
+      (有些操作系統可以通過其它辦法
+      知道自己是從哪個分區引導的,
+      如 MS-DOS
+      通常在它的引導扇區
+      保存磁盤的幾何結構或分區信息).
+      注意: 如果通過 `table&#39;
+      選項引用的
+      分區表設備被修改了,
+      就需要重新執行 /sbin/lilo.</dd>
+  <dt><b>unsafe</b></dt>
+  <dd>在建立映射時不能存取引導扇區.
+      這樣禁止某些包括分區表的完整性檢查,
+      如果引導扇區在固定格式的軟盤設備上,
+      使用 UNSAFE
+      可以避免在執行
+      映射安裝程序時需要把可讀盤放入驅動器中,
+      `unsafe&#39; 和 `table&#39; 不兼容.</dd>
+</dl>
+<p class="Pp">在上面所示的兩種情況下,
+    都適用下述選項 :</p>
+<dl class="Bl-tag">
+  <dt><b>label=</b><i>name</i></dt>
+  <dd>指出每個映像的標識文件名稱
+      (不含路徑).
+      通過設置各種 `label&#39;,
+      可以爲映像指定不同的名稱.</dd>
+  <dt><b>alias=</b><i>name</i></dt>
+  <dd>通過使用別名可以爲同一個項目指定第二個名稱.</dd>
+  <dt><b>lock</b></dt>
+  <dd>(參考前面.)</dd>
+  <dt><b>optional</b></dt>
+  <dd>如果在映射建立時
+      沒有提供映像文件就忽略它.
+      這對於指定
+      實際上並不存在的實驗覈心
+      是非常有用的.</dd>
+  <dt><b>password=</b><i>password</i></dt>
+  <dd>通過 password
+      口令保護映像.</dd>
+  <dt><b>restricted</b></dt>
+  <dd>如果參數是在命令行中給出的,
+      爲引導映像就僅需要口令
+      (如 single).</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="Linux_核心選項">Linux 核心選項<a class="anchor" href="#Linux_%E6%A0%B8%E5%BF%83%E9%81%B8%E9%A0%85">¶</a></h1>
+如果引導的是 Linux 核心,
+  可以傳遞命令行參數到核心.
+<dl class="Bl-tag">
+  <dt><b>append=</b><i>string</i></dt>
+  <dd>在傳遞給核心的參數表中附加本選項.
+      典型的應用是指定不能完全自動
+      探測到的硬件參數,
+      或者是可能有風險的情況.
+      例如:
+    <p class="Pp"></p>
+    <pre>     append = &#34;hd=64,32,202&#34;
+    </pre>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>literal=</b><i>string</i></dt>
+  <dd>類似 `append&#39;,
+      但刪除其它選項
+      (如設置 root 設備).
+      因爲通過 `literal&#39; 選項,
+      可以無意中刪除掉其它關鍵選項,
+      所以它不能用在全局選項部分.</dd>
+  <dt><b>ramdisk=</b><i>size</i></dt>
+  <dd>指出 RAM 磁盤的大小, 0
+      表示沒有 RAM
+      盤需要建立.
+      忽略了此選項, RAM
+      盤的大小就使用引導映像中原來配置的值.</dd>
+  <dt><b>read-only</b></dt>
+  <dd>指出 root
+      文件系統以只讀方式安裝.
+      典型地,
+      系統在啓動過程中 (在
+      fsck 檢查過程之後)
+      以讀寫方式安裝 root
+      文件系統.</dd>
+  <dt><b>read-write</b></dt>
+  <dd>以讀寫方式安裝 root
+      文件系統.</dd>
+  <dt><b>root=</b><i>root-device</i></dt>
+  <dd>指定作爲 root
+      安裝的設備.
+      如果使用的是 <b>current</b> , root
+      就設置爲當前以根
+      文件系統安裝的設備.
+      如果用 -r 選項改變了 root
+      的值,
+      就使用各個自己的設備.
+      如果忽略了 &#39;root&#39; 選項,
+      就使用核心中包含的
+      root 設備.
+      (該值是在覈心的 Makefile
+      文件中 由 ROOT_DEV
+      給出並在編譯核心時
+      就確定了的,
+      以後可以用 <a href="../../buster/manpages-zh/rdev.8.zh_TW.html">rdev(8)</a>
+      程序修改.)</dd>
+  <dt><b>vga=</b><i>mode</i></dt>
+  <dd>引導時可以選擇的 VGA
+      文本模式.
+      可以使用下列值:
+    <p class="Pp"><b>normal</b>: 普通 80x25
+        文本模式 .</p>
+    <p class="Pp"><b>extended</b> (或 <b>ext</b>): 選擇 80x50
+        文本模式 .</p>
+    <p class="Pp"><b>ask</b>:
+        引導停止並等待用戶輸入.</p>
+    <p class="Pp">&lt;number&gt;:
+        使用此數字對應的文本模式.
+        通過 vga=ask 引導, 然後按
+        [Enter]
+        可以得到一個支持的列表輸出.</p>
+    <p class="Pp">忽略了此選項,
+        就使用核心映像中
+        包含的 VGA 模式設置值.
+        (該值是在覈心的 Makefile
+        文件中 由 SVGA_MODE
+        給出並在編譯核心時就確定了的,
+        以後可以用 <a href="../../buster/manpages-zh/rdev.8.zh_TW.html">rdev(8)</a>
+        程序修改.)</p>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參考">參考<a class="anchor" href="#%E5%8F%83%E8%80%83">¶</a></h1>
+<a href="../../buster/manpages-zh/lilo.8.zh_TW.html">lilo(8)</a>, <a href="../../buster/manpages-zh/rdev.8.zh_TW.html">rdev(8)</a>.
+<br/>
+lilo
+  的發行版都有很多的文檔資料,
+  以上僅僅是其中的一小部分.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文版維護人">中文版維護人<a class="anchor" href="#%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA">¶</a></h1>
+<b>Yin Huaming &lt;yhmact@pzh-public.sc.cninfo.net&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文版最新更新">中文版最新更新<a class="anchor" href="#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0">¶</a></h1>
+2002年7月10日
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文_man_手冊頁翻譯計劃">中文 man 手冊頁翻譯計劃<a class="anchor" href="#%E4%B8%AD%E6%96%87_man_%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">20 March 2000</td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+lilo.conf.5.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-11T03:48:06Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"lilo.conf(5)\"}}]}"
+</script>

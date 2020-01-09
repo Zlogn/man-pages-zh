@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xpdf(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/xpdf/xpdf.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/xpdf.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/xpdf.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; xpdf(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/xpdf.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/xpdf.1.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%80%BB%E8%A7%88" title="总览">总览</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%89%E9%A1%B9" title="选项">选项</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8E%A7%E5%88%B6" title="控制">控制</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%BD%91%E7%BB%9C%E6%B5%8F%E8%A7%88%E5%99%A8" title="网络浏览器">网络浏览器</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A8%A1%E5%BC%8F" title="远程服务器模式">远程服务器模式</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%89%E9%A1%B9%E6%96%87%E4%BB%B6" title="选项文件">选项文件</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%87%AD%E8%99%AB" title="臭虫">臭虫</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85" title="作者">作者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%A6%E8%A7%81" title="另见">另见</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/xpdf.1.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/xpdf.1.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/xpdf.1.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/xpdf/xpdf.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/xpdf.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/xpdf.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle"><a href="../../buster/manpages-zh/xpdf.1.zh_CN.html">xpdf(1)</a></td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle"><a href="../../buster/manpages-zh/xpdf.1.zh_CN.html">xpdf(1)</a></td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+xpdf -Portable Document
+  Format(PDF)文件阅读器(版本0.90)
+</section>
+<section class="Sh">
+<h1 class="Sh" id="总览">总览<a class="anchor" href="#%E6%80%BB%E8%A7%88">¶</a></h1>
+<b>xpdf</b> [选项] [<i>PDF文件</i> [<i>page]]</i>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>Xpdf是一个 Portable Document Format(PDF)
+  文件阅读软件.(PDF文件也经常被称为&#34;Acrobat&#34;
+  文件,这种叫法来源于Adobe公司的PDF软件的名字.)
+  Xpdf运行在UNIX,VMS和OS/2的X
+  Window系统下.</b>
+<p class="Pp">运行xpdf,只要键入:</p>
+<p class="Pp"></p>
+<div class="Bd-indent">xpdf file.pdf</div>
+<p class="Pp"><i>file.pdf</i>
+    是你的PDF文件.文件名字后面可以跟随一个数字,用于指定最先显示的页面的页码,比如:</p>
+<p class="Pp"></p>
+<div class="Bd-indent">xpdf file.pdf 18</div>
+<p class="Pp">你当然也可以启动xpdf而不打开任何文件.</p>
+<p class="Pp"></p>
+<div class="Bd-indent">xpdf</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="选项">选项<a class="anchor" href="#%E9%80%89%E9%A1%B9">¶</a></h1>
+方括弧中列出了X资源和相应的选项
+<dl class="Bl-tag">
+  <dt><b>-err</b></dt>
+  <dd>将错误信息指定送到/dev/tty而不是标准错误中(此选项当xpdf被其它程序,比如netscape,打开时,十分有用,否则,每个错误都会弹出一个令人讨厌的小窗口).</dd>
+  <dt><b>-z</b><i> zoom</i></dt>
+  <dd>设定初始的放大因子.放大因子是(-5..5)之间的一个数字,其中0表示72dpi.你也可以通过`page`设定显示页面大小配合窗口大小,或者通过`width`设定显示页面宽度配合窗口宽度.
+      [<b>xpdf.initialZoom]</b></dd>
+  <dt><b>-g</b><i> geometry</i></dt>
+  <dd>设定窗口的初始几何参数.
+      (相当于<b>-geometry.)</b> [<b>xpdf.geometry]</b></dd>
+  <dt><b>-remote</b><i> name</i><b>]</b></dt>
+  <dd>启动/连接名为name的xpdf远程服务器(参见后面的&#34;远程服务器模式&#34;部分)</dd>
+  <dt><b>-raise</b></dt>
+  <dd>建立xpdf远程服务器窗口.(仅适用于-remote时)</dd>
+  <dt><b>-quit</b></dt>
+  <dd>退出xpdf远程服务器.(仅适用于-remote时)</dd>
+  <dt><b>-cmap</b></dt>
+  <dd>安装一个自定义的色彩地图.此选项在TrueColor模式下无效.
+      [<b>xpdf.installCmap]</b></dd>
+  <dt><b>-rgb</b><i> number</i></dt>
+  <dd>设置xpdf将要分配的最大RGB值.缺省值是5(即RGB值5x5x5);
+      设置一个小数值,可以节省色彩表记录.在自定义色彩地图和TrueColor模式下,此选项无效.</dd>
+  <dt><b>-papercolor</b><i> color</i></dt>
+  <dd>设置&#34;页面色彩&#34;,比如,页面的显示背景.当pdf文件出现类似在字符后填充白色等情况的时候,此选项无法正常工作.
+      [<b>xpdf.paperColor]</b></dd>
+  <dt><b>-eucjp</b></dt>
+  <dd>复制字符时,将日文字符转换成EUC-JP编码.这是至今为止唯一的日文字符转换选项---它的唯一作用就是将非日文字符转换成7-bit的ASCII,以便于配合EUC-JP编码.(此选项只有在编译pdftotext时加上日文支持才有效)
+      [<b>xpdf.eucjp</b>]</dd>
+  <dt><b>-t1lib</b><i> font-type</i></dt>
+  <dd>设定使用t1lib类型的字体提供器.选项为`none`(完全不使用t1lib),`plain`(使用non-anti-aliased字体),`low`或`high`(使用low-level或者high-level
+      anti-aliased 字体). [<b>xpdf.t1libControl]</b></dd>
+  <dt><b>-ps</b><i> PS-file</i></dt>
+  <dd>设定缺省的PostScript输出文件的名字.此选项也可以以`|command`的形式,通过某个命令来管道PostScript文件.
+      [<b>xpdf.psFile]</b></dd>
+  <dt><b>-paperw</b><i> size</i></dt>
+  <dd>设定页面宽度,单位是像素点.
+      [<b>xpdf.psPaperWidth]</b></dd>
+  <dt><b>-paperh</b><i> size</i></dt>
+  <dd>设定页面高度,单位是像素点.
+      [<b>xpdf.psPaperHeight]</b></dd>
+  <dt><b>-level1</b></dt>
+  <dd>产生Level1
+      PostScript文件.输出的PostScript文件相当的大(如果它包含图片的话),但是确可以在Level
+      1打印机上打印输出.此选项将所有的图像转换成黑白图像.
+      [<b>xpdf.psLevel1]</b></dd>
+  <dt><b>-cmd</b></dt>
+  <dd>打印出命令的执行结果(在调试时有用)</dd>
+  <dt><b>-q</b></dt>
+  <dd>不打印任何信息或者错误</dd>
+  <dt><b>-h</b></dt>
+  <dd>打印帮助信息
+      (相当于<b>-help)</b></dd>
+</dl>
+<p class="Pp">一些其他的X选项和资源同样可以如预期的一样执行</p>
+<dl class="Bl-tag">
+  <dt><b>-display</b><i> display</i></dt>
+  <dd>[<b>xpdf.display]</b></dd>
+  <dt><b>-fg</b><i> color</i></dt>
+  <dd>[<b>相当于</b>-foreground] [<b>xpdf.foreground]</b>
+      -bg<b> color</b> (相当于<b>-background)</b>
+      [<b>xpdf.background]</b></dd>
+  <dt><b>-font</b><i> font</i></dt>
+  <dd>(<b>相当于</b>-fn) [<b>xpdf.font]</b></dd>
+</dl>
+<p class="Pp">色彩和字体选项只影响用户界面部分,不影响PDF文件的显示.(`paper`)</p>
+<p class="Pp">下列的X资源没有对应的命令行选项</p>
+<dl class="Bl-tag">
+  <dt><b>xpdf.urlCommand</b></dt>
+  <dd>设定,当你点击网络链接时执行的命令.详情参见后面的
+      <b>网络浏览器</b> 部分.</dd>
+  <dt><b>xpdf.japaneseFont</b></dt>
+  <dd>设定用于使用日文字符的相应的X字体模式.缺省的是:</dd>
+</dl>
+<p class="Pp"></p>
+<div class="Bd-indent">-*-fixed-medium-r-normal-*-%s-*-*-*-*-*-jisx0208.1983-0</div>
+<dl class="Bl-tag">
+  <dt><b>xpdf.viKeys</b></dt>
+  <dd>设定将左,右,上和下的滚动由`h`,`l`,`k`和`j`键执行.</dd>
+</dl>
+<p class="Pp">下面的资源用于设定文件名字使用的14种基本的Type
+    1字体.</p>
+<p class="Pp"></p>
+<div class="Bd-indent"><b>xpdf.t1TimesRoman</b>
+<br/>
+<b>xpdf.t1TimesItalic</b>
+<br/>
+<b>xpdf.t1TimesBold</b>
+<br/>
+<b>xpdf.t1TimesBoldItalic</b>
+<br/>
+<b>xpdf.t1Helvetica</b>
+<br/>
+<b>xpdf.t1HelveticaOblique</b>
+<br/>
+<b>xpdf.t1HelveticaBold</b>
+<br/>
+<b>xpdf.t1HelveticaBoldOblique</b>
+<br/>
+<b>xpdf.t1Courier</b>
+<br/>
+<b>xpdf.t1CourierOblique</b>
+<br/>
+<b>xpdf.t1CourierBold</b>
+<br/>
+<b>xpdf.t1CourierBoldOblique</b>
+<br/>
+<b>xpdf.t1Symbol</b>
+<br/>
+<b>xpdf.t1ZapfDingbats</b></div>
+<p class="Pp">如果激活t1lib,这些Type
+    1字体将被用于取代X服务器的字体.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="控制">控制<a class="anchor" href="#%E6%8E%A7%E5%88%B6">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="屏幕控制在xpdf窗口的底部.">屏幕控制在xpdf窗口的底部.<a class="anchor" href="#%E5%B1%8F%E5%B9%95%E6%8E%A7%E5%88%B6%E5%9C%A8xpdf%E7%AA%97%E5%8F%A3%E7%9A%84%E5%BA%95%E9%83%A8.">¶</a></h2>
+<dl class="Bl-tag">
+  <dt><b>左/右箭头按键</b></dt>
+  <dd>翻到前/后一页</dd>
+  <dt><b>双左/右箭头按键</b></dt>
+  <dd>向前/后翻动10页</dd>
+  <dt><b>破折号左/右箭头按键</b></dt>
+  <dd>沿着历史路径向前/后翻动</dd>
+  <dt><b>`Page`输入框</b></dt>
+  <dd>翻到指定的页码.通过点击激活输入框,输入页码,然后回车.</dd>
+  <dt><b>放大缩小弹出菜单</b></dt>
+  <dd>调整放大因子.(参见前面-z选项的说明)</dd>
+  <dt><b>望远镜按键</b></dt>
+  <dd>查找某个文本.</dd>
+  <dt><b>打印机按键</b></dt>
+  <dd>弹出一个产生PostScript文件的对话框.对话框可以设定需要
+      打印的页面和PostScript文件的名字.当文件名字为´-&#39;时,代表
+      标准输出,或者用´|command&#39;通过某个命令来管道PostScript,
+      比如,´|lpr&#39;.</dd>
+  <dt><b>´?&#39;按键</b></dt>
+  <dd>弹出一个´about xpdf&#39;窗口.</dd>
+  <dt><b>链接信息</b></dt>
+  <dd>当鼠标移动到某个链接的上面,`?`和`Quit`按键之间的空间用来显示链接地址或者外部文件名.</dd>
+  <dt><b>`Quit`按键</b></dt>
+  <dd>退出xpdf.</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="菜单">菜单<a class="anchor" href="#%E8%8F%9C%E5%8D%95">¶</a></h2>
+按鼠标右键,会弹出一个含有以下命令的弹出菜单.
+<dl class="Bl-tag">
+  <dt><b>Open...</b></dt>
+  <dd>通过文件选择器打开一个新文件.</dd>
+  <dt><b>Save PDF...</b></dt>
+  <dd>通过文件选择器保存现有文件.</dd>
+  <dt><b>Rotate left</b></dt>
+  <dd>将当前页面逆时针旋转90度.</dd>
+  <dt><b>Rotate right</b></dt>
+  <dd>将当前页面顺时针旋转90度.这两个旋转命令主要是为了那些没有在文件中正确指定旋转信息的PDF文件设计的,即使您的X服务器不支持字体旋转,它依然起作用.</dd>
+  <dt><b>Quit</b></dt>
+  <dd>退出xpdf.</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="字符选择">字符选择<a class="anchor" href="#%E5%AD%97%E7%AC%A6%E9%80%89%E6%8B%A9">¶</a></h2>
+按住鼠标并拖动它,可以高亮出一个任意的矩形.任何在此矩形中的字符都会被复制到X选择缓冲中去.
+</section>
+<section class="Ss">
+<h2 class="Ss" id="链接">链接<a class="anchor" href="#%E9%93%BE%E6%8E%A5">¶</a></h2>
+点击一个超级链接可以跳转到此链接的目标地址中去.一个指向某个PDF文件的链接将促使xpdf打开此文件.一个指向某可执行程序的`launch`的链接将弹出一个对话框,如果您点击`ok`,就会执行此程序.URL链接调出某个外部命令.(参见下面网络浏览器部分.)
+</section>
+<section class="Ss">
+<h2 class="Ss" id="滚动">滚动<a class="anchor" href="#%E6%BB%9A%E5%8A%A8">¶</a></h2>
+按住鼠标中键并拖动之,可以滚动页面.
+</section>
+<section class="Ss">
+<h2 class="Ss" id="快捷键">快捷键<a class="anchor" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE">¶</a></h2>
+<dl class="Bl-tag">
+  <dt><b>o</b></dt>
+  <dd>通过文件选择器打开一个新PDF文件.</dd>
+  <dt><b>f</b></dt>
+  <dd>查找字符串.</dd>
+  <dt><b>n</b></dt>
+  <dd>翻到下一页.</dd>
+  <dt><b>p</b></dt>
+  <dd>翻到前一页.</dd>
+  <dt><b>空格键,PageDown键或者Next键</b></dt>
+  <dd>向下滚动当前页面,如果已经到达当前页面低部,则翻到下一页.</dd>
+  <dt><b>Backspace键,Delete键,PageUp或者Previous键</b></dt>
+  <dd>向上滚动当前页面,如果已经到达页面顶部,则翻到前一页.</dd>
+  <dt><b>Home键</b></dt>
+  <dd>滚动到当前页面顶部.</dd>
+  <dt><b>End键</b></dt>
+  <dd>滚动到当前页面低部.</dd>
+  <dt><b>箭头键</b></dt>
+  <dd>滚动当前页面.</dd>
+  <dt><b>control-L</b></dt>
+  <dd>更新当前页面.</dd>
+  <dt><b>q</b></dt>
+  <dd>退出xpdf.</dd>
+</dl>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="网络浏览器">网络浏览器<a class="anchor" href="#%E7%BD%91%E7%BB%9C%E6%B5%8F%E8%A7%88%E5%99%A8">¶</a></h1>
+如果您希望点击一个指向PDF文件的链接时,从netscape或者mosaic(或者其他的浏览器)中自动启动xpdf,您需要在您的用户目录下修改(或者创建)
+  <i>.mime.types</i> 和 <i>.mailcap</i> 文件. 在
+  <i>.mime.types</i> 中加入一行:
+<p class="Pp"></p>
+<div class="Bd-indent">application/pdf pdf</div>
+<p class="Pp">在 <i>.mailcap</i> 中加入:</p>
+<p class="Pp"></p>
+<div class="Bd-indent"># Use xpdf to view PDF files.</div>
+<div class="Bd-indent">application/pdf; xpdf -err %s</div>
+<p class="Pp">确认xpdf在您的可执行查找路径中.</p>
+<p class="Pp">当您点击一个PDF文件中的URL链接,xpdf将执行一个由xpdf.urlCommand资源指定的命令,并将资源中`%s`替换为相应的URL.比如,指定netscape打开URL,可以这样设定资源.</p>
+<p class="Pp"></p>
+<div class="Bd-indent">xpdf.urlCommand: netscape -remote `openURL(%s)`</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="远程服务器模式">远程服务器模式<a class="anchor" href="#%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A8%A1%E5%BC%8F">¶</a></h1>
+通过指定一个服务器的名字,xpdf可以以远程服务器模式打开(和文件名,页码).
+<p class="Pp"></p>
+<div class="Bd-indent">xpdf -remote myServer file.pdf</div>
+<p class="Pp">如果没有xpdf运行在以myServer为名字的服务器模式中,那么一个新的xpdf窗口会被打开.此时,如果键入另一个命令:</p>
+<p class="Pp"></p>
+<div class="Bd-indent">xpdf -remote myServer another.pdf 9</div>
+<p class="Pp">则不会启动新的xpdf,而前一个xpdf(服务器)将会打开
+    <i>another.pdf</i>
+    并且显示第9页.如果文件名字相同:</p>
+<p class="Pp"></p>
+<div class="Bd-indent">xpdf -remote myServer another.pdf 4</div>
+<p class="Pp">xpdf服务器将会简单的显示指定的页面.</p>
+<p class="Pp">-raise选项通知服务器唤醒它的窗口.它既可以后面跟随文件名和页码也可以单独使用.</p>
+<p class="Pp">-quit选项通知服务器关闭窗口并且退出.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="选项文件">选项文件<a class="anchor" href="#%E9%80%89%E9%A1%B9%E6%96%87%E4%BB%B6">¶</a></h1>
+xpdf会从您的用户目录(如果有的话)中读取一个叫做
+  <i>.xpdfrc</i>
+  的文件.这个文件可以包含两种条目.
+<dl class="Bl-tag">
+  <dt><b>fontpath</b><i> directory</i></dt>
+  <dd>在 <i>dicrectory</i> 中寻找Type 1字体.
+      Xpdf只通过此条目获得字体编码.为了显示,还要通过
+      <b>fontmap</b>
+    条目来布局字体.</dd>
+  <dt><b>fontmap</b><i> PDF-font</i><b></b><i> X-font</i></dt>
+  <dd>将 <i>PDF-font</i>
+      (PDF文件中指定的)布局到
+      <i>X-font</i>
+      中去,X-font必须是一个在像素大小位置上含有`%s`的标准X字体描述.</dd>
+</dl>
+<p class="Pp">比如,使用</p>
+<p class="Pp"></p>
+<div class="Bd-indent">fontmap TimesCE-Roman
+  -*-times-medium-r-*-*-%s-*-*-*-*-*-iso8859-2</div>
+<p class="Pp">来布局Central
+    European(Latin-2)版的Times-Roman字体.这里假设您已经安装了适当的X字体(参见
+    <b><a href="../../buster/xfonts-utils/mkfontdir.1.en.html">mkfontdir(1)</a></b> ).
+    Xpdf理解ISO8859-2编码,所以您不需要这些字体的
+    <b>fontpath</b> 条目. 使用Bakoma Type
+    1字体,可以这样做:</p>
+<p class="Pp"></p>
+<div class="Bd-indent">fontpath /home/derekn/fonts/bakoma
+<br/>
+fontmap cmb10 -bakoma-cmb10-medium-r-normal--%s-*-*-*-p-*-adobe-fontspecific
+<br/>
+fontmap cmbsy10 -bakoma-cmbsy10-medium-r-normal--%s-*-*-*-p-*-adobe-fontspecific
+<br/>
+etc...</div>
+<p class="Pp">这里假设Type
+    1字体在目录 <i>/home/derekn/fonts/bakoma</i>
+    下.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="臭虫">臭虫<a class="anchor" href="#%E8%87%AD%E8%99%AB">¶</a></h1>
+不支持TypeType和Type 3字体.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者">作者<a class="anchor" href="#%E4%BD%9C%E8%80%85">¶</a></h1>
+The xpdf software and documentation are copyright 1996-1999 Derek B. Noonburg
+  (derekn@foolabs.com).
+</section>
+<section class="Sh">
+<h1 class="Sh" id="另见">另见<a class="anchor" href="#%E5%8F%A6%E8%A7%81">¶</a></h1>
+<b><a href="../../buster/poppler-utils/pdftops.1.en.html">pdftops(1)</a>.</b> <b><a href="../../buster/poppler-utils/pdftotext.1.en.html">pdftotext(1)</a>.</b> <b><a href="../../buster/poppler-utils/pdfinfo.1.en.html">pdfinfo(1)</a>.</b> <b>pdftopbm(1).</b>
+  <b><a href="../../buster/poppler-utils/pdfimages.1.en.html">pdfimages(1)</a>.</b>
+<br/>
+<b><a href="../../xpdf/">../../xpdf/</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">02 Aug 1999</td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+xpdf.1.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-26T15:45:46Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"xpdf(1)\"}}]}"
+</script>

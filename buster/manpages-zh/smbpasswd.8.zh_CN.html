@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>smbpasswd(8) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/samba-common-bin/smbpasswd.8.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/smbpasswd.8.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/smbpasswd.8.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="8">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; smbpasswd(8)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/smbpasswd.8">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/smbpasswd.8.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%80%BB%E8%A7%88_SYNOPSIS" title="总览 SYNOPSIS">总览 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%89%E9%A1%B9_OPTIONS" title="选项 OPTIONS">选项 OPTIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%B3%A8%E6%84%8F_NOTES" title="注意 NOTES">注意 NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%89%88%E6%9C%AC_VERSION" title="版本 VERSION">版本 VERSION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E8%A7%81_SEE_ALSO" title="参见 SEE ALSO">参见 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85_AUTHOR" title="作者 AUTHOR">作者 AUTHOR</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D" title="[中文版维护人]">[中文版维护人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/smbpasswd.8.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/smbpasswd.8.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/smbpasswd.8.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/samba-common-bin/smbpasswd.8.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/smbpasswd.8.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/smbpasswd.8.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/smbpasswd.5.zh_CN.html">5 (<span title="File formats and conventions eg /etc/passwd">formats</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/smbpasswd.8.zh_CN.html">8 (<span title="System administration commands (usually only for root)">sysadmin</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">SMBPASSWD(8)</td>
+    <td class="head-vol"></td>
+    <td class="head-rtitle">SMBPASSWD(8)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+smbpasswd - 改变用户的SMB口令
+</section>
+<section class="Sh">
+<h1 class="Sh" id="总览_SYNOPSIS">总览 SYNOPSIS<a class="anchor" href="#%E6%80%BB%E8%A7%88_SYNOPSIS">¶</a></h1>
+<b>smbpasswd</b> [-a] [-x] [-d] [-e] [-D debuglevel] [-n] [-r &lt;remote
+  machine&gt;] [-R &lt;name resolve order&gt;] [-m] [-U username[%password]]
+  [-h] [-s] [-w pass] [-i] [-L] [username]
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+此程序是<b>Samba</b>(7)套件的一部分。
+<p class="Pp"></p>
+<p class="Pp">smbpasswd程序有几个不太一样的功能，这取决于它被<b>root</b>账号还是其它账号来使用。当普通用户运行它时，用户可以通过SMB会话在任何保存SMB口令的机器上改变他们的口令。</p>
+<p class="Pp"></p>
+<p class="Pp">默认情况下(不带参数运行)它会尝试在本地改变当前用户的SMB口令。这和<a href="../../buster/passwd/passwd.1.zh_CN.html">passwd(1)</a>程序的工作方式类似。不过，<b>
+    smbpasswd</b>和具有<b>setuid root</b>
+    特性的passwd还是不一样的，它工作在客户机-服务器模式,
+    并且与本地运行中的<a href="../../buster/manpages-zh/smbd.8.zh_CN.html">smbd(8)</a>通信。为了运行成功，smbd守护程序必须正在本地主机上运行。在UNIX主机上通常用<a href="../../buster/manpages-zh/smbpasswd.5.zh_CN.html">smbpasswd(5)</a>
+    来存放SMB的加密口令。</p>
+<p class="Pp"></p>
+<p class="Pp">当普通用户不带选项来运行这个程序时，smbpasswd会向他们提示输入原SMB口令并询问所需的新口令两次，来确保输入正确.
+    输入时屏幕并不回显。如果你用了一个空SMB口令(在smbpasswd文件中会指定字串“NO
+    PASSWORD”)的话，在程序提示输入原口令时可以直接输入&lt;Enter&gt;键。</p>
+<p class="Pp"></p>
+<p class="Pp">普通用户也可以在远程主机(例如Windows
+    NT主域控制器)上用smbpasswd来改他们的SMB口令。详细情况请参见以下的(<i>-r</i>)和<i>-U</i>两个选项。</p>
+<p class="Pp"></p>
+<p class="Pp">当root运行这个程序时，smbpasswd可以在smbpasswd文件中增删用户，也可以改变用户属性。这时，<b>
+    smbpasswd</b>
+    会直接访问本地smbpasswd文件，即使smbd并没有在运行时也可以。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="选项_OPTIONS">选项 OPTIONS<a class="anchor" href="#%E9%80%89%E9%A1%B9_OPTIONS">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>-a</dt>
+  <dd>在这个选项后跟上用户名用来实现在本地smbpasswd文件中增加用户，并且同时设置口令(提示原口令时用&lt;Enter&gt;)。如果smbpasswd文件中已经存在了这个用户时，命令就变成通常的修改口令模式。注意，默认的passdb后端要求所要加入的SMB用户必须是系统口令文件中(通常是<i>/etc/passwd</i>)已经存在的用户否则加入操作将会失败。
+    <p class="Pp">只有root运行smbpasswd程序时才可以使用这个选项。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-x</dt>
+  <dd>This option specifies that the username following should be deleted from
+      the local smbpasswd file.
+    <p class="Pp"></p>
+    <p class="Pp">This option is only available when running smbpasswd as
+      root.</p>
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-d</dt>
+  <dd>这个选项后跟用户名用来<b>禁止</b>存在于smbpasswd文件中的这个账号。通过在smbpasswd文件的账号控制部分写入
+      <b>&#39;D&#39;</b>标志来实现这个功能。一旦账号被禁止，所有使用这个账号作SMB身份验证的尝试都将失败。
+    <p class="Pp">如果smbpasswd文件还是旧格式的话(比如Samba
+        2.0之前版本)，在用户口令项中没有这样的账号控制部分可以作任何标志，这个命令会*失败*。关于口令文件的新格式和旧格式细节可以参见<a href="../../buster/manpages-zh/smbpasswd.5.zh_CN.html">smbpasswd(5)</a>
+        。</p>
+    <p class="Pp">只有root运行smbpasswd程序时才可以使用这个选项。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-e</dt>
+  <dd>这个选项后跟用户名用来在本地smbpasswd文件中的这个账号被禁止时重新<b>允许</b>使用。如果账号并未被禁止的话，使用这个选项不会有什么结果。被允许的账号将可以通过SMB的身份验证。
+    <p class="Pp">使用老格式的口令文件时，<b>
+        smbpasswd</b>
+        将运行失败。关于口令文件的新格式和旧格式细节可以参见<a href="../../buster/manpages-zh/smbpasswd.5.zh_CN.html">smbpasswd(5)</a>。</p>
+    <p class="Pp">只有root运行smbpasswd程序时才可以使用这个选项。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-D debuglevel</dt>
+  <dd><i>debuglevel</i>
+      是一个从0到10的整数。如果没有指定此参数则默认的值是0。
+    <p class="Pp">如果这个值越高，越多关于smbpasswd的详细活动信息将被记录到文件中。在0调试级时，只记录紧急错误和严重警告。</p>
+    <p class="Pp">1以上的调试级将产生相当多的记录数据，并且只在解决问题时才有用。3以上的调试级只被设计为让开发者使用并会产生极大数量的记录数据，而且其中很多部分非常难以理解。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-n</dt>
+  <dd>用这个选项后跟用户名来把这个账号的口令设为空(也就是没有口令)。程序会把本地smbpasswd文件中该口令项的第一部分改为“NO
+      PASSWORD”。
+    <p class="Pp">注意如果设置了&#34;NO
+        PASSWORD&#34;之后，要允许用户以空口令登录到Samba服务器，管理员必须在<i>smb.conf</i>配置文件的[global]段中设置以下的参数：</p>
+    <p class="Pp"><b>null passwords = yes</b></p>
+    <p class="Pp">只有root运行smbpasswd程序时才可以使用这个选项。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-r remote machine name</dt>
+  <dd>使用这个选项来让用户指定他们所希望改变口令的主机，不用此参数时默认对本地更改口令。SMB/CIFS服务器会试图联接以<i>remote
+      machine
+      name</i>作为NetBIOS名字的主机以更改口令。Samba套件中的所有程序都使用标准的名字解析机制来把这样的名字转换成IP地址。参见<i>-R
+      name resolve
+      order</i>参数来获得改变解析机制的详细信息。
+    <p class="Pp">用这个选项更改密码的账号就是当前登录UNIX的账号。要改变其它帐号的密码可以参见<i>-U
+        username</i>参数。</p>
+    <p class="Pp">注意，如果要改变一个NT域账号，指定的远程主机必须是域中的主域控制器，因为备份域控制器只维护用户账号数据库的只读复本，而不能更改。</p>
+    <p class="Pp"><b>注意</b>的是Windows
+        95/98实际根本没有口令数据库，所以不可能更改远程Win95/98主机上的口令</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-R name resolve order</dt>
+  <dd>用这个选项来让使用smbclient的用户在查询主机NetBIOS名字用于联接时，决定使用怎样的名字解析服务。
+    <p class="Pp">这些名字解析选项是：&#34;lmhosts&#34;,&#34;host&#34;,&#34;wins&#34;和&#34;bcast&#34;.它们决定了名字解析是以如下方式的：</p>
+    <p class="Pp"><b>lmhosts</b> :
+        在samba的lmhosts文件中查找IP地址.如果lmhosts文件的内容行中没有名字类型附加在NetBIOS名上时(参见<b>lmhosts</b>
+        (5)中的详细描述),任何类型的名字都可以匹配这个查询.</p>
+    <p class="Pp"><b>host</b> :
+        执行标准的主机名到IP地址的解析操作,此操作会使用系统的<i>/etc/hosts</i>,NIS或者是DNS来查询.具体方法取决于操作系统,在IRIX和Solaris中解析名字的方法可能是由<i>/etc/nsswitch.conf</i>文件来控制的.注意此方法只适用于对被查询的NetBIOS名字类型为0x20(服务器)时才有用,其它类型都会被忽略.</p>
+    <p class="Pp"><b>wins</b> : 向列在<i>wins
+        server</i>选项中的服务器查询一个名字对应的IP地址.如果没有指定WINS服务器,那么此方法就被略过了.</p>
+    <p class="Pp"><b>bcast</b> :
+        向在<i>interfaces</i>选项中列出的每一个已知本地网络接口进行广播来作查询.这是最不可信的名字解析方法,除非目标主机就在本地子网中.</p>
+    <p class="Pp">默认的顺序是 <b>lmhosts,
+        host, wins,
+        bcast</b>。如果没有这个参数，<a href="../../buster/manpages-zh/smb.conf.5.zh_CN.html">smb.conf(5)</a>
+        文件中也没有选项，将尝试这个顺序的名字解析。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-m</dt>
+  <dd>这个选项来把账号改为一个MACHINE账号。通常当Samba作为Windows
+      NT主域控制器的时候可以使用它。
+    <p class="Pp">只有root运行smbpasswd程序时才可以使用这个选项。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-U username</dt>
+  <dd>这个选项只能和
+      <i>-r</i>选项联合使用。当从远程主机更改口令时，用它来允许用户指定要改变的远程主机口令的用户账号。这使得在不同的系统上使用不同的账号的用户可以口令。
+    <p class="Pp"></p>
+  </dd>
+  <dt>-h</dt>
+  <dd>使用这个选项可以打印出<b>
+      smbpasswd</b>的帮助信息，注意选择正确的帮助:
+      root用户和普通用户使用的。
+    <p class="Pp"></p>
+  </dd>
+  <dt>-s</dt>
+  <dd>使用这个选项会使smbpasswd保持安静(不发出提示)，在标准输入上读取原口令和新口令。而不是从<i>/dev/tty</i>上读口令(象<a href="../../buster/passwd/passwd.1.zh_CN.html">passwd(1)</a>那样)。使用脚本来处理smbpasswd时可以用它。
+    <p class="Pp"></p>
+  </dd>
+  <dt>-w password</dt>
+  <dd>This parameter is only available if Samba has been configured to use the
+      experimental <b>--with-ldapsam</b> option. The <i>-w</i> switch is used to
+      specify the password to be used with the <i>ldap admin dn</i>. Note that
+      the password is stored in the <i>secrets.tdb</i> and is keyed off of the
+      admin&#39;s DN. This means that if the value of <i>ldap admin dn</i> ever
+      changes, the password will need to be manually updated as well.
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-i</dt>
+  <dd>This option tells smbpasswd that the account being changed is an
+      interdomain trust account. Currently this is used when Samba is being used
+      as an NT Primary Domain Controller. The account contains the info about
+      another trusted domain.
+    <p class="Pp"></p>
+    <p class="Pp">This option is only available when running smbpasswd as
+      root.</p>
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-L</dt>
+  <dd>Run in local mode.
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>username</dt>
+  <dd>This specifies the username for all of the <b>root only</b> options to
+      operate on. Only root can specify this parameter as only root has the
+      permission needed to modify attributes directly in the local smbpasswd
+      file.
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="注意_NOTES">注意 NOTES<a class="anchor" href="#%E6%B3%A8%E6%84%8F_NOTES">¶</a></h1>
+由于非root用户是以客户机-服务器模式运行<b>smbpasswd</b>与本地smbd通信，因此smbd守护程序必须在运行状态。通常会出现的一个问题是在对可以连接到本地运行的smbd的主机进行限制的时候，通过在<a href="../../buster/manpages-zh/smb.conf.5.zh_CN.html">smb.conf(5)</a>
+  配置文件中指定<i>allow
+  hosts</i>或者<i>deny
+  hosts</i>参数但是忘记了允许“localhost”对smbd进行连接。
+<p class="Pp"></p>
+<p class="Pp">另外smbpasswd命令只有在已经把samba设成使用加密口令时才能发挥作用。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="版本_VERSION">版本 VERSION<a class="anchor" href="#%E7%89%88%E6%9C%AC_VERSION">¶</a></h1>
+此手册页是针对samba套件版本3.0的。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参见_SEE_ALSO">参见 SEE ALSO<a class="anchor" href="#%E5%8F%82%E8%A7%81_SEE_ALSO">¶</a></h1>
+<a href="../../buster/manpages-zh/smbpasswd.5.zh_CN.html">smbpasswd(5)</a>, <b>Samba</b>(7).
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者_AUTHOR">作者 AUTHOR<a class="anchor" href="#%E4%BD%9C%E8%80%85_AUTHOR">¶</a></h1>
+samba软件和相关工具最初由Andrew
+  Tridgell创建。samba现在由Samba Team
+  作为开源软件来发展，类似linux内核的开发方式。
+<p class="Pp"></p>
+<p class="Pp">最初的samba手册页是 Karl
+    Auer写的。
+    手册页源码已经转换为YODL格式(另一种很好的开源软件，可以在ftp://ftp.ice.rug.nl/pub/unix找到)，由Jeremy
+    Sllison 更新到Samba2.0 版本。 Gerald
+    Carter
+    在Samba2.2中将它转化为DocBook
+    格式。 Alexander Bokovoy 在Samba
+    3.0中实现了DocBook XML4.2
+    格式的转换。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版维护人]">[中文版维护人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D">¶</a></h1>
+<b>meaculpa &lt;meaculpa@21cn.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2000/12/08</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9B%BDlinux%E8%AE%BA%E5%9D%9Bman%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+smbpasswd.8.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-16T15:43:29Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"smbpasswd(8)\"}}]}"
+</script>

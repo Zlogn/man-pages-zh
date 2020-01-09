@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cpio(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/cpio.1.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/cpio/cpio.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es-extra/cpio.1.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-hu/cpio.1.hu.html" hreflang="hu">
+<link rel="alternate" href="../../buster/manpages-ja/cpio.1.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-zh/cpio.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/cpio.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; cpio(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/cpio.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/cpio.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_%28SYNOPSIS%29" title="總覽 (SYNOPSIS)">總覽 (SYNOPSIS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_%28DESCRIPTION%29" title="描述 (DESCRIPTION)">描述 (DESCRIPTION)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B" title="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/cpio.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/cpio.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/cpio.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/cpio.1.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/cpio/cpio.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es-extra/cpio.1.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-hu/cpio.1.hu.html" title="Hungarian (hu)">magyar</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/cpio.1.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/cpio.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/cpio.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/cpio.1.zh_TW.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/libarchive-dev/cpio.5.en.html">5 (<span title="File formats and conventions eg /etc/passwd">formats</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">CPIO(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">CPIO(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+cpio - 存取歸檔包中的文件
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_(SYNOPSIS)">總覽 (SYNOPSIS)<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_(SYNOPSIS)">¶</a></h1>
+<b>cpio</b> {-o|--create} [-0acvABLV] [-C bytes] [-H format] [-M message] [-O
+  [[user@]host:]archive] [-F [[user@]host:]archive]
+  [--file=[[user@]host:]archive] [--format=format] [--message=message] [--null]
+  [--reset-access-time] [--verbose] [--dot] [--append] [--block-size=blocks]
+  [--dereference] [--io-size=bytes] [--quiet] [--force-local] [--help]
+  [--version] &lt; name-list [&gt; archive]
+<p class="Pp"><b>cpio</b> {-i|--extract} [-bcdfmnrtsuvBSV] [-C bytes] [-E file]
+    [-H format] [-M message] [-R [user][:.][group]] [-I [[user@]host:]archive]
+    [-F [[user@]host:]archive] [--file=[[user@]host:]archive]
+    [--make-directories] [--nonmatching] [--preserve-modification-time]
+    [--numeric-uid-gid] [--rename] [--list] [--swap-bytes] [--swap] [--dot]
+    [--unconditional] [--verbose] [--block-size=blocks] [--swap-halfwords]
+    [--io-size=bytes] [--pattern-file=file] [--format=format]
+    [--owner=[user][:.][group]] [--no-preserve-owner] [--message=message]
+    [--force-local] [--no-absolute-filenames] [--sparse] [--only-verify-crc]
+    [--quiet] [--help] [--version] [pattern...] [&lt; archive]</p>
+<p class="Pp"><b>cpio</b> {-p|--pass-through} [-0adlmuvLV] [-R
+    [user][:.][group]] [--null] [--reset-access-time] [--make-directories]
+    [--link] [--quiet] [--preserve-modification-time] [--unconditional]
+    [--verbose] [--dot] [--dereference] [--owner=[user][:.][group]]
+    [--no-preserve-owner] [--sparse] [--help] [--version] destination-directory
+    &lt; name-list</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_(DESCRIPTION)">描述 (DESCRIPTION)<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_(DESCRIPTION)">¶</a></h1>
+本手冊頁 描述 GNU 版本 的
+  <b>cpio</b>.
+<p class="Pp"><b>cpio</b> 可以 從 cpio 或 tar
+    格式 的 歸檔包(archive) 中
+    讀寫 文件, 歸檔包 是
+    一種文件, 它 由
+    歸檔文件 及其
+    相關信息 組成, 例如
+    文件名, 屬主, 時標 (timestamp),
+    和 訪問權限. 歸檔包
+    可以 是 磁盤上的 文件,
+    也可以 是
+  磁帶或管道.</p>
+<p class="Pp"><b>cpio</b> 有 三種
+    操作模式.</p>
+<p class="Pp">在 copy-out 模式中, <b>cpio</b> 把
+    文件 複製到 歸檔包 中.
+    它 從 標準輸入 讀取
+    文件名列表,
+    每行一個文件名.
+    生成的 歸檔包 寫到
+    標準輸出. 產生
+    文件名列表 的
+    典型方法 是 使用 <b>find</b>
+    命令; 你 可能 要在 <b>find</b>
+    後面 用上 -depth 選項, 減少
+    因爲 進入 沒有
+    訪問權限 的 目錄 引起
+    的 麻煩.</p>
+<p class="Pp"></p>
+<p class="Pp">在 copy-in 模式中, <b>cpio</b> 從
+    歸檔包 讀取 文件, 或者
+    列出 歸檔包 的 內容,
+    歸檔包 來自 標準輸入.
+    任何 非選項
+    命令行參數 被視爲 shell
+    的 通配符模式串 (globbing
+    pattern); 在 歸檔包 中, 只
+    讀取 文件名 匹配 這些
+    模式串 的 文件. 和 shell
+    環境 不一樣, 文件名
+    起始處 的 &#39;.&#39; 可以 匹配
+    模式串 起始處 的
+    通配符, 文件名中 的 &#39;/&#39;
+    也可以 匹配 通配符.
+    如果 沒有 給出 模式串,
+    那麼 讀取 所有 文件.</p>
+<p class="Pp"></p>
+<p class="Pp">在 copy-pass 模式中, <b>cpio</b> 把
+    文件 從 一棵目錄樹
+    複製到 另一棵, 它
+    結合了 copy-in 和 copy-out 的
+    操作, 但是 沒有 使用
+    歸檔包. <b>cpio</b> 從
+    標準輸入 讀取
+    欲複製的 文件名列表;
+    目標目錄 是
+    非選項命令行參數.</p>
+<p class="Pp"></p>
+<p class="Pp"><b>cpio</b> 支持 下列的
+    歸檔 格式: binary, old ASCII, new ASCII, crc, HPUX
+    binary, HPUX old ASCII, old tar, 和 POSIX.1 tar.</p>
+<p class="Pp">&#34;binary&#34; 格式 是 過時
+    格式, 因爲 它 保存
+    文件信息 的 方法 無法
+    應用在 不同體系 的
+    機器 上. &#34;old ASCII&#34; 格式
+    可以 跨平臺 使用, 但是
+    不能 用於 超過 65536 個 i
+    節點 的 文件系統 中.
+    &#34;new ASCII&#34; 格式 可以
+    跨平臺 使用, 也 適用於
+    任意大小 的 文件系統
+    上, 但 不是 所有 版本
+    的 <b>cpio</b> 都 支持, 目前
+    只有 GNU 和 System VR4 的 cpio 能夠
+    支持 &#34;new ASCII&#34; 格式. &#34;crc&#34;
+    格式 類似於 &#34;new ASCII&#34;
+    格式, 而且 對每個 文件
+    計算 校驗和; <b>cpio</b> 在
+    創建 歸檔包 時 計算
+    校驗和, 解開 文件 時
+    進行 校驗. &#34;HPUX&#34; 格式
+    用於 兼容 HP UNIX 的 cpio, 它
+    用了 獨特的方法 保存
+    設備文件.</p>
+<p class="Pp"></p>
+<p class="Pp">&#34;tar&#34; 格式 用以 兼容
+    <b>tar</b> 程序. 它 不能 對
+    文件名 超過 100 個 字符
+    的 文件 歸檔, 也 不能
+    對 特殊文件 (塊設備 或
+    字符設備) 歸檔. &#34;POSIX.1 tar&#34;
+    格式 不能 對 文件名
+    超過 255 個 字符 的 文件
+    歸檔 (小於 255, 除非
+    文件名 的 最右邊
+    有一個 &#34;/&#34;).</p>
+<p class="Pp"></p>
+<p class="Pp">缺省情況下, <b>cpio</b>
+    爲了 兼容 老式的 <b>cpio</b>
+    程序, 創建 &#34;binary&#34; 格式
+    的 歸檔包. 當展開
+    歸檔包 時, <b>cpio</b> 能夠
+    自動識別 歸檔包 的
+    格式, 而且 能夠 讀取
+    不同 字節順序 的 機器
+    上 創建 的 歸檔包.</p>
+<p class="Pp"></p>
+<p class="Pp"><b>cpio</b> 的 某些 選項
+    只能 用在 相應的
+    操作模式 上; 參見 總覽
+    小節, 裏面 列出了
+    什麼模式 可以用
+    什麼選項.</p>
+<p class="Pp"></p>
+<section class="Ss">
+<h2 class="Ss" id="選項_(OPTIONS)">選項 (OPTIONS)<a class="anchor" href="#%E9%81%B8%E9%A0%85_(OPTIONS)">¶</a></h2>
+<dl class="Bl-tag">
+  <dt><i>-0, --null</i></dt>
+  <dd>在 copy-out 和 copy-pass 模式中,
+      認爲 輸入的 文件名
+      以 null 字符 結尾, 而不是
+      換行符, 這樣 即使
+      文件名 中 包含
+      換行符, 也 不影響
+      歸檔. GNU <b>find</b> 是 生成 null
+      結尾 文件名 列表 的
+      方法 之一.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-a, --reset-access-time</i></dt>
+  <dd>讀取完 文件 後 重置
+      文件的訪問時間, 這樣
+      看上去 就象 沒有
+      訪問 過 這個 文件.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-A, --append</i></dt>
+  <dd>添加到 現存的 歸檔包
+      中. 僅用於 copy-out 模式. 該
+      歸檔包 必須是 用 <i>-O</i>
+      或 <i>-F (--file)</i> 選項 生成的
+      磁盤文件.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-b, --swap</i></dt>
+  <dd>在 copy-in 模式中, 顛倒
+      數據中 字 的 字節
+      順序. 相當於 <i>-sS</i>. 使用
+      這個 選項 可以 在
+      大端數 和 小端數
+      機器 之間 轉換 32 位
+      整數.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-B</i></dt>
+  <dd>把 I/O 塊 大小 設置成 5120
+      字節. 最初的 塊大小
+      是 512 字節.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>--block-size=BLOCK-SIZE</i></dt>
+  <dd>設置 I/O 塊 大小 爲 BLOCK-SIZE * 512
+      字節.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-c</i></dt>
+  <dd>使用 老式的 跨平臺 (ASCII)
+      歸檔 格式.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-C IO-SIZE, --io-size=IO-SIZE</i></dt>
+  <dd>設置 I/O 塊 大小 爲 IO-SIZE
+      字節.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-d, --make-directories</i></dt>
+  <dd>在 需要的地方 創建
+      起始目錄.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-E FILE, --pattern-file=FILE</i></dt>
+  <dd>在 copy-in 模式中, 從 FILE 裏
+      讀取 用於 匹配
+      文件名 的 模式串. FILE 的
+      內容 如同 <b>cpio</b> 的
+      非選項 參數.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-f, --nonmatching</i></dt>
+  <dd>只複製 那些 不匹配
+      給定的 模式串 的
+      文件.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-F, --file=archive</i></dt>
+  <dd>使用 歸檔包文件,
+      而不是
+      標準輸入或輸出. 如果
+      把 其他 機器上 的
+      磁帶機 作成
+      歸檔包文件, 文件名
+      要用 &#34;HOSTNAME:&#34; 開始.
+      主機名 前面 可以
+      加上 用戶名 和 一個 &#39;@&#39;,
+      作爲 訪問 遠程
+      磁帶機 的 用戶 (如果
+      你有 這樣的 權限,
+      一般 在 用戶的 ~/.rhosts
+      文件中 會有 這麼
+      一項).
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>--force-local</i></dt>
+  <dd>和 <i>-F</i>, <i>-I</i>, 或 <i>-O</i>,
+      一起用, 可以 把
+      歸檔包文件 看作
+      本地文件, 即使
+      文件名 中 含有 冒號,
+      一般說來 冒號 指出
+      一個 遠程主機 的
+      存在.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-H FORMAT, --format=FORMAT</i></dt>
+  <dd>使用 歸檔格式 FORMAT. 有效
+      的 格式 列在 下面,
+      大小寫 均可. &#34;copy-in&#34;
+      模式 的 缺省動作 是
+      自動檢測 歸檔格式,
+      &#34;copy-out&#34; 的 缺省格式 是
+      &#34;bin&#34;.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt>bin</dt>
+  <dd>老式的 binary 格式.</dd>
+  <dt>odc</dt>
+  <dd>老式的 (POSIX.1) 跨平臺
+      格式.</dd>
+  <dt>newc</dt>
+  <dd>新型 (SVR4) 跨平臺 格式,
+      支持 大於 65536 i節點 的
+      文件系統.</dd>
+  <dt>crc</dt>
+  <dd>新型 (SVR4) 跨平臺 格式,
+      並且 計算 校驗和.</dd>
+  <dt>tar</dt>
+  <dd>老式的 tar 格式.</dd>
+  <dt>ustar</dt>
+  <dd>POSIX.1 tar 格式, 也能 識別 GNU
+      <b>tar</b> 歸檔文件, 它們
+      相似 但不全相同.</dd>
+  <dt>hpbin</dt>
+  <dd>HP UNIX 上的 cpio 使用的
+      老式的 binary 格式. (用
+      獨特的方法 儲存
+      設備文件)</dd>
+  <dt>hpodc</dt>
+  <dd>HP UNIX 上的 cpio 使用的
+      跨平臺 格式. (用
+      獨特的方法 儲存
+      設備文件)</dd>
+</dl>
+</div>
+<dl class="Bl-tag">
+  <dt><i>-i, --extract</i></dt>
+  <dd>進入 copy-in 模式.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-I archive</i></dt>
+  <dd>使用 歸檔包文件,
+      而不是 標準輸入.
+      如果 把 其他 機器上
+      的 磁帶機 作成
+      歸檔包文件, 文件名
+      要用 &#34;HOSTNAME:&#34; 開始.
+      主機名 前面 可以
+      加上 用戶名 和 一個 &#39;@&#39;,
+      作爲 訪問 遠程
+      磁帶機 的 用戶 (如果
+      你有 這樣的 權限,
+      一般 在 用戶的 ~/.rhosts
+      文件中 會有 這麼
+      一項).</dd>
+  <dt><i>-k</i></dt>
+  <dd>無效操作; 只是 用來
+      兼容 其他 版本 的 <b>cpio</b>.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-l, --link</i></dt>
+  <dd>如果有可能, 連接
+      文件, 而不是 複製.</dd>
+  <dt><i>-L, --dereference</i></dt>
+  <dd>解除 符號連接 的
+      關聯 (複製 符號連接
+      指向的 文件, 而不是
+      連接 本身).</dd>
+  <dt><i>-m, --preserve-modification-time</i></dt>
+  <dd>當 創建 文件 時, 保留
+      以前的
+    文件修改時間.</dd>
+  <dt><i>-M MESSAGE, --message=MESSAGE</i></dt>
+  <dd>當 備份 媒體 (例如
+      磁帶或軟盤) 到達
+      卷尾時, 顯示 一條
+      消息, 提醒 用戶 插入
+      下一卷. 如果 MESSAGE 包含
+      字符串 &#34;%d&#34;, 它 替換成
+      當前 卷號 (從 1 開始).</dd>
+  <dt><i>-n, --numeric-uid-gid</i></dt>
+  <dd>以 繁瑣模式 (verbose) 顯示
+      內容 時, 用 數字 顯示 UID
+      和 GID, 而 不是 名稱.</dd>
+  <dt><i> --no-absolute-filenames</i></dt>
+  <dd>在 copy-in 模式中, 在
+      當前目錄中 創建 所有
+      相關 文件, 即使 它們
+      在 歸檔包中 有
+      絕對路徑名.</dd>
+  <dt><i> --no-preserve-owner</i></dt>
+  <dd>在 copy-in 和 copy-pass 模式中,
+      不改變 文件 的
+      屬主關係 (譯註:
+      疑爲不保留); 使 它們
+      屬於 展開 它們 的
+      用戶. 這是 普通用戶
+      的 缺省行爲, 因此 System V
+      的 用戶 不致於
+      無意中 把 文件 送人.</dd>
+  <dt><i>-o, --create</i></dt>
+  <dd>進入 copy-out 模式.</dd>
+  <dt><i>-O archive</i></dt>
+  <dd>使用 歸檔包文件,
+      而不是 標準輸出.
+      如果 把 其他 機器上
+      的 磁帶機 作成
+      歸檔包文件, 文件名
+      要用 &#34;HOSTNAME:&#34; 開始.
+      主機名 前面 可以
+      加上 用戶名 和 一個 &#39;@&#39;,
+      作爲 訪問 遠程
+      磁帶機 的 用戶 (如果
+      你有 這樣的 權限,
+      一般 在 用戶的 ~/.rhosts
+      文件中 會有 這麼
+      一項).
+    <p class="Pp"></p>
+  </dd>
+  <dt><i> --only-verify-crc</i></dt>
+  <dd>當以 copy-in 模式 讀入 CRC
+      格式 的 歸檔包 時,
+      不展開 裏面的文件,
+      只是 測試 文件的 CRC 碼.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-p, --pass-through</i></dt>
+  <dd>進入 copy-pass 模式.</dd>
+  <dt><i>--quiet</i></dt>
+  <dd>不顯示 複製的 塊數.</dd>
+  <dt><i>-r, --rename</i></dt>
+  <dd>交互式 文件 改名.</dd>
+  <dt><i>-R [user][:.][group], --owner [user][:.][group]</i></dt>
+  <dd>在 copy-out 和 copy-pass 模式中, 把
+      所有文件 的 屬主
+      設置爲 指定的 用戶
+      和/或 用戶組. 無論
+      用戶 還是 用戶組
+      都必須 存在. 如果
+      省略 用戶組, 但卻
+      給出了 分隔符 &#34;:&#34; 或
+      &#34;.&#39;, 則 使用 該 用戶 的
+      登錄用戶組. 只有
+      超級用戶 能夠 改變
+      文件的屬主.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>--sparse</i></dt>
+  <dd>在 copy-out 和 copy-pass 模式中, 把
+      大塊 數據0 的 文件
+      寫成 稀疏文件 (sparse file).</dd>
+  <dt><i>-s, --swap-bytes</i></dt>
+  <dd>在 copy-in 模式中, 交換
+      文件中 每一個
+      半字(字節對) 中的
+      字節.</dd>
+  <dt><i>-S, --swap-halfwords</i></dt>
+  <dd>在 copy-in 模式中, 交換
+      文件中 每一個
+      字(4字節) 中的 半字.</dd>
+  <dt><i>-t, --list</i></dt>
+  <dd>顯示 輸入(歸檔包) 的
+      內容.</dd>
+  <dt><i>-u, --unconditional</i></dt>
+  <dd>替換 所有 文件,
+      不再提問 是否 用
+      舊文件 替換
+      已經存在的 新文件.</dd>
+  <dt><i>-v, --verbose</i></dt>
+  <dd>列出 處理的文件,
+      加上 <i>-t</i> 選項 可以
+      列出 一個 &#39;ls -l&#39;
+      風格的列表. 在一個
+      歸檔包 的 內容
+      詳細列表 (verbose) 中, 如果
+      本地系統 不存在
+      歸檔文件的
+      用戶和用戶組 名稱,
+      就用 其數字 UID和GID
+      對應於 本地系統的
+      用戶和用戶組 名稱
+      代替.
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>-V --dot</i></dt>
+  <dd>每處理一個文件,
+      顯示一個 &#34;.&#34;.</dd>
+  <dt><i>--version</i></dt>
+  <dd>顯示 <b>cpio</b> 程序 的
+      版本號, 然後退出.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>徐明 &lt;xuming@iname.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/09/25</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+<p class="Pp"></p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+cpio.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-20T21:43:18Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"cpio(1)\"}}]}"
+</script>

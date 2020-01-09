@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>perl(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/perl-base/perl.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-pl/perl.1.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/perl.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/perl.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; perl(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perl.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perl.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS" title="總覽 SYNOPSIS">總覽 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%AF%E7%94%A8%E6%80%A7_AVAILABILITY" title="可用性 AVAILABILITY">可用性 AVAILABILITY</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%92%B0%E5%A2%83_ENVIRONMENT" title="環境 ENVIRONMENT">環境 ENVIRONMENT</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85_AUTHOR" title="作者 AUTHOR">作者 AUTHOR</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6_FILES" title="文件 FILES">文件 FILES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO" title="參見 SEE ALSO">參見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%A8%BA%E6%96%B7_DIAGNOSTICS" title="診斷 DIAGNOSTICS">診斷 DIAGNOSTICS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%B3%A8%E6%84%8F_NOTES" title="注意 NOTES">注意 NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國linux論壇man手冊翻譯計劃》:">《中國linux論壇man手冊翻譯計劃》:</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perl.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/perl.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/perl.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/perl-base/perl.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/perl.1.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perl.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perl.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">PERL(1)</td>
+    <td class="head-vol">Perl Programmers Reference Guide</td>
+    <td class="head-rtitle">PERL(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+perl - Practical Extraction and Report Language
+  (實用摘錄和彙報語言)
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_SYNOPSIS">總覽 SYNOPSIS<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS">¶</a></h1>
+<b>perl</b>	[ <b>-sTuU</b> ]
+  [ <b>-hv</b> ] [ <b>-V</b>[:<i>configvar</i>] ]
+
+  [ <b>-cw</b> ] [ <b>-d</b>[:<i>debugger</i>] ] [ <b>-D</b>[<i>number/list</i>] ]
+
+  [ <b>-pna</b> ] [ <b>-F</b><i>pattern</i> ] [ <b>-l</b>[<i>octal</i>] ] [ <b>-0</b>[<i>octal</i>] ]
+
+  [ <b>-I</b><i>dir</i> ] [ <b>-m</b>[<b>-</b>]<i>module</i> ] [ <b>-M</b>[<b>-</b>]<i>&#39;module...&#39;</i> ]
+ [ <b>-P</b> ] [ <b>-S</b> ]
+  [ <b>-x</b>[<i>dir</i>] ]
+ [ <b>-i</b>[<i>extension</i>] ]
+  [ <b>-e</b> <i>&#39;command&#39;</i> ] [ <b>--</b> ] [ <i>programfile</i> ] [ <i>argument</i> ]...
+<p class="Pp">如果你是 Perl
+    新手，還是從 perlintro
+    看起吧，那是爲初學者準備的簡單介紹，提供了一些背景知識，幫助你瀏覽
+    Perl 其餘的大量文檔</p>
+<p class="Pp">爲方便閱讀，Perl
+    手冊分成了很多章
+  <br/>
+</p>
+<p class="Pp"><b>概述 Overview</b></p>
+<p class="Pp"></p>
+<pre>    perl                Perl 概述 (本小節) 
+    perlintro           Perl 介紹 (爲新手準備) 
+    perltoc             Perl 目錄 (所有內容列表) 
+</pre>
+<br/>
+<p class="Pp"><b>教程 Tutorials</b></p>
+<p class="Pp"></p>
+<pre>    perlreftut          Perl 引用 
+    perldsc             Perl 數據結構 
+    perllol             Perl 高級數據結構 
+</pre>
+<p class="Pp"></p>
+<pre>    perlrequick         Perl 正則表達式快速入門 
+    perlretut           Perl 正則表達式 
+</pre>
+<p class="Pp"></p>
+<pre>    perlboot            Perl OO 面向對象 入門 
+    perltoot            Perl OO 面向對象 教程 (第一部分) 
+    perltooc            Perl OO 面向對象 教程 (第二部分) 
+    perlbot             Perl OO 面向對象 竅門和例子 
+</pre>
+<p class="Pp"></p>
+<pre>    perlstyle           Perl 程序風格 
+</pre>
+<p class="Pp"></p>
+<pre>    perlcheat           Perl 投機取巧 
+    perltrap            Perl 大意者的陷阱 
+    perldebtut          Perl 調試 
+</pre>
+<p class="Pp"></p>
+<pre>    perlfaq             Perl 常見問題 
+      perlfaq1          有關 Perl 的一般問題
+      perlfaq2          獲取/學習 Perl 
+      perlfaq3          編程工具
+      perlfaq4          數據操縱
+      perlfaq5          文件與文件格式
+      perlfaq6          正則表達式
+      perlfaq7          Perl 語言本身的問題
+      perlfaq8          與操作系統交互
+      perlfaq9          網絡
+</pre>
+<br/>
+<p class="Pp"><b>參考手冊 Reference Manual</b></p>
+<p class="Pp"></p>
+<pre>    perlsyn             Perl 語法
+    perldata            Perl 數據結構
+    perlop              Perl 操作符及優先級
+    perlsub             Perl 定義函數
+    perlfunc            Perl 內置函數
+      perlopentut       Perl open() 教程
+      perlpacktut       Perl pack() 和 unpack() 教程
+    perlpod             Perl POD 文檔
+    perlpodspec         Perl POD 文檔格式規約
+    perlrun             Perl 執行選項
+    perldiag            Perl 診斷信息
+    perllexwarn         Perl 警告 控制警告
+    perldebug           Perl 調試
+    perlvar             Perl 預定義變量
+    perlre              Perl 正則表達式 其餘的部分
+    perlreref           Perl 正則表達式快速索引
+    perlref             Perl 參考 其餘的部分 
+    perlform            Perl 格式
+    perlobj             Perl 對象
+    perltie             Perl 用簡單變量隱藏對象
+      perldbmfilter     Perl DBM 層
+</pre>
+<p class="Pp"></p>
+<pre>    perlipc             Perl 進程間通信
+    perlfork            Perl fork() 相關信息
+    perlnumber          Perl 數字的語義
+</pre>
+<p class="Pp"></p>
+<pre>    perlthrtut          Perl 線程
+      perlothrtut       舊版 Perl 線程
+</pre>
+<p class="Pp"></p>
+<pre>    perlport            Perl 移植嚮導
+    perllocale          Perl 語言環境支持
+    perluniintro        Perl Unicode 介紹
+    perlunicode         Perl Unicode 支持
+    perlebcdic          在 EBCDIC 平臺上運行 Perl
+</pre>
+<p class="Pp"></p>
+<pre>    perlsec             Perl 安全性
+</pre>
+<p class="Pp"></p>
+<pre>    perlmod             Perl modules: 它如何工作
+    perlmodlib          Perl modules: 如何寫和用它們
+    perlmodstyle        Perl modules: 如何寫好它
+    perlmodinstall      Perl modules: 如何從 CPAN 安裝它們
+    perlnewmod          Perl modules: 準備釋放出新模塊
+</pre>
+<p class="Pp"></p>
+<pre>    perlutil            Perl 附帶的工具
+</pre>
+<p class="Pp"></p>
+<pre>    perlcompile         Perl 編譯套件介紹
+</pre>
+<p class="Pp"></p>
+<pre>    perlfilter          Perl 源碼過濾
+</pre>
+<br/>
+<p class="Pp"><b>內部以及 C 接口 Internals
+    and C Language Interface</b></p>
+<p class="Pp"></p>
+<pre>    perlembed           在 C/C++ 應用中內置 Perl 的獨特方法
+    perldebguts         Perl 調試要點和技巧
+    perlxstut           Perl XS 
+    perlxs              Perl XS 應用程序編程接口
+    perlclib            標準 C 庫的內部實現
+    perlguts            爲高級開發者準備的 Perl 內部函數
+    perlcall            從 C 轉換爲 Perl 調用
+</pre>
+<p class="Pp"></p>
+<pre>    perlapi             Perl API 列表 (自動生成)
+    perlintern          Perl 內部函數 (自動生成)
+    perliol             Perl 以“層”方式實現 IO 用到的 C API 
+    perlapio            Perl 內部 IO 抽象接口
+</pre>
+<p class="Pp"></p>
+<pre>    perlhack            修改 Perl 
+</pre>
+<br/>
+<p class="Pp"><b>雜項 Miscellaneous</b></p>
+<p class="Pp"></p>
+<pre>    perlbook            Perl 書籍信息 
+    perltodo            Perl 的未來
+</pre>
+<p class="Pp"></p>
+<pre>    perldoc             查看 Pod 格式的 Perl 文檔
+</pre>
+<p class="Pp"></p>
+<pre>    perlhist            Perl 歷史記錄
+    perldelta           Perl 上一版本以來的變動
+    perl58delta         Perl 5.8.0 帶來的變化
+    perl573delta        Perl changes in version 5.7.3
+    perl572delta        Perl changes in version 5.7.2
+    perl571delta        Perl changes in version 5.7.1
+    perl570delta        Perl changes in version 5.7.0
+    perl561delta        Perl changes in version 5.6.1
+    perl56delta         Perl changes in version 5.6
+    perl5005delta       Perl changes in version 5.005
+    perl5004delta       Perl changes in version 5.004
+</pre>
+<p class="Pp"></p>
+<pre>    perlartistic        Perl Artistic License
+    perlgpl             GNU General Public License
+</pre>
+<br/>
+<p class="Pp"><b>語言相關 Language-Specific</b></p>
+<p class="Pp"></p>
+<pre>    perlcn              Perl 簡體中文支持 (原文是 EUC-CN 編碼)
+    perljp              Perl 日本語支持 (原文是 EUC-JP 編碼)
+    perlko              Perl 朝鮮語支持 (原文是 EUC-KR 編碼)
+    perltw              Perl 繁體中文支持 (原文是 Big5 編碼)
+</pre>
+<br/>
+<p class="Pp"><b>平臺相關 Platform-Specific</b></p>
+<p class="Pp"></p>
+<pre>    perlaix             Perl notes for AIX
+    perlamiga           Perl notes for AmigaOS
+    perlapollo          Perl notes for Apollo DomainOS
+    perlbeos            Perl notes for BeOS
+    perlbs2000          Perl notes for POSIX-BC BS2000
+    perlce              Perl notes for WinCE
+    perlcygwin          Perl notes for Cygwin
+    perldgux            Perl notes for DG/UX
+    perldos             Perl notes for DOS
+    perlepoc            Perl notes for EPOC
+    perlfreebsd         Perl notes for FreeBSD
+    perlhpux            Perl notes for HP-UX
+    perlhurd            Perl notes for Hurd
+    perlirix            Perl notes for Irix
+    perlmachten         Perl notes for Power MachTen
+    perlmacos           Perl notes for Mac OS (Classic)
+    perlmacosx          Perl notes for Mac OS X
+    perlmint            Perl notes for MiNT
+    perlmpeix           Perl notes for MPE/iX
+    perlnetware         Perl notes for NetWare
+    perlos2             Perl notes for OS/2
+    perlos390           Perl notes for OS/390
+    perlos400           Perl notes for OS/400
+    perlplan9           Perl notes for Plan 9
+    perlqnx             Perl notes for QNX
+    perlsolaris         Perl notes for Solaris
+    perltru64           Perl notes for Tru64
+    perluts             Perl notes for UTS
+    perlvmesa           Perl notes for VM/ESA
+    perlvms             Perl notes for VMS
+    perlvos             Perl notes for Stratus VOS
+    perlwin32           Perl notes for Windows
+</pre>
+<p class="Pp">默認情況下，上面列出的手冊頁安裝在
+    <i>/usr/local/man/</i> 目錄</p>
+<p class="Pp">還有大量有關 Perl
+    模塊的文檔。默認的
+    perl
+    配置會將它們安裝到
+    <i>/usr/local/lib/perl5/man</i> 目錄，(或者
+    Perl 庫目錄中的 <i>man</i>
+    子目錄).
+    它們中的一部分是隨
+    Perl 發佈的標準文檔，
+    另外你還可以從中找到第三方的文檔</p>
+<p class="Pp">你可以用 <a href="../../buster/man-db/man.1.zh_CN.html">man(1)</a>
+    程序來查看 Perl
+    的文檔，只要在配置文件中加入合適的路徑，
+    或者將路徑設置在 MANPATH
+    環境變量中。要找出
+    perl
+    所有手冊頁的路徑，只要運行</p>
+<p class="Pp"></p>
+<pre>    perl -V:man.dir
+</pre>
+<p class="Pp">如果路徑有共同點，例如
+    <i>/usr/local/man/man1</i> 和 <i>/usr/local/man/man3</i>,
+    你只要將共同點
+    (<i>/usr/local/man</i>) 加入到 <a href="../../buster/man-db/man.1.zh_CN.html">man(1)</a>
+    的配置文件中，或是
+    MANPATH
+    環境變量中。如果它們沒有共同點，就必須全部添加</p>
+<p class="Pp">如果這樣做沒有效果，你也可以用附帶的
+    <i>perldoc</i>
+    腳本來查看模塊信息。也可以找一個
+    man 的替代程序</p>
+<p class="Pp">如果你的程序出了問題，又不知道該到哪裏去找幫助，就先試一試
+    <b>-w</b>
+    選項。它會精確地報告錯誤發生在哪一行</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+Perl
+  是一種特別爲掃描複雜文本文件優化過的語言，
+  從中提取有用的信息，然後據此生成結果。
+  它也是系統管理任務中很好用的語言。它的目標是實用
+  (易用，高效，完整)
+  而不是 精緻
+  (小，優雅，功能有限)
+<p class="Pp">Perl 結合了
+    (在作者看來) C, <b>sed</b>, <b>awk</b>,
+    還有 <b>sh</b>
+    的優點，熟悉它們的人學起
+    Perl 毫無困難。
+    (語言學家還會從中發現一些
+    <b>csh</b>, Pascal, 甚至 BASIC-PLUS
+    中的元素。)
+    表達式語法與 C
+    表達式語法緊密對應。與大多數
+    Unix 工具不同，Perl 不限制
+    你的數據的大小 --
+    只要你有足夠的內存，Perl
+    可以把你的整個文件當作單一的字符串來享受。
+    遞歸的深度是無限的。
+    散列
+    (有時又叫做“關聯數組”
+    &#34;associative arrays&#34; )
+    會按需生長，以避免性能下降。
+    Perl
+    使用精緻的模式匹配技術來保證快速掃描大量數據。
+    儘管爲掃描文本而優化，Perl
+    仍然可以處理二進制數據，也可以像使用散列一樣使用
+    dbm 文件。 設置了 UID 的 Perl
+    腳本要比 C
+    程序安全，因爲數據流跟蹤機制可以堵上很多愚蠢的安全漏洞</p>
+<p class="Pp">如果你遇到了一般適於
+    <b>sed</b> 或 <b>awk</b> 或 <b>sh</b>
+    處理的問題，但是問題超出了工具的能力，
+    或者需要更快的處理，你又不想用
+    C
+    來寫一大堆倒塌的程序，那麼使用
+    Perl 吧。
+    另外，還有很多將 <b>sed</b>
+    和 <b>awk</b> 腳本轉換爲 Perl
+    腳本的翻譯器</p>
+<p class="Pp">但是稍等，還有更多...</p>
+<p class="Pp">自 1993 年開始 (參見
+    perlhist)，Perl 5
+    進行了幾乎完全的重寫，
+    提供了以下的功能：</p>
+<ul class="Bl-bullet">
+  <li>模塊性和可複用性
+    <p class="Pp">詳述在 perlmod, perlmodlib, 和
+        perlmodinstall 中</p>
+  </li>
+  <li>可內置可擴展
+    <p class="Pp">詳述在 perlembed, perlxstut, perlxs,
+        perlcall, perlguts, 和 xsubpp 中</p>
+  </li>
+  <li>創建功能強大的數據類型
+      (同時包括多種 DBM 實現)
+    <p class="Pp">詳述在 perltie 和 AnyDBM_File
+      中</p>
+  </li>
+  <li>函數可重載，自動加載，原型化
+    <p class="Pp">詳述在 perlsub 中</p>
+  </li>
+  <li>複雜的數據結構嵌套還有匿名函數
+    <p class="Pp">詳述在 perlreftut, perlref, perldsc,
+        和 perllol 中</p>
+  </li>
+  <li>面向對象編程
+    <p class="Pp">詳述在 perlobj, perlboot, perltoot,
+        perltooc, 和 perlbot 中</p>
+  </li>
+  <li>支持輕量級進程
+      (線程)
+    <p class="Pp">詳述在 perlthrtut 和 threads
+      中</p>
+  </li>
+  <li>支持
+      Unicode，國際化和本地化
+    <p class="Pp">詳述在 perluniintro, perllocale 和
+        Locale::Maketext 中</p>
+  </li>
+  <li>變量作用域
+    <p class="Pp">詳述在 perlsub 中</p>
+  </li>
+  <li>正則表達式強化
+    <p class="Pp">詳述在 perlre 中，perlop
+        中有更多例子</p>
+  </li>
+  <li>強化的調試工具和交互的
+      Perl
+      環境，支持集成的編輯器
+    <p class="Pp">詳述在 perldebtut, perldebug 和
+        perldebguts 中</p>
+  </li>
+  <li>POSIX 1003.1 兼容的庫
+    <p class="Pp">詳述在 POSIX 中</p>
+  </li>
+</ul>
+<p class="Pp">Okay,
+    這些已經是絕對的絕對夠用了</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="可用性_AVAILABILITY">可用性 AVAILABILITY<a class="anchor" href="#%E5%8F%AF%E7%94%A8%E6%80%A7_AVAILABILITY">¶</a></h1>
+Perl
+  在大部分操作系統上都可用，包含幾乎所有類
+  Unix 的平臺。參見 perlport
+  中的 &#34;Supported Platforms&#34;
+  段來查看平臺列表
+</section>
+<section class="Sh">
+<h1 class="Sh" id="環境_ENVIRONMENT">環境 ENVIRONMENT<a class="anchor" href="#%E7%92%B0%E5%A2%83_ENVIRONMENT">¶</a></h1>
+參見 perlrun
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者_AUTHOR">作者 AUTHOR<a class="anchor" href="#%E4%BD%9C%E8%80%85_AUTHOR">¶</a></h1>
+Larry Wall &lt;larry@wall.org&gt;, with the help of oodles of other folks.
+<p class="Pp">如果你使用 Perl
+    的成功案例對想在項目中應用
+    Perl 的人有用，
+    或者如果你只是想想表達你對
+    Larry 和 Perl
+    開發者的感激之情，請寫信到
+    &lt;perl-thanks@perl.org&gt;</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件_FILES">文件 FILES<a class="anchor" href="#%E6%96%87%E4%BB%B6_FILES">¶</a></h1>
+<pre> &#34;@INC&#34;                 locations of perl libraries
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_SEE_ALSO">參見 SEE ALSO<a class="anchor" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO">¶</a></h1>
+<pre> a2p    awk 到 perl 翻譯器
+ s2p    sed 到 perl 翻譯器
+</pre>
+<p class="Pp"></p>
+<pre> <a href="../../">../../</a>       Perl 官方主頁
+ <a href="../../">../../</a>       the Comprehensive Perl Archive (Perl 文件中心)
+ <a href="../../">../../</a>       Perl Mongers (Perl 用戶組)
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="診斷_DIAGNOSTICS">診斷 DIAGNOSTICS<a class="anchor" href="#%E8%A8%BA%E6%96%B7_DIAGNOSTICS">¶</a></h1>
+<span class="Li">&#34;use warnings&#34;</span>
+  編譯指示 (pragma) (還有 <b>-w</b>
+  選項) 會產生
+  一些有用的診斷信息
+<p class="Pp">參見 perldiag 來查看所有
+    Perl 診斷信息的含義。
+    <span class="Li">&#34;use diagnostics&#34;</span>
+    編譯指示會自動將 Perl
+    簡短的警告和錯誤消息
+    轉換爲長格式</p>
+<p class="Pp">編譯錯誤將給出行號，還有要執行的下一個詞或詞的類型。
+    (在用 <b>-e</b> 選項傳給 Perl
+    的腳本中，每個 <b>-e</b>
+    視爲一行。)</p>
+<p class="Pp">設置了 UID
+    的腳本有額外的約束，會產生格式化的錯誤信息，類似
+    &#34;Insecure dependency&#34;。參見 perlsec</p>
+<p class="Pp">我們說過你一定要用
+    <b>-w</b> 選項了嗎？</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+<b>-w</b> 選項不是必要的
+<p class="Pp">Perl
+    依賴於你的機器中操作的定義，類似於類型轉換，
+    <i>atof()</i>, 還有使用 <i>sprintf()</i>
+    來做浮點輸出等操作</p>
+<p class="Pp">如果你的 stdio
+    在讀寫一個特殊流時需要一個
+    seek 或是 eof，Perl
+    也會需要它們。
+    (這種情況不會在 <i>sysread()</i>
+    和 <i>syswrite()</i> 中發生。)</p>
+<p class="Pp">所有內置數據類型都沒有大小限制
+    (除了內存大小之外)，但是還是有一些限制：
+    變量名不得長於 251
+    個字符。
+    診斷信息顯示的行號以短整型數保存，因此行號最大值是
+    65535
+    (更大的行號一般會從頭開始)</p>
+<p class="Pp">可以將錯誤報告
+    (一定要包含完整的配置信息，使用
+    perl 源碼樹中的 myconfig
+    程序，或者用 <span class="Li">&#34;perl
+    -V&#34;</span> 命令得到) 寄給
+    perlbug@perl.org 。
+    如果你已經成功編譯
+    perl， <i>utils/</i> 目錄中的 <b>perlbug</b>
+    腳本可以用來郵寄錯誤報告</p>
+<p class="Pp">Perl 真正意義是 Pathologically
+    Eclectic Rubbish Lister, 但是
+    不要告訴任何人我說過它</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="注意_NOTES">注意 NOTES<a class="anchor" href="#%E6%B3%A8%E6%84%8F_NOTES">¶</a></h1>
+Perl 的信條是 &#34;There&#39;s more than one way to do
+  it.&#34;
+  至於探索有多少種辦法，就是讀者自己的事了
+<p class="Pp">程序員應有的三種美德是
+    Laziness, Impatience, 還有 Hubris.
+    原因呢，請參見駱駝書</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>bbbush &lt;bbbush@163.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2003.11.29</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國linux論壇man手冊翻譯計劃》:">《中國linux論壇man手冊翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8Blinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+<br/>
+<p class="Pp"><b>跋</b></p>
+<p class="Pp">本頁面中文版由中文
+    man 手冊頁計劃提供。
+  <br/>
+  中文 man
+    手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-09-02</td>
+    <td class="foot-os">perl v5.8.1</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+perl.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-28T03:40:51Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"perl(1)\"}}]}"
+</script>

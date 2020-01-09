@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eject(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/eject/eject.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-hu/eject.1.hu.html" hreflang="hu">
+<link rel="alternate" href="../../buster/manpages-ja/eject.1.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/eject.1.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/eject.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/eject.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; eject(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/eject.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/eject.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME_%28%E5%90%8D%E7%A8%B1%29" title="NAME (名稱)">NAME (名稱)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS%28%E7%B8%BD%E8%A6%BD%29" title="SYNOPSIS(總覽)">SYNOPSIS(總覽)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION%28%E6%8F%8F%E8%BF%B0%29" title="DESCRIPTION(描述)">DESCRIPTION(描述)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#COMMAND-LINE_OPTIONS_%28%E5%91%BD%E4%BB%A4-%E8%A1%8C%E9%81%B8%E9%A0%85%29" title="COMMAND-LINE OPTIONS (命令-行選項)">COMMAND-LINE OPTIONS (命令-行選項)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#LONG_OPTIONS%28%E9%95%B7%E9%81%B8%E9%A0%85%29" title="LONG OPTIONS(長選項)">LONG OPTIONS(長選項)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#EXAMPLES%28%E7%A4%BA%E4%BE%8B%29" title="EXAMPLES(示例)">EXAMPLES(示例)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#EXIT_STATUS%28%E9%80%80%E5%87%BA%E7%8B%80%E6%85%8B%29" title="EXIT STATUS(退出狀態)">EXIT STATUS(退出狀態)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES%28%E5%82%99%E8%A8%BB%29" title="NOTES(備註)">NOTES(備註)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#AUTHOR%28%E4%BD%9C%E8%80%85%29" title="AUTHOR(作者)">AUTHOR(作者)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%88%E8%A6%8B" title="又見">又見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/eject.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/eject.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/eject.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/eject/eject.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-hu/eject.1.hu.html" title="Hungarian (hu)">magyar</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/eject.1.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/eject.1.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/eject.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/eject.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">EJECT(1)</td>
+    <td class="head-vol">User</td>
+    <td class="head-rtitle">EJECT(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME_(名稱)">NAME (名稱)<a class="anchor" href="#NAME_(%E5%90%8D%E7%A8%B1)">¶</a></h1>
+eject - 彈出可移動介質
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS(總覽)">SYNOPSIS(總覽)<a class="anchor" href="#SYNOPSIS(%E7%B8%BD%E8%A6%BD)">¶</a></h1>
+eject -h.breject [-vnrsfq] [&lt;name&gt;]
+<br/>
+eject [-vn] -d.breject [-vn] -a on|off|1|0 [&lt;name&gt;]
+<br/>
+eject [-vn] -c slot [&lt;name&gt;]
+<br/>
+eject [-vn] -t [&lt;name&gt;]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION(描述)">DESCRIPTION(描述)<a class="anchor" href="#DESCRIPTION(%E6%8F%8F%E8%BF%B0)">¶</a></h1>
+<b>Eject</b>
+  允許可移動介質(典型是
+  CD-ROM，軟盤，磁帶，或者
+  JAZ 以及 ZIP 磁盤)
+  在軟件控制下彈出．該命令也可以控制一些多盤片
+  CD-ROM 控制器，
+  控制一些設備支持的自動彈出功能，以及控制一些
+  CD-ROM
+  驅動器磁盤托盤的關閉．
+  與 name
+  相應的設備將被彈出．name
+  可以爲設備文件或者其掛載點，
+  也可以爲完整路徑或者省略前面的
+  /dev 或者 /mnt 設備文件名．
+  如果沒有指定
+  name，缺省使用
+  cdrom．有四種不同的彈出的方法，
+  具體要看設備是 CD-ROM，
+  SCSI設備， 可移動軟盤，
+  還是磁帶而定．
+  默認的彈出會依次嘗試所有四種方法，
+  直到成功爲止．
+  如果設備當前是掛載上來的，
+  那麼在彈出前要先卸載．
+</section>
+<section class="Sh">
+<h1 class="Sh" id="COMMAND-LINE_OPTIONS_(命令-行選項)">COMMAND-LINE OPTIONS (命令-行選項)<a class="anchor" href="#COMMAND-LINE_OPTIONS_(%E5%91%BD%E4%BB%A4-%E8%A1%8C%E9%81%B8%E9%A0%85)">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>-h</b></dt>
+  <dd>該選項使得 <b>eject</b>
+      顯示關於命令選項的簡要描述．</dd>
+  <dt><b>-v</b></dt>
+  <dd>令 <b>eject</b>
+      在冗長模式下運行；
+      顯示更多的關於命令作什麼用的信息．</dd>
+  <dt><b>-d</b></dt>
+  <dd>如果調用了這個選項，
+      <b>eject</b>
+      會顯示默認的設備名．</dd>
+  <dt><b>-a on|1|off|0</b></dt>
+  <dd>該選項控制一些設備支持的自動彈出模式．
+      當激活時，
+      驅動器自動在設備關閉時彈出．</dd>
+  <dt>B -c &lt;slot&gt;</dt>
+  <dd>有了這個選項， 可由
+      ATAPI/IDE CD-ROM 控制器選擇一個
+      CD 槽． Linux 2.0
+      或者更高版本要求使用該功能．CD-ROM
+      驅動器不能在正使用時
+      (已掛載數據 CD
+      或者在播放音樂
+      CD)響應工作改變請求．
+      還要注意控制器的第一個槽設爲
+      0，而不是 1．</dd>
+  <dt><b>-t</b></dt>
+  <dd>有了這個選項，
+      會發一個關閉 CD-ROM
+      托盤的命令給驅動器．
+      不是所有的設備都支持該命令．</dd>
+  <dt><b>-n</b></dt>
+  <dd>有了這個選項，
+      顯示選定的設備，
+      但是不執行任何動作．</dd>
+  <dt><b>-r</b></dt>
+  <dd>該選項指定了使用 CDROM
+      彈出命令應被彈出的驅動器．</dd>
+  <dt><b>-s</b></dt>
+  <dd>該選項指定了使用 SCSI
+      命令應被彈出的驅動器．</dd>
+  <dt><b>-f</b></dt>
+  <dd>該選項指定了使用可移動軟盤彈出命令應被彈出的驅動器．</dd>
+  <dt>B -q</dt>
+  <dd>該選項指定了使用磁帶驅動器離線命令應被彈出的驅動器．</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="LONG_OPTIONS(長選項)">LONG OPTIONS(長選項)<a class="anchor" href="#LONG_OPTIONS(%E9%95%B7%E9%81%B8%E9%A0%85)">¶</a></h1>
+所有選項與以下列出的長名字相關．
+  只要長名字縮寫唯一，
+  它就可以縮寫．
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES(示例)">EXAMPLES(示例)<a class="anchor" href="#EXAMPLES(%E7%A4%BA%E4%BE%8B)">¶</a></h1>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>eject</dd>
+</dl>
+<p class="Pp">彈出名字爲 cdrom
+    的設備或者掛載點：</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>eject cdrom</dd>
+</dl>
+<p class="Pp">使用設備名來彈出：</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>eject /dev/cdrom</dd>
+</dl>
+<p class="Pp">使用掛載點來彈出：</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>eject /mnt/cdrom/</dd>
+  <dt></dt>
+  <dd>eject hdd</dd>
+</dl>
+<p class="Pp">彈出第一個 SCSI
+    設備：</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>eject sda</dd>
+</dl>
+<p class="Pp">使用 SCSI 分區名(例如
+    ZIP 設備)來彈出 :.IP eject sda4</p>
+<p class="Pp">在多盤片控制器上選擇第五個磁盤：</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>eject -v -c5 /dev/cdrom</dd>
+</dl>
+<p class="Pp">在 SoundBlaster CD-ROM
+    驅動器上開啓自動彈出功能：</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>eject -a on /dev/sdpcd</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXIT_STATUS(退出狀態)">EXIT STATUS(退出狀態)<a class="anchor" href="#EXIT_STATUS(%E9%80%80%E5%87%BA%E7%8B%80%E6%85%8B)">¶</a></h1>
+如果操作成功， 返回
+  0，
+  如果操作失敗或者命令語法無效，
+  則返回 1．
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES(備註)">NOTES(備註)<a class="anchor" href="#NOTES(%E5%82%99%E8%A8%BB)">¶</a></h1>
+<b>Eject</b>
+  只對支持四種彈出方式其中之一或更多的設備起作用．
+  這些設備包括大多數的
+  CD-ROM 驅動器 (IDE, SCSI
+  和專有接口的)， 一些
+  SCSI 磁帶驅動器， JAZ
+  驅動器， ZIP
+  驅動器(並口， SCSI 以及 IDE
+  版本接口的)， 以及 LS120
+  可移動軟盤．
+  用戶已經報告過在 Sun SPARC
+  和 Apple Macintosh
+  系統上的軟盤驅動器也成功了．
+  如果 <b>eject</b> 不起作用，
+  最可能的原因是由於設備的內核驅動的限制，
+  而並非 <b>eject</b>
+  程序本身的問題． -r，
+  -s， -f 和 -q
+  選項可以控制彈出的方式．
+  可指定一種以上的方式．
+  如果沒有指定任何這些選項，
+  它會嘗試所有四種方式(這在多數情況下工作很好)．
+  <b>Eject</b>
+  不一定總是能判斷設備是否已經掛載(例如，
+  如果設備有多個名字)．
+  如果設備名是一個符號鏈接，
+  <b>eject</b>
+  會跟隨該鏈接並使用其指向的設備．
+<p class="Pp">如果 <b>eject</b>
+    判斷設備能有多個分區，
+    它會嘗試在彈出前卸載所有該設備已掛載的分區．
+    如果卸載失敗，
+    程序不會嘗試彈出該介質．</p>
+<p class="Pp">你可以彈出音頻
+    CD． 如果驅動器爲空，
+    一些 CD-ROM
+    驅動器會拒絕打開其托盤．
+    一些設備不支持托盤關閉的命令．
+    如果激活了自動彈出的功能．
+    那麼驅動器總會在運行該命令後彈出．
+    不是所有的 Linux 內核 CD-ROM
+    驅動程序都支持自動彈出模式．</p>
+<p class="Pp">你需要適當的特權以訪問設備文件．
+    在彈出一些設備(例如，
+    SCSI 設備)時， 要求以 root
+    或者 setuid root
+    的身份運行．</p>
+<p class="Pp">用來找到給定名字的設備的搜索方法如下．
+    如果名字以標記斜線結束，
+    它將被移去(這是爲了支持使用
+    shell
+    文件名補全所生成的文件名）．
+    如果名字以 &#39;.&#39; 或 &#39;/&#39;
+    開頭，
+    它會試圖以設備文件名或者掛載點打開它．
+    如果那樣失敗了，
+    它會嘗試在名字前面補加
+    &#39;/dev/&#39;， &#39;/mnt&#39;， `/dev/rdsk/&#39;， &#39;/dev/dsk/&#39;
+    以及 &#39;./&#39;，
+    直到找到的設備文件名或者能夠打開掛載點爲止．
+    程序檢查 /etc/mtab
+    以獲知已掛載的設備．
+    如果那樣也失敗了，
+    它還會檢查 /etc/fstab
+    以獲知當前未掛載設備的掛載點．
+    推薦創建如 /dev/cdrom 或者
+    /dev/zip
+    之類的符號鏈接，這樣
+    <b>eject</b>
+    可以使用易記的名字決定合適的設備．
+    爲了節約輸出，
+    你可以創建一個適合於你的特定配置的針對
+    eject 選項的 shell 別名．</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="AUTHOR(作者)">AUTHOR(作者)<a class="anchor" href="#AUTHOR(%E4%BD%9C%E8%80%85)">¶</a></h1>
+<b>Eject</b> 由 Jeff Tranter (tranter@pobox.com) 寫成，
+  並在 GNU
+  通用出版許可的條例下發布．
+  參看源文件中的文件
+  COPYING
+  和註釋以獲知詳情．
+</section>
+<section class="Sh">
+<h1 class="Sh" id="又見">又見<a class="anchor" href="#%E5%8F%88%E8%A6%8B">¶</a></h1>
+<a href="../../buster/manpages-dev/mount.2.en.html">mount(2)</a>, <a href="../../buster/manpages-dev/umount.2.en.html">umount(2)</a>, <a href="../../buster/mount/mount.8.en.html">mount(8)</a>, <a href="../../buster/manpages-zh/umount.8.zh_TW.html">umount(8)</a>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>riser &lt;boomer@ccidnet.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/08/08</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8Blinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">1999年1月21日</td>
+    <td class="foot-os">Linux</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+eject.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-17T21:41:25Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"eject(1)\"}}]}"
+</script>

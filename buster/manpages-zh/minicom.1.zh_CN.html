@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>minicom(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/minicom/minicom.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/minicom.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/minicom.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; minicom(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/minicom.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/minicom.1.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%80%BB%E8%A7%88_SYNOPSIS" title="总览 SYNOPSIS">总览 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0_COMMAND-LINE" title="命令行参数 COMMAND-LINE">命令行参数 COMMAND-LINE</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%BF%E7%94%A8_USE" title="使用 USE">使用 USE</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8B%A8%E5%8F%B7%E7%9B%AE%E5%BD%95_DIALING_DIRECTORY" title="拨号目录 DIALING DIRECTORY">拨号目录 DIALING DIRECTORY</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%85%8D%E7%BD%AE_CONFIGURATION" title="配置 CONFIGURATION">配置 CONFIGURATION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%8A%B6%E6%80%81%E8%A1%8C_STATUS_LINE" title="状态行 STATUS LINE">状态行 STATUS LINE</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%9C%AC%E5%9C%B0%E5%8C%96_LOCALES" title="本地化 LOCALES">本地化 LOCALES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98_SECURITY_ISSUES" title="安全问题 SECURITY ISSUES">安全问题 SECURITY ISSUES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%9D%82%E9%A1%B9_MISC" title="杂项 MISC">杂项 MISC</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6_FILES" title="文件 FILES">文件 FILES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%89%88%E6%9C%AC_VERSION" title="版本 VERSION">版本 VERSION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85_AUTHOR_S" title="作者 AUTHOR S">作者 AUTHOR S</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D" title="[中文版维护人]">[中文版维护人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/minicom.1.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/minicom.1.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/minicom.1.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/minicom/minicom.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/minicom.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/minicom.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">MINICOM(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">MINICOM(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+minicom -
+  友好易用的串口通信程序
+</section>
+<section class="Sh">
+<h1 class="Sh" id="总览_SYNOPSIS">总览 SYNOPSIS<a class="anchor" href="#%E6%80%BB%E8%A7%88_SYNOPSIS">¶</a></h1>
+<b>minicom</b> [-somMlwz8] [-c on|off] [-S script] [-d entry]
+<br/>
+<br/>
+[-a on|off] [-t term] [-p pty] [-C capturefile] [<i>configuration</i>]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>minicom</b>
+  是个通信程序，有点象共享软件
+  TELIX，但其源码可以自由获得，并能够运行于多
+  数Unix系统。
+  它包括以下特性：自动重拨号的拨号目录，
+  对串行设备UUCP格式的
+  lock文件的支持，独立的脚本语言解释器，文件捕获，多用户单独配置，等等。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="命令行参数_COMMAND-LINE">命令行参数 COMMAND-LINE<a class="anchor" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0_COMMAND-LINE">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>-s</b></dt>
+  <dd><b>设置。</b> root
+      使用此选项在/etc/minirc.dfl中编辑系统范围的缺省值。
+      使用此参数后，minicom 将
+      <i>不</i> 进行初始化，
+      而是直接进入配置菜单。如果因为你的系统被改变，或者第一次运行
+      minicom时，minicom不能启动，这个参数就会很有用。对于多数系统，已经内定了
+      比较合适的缺省值。</dd>
+  <dt><b>-o</b></dt>
+  <dd>不进行初始化。minicom
+      将跳过初始化代码。如果你未复位(reset)就退出了
+      minicom，又想重启一次会话(session)，
+      那么用这个选项就比较爽(不会再有错误
+      提示：modem is locked ----
+      注)。但是也有潜在的危险：由于未对lock文件等进
+      行检查，因此一般用户可能会与uucp之类的东东发生冲突......也许以后这个参数
+      会被去掉。现在姑且假定，使用modem的用户对自己的行为足够负责。</dd>
+  <dt><b>-m</b></dt>
+  <dd>用Meta或Alt键重载命令键。在1.80版中这是缺省值，也可以在minicom
+      菜单中配置
+      这个选项。不过若你一直使用不同的终端，其中有些没有Meta或Alt键，那么方便的
+      做法还是把缺省的命令键设置为Ctrl-A，当你有了支持Meta或Alt键的键盘时再使用
+      此选项。Minicom假定你的Meta键发送ESC前缀，而不是设置字符最高位的那一种(见
+      下)。</dd>
+  <dt><b>-M</b></dt>
+  <dd>跟“-m”一样，但是假定你的Meta键设置字符高端的第八位(发送128+字符代码)。</dd>
+  <dt><b>-z</b></dt>
+  <dd>使用终端状态行。仅当终端支持，并且在其termcap或terminfo数据库入口中有相关
+      信息时才可用。</dd>
+  <dt><b>-l</b></dt>
+  <dd><b>逐字翻译</b>
+      高位被置位的字符。使用此标志，
+      minicom将不再尝试将IBM行字符翻译为ASCII码，
+      而是将其直接传送。许多PC-Unix克隆不经翻译也能正确显示它们(Linux使用专门的
+      模式：Coherent和Sco)。</dd>
+  <dt><b>-w</b></dt>
+  <dd>Turns linewrap on at startup by default.</dd>
+  <dt><b>-a</b></dt>
+  <dd><b>特性使用。</b>
+      有些终端，特别是televideo终端，
+      有个很讨厌的特性处理(串行而非并行)。
+      minicom缺省使用`-a
+      on&#39;，但若你在用这样的
+    <p class="Pp">终端，你就可以(必须!)加上选项`-a
+        off&#39;。尾字`on&#39;或`off&#39;需要加上。</p>
+  </dd>
+  <dt><b>-t</b></dt>
+  <dd><b>终端类型。</b>
+      使用此标志，
+      你可以重载环境变量TERM，
+      这在环境变量MINICOM
+      中使用很方便；
+      你可以创建一个专门的
+      termcap 入口以备minicom
+      在控制台上使用，它将屏幕初始
+      化为raw模式， 这样，
+      连同`-f&#39;标志一起，就可以不经翻译而显示IBM行字符。</dd>
+  <dt><b>-c</b></dt>
+  <dd><b>颜色</b>
+      使用。有些终端(如Linux控制台)支持标准ANSI转义序列色彩。由于termcap显然没
+      有对于色彩的支持，因而minicom硬性内置了这些转义序列的代码。所以此选项缺省
+      为off。使用`-c
+      on&#39;可以打开此项。把这个标志，还有`-m&#39;放入MINICOM环境变量中
+      是个不错的选择。</dd>
+  <dt><b>-S</b></dt>
+  <dd><b>脚本。</b>
+      启动时执行给定名字的脚本。到目前为止，还不支持将用户名和口令传送给启动脚
+      本。如果你还使用了`-d&#39;选项，以在启动时开始拨号，此脚本将在拨号之前运行，
+      拨号项目入口由`-d&#39;指明。</dd>
+  <dt><b>-d</b></dt>
+  <dd><b>D</b>ial an entry from the dialing directory on startup. You can
+      specify an index number, but also a substring of the name of the entry. If
+      you specify a name that has multiple entries in the directory, they are
+      all tagged for dialing. You can also specify multiple names or index
+      numbers by separating them with commas. The dialing will start from the
+      first entry specified after all other program initialization procedures
+      are completed.</dd>
+  <dt><b>-p</b></dt>
+  <dd><b>要使用的伪终端。</b>
+      它超载配置文件中定义的终端端口，但仅当其为伪tty设备。提供的文件名必须采用
+      这样的形式: (/dev/)tty[p-z][0-f]</dd>
+  <dt><b>-C</b></dt>
+  <dd><b>文件名。</b>
+      启动时打开捕获文件。</dd>
+  <dt><b>-8</b></dt>
+  <dd>不经修改地传送8位字符。“连续”意指未对地点/特性进行真正改变，就不插
+      入地点/特性控制序列。此模式用于显示8位多字节字符，比如日本字(TMD！应该是
+      中国字!!)。不是8位字符的语言都需要(例如显示芬兰文字就不需要这个)。</dd>
+</dl>
+<p class="Pp"></p>
+<div class="Bd-indent"><b>minicom</b>
+  启动时，它首先搜索用于命令行参数的MINICOM环境变量----这些参数可在命令行上
+  超载。例如：若你进行了如下设置：
+<p class="Pp"></p>
+<div class="Bd-indent">MINICOM=&#39;-m -c on&#39;
+<p class="Pp">export MINICOM</p>
+<p class="Pp"></p>
+</div>
+<p class="Pp">或者其它等效的设置，然后启动minicom，minicom
+    会假定你的终端有Meat键或Alt
+    键，并且支持彩色。如果你从一个不支持彩色的终端登录，并在你的启动文件
+    (.profile或等效文件)中设置了MINICOM，而且你又不想重置你的环境变量，那么你
+    就可以键入`minicom -c
+    off&#39;,来运行这次没有色彩支持的会话。</p>
+</div>
+<dl class="Bl-tag">
+  <dt><b>配置</b></dt>
+  <dd>The <i>配置</i>
+      参数更有趣。通常，minicom从文件“minirc.dfl”中获取其缺省值。不过，若
+      你给minicom一个参数，它将尝试从文件“minirc.configuration”中获取缺省
+      值。因此，为不同端口、不同用户等创建多个配置文件是可能的。最好使用设备名，
+      如：tty1，tty64，sio2等。如果用户创建了自己的配置文件，那么该文件将以
+      “.minirc.dfl”为名出现在他的home目录中。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="使用_USE">使用 USE<a class="anchor" href="#%E4%BD%BF%E7%94%A8_USE">¶</a></h1>
+Minicom是基于窗口的。要弹出所需功能的窗口，可按下Ctrl-A
+  (以下使用C-A来表
+  示Ctrl-A),然后再按各功能键(a-z或A-Z)。先按C-A，再按&#39;z&#39;，将出现一个帮助窗
+  口，提供了所有命令的简述。配置minicom(-s
+  选项，或者C-A、O)时，可以改变这
+  个转义键，不过现在我们还是用Ctrl-A吧。
+<p class="Pp">以下键在所有菜单中都可用：</p>
+<dl class="Bl-tag">
+  <dt><b>UP</b></dt>
+  <dd>arrow-up 或 &#39;k&#39;</dd>
+  <dt><b>DOWN</b></dt>
+  <dd>arrow-down 或 &#39;j&#39;</dd>
+  <dt><b>LEFT</b></dt>
+  <dd>arrow-left 或 &#39;h&#39;</dd>
+  <dt><b>RIGHT</b></dt>
+  <dd>arrow-right 或 &#39;l&#39;</dd>
+  <dt><b>CHOOSE</b></dt>
+  <dd>Enter</dd>
+  <dt><b>CANCEL</b></dt>
+  <dd>ESCape.</dd>
+</dl>
+<p class="Pp">屏幕分为两部分：上部24行为终端模拟器的屏幕。
+    ANSI或VT100转义序列在此窗口
+    中被解释。若底部还剩有一行，那么状态行就放在这儿；否则，每次按C-A时状态行
+    出现。
+    在那些有专门状态行的终端上将会使用这一行，如果termcap信息完整且加
+    了-k标志的话。</p>
+<p class="Pp">下面按字母顺序列出可用的命令：</p>
+<dl class="Bl-tag">
+  <dt><b>C-A</b></dt>
+  <dd>两次按下C-A将发送一个C-A命令到远程系统。如果你把“转义字符”换成了
+      C-A以外的什么字符，则对该字符的工作方式也类似。</dd>
+  <dt><b>A</b></dt>
+  <dd>切换“Add
+      Linefeed”为on/off。若为on，则每上回车键在屏幕上显示之前，
+      都要加上一个linefeed。</dd>
+  <dt><b>B</b></dt>
+  <dd>为你提供一个回卷(scroll
+      back)的缓冲区。可以按u上卷，按d下卷，按b上翻一页，
+      按f下翻一页。也可用箭头键和翻页键。可用s或S键(大小写敏感)在缓冲区中查找文
+      字串，按N键查找该串的下一次出现。按c进入引用模式，出现文字光标，你就可以
+      按Enter键指定起始行。然后回卷模式将会结束，带有前缀&#39;&gt;&#39;的内容将被发送。</dd>
+  <dt><b>C</b></dt>
+  <dd>清屏。</dd>
+  <dt><b>D</b></dt>
+  <dd>拨一个号，或转向拨号目录。</dd>
+  <dt><b>E</b></dt>
+  <dd>切换本地回显为on/off
+      (若你的minicom版本支持)。</dd>
+  <dt><b>F</b></dt>
+  <dd>将break信号送modem。</dd>
+  <dt><b>G</b></dt>
+  <dd>运行脚本(Go)。运行一个登录脚本。</dd>
+  <dt><b>H</b></dt>
+  <dd>挂断。</dd>
+  <dt><b>I</b></dt>
+  <dd>切换光标键在普通和应用模式间发送的转义序列的类型(另参下面
+      关于状态行的注释)。</dd>
+  <dt><b>J</b></dt>
+  <dd>跳至shell。返回时，整个屏幕将被刷新(redrawn)。</dd>
+  <dt><b>K</b></dt>
+  <dd>清屏，运行kermit,返回时刷新屏幕。</dd>
+  <dt><b>L</b></dt>
+  <dd>文件捕获开关。打开时，所有到屏幕的输出也将被捕获到文件中。</dd>
+  <dt><b>M</b></dt>
+  <dd>发送modem初始化串。若你online，且DCD线设为on，则modem被初始化前将要求你进行确认。</dd>
+  <dt><b>O</b></dt>
+  <dd>配置minicom。转到配置菜单。</dd>
+  <dt><b>P</b></dt>
+  <dd>通信参数。允许你改变bps速率，奇偶校验和位数。</dd>
+  <dt><b>Q</b></dt>
+  <dd>不复位modem就退出minicom。如果改变了macros，而且未存盘，会提供你一个save的机会。</dd>
+  <dt><b>R</b></dt>
+  <dd>接收文件。从各种协议(外部)中进行选择。若filename选择窗口和下载目录提示可
+      用，会出现一个要求选择下载目录的窗口。否则将使用Filenames
+      and Paths菜单中
+      定义的下载目录。</dd>
+  <dt><b>S</b></dt>
+  <dd>发送文件。选择你在接收命令中使用的协议。如果你未使文件名选择窗口可用(在
+      File Transfer
+      Protocols菜单中设置)，你将只能在一个对话框窗口中写文件名。
+      若将其设为可用，将弹出一个窗口，显示你的上传目录中的文件名。可用空格键为
+      文件名加上或取消标记，用光标键或j/k键上下移动光标。被选的文件名将高亮显示。
+      目录名在方括号中显示，两次按下空格键可以在目录树中上下移动。最后，按
+      Enter发送文件，或按ESC键退出。</dd>
+  <dt><b>T</b></dt>
+  <dd>选择终端模拟：ANSI(彩色)或VT100。此处还可改变退格键，打开或关闭状态行。</dd>
+  <dt><b>W</b></dt>
+  <dd>切换linewrap为on/off。</dd>
+  <dt><b>X</b></dt>
+  <dd>退出minicom，复位modem。如果改变了macros，而且未存盘，会提供
+      你一个save的机会。</dd>
+  <dt><b>Z</b></dt>
+  <dd>弹出help屏幕。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="拨号目录_DIALING_DIRECTORY">拨号目录 DIALING DIRECTORY<a class="anchor" href="#%E6%8B%A8%E5%8F%B7%E7%9B%AE%E5%BD%95_DIALING_DIRECTORY">¶</a></h1>
+按下Ctrl-A、D，会进入拨号目录。可以增减、删除或修改各个项目。选择
+  “dial”，则会拨打标记项目的电话号码，或者当未作任何标记时高亮显示的
+  项目号码。modem拨号时，可按ESC取消；任何其它按键将关闭拨号窗口，但并不取
+  消拨号。拨号目录将保存在你的home目录下的“.dialdir”
+  文件中。 可用箭
+  头键可以上下卷动，
+  但也可用PageUp或PageDown键卷动整页。若没有这些键，可用
+  Ctrl-B(向后)，以及Ctrl-F(向前)。可用空格键标记多个项目，若minicom不能建立
+  一个连接，它将在此列表中循环进行拨号。目录中标记项目的名字前将显示一个
+  `&gt;&#39;符号。
+<p class="Pp">&#34;edit&#34;
+    菜单不言自明，但这里还是简要介绍一下。</p>
+<dl class="Bl-tag">
+  <dt><b>A - Name</b></dt>
+  <dd>项目名</dd>
+  <dt><b>B - Number</b></dt>
+  <dd>电话号码</dd>
+  <dt><b>C - Dial string #</b></dt>
+  <dd>指出用于连接的拨号串。在Modem
+      and
+      dialing菜单中有三种不同的拨号串(前缀和后缀)可以进行设置。</dd>
+  <dt><b>D - Local echo</b></dt>
+  <dd>可为on或off（若你的minicom版本支持）</dd>
+  <dt><b>E - Script</b></dt>
+  <dd>成功建立连接后必须执行的脚本(参runscript手册)</dd>
+  <dt><b>F - Username</b></dt>
+  <dd>传给runscript程序的用户名。在环境串&#34;$LOGIN&#34;中传送。</dd>
+  <dt><b>G - Password</b></dt>
+  <dd>传送为&#34;$PASS&#34;的口令。</dd>
+  <dt><b>H - Terminal Emulation</b></dt>
+  <dd>使用ANSI或VT100模拟。</dd>
+  <dt><b>I - Backspace key sends</b></dt>
+  <dd>退格键发送的代码(Backspace或Delete)。</dd>
+  <dt><b>J - Linewrap</b></dt>
+  <dd>可为on或off。</dd>
+  <dt><b>K - Line settings</b></dt>
+  <dd>本次连接的bps速率，位数和奇偶设置。速率可选当前值，这样就能用当时正在使用
+      的任何速率值(当你有多个modem时，这玩儿很有用)。</dd>
+  <dt><b>L - Conversion table</b></dt>
+  <dd>可以指定运行login脚本前，此拨号项目应答的任何时候要装入的字符转换表。若此
+      域为空，则转换表保持不变。</dd>
+</dl>
+<p class="Pp">edit
+    菜单还显示了你最近一次呼叫此项的日期和时间，及呼叫该项的总次数。但并
+    不允许你改变这些值。当你进行连接时，它们会自动更新。</p>
+<p class="Pp">The moVe command lets you move the highlighted entry up or down in
+    the dialing directory with the up/down arrow keys or the k and j keys. Press
+    Enter or ESC to end moving the entry.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="配置_CONFIGURATION">配置 CONFIGURATION<a class="anchor" href="#%E9%85%8D%E7%BD%AE_CONFIGURATION">¶</a></h1>
+按Ctrl-A、O，进入setup菜单。人人都可以改变其中的多数设置，但有些仅限于
+  root。在此，那些特权设置用星号(*)标记。
+<p class="Pp"><b>Filenames and paths</b></p>
+<p class="Pp"></p>
+<div class="Bd-indent">此菜单定义你的缺省目录。
+<dl class="Bl-tag">
+  <dt><b>A - Download directory</b></dt>
+  <dd>下载的文件的存放位置</dd>
+  <dt><b>B - Upload directory</b></dt>
+  <dd>从此处读取上传的文件</dd>
+  <dt><b>C - Script directory</b></dt>
+  <dd>存放login脚本的位置</dd>
+  <dt><b>D - Script program</b></dt>
+  <dd>作为脚本解释器的程序。缺省是“runscript”，也可用其它的东东(如:
+      /bin/sh 或
+      &#34;expect&#34;)。Stdin和Stdout连接到modem，Stderr连接到屏幕。</dd>
+</dl>
+<div class="Bd-indent">若用相对路径（即不以&#39;/&#39;开头），则是相对于你的home目录，除了脚本解释器以外。</div>
+<dl class="Bl-tag">
+  <dt><b>E - Kermit program</b></dt>
+  <dd>为kermit寻找可执行程序和参数的位置。命令行上可用一些简单的宏：`%1&#39;扩展为
+      拨出设备的完整文件名，`%b&#39;扩展为当前波特率。</dd>
+  <dt><b>F - Logging options</b></dt>
+  <dd>Options to configure the logfile writing.</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>A - File name</b></dt>
+  <dd>Here you can enter the name of the logfile. The file will be written in
+      your home directory, and the default value is &#34;minicom.log&#34;. If
+      you blank the name, all logging is turned off.</dd>
+  <dt><b>B - Log connects and hangups</b></dt>
+  <dd>This option defines whether or not the logfile is written when the remote
+      end answers the call or hangs up. Or when you give the hangup command
+      yourself or leave minicom without hangup while online.</dd>
+  <dt><b>C - Log file transfers</b></dt>
+  <dd>Do you want log entries of receiving and sending files.</dd>
+</dl>
+</div>
+The &#39;log&#39; command in the scripts is not affected by logging options B and C. It
+  is always executed, if you just have the name of the log file defined.</div>
+<p class="Pp"><b>File Transfer Protocols</b></p>
+<p class="Pp"></p>
+<div class="Bd-indent">此处规定的协议将在按下Ctrl-A、s/r时显示。行首的“Name”为将要显示在菜
+  单中的名字。“Program”为协议路径，其后的“Name”则确定了程序是否
+  需要参数，如要传送的文件。“U/D”确定了该项要否在
+  “upload/download”菜单中出现。“Fullscr”确定要否全屏运行，否则
+  mincom将仅在一个窗口中显示其标准输出。
+  “IO-Red” 确定minicom要否将程
+  序的标准io连接到modem端口。“Multi”告诉文件名选择窗口协议能否用一个
+  命令发送多上文件。它对于下载协议无效；如果你不用文件名选择窗口，那么上传
+  协议也会忽略它。老版本的sz和rz非全屏，并且设置了IO-Red。但是，有些基于
+  curses的版本，至少是rz，不希望其stdin和stdout被改向，
+  以及全屏运行。 所有
+  文件传输协议都以用户的UID运行，但并不是总有UID=root。对于kermit，命令行上
+  可用&#39;%l&#39; 和
+  &#39;%b&#39;。在此菜单内，你还能规定当提示文件要上传时，要否文件选择
+  窗口，以及每次自动下载开始时要否提示下载目录。如果禁止下载目录提示，将使
+  用file and
+  directory菜单中规定的下载目录。</div>
+<p class="Pp"><b>串口设置 erial port setup</b></p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>*A - 串行设备</b></dt>
+  <dd>多数人用 /dev/tty1 或
+      /dev/ttfS1。Linux
+      下仍然可以使用/dev/cua&lt;n&gt;，但是不
+      推荐这样作，因为这些借口都过时了，使用2.2.x
+      或
+      更新的内核的系统中没有它们，
+      可以使用 /dev/ttyS&lt;n&gt;
+      来代替。你也可以使
+      /dev/modem
+      成为一个指向实际设备
+      的链接。
+    <br/>
+    如果你有多个modem连接到两个或以上的串口，可以在这儿列表指定，用空格、逗号
+      或者分号作为分隔符。minicom启动时，检查此列表直至发现有可用的modem，并使
+      用之。（不过，你不能为它们指定不同的初始化串....至少现在不能）</dd>
+  <dt><b>*B - Lock 文件位置</b></dt>
+  <dd>多数系统上，这应该是
+      /usr/spool/uucp。Linux系统则使用var/lock。若此目录不
+      存在，minicom将不会试图使用lock
+      文件。</dd>
+  <dt><b>*C - Callin program</b></dt>
+  <dd>若你的串口上有uugetty设备或别的什么，可能你就需要运行某个程序以把modem的
+      cq端口切换到dialin/dialout模式。这就是进入dialin模式所需的程序。</dd>
+  <dt><b>*D - Callout program</b></dt>
+  <dd>这是进入dialout模式所用的程序。</dd>
+  <dt><b>E - Bps/Par/Bits</b></dt>
+  <dd>启动时的缺省参数。</dd>
+</dl>
+<p class="Pp">如果其中某一项为空，它就不会被使用。因此若你并不在意locking，你的
+    modemline上也没有getty在运行，项目
+    B - D
+    就应该空着。注意！有效用户ID
+    &#34;root&#34;(也就是 0
+    )才能运行callin和callout。</p>
+</div>
+<p class="Pp"><b>Modem and Dialing</b></p>
+<p class="Pp"></p>
+<div class="Bd-indent">modem的参数在此处定义。我不再进一步解释了，因为缺省是用于genericHayes
+  modems，这应该总能正常工作的。这个文件可不是Hayes的学习指导:-)唯一值得注
+  意的是，控制字符可以用加前缀`^&#39;的方式发送，其中`^^&#39;指`^&#39;本身，`´字符必须
+  双写为`\&#39;，因为反斜线在宏定义中有特殊意义。不过有些选项，跟modem没多大关
+  系，倒是与minicom自己的行为关系不少：
+<dl class="Bl-tag">
+  <dt><b>M - Dial time</b></dt>
+  <dd>当未建立连接，minicom超时前的秒数。</dd>
+  <dt><b>N - Delay before redial</b></dt>
+  <dd>若未建立连接，minicom将重新拨号，不过先要等待一段时间。</dd>
+  <dt><b>O - Number of tries</b></dt>
+  <dd>minicom试图拨号的最大次数。</dd>
+  <dt><b>P - Drop DTR time</b></dt>
+  <dd>此项设为0时，minicom通过发送一个Hayes类型的hanup序列进行挂断。若设为非0值，
+      则通过放弃DTR
+      line来挂断。该值指定了结束DTR要经历的秒数。</dd>
+  <dt><b>Q - Auto bps detect</b></dt>
+  <dd>设为on时，minicom尝试匹配被呼叫方的速度。但多数现代的modem并不需要这个选
+      项，因为modem对数据进行了缓冲，转换了速度。</dd>
+  <dt><b>R - Modem has DCD line</b></dt>
+  <dd>如果你的modem和操作系统灰支持DCD
+      line(建立连接后它就升“高”了)，那么
+      minicom就会使用它。 When you have this
+      option on, minicom will also NOT start dialing while you are already
+      online.</dd>
+  <dt><b>S - Status line shows DTE speed / line speed</b></dt>
+  <dd>你可以切换状态行或者显示DTE速度（minicom与你的modem通信的速度）或者显示线
+      速度（你的modem与其它modem在线上通信的速度），注意连接期间线速度可能会变
+      化，但你将仍然只能看到modem启动连接时的初始速度。这是因为modem并不告诉程
+      序速度有否改变。而且，要看到线速度，你需要在连接字串中进行设置，以使
+      modem显示它。否则，你将只能看到一个值为0的线速度。</dd>
+  <dt><b>T - Multi-line untag</b></dt>
+  <dd>You can toggle the feature to untag entries from the dialing directory
+      when a connection is established to a multi-line BBS. All the tagged
+      entries that have the same name are untagged.</dd>
+</dl>
+</div>
+<p class="Pp"></p>
+<div class="Bd-indent"><b>注意此菜单还是个特例：每个用户都可在此改变参数，但它们不会被保存。</b></div>
+<p class="Pp"><b>Screen and keyboard</b></p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>A - Command key is</b></dt>
+  <dd>进入命令模式的热键。若将其设为`Alt&#39;或`Meta&#39;键，你就可以直接用Alt-key调用命令，而不是用HotKey-key。</dd>
+  <dt><b>B - Backspace key sends</b></dt>
+  <dd>仍然有些系统需要VT100来发送DEL而非BS。使用此选项，你就能干那件蠢事了。（我倒！甚至缺省值就是on!）</dd>
+  <dt><b>C - Status line is</b></dt>
+  <dd>打开或关闭。一些慢的终端（如X-terminals）在卷动的时候，会使状态行“上蹿下跳”，所以需要时可以将状态行关闭。命令模式下仍会被显示。</dd>
+  <dt><b>D - Alarm sound</b></dt>
+  <dd>若打开，minicom会在成功连接，以及上传/下载完成后发出报警声。</dd>
+  <dt><b>E - Foreground Color (menu)</b></dt>
+  <dd>指定所有的minicom配置窗口使用的前景色。</dd>
+  <dt><b>F - Background Color (menu)</b></dt>
+  <dd>指定所有的minicom配置窗口使用的背景色。注意：minicom不允许你将前/背景色设为相同值。</dd>
+  <dt><b>G - Foreground Color (term)</b></dt>
+  <dd>指定在终端窗口中使用的前景色。</dd>
+  <dt><b>H - Background Color (term)</b></dt>
+  <dd>指定在终端窗口中使用的背景色。注意：minicom不允许你将前/背景色设为相同值。</dd>
+  <dt><b>I - Foreground Color (stat)</b></dt>
+  <dd>指定在状态行中使用的前景色。</dd>
+  <dt><b>J - Background Color (stat)</b></dt>
+  <dd>指定在状态行中使用的背景色。注意：minicom允许你将状态行的前/背景色设为相同值。这实际上会隐藏状态行，不过如果你有意这样是做，可以参考这个选项。</dd>
+  <dt><b>K - History buffer size</b></dt>
+  <dd>历史缓冲区中保存的行数（用于回卷）。</dd>
+  <dt><b>L - Macros file</b></dt>
+  <dd>保存有macros的文件的完整路径。macros允许你定义当按下某一个键时被发送的字
+      符串。minicom中，可定义F1到F10，发送多达256个字符。（这在编译时被确定了）。
+      一按下Enter，就会检验你指定的文件名。
+      若你无权建立指定的文件，会有个错误
+      信息为你指出，然后将你不得不重新编辑文件名。若可以建立该文件，minicom会去
+      检查它是否已经存在，
+      若存在，就假定它是个macro文件并读入；否则，哈，那是
+      你的问题了:-)
+      如果此文件不存在，就接受此文件名。</dd>
+  <dt><b>M - Edit Macros</b></dt>
+  <dd>打开一个新窗口，允许你在此编辑F1到F10的宏。</dd>
+  <dt><b>N - Macros enabled</b></dt>
+  <dd>是/否。若允许macro，则F1-F10键将发送VT100/VT200的功能键转义序列。</dd>
+  <dt><b>O - Character conversion</b></dt>
+  <dd>在此显示激活的转换表文件名，若看不到，则表明尚未有活动的转换表。按下0,可以看到转换表编辑菜单。</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>Edit Macros</b></dt>
+  <dd>F1到F10的宏在此定义。窗口底部以图例显示有特殊意义的字符组合。允许以`^&#39;为
+      前缀加普通文本的方式输入控制字符，其中`^^&#39;表示`^&#39;自身。可用`^~&#39;代码发送1
+      秒的延迟。当你ftp或telnet某地址后，试图login时，它很有用。还可以从拨号目
+      录中加上你的当前用户名和口令，分别用`&#39;和`&#39;表示。若需要在macro中用反斜
+      线字符，应双写为`\&#39;。要编辑一个macro，按下相应数字(或字母如F10)，则光标
+      移到macro的末尾。编辑该行时，可用左右箭头，Home和End键，Del和BackSpace键，
+      以及ESC和回车键。ESC取消所做的任何修改，回车则接受之。</dd>
+  <dt><b>Character conversion</b></dt>
+  <dd>此处可编辑字符转换表。如果你不是美国人，你该知道，许多语言中的字符并不包
+      括在ASCII字符集中，过去也许是用它们替换了ASCII表中不太重要的字符，现在则
+      常常用大于127的字符代码表示。其实有许多表示这些字符的方法。这儿正是为那些
+      使用不同于你的计算机字符集的系统编辑转换表的地方，</dd>
+  <dt><b>A - Load table</b></dt>
+  <dd>你可能已经猜出来了。此命令从磁盘中装入转换表。将询问你表的文件名。
+      预定义的表.mciso，.mcpc8及.mcsf7应包含在程序中。表.mciso
+      并不进行
+      转换，.mcpc8用于连接使用8位pc字符集的系统，.mcsf7
+      则用于兼容很老式
+      的7位编码的系统，
+      这种7位码用芬兰语和瑞典语的区分字符置换了字
+      符 {|}[]。</dd>
+  <dt><b>B - Save table</b></dt>
+  <dd>以指定文件名保存活动的转换表。</dd>
+  <dt><b>C - edit char</b></dt>
+  <dd>这里可对现存的表自行修改。首先将询问你要修改的转换的字符值(十进制)；接着
+      你要指出从外部接收的字符在屏幕上显示为何者。然后询问你当按下键盘上的那个
+      键时，你要发送什么。</dd>
+  <dt><b>D - 下一屏</b></dt>
+  <dd></dd>
+  <dt><b>E - 前一屏</b></dt>
+  <dd>不错，可能你注意到了这一屏显示了活动转换的种类。屏幕(通常)太小了，没法用一种简单易懂的格式来一次显示整个表。你可以用此来做右卷动转换表。</dd>
+  <dt><b>F - convert capture</b></dt>
+  <dd>切换当写入捕获文件时是否使用转换表。</dd>
+</dl>
+</div>
+</div>
+<dl class="Bl-tag">
+  <dt><b>Save setup as dfl</b></dt>
+  <dd>保存参数，作为下一次启动程序时的缺省值。除了dfl，其它参数名都会出现，这取决于下次启动程序时会用哪一个。</dd>
+  <dt><b>Save setup as..</b></dt>
+  <dd>以指定名字保存参数。只要以此名为参项启动minicom，它就会用这些参数。当然只有root有使用这个选项的特权。</dd>
+  <dt><b>Exit</b></dt>
+  <dd>不保存退出此菜单。也可按ESC键。</dd>
+  <dt><b>Exit from minicom</b></dt>
+  <dd>只有root才会看到这个菜单项
+      ---- 如果启动 minicom
+      时用了选项`-s&#39;的话。这样，就可以在实际上并未运行minicom的情况下，修改其配置。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="状态行_STATUS_LINE">状态行 STATUS LINE<a class="anchor" href="#%E7%8A%B6%E6%80%81%E8%A1%8C_STATUS_LINE">¶</a></h1>
+状态行上有好几个指示器，其意义不言自明。可能需要解释一下奇怪的APP和NOR指
+  示器。VT100的光标键可有两种模式：应用模式和光标模式。这由一个转义序列来控
+  制。当你用minicom登录后，如果发现光标键不能工作，比如在vi中，这时你就可以
+  用此指示器来查看光标键是在应用模式中，还是在光标模式中。可以用Ctrl-A、I来
+  切换。如果那这时光标键能工作，可能是远程系统的termcap初始化串发生了错误。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="本地化_LOCALES">本地化 LOCALES<a class="anchor" href="#%E6%9C%AC%E5%9C%B0%E5%8C%96_LOCALES">¶</a></h1>
+现在minicom已经支持本地语言。这就是说，你可以通过设置环境变量LANG，把多数
+  的英文消息及其它字串转变为其它语言。到1998年7月，已经支持巴西葡萄牙语、芬
+  兰语和日本语。对土耳其语的支持在建。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="安全问题_SECURITY_ISSUES">安全问题 SECURITY ISSUES<a class="anchor" href="#%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98_SECURITY_ISSUES">¶</a></h1>
+由于minicom在一些计算机上以root运行，可能你要限制对它的使用。可以通过在缺
+  省文件目录中使用一个叫“minicom.users”的配置文件来实现。该文件的句法
+  如下：
+<p class="Pp"></p>
+<div class="Bd-indent">&lt;username&gt; &lt;configuration&gt;
+  [configuration...]</div>
+<p class="Pp">为了允许用户`miquels&#39;使用缺省配置，可在“minicom.users”中输入下行：</p>
+<p class="Pp"></p>
+<div class="Bd-indent">miquels dfl</div>
+<p class="Pp">如果你想让用户使用比缺省值更多的配置，那么在用户名下面加上那些配置的名字即可。若用户名后未给出配置，则minicom假定该用户可以使用所有配置。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="杂项_MISC">杂项 MISC<a class="anchor" href="#%E6%9D%82%E9%A1%B9_MISC">¶</a></h1>
+若 minicom 被挂起，则可用
+  SIGTERM 来 kill之（即kill
+  -15，或者，既然
+  sigterm为缺省值，干脆“kill
+  在复位等动作后安全退出
+  minicom 。 还可以不
+  挂断线路，
+  用带命令“! killall -9
+  minicom”的脚本来kill
+  minicom。若没
+  有使用参数-9，则minicom会先挂断，再退出。
+<p class="Pp">因为许多转义序列以ESC开头（上箭头为ESC[A），所以minicom无法知道它获得的ESC字符是你按下的ESC键，还是某一转义序列的一部分。</p>
+<p class="Pp">minicom的一个老版本，V1.2，以一种相当拙劣的方式解决此问题：要获得ESC键，你得把它按
+    <i>两次。</i></p>
+<p class="Pp">这在1.3版中就好一点儿了：现在内置了1秒超时，象在vi中的一样。在有select()
+    系统调用的系统中，超时为0.5秒。而且....奇怪吧：还加了一个Linux相关的专用
+    hack :-)
+    现在，minicom可以区分ESC键和转义序列了。要知其中猫腻，请参
+    wkeys.c。不过它干得确实不错！</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件_FILES">文件 FILES<a class="anchor" href="#%E6%96%87%E4%BB%B6_FILES">¶</a></h1>
+minicom将其配置文件保存在一个目录中，通常是：/var/lib/minicom,
+  /usr/local/etc或者/etc。要想知道minicom编译时内定的缺省目录，可用命令
+  “minicom
+  -h”，在那儿你可能还会找到runscript(1)的demo文件,
+  and the examples of character conversion tables either there or in the
+  subdirectories of /usr/doc/minicom*. The conversion tables are named something
+  like mc.* in that directory, but you probably want to copy the ones you need
+  in your home directory as something beginning with a dot.
+<p class="Pp"></p>
+<pre>minicom.users
+minirc.*
+$HOME/.minirc.*
+$HOME/.dialdir
+$HOME/minicom.log
+/usr/share/locale/*/LC_MESSAGES/minicom.mo
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="版本_VERSION">版本 VERSION<a class="anchor" href="#%E7%89%88%E6%9C%AC_VERSION">¶</a></h1>
+Minicom is now up to version 2.00.0.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者_AUTHOR_S">作者 AUTHOR S<a class="anchor" href="#%E4%BD%9C%E8%80%85_AUTHOR_S">¶</a></h1>
+minicom 原创作者为 Miquel van Smoorenburg
+  (miquels@cistron.nl). He wrote versions up to 1.75.
+<br/>
+Jukka Lahtinen (walker@clinet.fi, walker@megabaud.fi)
+  负责1.78以上的新版本，由以下人士协助：
+<br/>
+filipg@paranoia.com
+  为V1.79编写历史缓冲区搜索程序。
+<br/>
+Arnaldo Carvalho de Melo (acme@conectiva.com.br)
+  完成国际化和巴西葡萄牙语的翻译。
+<br/>
+Jim Seymour (jseymour@jimsun.LinxNet.com)
+  编写多modem支持，以及V1.80版以来使用的文件名选择窗口。
+<br/>
+Tomohiro Kubota (kubota@debian.or.jp)
+  编写日文翻译及引用程序，并进行了一些更正。
+<br/>
+Gael Queri (gqueri@mail.dotcom.fr)
+  编写法语翻译。
+<br/>
+Arkadiusz Miskiewicz (misiek@pld.org.pl) wrote the Polish translations.
+<br/>
+Kim Soyoung (nexti@chollian.net) wrote the Korean translations.
+<p class="Pp">本man
+    page中的内容多拷贝自minicom的原始README，作了几处更正。其中有些内容及更正由Michael
+    K.Johnson (johnsonm@stolaf.edu) 完成。</p>
+<p class="Pp">Jukka Lahtinen (walker@clinet.fi)
+    加上了1.75版以后的一些变动信息。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版维护人]">[中文版维护人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D">¶</a></h1>
+<b>范逊</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2000.2.28</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9B%BDlinux%E8%AE%BA%E5%9D%9Bman%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003/11/24 05:09:58</td>
+    <td class="foot-os">User&#39;s Manual</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+minicom.1.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-30T09:42:59Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"minicom(1)\"}}]}"
+</script>

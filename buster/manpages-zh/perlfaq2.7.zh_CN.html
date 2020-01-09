@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>perlfaq2(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/perlfaq2.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/perlfaq2.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; perlfaq2(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlfaq2.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlfaq2.7.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#AUTHOR_AND_COPYRIGHT" title="AUTHOR AND COPYRIGHT">AUTHOR AND COPYRIGHT</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AF%91%E8%80%85" title="译者">译者</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlfaq2.7.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/perlfaq2.7.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/perlfaq2.7.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlfaq2.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlfaq2.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/perl-doc/perlfaq2.1.en.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlfaq2.7.zh_CN.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">PERLFAQ2(7)</td>
+    <td class="head-vol">Perl Programmers Reference Guide</td>
+    <td class="head-rtitle">PERLFAQ2(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+perlfaq2 - 获取和学习 Perl (2003/10/16 04:57:38)
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+从哪里寻找 Perl
+  的源程序和文档，支持以及相关事项
+<br/>
+<p class="Pp"><b>哪些平台上有
+    Perl？要到哪里去找？</b></p>
+<p class="Pp">Perl的标准发行版（由
+    perl发展小组负责维护）仅以原始码形式发行。您可在
+    <a href="../../CPAN/src/latest.tar.gz%E5%A4%84%E5%8F%96%E5%BE%97%E3%80%82%E8%BF%99%E4%B8%AA%E6%A1%A3%E6%A1%88%E7%9A%84%E6%A0%BC%E5%BC%8F%E6%98%AF">../../CPAN/src/latest.tar.gz处取得。这个档案的格式是</a>
+    POSIX tar档案柜，再以
+    gzip格式压缩。</p>
+<p class="Pp">Perl
+    可以在难以记数的平台上运行。几乎所有已知的
+    Unix 衍生版本都被支持 (Perl
+    的本地平台)，还有其他操作系统平台，类似
+    VMS, DOS, OS/2, Windows, QNX, BeOS, OS X, MPE/iX 和 Amiga.</p>
+<p class="Pp">为专有平台准备的二进制发行版，包括
+    Apple，可以从 <a href="../../ports/">../../ports/</a>
+    找到。因为它们不是标准发行的一部分，它们可能（事实上的确）和基本的
+    Perl有多方面的不同。要确切知道到底哪些地方不同，您得自行查阅它们各自的发行说明。这些差异可能是正面的（譬如它们可能附有一些原始码发行的
+    perl所没有的延伸，提供专属某一平台的特殊功能），亦或负面的（例如它们可能是植基于比较老旧的
+    Perl原始码发行 版）。
+  <br/>
+</p>
+<p class="Pp"><b>要如何取得以二进制形式发行的
+    Perl？</b></p>
+<p class="Pp">不管为什么您的作业系统业者没有将
+    C编译器附在所卖的作业系统中，最好的方法是到网路上去抓一份
+    gcc的执行档，然后用它来编译
+    perl 。 CPAN 上所放的
+    gcc执行档仅专门提供几个特别难拿到免费编译器的平台，而不是给任何
+    Unix系 统的。</p>
+<p class="Pp">一些 URLs 可能有用：</p>
+<p class="Pp"></p>
+<pre>    <a href="../../ports/">../../ports/</a>
+    <a href="../../pub/language/info/software.html">../../pub/language/info/software.html</a>
+</pre>
+<p class="Pp">Someone looking for a Perl for Win16 might look to Laszlo Molnar&#39;s
+    djgpp port in <a href="../../ports/#msdos">../../ports/#msdos</a> , which comes with clear
+    installation instructions. A simple installation guide for MS-DOS using Ilya
+    Zakharevich&#39;s OS/2 port is available at
+    <a href="../../%7Epiet/perl5dos.html">../../%7Epiet/perl5dos.html</a> and similarly for Windows 3.1 at
+    <a href="../../%7Epiet/perlwin3.html">../../%7Epiet/perlwin3.html</a> .
+  <br/>
+</p>
+<p class="Pp"><b>我的系统里没有
+    C编译器。要如何编译
+    perl？</b></p>
+<p class="Pp">因为您没有 C
+    编译器，您是没指望了，而您的经销商则该拿去当作祭拜
+    Sun god
+    的供品。不过说这些风凉话无济于事。</p>
+<p class="Pp">您首先需要做的是替您的系统找一个
+    gcc的执行档。参阅和您的作业系统相关的
+    各 Usenet
+    FAQs，看到哪里可以找到这种作业系统的
+    gcc执行档 。
+  <br/>
+</p>
+<p class="Pp"><b>我直接将
+    Perl的执行档从一台机器上复制到另一台机器上，但是程式跑不起来。</b></p>
+<p class="Pp">那大概是您忘了复制程式库，或者是程式库的路径不同的关系。您真的应该在那台要安装
+    perl的机器上将整套发行从头编译，然后打
+    make
+    install来安装。其他的方法大多注定要失败。</p>
+<p class="Pp">有一个简单的方法可用来检查和确定东西有没有装对地方
+    --把编入 perl的
+    @INC阵列（perl用它来寻找程式库的路径）印出：</p>
+<p class="Pp"></p>
+<pre>    % perl -le &#39;print for @INC&#39;
+</pre>
+<p class="Pp">如果这个指令列出了任何在您系统上不存在的路径，那么您或许得将适当的程式库移到这些地方，或者制做适当的
+    symlinks、aliases
+    或捷径。<span class="Li">@INC</span>
+    也作为命令</p>
+<p class="Pp"></p>
+<pre>    % perl -V
+</pre>
+<p class="Pp">的输出。你也许会想看看
+    &#34;How do I keep my own module/library directory?&#34; in perlfaq8.
+  <br/>
+</p>
+<p class="Pp"><b>我抓回了原始码，试着编译
+    perl，但是 gdbm/dynamic
+    loading/malloc/linking/...部分失败。要如何将它搞定？</b></p>
+<p class="Pp">细读
+    INSTALL这个档案，这是原始码发行版里面的一个档案。有时候自动设定程式
+    (Configure)
+    对某些较不寻常的系统、平台特质、或变异会不知所措。该档案对该如何处这类的问题，大都有详细的说明。
+  <br/>
+</p>
+<p class="Pp"><b>Perl有哪些模组和延伸？
+    CPAN是什么？
+    CPAN/src/...又代表什么？</b></p>
+<p class="Pp">CPAN代表的是「大
+    Perl档案库网络」(Comprehensive Perl
+    Archive
+    Network)，一个在全世界近200台机器之间相互映射的巨大档案库。CPAN包含了原始码、对各非原生系统的移植、使用说明、程式，以及许多由第叁类团体所写的模组和延伸，从各商业品牌的资料库介面、到键盘／萤幕控制，乃至全球资讯网漫游及
+    CGI程式皆一应具全。CPAN的总主机是../../
+    ，但您也可以透过这个位址：
+    <a href="../../CPAN.html">../../CPAN.html</a>
+    来自动连接一个在地理位置上最接近您的站。至于这个设计的运作原理，请看
+    <a href="../../CPAN%EF%BC%88%E6%9C%80%E5%90%8E%E5%A4%B4%E6%B2%A1%E6%9C%89%E6%96%9C%E7%BA%BF%EF%BC%89%E7%9A%84%E8%AF%B4%E6%98%8E%E3%80%82%E5%90%8C%E6%97%B6%EF%BC%8C../../">../../CPAN（最后头没有斜线）的说明。同时，../../</a>
+    也提供了 <a href="../../MIRRORED">../../MIRRORED</a>
+    的方便的界面</p>
+<p class="Pp">参见 CPAN FAQ 位于
+    <a href="../../misc/cpan-faq.html">../../misc/cpan-faq.html</a>
+    来获得有关 CPAN 的
+    FAQ，包括如何成为一个镜像站</p>
+<p class="Pp">CPAN/path/... 是
+    CPAN站台上头的档案的命名规范。CPAN
+    代表一个
+    CPAN映射的基准目录，然后其馀的路径是由该目录到一个档案的路径。例如，如果您使用
+    <a href="ftp://ftp.funet.fi/pub/languages/perl/CPAN">ftp://ftp.funet.fi/pub/languages/perl/CPAN</a> 来做您的
+    CPAN 站，那么
+    CPAN/misc/japh这个档案便可以从
+    <a href="ftp://ftp.funet.fi/pub/languages/perl/CPAN/misc/japh">ftp://ftp.funet.fi/pub/languages/perl/CPAN/misc/japh</a>
+    下载到</p>
+<p class="Pp">由于目前
+    CPAN档案库中已经有近两千个模组，因此几乎任何您所能想到的用途，大概都已经有现成的模组可以办到。目前在
+    CPAN/modules/by-category/ 底下的类
+    别包括了
+    perl核心模组、协助发展模组、作业系统介面、网路、周边设备、不同
+    processes间之沟通、资料型态工具、资料库介面、使用者介面、与其他语言介面、档名、档案系统、档案锁定、软体国际化及地方化、全球资讯网支援、伺服软体工具、档案库和档案压缩、图形变换处理、电子邮件及新闻讨论群、程式流程控制工具、filehandles和输入／输出、微软视窗模组，以及杂项模组
+    等。</p>
+<p class="Pp">参见 <a href="../../modules/00modlist.long.html">../../modules/00modlist.long.html</a>
+    或 <a href="../../">../../</a>
+    来阅读分类的模块完整列表。</p>
+<p class="Pp">CPAN 不是 O&#39;Reilly and Associates
+    的附属品.
+  <br/>
+</p>
+<p class="Pp"><b>是不是有一个经
+    ISO【国际标准局】或
+    ANSI【美国国家标准局】认可的
+    Perl版本？</b></p>
+<p class="Pp">当然没有。Larry认为他得先被认可后然后才会轮到
+    Perl 。
+  <br/>
+</p>
+<p class="Pp"><b>Perl的相关资料要上哪儿找？</b></p>
+<p class="Pp">perl的发行版中都附有完整的使用说明中。如果
+    perl已安装在您的机器上，那么使用说明应该也已经装在上头了：如果您用的是一个像
+    Unix的系统，您可以打 man
+    perl。这同时会带领您到其他重要的使用说明页。如果您用的不是
+    Unix
+    式的系统，那么查阅使用说明的方法会有所不同；譬如说，使用说明可能会以HTML
+    格式来存放。不管怎么样，只要
+    perl正确地安装，查阅使用说明应该不成问题。</p>
+<p class="Pp">如果您的系统没有
+    man这个指令，或者是该指令安装不当，那么您可以试试
+    perldoc
+    perl。如果还不成，您可以在
+    /usr/local/lib/perl5/pod这个目录
+    下找使用说明。</p>
+<p class="Pp">如果以上的方法全失败，那么您可求助于
+    <a href="../../">../../</a> 或 <a href="../../">../../</a>
+    都提供了完整的 html
+    格式的帮助</p>
+<p class="Pp">面上有许多本和
+    Perl有关的好书，详情请见下面一节的介绍。</p>
+<p class="Pp">Tutorial documents are included in current or upcoming Perl
+    releases include perltoot for objects or perlboot for a beginner&#39;s approach
+    to objects, perlopentut for file opening semantics, perlreftut for managing
+    references, perlretut for regular expressions, perlthrtut for threads,
+    perldebtut for debugging, and perlxstut for linking C and Perl together.
+    There may be more by the time you read this. The following URLs might also
+    be of assistance:</p>
+<p class="Pp"></p>
+<pre>    <a href="../../">../../</a>
+    <a href="../../">../../</a>
+    <a href="../../search.cgi?cat=Training%2FTutorials">../../search.cgi?cat=Training%2FTutorials</a>
+</pre>
+<br/>
+<p class="Pp"><b>USENET上有哪些专门讨论
+    Perl的新闻讨论群？问题该投到哪里？</b></p>
+<p class="Pp">Usenet
+    中有多个新闻组与 Perl
+    语言相关：</p>
+<p class="Pp"></p>
+<pre>    comp.lang.perl.announce             Moderated announcement group
+    comp.lang.perl.misc                 High traffic general Perl discussion
+    comp.lang.perl.moderated        Moderated discussion group
+    comp.lang.perl.modules              Use and development of Perl modules
+    comp.lang.perl.tk                   Using Tk (and X) from Perl
+</pre>
+<p class="Pp"></p>
+<pre>    comp.infosystems.www.authoring.cgi  Writing CGI scripts for the Web.
+</pre>
+<p class="Pp">Some years ago, comp.lang.perl was divided into those groups, and
+    comp.lang.perl itself officially removed. While that group may still be
+    found on some news servers, it is unwise to use it, because postings there
+    will not appear on news servers which honour the official list of group
+    names. Use comp.lang.perl.misc for topics which do not have a
+    more-appropriate specific group.</p>
+<p class="Pp">There is also a Usenet gateway to Perl mailing lists sponsored by
+    perl.org at <a href="nntp://nntp.perl.org">nntp://nntp.perl.org</a> , a web interface to the same lists at
+    <a href="../../group/">../../group/</a> and these lists are also available under the
+    <span class="Li">&#34;perl.*&#34;</span> hierarchy at
+    <a href="../..//groups.google.com</a> . Other groups are listed at <a href="../../">../../</a>
+    ( also known as <a href="../../">../../</a> ).</p>
+<p class="Pp">A nice place to ask questions is the PerlMonks site,
+    <a href="../../">../../</a> , or the Perl Beginners mailing list
+    <a href="../../showlist.cgi?name=beginners">../../showlist.cgi?name=beginners</a> .</p>
+<p class="Pp">Note that none of the above are supposed to write your code for
+    you: asking questions about particular problems or general advice is fine,
+    but asking someone to write your code for free is not very cool.
+  <br/>
+</p>
+<p class="Pp"><b>如果我想投程式原始码，该投到哪个板子上？</b></p>
+<p class="Pp">您应看程式的性质来决定该丢到哪个板子上，但也欢迎您交叉投递一份到
+    comp.lang.perl.misc上头去。如果您打算交叉投递到
+    alt.sources
+    的话，请务必遵照该板所规定的标准，包括标头的
+    Followup-To 栏不可将 alt.sources
+    列入； 详见该板的 FAQ
+    。</p>
+<p class="Pp">If you&#39;re just looking for software, first use Google (
+    <a href="../..//www.google.com</a> ), Google&#39;s usenet search interface (
+    <a href="../..//groups.google.com</a> ), and CPAN Search ( <a href="../..//search.cpan.org</a> ). This
+    is faster and more productive than just posting a request.
+  <br/>
+</p>
+<p class="Pp"><b>Perl 书籍</b></p>
+<p class="Pp">市面上有许多有关
+    Perl 和／或
+    CGI程式设计的书。其中有些很好，有些还过得去，但也有不少根本不值得买。大部分的
+    Perl书都列在 Tom Christiansen
+    所维护的列表中，其中一些有详细的评论，位于
+    <a href="../../perl/critiques/index.html">../../perl/critiques/index.html</a> .</p>
+<p class="Pp">毫无争议地，最权威的
+    Perl参考书要数以下这本，由
+    Perl的创始者著作，现在是第三版
+    (July 2000)：</p>
+<p class="Pp"></p>
+<pre>    Programming Perl (the &#34;Camel Book&#34;):
+        by Larry Wall, Tom Christiansen, and Jon Orwant
+        0-596-00027-8  [3rd edition July 2000]
+        <a href="../../catalog/pperl3/">../../catalog/pperl3/</a>
+    (English, translations to several languages are also available)
+</pre>
+<p class="Pp">The companion volume to the Camel containing thousands of
+    real-world examples, mini-tutorials, and complete programs is:</p>
+<p class="Pp"></p>
+<pre>    The Perl Cookbook (the &#34;Ram Book&#34;):
+        by Tom Christiansen and Nathan Torkington,
+            with Foreword by Larry Wall
+        ISBN 1-56592-243-3 [1st Edition August 1998]
+        <a href="../../catalog/cookbook/">../../catalog/cookbook/</a>
+</pre>
+<p class="Pp">If you&#39;re already a seasoned programmer, then the Camel Book might
+    suffice for you to learn Perl from. If you&#39;re not, check out the Llama
+  book:</p>
+<p class="Pp"></p>
+<pre>    Learning Perl (the &#34;Llama Book&#34;)
+        by Randal L. Schwartz and Tom Phoenix
+        ISBN 0-596-00132-0 [3rd edition July 2001]
+        <a href="../../catalog/lperl3/">../../catalog/lperl3/</a>
+</pre>
+<p class="Pp">And for more advanced information on writing larger programs,
+    presented in the same style as the Llama book, continue your education with
+    the Alpaca book:</p>
+<p class="Pp"></p>
+<pre>    Learning Perl Objects, References, and Modules (the &#34;Alpaca Book&#34;)
+       by Randal L. Schwartz, with Tom Phoenix (foreword by Damian Conway)
+       ISBN 0-596-00478-8 [1st edition June 2003]
+       <a href="../../catalog/lrnperlorm/">../../catalog/lrnperlorm/</a>
+</pre>
+<p class="Pp">If you&#39;re not an accidental programmer, but a more serious and
+    possibly even degreed computer scientist who doesn&#39;t need as much
+    hand-holding as we try to provide in the Llama, please check out the
+    delightful book</p>
+<p class="Pp"></p>
+<pre>    Perl: The Programmer&#39;s Companion
+        by Nigel Chapman
+        ISBN 0-471-97563-X [1997, 3rd printing Spring 1998]
+        <a href="../../compbooks/catalog/97563-X.htm">../../compbooks/catalog/97563-X.htm</a>
+        <a href="../../compbooks/chapman/perl/perltpc.html">../../compbooks/chapman/perl/perltpc.html</a> (errata etc)
+</pre>
+<p class="Pp">If you are more at home in Windows the following is available
+    (though unfortunately rather dated).</p>
+<p class="Pp"></p>
+<pre>    Learning Perl on Win32 Systems (the &#34;Gecko Book&#34;)
+        by Randal L. Schwartz, Erik Olson, and Tom Christiansen,
+            with foreword by Larry Wall
+        ISBN 1-56592-324-3 [1st edition August 1997]
+        <a href="../../catalog/lperlwin/">../../catalog/lperlwin/</a>
+</pre>
+<p class="Pp">Addison-Wesley ( <a href="../../">../../</a> ) and Manning (
+    <a href="../../">../../</a> ) are also publishers of some fine Perl books such
+    as <i>Object Oriented Programming with Perl</i> by Damian Conway and
+    <i>Network Programming with Perl</i> by Lincoln Stein.</p>
+<p class="Pp">An excellent technical book discounter is Bookpool at
+    <a href="../../">../../</a> where a 30% discount or more is not unusual.</p>
+<p class="Pp">What follows is a list of the books that the FAQ authors found
+    personally useful. Your mileage may (but, we hope, probably won&#39;t) vary.</p>
+<p class="Pp">Recommended books on (or mostly on) Perl follow.</p>
+<dl class="Bl-tag">
+  <dt>References</dt>
+  <dd>
+    <pre>    Programming Perl
+        by Larry Wall, Tom Christiansen, and Jon Orwant
+        ISBN 0-596-00027-8 [3rd edition July 2000]
+        <a href="../../catalog/pperl3/">../../catalog/pperl3/</a>
+    </pre>
+    <p class="Pp"></p>
+    <pre>    Perl 5 Pocket Reference
+    by Johan Vromans
+        ISBN 0-596-00032-4 [3rd edition May 2000]
+        <a href="../../catalog/perlpr3/">../../catalog/perlpr3/</a>
+    </pre>
+    <p class="Pp"></p>
+    <pre>    Perl in a Nutshell
+    by Ellen Siever, Stephan Spainhour, and Nathan Patwardhan
+        ISBN 1-56592-286-7 [1st edition December 1998]
+        <a href="../../catalog/perlnut/">../../catalog/perlnut/</a>
+    </pre>
+  </dd>
+  <dt>Tutorials</dt>
+  <dd>
+    <pre>    Elements of Programming with Perl
+        by Andrew L. Johnson
+        ISBN 1-884777-80-5 [1st edition October 1999]
+        <a href="../../Johnson/">../../Johnson/</a>
+    </pre>
+    <p class="Pp"></p>
+    <pre>    Learning Perl
+        by Randal L. Schwartz and Tom Phoenix
+        ISBN 0-596-00132-0 [3rd edition July 2001]
+        <a href="../../catalog/lperl3/">../../catalog/lperl3/</a>
+    </pre>
+    <p class="Pp"></p>
+    <pre>    Learning Perl Objects, References, and Modules
+       by Randal L. Schwartz, with Tom Phoenix (foreword by Damian Conway)
+       ISBN 0-596-00478-8 [1st edition June 2003]
+       <a href="../../catalog/lrnperlorm/">../../catalog/lrnperlorm/</a>
+    </pre>
+    <p class="Pp"></p>
+    <pre>    Learning Perl on Win32 Systems
+        by Randal L. Schwartz, Erik Olson, and Tom Christiansen,
+            with foreword by Larry Wall
+        ISBN 1-56592-324-3 [1st edition August 1997]
+        <a href="../../catalog/lperlwin/">../../catalog/lperlwin/</a>
+    </pre>
+    <p class="Pp"></p>
+    <pre>    Perl: The Programmer&#39;s Companion
+        by Nigel Chapman
+        ISBN 0-471-97563-X [1997, 3rd printing Spring 1998]
+    <a href="../../compbooks/catalog/97563-X.htm">../../compbooks/catalog/97563-X.htm</a>
+    <a href="../../compbooks/chapman/perl/perltpc.html">../../compbooks/chapman/perl/perltpc.html</a> (errata etc)
+    </pre>
+    <p class="Pp"></p>
+    <pre>    Cross-Platform Perl
+        by Eric Foster-Johnson
+        ISBN 1-55851-483-X [2nd edition September 2000]
+        <a href="../../~erc/perlbook.htm">../../~erc/perlbook.htm</a>
+    </pre>
+    <p class="Pp"></p>
+    <pre>    MacPerl: Power and Ease
+        by Vicki Brown and Chris Nandor,
+            with foreword by Matthias Neeracher
+        ISBN 1-881957-32-2 [1st edition May 1998]
+        <a href="../../ptf_book/">../../ptf_book/</a>
+    </pre>
+  </dd>
+  <dt>Task-Oriented</dt>
+  <dd>
+    <pre>    The Perl Cookbook
+        by Tom Christiansen and Nathan Torkington
+            with foreword by Larry Wall
+        ISBN 1-56592-243-3 [1st edition August 1998]
+        <a href="../../catalog/cookbook/">../../catalog/cookbook/</a>
+    </pre>
+    <p class="Pp"></p>
+    <pre>    Effective Perl Programming
+        by Joseph Hall
+        ISBN 0-201-41975-0 [1st edition 1998]
+        <a href="../../">../../</a>
+    </pre>
+  </dd>
+  <dt>Special Topics</dt>
+  <dd>
+    <pre>    Mastering Regular Expressions
+        by Jeffrey E. F. Friedl
+        ISBN 0-596-00289-0 [2nd edition July 2002]
+        <a href="../../catalog/regex2/">../../catalog/regex2/</a>
+    </pre>
+    <p class="Pp"></p>
+    <pre>    Network Programming with Perl
+        by Lincoln Stein
+        ISBN 0-201-61571-1 [1st edition 2001]
+        <a href="../../">../../</a>
+    </pre>
+    <p class="Pp"></p>
+    <pre>    Object Oriented Perl
+        Damian Conway
+            with foreword by Randal L. Schwartz
+        ISBN 1-884777-79-1 [1st edition August 1999]
+        <a href="../../Conway/">../../Conway/</a>
+    </pre>
+    <p class="Pp"></p>
+    <pre>    Data Munging with Perl
+        Dave Cross
+        ISBN 1-930110-00-6 [1st edition 2001]
+        <a href="../../cross">../../cross</a>
+    </pre>
+    <p class="Pp"></p>
+    <pre>    Mastering Perl/Tk
+        by Steve Lidie and Nancy Walsh
+        ISBN 1-56592-716-8 [1st edition January 2002]
+        <a href="../../catalog/mastperltk/">../../catalog/mastperltk/</a>
+    </pre>
+    <p class="Pp"></p>
+    <pre>    Extending and Embedding Perl
+       by Tim Jenness and Simon Cozens
+       ISBN 1-930110-82-0 [1st edition August 2002]
+       <a href="../../jenness">../../jenness</a>
+    </pre>
+    <br/>
+  </dd>
+</dl>
+<p class="Pp"><b>和 Perl 有关的杂志</b></p>
+<p class="Pp">The first (and for a long time, only) periodical devoted to All
+    Things Perl, <i>The Perl Journal</i> contains tutorials, demonstrations,
+    case studies, announcements, contests, and much more. <i>TPJ</i> has columns
+    on web development, databases, Win32 Perl, graphical programming, regular
+    expressions, and networking, and sponsors the Obfuscated Perl Contest and
+    the Perl Poetry Contests. Beginning in November 2002, TPJ moved to a
+    reader-supported monthly e-zine format in which subscribers can download
+    issues as PDF documents. For more details on TPJ, see
+  <a href="../../">../../</a></p>
+<p class="Pp">Beyond this, magazines that frequently carry quality articles on
+    Perl are <i>The Perl Review</i> ( <a href="../..//www.theperlreview.com</a> ), <i>Unix
+    Review</i> ( <a href="../../">../../</a> ), <i>Linux Magazine</i> (
+    <a href="../../">../../</a> ), and Usenix&#39;s newsletter/magazine to its
+    members, <i>login:</i> ( <a href="../../">../../</a> )</p>
+<p class="Pp">The Perl columns of Randal L. Schwartz are available on the web at
+    <a href="../../merlyn/WebTechniques/">../../merlyn/WebTechniques/</a> ,
+    <a href="../../merlyn/UnixReview/">../../merlyn/UnixReview/</a> , and
+    <a href="../../merlyn/LinuxMag/">../../merlyn/LinuxMag/</a> .
+  <br/>
+</p>
+<p class="Pp"><b>网路上的 Perl：接触
+    FTP 和 WWW</b></p>
+<p class="Pp">如果您想达到最好（还有最省钱）的传输效果，那么从
+    <a href="../../SITES.html">../../SITES.html</a>
+    所列的站台中任选其一，从上头把完整的映射站名单抓下来。然后您可以从中挑选一个对您来说传输最快的站台。.PP
+    也可以使用 xx.cpan.org
+    ，其中 &#34;xx&#34;
+    是双字符的国家代码，例如澳大利亚可以使用
+    au.cpan.org.
+    [注意：这只对至少包含了一个主机镜像的国家有效。]
+  <br/>
+</p>
+<p class="Pp"><b>有哪些讨论 Perl
+    的邮件列表？</b></p>
+<p class="Pp">大部分的重要模组（如
+    Tk、CGI 和
+    libwww-perl）有专属各自的 mailing
+    lists。有关资料请参考这些模组的使用说明。</p>
+<p class="Pp">完整的与 Perl
+    有关的邮件列表可以从这里找到：</p>
+<p class="Pp"></p>
+<pre>        <a href="../../">../../</a>
+</pre>
+<br/>
+<p class="Pp"><b>comp.lang.perl.misc 的档案库</b></p>
+<p class="Pp">The Google search engine now carries archived and searchable
+    newsgroup content.</p>
+<p class="Pp"><a href="../../groups?group=comp.lang.perl.misc">../../groups?group=comp.lang.perl.misc</a></p>
+<p class="Pp">If you have a question, you can be sure someone has already asked
+    the same question at some point on c.l.p.m. It requires some time and
+    patience to sift through all the content but often you will find the answer
+    you seek.
+  <br/>
+</p>
+<p class="Pp"><b>如何购买商业版本的
+    Perl？</b></p>
+<p class="Pp">在某种程度上来说，Perl
+    已经算是商业软体了：您可以把
+    Perl的发行约定拿来细读给您的经理听。各发行版都附有这份条例清楚、明确的公约。Perl有广大的使用者及广泛的文献。comp.lang.perl.*等新闻讨论群组和各电子邮递论坛更是对各种疑难杂症提供迅速的解答。Perl
+    传统上一直是由
+    Larry、许多软体设计工程师，以及成千上万的程式写作者提供支援，大伙协力让人人过更美好的日子。</p>
+<p class="Pp">尽管如此，有些主管坚持只向附售后保证的公司下订单，这样子出了问题才可以告他们，故以上的回答可能无法令这类的经理满意。或许是这类的主管觉得亦步亦趋的扶持支援及很强的合约义务有其必要。市面上有卖用玻璃纸密封包装的
+    Perl
+    光碟，您可以试试看，或许对您的经理有效。</p>
+<p class="Pp">Alternatively, you can purchase commercial incidence based support
+    through the Perl Clinic. The following is a commercial from them:</p>
+<p class="Pp">&#34;The Perl Clinic is a commercial Perl support service
+    operated by ActiveState Tool Corp. and The Ingram Group. The operators have
+    many years of in-depth experience with Perl applications and Perl internals
+    on a wide range of platforms.</p>
+<p class="Pp">&#34;Through our group of highly experienced and well-trained
+    support engineers, we will put our best effort into understanding your
+    problem, providing an explanation of the situation, and a recommendation on
+    how to proceed.&#34;</p>
+<p class="Pp">Contact The Perl Clinic at</p>
+<p class="Pp"></p>
+<pre>    www.PerlClinic.com
+</pre>
+<p class="Pp"></p>
+<pre>    North America Pacific Standard Time (GMT-8)
+    Tel:    1 604 606-4611 hours 8am-6pm
+    Fax:    1 604 606-4640
+</pre>
+<p class="Pp"></p>
+<pre>    Europe (GMT)
+    Tel:    00 44 1483 862814
+    Fax:    00 44 1483 862801
+</pre>
+<p class="Pp">See also www.perl.com for updates on tutorials, training, and
+    support.
+  <br/>
+</p>
+<p class="Pp"><b>如果发现
+    bugs要向何处报告？</b></p>
+<p class="Pp">如果您发现
+    perl解译器或标准发行中的模组有
+    bugs ，想报知 perl
+    发布小组的
+    话，请使用
+    perl发行中所附的 perlbug
+    程式，或将您的报告
+    email 到 perlbug@perl.org .</p>
+<p class="Pp">如果您想报告的
+    bug是有关某个非标准发行的
+    perl（详见「哪些平台上有
+    Perl
+    ？」一题的答案）、某可执行档形式的发行，或是某非标准的模组（譬如
+    Tk、CGI
+    等），那么请参考它所附的使用说明，以确定最合适报告
+    bugs的地方。</p>
+<p class="Pp">详情请见 <a href="../../buster/perl/perlbug.1.en.html">perlbug(1)</a>
+    手册页 (perl5.004
+    或更新版本)。
+  <br/>
+</p>
+<p class="Pp"><b>什么是 perl.com? Perl Mongers? pm.org?
+    perl.org? cpan.org?</b></p>
+<p class="Pp">The Perl Home Page at <a href="../../">../../</a> is currently hosted by
+    The O&#39;Reilly Network, a subsidiary of O&#39;Reilly and Associates.</p>
+<p class="Pp">Perl Mongers is an advocacy organization for the Perl language
+    which maintains the web site <a href="../../">../../</a> as a general advocacy site
+    for the Perl language.</p>
+<p class="Pp">Perl Mongers uses the pm.org domain for services related to Perl
+    user groups, including the hosting of mailing lists and web sites. See the
+    Perl user group web site at <a href="../../">../../</a> for more information about
+    joining, starting, or requesting services for a Perl user group.</p>
+<p class="Pp">Perl Mongers also maintain the perl.org domain to provide general
+    support services to the Perl community, including the hosting of mailing
+    lists, web sites, and other services. The web site <a href="../../">../../</a> is a
+    general advocacy site for the Perl language, and there are many other
+    sub-domains for special topics, such as</p>
+<p class="Pp"></p>
+<pre>    <a href="../../">../../</a>
+    <a href="../../">../../</a>
+    <a href="../../">../../</a>
+    <a href="../../">../../</a>
+</pre>
+<p class="Pp"><a href="../../">../../</a> is the Comprehensive Perl Archive Network, a
+    replicated worlwide repository of Perl software, see the <i>What is
+    CPAN?</i> question earlier in this document.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="AUTHOR_AND_COPYRIGHT">AUTHOR AND COPYRIGHT<a class="anchor" href="#AUTHOR_AND_COPYRIGHT">¶</a></h1>
+Copyright (c) 1997-2001 Tom Christiansen and Nathan Torkington. All rights
+  reserved.
+<p class="Pp">This documentation is free; you can redistribute it and/or modify
+    it under the same terms as Perl itself.</p>
+<p class="Pp">Irrespective of its distribution, all code examples here are in
+    the public domain. You are permitted and encouraged to use this code and any
+    derivatives thereof in your own programs for fun or for profit as you see
+    fit. A simple comment in the code giving credit to the FAQ would be
+    courteous but is not required.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="译者">译者<a class="anchor" href="#%E8%AF%91%E8%80%85">¶</a></h1>
+<b>萧百龄，两只老虎工作室</b>
+<br/>
+<p class="Pp"><b>跋</b></p>
+<p class="Pp">本页面中文版由中文
+    man 手册页计划提供。
+  <br/>
+  中文 man
+    手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-25</td>
+    <td class="foot-os">perl v5.8.3</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+perlfaq2.7.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-28T03:40:59Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"perlfaq2(7)\"}}]}"
+</script>

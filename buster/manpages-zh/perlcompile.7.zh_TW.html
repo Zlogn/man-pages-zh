@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>perlcompile(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/perlcompile.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/perlcompile.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; perlcompile(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlcompile.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlcompile.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#Using_The_Back_Ends_%E4%BD%BF%E7%94%A8%E5%BE%8C%E7%AB%AF" title="Using The Back Ends 使用後端">Using The Back Ends 使用後端</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#Module_List_for_the_Compiler_Suite_%E7%B7%A8%E8%AD%AF%E5%A5%97%E4%BB%B6%E7%9A%84%E6%A8%A1%E5%A1%8A%E5%88%97%E8%A1%A8" title="Module List for the Compiler Suite 編譯套件的模塊列表">Module List for the Compiler Suite 編譯套件的模塊列表</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#KNOWN_PROBLEMS_%E5%B7%B2%E7%9F%A5%E7%9A%84%E5%95%8F%E9%A1%8C" title="KNOWN PROBLEMS 已知的問題">KNOWN PROBLEMS 已知的問題</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#AUTHOR_%E4%BD%9C%E8%80%85" title="AUTHOR 作者">AUTHOR 作者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AD%AF%E8%80%85" title="譯者">譯者</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlcompile.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/perlcompile.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/perlcompile.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlcompile.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlcompile.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">PERLCOMPILE(7)</td>
+    <td class="head-vol">Perl Programmers Reference Guide</td>
+    <td class="head-rtitle">PERLCOMPILE(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+perlcompile - 關於 Perl
+  編譯器和翻譯器的介紹
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+Perl
+  一直是有一個編譯器的：你的源文件會被編譯成一種內部格式（一種語法分析樹），並且在運行前還會被優化。從5.005版本起，Perl
+  在發行時就帶有一個模塊可以檢查優化過的語法分析樹（該模塊稱作B模塊(<span class="Li">&#34;B&#34;</span>)），它被用來編寫許多有用的功能，包括一個可以將你的Perl轉成C源代碼的模塊，這樣再編譯後就可以得到一個可執行的文件了。
+<p class="Pp"><span class="Li">&#34;B&#34;</span>
+    模塊提供了訪問語法分析樹的方法,
+    其它的一些模塊（“後端”）則對這個樹進行操作。一些把它（語法樹）以字節碼的形式輸出，還有以C源代碼形式的輸出的，後者以半可讀的文本形式輸出的。另一些遍歷整棵語法樹以建立一個關於所使用的子程序，格式及變量的交叉引用表。還有另外一些檢查你的代碼，看看有沒有模棱兩可的構造。另一些則重新將語法樹導出成Perl代碼，可以起代碼美化或是消除混亂的代碼的作用。</p>
+<p class="Pp">因爲 <span class="Li">&#34;B&#34;</span>
+    模塊的最初目的是提供一種能將Perl程序轉爲對應C代碼的方法，接着就能把它變成可執行文件了，所以
+    <span class="Li">&#34;B&#34;</span>
+    模塊和它的那些後端模塊就被認爲是“編譯器”了，即使它們實際上沒有做任何編譯方面的事。這個編譯器的各個部分精確的說應該是個“翻譯器”，或者一個“檢視器”，但是用Perl的人們想要一個“編譯選項”而不是一個叫做“檢視器”的小玩藝。你能怎麼辦呢？</p>
+<p class="Pp">這篇文章的主要內容是講Perl編譯器的用法：它包含的模塊，怎樣使用那些最重要的後端模塊，它們有什麼問題，如何讓它們工作。
+  <br/>
+</p>
+<p class="Pp"><b>Layout 佈局</b></p>
+<p class="Pp">編譯器的後端放在
+    <span class="Li">&#34;B::&#34;</span>
+    裏面，而前端（就是你，編譯器的使用者，有時候要與之交互的）是
+    O 模塊。一些後端（如
+    <span class="Li">&#34;B::C&#34;</span>)）提供了一些程序（如<i>perlcc</i>）來隱藏模塊的複雜性。</p>
+<p class="Pp">這裏是一些值得知道的重要後端，並附有它們目前的狀態，用0到10的整數表示。（狀態0表示目前該部分功能只是有一個框架，還沒有實現；狀態10則表示如果還有Bug的話，我們會感到很奇怪的）：</p>
+<dl class="Bl-tag">
+  <dt>B::Bytecode</dt>
+  <dd>將語法樹存成機器相關的格式，可供BtyeLoader模塊可以在以後重新裝入。狀態：5（一些部分可以工作，一些不可以，還有一些還沒有測試）</dd>
+  <dt>B::C</dt>
+  <dd>創建C代碼文件，其中包括了重建語法樹和恢復解釋器的代碼。狀態：6（許多情況下可以正常工作，包括使用了Tk的程序）。</dd>
+  <dt>B::CC</dt>
+  <dd>按照語法樹中運行期代碼的路徑創建C代碼文件。這是最像
+      Perl - C
+      翻譯器的一個，但是它生成的代碼幾乎是不能看懂的，因爲它把語法樹翻譯成了一個巨大的switch結構來操作Perl中的結構。最終的目的是在perl程序中給出足夠的類型信息後，可以將
+      perl
+      數據結構的操作轉換爲
+      c 級別的數據結構，對
+      int 和 float
+      的操作。狀態：5
+      (有些可以工作，包括不復雜的
+      Tk 示例).</dd>
+  <dt>B::Lint</dt>
+  <dd>當發現你的代碼中有模棱兩可的構造時會發出警告。狀態：6（許多情況下可以正常工作，僅僅在很少數的領域內它會停止工作）。</dd>
+  <dt>B::Deparse</dt>
+  <dd>重新生成Perl代碼，試着把代碼用一致的格式寫出來。狀態：8（它工作得很好，只是會略去一些晦澀難懂的部分）。</dd>
+  <dt>B::Xref</dt>
+  <dd>生成關於申明和關於變量以及子程序的使用情況的報告。狀態：8（它工作得很好，只是仍有一點延遲方面的bugs）。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="Using_The_Back_Ends_使用後端">Using The Back Ends 使用後端<a class="anchor" href="#Using_The_Back_Ends_%E4%BD%BF%E7%94%A8%E5%BE%8C%E7%AB%AF">¶</a></h1>
+接下來的部分介紹怎樣使用各種各樣的編譯器後端。介紹的順序按照後端的成熟程度排列，所以最爲穩定的，經過了驗證的後端會最先介紹，還在試驗中和沒有完成的後端就放到後面描述了。
+<p class="Pp">O模塊默認讓 <b>-c</b>
+    開關有效，這防止Perl在編譯完代碼後運行程序。這也是爲什麼所有的後端在產生任何輸出前都會打印一句：</p>
+<p class="Pp"></p>
+<pre>  myperlprogram syntax OK
+</pre>
+<p class="Pp"><b>The Cross Referencing Back End
+    交叉引用後端</b></p>
+<p class="Pp">交叉引用後端（B::Xref）生成一個關於你的程序的報表，把各個申明以及子程序，變量（包括格式）的使用情況存入文件中去。舉例來說，這有一段摘自對pod2man程序分析後生成的報表（該程序是Perl自帶的一個例程）：</p>
+<p class="Pp"></p>
+<pre>  Subroutine clear_noremap
+    Package (lexical)
+      $ready_to_print   i1069, 1079
+    Package main
+      $&amp;                1086
+      $.                1086
+      $0                1086
+      $1                1087
+      $2                1085, 1085
+      $3                1085, 1085
+      $ARGV             1086
+      %HTML_Escapes     1085, 1085
+</pre>
+<p class="Pp">這裏展示了<span class="Li">&#34;clear_noremap&#34;</span>
+    子程序中變量的使用情況。就像變量
+    <span class="Li">$ready_to_print</span> 是 <i>my()</i>
+    (詞法)
+    的一個變量，在第1069行被引入(
+    原文用的詞是introduced，也就是在
+    <i>my()</i>
+    中第一次被定義的意思
+    )，然後在第1079行該變量被使用了。從主包（main
+    package）中來的變量
+    <span class="Li">$&amp;</span>
+    又在第1086行被使用,
+    等等。</p>
+<p class="Pp">行號前面可能會有一個字母作爲前綴，它們的意思是：</p>
+<dl class="Bl-tag">
+  <dt>i</dt>
+  <dd>變量首次被引入
+      (在my()中申明) 。</dd>
+  <dt>&amp;</dt>
+  <dd>子程序或者方法的引用。</dd>
+  <dt>s</dt>
+  <dd>定義的子程序。</dd>
+  <dt>r</dt>
+  <dd>定義的格式。</dd>
+</dl>
+<p class="Pp">交叉引用中最爲有用的選項就是把報表存入不同的文件，例如要把關於
+    <i>myperlprogram</i>
+    的報表存入文件 <i>report</i>
+    中：</p>
+<p class="Pp"></p>
+<pre>  $ perl -MO=Xref,-oreport myperlprogram
+</pre>
+<br/>
+<p class="Pp"><b>The Decompiling Back End
+    反編譯後端</b></p>
+<p class="Pp">反編譯後端將把你的Perl語法樹重新變成源代碼。生成的源代碼會按照某種格式組織，所以這個後端可以用來消除代碼中的混亂部分。此後端的基本使用方法如下：</p>
+<p class="Pp"></p>
+<pre>  $ perl -MO=Deparse myperlprogram
+</pre>
+<p class="Pp">你也許馬上會發現Perl並不知道如何給你的代碼分段。你要自己手動添入新行來把這大斷的代碼分開。然而現在，讓我們看看代碼只有一行時情況怎樣，這個後端會做些什麼：</p>
+<p class="Pp"></p>
+<pre>  $ perl -MO=Deparse -e &#39;$op=shift⎪⎪die &#34;usage: $0
+  code [...]&#34;;chomp(@ARGV=&lt;&gt;)unless@ARGV; for(@ARGV){$was=$_;eval$op;
+  die$@ if$@; rename$was,$_ unless$was eq $_}&#39;
+  -e syntax OK
+  $op = shift @ARGV ⎪⎪ die(&#34;usage: $0 code [...]&#34;);
+  chomp(@ARGV = &lt;ARGV&gt;) unless @ARGV;
+  foreach $_ (@ARGV) {
+      $was = $_;
+      eval $op;
+      die $@ if $@;
+      rename $was, $_ unless $was eq $_;
+  }
+</pre>
+<p class="Pp">這個後端也有幾條選項控制生成的代碼，舉例說，你可以把縮進的尺寸設在4（最大）到2之間：</p>
+<p class="Pp"></p>
+<pre>  $ perl -MO=Deparse,-si2 myperlprogram
+</pre>
+<p class="Pp"><b>-p</b>
+    開關控制在常常可以不加圓括號的地方加上它們：</p>
+<p class="Pp"></p>
+<pre>  $ perl -MO=Deparse -e &#39;print &#34;Hello, world\n&#34;&#39;
+  -e syntax OK
+  print &#34;Hello, world\n&#34;;
+  $ perl -MO=Deparse,-p -e &#39;print &#34;Hello, world\n&#34;&#39;
+  -e syntax OK
+  print(&#34;Hello, world\n&#34;);
+</pre>
+<p class="Pp">要知道更多，請參考
+    B::Deparse
+  <br/>
+</p>
+<p class="Pp"><b>Lint 後端</b></p>
+<p class="Pp">lint 後端 （B::Lint）
+    檢察程序中不好的程序風格。一個程序認爲的不好風格可能對另外一個程序員來說是用起來很有效的工具，所以有選項讓你設定哪些東東將會受到檢查。</p>
+<p class="Pp">要運行一個風格檢查器檢察你的代碼：</p>
+<p class="Pp"></p>
+<pre>  $ perl -MO=Lint myperlprogram
+</pre>
+<p class="Pp">要取消對上下文和沒有定義的子程序的檢查：</p>
+<p class="Pp"></p>
+<pre>  $ perl -MO=Lint,-context,-undefined-subs myperlprogram
+</pre>
+<p class="Pp">要知道更多的選項信息，請看
+    B::Lint
+  <br/>
+</p>
+<p class="Pp"><b>The Simple C Back End
+    簡化的C後端</b></p>
+<p class="Pp">這個模塊用來把你的Perl程序的內部編譯狀態存儲到一個C代碼文件中去，而生成的C代碼就可以被特定平臺上的C編譯器轉換成一個可執行文件了。最後的程序還會和Perl解釋器的庫文件靜態鏈接起來，所以它不會節省你的磁盤空間（除非你的Perl是用共享的庫文件創建的）或是程序大小，然而，另一方面，程序啓動起來會快一些。</p>
+<p class="Pp"><span class="Li">&#34;perlcc&#34;</span>
+    工具缺省是生成以下的可執行文件。</p>
+<p class="Pp"></p>
+<pre>  perlcc myperlprogram.pl
+</pre>
+<br/>
+<p class="Pp"><b>The Bytecode Back End
+    字節碼後端</b></p>
+<p class="Pp">這個模塊只有在你能夠找到一種方法來裝入並運行它生成的字節碼時纔會顯得有用。ByteLoader模塊提供了這項功能。</p>
+<p class="Pp">要把Perl轉換成可執行的字節碼，你可以使用
+    <span class="Li">&#34;perlcc&#34;</span> 的
+    <span class="Li">&#34;-B&#34;</span> 開關:</p>
+<p class="Pp"></p>
+<pre>  perlcc -B myperlprogram.pl
+</pre>
+<p class="Pp">字節碼是和機器類型無關的，所以一旦你編譯了一個模塊或是程序，它就可以像Perl源代碼一樣具有可移植性。（假設那個模塊或者程序的使用者有一個足夠新的Perl解釋器來對字節碼進行解碼）</p>
+<p class="Pp">有一些選項用來控制要生成的字節碼的性質和關於優化方面的參數，要知道這些選項的詳細情況，請參考
+    <b>B::Bytecode</b>
+  <br/>
+</p>
+<p class="Pp"><b>The Optimized C Back End
+    優化的C後端</b></p>
+<p class="Pp">優化的C後端按照語法樹中運行期代碼的路徑將你的Perl程序轉換成等效的(但是被優化了的)C代碼文件。這個C程序會直接對Perl的數據結構進行操作，而且也會鏈接Perl的解釋器的庫文件，以支持
+    <i>eval()</i>, <span class="Li">&#34;s///e&#34;</span>,
+    <span class="Li">&#34;require&#34;</span> 等等。</p>
+<p class="Pp"><span class="Li">&#34;perlcc&#34;</span>
+    工具使用 -O
+    開關生成這種可執行文件。要編譯一個Perl程序（以<span class="Li">&#34;.pl&#34;</span>
+    或者<span class="Li">&#34;.p&#34;</span>
+    結尾）：</p>
+<p class="Pp"></p>
+<pre>  perlcc -O myperlprogram.pl
+</pre>
+<p class="Pp">從Perl模塊創建一個共享庫文件（以
+    <span class="Li">&#34;.pm&#34;</span> 結尾）：</p>
+<p class="Pp"></p>
+<pre>  perlcc -O Myperlmodule.pm
+</pre>
+<p class="Pp">知道更多，請參考
+    perlcc 和 B::CC.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="Module_List_for_the_Compiler_Suite_編譯套件的模塊列表">Module List for the Compiler Suite 編譯套件的模塊列表<a class="anchor" href="#Module_List_for_the_Compiler_Suite_%E7%B7%A8%E8%AD%AF%E5%A5%97%E4%BB%B6%E7%9A%84%E6%A8%A1%E5%A1%8A%E5%88%97%E8%A1%A8">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>B</dt>
+  <dd>這個模塊是一個自省的（introspective，用Java的術語說就是“reflective”）模塊，允許Perl程序審視自己的內部。後端模塊都是通過這個模塊來訪問語法分析樹的。而你，後端模塊的用戶，就不用和B模塊打交道了。</dd>
+  <dt>O</dt>
+  <dd>這個模塊是編譯器的那些後端的前端，一般像這樣進行調用：
+    <p class="Pp"></p>
+    <pre>  $ perl -MO=Deparse myperlprogram
+    </pre>
+    <p class="Pp">這與在這個Perl程序中使用
+        <span class="Li">&#34;use O &#39;Deparse&#39;&#34;</span>
+        相同。</p>
+  </dd>
+  <dt>B::Asmdata</dt>
+  <dd>這個模塊被 B::Assembler
+      模塊使用，而 B::Assembler
+      又接着被 B::Bytecode
+      模塊使用，B::Bytecode中有一個字節碼形式存放的語法分析樹以便以後裝入。B::Asmdata自己並不算是一個後端，也許說它是後端的一個組件比較好。</dd>
+  <dt>B::Assembler</dt>
+  <dd>這個模塊可以將語法樹轉爲適合存儲和恢復的數據形式。它本身不是一個後端，但是算是某個後端的一個組件。
+      assemble
+      程序用它來生成字節碼。</dd>
+  <dt>B::Bblock</dt>
+  <dd>這個模塊被 B::CC
+      後端使用。它被用來運行“基本塊”。一個基本塊就是一段從頭到尾的操作，中間是不可能停下來或出現分支的。</dd>
+  <dt>B::Bytecode</dt>
+  <dd>這個模塊可以由程序的語法樹生成字節碼。生成的字節碼會被寫入到文件中，以後還能被重新恢復成語法樹。總的目標就是爲了只進行一次費時的程序編譯工作，然後把解釋器的狀態存入文件中，運行程序時再把狀態從文件中恢復。
+      具體的用法請參考 &#34;The
+      Bytecode Back End&#34; 。</dd>
+  <dt>B::C</dt>
+  <dd>這個模塊按照語法樹和其他一些解釋器的內部數據結構生成C代碼。然後你再編譯生成的C代碼，就可以得到一個可執行文件了。運行時這個可執行文件會恢復解釋器和內部的數據結構來轉動程序。要知道細節請參考
+      &#34;The Simple C Back End&#34;。</dd>
+  <dt>B::CC</dt>
+  <dd>這個模塊按照你程序中的操作生成C代碼。不像
+      B::C
+      模塊只是把解釋和它的狀態存入C程序中，
+      B::CC
+      模塊生成的是不包含解釋器的C
+      程序，所以用 B::CC
+      翻譯的C
+      程序運行速度比一般的解釋執行的程序速度要快，具體用法請參考
+      &#34;The Optimized C Back End&#34; 。</dd>
+  <dt>B::Concise</dt>
+  <dd>這個模塊輸出一個簡潔的
+      (但是完整的) Perl
+      分析樹。它的輸出比
+      B::Terse 或者 B::Debug
+      的結果更容易定製
+      (並且也可以模仿它們)。這個模塊對書寫自己的後端，或者學習
+      Perl
+      實現的人有用。它對一般的程序員沒有用處。</dd>
+  <dt>B::Debug</dt>
+  <dd>這個模塊把Perl語法分析樹非常詳細地輸出到標準輸出上去。這對正在編寫自己的後端程序，或正在深入Perl內部機制的人們來說是非常有用的。對普通程序員來說則沒什麼用。</dd>
+  <dt>B::Deparse</dt>
+  <dd>這個模塊將編譯了的語法樹反向分析得出Perl源代碼，這在調試或是反編譯他人代碼的時候會是非常有用的。另外讓它爲你自己的代碼做一些美化工作也是可以的。要知道細節請參考
+      &#34;The Decompiling Back End&#34;。</dd>
+  <dt>B::Disassembler</dt>
+  <dd>這個模塊把字節碼恢復成語法樹，它本身不是一個後端，而是某個後端的一個組件。它會被和字節碼在一起的
+      disassemble 程序使用。</dd>
+  <dt>B::Lint</dt>
+  <dd>這個模塊審視你的代碼編譯後的格式，並且找到那些容易讓人皺眉，卻又不至於引起警告的地方。舉例來說，使用一個標量內容（scalar
+      context）的數組，而不顯式地申明成
+      <span class="Li">&#34;scalar(@array)&#34;</span>
+      。這種情況是會被 Lint
+      標示出來的。要知道細節請參考
+      &#34;The Lint Back End&#34;。</dd>
+  <dt>B::Showlex</dt>
+  <dd>這個模塊打印出 <i>my()</i>
+      中的變量在函數或是文件中的使用情況，以得到一份關於
+      <i>my()</i>
+      中的變量在定義於文件
+      myperlprogram 中的子程序 <i>mysub()</i>
+      中的使用情況的列表：
+    <p class="Pp"></p>
+    <pre>  $ perl -MO=Showlex,mysub myperlprogram
+    </pre>
+    <p class="Pp">要得到一份關於 my()
+        中的變量在文件myperlprogram中的使用情況的列表：</p>
+    <p class="Pp"></p>
+    <pre>  $ perl -MO=Showlex myperlprogram
+    </pre>
+    <p class="Pp">[BROKEN]</p>
+  </dd>
+  <dt>B::Stackobj</dt>
+  <dd>這個模塊被 B::CC
+      模塊調用。它本身不是後端，但是是某個後端的一個組件。</dd>
+  <dt>B::Stash</dt>
+  <dd>這個模塊被 perlcc
+      程序調用，而perlcc可以把一個模塊編譯成可執行文件。B::Stash
+      把程序使用的符號表打印出來，並被用來阻止
+      B::CC 爲 B::* 或是 O 模塊生成C
+      代碼。它本身不是後端，但是是某個後端的一個組件。</dd>
+  <dt>B::Terse</dt>
+  <dd>這個模塊用來打印語法樹的內容，但是信息不會有B::Debug打印的那麼多。對比來說，<span class="Li">&#34;print
+      &#34;Hello, world.&#34;&#34;</span> 會讓 B::Debug
+      產生96行輸出， 但是
+      B::Terse只會有6行。
+    <p class="Pp">這個模塊對正在編寫自己的後端程序，或正在深入Perl內部機制的人們來說是非常有用的。對普通程序員來說則沒什麼用。</p>
+  </dd>
+  <dt>B::Xref</dt>
+  <dd>這個模塊打印一個報表列出在程序中哪裏定義和使用了哪些變量，子程序或格式，報表還會列出程序裝入的模塊。要知道詳細的使用方法，請參考
+      &#34;The Cross Referencing Back End&#34; 。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="KNOWN_PROBLEMS_已知的問題">KNOWN PROBLEMS 已知的問題<a class="anchor" href="#KNOWN_PROBLEMS_%E5%B7%B2%E7%9F%A5%E7%9A%84%E5%95%8F%E9%A1%8C">¶</a></h1>
+簡單 C
+  後端目前只保存以字符和數字命名的類型說明
+<p class="Pp">優化的 C
+    後端會爲一些不該爲之輸出的模塊（比如說
+    DirHandle）輸出代碼。而且它不太可能正確地處理正在執行的子程序外部的goto語句（goto
+    &amp;sub is OK）。目前 <span class="Li">&#34;goto
+    LABEL&#34;</span>
+    語句在這個後端中完全不會工作。他還會生成讓C
+    編譯器頭痛無比的巨大的初始化函數。如果把這個初始化函數分割開是能得到比目前更好的效果的。另外的問題包括：處理無符號的數學問題時不能正確工作；一些操作碼如果按照默認的操作碼機制處理也會有非正常的結果。</p>
+<p class="Pp">BEGIN{}
+    塊會在編譯你的代碼的時候被執行。所有的在BEGIN{}
+    中初始化的外部狀態，如打開的文件，初始的數據庫連結等等，會有不正確的表現。爲了解決這個問題，Perl中又提供了一個
+    INIT{}
+    塊來對應程序編譯之後，正式運行之前要執行的那段代碼。執行的順序是：BEGIN{},
+    (後端編譯程序可能這時會保存狀態),
+    INIT{}, 程序運行, END{}。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="AUTHOR_作者">AUTHOR 作者<a class="anchor" href="#AUTHOR_%E4%BD%9C%E8%80%85">¶</a></h1>
+這篇文章最初是由 Nathan
+  Torkington
+  編寫，現在由郵件列表(perl5-porters@perl.org.)維護
+</section>
+<section class="Sh">
+<h1 class="Sh" id="譯者">譯者<a class="anchor" href="#%E8%AD%AF%E8%80%85">¶</a></h1>
+<b>郭銳(sunny65535) &lt;sunny65535@263.net&gt;</b>
+<br/>
+<p class="Pp"><b>跋</b></p>
+<p class="Pp">本頁面中文版由中文
+    man 手冊頁計劃提供。
+  <br/>
+  中文 man
+    手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-25</td>
+    <td class="foot-os">perl v5.8.3</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+perlcompile.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:33Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"perlcompile(7)\"}}]}"
+</script>

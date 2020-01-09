@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>smbd(8) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/samba/smbd.8.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/smbd.8.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/smbd.8.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="8">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; smbd(8)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/smbd.8">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/smbd.8.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS" title="總覽 SYNOPSIS">總覽 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%B8%E9%A0%85_OPTIONS" title="選項 OPTIONS">選項 OPTIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6_FILES" title="文件 FILES">文件 FILES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%99%90%E5%88%B6_LIMITATIONS" title="限制 LIMITATIONS">限制 LIMITATIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%92%B0%E5%A2%83%E8%AE%8A%E9%87%8F_ENVIRONMENT_VARIABLES" title="環境變量 ENVIRONMENT VARIABLES">環境變量 ENVIRONMENT VARIABLES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#PAM_INTERACTION" title="PAM INTERACTION">PAM INTERACTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%89%88%E6%9C%AC_VERSION" title="版本 VERSION">版本 VERSION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%A8%BA%E6%96%B7_DIAGNOSTICS" title="診斷 DIAGNOSTICS">診斷 DIAGNOSTICS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BF%A1%E8%99%9F_SIGNALS" title="信號 SIGNALS">信號 SIGNALS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO" title="參見 SEE ALSO">參見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85_AUTHOR" title="作者 AUTHOR">作者 AUTHOR</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/smbd.8.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/smbd.8.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/smbd.8.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/samba/smbd.8.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/smbd.8.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/smbd.8.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">SMBD(8)</td>
+    <td class="head-vol"></td>
+    <td class="head-rtitle">SMBD(8)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+smbd -
+  向客戶提供SMB/CIFS服務的服務器
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_SYNOPSIS">總覽 SYNOPSIS<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS">¶</a></h1>
+<b>smbd</b> [-D] [-F] [-S] [-i] [-h] [-V] [-b] [-d &lt;debug level&gt;] [-l
+  &lt;log directory&gt;][-p &lt;port number&gt;] [-O &lt;socket option&gt;] [-s
+  &lt;configuration file&gt;]
+<p class="Pp"></p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+此程序是<b>Samba</b>(7)
+  套件的一部分。
+<p class="Pp"></p>
+<p class="Pp"><b>smbd</b>
+    是向Windows客戶機提供文件共享和打印服務的服務器進程。該服務器用SMB(或CIFS)協議向客戶提供文件存放空間和打印服務。它與LanManager協議兼容並能向使用此協議的客戶提供服務。這些客戶端包括MSCLIENT
+    3.0 for DOS，Windows for Workgroups，Windows
+    95/98/ME，Windows NT，Windows 2000, OS/2，DAVE for
+    Macintosh, 和smbfs for Linux。</p>
+<p class="Pp"></p>
+<p class="Pp">用來控制服務屬性的配置文件的手冊頁中對服務器可提供的服務進行了詳細的描述(參見
+    <b>smb.conf</b>
+    (5))。此手冊不描述提供的服務但集中講述了對管理服務器運行等方面的問題描述。</p>
+<p class="Pp"></p>
+<p class="Pp">請注意對服務器運行有關的非常重要的安全性問題，同時在進行安裝處理前也應該仔細閱讀<b>smb.conf</b>
+    (5)手冊。</p>
+<p class="Pp"></p>
+<p class="Pp">只要有客戶請求就會建立一個對話。對每個對話，每個客戶獲得服務器的一份複本。在對話期間此複本對所有客戶產生的連接進行服務。當來自此客戶的所有連接都關閉時，此客戶的服務器複本也退出。</p>
+<p class="Pp"></p>
+<p class="Pp">服務器所包含的配置文件和其它任何文件都會在每次更改後自動重新裝入。你可以通過對服務器發送一個SIGHUP信息來強制一次重新裝入。重新裝入配置文件對已建立的任何對服務的連接均無效。要麼用戶必須斷開服務，要麼將<b>smbd</b>進程中止並重啓。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="選項_OPTIONS">選項 OPTIONS<a class="anchor" href="#%E9%81%B8%E9%A0%85_OPTIONS">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>-D</dt>
+  <dd>如果指定此選項，則服務器以後臺進程方式運行。即，它會分離本身並在後臺運行，在適當的端口上監聽請求。對於提供比臨時性的文件和打印服務更多內容的服務器，推薦將<b>smbd</b>
+      以後臺進程方式運行。如果在shell命令行運行<b>smbd
+      </b>，將默認使用這個選項。
+    <p class="Pp"></p>
+  </dd>
+  <dt>-F</dt>
+  <dd>If specified, this parameter causes the main <b>smbd</b> process to not
+      daemonize, i.e. double-fork and disassociate with the terminal. Child
+      processes are still created as normal to service each connection request,
+      but the main process does not exit. This operation mode is suitable for
+      running <b>smbd</b> under process supervisors such as <b>supervise</b> and
+      <b>svscan</b> from Daniel J. Bernstein&#39;s <b>daemontools</b> package, or
+      the AIX process monitor.
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-S</dt>
+  <dd>If specified, this parameter causes <b>smbd</b> to log to standard output
+      rather than a file.
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-i</dt>
+  <dd>If this parameter is specified it causes the server to run
+      &#34;interactively&#34;, not as a daemon, even if the server is executed
+      on the command line of a shell. Setting this parameter negates the
+      implicit deamon mode when run from the command line. <b>smbd</b> also logs
+      to standard output, as if the <b>-S</b> parameter had been given.
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-V</dt>
+  <dd>打印smbd的版本號。
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-s &lt;configuration file&gt;</dt>
+  <dd>指定的文件包含了服務器所需的配置細節。此文件中的信息包含如所用的printcap文件這樣的服務器詳細信息，同時也對服務器所提供的服務進行了描述。請參見<i>smb.conf</i>
+      (5)文件。缺省的配置文件名在軟件包編譯時決定。
+    <p class="Pp"></p>
+  </dd>
+  <dt>-d|--debug=debuglevel</dt>
+  <dd><i>debuglevel</i>
+      是一個從0到10的整數。如果沒有指定此參數則默認的值是0。
+    <p class="Pp">如果這個值越高，越多關於服務器的詳細活動信息將被記錄到文件中。在0調試級時，只記錄緊急錯誤和嚴重警告。對於平日的運行服務，1調試級是個合理的等級，它只產生小量的關於執行操作的信息。</p>
+    <p class="Pp">1以上的調試級將產生相當多的記錄數據，並且只在解決問題時纔有用。3以上的調試級只被設計爲讓開發者使用並會產生極大數量的記錄數據，而且其中很多部分非常難以理解。</p>
+    <p class="Pp">注意在此使用這個參數將越過在<i>smb.conf</i>
+        (5)文件中的<i>log
+        level</i>參數。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-l|--logfile=logbasename</dt>
+  <dd>用來記錄/調試的文件。會自動爲它添加
+      <b>&#34;.client&#34;</b>
+      擴展名。客戶端不會將記錄文件刪除。
+    <p class="Pp"></p>
+  </dd>
+  <dt>-h|--help</dt>
+  <dd>打印smbd的命令行參數(用法)。
+    <p class="Pp"></p>
+  </dd>
+  <dt>-b</dt>
+  <dd>Prints information about how Samba was built.
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-l &lt;log directory&gt;</dt>
+  <dd>If specified, <i>log directory</i> specifies a log directory into which
+      the &#34;log.smbd&#34; log file will be created for informational and
+      debug messages from the running server. The log file generated is never
+      removed by the server although its size may be controlled by the <i>max
+      log size</i> option in the <a href="../../buster/manpages-zh/smb.conf.5.zh_TW.html">smb.conf(5)</a> file. <b>Beware:</b> If the
+      directory specified does not exist, <b>smbd</b> will log to the default
+      debug log location defined at compile time.
+    <p class="Pp">The default log directory is specified at compile time.</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-p &lt;port number&gt;</dt>
+  <dd><i>port number</i>
+      端口號是個正值整數。如果此選項未指定則缺省值爲139。
+    <p class="Pp">這個端口號用於從客戶端建立對服務器的連接。基於TCP上的SMB所用的標準(通常使用的)端口號爲139，因此這是缺省值。如果你希望作爲普通用戶而不是root身份運行服務器的話，多數系統會要求你使用1024以上的端口號
+        -
+        如有此情況請向系統管理員取得幫助。</p>
+    <p class="Pp">爲了使更多客戶使用服務器，而又在139以外的端口進行配置，則你需要在端口139上進行端口重定向，在rfc1002.txt的4.3.5部分有詳細的描述。</p>
+    <p class="Pp">除上述情況以外，此選項通常不用。</p>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件_FILES">文件 FILES<a class="anchor" href="#%E6%96%87%E4%BB%B6_FILES">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><i>/etc/inetd.conf</i></dt>
+  <dd>如果通過<b>inetd</b>
+      超級進程來運行服務器，則此文件必須含有適當的啓動信息。
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>/etc/rc</i></dt>
+  <dd>(或其它你的系統所用的初始化腳本)。
+    <p class="Pp">如果在啓動時以後臺進程模式運行服務器，則此文件須包含適當的服務器啓動次序。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>/etc/services</i></dt>
+  <dd>如果通過<b>inetd</b>超級進程來運行服務器，則此文件必須包含一份服務端口(如139)和協議類型(如tcp)與對應的服務名(如netbios-ssn)的映射。
+    <p class="Pp"></p>
+  </dd>
+  <dt><i>/usr/local/samba/lib/smb.conf</i></dt>
+  <dd>缺省的服務器配置文件
+      <a href="../../buster/manpages-zh/smb.conf.5.zh_TW.html">smb.conf(5)</a>的存放位置。系統安裝此文件的其它通常位置爲
+      <i>/usr/samba/lib/smb.conf</i>和<i>/etc/samba/smb.conf</i>。
+    <p class="Pp">此文件描述了客戶可獲得的服務項的情況。參見<a href="../../buster/manpages-zh/smb.conf.5.zh_TW.html">smb.conf(5)</a>獲得更多情況。</p>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="限制_LIMITATIONS">限制 LIMITATIONS<a class="anchor" href="#%E9%99%90%E5%88%B6_LIMITATIONS">¶</a></h1>
+在有些系統上，<b>smbd</b>無法在一次setuid()調用以後把uid返回到root。這樣的系統稱爲“陷門”(trapdoor)uid系統。如果你使用這樣的系統，將無法同時在一個客戶端(如一臺PC機)以兩個不同的用戶身份進行連接。試圖連接第二個用戶將得到“訪問被拒”或類似的結果。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="環境變量_ENVIRONMENT_VARIABLES">環境變量 ENVIRONMENT VARIABLES<a class="anchor" href="#%E7%92%B0%E5%A2%83%E8%AE%8A%E9%87%8F_ENVIRONMENT_VARIABLES">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>PRINTER</b></dt>
+  <dd>如果對可打印服務沒有指定打印名稱，多數系統將使用此變量(如果未定義此變量則用<b>lp</b>
+      )的值作爲可用打印機的名稱。但並不是服務器特定的。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="PAM_INTERACTION">PAM INTERACTION<a class="anchor" href="#PAM_INTERACTION">¶</a></h1>
+Samba uses PAM for authentication (when presented with a plaintext password),
+  for account checking (is this account disabled?) and for session management.
+  The degree too which samba supports PAM is restricted by the limitations of
+  the SMB protocol and the <i>obey pam restrictions</i> <a href="../../buster/manpages-zh/smb.conf.5.zh_TW.html">smb.conf(5)</a>
+  paramater. When this is set, the following restrictions apply:
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt>•</dt>
+  <dd><b>Account Validation</b>: All accesses to a samba server are checked
+      against PAM to see if the account is vaild, not disabled and is permitted
+      to login at this time. This also applies to encrypted logins.
+    <p class="Pp"></p>
+  </dd>
+  <dt>•</dt>
+  <dd><b>Session Management</b>: When not using share level secuirty, users must
+      pass PAM&#39;s session checks before access is granted. Note however, that
+      this is bypassed in share level secuirty. Note also that some older pam
+      configuration files may need a line added for session support.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="版本_VERSION">版本 VERSION<a class="anchor" href="#%E7%89%88%E6%9C%AC_VERSION">¶</a></h1>
+此手冊頁是針對samba套件版本3.0的。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="診斷_DIAGNOSTICS">診斷 DIAGNOSTICS<a class="anchor" href="#%E8%A8%BA%E6%96%B7_DIAGNOSTICS">¶</a></h1>
+通常情況下診斷信息都記錄到指定好的記錄文件中。這個文件的名稱是在編譯時指定的，但也可以用命令行來指定。
+<p class="Pp"></p>
+<p class="Pp">用戶可以得到的診斷信息的數量和種類取決於用戶執行客戶端程序時所用的調試等級。如果你發現有問題的話，把調試級設到3並詳細閱讀記錄文件裏的內容。</p>
+<p class="Pp"></p>
+<p class="Pp">很多信息都無須加以說明。不幸的是，在寫手冊頁時，源代碼中有着太多的診斷信息，它們保證了對每種情況都加以描述，卻無法寫入文檔。在此時，你最好還是用grep查找源代碼並檢查引起診斷信息的條件。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="信號_SIGNALS">信號 SIGNALS<a class="anchor" href="#%E4%BF%A1%E8%99%9F_SIGNALS">¶</a></h1>
+向<b>smbd</b>發送一個SIGHUP信號可以使它在一個很短時間內重新裝入<i>smb.conf</i>配置文件。
+<p class="Pp"></p>
+<p class="Pp">我們 <b>不</b>
+    推薦你使用SIGKILL
+    (-9)來終止<b>smbd</b>進程除非這是最後的方法，因爲這樣做可能導致名字數據庫不一致。正確的方法是發送SIGTERM
+    (-15)信號並等待程序自行結束。</p>
+<p class="Pp"></p>
+<p class="Pp">另外，<b>smbd</b>程序的調試記錄等級也可以通過<a href="../../buster/manpages-zh/smbcontrol.1.zh_TW.html">smbcontrol(1)</a>
+    調高或者調低。(向程序發送一個SIGUSR1或SIGUSR2信號(kill
+    -USR2 &lt;nmbd-pid&gt;)的方法在Samba2.2
+    中已經不再使用。)
+    通過使用這樣的方法可以診斷一些暫時的問題，同時仍然可以在一個正常的並且較低的記錄等級來運行。</p>
+<p class="Pp"></p>
+<p class="Pp">Note that as the signal handlers send a debug write, they are not
+    re-entrant in <b>smbd</b>. This you should wait until<b>smbd</b> is in a
+    state of waiting for an incoming SMB before issuing them. It is possible to
+    make the signal handlers safe by un-blocking the signals before the select
+    call and re-blocking them after, however this would affect performance.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_SEE_ALSO">參見 SEE ALSO<a class="anchor" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO">¶</a></h1>
+<a href="../../buster/libwrap0/hosts_access.5.en.html">hosts_access(5)</a>, <a href="../../buster/manpages-zh/inetd.8.zh_TW.html">inetd(8)</a>, <a href="../../buster/manpages-zh/nmbd.8.zh_TW.html">nmbd(8)</a>, <a href="../../buster/manpages-zh/smb.conf.5.zh_TW.html">smb.conf(5)</a>,
+  <a href="../../buster/manpages-zh/smbclient.1.zh_TW.html">smbclient(1)</a>, <a href="../../buster/manpages-zh/testparm.1.zh_TW.html">testparm(1)</a>, <a href="../../buster/manpages-zh/testprns.1.zh_TW.html">testprns(1)</a>,
+  還有互聯網草案 <i>rfc1001.txt</i>,
+  <i>rfc1002.txt</i>. 另外，CIFS (從前的
+  SMB) 規約可以在
+  <a href="../../cifs/%E7%B6%B2%E9%A0%81%E4%B8%8A%E6%89%BE%E5%88%B0%E9%8F%88%E6%8E%A5%E3%80%82">../../cifs/網頁上找到鏈接。</a>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者_AUTHOR">作者 AUTHOR<a class="anchor" href="#%E4%BD%9C%E8%80%85_AUTHOR">¶</a></h1>
+samba軟件和相關工具最初由Andrew
+  Tridgell創建。samba現在由Samba Team
+  作爲開源軟件來發展，類似linux內核的開發方式。
+<p class="Pp"></p>
+<p class="Pp">最初的samba手冊頁是 Karl
+    Auer寫的。
+    手冊頁源碼已經轉換爲YODL格式(另一種很好的開源軟件，可以在ftp://ftp.ice.rug.nl/pub/unix找到)，由Jeremy
+    Sllison 更新到Samba2.0 版本。 Gerald
+    Carter
+    在Samba2.2中將它轉化爲DocBook
+    格式。 Alexander Bokovoy 在Samba
+    3.0中實現了DocBook XML4.2
+    格式的轉換。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>meaculpa &lt;meaculpa@21cn.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2000/12/08</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8Blinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+smbd.8.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-16T15:43:24Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"smbd(8)\"}}]}"
+</script>

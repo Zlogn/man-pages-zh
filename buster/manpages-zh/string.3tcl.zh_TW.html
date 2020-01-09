@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>string(3tcl) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/tcl8.6-doc/string.3tcl.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/string.3tcl.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/string.3tcl.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="3tcl">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; string(3tcl)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/string.3tcl">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/string.3tcl.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS" title="總覽 SYNOPSIS">總覽 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO" title="參見 SEE ALSO">參見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS" title="關鍵字 KEYWORDS">關鍵字 KEYWORDS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國 Linux 論壇 man 手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/string.3tcl.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/string.3tcl.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/string.3tcl.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/tcl8.6-doc/string.3tcl.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/string.3tcl.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/string.3tcl.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-dev/string.3.en.html">3 (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/libbobcat-dev/string.3bobcat.en.html">3bobcat (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/erlang-manpages/string.3erl.en.html">3erl (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/string.3tcl.zh_TW.html">3tcl (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">string(3tcl)</td>
+    <td class="head-vol">Tcl Built-In Commands</td>
+    <td class="head-rtitle">string(3tcl)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<pre>
+
+</pre>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+string - 操縱字符串
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_SYNOPSIS">總覽 SYNOPSIS<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS">¶</a></h1>
+<b>string </b><i>option arg </i>?<i>arg ...?</i>
+<pre>
+
+</pre>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+依賴於 <i>option</i>
+  (選項)進行某種字符串操作。合法的
+  <i>option</i> (可以是縮寫)有:
+<dl class="Bl-tag">
+  <dt><b>string bytelength </b><i>string</i></dt>
+  <dd>返回一個十進制字符串，給出在內存中表示
+      <i>string</i>
+      用的字節數。因爲 UTF-8
+      使用一到三字節來表示
+      Unicode
+      字符，字節長度可能與通常的字符長度不同。一個腳本關心字節長度的情況較少見。多數情況下，你應該使用
+      <b>string length</b> 操作。關於 UTF-8
+      表示的詳情請參考
+      <b>Tcl_NumUtfChars</b> 手冊頁。</dd>
+  <dt><b>string compare</b> ?<b>-nocase</b>? ?<b>-length int</b>? <i>string1
+    string2</i></dt>
+  <dd>對字符串 <i>string1</i> 和 <i>string2</i><i>
+      </i>進行逐個字符的比較。依賴於
+      <i>string1</i>
+      在詞典順序上(lexicographically)小於、等於、大於
+      <i>string2</i>，返回 -1、0、或
+      1。 如果指定了 <b>-length</b>
+      ，則在比較中只使用前
+      <i>length</i> 個字符。如果
+      <b>-length</b>
+      是負數，則被忽略。如果指定了
+      <b>-nocase</b>
+      ，則使用大小寫不敏感方式比較字符串。</dd>
+  <dt><b>string equal</b> ?<b>-nocase</b>? ?<b>-length int</b>? <i>string1
+    string2</i></dt>
+  <dd>對字符串 <i>string1</i> 和 <i>string2</i><i>
+      </i>進行逐個字符的比較。如果
+      <i>string1</i> 和 <i>string2</i>
+      等同則返回
+      1，否則返回
+      0。如果指定了 <b>-length</b>
+      ，則在比較中只使用前
+      <i>length</i> 個字符。如果
+      <b>-length</b>
+      是負數，則被忽略。如果指定了
+      <b>-nocase</b>
+      ，則使用大小寫不敏感方式比較字符串。</dd>
+  <dt><b>string first </b><i>string1 string2</i> ?<i>startIndex</i>?</dt>
+  <dd>在 <i>string2</i>
+      中查找精確的匹配
+      <i>string1
+      </i>中的字符的一個字符序列。如果找到，返回
+      <i>string2
+      </i>中的第一個這樣的匹配的第一個字符的索引。如果未找到，返回
+      -1。 如果指定了 <i>startIndex</i>
+      (以可被 <b>index</b>
+      方法接受的任何形式)，則約束查找爲在
+      <i>string2</i>
+      中從用索引指定的字符開始。例如，</dd>
+</dl>
+<div class="Bd-indent">
+<div class="Bd-indent">
+<pre><b>string first a 0a23456789abcdef 5</b>
+</pre>
+</div>
+將返回 <b>10</b>, but
+<div class="Bd-indent">
+<pre><b>string first a 0123456789abcdef 11</b>
+</pre>
+</div>
+將返回 <b>-1</b>.</div>
+<dl class="Bl-tag">
+  <dt><b>string index </b><i>string charIndex</i></dt>
+  <dd>返回 <i>string</i> 參數的第
+      <i>charIndex </i>個字符。<i>charIndex</i> 中
+      0
+      對應着字符串的第一個字符。
+     <i>charIndex</i>
+    可以被指定如下:</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><i>integer</i></dt>
+  <dd>用整數索引指定字符。</dd>
+  <dt><b>end</b></dt>
+  <dd>字符串的最後一個字符。</dd>
+  <dt><b>end-</b><i>integer</i></dt>
+  <dd>字符串最後一個字符減去指定整數偏移量(例如，
+      <b>end-1</b>
+      將參照“abcd”中的“c”)。</dd>
+</dl>
+<p class="Pp">如果 <i>charIndex</i> 小於 0
+    或大於等於字符串的長度則返回一個空串。</p>
+</div>
+<dl class="Bl-tag">
+  <dt><b>string is </b><i>class</i> ?<b>-strict</b>? ?<b>-failindex
+    </b><i>varname</i>? <i>string</i></dt>
+  <dd>如果 <i>string</i>
+      是指定字符類的一個有效成員則返回
+      1，否則返回
+      0。如果指定了
+      <b>-strict</b>，則對一個空串返回
+      0，否則在任何類上對一個空串返回
+      1。如果指定了
+      <b>-failindex</b>，則若函數返回
+      0，把字符串中類不再有效的地方的索引存儲到叫做
+      <i>varname</i>
+      的變量中。如果函數返回
+      1則不設置 <i>varname</i>
+      。識別下列字符類(類的名字可以被縮寫):</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>alnum</b></dt>
+  <dd>任何 Unicode
+      字母或數字字符。</dd>
+  <dt><b>alpha</b></dt>
+  <dd>任何 Unicode 字母字符。</dd>
+  <dt><b>ascii</b></dt>
+  <dd>值小於 \u0080
+      的任何字符(這是 7-bit ascii
+      的範圍)。</dd>
+  <dt><b>boolean</b></dt>
+  <dd><b>Tcl_GetBoolean</b>
+      所允許的任何形式。</dd>
+  <dt><b>control</b></dt>
+  <dd>任何 Unicode 控制字符。</dd>
+  <dt><b>digit</b></dt>
+  <dd>任何 Unicode
+      數字字符。注意這包括在
+      [0-9] 範圍外的字符。</dd>
+  <dt><b>double</b></dt>
+  <dd>雙精度數在 Tcl
+      中的任何有效形式，可以有可選的圍繞白空格。在值下溢/上溢的情況下，返回
+      0 並且 <i>varname</i> 將包含 -1。</dd>
+  <dt><b>false</b></dt>
+  <dd><b>Tcl_GetBoolean</b>
+      允許的任何形式，這裏的值是假。</dd>
+  <dt><b>graph</b></dt>
+  <dd>除了空格之外的任何
+      Unicode 打印字符。</dd>
+  <dt><b>integer</b></dt>
+  <dd>整數在 Tcl
+      中的任何有效形式，可以有可選的圍繞白空格。在值下溢/上溢的情況下，返回
+      0 並且 <i>varname</i> 將包含 -1。</dd>
+  <dt><b>lower</b></dt>
+  <dd>任何 Unicode
+      小寫字母字符。.</dd>
+  <dt><b>print</b></dt>
+  <dd>包括空格在內的任何
+      Unicode 打印字符。</dd>
+  <dt><b>punct</b></dt>
+  <dd>任何 Unicode 標點字符。</dd>
+  <dt><b>space</b></dt>
+  <dd>任何 Unicode 空格字符。</dd>
+  <dt><b>true</b></dt>
+  <dd><b>Tcl_GetBoolean</b>
+      所允許的任何形式，這裏的值是真。</dd>
+  <dt><b>upper</b></dt>
+  <dd>在 Unicode
+      中的任何大寫字符。</dd>
+  <dt><b>wordchar</b></dt>
+  <dd>任何 Unicode
+      單字字符。它是任何字母字符和
+      Unicode
+      連接符標點字符(例如，下劃線)。</dd>
+  <dt><b>xdigit</b></dt>
+  <dd>任何十六進制數字字符
+      ([0-9A-Fa-f]).</dd>
+</dl>
+<p class="Pp">在 <b>boolean</b>、<b>true</b> 和 <b>false</b>
+    的情況下，如果函數將返回
+    0，則 <i>varname</i>
+    總是被設置爲
+    0，原因是一個有效 boolean
+    值有多種本地(表示)。</p>
+</div>
+<dl class="Bl-tag">
+  <dt><b>string last </b><i>string1 string2</i> ?<i>startIndex</i>?</dt>
+  <dd>在 <i>string2</i>
+      中查找精確的匹配在
+      <i>string1
+      </i>中的字符的一個字符序列。如果找到，返回在
+      <i>string2
+      </i>中最後一個這樣的匹配的第一個字符的索引。如果沒有匹配，則返回
+      -1。 如果指定了
+      <i>startIndex</i>(以可被 <b>index</b>
+      方法接受的任何形式)，
+      則查找只針對 <i>string2</i>
+      中用 <i>startIndex</i>
+      指定的和此前的字符。例如，</dd>
+</dl>
+<div class="Bd-indent">
+<div class="Bd-indent">
+<pre><b>string last a 0a23456789abcdef 15</b>
+</pre>
+</div>
+將返回 <b>10</b>, 而
+<div class="Bd-indent">
+<pre><b>string last a 0a23456789abcdef 9</b>
+</pre>
+</div>
+將返回 <b>1</b>.</div>
+<dl class="Bl-tag">
+  <dt><b>string length </b><i>string</i></dt>
+  <dd>返回一個十進制字符串，給出在
+      <i>string
+      </i>中字符的數目。注意這不是必須與用於存儲這個字符串的字節的數目相同。</dd>
+  <dt><b>string map</b> ?<b>-nocase</b>? <i>charMap string</i></dt>
+  <dd>基於在 <i>charMap
+      </i>中的鍵-值對替代
+      <i>string</i> 中的字符。<i>charMap</i>
+      是形如 <i>key value key value</i> ...
+      的一個列表，同於從
+      <b>array get
+      </b>返回的那種形式。在字符串中這些鍵的每個實例將被替代爲相應的值。如果指定了
+      <b>-nocase</b>，則進行匹配時不區別大小寫。<i>key</i>
+      和 <i>value</i>
+      二者都可以是多字節的。以一種有次序的方式進行替代，所以在列表中出現在最前面的鍵將被首先檢查，以此類推。<i>string</i>
+      只被重複操作(iterate)一次，所以早先的鍵替代將不影響以後的鍵匹配。例如，</dd>
+</dl>
+<div class="Bd-indent">
+<div class="Bd-indent">
+<pre><b>string map {abc 1 ab 2 a 3 1 0} 1abcaababcabababc</b>
+</pre>
+</div>
+將返回字符串 <b>01321221</b>.</div>
+<dl class="Bl-tag">
+  <dt><b>string match</b> ?<b>-nocase</b>? <i>pattern</i> <i>string</i></dt>
+  <dd>查看 <i>pattern</i> 是否匹配
+      <i>string</i>；如果是則返回
+      1，不是則返回 0。
+      如果指定了
+      <b>-nocase</b>，則針對字符串的模式匹配採用大小寫不敏感的方式。
+      對於要進行匹配的這兩個字符串，除了在
+      <i>pattern
+      </i>中可以出現的下列特殊序列之外它們的內容必須相同:</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>*</b></dt>
+  <dd>匹配 <i>string
+      </i>中任何字符的一個序列，包括一個空字符。</dd>
+  <dt><b>?</b></dt>
+  <dd>匹配 <i>string</i>
+      中的一個單一字符。</dd>
+  <dt><b>[</b><i>chars</i><b>]</b></dt>
+  <dd>匹配在用 <i>chars
+      </i>給出的集合中的任何字符。如果在
+      <i>chars</i>
+      中出現一個形式是
+      <i>x</i><b>-</b><i>y</i>
+      的一個序列，則匹配在
+      <i>x</i> 和
+      <i>y</i>,之間的任何字符，包括二者。
+      當與 <b>-nocase
+      </b>一起使用的時候，範圍的端點首先被轉換爲小寫。所以在大小寫敏感匹配時
+      {[A-z]}
+      匹配‘_’(‘_’位於‘Z’和‘a’之間)，加上
+      <b>-nocase</b> 則將被象 {[A-Za-z]}
+      那樣對待(並可能是前者的真實意圖)。</dd>
+  <dt><b>\</b><i>x</i></dt>
+  <dd>匹配單一字符
+      <i>x</i>。這提供了一種方式避免在
+      <i>pattern </i>中對字符 <b>*?[]\</b>
+      做特殊解釋。</dd>
+</dl>
+</div>
+<dl class="Bl-tag">
+  <dt><b>string range </b><i>string first last</i></dt>
+  <dd>從 <i>string
+      </i>返回一個範圍的連續字符，從索引是
+      <i>first</i>
+      的字符開始並結束於索引是
+      <i>last</i> 的字符。 索引 0
+      參照字符串的
+      第一個字符。可以按
+      <b>index</b> 方法的方式指定
+      <i>first</i> 和 <i>last</i> 。 如果 <i>first</i>
+      小於零，則把它作爲零對待，而如果
+      <i>last</i>
+      大於等於字符串的長度，則把它作爲
+      <b>end</b> 對待。如果 <i>first</i>
+      大於 <i>last</i>
+      則返回空串。</dd>
+  <dt><b>string repeat </b><i>string count</i></dt>
+  <dd>把 <i>string </i>重複 <i>count</i>
+      次後返回。</dd>
+  <dt><b>string replace </b><i>string first last</i> ?<i>newstring</i>?</dt>
+  <dd>從 <i>string</i>
+      刪除一個範圍的連續字符，範圍從索引是
+      <i>first</i>
+      的字符開始並結束於索引是
+      <i>last</i> 的字符。索引 0
+      參照字符串的第一個字符。可以按
+      <b>index</b> 方法的方式指定
+      <i>first</i> 和 <i>last</i>
+      。如果指定了 <i>newstring</i>
+      ，則把它放置在刪除的字符範圍中。如果
+      <i>first</i>
+      小於零，則把它作爲零對待，而如果
+      <i>last</i>
+      大於等於字符串的長度，則把它作爲
+      <b>end</b> 對待。如果 <i>first</i>
+      大於 <i>last
+      </i>或最初的字符串的長度
+      ，或者 <i>last</i> 小於
+      0，則不做變動的返回最初的字符串。</dd>
+  <dt><b>string tolower </b><i>string</i> ?<i>first</i>? ?<i>last</i>?</dt>
+  <dd>返回一個等同於 <i>string</i>
+      的值，但所有大寫(或標題)字母都被轉換爲小寫。如果指定了
+      <i>first</i>，則它參照字符串中開始修改的第一個字符的索引。如果指定了
+      <i>last</i>，則它參照字符串中修改停止到(包括它)的那個字符的索引。按
+      <b>index</b> 方法的方式指定
+      <i>first</i> 和 <i>last</i>。</dd>
+  <dt><b>string totitle </b><i>string</i> ?<i>first</i>? ?<i>last</i>?</dt>
+  <dd>返回等同於 <i>string</i>
+      的一個值，但把 <i>string</i>
+      的第一個字符轉換成它的
+      Unicode
+      標題大寫變體(如果沒有標題大寫變體則爲大寫)而把字符串的其餘部分轉換成小寫。如果指定了
+      <i>first</i>，則它參照字符串中開始修改的第一個字符的索引。如果指定了
+      <i>last</i>，則它參照字符串中修改停止到(包括它)的那個字符的索引。按
+      <b>index</b> 方法的方式指定
+      <i>first</i> 和 <i>last</i>。</dd>
+  <dt><b>string toupper </b><i>string</i> ?<i>first</i>? ?<i>last</i>?</dt>
+  <dd>返回一個等同於 <i>string</i>
+      的值，但所有小寫(或標題)字母都被轉換爲大寫。如果指定了
+      <i>first</i>，則它參照字符串中開始修改的第一個字符的索引。如果指定了
+      <i>last</i>，則它參照字符串中修改停止到(包括它)的那個字符的索引。按
+      <b>index</b> 方法的方式指定
+      <i>first</i> 和 <i>last</i>。</dd>
+  <dt><b>string trim </b><i>string</i> ?<i>chars</i>?</dt>
+  <dd>返回一個等同於 <i>string</i>
+      的值，但刪除了任何前導或尾隨的用
+      <i>chars</i>
+      給出的字符集合中字符。如果未指定
+      <i>chars</i>
+      則刪除白空格(空格、tab、換行、回車)。</dd>
+  <dt><b>string trimleft </b><i>string</i> ?<i>chars</i>?</dt>
+  <dd>返回一個等同於 <i>string</i>
+      的值，但刪除了任何前導的用
+      <i>chars</i>
+      給出的字符集合中字符。如果未指定
+      <i>chars</i>
+      則刪除白空格(空格、tab、換行、回車)。</dd>
+  <dt><b>string trimright </b><i>string</i> ?<i>chars</i>?</dt>
+  <dd>返回一個等同於 <i>string</i>
+      的值，但刪除了任何尾隨的用
+      <i>chars</i>
+      給出的字符集合中字符。如果未指定
+      <i>chars</i>
+      則刪除白空格(空格、tab、換行、回車)。</dd>
+  <dt><b>string wordend </b><i>string charIndex</i></dt>
+  <dd>返回包含 <i>string </i>的第
+      <i>charIndex</i>
+      個字符的那個字最後的字符後面的那個字符的索引。按
+      <b>index</b> 方法的方式指定
+      <i>charIndex</i>
+      。一個字被認爲是任何連續範圍的
+      alphanumeric (Unicode
+      字母或十進制數字)或下劃線(Unicode
+      連接符標點)字符，或除了這些之外的任何單一字符。</dd>
+  <dt><b>string wordstart </b><i>string charIndex</i></dt>
+  <dd>返回包含 <i>string </i>的第
+      <i>charIndex</i>
+      個字符的那個字的第一個字符的索引。按
+      <b>index</b> 方法的方式指定
+      <i>charIndex</i>
+      。一個字被認爲是任何連續範圍的
+      alphanumeric (Unicode
+      字母或十進制數字)或下劃線(Unicode
+      連接符標點)字符，或除了這些之外的任何單一字符。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_SEE_ALSO">參見 SEE ALSO<a class="anchor" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO">¶</a></h1>
+expr(n), list(n)
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="關鍵字_KEYWORDS">關鍵字 KEYWORDS<a class="anchor" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS">¶</a></h1>
+case conversion, compare, index, match, pattern, string, word, equal, ctype
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>寒蟬退士</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/11/15</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國_Linux_論壇_man_手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8B_Linux_%E8%AB%96%E5%A3%87_man_%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">8.1</td>
+    <td class="foot-os">Tcl</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+string.3tcl.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2020-01-04T21:36:38Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"string(3tcl)\"}}]}"
+</script>

@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tcp(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages/tcp.7.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es/tcp.7.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-ja/tcp.7.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pt/tcp.7.pt.html" hreflang="pt">
+<link rel="alternate" href="../../buster/manpages-zh/tcp.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/tcp.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; tcp(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/tcp.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/tcp.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E7%BA%9C_SYNOPSIS" title="總纜 SYNOPSIS">總纜 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%9C%B0%E5%9D%80%E6%A0%BC%E5%BC%8F_ADDRESS_FORMATS" title="地址格式 ADDRESS FORMATS">地址格式 ADDRESS FORMATS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B3%BB%E7%B5%B1%E6%8E%A7%E5%88%B6_SYSCTLS" title="系統控制 SYSCTLS">系統控制 SYSCTLS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8E%A5%E5%8F%A3%E9%81%B8%E9%A0%85_SOCKET_OPTIONS" title="接口選項 SOCKET OPTIONS">接口選項 SOCKET OPTIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%BC%B8%E5%85%A5%E8%BC%B8%E5%87%BA%E6%8E%A7%E5%88%B6%E5%AD%97_IOCTLS" title="輸入輸出控制字 IOCTLS">輸入輸出控制字 IOCTLS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%87%BA%E9%8C%AF%E8%99%95%E7%90%86_ERROR_HANDLING" title="出錯處理 ERROR HANDLING">出錯處理 ERROR HANDLING</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%99%84%E8%A8%BB_NOTES" title="附註 NOTES">附註 NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%B7%B2%E7%9F%A5%E9%8C%AF%E8%AA%A4_ERRORS" title="已知錯誤 ERRORS">已知錯誤 ERRORS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%8D%E8%B6%B3%E4%B9%8B%E8%99%95_BUGS" title="不足之處 BUGS">不足之處 BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%89%88%E6%9C%AC_VERSIONS" title="版本 VERSIONS">版本 VERSIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%88%E8%A6%8B_SEE_ALSO" title="又見 SEE ALSO">又見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/tcp.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/tcp.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/tcp.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages/tcp.7.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es/tcp.7.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/tcp.7.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pt/tcp.7.pt.html" title="Portuguese (pt)">português (pt)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/tcp.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/tcp.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/freebsd-manpages/tcp.4freebsd.en.html">4freebsd (<span title="Special files (usually found in /dev)">files</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/tcp.7.zh_TW.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">TCP(7)</td>
+    <td class="head-vol">Linux Programmer&#39;s Manual</td>
+    <td class="head-rtitle">TCP(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<p class="Pp"></p>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+tcp - 傳輸控制協議 （TCP）
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總纜_SYNOPSIS">總纜 SYNOPSIS<a class="anchor" href="#%E7%B8%BD%E7%BA%9C_SYNOPSIS">¶</a></h1>
+<b>#include &lt;sys/socket.h&gt;</b>
+<br/>
+<b>#include &lt;netinet/in.h&gt;</b>
+<br/>
+<b>tcp_socket = socket(PF_INET, SOCK_STREAM, 0);</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+本協議是對 RFC973, RFC1122 和 RFC2001
+  定義的協議 及其 NewReno 和
+  SACK 擴充部份實現的。
+  它在建立在互聯網協議
+  <a href="../../buster/manpages-zh/ip.7.zh_TW.html">ip(7)</a>
+  之上的兩個套接字之間提供了可靠的面向數據流的全雙工連接。
+  TCP
+  協議確保了數據按序到達並在數據包丟失時自動重發。
+  它產生和校驗每個數據包的校驗和
+  (checksum)
+  用以捕捉數據傳輸時錯誤。TCP
+  不保留記錄的上下限。
+<p class="Pp">初始的 TCP
+    接口不包含遠端或本地址並且沒有規定明確。
+    在產生一個出站 (outgoing) TCP
+    連接時使用 <a href="../../buster/manpages-dev/connect.2.en.html">connect(2)</a>
+    來與另個套接字建立一個網絡接口。
+    在接收一個入站 (incoming)
+    連接時，套接字使用
+    <a href="../../buster/manpages-zh/bind.2.zh_TW.html">bind(2)</a>
+    先取得本地地址和端口，然後調用
+    <a href="../../buster/manpages-zh/listen.2.zh_TW.html">listen(2)</a>
+    使套接字進入偵聽狀態。
+    隨後可以用 <a href="../../buster/manpages-zh/accept.2.zh_TW.html">accept(2)</a>.
+    接受爲每一個入站 (incoming)
+    連接建立的新套接字。
+    一個已經經過 <b>accept</b> 或
+    <b>connect</b>
+    成功調用的套接字表示它已完全明確，可以進行數據傳送。
+    在偵聽狀態或尚未建立連接的網絡接口之間數據傳送將不能進行。</p>
+<p class="Pp">Linux 2.2 支持 RFC1323 TCP
+    高性能擴展。這包括採用大
+    TCP 數據滑移
+    窗以支持高延時或高帶寬下的多連接。爲實現這些功能，必須增加接
+    收與發送的數據緩存區。它們可以使用
+    <b>net.core.wmem_default</b> 和 <b>net.core.rmem_default</b> sysctl
+    進行全局設定,或用
+    <b>SO_SNDBUF</b> 和 <b>SO_RCVBUF</b>
+    套接字選項對套接字進行單獨設定。
+    套接字緩存區的最大尺寸，受到由全局變量
+    <b>net.core.rmem_max</b> 和 <b>net.core.wmem_max</b> 兩個
+    sysctl
+    限制。詳細細節，請參見
+    <a href="../../buster/manpages-zh/socket.7.zh_TW.html">socket(7)</a>.</p>
+<p class="Pp">TCP
+    支持緊急數據。緊急數據用來通知接收方，在數據流中有需要儘快處理
+    的重要信息。發送緊急數據，需在
+    <a href="../../buster/manpages-zh/send.2.zh_TW.html">send(2)</a>. 中指定 <b>MSG_OOB</b>
+    選項。當緊急數據接收後，內核發送
+    <b>SIGURG</b>
+    信號到讀進程或者那些用
+    ioctl 設置了 <b>FIOCSPGRP</b> 或 <b>FIOCSETOWN</b>
+    套接字的進程或進程組．
+    當打開了 <b>SO_OOBINLINE</b>
+    套接字選項,
+    那麼緊急數據被放入普通數據流中。
+    (可以用 <b>SIOCATMARK</b> ioctl 來測試),
+    否則只有設置了 <a href="../../buster/manpages-dev/sendmsg.2.en.html">sendmsg(2)</a>
+    中的 <b>MSG_OOB</b>
+    標誌時，數據才能被接收。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="地址格式_ADDRESS_FORMATS">地址格式 ADDRESS FORMATS<a class="anchor" href="#%E5%9C%B0%E5%9D%80%E6%A0%BC%E5%BC%8F_ADDRESS_FORMATS">¶</a></h1>
+TCP 是建立在 IP 之上(參見
+  <a href="../../buster/manpages-zh/ip.7.zh_TW.html">ip(7)</a>). <a href="../../buster/manpages-zh/ip.7.zh_TW.html">ip(7)</a>
+  定義定義的地址格式也適用於
+  TCP.
+  TCP只支持點對點通訊，不支持全局及多址廣播。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="系統控制_SYSCTLS">系統控制 SYSCTLS<a class="anchor" href="#%E7%B3%BB%E7%B5%B1%E6%8E%A7%E5%88%B6_SYSCTLS">¶</a></h1>
+可以通過訪問 <b>/proc/sys/net/ipv4/*</b>
+  目錄下的文件 或通過
+  <a href="../../buster/manpages-dev/sysctl.2.en.html">sysctl(2)</a>
+  接口進行訪問這些 sysctl.
+  此外大多數 IP sysctl
+  也同樣適用於 TCP; 參見
+  <a href="../../buster/manpages-zh/ip.7.zh_TW.html">ip(7)</a>.
+<dl class="Bl-tag">
+  <dt><b>tcp_window_scaling</b></dt>
+  <dd>打開 RFC1323 協議中 TCP
+      滑移數據窗尺寸調整.</dd>
+  <dt><b>tcp_sack</b></dt>
+  <dd>打開 RFC2018 協議中 TCP
+      選擇性確認.</dd>
+  <dt><b>tcp_timestamps</b></dt>
+  <dd>打開 RFC1323 協議中 TCP
+      時間戳.</dd>
+  <dt><b>tcp_fin_timeout</b></dt>
+  <dd>規定強迫關閉套接字前，等待最後結束數據包的秒數。
+      這確實與 TCP
+      協議中有關規定相違背。
+      但這是防止拒絕服務攻擊所要求的。</dd>
+  <dt><b>tcp_keepalive_probes</b></dt>
+  <dd>丟棄數據包前，進行最大
+      TCP 保持連接偵測.
+      保持連接僅在 <b>SO_KEEPALIVE</b>
+      套接字選項被打開時才被髮送.</dd>
+  <dt><b>tcp_keepalive_time</b></dt>
+  <dd>從不再傳送數據到向連接上發送保持連接信號之間所需的秒數，
+      默認爲 10800 秒(3 小時)。</dd>
+  <dt><b>tcp_max_ka_probes</b></dt>
+  <dd>在一定時間發送保持連接時間偵測包的數量。爲防止突發信號，此
+      值不宜設置太高。</dd>
+  <dt><b>tcp_stdurg</b></dt>
+  <dd>使 TCP
+      緊急指針字段遵循在
+      RFC973
+      協議中的嚴格解釋。缺省情況下，
+      緊急指針字段使用與
+      BSD
+      相兼容，指針指向緊急數據後的第一個字節。
+      在 RFC973
+      協議中是指向緊急數據後的最後一個字節。打開這一選項
+      可能造成操作互換性問題。</dd>
+  <dt><b>tcp_syncookies</b></dt>
+  <dd>打開 TCP
+      同步標籤(syncookie)，內核必須打開了
+      <b>CONFIG_SYN_COOKIES</b> 項進行編譯.
+      同步標籤(Syncookie)防止一個套接字在有過多試圖連接到
+      達時的過載。當使用同步標籤(syncookie)時，客戶機可能探測不到
+      一個超時時間短的過載主機。</dd>
+  <dt><b>tcp_max_syn_backlog</b></dt>
+  <dd>每個接口中待發數據隊列
+      (backlog) 長度。Linux 2.2 中,在
+      <a href="../../buster/manpages-zh/listen.2.zh_TW.html">listen(2)</a>
+      中的定義只說明瞭已建立的套接字中待發數據隊列(backlog)長度。
+      每個偵測套接字的還未建立的套接字(在
+      <b>SYN_RECV</b>
+      狀態中的)的最大隊列長度用這個
+      sysctl 設置。
+      當更多的連接請求到達時，Linux
+      系統將開始丟棄數據包。當同步標籤(syncookie)被設置成打開，
+      數據包仍能被迴應時，這個值將被忽略。</dd>
+  <dt><b>tcp_retries1</b></dt>
+  <dd>定義放棄迴應一個 TCP
+      連接請求前發送重試信號的次數。</dd>
+  <dt><b>tcp_retries2</b></dt>
+  <dd>定義放棄在已建立通訊狀態下一個
+      TCP
+      數據包前重發的次數。</dd>
+  <dt><b>tcp_syn_retries</b></dt>
+  <dd>定義在放棄發送初始同步數據包(SYN
+      packet)到遠端主機前重試的次數並返回出
+      錯消息，此值必須小於255。這僅對出站(outgoing)連接超時有效；
+      對於進站(incoming)連接重發數由
+      <b>tcp_retries1</b> 定義。</dd>
+  <dt><b>tcp_retrans_collapse</b></dt>
+  <dd>在重發時試圖發送全尺寸數據包。
+      用來解決一些堆棧中的
+      TCP 缺陷(BUG)。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="接口選項_SOCKET_OPTIONS">接口選項 SOCKET OPTIONS<a class="anchor" href="#%E6%8E%A5%E5%8F%A3%E9%81%B8%E9%A0%85_SOCKET_OPTIONS">¶</a></h1>
+設置或取得 TCP
+  接口選項，調用 <a href="../../buster/manpages-dev/getsockopt.2.en.html">getsockopt(2)</a>
+  進行讀操作或調用
+  <a href="../../buster/manpages-dev/setsockopt.2.en.html">setsockopt(2)</a>
+  將接口系列選項參數傳送到
+  <b>SOL_TCP</b>
+  中去.另外，大多數
+  <b>SOL_IP</b> 接口 選項對 TCP
+  接口也適用。更多資料，請參見
+  <a href="../../buster/manpages-zh/ip.7.zh_TW.html">ip(7)</a>.
+<dl class="Bl-tag">
+  <dt><b>TCP_NODELAY</b></dt>
+  <dd>關閉 Nagle
+      算法。這意味着數據包將盡可能快地被髮送而沒有因有網
+      絡中更多的數據包造成的延時，期待一個整數表示的布爾標誌。</dd>
+  <dt><b>TCP_MAXSEG</b></dt>
+  <dd>設置或接收最大出站
+      TCP
+      數據段尺寸。如果這個選項在建立連接前的
+      設置，它將改變發送到另一端初始信息包中的
+      MSS 值。這個值大於 MTU
+      接口值將被忽略而不起作用。</dd>
+  <dt><b>TCP_CORK</b></dt>
+  <dd>設置此項將不發送部份幀。所有排隊的部份幀只在此項清除後，
+      才能發送。在調用
+      <a href="../../buster/manpages-dev/sendfile.2.en.html">sendfile(2)</a>
+      前準備數據報頭或對網絡吞吐量進行優化有用處。
+      此選項不能與 <b>TCP_NODELAY</b>
+      聯用.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="輸入輸出控制字_IOCTLS">輸入輸出控制字 IOCTLS<a class="anchor" href="#%E8%BC%B8%E5%85%A5%E8%BC%B8%E5%87%BA%E6%8E%A7%E5%88%B6%E5%AD%97_IOCTLS">¶</a></h1>
+這些 ioctl 可以用 <a href="../../buster/manpages-dev/ioctl.2.en.html">ioctl(2)</a>
+  進行訪問。正確調用句法爲:
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre><b>int</b><i> value</i><b>;</b>
+<i>error</i><b> = ioctl(</b><i>tcp_socket</i><b>, </b><i>ioctl_type</i><b>, &amp;</b><i>value</i><b>);</b>
+</pre>
+</div>
+<dl class="Bl-tag">
+  <dt><b>FIONREAD</b></dt>
+  <dd>返回接收緩存中排隊的未讀數據的數量。
+      變量參數是指向一個整數的指針。</dd>
+  <dt><b>SIOCATMARK</b></dt>
+  <dd>如果用戶程序已經接收了所有緊急數據，此項返回值爲
+      0。它與 <b>SO_OOBINLINE</b>
+      聯用。變量參數是對測試結果，指向一個整數的指針。</dd>
+  <dt><b>TIOCOUTQ</b></dt>
+  <dd>返回在接口(socket)發送隊列中待發送數據數，
+      該指針返回是一個整數數值。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="出錯處理_ERROR_HANDLING">出錯處理 ERROR HANDLING<a class="anchor" href="#%E5%87%BA%E9%8C%AF%E8%99%95%E7%90%86_ERROR_HANDLING">¶</a></h1>
+當網絡發生錯誤時，TCP
+  協議將嘗試重新發送數據包，
+  當重發一定失敗次數後，產生超時錯
+  <b>ETIMEDOUT</b>
+  或報告在此連接上最後出錯消息。
+<p class="Pp">有時程序需要更快地偵測到出錯狀態。這可以通過打開
+    <b>SOL_IP</b> 級別的 <b>IP_RECVERR</b>
+    接口選項。當此項打開後，所有入站
+    (incoming) 錯誤
+    被立即送到用戶程序中。小心使用該選項-它使
+    TCP 協議對路由的改
+    變和其他正常網絡狀態變化的容錯性下降。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="附註_NOTES">附註 NOTES<a class="anchor" href="#%E9%99%84%E8%A8%BB_NOTES">¶</a></h1>
+當建立一個連接時發生錯誤引發一個對
+  <b>SIGPIPE</b>
+  接口寫操作，此操作
+  僅當 <b>SO_KEEPOPEN</b>
+  接口選項被設置時才能進行。
+<p class="Pp">TCP
+    並不具有真正的額外頻帶(out-of-band)數據;
+    雖然它可以有緊
+    急數據。在 Linux
+    中這意味着如果有其他端發送緊急數據時，舊的緊
+    急數據將被當作普通數據插入數據流中。(即使
+    <b>SO_OOBINLINE</b>
+    值沒有被設置).這與基於
+    BSD 堆棧定義不同.</p>
+<p class="Pp"></p>
+<p class="Pp">缺省狀態下，Linux
+    使用與 BSD
+    兼容的緊急數據指針字段。這與
+    RFC1122 協議相違背,
+    但這是與其他堆棧協議相互操作性所要求。它可以用
+    <b>tcp_stdurg</b> sysctl 加以改變.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="已知錯誤_ERRORS">已知錯誤 ERRORS<a class="anchor" href="#%E5%B7%B2%E7%9F%A5%E9%8C%AF%E8%AA%A4_ERRORS">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>EPIPE</b></dt>
+  <dd>另一端意外關閉了套接字連接或對一個關閉了的套接字進行讀操作。</dd>
+  <dt><b>ETIMEDOUT</b></dt>
+  <dd>一段時間後，另一端不確認重發數據。</dd>
+  <dt><b>EAFNOTSUPPORT</b></dt>
+  <dd>在 <i>sin_family</i>
+      傳遞套接字地址類型而不是在
+      <b>AF_INET</b>中的。</dd>
+</dl>
+<p class="Pp">任何定義爲 <a href="../../buster/manpages-zh/ip.7.zh_TW.html">ip(7)</a>
+    出錯或普通套接字出錯可能返回爲
+    TCP 出錯.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="不足之處_BUGS">不足之處 BUGS<a class="anchor" href="#%E4%B8%8D%E8%B6%B3%E4%B9%8B%E8%99%95_BUGS">¶</a></h1>
+不是所有的錯誤都列入了文檔。
+<p class="Pp">沒有描述有關透明代理的選項</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="版本_VERSIONS">版本 VERSIONS<a class="anchor" href="#%E7%89%88%E6%9C%AC_VERSIONS">¶</a></h1>
+有關 sysctl 是在 Linux 2.2
+  中新增的。 <b>IP_RECVERR</b> 是 Linux 2.2
+  中的新特性。 <b>TCP_CORK</b> 在 2.2
+  中是新的內容.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="又見_SEE_ALSO">又見 SEE ALSO<a class="anchor" href="#%E5%8F%88%E8%A6%8B_SEE_ALSO">¶</a></h1>
+<a href="../../buster/manpages-zh/socket.7.zh_TW.html">socket(7)</a>, <a href="../../buster/manpages-dev/socket.2.en.html">socket(2)</a>, <a href="../../buster/manpages-zh/ip.7.zh_TW.html">ip(7)</a>, <a href="../../buster/manpages-dev/sendmsg.2.en.html">sendmsg(2)</a>,
+  <a href="../../buster/manpages-dev/recvmsg.2.en.html">recvmsg(2)</a>.
+<br/>
+RFC793 協議中對 TCP 有關描述.
+<br/>
+RFC1122 協議中對 TCP
+  要求和一份關於 Nagle
+  算法描述。
+<br/>
+RFC2001 協議中一些 TCP 算法。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>LetBright &lt;letbright@netease.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2000/10/21</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8Blinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">25 Apr 1999</td>
+    <td class="foot-os">Linux Man Page</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+tcp.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-26T15:38:37Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"tcp(7)\"}}]}"
+</script>

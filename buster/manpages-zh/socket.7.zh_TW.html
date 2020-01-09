@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>socket(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages/socket.7.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es/socket.7.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-ja/socket.7.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pt/socket.7.pt.html" hreflang="pt">
+<link rel="alternate" href="../../buster/manpages-zh/socket.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/socket.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; socket(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/socket.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/socket.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD" title="總覽">總覽</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%A5%97%E6%8E%A5%E5%B1%A4%E5%87%BD%E6%95%B8" title="套接層函數">套接層函數</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%A5%97%E6%8E%A5%E5%AD%97%E9%81%B8%E9%A0%85" title="套接字選項">套接字選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SIGNALS" title="SIGNALS">SIGNALS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYSCTLS" title="SYSCTLS">SYSCTLS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#IOCTLS" title="IOCTLS">IOCTLS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%B3%A8%E6%84%8F" title="注意">注意</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%BC%BA%E9%99%B7" title="缺陷">缺陷</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#VERSIONS_%E7%89%88%E6%9C%AC" title="VERSIONS 版本">VERSIONS 版本</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85" title="作者">作者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%88%E8%A6%8B" title="又見">又見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/socket.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/socket.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/socket.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages/socket.7.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es/socket.7.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/socket.7.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pt/socket.7.pt.html" title="Portuguese (pt)">português (pt)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/socket.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/socket.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/socket/socket.1.en.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-dev/socket.2.en.html">2 (<span title="System calls (functions provided by the kernel)">syscalls</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/freebsd-manpages/socket.2freebsd.en.html">2freebsd (<span title="System calls (functions provided by the kernel)">syscalls</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/socket.3tcl.zh_TW.html">3tcl (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/socket.7.zh_TW.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/freebsd-manpages/socket.9freebsd.en.html">9freebsd (<span title="Kernel routines [Non standard]">kernel</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">SOCKET(7)</td>
+    <td class="head-vol">Linux Programmer&#39;s Manual</td>
+    <td class="head-rtitle">SOCKET(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+socket - Linux 套接字
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽">總覽<a class="anchor" href="#%E7%B8%BD%E8%A6%BD">¶</a></h1>
+<b>#include &lt;sys/socket.h&gt;</b>
+<br/>
+<i>mysocket</i><b> = socket(int </b><i>socket_family</i><b>, int
+  </b><i>socket_type</i><b>, int </b><i>protocol</i><b>);</b>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+本手冊頁介紹了 Linux
+  套接字的用戶接口.
+  這個 BSD
+  兼容套接字是介於用
+  戶進程與內核網絡協議棧之間的統一接口,
+  各協議模塊屬於不同的
+  <i>協議族</i> ,如 <b>PF_INET</b>, <b>PF_IPX</b>,
+  <b>PF_PACKET</b> 和 <i>套接字類型</i>
+  ,如 <b>字節流（SOCK_STREAM）</b> 或
+  <b>數據報（SOCK_DGRAM）.</b>
+  關於協議族和套接字類型請參考
+  <a href="../../buster/manpages-dev/socket.2.en.html">socket(2)</a><b>.</b>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="套接層函數">套接層函數<a class="anchor" href="#%E5%A5%97%E6%8E%A5%E5%B1%A4%E5%87%BD%E6%95%B8">¶</a></h1>
+用戶通過這些套接字函數發送和接收包,
+  以及其他套接字操作.
+  詳細說明參看他們各自的手冊頁.
+<p class="Pp"><a href="../../buster/manpages-dev/socket.2.en.html">socket(2)</a>
+  創建套接字，</p>
+<p class="Pp"><a href="../../buster/manpages-dev/connect.2.en.html">connect(2)</a>
+    與遠程套接字地址建立連接</p>
+<p class="Pp"><a href="../../buster/manpages-zh/bind.2.zh_TW.html">bind(2)</a>
+    把套接字和一個本地套接字地址綁定在一起（爲套接字分配一個本地協議地址）</p>
+<p class="Pp"><a href="../../buster/manpages-zh/listen.2.zh_TW.html">listen(2)</a>
+    通知套接字接受新的連接</p>
+<p class="Pp"><a href="../../buster/manpages-zh/accept.2.zh_TW.html">accept(2)</a>
+    爲新的已完成連接獲得新的描述字</p>
+<p class="Pp"><a href="../../buster/manpages-dev/socketpair.2.en.html">socketpair(2)</a>
+    返回兩個連接的匿名套接字（僅在某些本地族中才有實現,如
+    <b>PF_UNIX</b>）</p>
+<p class="Pp"><a href="../../buster/manpages-zh/send.2.zh_TW.html">send(2)</a>,</p>
+<p class="Pp"><a href="../../buster/manpages-dev/sendto.2.en.html">sendto(2)</a>, 和 <a href="../../buster/manpages-dev/sendmsg.2.en.html">sendmsg(2)</a>
+    通過套接字發送數據，而
+    <a href="../../buster/manpages-dev/recv.2.en.html">recv(2)</a>, <a href="../../buster/manpages-dev/recvfrom.2.en.html">recvfrom(2)</a>, <a href="../../buster/manpages-dev/recvmsg.2.en.html">recvmsg(2)</a>
+    從套接字接收數據.
+    <a href="../../buster/manpages-dev/poll.2.en.html">poll(2)</a> 和</p>
+<p class="Pp"><a href="../../buster/manpages-dev/select.2.en.html">select(2)</a>
+    等待數據到來或準備好接收數據.
+    除此之外, 標準 I/O
+    操作如 <a href="../../buster/manpages-zh/write.2.zh_TW.html">write(2)</a>, <a href="../../buster/manpages-dev/writev.2.en.html">writev(2)</a>,
+    <a href="../../buster/manpages-dev/sendfile.2.en.html">sendfile(2)</a>, <a href="../../buster/manpages-zh/read.2.zh_TW.html">read(2)</a>, 和 <a href="../../buster/manpages-dev/readv.2.en.html">readv(2)</a>
+    也可用來讀入（接收）和寫出（發送）數據.</p>
+<p class="Pp"><a href="../../buster/manpages-dev/getsockname.2.en.html">getsockname(2)</a>
+    用於獲得本地套接字地址</p>
+<p class="Pp"><a href="../../buster/manpages-dev/getpeername.2.en.html">getpeername(2)</a>
+    用於獲得遠端套接字地址.
+    <a href="../../buster/manpages-dev/getsockopt.2.en.html">getsockopt(2)</a> 和 <a href="../../buster/manpages-dev/setsockopt.2.en.html">setsockopt(2)</a>
+    用於設置或取得套接字或協議選項.
+    <a href="../../buster/manpages-dev/ioctl.2.en.html">ioctl(2)</a>
+    也可以用來設置或讀取一些其他選項.</p>
+<p class="Pp"><a href="../../buster/manpages-zh/close.2.zh_TW.html">close(2)</a> 關閉套接字.
+    <a href="../../buster/manpages-dev/shutdown.2.en.html">shutdown(2)</a>
+    關閉全雙工套接字連接的一部分.</p>
+<p class="Pp">套接字不支持搜索，也不支持調用
+    <a href="../../buster/manpages-dev/pread.2.en.html">pread(2)</a> 或 <a href="../../buster/manpages-dev/pwrite.2.en.html">pwrite(2)</a> 進行非 0
+    位置的操作. 可以用
+    <a href="../../buster/manpages-dev/fcntl.2.en.html">fcntl(2)</a>. 設置 <b>O_NONBLOCK</b>
+    標誌來實現對套接字的非阻塞
+    I/O 操作 <b>O_NONBLOCK</b> 是從 accept
+    繼承來的，然後原來所有會阻塞的操作會返回
+    <b>EAGAIN</b>. <a href="../../buster/manpages-dev/connect.2.en.html">connect(2)</a>
+    在此情況下返回 <b>EINPROGRESS</b>
+    錯誤. 用戶可以通過
+    <a href="../../buster/manpages-dev/poll.2.en.html">poll(2)</a> 或者 <a href="../../buster/manpages-dev/select.2.en.html">select(2)</a>
+    等待各種事件.</p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<table class="tbl" border="1" style="border-style: solid;">
+  <tbody><tr>
+    <td colspan="3" style="text-align: center;">I/O 事件</td>
+  </tr>
+  <tr>
+    <td>事件</td>
+    <td>輪詢標誌</td>
+    <td>發生事件</td>
+  </tr>
+  <tr>
+    <td>讀</td>
+    <td>POLLIN</td>
+    <td>新數據到達.</td>
+  </tr>
+  <tr>
+    <td>讀</td>
+    <td>POLLIN</td>
+    <td>(對面向連接的套接字)建立連接成功</td>
+  </tr>
+  <tr>
+    <td>讀</td>
+    <td>POLLHUP</td>
+    <td>另一端套接字發出斷開連接請求.</td>
+  </tr>
+  <tr>
+    <td>讀</td>
+    <td>POLLHUP</td>
+    <td>(僅對面向連接協議)套接字寫的時候連接斷開.
+      同時發送 SIGPIPE.</td>
+  </tr>
+  <tr>
+    <td>寫</td>
+    <td>POLLOUT</td>
+    <td>套接字有充足的發送緩衝區用於寫入新數據.</td>
+  </tr>
+  <tr>
+    <td>讀/寫</td>
+    <td>POLLIN| POLLOUT</td>
+    <td>發出的 connect (2) 結束.</td>
+  </tr>
+  <tr>
+    <td>讀/寫</td>
+    <td>POLLERR</td>
+    <td>產生一個異步錯誤.</td>
+  </tr>
+  <tr>
+    <td>讀/寫</td>
+    <td>POLLHUP</td>
+    <td>對方已經單向關閉連接.</td>
+  </tr>
+  <tr>
+    <td>例外</td>
+    <td>POLLPRI</td>
+    <td>緊急數據到達.然後發送
+      SIGURG.</td>
+  </tr>
+</tbody></table>
+<p class="Pp"></p>
+<p class="Pp">另外一個的 poll/select
+    方法是讓內核用 <b>SIGIO</b>
+    信號來通知應用程序.
+    要這麼用的話你必須用
+    <a href="../../buster/manpages-dev/fcntl.2.en.html">fcntl(2)</a>
+    設置套接字文件描述符的
+    <b>FASYNC</b> 標誌，並用 <a href="../../buster/manpages-dev/sigaction.2.en.html">sigaction(2)</a>.
+    給 <b>SIGIO</b>
+    信號設置一個的有效信號處理句柄.參看下面的
+    <i>SIGNALS</i> 的討論.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="套接字選項">套接字選項<a class="anchor" href="#%E5%A5%97%E6%8E%A5%E5%AD%97%E9%81%B8%E9%A0%85">¶</a></h1>
+套接字選項可以用
+  <a href="../../buster/manpages-dev/setsockopt.2.en.html">setsockopt(2)</a> 來設置，用
+  <a href="../../buster/manpages-dev/getsockopt.2.en.html">getsockopt(2)</a>
+  讀取所有套接字級別設爲
+  <b>SOL_SOCKET</b>
+  的套接字的套接字選項:
+<dl class="Bl-tag">
+  <dt><b>SO_KEEPALIVE</b></dt>
+  <dd>允許在面向連接的套接字上發送
+      keep-alive
+      消息的功能.是一個布爾整數.</dd>
+  <dt><b>SO_OOBINLINE</b></dt>
+  <dd>如果打開這個選項，帶外（Out-of-Band）數據可以直接放入接收數據流。
+      否則，只有接收時打開
+      <b>MSG_OOB</b> 標誌,
+      才接收帶外數據.</dd>
+  <dt><b>SO_RCVLOWAT</b> 和 <b>SO_SNDLOWAT</b></dt>
+  <dd>聲明在開始向協議
+      (<b>SO_SNDLOWAT</b>)
+      或正在接收數據的用戶
+      (<b>SO_RCVLOWAT</b>).
+      傳遞數據之前緩衝區內的最小字節數.
+      在 Linux
+      中這兩個值是不可改變的,
+      固定爲 1 字節. 可以用
+      <b>getsockopt</b>
+      用來讀取它們的值;
+      <b>setsockopt</b> 總是返回
+    <b>ENOPROTOOPT</b>.</dd>
+  <dt><b>SO_RCVTIMEO</b> 和 <b>SO_SNDTIMEO</b></dt>
+  <dd>發送和接收時的超時設定,
+      並在超時時報錯. 在 Linux
+      中由 協議指定,
+      不能被讀寫.
+      它們的功能可用 <a href="../../buster/manpages-dev/alarm.2.en.html">alarm(2)</a>
+      或者 <a href="../../buster/manpages-dev/setitimer.2.en.html">setitimer(2)</a>. 來模擬.</dd>
+  <dt><b>SO_BSDCOMPAT</b></dt>
+  <dd>允許 BSD 的 bug-to-bug 兼容.
+      這一項只能在 UDP
+      協議模塊中使用而
+      且今後將要取消.
+      如果允許的話, UDP
+      套接字接收到的 ICMP
+      錯誤將不
+      會被傳送至用戶程序.
+      Linux 2.0
+      中對於原始套接字也允許
+      BSD bug-to-bug
+      兼容（報頭隨機改變,省略廣播標識）,但在
+      Linux 2.2 中取消了這一項.
+      修改用戶程序的方式比較好.</dd>
+  <dt><b>SO_PASSCRED</b></dt>
+  <dd>允許或關閉 <b>SCM_CREDENTIALS</b>
+      控制消息的接收.
+      更多信息參見 <a href="../../buster/manpages-zh/unix.7.zh_TW.html">unix(7)</a>.</dd>
+  <dt><b>SO_PEERCRED</b></dt>
+  <dd>返回連接至此套接字的外部進程的身份驗證.
+      只在 <b>PF_UNIX</b>
+      套接字中有用.參見
+      <a href="../../buster/manpages-zh/unix.7.zh_TW.html">unix(7)</a>. 參數爲 <b>ucred</b>
+      結構.只在 <b>getsockopt</b>.
+      中有效.</dd>
+  <dt><b>SO_BINDTODEVICE</b></dt>
+  <dd>將此套接字綁定到一個特定的設備上,
+      如“eth0”,
+      做爲指定的接口名字傳遞.
+      如果名稱是空字符串或此項長度爲
+      0,
+      則套接字設備綁定被取消.
+      過去的選項是一個變長的空零結尾的
+      接口名稱的字符串,
+      其最大長度爲 <b>IFNAMSIZ</b>.
+      如果一個套接字被綁定至一接口,
+      只有由這個特定接口接收的信息包可以由此套接字處理.</dd>
+  <dt><b>SO_DEBUG</b></dt>
+  <dd>允許套接字調試.只對有
+      <b>CAP_NET_ADMIN</b>
+      功能或有效用戶標識爲
+      0 的進程有效.</dd>
+  <dt><b>SO_REUSEADDR</b></dt>
+  <dd>表示在一個 <a href="../../buster/manpages-zh/bind.2.zh_TW.html">bind(2)</a>
+      調用中對提供給它的地址使用的確認規則應該允許重複使用本地地址.
+      對於 <b>PF_INET</b> 套接字,
+      這表示該套接字可以綁定,
+      除非已有一個活躍的偵聽套
+      接口綁定到此地址上.
+      如果這個偵聽套接字和一個指定端口綁定爲
+      <b>INADDR_ANY</b> 時,
+      它就不能再綁定到任何本地地址的此端口.</dd>
+  <dt><b>SO_TYPE</b></dt>
+  <dd>按整數返回套接字類型（如
+      <b>SOCK_STREAM</b>） 只能通過
+      <b>getsockopt</b> 讀取.</dd>
+  <dt><b>SO_DONTROUTE</b></dt>
+  <dd>不通過網關發送,
+      只能發送給直接連接的主機.可以通過在套接字的
+      <a href="../../buster/manpages-zh/send.2.zh_TW.html">send(2)</a> 操作上設置
+      <b>MSG_DONTROUTE</b>
+      標誌來實現相同的效果.
+      其值爲布爾型整數的標識.</dd>
+  <dt><b>SO_BROADCAST</b></dt>
+  <dd>設置或獲取廣播標識.
+      當選擇此選項時,
+      數據報套接字接收向
+      廣播地址發送的數據包,
+      並且可以向廣播地址發送數據包.
+      這一
+      選項對於面向流的套接字無效.</dd>
+  <dt><b>SO_SNDBUF</b></dt>
+  <dd>設置或得到套接字發送緩衝區的最大字節數.
+      其默認值由 <b>wmem_default</b> sysctl
+      設置,最大允許值由
+      <b>wmem_max</b> sysctl 設置.</dd>
+  <dt><b>SO_RCVBUF</b></dt>
+  <dd>設置或得到套接字接收緩衝區的最大字節數。其默認值由
+      <b>rmem_default</b>
+      sysctl設置,最大允許值由
+      <b>rmem_max</b> sysctl 設置.</dd>
+  <dt><b>SO_LINGER</b></dt>
+  <dd>設置或獲取 <b>SO_LINGER</b>
+      選項的值. 其參數爲
+      <b>linger</b> 結構.</dd>
+</dl>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>struct linger {
+	int	l_onoff;	/* 延時狀態（打開/關閉） */
+	int	l_linger;	/* 延時多長時間 */
+};
+</pre>
+</div>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>如果選擇此選項, <a href="../../buster/manpages-zh/close.2.zh_TW.html">close(2)</a>
+      或 <a href="../../buster/manpages-dev/shutdown.2.en.html">shutdown(2)</a>
+      將等到所有套接字裏排隊的消息成功發送或到達延遲時間後
+      纔會返回. 否則,
+      調用將立即返回. 而 closing
+      操作將在後臺 進行.
+      如果套接字是 <a href="../../buster/manpages-dev/exit.2.en.html">exit(2)</a>,
+      的一部分關閉時,
+      它總是在後臺延遲進行的.</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt><b>SO_PRIORITY</b></dt>
+  <dd>設置在此套接字發送的所有包的協議定義優先權.
+      Linux
+      通過這一值來排列網絡隊列:
+      根據所選設備排隊規則,
+      具有更高優先權的包可以先被處理.對於
+      <a href="../../buster/manpages-zh/ip.7.zh_TW.html">ip(7)</a>,
+      同時也設置了輸出包的
+      IP
+    服務類型（TOS）的域.</dd>
+  <dt><b>SO_ERROR</b></dt>
+  <dd>取得並清除未解決的套接字錯誤.
+      只有在 <b>getsockopt</b>. 時有效.
+      是一個整數值.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SIGNALS">SIGNALS<a class="anchor" href="#SIGNALS">¶</a></h1>
+當向一個已關閉（被本地或遠程終端）的面向聯接的套接字寫入時,
+  將向該寫入進程發送
+  <b>SIGPIPE</b> 信號，並返回 <b>EPIPE</b>
+  如果寫入命令聲明瞭
+  <b>MSG_NOSIGNAL</b> 標識時,
+  不會發出此信號.
+<p class="Pp">如果與 <b>FIOCSETOWN</b> fcntl 或
+    <b>SIOCSPGRP</b> ioctl
+    一起請求，那麼當發生
+    I/O 事件時發出 <b>SIGIO</b>
+    這樣我們就可以在信號句柄裏使用
+    <a href="../../buster/manpages-dev/poll.2.en.html">poll(2)</a> 或 <a href="../../buster/manpages-dev/select.2.en.html">select(2)</a>
+    找出發生事件的套接字.
+    另一種選擇（在 Linux 2.2
+    中）是用 <b>F_SETSIG</b> fcntl
+    設置一個實時信號:
+    實時信號的處理程序被調用時還會收到它的
+    <i>siginfo_t</i> 的 <i>si_fd</i>
+    區域中的文件描述符.
+    更多信息參見 <a href="../../buster/manpages-dev/fcntl.2.en.html">fcntl(2)</a></p>
+<p class="Pp">在某些環境中（例如:多個進程訪問單個套接字）,
+    引發 <b>SIGIO</b>
+    的東西在進程對信號作出反應時可能已經消失了.
+    如果這樣的話,
+    進程應該再次等待,
+    因爲 Linux
+    稍後會重發此信號.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYSCTLS">SYSCTLS<a class="anchor" href="#SYSCTLS">¶</a></h1>
+可以通過目錄 <b>/proc/sys/net/core/*</b>
+  下的文件或者用 <a href="../../buster/manpages-dev/sysctl.2.en.html">sysctl(2)</a>
+  系統調用來訪問內核套接字的網絡系統控制（sysctl）信息.
+<dl class="Bl-tag">
+  <dt><b>rmem_default</b></dt>
+  <dd>指明套接字接收緩衝區的默認字節數.</dd>
+  <dt><b>rmem_max</b></dt>
+  <dd>指明套接字接收緩衝區的最大字節數,
+      用戶可以通過使用
+      <b>SO_RCVBUF</b>
+      套接字選項來設置此值.</dd>
+  <dt><b>wmem_default</b></dt>
+  <dd>指明套接字發送緩衝區的默認字節數.</dd>
+  <dt><b>wmem_max</b></dt>
+  <dd>指明發送緩衝區的最大字節數，用戶可以通過使用套接字的
+      <b>SO_SNDBUF</b>
+      選項來設置它的值.</dd>
+  <dt><b>message_cost</b> 和 <b>message_burst</b></dt>
+  <dd>設定記號存儲桶過濾器,
+      在存儲桶中保存一定數量的外部網絡
+      事件導致的警告消息.</dd>
+  <dt><b>netdev_max_backlog</b></dt>
+  <dd>在全局輸入隊列中包的最大數目.</dd>
+  <dt><b>optmem_max</b></dt>
+  <dd>每個套接字的象 iovecs
+      這樣的輔助數據和用戶控制數據的最大長度.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="IOCTLS">IOCTLS<a class="anchor" href="#IOCTLS">¶</a></h1>
+以上的 IO
+  控制值可以通過 <a href="../../buster/manpages-dev/ioctl.2.en.html">ioctl(2)</a>
+  來訪問:
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre><i>error</i><b> = ioctl(</b><i>ip_socket</i><b>, </b><i>ioctl_type</i><b>, </b><i>&amp;value_result</i><b>);</b>
+</pre>
+</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>SIOCGSTAMP</b></dt>
+  <dd>返回 <b>timeval</b>
+      類型的結構，其中包括有發送給用戶的最後一個包接收時的時間戳。
+      被用來測量精確的 RTT
+      （round trip time） 時間. <b>struct timeval</b>.
+      結構說明請參考
+      <a href="../../buster/manpages-dev/setitimer.2.en.html">setitimer(2)</a></dd>
+  <dt><b>SIOCSPGRP</b></dt>
+  <dd>在異步 IO
+      操作結束或者接收到緊急數據時，用來設置進程或進程組，
+      向它（它們）發送
+      <b>SIGIO</b> 或者 <b>SIGURG</b> 信號,
+      參數爲指向 <b>pid_t</b>.
+      類型的指針。如果參數爲正，則發送信號到相應的進程。如果參數爲
+      負，則發送信號到此參數絕對值
+      id
+      所屬的進程組的所有進程。
+      如果它沒有 <b>CAP_KILL</b>
+      功能或者它的有效 UID
+      不是 0,
+      進程只能選擇它自己或自己的進程組來
+      接收信號.</dd>
+  <dt><b>FIOASYNC</b></dt>
+  <dd>改變 <b>O_ASYNC</b>
+      標誌來打開或者關閉套接字的異步
+      IO
+      模式。異步IO模式指的是：當
+      新的 I/O
+      事件發生時，將發出
+      <b>SIGIO</b> 信號或者用 <b>F_SETSIG</b>
+      設置的信號.</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>參數爲整形布爾量.</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt><b>SIOCGPGRP</b></dt>
+  <dd>獲得當前接收 <b>SIGIO</b>
+      或者 <b>SIGURG</b>
+      信號的進程或者進程組,
+      如果兩個信號都沒有設置,
+      則爲 0.</dd>
+</dl>
+<p class="Pp">有效的 fcntl:</p>
+<dl class="Bl-tag">
+  <dt><b>FIOCGETOWN</b></dt>
+  <dd>與 IO 控制中的 SIOCGPGRP
+    相同.</dd>
+  <dt><b>FIOCSETOWN</b></dt>
+  <dd>與 IO 控制中的 SIOCSPGRP
+    相同.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="注意">注意<a class="anchor" href="#%E6%B3%A8%E6%84%8F">¶</a></h1>
+Linux
+  假設有一半的發送/接收緩衝區是用來處理內核結構,
+  因此,
+  系統控制的緩衝區是網絡可訪問的緩衝區的兩倍.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="缺陷">缺陷<a class="anchor" href="#%E7%BC%BA%E9%99%B7">¶</a></h1>
+<b>CONFIG_FILTER</b> 沒有介紹 <b>SO_ATTACH_FILTER</b>
+  和 <b>SO_DETACH_FILTER</b> 套接字選項.
+  在 libpcap
+  庫有此接口的說明
+</section>
+<section class="Sh">
+<h1 class="Sh" id="VERSIONS_版本">VERSIONS 版本<a class="anchor" href="#VERSIONS_%E7%89%88%E6%9C%AC">¶</a></h1>
+<b>SO_BINDTODEVICE</b> 在 Linux 2.0.30 中引入.
+  <b>SO_PASSCRED</b> 是在 Linux 2.2
+  中引入的新選項. sysctl
+  是在 Linux 2.2.
+  中引入的新概念。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者">作者<a class="anchor" href="#%E4%BD%9C%E8%80%85">¶</a></h1>
+本手冊頁由 Andi Kleen 編寫.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="又見">又見<a class="anchor" href="#%E5%8F%88%E8%A6%8B">¶</a></h1>
+<a href="../../buster/manpages-dev/socket.2.en.html">socket(2)</a>, <a href="../../buster/manpages-zh/ip.7.zh_TW.html">ip(7)</a>, <a href="../../buster/manpages-dev/setsockopt.2.en.html">setsockopt(2)</a>, <a href="../../buster/manpages-dev/getsockopt.2.en.html">getsockopt(2)</a>,
+  <a href="../../buster/manpages-zh/packet.7.zh_TW.html">packet(7)</a>, <a href="../../buster/manpages/ddp.7.en.html">ddp(7)</a>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>liguoping &lt;liguoping_11@sina.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2000/11/06</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8Blinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">7 May 1999</td>
+    <td class="foot-os">Linux Man Page</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+socket.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2020-01-04T21:36:44Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"socket(7)\"}}]}"
+</script>

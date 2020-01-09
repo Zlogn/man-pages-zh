@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>logind.conf(5) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/logind.conf.5.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/elogind/logind.conf.5.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/systemd/logind.conf.5.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/logind.conf.5.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/logind.conf.5.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="5">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; logind.conf(5)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/logind.conf.5">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/logind.conf.5.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS" title="SYNOPSIS">SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%85%8D%E7%BD%AE%E7%9B%AE%E9%8C%84%E5%8F%8A%E5%85%B6%E5%84%AA%E5%85%88%E7%B4%9A" title="配置目錄及其優先級">配置目錄及其優先級</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%B8%E9%A0%85" title="選項">選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B" title="參見">參見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES" title="NOTES">NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/logind.conf.5.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/logind.conf.5.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/logind.conf.5.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/logind.conf.5.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/elogind/logind.conf.5.en.html" title="English (en)">English</a>
+
+<span class="pkgname">elogind</span>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/systemd/logind.conf.5.en.html" title="English (en)">English</a>
+
+<span class="pkgname">systemd</span>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/logind.conf.5.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/logind.conf.5.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">LOGIND.CONF(5)</td>
+    <td class="head-vol">logind.conf</td>
+    <td class="head-rtitle">LOGIND.CONF(5)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+logind.conf, logind.conf.d -
+  登陸管理器配置文件
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS">SYNOPSIS<a class="anchor" href="#SYNOPSIS">¶</a></h1>
+/etc/systemd/logind.conf
+<p class="Pp">/etc/systemd/logind.conf.d/*.conf</p>
+<p class="Pp">/run/systemd/logind.conf.d/*.conf</p>
+<p class="Pp">/usr/lib/systemd/logind.conf.d/*.conf</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+上述配置文件用於控制
+  <a href="../../buster/systemd/systemd-logind.service.8.en.html">systemd-logind.service(8)</a>
+  登陸管理器的行爲。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="配置目錄及其優先級">配置目錄及其優先級<a class="anchor" href="#%E9%85%8D%E7%BD%AE%E7%9B%AE%E9%8C%84%E5%8F%8A%E5%85%B6%E5%84%AA%E5%85%88%E7%B4%9A">¶</a></h1>
+默認設置是在編譯期間確定的，
+  所以僅在確實需要修改默認設置的情況下，
+  才需要使用配置文件。位於
+  /etc/systemd/
+  目錄中的初始配置文件，
+  僅包含了展示選項默認值的註釋，
+  目的在於方便系統管理員查看和直接修改。
+<p class="Pp">如果軟件包想要自定義某些默認設置，
+    那麼必須將自定義的配置文件安裝到
+    /usr/lib/systemd/*.conf.d/ 目錄中。 /etc/
+    目錄僅供系統管理員使用。
+    系統管理員可以利用下面的邏輯來覆蓋默認設置：
+    主配置文件最先被讀取，
+    優先級也最低。 所有
+    *.conf.d/ 中的配置文件
+    都會覆蓋主配置文件中的設置。
+    所有 *.conf.d/
+    中的配置文件(無論位於哪個目錄中)，
+    統一按照文件名的字典順序處理。
+    如果在多個配置文件中設置了同一個選項，
+    那麼僅以文件名最靠後(字典順序)的那一個爲準。
+    爲了便於排序，
+    建議給所有 *.conf.d/
+    中的配置文件
+    都加上兩位十進制數字的文件名前綴。</p>
+<p class="Pp">如果系統管理員想要屏蔽
+    /usr/lib/
+    目錄中的某個配置文件，
+    那麼最佳做法是在 /etc/
+    目錄中 創建一個指向
+    /dev/null 的同名符號鏈接，
+    即可徹底屏蔽 /usr/lib/
+    目錄中的同名文件。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="選項">選項<a class="anchor" href="#%E9%81%B8%E9%A0%85">¶</a></h1>
+下面的所有選項都位於
+  &#34;[Login]&#34; 小節：
+<p class="Pp"><i>NAutoVTs=</i></p>
+<div class="Bd-indent">必須設爲一個正整數，
+  表示默認最多可以自動啓動多少個虛擬終端。
+  當用戶切換到一個先前未曾使用的虛擬終端時，
+  將根據該虛擬終端的名稱自動從
+  autovt@.service 模版實例化一個
+  例如 autovt@tty4.service
+  這樣的服務單元。
+  默認情況下，autovt@.service
+  是一個指向 getty@.service
+  的軟連接。
+  換句話說，當用戶切換到一個先前未曾使用的虛擬終端時，&#34;login:&#34;登錄提示符是動態啓動的。
+  因此，此選項實際上相當於設置了允許啓動多少個
+  <b>agetty</b>[1]
+  文本登錄界面(與虛擬終端一一對應)。
+  如果某個虛擬終端已經被其他子系統(例如圖形登錄界面)佔用，
+  那麼將不會自動啓動此虛擬終端。
+  注意，<i>ReserveVT=</i>
+  中的虛擬終端
+  總會被自動啓動，
+  即使這些終端並不在
+  <i>NAutoVTs=</i> 的範圍內。
+  默認值是&#34;6&#34;。若設爲&#34;0&#34;則表示禁止自動啓動任何虛擬終端，
+  也就是禁止自動從
+  autovt@.service 模版實例化。</div>
+<p class="Pp"><i>ReserveVT=</i></p>
+<div class="Bd-indent">必須設爲一個表示終端編號的正整數，
+  表示無條件的爲該終端從
+  autovt@.service
+  模版實例化一個服務單元(見上文)。
+  被此選項選中的虛擬終端將被無條件的標記爲&#34;忙碌&#34;狀態，
+  以確保不被任何其他子系統佔用。
+  此選項可用於確保無論其他子系統佔用了多少虛擬終端，
+  在特定編號的終端上總有一個文本界面的登錄
+  <b>agetty</b>[1] 可用。
+  默認值是&#34;6&#34;，
+  也就是在 Alt-F6
+  上總有一個文本界面的&#34;login:&#34;登錄提示符。
+  若設爲&#34;0&#34;則表示禁止此特性。</div>
+<p class="Pp"><i>KillUserProcesses=</i></p>
+<div class="Bd-indent">接受一個布爾值。控制在用戶退出登錄會話時，
+  是否殺死該用戶的進程。如果設爲&#34;yes&#34;，
+  那麼與此會話對應的 scope
+  單元中所包含的所有進程都將被殺死。
+  如果設爲&#34;no&#34;，那麼與此會話對應的
+  scope
+  單元將會被&#34;遺棄&#34;，
+  並且其中包含的所有進程都將被保留(任由其自生自滅)。
+  默認值是 &#34;yes&#34; 。
+  參見下面的 <i>KillOnlyUsers=</i> 與
+  <i>KillExcludeUsers=</i> 選項。
+<p class="Pp">根據 linger(逗留)
+    設置的不同，用戶進程除了可以運行在會話中，
+    還可以運行在 user@.service
+    用戶管理單元中。
+    這樣就允許用戶運行獨立於登錄會話的進程。參見
+    <a href="../../buster/manpages-zh/loginctl.1.zh_TW.html">loginctl(1)</a> 的 <b>enable-linger</b>
+  命令。</p>
+<p class="Pp">注意，設置
+    <i>KillUserProcesses=yes</i> 將破壞 <a href="../../buster/screen/screen.1.en.html">screen(1)</a>
+    與 <a href="../../buster/tmux/tmux.1.en.html">tmux(1)</a>
+    之類的工具(除非它們被移出了會話
+    scope 單元之外)。參見
+    <a href="../../buster/systemd/systemd-run.1.en.html">systemd-run(1)</a> 的例子。</p>
+</div>
+<p class="Pp"><i>KillOnlyUsers=</i>, <i>KillExcludeUsers=</i></p>
+<div class="Bd-indent">設爲一個空格分隔的用戶名列表，
+  以影響 <i>KillUserProcesses=</i>
+  的效果： 若 <i>KillOnlyUsers=</i>
+  非空， 則表示 <i>KillUserProcesses=yes</i>
+  僅對列表內的用戶有效。
+  若 <i>KillExcludeUsers=</i> 非空，
+  則表示 <i>KillUserProcesses=yes</i>
+  僅對列表外的用戶有效。
+  <i>KillOnlyUsers=</i> 默認值爲空，
+  <i>KillExcludeUsers=</i> 默認值爲 &#34;root&#34;
+  ， 並且 <i>KillExcludeUsers=</i>
+  的優先級比 <i>KillOnlyUsers=</i>
+  更高。
+  注意，若選項值爲空則表示忽略此選項(相當於不存在此選項)。</div>
+<p class="Pp"><i>IdleAction=</i></p>
+<div class="Bd-indent">當系統持續處於空閒狀態超過
+  <i>IdleActionSec=</i>
+  所設置的時間後，
+  應該執行何種操作：
+  &#34;ignore&#34;(無操作),
+  &#34;poweroff&#34;(關閉系統並切斷電源),
+  &#34;reboot&#34;(重新啓動),
+  &#34;halt&#34;(關閉系統但不切斷電源),
+  &#34;kexec&#34;(調用內核&#34;kexec&#34;函數),
+  &#34;suspend&#34;(休眠到內存),
+  &#34;hibernate&#34;(休眠到硬盤),
+  &#34;hybrid-sleep&#34;(同時休眠到內存與硬盤),
+  &#34;lock&#34;(鎖屏) 。 默認值是
+  &#34;ignore&#34;
+<p class="Pp">注意，此功能依賴於用戶會話能夠正確的報告空閒狀態。
+    執行此處設置的動作需要滿足下列全部條件：
+    (1)系統中不存在&#34;idle
+    <b>inhibitor</b>[2]&#34;鎖(禁止進入空閒狀態的鎖)
+    (2)所有會話都報告說它們正處於空閒狀態，並且持續處於空閒狀態超過了下文
+    <i>IdleActionSec=</i>
+    所設置的時間。</p>
+</div>
+<p class="Pp"><i>IdleActionSec=</i></p>
+<div class="Bd-indent">當系統持續處於空閒狀態超過此處設置的時長之後
+  將會自動執行 <i>IdleAction=</i>
+  設定的動作。
+  可以使用下面的時間單位後綴：&#34;ms&#34;,
+  &#34;s&#34;, &#34;min&#34;, &#34;h&#34;, &#34;d&#34;
+  ，若僅設爲一個正整數，那麼單位是秒。</div>
+<p class="Pp"><i>InhibitDelayMaxSec=</i></p>
+<div class="Bd-indent">當系統中存在&#34;delay
+  <b>inhibitor</b>[2]&#34;延遲鎖時，關閉/休眠系統的請求將被臨時延遲一段時間。
+  此選項可用於設置上述延遲的最大時長。
+  若超過這個時長之後，延遲鎖依然未被釋放，那麼將執行關閉/休眠系統的動作。
+  可以使用下面的時間單位後綴：&#34;ms&#34;,
+  &#34;s&#34;, &#34;min&#34;, &#34;h&#34;, &#34;d&#34;
+  ，若僅設爲一個正整數，那麼單位是秒。
+  默認值是5秒。</div>
+<p class="Pp"><i>HandlePowerKey=</i>, <i>HandleSuspendKey=</i>,
+    <i>HandleHibernateKey=</i>, <i>HandleLidSwitch=</i>,
+    <i>HandleLidSwitchDocked=</i></p>
+<div class="Bd-indent">當按下硬件按鈕(關機、休眠到內存、休眠到硬盤、合上顯示屏)時，
+  應該執行何種操作：
+  &#34;ignore&#34;(無操作),
+  &#34;poweroff&#34;(關閉系統並切斷電源),
+  &#34;reboot&#34;(重新啓動),
+  &#34;halt&#34;(關閉系統但不切斷電源),
+  &#34;kexec&#34;(調用內核&#34;kexec&#34;函數),
+  &#34;suspend&#34;(休眠到內存),
+  &#34;hibernate&#34;(休眠到硬盤),
+  &#34;hybrid-sleep&#34;(同時休眠到內存與硬盤),
+  &#34;lock&#34;(鎖屏) 。 注意，
+  只監視帶有 &#34;power-switch&#34;
+  標籤的 輸入設備的
+  key(按下按鈕)/lid(合上顯示屏)
+  事件。
+  如果主機插入了一個擴展塢(docking
+  station)
+  或者連接了多個顯示器，
+  那麼&#34;合上顯示屏&#34;將執行
+  <i>HandleLidSwitchDocked=</i> 動作，
+  否則將執行 <i>HandleLidSwitch=</i>
+  動作。
+  下面是各選項的默認值：
+  <i>HandlePowerKey=poweroff</i> 、 <i>HandleSuspendKey=suspend</i>
+  、 <i>HandleLidSwitch=suspend</i> 、
+  <i>HandleLidSwitchDocked=ignore</i> 、
+  <i>HandleHibernateKey=hibernate</i></div>
+<p class="Pp"><i>PowerKeyIgnoreInhibited=</i>,
+    <i>SuspendKeyIgnoreInhibited=</i>, <i>HibernateKeyIgnoreInhibited=</i>,
+    <i>LidSwitchIgnoreInhibited=</i></p>
+<div class="Bd-indent">設置硬件按鈕(關機、休眠到內存、休眠到硬盤、合上顯示屏)
+  所觸發的操作(見上文)是否應該忽略
+  <b>inhibitor</b>[2] 鎖的存在。 &#34;no&#34;
+  表示遵守應用所持有的
+  inhibitor 鎖，
+  僅當所有的鎖都失效以後才執行所觸發的操作。
+  &#34;yes&#34; 表示無視 inhibitor
+  鎖的存在，
+  無條件的立即執行所觸發的操作。
+  下面是各選項的默認值：
+  <i>PowerKeyIgnoreInhibited=no</i> 、 <i>SuspendKeyIgnoreInhibited=no</i>
+  、 <i>HibernateKeyIgnoreInhibited=no</i> 、
+  <i>LidSwitchIgnoreInhibited=yes</i> 。</div>
+<p class="Pp"><i>HoldoffTimeoutSec=</i></p>
+<div class="Bd-indent">當開機/喚醒時間尚未超出此處設置的時間長度時，
+  systemd
+  將延遲響應合上顯示屏(lid)硬件事件。
+  爲了能夠正確檢測可熱插拔的外接顯示器與擴展塢，
+  在剛開機之後的一段時間內忽略lid事件是非常有必要的。
+  若設爲零，systemd
+  將會立即響應lid事件，
+  但這有可能在內核完成初始化所有熱插拔設備之前。
+  只要你不在乎讓 systemd
+  去管理在系統關閉時被插入或拔出的設備，
+  那麼就可以設爲零。
+  默認值是30秒。</div>
+<p class="Pp"><i>RuntimeDirectorySize=</i></p>
+<div class="Bd-indent">爲每個已登錄用戶設置運行時目錄(<i>$XDG_RUNTIME_DIR</i>)的最大尺寸。
+  若設爲絕對大小，
+  則可以使用基於1024的字節後綴：K,
+  M, G, T 。
+  若設爲相對大小，
+  則可以設爲一個以物理內存大小爲基準的百分數(以
+  &#34;%&#34; 爲後綴)。
+  默認值是 10% 。
+  注意，這裏設置的值僅用於限制運行時目錄尺寸的上限，
+  因爲運行時目錄位於內存中(tmpfs)，
+  所以實際所佔用的內存大小是隨着目錄內容的變化而變化的。</div>
+<p class="Pp"><i>InhibitorsMax=</i></p>
+<div class="Bd-indent">控制最多允許同時存在多少個
+  inhibitor 鎖。 默認值是 8192</div>
+<p class="Pp"><i>SessionsMax=</i></p>
+<div class="Bd-indent">控制最多允許同時管理多少個用戶會話。默認值是
+  8192 。 根據PAM棧中 pam_systemd.so
+  模塊的不同配置，
+  超出數量限制的登錄會話可能會被直接拒絕、也可能會被允許登錄但不被
+  systemd-logind 追蹤。</div>
+<p class="Pp"><i>UserTasksMax=</i></p>
+<div class="Bd-indent">限制每個用戶可同時運行的最大操作系統任務數。
+  這實際上是設置了每個用戶的
+  slice 單元的 <i>TasksMax=</i>
+  的值。詳見 <a href="../../buster/systemd/systemd.resource-control.5.en.html">systemd.resource-control(5)</a>
+  手冊。默認值是 33%
+  ，對於默認設置的內核來說，在主機上等於
+  10813
+  ，但是在容器中的值可能會更小。</div>
+<p class="Pp"><i>RemoveIPC=</i></p>
+<div class="Bd-indent">當用戶完全退出登錄時(也就是退出最後一個登錄會話時)，
+  是否銷燬所有屬於該用戶的
+  SysV 與 POSIX IPC 對象。
+  這些IPC對象包括：SysV
+  信號/共享內存/消息隊列、POSIX
+  共享內存/消息隊列。
+  默認值 &#34;yes&#34;
+  表示銷燬，這樣可以確保當用戶完全退出登錄之後，不會再佔用任何IPC資源。
+  注意，無論如何設置此選項，root
+  用戶的IPC對象永遠不會被銷燬。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見">參見<a class="anchor" href="#%E5%8F%83%E8%A6%8B">¶</a></h1>
+<a href="../../buster/manpages-zh/systemd.1.zh_TW.html">systemd(1)</a>, <a href="../../buster/systemd/systemd-logind.service.8.en.html">systemd-logind.service(8)</a>, <a href="../../buster/manpages-zh/loginctl.1.zh_TW.html">loginctl(1)</a>,
+  <a href="../../buster/systemd/systemd-system.conf.5.en.html">systemd-system.conf(5)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES">NOTES<a class="anchor" href="#NOTES">¶</a></h1>
+<dl class="Bl-tag">
+  <dt> 1.</dt>
+  <dd>agetty</dd>
+</dl>
+<div class="Bd-indent">[set
+  $man.base.url.for.relative.links]//man/agetty.html</div>
+<dl class="Bl-tag">
+  <dt> 2.</dt>
+  <dd>inhibitor</dd>
+</dl>
+<div class="Bd-indent"><a href="../../wiki/Software/systemd/inhibit">../../wiki/Software/systemd/inhibit</a></div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<p class="Pp">翻譯人員：金步國
+  <br/>
+  金步國作品集：https://www.jinbuguo.com
+  <br/>
+  中文 man
+    手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os">systemd 231</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+logind.conf.5.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-30T03:48:37Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"logind.conf(5)\"}}]}"
+</script>

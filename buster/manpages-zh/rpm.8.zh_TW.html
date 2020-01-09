@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rpm(8) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/rpm/rpm.8.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/rpm-i18n/rpm.8.fr.html" hreflang="fr">
+<link rel="alternate" href="../../buster/rpm-i18n/rpm.8.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/rpm-i18n/rpm.8.ko.html" hreflang="ko">
+<link rel="alternate" href="../../buster/rpm-i18n/rpm.8.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/rpm-i18n/rpm.8.ru.html" hreflang="ru">
+<link rel="alternate" href="../../buster/rpm-i18n/rpm.8.sk.html" hreflang="sk">
+<link rel="alternate" href="../../buster/manpages-zh/rpm.8.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/rpm.8.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="8">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; rpm(8)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/rpm.8">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/rpm.8.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%90%8D%E7%A8%B1" title="名稱">名稱</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD" title="總覽">總覽</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%9A%E7%94%A8%E9%81%B8%E9%A0%85" title="通用選項">通用選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%AE%89%E8%A3%9D%E5%92%8C%E5%8D%87%E7%B4%9A%E9%81%B8%E9%A0%85" title="安裝和升級選項">安裝和升級選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%9F%A5%E8%A9%A2%E9%81%B8%E9%A0%85" title="查詢選項">查詢選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%A6%88%E5%AF%A6%E9%81%B8%E9%A0%85" title="覈實選項">覈實選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B0%BD%E5%90%8D%E6%AA%A2%E6%9F%A5" title="簽名檢查">簽名檢查</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8D%B8%E8%BC%89%E9%81%B8%E9%A0%85" title="卸載選項">卸載選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%94%9F%E6%88%90%E9%81%B8%E9%A0%85" title="生成選項">生成選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E4%BB%A5%E5%8F%8A%E9%87%8D%E6%96%B0%E7%B7%A8%E8%AD%AF%E9%81%B8%E9%A0%85" title="重新生成以及重新編譯選項">重新生成以及重新編譯選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B0%BD%E5%90%8D%E4%B8%80%E5%80%8B%E5%B7%B2%E5%AD%98%E5%9C%A8%E7%9A%84RPM" title="簽名一個已存在的RPM">簽名一個已存在的RPM</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#PGP_%E7%B0%BD%E5%90%8D" title="PGP 簽名">PGP 簽名</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E6%95%B8%E6%93%9A%E5%BA%AB%E9%81%B8%E9%A0%85" title="重新生成數據庫選項">重新生成數據庫選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SHOWRC" title="SHOWRC">SHOWRC</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#FTP/HTTP%E9%81%B8%E9%A0%85" title="FTP/HTTP選項">FTP/HTTP選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6" title="文件">文件</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%A6%E8%A6%8B" title="另見">另見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85" title="作者">作者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E3%80%8ALinuxfourm_%E4%B8%AD%E6%96%87MAN-PAGE%E8%A8%88%E5%8A%83%E3%80%8B" title="《Linuxfourm 中文MAN-PAGE計劃》">《Linuxfourm 中文MAN-PAGE計劃》</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/rpm.8.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/rpm.8.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/rpm.8.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/rpm/rpm.8.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/rpm-i18n/rpm.8.fr.html" title="French (fr)">français</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/rpm-i18n/rpm.8.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/rpm-i18n/rpm.8.ko.html" title="Korean (ko)">한국어</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/rpm-i18n/rpm.8.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/rpm-i18n/rpm.8.ru.html" title="Russian (ru)">русский</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/rpm-i18n/rpm.8.sk.html" title="Slovak (sk)">slovenčina</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/rpm.8.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/rpm.8.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle"><a href="../../buster/manpages-zh/rpm.8.zh_TW.html">rpm(8)</a></td>
+    <td class="head-vol">System Manager&#39;s Manual</td>
+    <td class="head-rtitle"><a href="../../buster/manpages-zh/rpm.8.zh_TW.html">rpm(8)</a></td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="名稱">名稱<a class="anchor" href="#%E5%90%8D%E7%A8%B1">¶</a></h1>
+rpm - RPM 軟件包管理器
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽">總覽<a class="anchor" href="#%E7%B8%BD%E8%A6%BD">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="查詢和驗證軟件包：">查詢和驗證軟件包：<a class="anchor" href="#%E6%9F%A5%E8%A9%A2%E5%92%8C%E9%A9%97%E8%AD%89%E8%BB%9F%E4%BB%B6%E5%8C%85%EF%BC%9A">¶</a></h2>
+<p class="Pp"><b>rpm</b> {<b>-q|--query</b>} [<b>select-options</b>]
+    [<b>query-options</b>]</p>
+<p class="Pp"><b>rpm</b> <b>--querytags</b></p>
+<p class="Pp"><b>rpm</b> {<b>-V|--verify</b>} [<b>select-options</b>]
+    [<b>verify-options</b>]</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="安裝、升級和卸載軟件包：">安裝、升級和卸載軟件包：<a class="anchor" href="#%E5%AE%89%E8%A3%9D%E3%80%81%E5%8D%87%E7%B4%9A%E5%92%8C%E5%8D%B8%E8%BC%89%E8%BB%9F%E4%BB%B6%E5%8C%85%EF%BC%9A">¶</a></h2>
+<p class="Pp"><b>rpm</b> {<b>-i|--install</b>} [<b>install-options</b>]
+    <b></b><i>PACKAGE_FILE</i><b></b><i> ...</i></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"><b>rpm</b> {<b>-U|--upgrade</b>} [<b>install-options</b>]
+    <b></b><i>PACKAGE_FILE</i><b></b><i> ...</i></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"><b>rpm</b> {<b>-F|--freshen</b>} [<b>install-options</b>]
+    <b></b><i>PACKAGE_FILE</i><b></b><i> ...</i></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"><b>rpm</b> {<b>--reinstall</b>} [<b>install-options</b>]
+    <b></b><i>PACKAGE_FILE</i><b></b><i> ...</i></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"><b>rpm</b> {<b>-e|--erase</b>} [<b>--allmatches</b>]
+    [<b>--nodeps</b>] [<b>--noscripts</b>]
+   [<b>--notriggers</b>] [<b>--test</b>]
+    <b></b><i>PACKAGE_NAME</i><b></b><i> ...</i></p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="雜項：">雜項：<a class="anchor" href="#%E9%9B%9C%E9%A0%85%EF%BC%9A">¶</a></h2>
+<b>rpm</b> <b>--showrc</b>
+<p class="Pp"><b>rpm</b> <b>--setperms</b> <b></b><i>PACKAGE_NAME</i><b></b><i>
+    ...</i></p>
+<p class="Pp"><b>rpm</b> <b>--setugids</b> <b></b><i>PACKAGE_NAME</i><b></b><i>
+    ...</i></p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="選擇相關選項">選擇相關選項<a class="anchor" href="#%E9%81%B8%E6%93%87%E7%9B%B8%E9%97%9C%E9%81%B8%E9%A0%85">¶</a></h2>
+<p class="Pp">
+   [<b></b><i>PACKAGE_NAME</i><b></b>] [<b>-a,--all</b>] [<b>-f,--file
+    </b><i>FILE</i><b></b>]
+   [<b>-g,--group </b><i>GROUP</i><b></b>] {<b>-p,--package
+    </b><i>PACKAGE_FILE</i> <b></b>]
+   [<b>--hdrid </b><i>SHA1</i><b></b>] [<b>--pkgid </b><i>MD5</i><b></b>]
+    [<b>--tid </b><i>TID</i><b></b>]
+   [<b>--querybynumber </b><i>HDRNUM</i><b></b>] [<b>--triggeredby
+    </b><i>PACKAGE_NAME</i><b></b>]
+   [<b>--whatprovides </b><i>CAPABILITY</i><b></b>] [<b>--whatrequires
+    </b><i>CAPABILITY</i><b></b>]</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="查詢相關選項">查詢相關選項<a class="anchor" href="#%E6%9F%A5%E8%A9%A2%E7%9B%B8%E9%97%9C%E9%81%B8%E9%A0%85">¶</a></h2>
+<p class="Pp">
+   [<b>--changelog</b>] [<b>-c,--configfiles</b>] [<b>--conflicts</b>]
+   [<b>-d,--docfiles</b>] [<b>--dump</b>] [<b>--filesbypkg</b>]
+    [<b>-i,--info</b>]
+   [<b>--last</b>] [<b>-l,--list</b>] [<b>--obsoletes</b>] [<b>--provides</b>]
+   [<b>--qf,--queryformat </b><i>QUERYFMT</i><b></b>] [<b>-R,--requires</b>]
+   [<b>--scripts</b>] [<b>-s,--state</b>]
+  [<b>--triggers,--triggerscripts</b>]</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="驗證相關選項">驗證相關選項<a class="anchor" href="#%E9%A9%97%E8%AD%89%E7%9B%B8%E9%97%9C%E9%81%B8%E9%A0%85">¶</a></h2>
+<p class="Pp">
+   [<b>--nodeps</b>] [<b>--nofiles</b>] [<b>--noscripts</b>]
+   [<b>--nodigest</b>] [<b>--nosignature</b>]
+   [<b>--nolinkto</b>] [<b>--nofiledigest</b>] [<b>--nosize</b>]
+    [<b>--nouser</b>]
+   [<b>--nogroup</b>] [<b>--nomtime</b>] [<b>--nomode</b>] [<b>--nordev</b>]
+   [<b>--nocaps</b>]</p>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="安裝相關選項">安裝相關選項<a class="anchor" href="#%E5%AE%89%E8%A3%9D%E7%9B%B8%E9%97%9C%E9%81%B8%E9%A0%85">¶</a></h2>
+<p class="Pp">
+   [<b>--allfiles</b>] [<b>--badreloc</b>] [<b>--excludepath
+    </b><i>OLDPATH</i><b></b>]
+   [<b>--excludedocs</b>] [<b>--force</b>] [<b>-h,--hash</b>]
+   [<b>--ignoresize</b>] [<b>--ignorearch</b>] [<b>--ignoreos</b>]
+   [<b>--includedocs</b>] [<b>--justdb</b>] [<b>--nocollections</b>]
+   [<b>--nodeps</b>] [<b>--nodigest</b>] [<b>--nosignature</b>]
+   [<b>--noorder</b>] [<b>--noscripts</b>] [<b>--notriggers</b>]
+   [<b>--oldpackage</b>] [<b>--percent</b>] [<b>--prefix
+    </b><i>NEWPATH</i><b></b>]
+   [<b>--relocate </b><i>OLDPATH</i><b>=</b><i>NEWPATH</i><b></b>]
+   [<b>--replacefiles</b>] [<b>--replacepkgs</b>]
+   [<b>--test</b>]</p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>rpm</b>是一個強大的的<i>包管理器</i>，可以用於構建、安裝、查詢、覈實、
+  更新以及卸載單個軟件包。
+  一個<i>軟件包</i>通常包括一個文件檔以及關於包的用於安裝和卸載的元信息，
+  包括幫助腳本、文件屬性和軟件包的描述性信息。
+<p class="Pp">必須選取下列基本模式中一個:
+    <i>初始化數據庫</i>,
+    <i>重新生成數據庫</i>,
+    <i>生成包</i>,
+    <i>重新編譯包</i>,
+    <i>從Tar包生成RPM包</i>,
+    <i>查詢</i>,
+    <i>顯示查詢標籤</i>,
+    <i>安裝</i>, <i>更新</i>, <i>卸載</i>,
+    <i>覈實</i>, <i>簽名檢查</i>,
+    <i>再簽名</i>, <i>添加簽名</i>,
+    <i>設置所有者和組</i>
+    以及 <i>顯示配置</i>.</p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="通用選項">通用選項<a class="anchor" href="#%E9%80%9A%E7%94%A8%E9%81%B8%E9%A0%85">¶</a></h1>
+這些選項可以各種不同的方式使用.
+<dl class="Bl-tag">
+  <dt><b>-vv</b></dt>
+  <dd>將打印出許多難以閱讀的調試信息.</dd>
+  <dt><b>--quiet</b></dt>
+  <dd>打印儘可能少的信息 -
+      普通只展示錯誤信息.</dd>
+  <dt><b>--help</b></dt>
+  <dd>給出比常規更多的用法信息.</dd>
+  <dt><b>--version</b></dt>
+  <dd>在單獨一個行裏給出所用
+      <b>rpm</b> 的版本號</dd>
+  <dt><b>--rcfile </b><i>&lt;filelist&gt;</i><b></b></dt>
+  <dd>在<i>&lt;filelist&gt;</i>裏列出了一些文件,
+      各文件之間以冒號分隔,
+      <b>rpm</b>
+      順序讀取這些文件以獲得配置信息.
+      <i>&lt;filelist&gt;</i>缺省
+      是<b>/usr/lib/rpm/rpmrc:/etc/rpmrc:~/.rpmrc</b>.
+      列表中的第一個文件(/usr/lib/rpm/rpmrc)且只有這個文件
+      必須存在,
+      代字符~指向<b>$HOME</b>的值.</dd>
+  <dt><b>--root </b><i>&lt;dir&gt;</i><b></b></dt>
+  <dd>對所有操作均將<i>&lt;dir&gt;</i>視爲系統根目錄.
+      注意這意味着對數
+      據庫的讀或修改操作都將是在<i>&lt;dir&gt;</i>目錄下進行,
+      並且腳本
+      的<i>pre</i>或<i>post</i>操作都是在做了以<i>&lt;dir&gt;</i>爲根目錄的chroot()
+      之後進行.</dd>
+  <dt><b>--dbpath </b><i>&lt;path&gt;</i><b></b></dt>
+  <dd>依照<i>&lt;path&gt;</i>使用RPM的數據庫.</dd>
+  <dt><b>--justdb</b></dt>
+  <dd>更新只針對數據庫,而不是整個文件系統.</dd>
+  <dt><b>--ftpproxy </b><i>&lt;host&gt;</i><b>, </b><b>--httpproxy
+    </b><i>&lt;host&gt;</i><b></b></dt>
+  <dd>設<i>&lt;host&gt;</i>爲FTP或HTTP的代理服務器.
+      參閱<b>FTP/HTTP 選項</b>.</dd>
+  <dt><b>--ftpport </b><i>&lt;port&gt;</i><b>, </b><b>--httpport
+    </b><i>&lt;port&gt;</i><b></b></dt>
+  <dd>設<i>&lt;port&gt;</i>爲FTP或HTTP的代理服務器的端口.
+      參閱<b>FTP/HTTP 選項</b>.</dd>
+  <dt><b>--pipe </b><i>&lt;cmd&gt;</i><b></b></dt>
+  <dd>通過管道將<b>rpm</b>的輸出輸入到命令<i>&lt;cmd&gt;</i>.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="安裝和升級選項">安裝和升級選項<a class="anchor" href="#%E5%AE%89%E8%A3%9D%E5%92%8C%E5%8D%87%E7%B4%9A%E9%81%B8%E9%A0%85">¶</a></h1>
+通常的rpm安裝命令如下:
+<p class="Pp">	<b>rpm -i [install-options]
+    </b><i>&lt;package_file&gt;+</i><b></b></p>
+<p class="Pp">這樣將安裝一個新的包.
+    通常的rpm升級命令如下:</p>
+<p class="Pp">	<b>rpm -U [install-options]
+    </b><i>&lt;package_file&gt;+</i><b></b></p>
+<p class="Pp">這樣將當前已安裝的包升級或新安裝到一個新的RPM版本.
+    升級和 安裝是一樣的,
+    區別在於升級要將所有別的版本的包從系統移去.</p>
+<p class="Pp">	<b>rpm [-F|--freshen] [install-options]
+    </b><i>&lt;package_file&gt;+</i><b></b></p>
+<p class="Pp">這樣也升級包,
+    但只有在系統存在一個更早版本的包時候才使用這
+    種方式.</p>
+<p class="Pp"></p>
+<p class="Pp">如果包在安裝之前要先進行下載,
+    <i>&lt;package_file&gt;</i>應該指明爲一個
+    ftp或者http URL.
+    要得到關於RPM包生成的ftp和http支持的信息,
+    可以參閱<b>FTP/HTTP 選項</b>.</p>
+<dl class="Bl-tag">
+  <dt><b>--force</b></dt>
+  <dd>與使用<b>--replacepkgs</b>, <b>--replacefiles</b>,
+      以及<b>--oldpackage</b>效果相同</dd>
+  <dt><b>-h</b>, <b>--hash</b></dt>
+  <dd>包檔如果沒有被解包,
+      打印50個破折號.
+      配合<b>-v</b>使用可以
+      使得有更好的展示.</dd>
+  <dt><b>--oldpackage</b></dt>
+  <dd>允許用舊版本的包取代較新的版本.</dd>
+  <dt><b>--percent</b></dt>
+  <dd>給出文件從包檔解包的百分比.
+      該項的作用是爲了使rpm相
+      比於別的工具更容易使用.</dd>
+  <dt><b>--replacefiles</b></dt>
+  <dd>即使要安裝的包會取代別的已安裝包的文件,
+      也安裝該包.</dd>
+  <dt><b>--replacepkgs</b></dt>
+  <dd>即使包的部分內容已安裝在系統裏,也安裝該包.</dd>
+  <dt><b>--allfiles</b></dt>
+  <dd>安裝或升級包裏所有的缺失文件,不管其是否存在.</dd>
+  <dt><b>--nodeps</b></dt>
+  <dd>在安裝或升級包之前不做依賴檢查.</dd>
+  <dt><b>--noscripts</b></dt>
+  <dd>不執行安裝前或安裝後腳本</dd>
+  <dt><b>--notriggers</b></dt>
+  <dd>不執行由該包的安裝所激發的腳本</dd>
+  <dt><b>--ignoresize</b></dt>
+  <dd>安裝該包前不檢查mount文件系統是否有足夠的磁盤空間.</dd>
+  <dt><b>--excludepath </b><i>&lt;path&gt;</i><b></b></dt>
+  <dd>不安裝文件名以路徑<i>&lt;path&gt;</i>開頭的文件.</dd>
+  <dt><b>--excludedocs</b></dt>
+  <dd>不安裝任何標記爲文檔的文件(包括手冊頁及文本信息檔案).</dd>
+  <dt><b>--includedocs</b></dt>
+  <dd>安裝文檔文件,
+      這是缺省的操作.</dd>
+  <dt><b>--test</b></dt>
+  <dd>不安裝包,
+      只是簡單地檢查並報告可能的衝突.</dd>
+  <dt><b>--ignorearch</b></dt>
+  <dd>允許安裝或升級其體系與主機不匹配的二進制RPM包.</dd>
+  <dt><b>--ignoreos</b></dt>
+  <dd>允許安裝或升級其操作系統與主機不匹配的二進制RPM包.</dd>
+  <dt><b>--prefix </b><i>&lt;path&gt;</i><b></b></dt>
+  <dd>對於可浮動包,
+      這將把安裝前綴設置到<i>&lt;path&gt;</i>.</dd>
+  <dt><b>--relocate
+    </b><i>&lt;oldpath&gt;</i><b>=</b><i>&lt;newpath&gt;</i><b></b></dt>
+  <dd>將文件從<i>&lt;oldpath&gt;</i>改置到<i>&lt;newpath&gt;</i>,
+      這使得可以浮動包.</dd>
+  <dt><b>--badreloc</b></dt>
+  <dd>與--relocate配合使用,
+      強制改置不可浮動的包.</dd>
+  <dt><b>--noorder</b></dt>
+  <dd>安裝時對包不重新排序,
+      正常在安裝時應該重新排序包列
+      表, 以滿足依賴性.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="查詢選項">查詢選項<a class="anchor" href="#%E6%9F%A5%E8%A9%A2%E9%81%B8%E9%A0%85">¶</a></h1>
+rpm的查詢命令通常的格式如下:
+<p class="Pp">	<b>rpm -q [query-options]</b></p>
+<p class="Pp">可以制定包信息的打印格式,
+    這時要用<b>[--queryformat|-qf]</b>選項,
+    格式串跟在選項後面.</p>
+<p class="Pp">查詢格式由標準<b><a href="../../buster/manpages-dev/printf.3.en.html">printf(3)</a></b>格式的版本決定.
+    格式由靜態字符串
+    (包括除了換行符, tab,
+    以及其它的特殊字符之外的標準C字符),
+    以及<b><a href="../../buster/manpages-dev/printf.3.en.html">printf(3)</a></b>類型格式符.
+    如果<b>rpm</b>已經知道打印類型,
+    則類型說明就必須被忽略,
+    並且以要打印的頭部tag的名字取代,
+    該名字被括在<b>{}</b>之間.
+    而且tag的<b>RPMTAG_</b>部分也被忽略.</p>
+<p class="Pp">可以用<b>:</b><i>typetag</i>來改變輸出格式.當前支持的有如下類型:<b>octal</b>,
+    <b>date</b>, <b>shescape</b>, <b>perms</b>, <b>fflags</b>, 以及
+    <b>depflags</b>.</p>
+<p class="Pp">例如,要只打印被查詢包的名字,可以用<b>%{名稱}</b>作爲格式字符串.
+    要在兩個欄裏打印包名及分佈信息,可以用<b>%-30{名稱}%{分佈}</b>.</p>
+<p class="Pp">當被<b>--querytags</b>參數激發時,<b>rpm</b>將列出所有tags.</p>
+<p class="Pp">查詢選項有兩種子設置:
+    包選擇和信息選擇.</p>
+<p class="Pp">包選擇選項:
+  <br/>
+</p>
+<dl class="Bl-tag">
+  <dt><b></b><i>&lt;package_name&gt;</i><b></b></dt>
+  <dd>查詢名爲<i>&lt;package_name&gt;</i>的安裝包.</dd>
+  <dt><b>-a</b>, <b>--all</b></dt>
+  <dd>查詢所有安裝的包.</dd>
+  <dt><b>--whatrequires </b><i>&lt;capability&gt;</i><b></b></dt>
+  <dd>查詢所有需要<i>&lt;capability&gt;</i>才能提供適當功能的包.</dd>
+  <dt><b>--whatprovides </b><i>&lt;virtual&gt;</i><b></b></dt>
+  <dd>查詢所有提供<i>&lt;virtual&gt;</i>功能的包.</dd>
+  <dt><b>-f </b><i>&lt;file&gt;</i><b>, </b><b>--file
+    </b><i>&lt;file&gt;</i><b></b></dt>
+  <dd>查詢擁有文件<i>&lt;file&gt;</i>的包.</dd>
+  <dt><b>-g </b><i>&lt;group&gt;</i><b>, </b><b>--group
+    </b><i>&lt;group&gt;</i><b></b></dt>
+  <dd>查詢屬於???組<i>&lt;group&gt;</i>的包</dd>
+  <dt><b>-p </b><i>&lt;package_file&gt;</i><b></b></dt>
+  <dd>查詢一個沒有安裝的包<i>&lt;package_file&gt;</i>.
+      <i>&lt;package_file&gt;</i>可以被說明爲ftp或http
+      URL,這時包頭會被下載並被查詢.
+      要得到關於RPM生成的ftp和http客戶端支持的信息,請參閱<b>FTP/HTTP
+      OPTIONS</b></dd>
+  <dt><b>--specfile </b><i>&lt;specfile&gt;</i><b></b></dt>
+  <dd>像對待一個包一樣Parse並查詢<i>&lt;specfile&gt;</i>.
+      雖然不是所有的信息(例如文件列表)可用,這種查詢類型
+      允許rpm在不用寫一個specfile
+      parser的情況下從spec
+      files提取信息.</dd>
+  <dt><b>--querybynumber </b><i>&lt;num&gt;</i><b></b></dt>
+  <dd>直接查詢<i>&lt;num&gt;</i>數據庫入口,該選項在調試時很有用處.</dd>
+  <dt><b>--triggeredby </b><i>&lt;pkg&gt;</i><b></b></dt>
+  <dd>查詢由包<i>&lt;pkg&gt;</i>所激發的包.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<p class="Pp">信息選擇選項:
+  <br/>
+</p>
+<dl class="Bl-tag">
+  <dt><b>-i</b></dt>
+  <dd>展示包信息,包括名字,版本,以及描述.???</dd>
+  <dt><b>-R</b>, <b>--requires</b></dt>
+  <dd>列出該包所依賴的別的包.</dd>
+  <dt><b>--provides</b></dt>
+  <dd>列出該包所提供的功能.</dd>
+  <dt><b>--changelog</b></dt>
+  <dd>展示該包的變更信息.</dd>
+  <dt><b>-l</b>, <b>--list</b></dt>
+  <dd>列出該包的文件.</dd>
+  <dt><b>-s</b>, <b>--state</b></dt>
+  <dd>展示該包各文件的狀態信息,因此該選項實際隱含了<b>-l</b>選項.
+      文件狀態可以是如下之一:
+      <i>normal</i>, <i>not installed</i>, 或者
+    <i>replaced</i>.</dd>
+  <dt><b>-d</b>, <b>--docfiles</b></dt>
+  <dd>只列出文檔文件(隱含<b>-l</b>選項).</dd>
+  <dt><b>-c</b>, <b>--configfiles</b></dt>
+  <dd>只列出配置文件(隱含<b>-l</b>選項).</dd>
+  <dt><b>--scripts</b></dt>
+  <dd>如果有的話,就列出該包裏作爲安裝或卸載過程一部分的特殊shell腳本.</dd>
+  <dt><b>--triggers</b>, <b>--triggerscripts</b></dt>
+  <dd>如果有的話,展示該包包含的激發子腳本.</dd>
+  <dt><b>--dump</b></dt>
+  <dd>如下的啞文件信息: path
+      size mtime md5sum mode owner group isconfig isdoc rdev symlink.
+      該選項必須至少配合如下選項之一:<b>-l</b>,
+      <b>-c</b>, <b>-d</b>使用.</dd>
+  <dt><b>--last</b></dt>
+  <dd>按包的安裝時間進行排序,這使得最新的包在序列頂部.</dd>
+  <dt><b>--querybypkg</b></dt>
+  <dd>列出每個包裏的所有文件.</dd>
+  <dt><b>--triggerscripts</b></dt>
+  <dd>顯示所選包的所有激發子腳本.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="覈實選項">覈實選項<a class="anchor" href="#%E8%A6%88%E5%AF%A6%E9%81%B8%E9%A0%85">¶</a></h1>
+	<b>rpm -V|-y|--verify [verify-options]</b>
+<p class="Pp">將所安裝包的文件信息和源發包的文件信息以及在rpm數據庫的文件信息做比較,
+    以此來覈實包.
+    對於別的東西,則???
+    任何的差異都會展示.包的說明選項與查詢選項相同.</p>
+<p class="Pp">對於不是從包安裝的文件,例如在安裝的時候用&#34;<b>--excludedocs</b>&#34;
+    選項排除了的文檔文件,將在沒有提示的情況下被忽略掉.</p>
+<p class="Pp">覈實選項可以使用如下模式:</p>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>--nofiles</b></dt>
+  <dd>覈實時忽略缺失文件</dd>
+  <dt><b>--nomd5</b></dt>
+  <dd>覈實時忽略MD5校驗錯誤</dd>
+  <dt><b>--nopgp</b></dt>
+  <dd>覈實時忽略PGP校驗錯誤</dd>
+  <dt><b>--nofiles</b></dt>
+  <dd>覈實時忽略缺失文件
+    <p class="Pp"></p>
+    <p class="Pp">輸出的格式是一個八個字符的字符串,和一個可能有的&#34;<b>c</b>&#34;,
+        指明後面是一個配置文件,以及後面的文件名.
+        八個字符中的每一個都代表着一個文件屬性與保存在RPM的數據庫中的屬性紀錄值的比較結果.
+        單個的&#34;<b>.</b>&#34;(句號)表明檢查通過.下列字符代表特定檢查的失敗:</p>
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>5</b></dt>
+  <dd>MD5校驗和</dd>
+  <dt><b>S</b></dt>
+  <dd>文件大小</dd>
+  <dt><b>L</b></dt>
+  <dd>符號連接</dd>
+  <dt><b>T</b></dt>
+  <dd>修改時間</dd>
+  <dt><b>D</b></dt>
+  <dd>設備</dd>
+  <dt><b>U</b></dt>
+  <dd>用戶</dd>
+  <dt><b>G</b></dt>
+  <dd>組</dd>
+  <dt><b>M</b></dt>
+  <dd>模式(包括許可和文件類型)
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="簽名檢查">簽名檢查<a class="anchor" href="#%E7%B0%BD%E5%90%8D%E6%AA%A2%E6%9F%A5">¶</a></h1>
+通常的rpm簽名檢查命令如下:
+<p class="Pp">	<b>rpm --checksig </b><i>&lt;package_file&gt;+</i><b></b></p>
+<p class="Pp">這將檢查包<i>&lt;package_file&gt;</i>的PGP簽名以確保其完整性和源發性.
+    可以從配置文件讀取PGP配置信息.細節請查閱
+    PGP 簽名 部分.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="卸載選項">卸載選項<a class="anchor" href="#%E5%8D%B8%E8%BC%89%E9%81%B8%E9%A0%85">¶</a></h1>
+rpm卸載命令的通常格式如下:
+<p class="Pp">	<b> rpm -e </b><i>&lt;package_name&gt;+</i><b></b></p>
+<dl class="Bl-tag">
+  <dt><b>--allmatches</b></dt>
+  <dd>將移去與<i>&lt;package_name&gt;</i>相匹配的所有版本的包.正常的話,如果<i>&lt;package_name&gt;</i>與多個包相匹配,就會給出錯誤信息.</dd>
+  <dt><b>--noscripts</b></dt>
+  <dd>不執行安裝前或安裝後腳本.</dd>
+  <dt><b>--notriggers</b></dt>
+  <dd>不執行由移去該包所激發的腳本</dd>
+  <dt><b>--nodeps</b></dt>
+  <dd>卸載前不檢查依賴性</dd>
+  <dt><b>--test</b></dt>
+  <dd>不真正卸載任何東西,只是遍歷該動作.配合<b>-vv</b>選項會很有用處.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="生成選項">生成選項<a class="anchor" href="#%E7%94%9F%E6%88%90%E9%81%B8%E9%A0%85">¶</a></h1>
+The general form of an rpm build command is
+<p class="Pp">
+   <b>rpm -[b|t]</b><i>O</i><b> [build-options]
+    </b><i>&lt;package_spec&gt;+</i><b></b></p>
+<p class="Pp">The argument used is <b>-b</b> if a spec file is being used to
+    build the package and <b>-t</b> if <b>RPM</b> should look inside of a
+    gzipped (or compressed) tar file for the spec file to use. After the first
+    argument, the next argument (<i>O</i>) specifies the stages of building and
+    packaging to be done and is one of:
+    rpm通常的生成選項如下:</p>
+<p class="Pp">
+   <b>rpm -[b|t]</b><i>O</i><b> [build-options]
+    </b><i>&lt;package_spec&gt;+</i><b></b></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>-bp</b></dt>
+  <dd>Executes the &#34;%prep&#34; stage from the spec file. Normally this
+      involves unpacking the sources and applying any patches.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-bl</b></dt>
+  <dd>Do a &#34;list check&#34;. The &#34;%files&#34; section from the spec
+      file is macro expanded, and checks are made to verify that each file
+      exists.</dd>
+  <dt><b>-bc</b></dt>
+  <dd>Do the &#34;%build&#34; stage from the spec file (after doing the prep
+      stage). This generally involves the equivalent of a &#34;make&#34;.</dd>
+  <dt><b>-bi</b></dt>
+  <dd>Do the &#34;%install&#34; stage from the spec file (after doing the prep
+      and build stages). This generally involves the equivalent of a &#34;make
+      install&#34;.</dd>
+  <dt><b>-bb</b></dt>
+  <dd>生成一個二進制包(在完成prep,
+      build, 以及 install階段之後)</dd>
+  <dt><b>-bs</b></dt>
+  <dd>只生成源包(在完成prep,
+      build, 以及 install階段之後)</dd>
+  <dt><b>-ba</b></dt>
+  <dd>生成二進制包和源包(在完成prep,
+      build, 以及 install階段之後)</dd>
+</dl>
+<p class="Pp">還可以使用的選項如下:</p>
+<dl class="Bl-tag">
+  <dt><b>--short-circuit</b></dt>
+  <dd>忽略導致specified階段(比如,忽略所有導致specified階段的階段).
+      只有與<b>-bc</b> 以及
+      <b>-bi</b>合用纔有效.</dd>
+  <dt><b>--timecheck</b></dt>
+  <dd>設置&#34;timecheck&#34;的值(0-?).該值也可以通過定義宏&#34;_timecheck&#34;來配置.
+      timecheck值以秒爲單位,表示一個包生成的最大年齡.如果時間超過了該值,
+      則對所有文件皆給出警告信息.</dd>
+  <dt><b>--clean</b></dt>
+  <dd>在包完成之後,移去生成樹.</dd>
+  <dt><b>--rmsource</b></dt>
+  <dd>在完成包的生成之後移去源和spec文件
+      (也可以單獨使用,比如:&#34;<b>rpm
+      --rmsource foo.spec</b>&#34;).</dd>
+  <dt><b>--test</b></dt>
+  <dd>不執行任何生成階段.在測試spec文件時很有用處.</dd>
+  <dt><b>--sign</b></dt>
+  <dd>在包中嵌入一個PGP簽名.該簽名可以用來覈實該包的完整性和源發性.
+      配置細節可以察看 PGP
+      簽名 一節.</dd>
+  <dt><b>--buildroot </b><i>&lt;dir&gt;</i><b></b></dt>
+  <dd>在生成包的時候,用目錄<i>&lt;dir&gt;</i>覆蓋包的生成根目錄tag.</dd>
+  <dt><b>--target </b><i>&lt;platform&gt;</i><b></b></dt>
+  <dd>在生成包的時候,將<i>&lt;platform&gt;</i>解釋爲<b>arch-vendor-os</b>,並且相應地設置
+      宏<b>_target</b>, <b>_target_arch</b> 以及
+      <b>_target_os</b>.</dd>
+  <dt><b>--buildarch </b><i>&lt;arch&gt;</i><b></b></dt>
+  <dd>在生成包的時候,將architecture設置到<i>&lt;arch&gt;</i>.
+      該選項在RPM
+      3.0中由於<b>--target</b>
+      <i>的出現而被拋棄.</i></dd>
+  <dt><b>--buildos </b><i>&lt;os&gt;</i><b></b></dt>
+  <dd>在生成包的時候,將architecture設置到<i>&lt;os&gt;</i>.
+      該選項在RPM
+      3.0中由於<b>--target</b>
+      <i>的出現而被拋棄.</i>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="重新生成以及重新編譯選項">重新生成以及重新編譯選項<a class="anchor" href="#%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E4%BB%A5%E5%8F%8A%E9%87%8D%E6%96%B0%E7%B7%A8%E8%AD%AF%E9%81%B8%E9%A0%85">¶</a></h1>
+There are two other ways to invoke building with rpm:
+  有兩種不同的方法用rpm重新生成包:
+<p class="Pp"><i><b>rpm --recompile
+    </b><i>&lt;source_package_file&gt;+</i><b></b></i></p>
+<p class="Pp"><i><b>rpm --rebuild
+    </b><i>&lt;source_package_file&gt;+</i><b></b></i></p>
+<p class="Pp">當以這種方式激發的時候,<b>rpm</b>安裝指明的源包,並且完成prep,compile,install工作.
+    另外,<b>--rebuild</b>生成一個新的二進制包.
+    當包的生成完成的時候,生成所用目錄被移去(就如同使用了<b>--clean</b>),
+    而且該包的源和spec文件也要移走.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="簽名一個已存在的RPM">簽名一個已存在的RPM<a class="anchor" href="#%E7%B0%BD%E5%90%8D%E4%B8%80%E5%80%8B%E5%B7%B2%E5%AD%98%E5%9C%A8%E7%9A%84RPM">¶</a></h1>
+<i><b>rpm --resign </b><i>&lt;binary_package_file&gt;+</i><b></b></i>
+<p class="Pp">該選項生成並將新簽名插入所列出的包裏.已存在的簽名會被移走.</p>
+<p class="Pp"><i><b>rpm --addsign
+    </b><i>&lt;binary_package_file&gt;+</i><b></b></i></p>
+<p class="Pp">該選項生成並將新簽名附加到所列出的包的簽名之後.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="PGP_簽名">PGP 簽名<a class="anchor" href="#PGP_%E7%B0%BD%E5%90%8D">¶</a></h1>
+要使用簽名特性,RPM必須要能夠運行PGP(要安裝了PGP並且你可以訪問它),
+  而且還需PGP能找到一個帶有RPM公鑰的公鑰環.
+  缺省情況下,RPM使用PGP的缺省設置(著名的PGPPATH)來查找鑰環.
+  如果你的鑰環並不在PGP所期望它們處在的地方,則你需要配置宏
+<dl class="Bl-tag">
+  <dt><b>_pgp_path</b></dt>
+  <dd>將其設爲要使用的PGP鑰環所在的位置.</dd>
+</dl>
+<p class="Pp">如果你想要簽名一個你自己生成的包,你還必須創建自己的公鑰和密鑰對(請參閱PGP手冊).
+    還需要配置簽名類型宏:</p>
+<dl class="Bl-tag">
+  <dt><b>_signature</b></dt>
+  <dd>目前只支持pgp.還有用戶名宏:</dd>
+  <dt><b>_pgp_name</b></dt>
+  <dd>指明想要使用其鍵去簽名你的包的用戶.
+    <p class="Pp">在生成包的時候,可以將--sign加到命令行裏.這樣只需給出你的口令短語,
+        就可以在生成包的同時對其簽名.</p>
+    <p class="Pp">比如,要想以用戶&#34;John
+        Doe
+        &lt;jdoe@foo.com&gt;&#34;<b>的身份,用在</b>
+        <b></b><b>/etc/rpm/.pgp</b><b>的鑰環,去簽名一個包,就應該將</b></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>%_signature</b></dt>
+  <dd><b>pgp</b></dd>
+  <dt><b>%_pgp_name</b></dt>
+  <dd><b>/etc/rpm/.pgp</b></dd>
+  <dt><b>%_pgp_name</b></dt>
+  <dd><b>John Doe &lt;jdoe@foo.com&gt;&#34;</b></dd>
+</dl>
+<p class="Pp">包括在一個宏配置文件裏.
+    對於系統的配置可以使用<b>/etc/rpm/macros</b>,
+    而對於個人配置可以使用<b>~/.rpmmacros</b>.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="重新生成數據庫選項">重新生成數據庫選項<a class="anchor" href="#%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E6%95%B8%E6%93%9A%E5%BA%AB%E9%81%B8%E9%A0%85">¶</a></h1>
+rpm重建數據庫的命令是
+<p class="Pp">	<b>rpm --rebuilddb</b></p>
+<p class="Pp">要重建一個新的數據庫,可以:</p>
+<p class="Pp">	<b>rpm --initdb</b></p>
+<p class="Pp">對這些模式唯一的選項是<b>--dbpath</b>
+    和 <b>--root</b>.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SHOWRC">SHOWRC<a class="anchor" href="#SHOWRC">¶</a></h1>
+運行
+<p class="Pp">	<b>rpm --showrc</b></p>
+<p class="Pp"></p>
+<p class="Pp">展示一些設置在<i>rpmrc</i>文件裏的值,RPM所有選項都會利用這些值.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="FTP/HTTP選項">FTP/HTTP選項<a class="anchor" href="#FTP/HTTP%E9%81%B8%E9%A0%85">¶</a></h1>
+RPM包括簡單的FTP和HTTP客戶端程序,這樣可以簡化那些從internet取得的包的安裝和查詢.
+  用於安裝,升級,以及查詢操作的包文件可以說明爲ftp或者http格式的URL:
+<p class="Pp"></p>
+<p class="Pp">	<b><a href="ftp://&lt;user">ftp://&lt;user</a>&gt;:&lt;password&gt;@hostname:&lt;port&gt;/path/to/package.rpm</b></p>
+<p class="Pp">如果忽略掉<b>:password</b>部分,會提示要求給出口令(每個用戶/主機名對一次)
+    如果用戶名和口令都忽略了,就使用匿名ftp.
+    總是使用消極(PASV)
+  ftp傳送.</p>
+<p class="Pp">RPM允許使用下列操作輔助ftp
+    URLs</p>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>--ftpproxy </b><i>&lt;hostname&gt;</i><b></b></dt>
+  <dd>主機<i>&lt;hostname&gt;</i>將被作爲所有ftp傳輸的代理服務器使用,
+      這樣允許用戶通過使用了代理系統的防火牆機器來做ftp傳輸.
+      該選項也可以通過配置宏<b>_ftpproxy</b>來指明.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>--ftpport </b><i>&lt;port&gt;</i><b></b></dt>
+  <dd>用該TCP<i>&lt;端口&gt;</i>號取代缺省的端口去連接代理ftp服務器.
+      該選項也可以通過配置宏<b>_ftpport</b>來指明.</dd>
+</dl>
+<p class="Pp">RPM允許使用下列操作輔助http
+    URLs</p>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>--httpproxy </b><i>&lt;hostname&gt;</i><b></b></dt>
+  <dd>將主機<i>&lt;主機名&gt;</i>作爲所有http傳輸的代理服務器使用.
+      該選項可以通過配置宏<b>_httpproxy</b>來指明.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>--httpport </b><i>&lt;port&gt;</i><b></b></dt>
+  <dd>用該TCP<i>&lt;端口&gt;</i>號取代缺省的端口去連接代理http服務器.
+      該選項也可以通過配置宏<b>_httpport</b>來指明.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件">文件<a class="anchor" href="#%E6%96%87%E4%BB%B6">¶</a></h1>
+<pre>/usr/lib/rpm/rpmrc
+/etc/rpmrc
+~/.rpmrc
+/var/lib/rpm/packages
+/var/lib/rpm/pathidx
+/var/lib/rpm/nameidx
+/tmp/rpm*
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="另見">另見<a class="anchor" href="#%E5%8F%A6%E8%A6%8B">¶</a></h1>
+<i>glint</i>(8)， <a href="../../buster/rpm2cpio/rpm2cpio.8.en.html">rpm2cpio(8)</a> <b><a href="../../">../../</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者">作者<a class="anchor" href="#%E4%BD%9C%E8%80%85">¶</a></h1>
+<pre>Marc Ewing &lt;marc@redhat.com&gt;
+Jeff Johnson &lt;jbj@redhat.com&gt;
+Erik Troan &lt;ewt@redhat.com&gt;
+</pre>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>mapping &lt;email&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+2001/7/21
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《Linuxfourm_中文MAN-PAGE計劃》">《Linuxfourm 中文MAN-PAGE計劃》<a class="anchor" href="#%E3%80%8ALinuxfourm_%E4%B8%AD%E6%96%87MAN-PAGE%E8%A8%88%E5%8A%83%E3%80%8B">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2002年6月9日</td>
+    <td class="foot-os">Red Hat, Inc.</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+rpm.8.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-18T03:57:23Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"rpm(8)\"}}]}"
+</script>

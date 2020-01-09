@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>host(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/bind9-host/host.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-hu/host.1.hu.html" hreflang="hu">
+<link rel="alternate" href="../../buster/manpages-ja/host.1.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/host.1.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/host.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/host.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; host(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/host.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/host.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME_%28%E5%90%8D%E5%AD%97%29" title="NAME (名字)">NAME (名字)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS_%28%E7%B8%BD%E8%A6%BD%29" title="SYNOPSIS (總覽)">SYNOPSIS (總覽)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%28%E6%8F%8F%E8%BF%B0%29" title="DESCRIPTION (描述)">DESCRIPTION (描述)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%B8%E9%A0%85" title="選項">選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%AE%9A%E8%A3%BD%E6%9F%A5%E8%A9%A2%E4%B8%BB%E6%A9%9F%E5%90%8D%E5%AD%97" title="定製查詢主機名字">定製查詢主機名字</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%92%B0%E5%A2%83%E8%AE%8A%E9%87%8F" title="環境變量">環境變量</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6" title="文件">文件</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%A6%E8%A6%8B" title="另見">另見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B" title="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/host.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/host.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/host.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/bind9-host/host.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-hu/host.1.hu.html" title="Hungarian (hu)">magyar</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/host.1.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/host.1.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/host.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/host.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/host.1.zh_TW.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pt/host.5.pt.html">5 (<span title="File formats and conventions eg /etc/passwd">formats</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">HOST(1)</td>
+    <td class="head-vol">4</td>
+    <td class="head-rtitle">HOST(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME_(名字)">NAME (名字)<a class="anchor" href="#NAME_(%E5%90%8D%E5%AD%97)">¶</a></h1>
+<b>host -
+  使用域名服務器查詢主機名字</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS_(總覽)">SYNOPSIS (總覽)<a class="anchor" href="#SYNOPSIS_(%E7%B8%BD%E8%A6%BD)">¶</a></h1>
+<b>host</b> [ <b>-l</b> ] [ <b>-v</b> ] [ <b>-w</b> ] [ <b>-r</b> ] [ <b>-d</b>
+  ] [ <b>-t</b> <i>querytype</i> ] [ <b>-a</b> ] <i>host</i> [ <i>server</i> ]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_(描述)">DESCRIPTION (描述)<a class="anchor" href="#DESCRIPTION_(%E6%8F%8F%E8%BF%B0)">¶</a></h1>
+<b>Host</b> 查詢 Internet 主機 的
+  信息. 它 通過 一組
+  分佈在 國家間的
+  互連服務器 獲取 這些
+  信息. 缺省情況下, host
+  只是 簡單的 做
+  主機名字 和 Internet 地址 的
+  轉換. 然而 通過 <b>-t</b> 或
+  <b>-a</b> 選項, 它 可以 用來
+  查找 由 域名服務器
+  維護的 某個主機 的
+  全部信息.
+<p class="Pp">參數 可以是
+    主機名稱, 也可以是
+    數字地址. 此程序 首先
+    把它 當做 主機的
+    數字地址, 如果 嘗試
+    失敗, 再把它 當做
+    主機名稱. 主機的
+    數字地址 由
+    句點隔開的 四個
+    十進位制數 組成, 例如
+    128.6.4.194. 主機名稱 由
+    句點隔開的 名字 組成,
+    例如 topaz.rutgers.edu. 除非 名字
+    以句點 結尾, 否則
+    本地域名 將 自動
+    添加在 後面. 因此, Rutgers
+    的 用戶 可以 輸入</p>
+<p class="Pp">host topaz</p>
+<p class="Pp">它 實際上 查找
+    &#34;topaz.rutgers.edu&#34;. 如果 嘗試
+    失敗, 就用 原來輸入的
+    名字 再試一次
+    (這裏就是 &#34;topaz&#34;). 郵件
+    和 其他 網絡工具 用了
+    同樣的 策略. 添加在
+    名字 後面 的 後綴 來自
+    調用 <b><a href="../../buster/manpages-zh/hostname.1.zh_TW.html">hostname(1)</a></b> 的 結果,
+    使用了 第一個點
+    後面的 全部 數據.
+    (另見 下面
+    <i>定製查詢主機名字</i>
+    的 描述. )</p>
+<p class="Pp">第一個參數 是 你
+    打算查詢的 主機名稱.
+    如果 是 數字地址, 就
+    執行 “ 反向查詢 (inverse query)
+    ” 也就是說, 域名系統
+    查看 一系列 獨立的
+    數據庫, 把 數字地址
+    轉換成 名字.</p>
+<p class="Pp">第二個 參數 是
+    可選的. 它 允許你
+    指定查詢 某個 特定的
+    服務器. 如果 沒有 使用
+    這個參數, 就用 缺省
+    服務器
+  (一般是本地機).</p>
+<p class="Pp">如果 指定了 名字,
+    你 可以見到 三個
+    不同種類的 輸出.
+    這裏是 它們的 例子:</p>
+<p class="Pp">% host sun4
+  <br/>
+  sun4.rutgers.edu is a nickname for ATHOS.RUTGERS.EDU
+  <br/>
+  ATHOS.RUTGERS.EDU has address 128.6.5.46
+  <br/>
+  ATHOS.RUTGERS.EDU has address 128.6.4.4
+  <br/>
+  ATHOS.RUTGERS.EDU mail is handled by ARAMIS.RUTGERS.EDU</p>
+<p class="Pp">用戶 鍵入的命令 是
+    “ <b>host sun4</b> ” 第一行 表明
+    “ sun4.rutgers.edu ” 實際上 是
+    別名. 正式名字 是 “
+    ATHOS.RUTGERS.EDU ” 接下來 兩行
+    顯示 地址. 如果 系統
+    有 多個 網絡接口, host 就
+    分別 顯示 每個 接口 的
+    地址. 最後一行 表明
+    ATHOS.RUTGERS.EDU 不接收 屬於它的
+    郵件, 郵件 由 ARAMIS.RUTGERS.EDU
+    處理. 由於 某些系統
+    擁有 多個 處理郵件的
+    系統, 可能 會有 多行
+    這樣的顯示. 從
+    技術角度 看, 我們 認爲
+    每個 能夠 接收郵件 的
+    系統 應該有 這樣的項.
+    如果 系統 接收
+    它自己的 郵件, 應該
+    有一項 提及 該系統
+    自身; 例如:</p>
+<p class="Pp">Li XXX mail is handled by XXX</p>
+<p class="Pp">然而, 很多 能夠
+    接收 自己郵件 的 系統
+    不願意 提及 這個事實.
+    如果 系統 有一項
+  <br/>
+  Li mail is handled by ,
+  <br/>
+  但是 沒有 地址, 這 表明
+    它 不是 Internet 的 一部分,
+    而是 在 網絡上 轉發
+    郵件 的 系統. Usenet, Bitnet 和
+    許多 其他網絡 都有
+    類似項.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="選項">選項<a class="anchor" href="#%E9%81%B8%E9%A0%85">¶</a></h1>
+在 主機名字 前面 能夠
+  使用 很多 選項. 大多數
+  選項 只對 維護
+  域名數據庫 有意義.
+<dl class="Bl-tag">
+  <dt><b>-w</b></dt>
+  <dd>這一項 導致 <b>host</b> 永久
+      等待 應答.
+      正常情況下, 大約
+      一分鐘後 產生 超時.</dd>
+  <dt><b>-v</b></dt>
+  <dd>以 &#34;繁瑣&#34; 格式 輸出,
+      它是 正式的
+      主域文件格式, 在
+      手冊頁 <a href="../../buster/bind9/named.8.en.html">named(8)</a> 中 有描述.
+      沒有 這個選項 時,
+      基本術語 的 輸出
+      仍然 遵循 這個 格式,
+      但是 試圖 對
+      普通用戶 顯示的
+      更智能些. 如果
+      不使用 -v , 所有的 &#34;a&#34;,
+      &#34;mx&#34;, 和 &#34;cname&#34; 項目
+      顯示成 相應的 &#34;has address&#34;,
+      &#34;mail is handled by&#34; 和 &#34;is a nickname for&#34;,
+      而且 不顯示 TTL
+    和類型.</dd>
+  <dt><b>-r</b></dt>
+  <dd>查詢時 關閉 遞歸. 這
+      意味着 名字服務器
+      只返回 它 自身
+      數據庫 的 數據. 不向
+      其他服務器 詢問 更多
+      信息.</dd>
+  <dt><b>-d</b></dt>
+  <dd>打開 調試功能. 顯示
+      網絡應答細節.</dd>
+  <dt><b>-t</b> <i>querytype</i></dt>
+  <dd>允許 指定 <i>querytype</i> 來
+      查詢 某個信息.
+      手冊頁 <a href="../../buster/bind9/named.8.en.html">named(8)</a> 中 定義了
+      這些 參數.
+      目前支持的 類型有: a , ns
+      , md , mf , cname , soa , mb , mg , mr , null , wks , ptr , hinfo , minfo
+      , mx , uinfo , uid , gid , unspec . 另外,
+      通配符 (可以 寫成 any 或 *
+      ) 可以 指定 上面的
+      任意(全部) 類型. 類型
+      必須是 小寫字符.
+      注意 缺省 搜索順序
+      首先是 a , 然後是 mx ,
+      除非 打開了 -v 選項, 使
+      缺省值 只是 a . -t 選項
+      在過濾 <i>host</i>
+      返回的信息 時
+      非常有用. 更多的
+      內容 參見 下面 -l 選項
+      的 說明.</dd>
+  <dt><b>-a</b></dt>
+  <dd>全部 ; 等同於 -v -t any</dd>
+  <dt><b>-l</b></dt>
+  <dd>列出 全部域項; 例如:
+    <p class="Pp">host -l rutgers.edu</p>
+    <p class="Pp">將 列出 rutgers.edu 域 中
+        所有的 主機.</p>
+    <p class="Pp">-t 選項 可以 按需
+        過濾 收到的信息.
+        缺省值 是 地址信息,
+        包括 PTR 和 NS 記錄.</p>
+  </dd>
+</dl>
+<p class="Pp">host -l -v -t any rutgers.edu</p>
+<p class="Pp">命令 以
+    正式主域文件格式
+    下載 rutgers.edu 的 全部
+    區域(zone) 數據. (然而 由於
+    某些 複雜原因, SOA 記錄
+    顯示了 兩次.)</p>
+<p class="Pp"><b>注意:</b> -l 執行
+    全部的 區域 傳輸, 然後
+    過濾出 要求的 信息.
+    所以 萬不得已 才用
+    這個 命令.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="定製查詢主機名字">定製查詢主機名字<a class="anchor" href="#%E5%AE%9A%E8%A3%BD%E6%9F%A5%E8%A9%A2%E4%B8%BB%E6%A9%9F%E5%90%8D%E5%AD%97">¶</a></h1>
+一般說來, 如果 用戶
+  給出的 名字 中 不含
+  任何 句點, host 就把
+  缺省域名 添加在
+  它的末尾. 缺省域名
+  能夠 定義 在 <i>/etc/resolv.conf</i> 中,
+  但是 通常 從 本機名字
+  的 第一個 句點 後面
+  提取. 用戶 可以 通過
+  環境變量 <b>LOCALDOMAIN</b> 指定
+  不同的 缺省域名. 另外,
+  用戶 可以 自定義
+  主機名字 的 縮寫. 縮寫
+  存放在 某個文件 中,
+  一行 一項, 格式是 一個
+  縮寫名字, 一個 空格,
+  然後是 完整的 主機名.
+  這個 名字文件 必須 用
+  <b>HOSTALIASES</b> 環境變量 指出.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="環境變量">環境變量<a class="anchor" href="#%E7%92%B0%E5%A2%83%E8%AE%8A%E9%87%8F">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>HOSTALIASES</dt>
+  <dd>名字文件, 含有
+      <i>(主機別名</i>,<i>主機全名)</i>
+      對.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件">文件<a class="anchor" href="#%E6%96%87%E4%BB%B6">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>/etc/resolv.conf</dt>
+  <dd></dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="另見">另見<a class="anchor" href="#%E5%8F%A6%E8%A6%8B">¶</a></h1>
+<a href="../../buster/bind9/named.8.en.html">named(8)</a>, <a href="../../buster/manpages-zh/resolver.5.zh_TW.html">resolver(5)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+當你 輸入的 名字
+  不屬於 本地域 時, 將會
+  出現 不希望 的 現象.
+  請記住 除非
+  輸入的名字 以 點 結尾,
+  否則 本地域名 總會
+  附加在 它 後面, 失敗後
+  才使用 原來的 名字.
+<p class="Pp">-l 選項 只 聯繫
+    指定域 中 的 第一個
+    名字服務器. 如果 這個
+    服務器 宕機, 你 應該
+    手工 指定 一個 服務器.
+    例如, 要 獲取 foo.edu
+    的清單, 可以 用</p>
+<p class="Pp">host -t ns foo.edu</p>
+<p class="Pp">獲得 foo.edu 的 全部
+    名字服務器, 然後 用</p>
+<p class="Pp">host -l foo.edu xxx</p>
+<p class="Pp">試驗 每一個 xxx
+    名字服務器, 直到 碰上
+    能用的.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+徐明 &lt;xuming@users.sourceforge.net&gt;
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+2003/05/13
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B">¶</a></h1>
+<a href="../..//cmpp.linuxforum.net</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">1994年12月15日</td>
+    <td class="foot-os">BSD</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+host.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2020-01-03T03:33:19Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"host(1)\"}}]}"
+</script>

@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>zic(8) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages/zic.8.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es/zic.8.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-ja/zic.8.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pt-dev/zic.8.pt.html" hreflang="pt">
+<link rel="alternate" href="../../buster/manpages-zh/zic.8.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/zic.8.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="8">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; zic(8)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/zic.8">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/zic.8.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%80%BB%E8%A7%88" title="总览">总览</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%B3%A8%E6%84%8F" title="注意">注意</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%9B%B8%E5%85%B3%E6%96%87%E4%BB%B6" title="相关文件">相关文件</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%88%E8%A7%81" title="又见">又见</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D" title="[中文版维护人]">[中文版维护人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E5%9B%BD_Linux_%E8%AE%BA%E5%9D%9B_man_%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%5D" title="[中国 Linux 论坛 man 手册页翻译计划]">[中国 Linux 论坛 man 手册页翻译计划]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/zic.8.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/zic.8.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/zic.8.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages/zic.8.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es/zic.8.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/zic.8.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pt-dev/zic.8.pt.html" title="Portuguese (pt)">português (pt)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/zic.8.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/zic.8.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">ZIC(8)</td>
+    <td class="head-vol">System Manager&#39;s Manual</td>
+    <td class="head-rtitle">ZIC(8)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+zic - 时区编辑器
+</section>
+<section class="Sh">
+<h1 class="Sh" id="总览">总览<a class="anchor" href="#%E6%80%BB%E8%A7%88">¶</a></h1>
+<b>zic</b> [ <b>-v</b> ] [ <b>-d</b> <i>directory</i> ] [ <b>-l</b>
+  <i>localtime</i> ] [ <b>-p</b> <i>posixrules</i> ] [ <b>-L</b>
+  <i>leapsecondfilename</i> ] [ <b>-s</b> ] [ <b>-y</b> <i>command</i> ] [
+  <i>filename</i> ... ]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<i>Zic</i>
+  从文件中读取文本输入，文件的名字是用命令行指定的；
+  然后生成时间转换信息文件，此文件由输入指定。
+  如果 <i>文件名</i> 是 <b>-</b>
+  ，从
+  标准输入中读取。
+<p class="Pp">可得到以下选项:</p>
+<dl class="Bl-tag">
+  <dt><b>-d </b><i>目录</i></dt>
+  <dd>在指定的目录中生成时间转换信息文件，而不是下面的标准
+      的目录名。</dd>
+  <dt><b>-l </b><i>时区</i></dt>
+  <dd>用给定的时区作为本地时间。
+      <i>Zic</i>
+      对此选项的对待如同在输入中有下面格式的连接行
+    <p class="Pp">连接 (从) <i>时区</i>
+        (到)本地时间</p>
+  </dd>
+  <dt><b>-p </b><i>时区</i></dt>
+  <dd>当处理 POSIX
+      格式的时区环境变量时，使用给定的时区规则。
+      <i>Zic</i>
+      对此选项的对待如同在输入中有下面格式的连接行
+    <p class="Pp">连接 (从) <i>时区</i>
+        (到)POSIX规则</p>
+  </dd>
+  <dt><b>-L </b><i>闰秒文件名</i></dt>
+  <dd>从指定名字的文件中读闰秒信息。
+      如果不使用本选项,则在输出文件中不出现闰秒信息。</dd>
+  <dt>译注:
+    早期的日期时间度量采用天文方法，GMT
+    (Greenwich Mean</dt>
+  <dd>Time，格林威治平均时)
+      中的 Greenwich
+      所指称的是英国的一个
+      天文台。1948年发明了原子钟，当前使用铯133原子钟的国际原子
+      时间(TAI)与地球的公转和自转无关。由于地球自转的速度逐渐变
+      慢，为保持与太阳运动的同相,
+      当 TAI
+      与太阳时之间的差距达
+      到 800ms
+      时，在太阳时中加入闰秒调快太阳时的时间系统。矫正
+      后的时间称为 UTC
+      时间(Universal Coordinated
+      Time，世界时)。 PC
+      机以本机器内的晶振计时,
+      没有与 UTC
+      时间同步的机制。UTC
+      是法语的缩写。
+      引自：现代操作系统/Andrew
+      S. Tanebaum 著。-北京:
+      机械工业
+      出版社，1999.11。第 11
+      章，第 11.1.2 节；第 5
+      章， 第 5.4.1 节。</dd>
+  <dt><b>-v</b></dt>
+  <dd>当出现在数据文件中的年超出了
+      <a href="../../buster/manpages-dev/time.2.en.html">time(2)</a>
+      可表示的值的年的范围时提出申诉。
+      (让用户知道他干不了超出自身能力的事)</dd>
+  <dt><b>-s</b></dt>
+  <dd>限定在输出文件中存储的时间值无论被作为有符号或无符号
+      均是同一个值。你能用此选项生成
+      SVVS 兼容文件。</dd>
+  <dt>译注: 传统 UNIX
+    使用三十二位有符号整数计数器以秒为单位计</dt>
+  <dd>时，以1970年1月1日为零起点，在2038年将溢出，负数可表示到
+      1901年。Linux
+      使用三十二位无符号整数计数器以秒为单位计时，
+      以1970年1月1日为零起点，在2106年将溢出。由此决定了时间值
+      的范围(至少是在 ANSI C
+      中)。
+      引自：现代操作系统/Andrew
+      S. Tanebaum 著。-北京:
+      机械工业
+      出版社，1999.11。第 5
+      章，第 5.4.2 节。</dd>
+  <dt><b>-y </b><i>命令</i></dt>
+  <dd>当检测年的类型时，使用给定的
+      <i>命令</i> ，而不是 <b>yearistype</b>
+      (见后)</dd>
+</dl>
+<p class="Pp">输入行由字段组成。字段之间以白空格字符(空格或
+    TAB)分隔。
+    前导和后挂的白空格将被忽略。在输入中的未加引号的
+    # 号
+    表示直到其所在行结束的部分是注释。如果要在字段中使用空白和
+    # 号，
+    你要把它们用双引号括起来。任何(去除了注释后的)空行将被
+    忽略。非空行应是以下三种类型之一:
+    规则行，时区行，连接行。</p>
+<p class="Pp">规则行的格式</p>
+<pre>
+
+Rule	NAME	FROM	TO	TYPE	IN	ON	AT	SAVE	LETTER/S
+
+例如:
+
+Rule	US	1967	1973	-	Apr	lastSun	2:00	1:00	D
+
+</pre>
+组成规则行的字段是:
+<dl class="Bl-tag">
+  <dt><b>NAME 名字</b></dt>
+  <dd>给出此条规则所属的规则集的名字，名字可任意起。
+      <b>FROM 从...(年)</b>
+      给出本规则应用的启始年份。提供的年份可以是任何整数；
+      <b>minimum 最小</b>
+      (或其略写)一词的意思是可表示成整数的最小年份。
+      <b>maximum 最大</b>
+      (或其略写)一词的意思是可表示成整数的最大年份。
+      规则可以描述不能以时间值表示的时间，
+      但忽略不能以时间值表示的时间，
+      这允许规则在不同时间值类型的主机之间有可移植性。</dd>
+  <dt><b>TO 到...(年)</b></dt>
+  <dd>给出本规则应用的终止年份。除了上面的
+      <b>最大</b> 和 <b>最小</b> ， <b>only
+      唯一</b>
+      (或其略写)一词的意思是与
+      <b>FROM</b>
+      字段有相同的值。</dd>
+  <dt><b>TYPE 类型</b></dt>
+  <dd>给出本规则应用的年份类型。如果
+      <b>TYPE</b> 是 <b>-</b>
+      ，则本规则应用于包含在
+      <b>FROM</b> 和 <b>TO</b>
+      之间的所有年份。如果是其他类型，则
+      <b>Zic</b> 执行下面的命令
+      <b>yearistype</b> <i>year</i> <i>type</i>
+    <br/>
+    来检测某一年的类型:
+      退出状态 0
+      表示此年是给定的类型；
+      退出状态非 0
+      表示此年不是给定的类型。</dd>
+  <dt><b>IN 在...(月)</b></dt>
+  <dd>给出本规则有效的月份的名字。月份的名字可用缩写。</dd>
+  <dt><b>ON 在...(日)</b></dt>
+  <dd>给出本规则有效的日期。可识别的日期的格式包括：
+    <br/>
+    <p class="Pp">5	一个月的第 5 天
+        lastSun	一个月的最后的星期天
+        lastMon	一个月的最后的星期一
+        Sun&gt;=8	一个月的第 8
+        天以后(含第 8
+        天)的第一个星期天
+        Sun&lt;=25	一个月的第 25
+        天以前(含第 25
+        天)的最后一个星期天
+      <br/>
+      <br/>
+    </p>
+    <p class="Pp">星期的名字是可以缩写或全拼。注意在
+        <b>ON</b>
+        字段中不能有空格。</p>
+  </dd>
+  <dt><b>AT 在...(时间)</b></dt>
+  <dd>给出本规则有效的时间。可识别的时间的格式包括：
+    <pre><br/>
+
+
+2	用小时表示的时间
+2:00	用小时:分钟表示的时间
+15:00	用 24 制小时表示的时间 (表示下午的时间)
+1:28:14	用小时:分钟:秒钟表示的时间
+    </pre>
+    <br/>
+    <p class="Pp">这里午夜 0
+        点是一天开始，
+        午夜 24
+        点是一天结束。
+        对于任何以上格式，如果给定的时间是本地的
+        &#34;墙钟&#34;
+        时间，可以后跟字母
+        <b>w ；</b>
+        如果给定的时间是本地的
+        &#34;标准&#34;
+        时间，可以后跟字母
+        <b>s ；</b>
+        果给定的时间世界时间，可以后跟字母
+        <b>u</b> （或 <b>g</b> 或 <b>z ）</b>
+        如果没写此种指示符，假定是&#34;墙钟&#34;时间。</p>
+  </dd>
+  <dt>译注：例如我的&#34;墙钟&#34;时间是北京时间(GMT+8),我的本地标准时间</dt>
+  <dd>是
+      GMT+9(哈尔滨所在的时区的时间)。</dd>
+  <dt><b>SAVE 补偿</b></dt>
+  <dd>给出当本规则有效时增加到本地标准时间上的时间量。
+      本字段与 <i>AT</i>
+      字段格式相同(当然，未使用
+      <b>w 和</b> <b>s 后缀)。</b></dd>
+  <dt><b>LETTER/S 字母</b></dt>
+  <dd>给出当本规则有效时时区缩写的
+      &#34;可变部分&#34; (例如，
+      &#34;EST&#34;中 的 &#34;S&#34;或
+      &#34;EDT&#34;中的
+      &#34;D&#34;)。如果本字段是
+      <b>-</b>，可变部分是空。</dd>
+</dl>
+<p class="Pp">时区行格式</p>
+<p class="Pp"></p>
+<pre>Zone	NAME	GMTOFF	RULES/SAVE	FORMAT	[UNTIL]
+
+例如：
+
+Zone	Australia/Adelaide	9:30	Aus	CST	1971 Oct 31 2:00
+
+</pre>
+组成规则行的字段是:
+<dl class="Bl-tag">
+  <dt><b>NAME 名字</b></dt>
+  <dd>时区的名称，被作为为时区而生成的时间转换文件的名字。</dd>
+  <dt><b>GMTOFF GMT-偏移量</b></dt>
+  <dd>为得到本时区的标准时间而应加到
+      UTC 时间上的时间量。
+      本字段与规则行的 <b>AT</b>
+      和 <b>SAVE</b>
+      有相同的格式；字段值是负值
+      (即以负号开始)表示要从
+      UTC
+      时间上减去的时间量。</dd>
+  <dt><b>RULES/SAVE 规则/补偿</b></dt>
+  <dd>本时区应用的规则的名字，或者是应加到本地标准时间上的
+      时间量
+      。如果本字段是 <b>-
+      ，则本时区总是用标准时间。</b></dd>
+  <dt><b>FORMAT 格式</b></dt>
+  <dd>本时区的时区缩写的格式。字符对
+      <b>%s</b> 表示时区缩写的
+      &#34;可变部分&#34;
+      。另外，/ 符号(斜扛)
+      分隔标准时和夏令时的缩写。</dd>
+  <dt><b>UNTIL 直到</b></dt>
+  <dd>是某个位置的 UTC
+      偏移量或规则改变的时间。它被指定为
+      某年某月某日某时。如果指定了本字段，直到指定的时间之
+      后，才会产生从改变了的
+      UTC
+      偏移量和规则生成的时区信息。
+      某年某月某日某时的格式同于规则中的
+      IN、ON 和 AT 列；
+      随后的列可以省略，给未写出的列的缺省值是可能的最早的值。</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>下一行必须是一个
+      &#34;接续&#34;
+      的行，就是说，除了字符串
+      &#34;Zone&#34;
+      和名字省略了之外，与时区行有一样的格式；接续行在上一行
+      的 <b>UNTIL</b>
+      字段所指定的时间开始后，按本行的
+      UTC 偏移量或规
+      则在上一行名字字段指定的文件中生成时区信息。接续行可以
+      有象时区行一样的 <b>UNTIL
+      字段，用于指示下一行是自己的接续。</b></dd>
+</dl>
+<dl class="Bl-tag">
+  <dt>译注：上面的这段绕口令的意思是</dt>
+  <dd>zome 输出的时区文件名
+      规则1 规则2生效时间
+      规则2 规则3生效时间
+      规则n</dd>
+</dl>
+<p class="Pp">连接行格式</p>
+<p class="Pp"></p>
+<pre>Link	LINK-FROM	LINK-TO
+
+例如：
+
+Link	Europe/Istanbul	Asia/Istanbul
+
+</pre>
+<b>LINK-FROM</b>
+  字段的值应是在某个时区行的
+  <b>NAME 名字</b>
+  字段上出现过； <b>LINK-TO</b>
+  字段是那个时区的可替代的名字。
+<p class="Pp">除了接续行之外，行可在文件中以任意顺序出现。</p>
+<p class="Pp">描述闰秒的文件中的行有以下格式:</p>
+<pre>
+
+Leap	YEAR	MONTH	DAY	HH:MM:SS	CORR	R/S
+
+例如：
+
+Leap	1974	Dec	31	23:59:60	+	S
+
+</pre>
+字段 <b>YEAR、</b> <b>MONTH、</b> <b>DAY</b> 和
+  <b>HH:MM:SS</b>
+  说明什么时侯闰秒出现。
+  <b>CORR</b>
+  字段在应增加一秒时是
+  &#34;+&#34;，在应减少一秒时是
+  &#34;-&#34;。
+  在其他字段给出的闰秒时间应被解释为
+  UTC 时间的情况下， <b>R/S</b>
+  字段应是 S ( &#34;Stationary&#34;
+  静止一词的缩写)；在其他字段给出的闰秒时间应被解释
+  为本地墙钟时间的情况下，
+  <b>R/S</b> 字段应是 R(
+  &#34;Rolling&#34;滚动一词的缩写)。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="注意">注意<a class="anchor" href="#%E6%B3%A8%E6%84%8F">¶</a></h1>
+对于有多于两种类型的本地时间的地区，你可能需要用最早变更时
+  间的规则的 <b>AT</b>
+  字段中的本地标准时间，来确保记录在编译的文件
+  中的最早变更时间是正确的。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="相关文件">相关文件<a class="anchor" href="#%E7%9B%B8%E5%85%B3%E6%96%87%E4%BB%B6">¶</a></h1>
+/usr/local/etc/zoneinfo
+  生成的文件所在的标准目录。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="又见">又见<a class="anchor" href="#%E5%8F%88%E8%A7%81">¶</a></h1>
+newctime(3), <a href="../../buster/manpages-zh/tzfile.5.zh_CN.html">tzfile(5)</a>, <a href="../../buster/manpages-zh/zdump.8.zh_CN.html">zdump(8)</a>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版维护人]">[中文版维护人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D">¶</a></h1>
+<b>mhss &lt;jijingzhisheng@up369.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+2000/12/05
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中国_Linux_论坛_man_手册页翻译计划]">[中国 Linux 论坛 man 手册页翻译计划]<a class="anchor" href="#%5B%E4%B8%AD%E5%9B%BD_Linux_%E8%AE%BA%E5%9D%9B_man_%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%5D">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+zic.8.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-26T15:38:45Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"zic(8)\"}}]}"
+</script>

@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bzip2(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/bzip2.1.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/bzip2/bzip2.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es-extra/bzip2.1.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-hu/bzip2.1.hu.html" hreflang="hu">
+<link rel="alternate" href="../../buster/manpages-ja/bzip2.1.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/bzip2.1.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-tr/bzip2.1.tr.html" hreflang="tr">
+<link rel="alternate" href="../../buster/manpages-zh/bzip2.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/bzip2.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; bzip2(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/bzip2.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/bzip2.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME_%E5%91%BD%E4%BB%A4%E5%90%8D" title="NAME 命令名">NAME 命令名</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD" title="總覽">總覽</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%B8%E9%A0%85" title="選項">選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%85%A7%E5%AD%98%E7%AE%A1%E7%90%86" title="內存管理">內存管理</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%BE%9E%E6%90%8D%E5%A3%9E%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD%E6%81%A2%E5%BE%A9%E6%95%B8%E6%93%9A" title="從損壞的文件中恢復數據">從損壞的文件中恢復數據</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%9C%89%E9%97%9C%E6%80%A7%E8%83%BD%E7%9A%84%E8%A8%BB%E8%A7%A3" title="有關性能的註解">有關性能的註解</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AD%A6%E5%91%8A" title="警告">警告</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85" title="作者">作者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E5%9C%8B_Linux_%E8%AB%96%E5%A3%87_man_%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%5D" title="[中國 Linux 論壇 man 手冊頁翻譯計劃]">[中國 Linux 論壇 man 手冊頁翻譯計劃]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/bzip2.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/bzip2.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/bzip2.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/bzip2.1.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/bzip2/bzip2.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es-extra/bzip2.1.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-hu/bzip2.1.hu.html" title="Hungarian (hu)">magyar</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/bzip2.1.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/bzip2.1.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-tr/bzip2.1.tr.html" title="Turkish (tr)">Türkçe</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/bzip2.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/bzip2.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle"><a href="../../buster/manpages-zh/bzip2.1.zh_TW.html">bzip2(1)</a></td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle"><a href="../../buster/manpages-zh/bzip2.1.zh_TW.html">bzip2(1)</a></td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<section class="Sh">
+<h1 class="Sh" id="NAME_命令名">NAME 命令名<a class="anchor" href="#NAME_%E5%91%BD%E4%BB%A4%E5%90%8D">¶</a></h1>
+bzip2, bunzip2 -
+  一種塊排序文件壓縮軟件，v0.9.5
+<br/>
+bzcat -
+  將文件解壓縮至標準輸出
+<br/>
+bzip2recover - 恢復損壞的 bzip2 文件
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽">總覽<a class="anchor" href="#%E7%B8%BD%E8%A6%BD">¶</a></h1>
+<b>bzip2</b> [<b> -cdfkqstvzVL123456789 </b>] [ <i>filenames ...</i> ]
+<br/>
+<b>bunzip2</b> [<b> -fkvsVL </b>] [ <i>filenames ...</i> ]
+<br/>
+<b>bzcat</b> [<b> -s </b>] [ <i>filenames ...</i> ]
+<br/>
+<b>bzip2recover</b> <i>filename</i>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<i>bzip2</i> 採用 Burrows-Wheeler
+  塊排序文本壓縮算法和
+  Huffman
+  編碼方式壓縮文件。
+  壓縮率一般比基於 LZ77/LZ78
+  的壓縮軟件好得多，其性能接近
+  PPM 族統計類 壓縮軟件。
+<p class="Pp">命令行參數有意設計爲非常接近
+    <i>GNU gzip</i>
+    的形式，但也不完全相同。</p>
+<p class="Pp"><i>bzip2</i>
+    從命令行讀入文件名和參數。
+    每個文件被名爲
+    &#34;原始文件名.bz2&#34;
+    的壓縮文件替換。
+    每個壓縮文件具有與原文件相同的修改時間、
+    權限，
+    如果可能的話，
+    還具有相同的屬主，
+    因此在解壓縮時這些特性將正確地恢復。
+    在某些文件系統中，
+    沒有權限、
+    屬主或時間的概念，
+    或者對文件名的長度有嚴格限制，
+    例如 MSDOS，
+    在這種情況下，bzip2
+    沒有保持原文件名、
+    屬主、
+    權限以及時間的機制，
+    從這個意義上說，bzip2
+    對文件名的處理是幼稚的。</p>
+<p class="Pp"><i>bzip2</i> 和 <i>bunzip2</i>
+    在缺省情況下不覆蓋已有的文件。
+    如果想覆蓋已有的文件，要指定
+    -f 選項。</p>
+<p class="Pp">如果未指定文件名，
+    <i>bzip2</i>
+    將壓縮來自標準輸入的數據並寫往標準輸出。在這種情況下，
+    <i>bzip2</i>
+    會拒絕將壓縮結果寫往終端，因爲這完全無法理解並且是沒有意義的。</p>
+<p class="Pp"><i>bunzip2</i> (以及 <i>bzip2 -d)</i>
+    對所有指定的文件進行解壓縮處理。不是由
+    <i>bzip2</i>
+    產生的文件將被忽略，同時發出一個警告信息。
+    <i>bzip2</i>
+    按下列方式由壓縮文件名確定解壓後的文件名：</p>
+<p class="Pp">
+   filename.bz2 解壓成 filename
+   filename.bz 解壓成 filename
+   filename.tbz2 解壓成 filename.tar
+   filename.tbz 解壓成 filename.tar
+   anyothername 解壓成 anyothername.out</p>
+<p class="Pp">如果文件名的後綴不是下列之一：
+    <i>.bz2,</i> <i>.bz,</i> <i>.tbz2</i> 或 <i>.tbz,</i> <i>.bzip2</i>
+    將抱怨無法確定原始文件名，並採用原文件名加
+    <i>.out</i>
+    作爲解壓縮文件名。</p>
+<p class="Pp">在壓縮時，如果不提供文件名，bzip2
+    將從標準輸入讀取數據，壓縮結果寫往標準輸出。</p>
+<p class="Pp"><i>bunzip2</i>
+    能夠正確地解壓由兩個或更多個壓縮文件連在一起的文件。
+    解壓的結果爲相應的連在一起的未壓縮文件。
+   bzip2
+    也支持對連在一起的壓縮文件的完整性檢查(-t選項)。</p>
+<p class="Pp">同樣可採用 -c
+    選項將文件壓縮或解壓縮至標準輸出。
+    多個文件可通過這種方式壓縮或解壓縮。
+    輸出結果被依次送往標準輸出。
+    採用這種方式對多個文件的壓縮將生成包含
+    多個壓縮文件的數據流。這樣的數據流只能被
+    0.9.0 版或其後續版本的
+    <i>bzip2</i>
+    正確解壓。較早版本的
+    <i>bzip2</i>
+    會在解壓完第一個文件之後停止。</p>
+<p class="Pp"><i>bzcat</i> (或 <i>bzip2 -dc)</i>
+    將所有指定文件解壓縮至標準輸出。</p>
+<p class="Pp"><i>bzip2</i> 可從環境變量
+    <i>BZIP2</i> 和 <i>BZIP</i>
+    中依次讀取參數，
+    並在命令行參數之前對其進行處理。
+    這是提供缺省選項的方便途徑。</p>
+<p class="Pp">即使壓縮後的文件略大於原文件，
+    壓縮也總是照樣進行。
+    小於大約 100
+    字節的文件壓縮後傾向於變大，
+    因爲會有一個 50
+    字節的數據頭。
+    對於隨機數據
+    （包括大多數壓縮軟
+    件的輸出），
+    大約每字節壓成 8.05
+    位， 放大率約爲 0.5%。</p>
+<p class="Pp"><i>bzip2</i> 採用 32 位 CRC
+    校驗碼作自我檢查，以確認解壓後的文件與原始文件相同。
+    這可用於檢測壓縮文件是否損壞，並防止
+    <i>bzip2</i>
+    中未知的缺陷（運氣好的話這種可能性非常小）。
+    數據損壞而未檢測到的機率非常之小，
+    對於每個被處理的文件大約是四十億分之一。
+    檢查是在解壓縮時進行的，
+    因此它只能說明某個地方出問題了。
+    它能幫助恢復原始未壓縮的數據。可以用
+    <i>bzip2recover</i>
+    來嘗試從損壞的文件中恢復數據。</p>
+<p class="Pp">返回值：正常退出返回
+    0， 出現環境問題返回 1
+    （文件未找到，非法的選項，I/O錯誤等），
+    返回 2
+    表明壓縮文件損壞，出現導致
+    <i>bzip2</i>
+    緊急退出的內部一致性錯誤（例如缺陷）時返回
+    3。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="選項">選項<a class="anchor" href="#%E9%81%B8%E9%A0%85">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>-c --stdout</b></dt>
+  <dd>將數據壓縮或解壓縮至標準輸出。</dd>
+  <dt><b>-d --decompress</b></dt>
+  <dd>強制解壓縮。 <i>bzip2,</i>
+      <i>bunzip2</i> 以及 <i>bzcat</i>
+      實際上是同一個程序，進行何種操作將根據程序名確定。
+      指定該選項後將不考慮這一機制，強制
+      <i>bzip2</i> 進行解壓縮。</dd>
+  <dt><b>-z --compress</b></dt>
+  <dd>-d
+      選項的補充：強制進行壓縮操作，而不管執行的是哪個程序。</dd>
+  <dt><b>-t --test</b></dt>
+  <dd>檢查指定文件的完整性，但並不對其解壓縮。
+      實際上將對數據進行實驗性的解壓縮操作，而不輸出結果。</dd>
+  <dt><b>-f --force</b></dt>
+  <dd>強制覆蓋輸出文件。通常
+      <i>bzip2</i>
+      不會覆蓋已經存在的文件。該選項還強制
+      <i>bzip2</i>
+      打破文件的硬連接，缺省情況下
+      bzip2 不會這麼做。</dd>
+  <dt><b>-k --keep</b></dt>
+  <dd>在壓縮或解壓縮時保留輸入文件（不刪除這些文件）。</dd>
+  <dt><b>-s --small</b></dt>
+  <dd>在壓縮、
+      解壓縮及檢查時減少內存用量。
+      採用一種修正的算法進行壓縮和測試，
+      每個數據塊僅需要 2.5
+      個字節。
+      這意味着任何文件都可以在
+      2300k
+      的內存中進行解壓縮，
+      儘管速度只有通常情況下的一半。
+    <p class="Pp">在壓縮時，-s將選定
+        200k
+        的塊長度，內存用量也限制在
+        200k 左右，
+        代價是壓縮率會降低。
+        總之，如果機器的內存較少（8兆字節或更少），
+        可對所有操作都採用-s選項。參見下面的內存管理。</p>
+  </dd>
+  <dt><b>-q --quiet</b></dt>
+  <dd>壓制不重要的警告信息。屬於
+      I/O
+      錯誤及其它嚴重事件的信息將不會被壓制。</dd>
+  <dt><b>-v --verbose</b></dt>
+  <dd>詳盡模式 --
+      顯示每個被處理文件的壓縮率。
+      命令行中更多的 -v
+      選項將增加詳細的程度，
+      使 bzip2
+      顯示出許多主要用於診斷目的信息。</dd>
+  <dt><b>-L --license -V --version</b></dt>
+  <dd>顯示軟件版本，許可證條款及條件。</dd>
+  <dt><b>-1 to -9</b></dt>
+  <dd>在壓縮時將塊長度設爲
+      100 k、200 k .. 900 k。
+      對解壓縮沒有影響。參見下面的內存管理。</dd>
+  <dt><b>--</b></dt>
+  <dd>將所有後面的命令行變量看作文件名，即使這些變量以減號&#34;-&#34;打頭。
+      可用這一選項處理以減號&#34;-&#34;打頭的文件名，
+      例如：bzip2 -- -myfilename.</dd>
+  <dt><b>--repetitive-fast --repetitive-best</b></dt>
+  <dd>這些選項在 0.9.5
+      及其以上版本中是多餘的。
+      在較早的版本中，這兩個選項對排序算法
+      的行爲提供了一些粗糙的控制，有些情況下很有用。
+      0.9.5
+      及其以上版本採用了改進的算法而與這些選項無關。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="內存管理">內存管理<a class="anchor" href="#%E5%85%A7%E5%AD%98%E7%AE%A1%E7%90%86">¶</a></h1>
+<i>bzip2</i>
+  按照數據塊壓縮大文件。
+  數據塊長度同時影響數據的壓縮率和壓縮及解壓縮時需要
+  的內存用量。 選項 -1 至
+  -9
+  將數據塊長度分別指定爲
+  100,000 字節至
+  900,000（缺省）字節。
+  在解壓縮時，
+  壓縮時使用的塊長度從壓縮文件的頭中讀取，
+  同時 <i>bunzip2</i>
+  分配出剛好夠用的內存對文件進行解壓縮。
+  由於數據塊長度保存在壓縮文件中，
+  所以在解壓縮時不需要
+  -1 至 -9 這些選項，
+  因而將被忽略。
+<p class="Pp">可以按下面的公式估計壓縮和解壓縮時的內存用量，單位爲字節：</p>
+<p class="Pp">
+   壓縮: 400k + ( 8 x 數據塊長度 )</p>
+<p class="Pp">
+   解壓縮: 100k + ( 4 x
+    數據塊長度 ), 或
+   100k + ( 2.5 x 數據塊長度 )</p>
+<p class="Pp">大數據塊長度產生迅速縮小的臨界返回
+    (give rapidly diminishing marginal returns)。
+    在小機器上使用 <i>bzip2</i>
+    時，
+    一個值得記住的事實是，
+    大多數壓縮來自數據塊長度的前
+    200 或 300k。
+    另外重要的一點是，
+    解壓縮時內存的需要量是在壓縮時用塊長度選項設定的。</p>
+<p class="Pp">對於缺省用 900k
+    的數據塊長度壓縮的文件，
+    <i>bunzip2</i> 大約需要 3700k
+    字節的內存進行解壓縮。爲支持一臺
+    4MB
+    機器上任何文件的解壓縮，
+    <i>bunzip2</i>
+    有一個選項大約只需一半容量的內存，約
+    2300k 字節。
+    解壓縮速度同樣也降低一半。
+    因此應該只在需要時採用該選項。相應的選項標誌爲
+    -s。</p>
+<p class="Pp">一般來說，應儘量採用內存允許的最大數據塊長度，
+    因爲這能達到最好的壓縮率，
+    壓縮和解壓縮速度實質上不受塊長度的影響。</p>
+<p class="Pp">另一個值得注意的問題是關於小於一個數據塊長度的文件的，
+    也就是說， 所遇到的
+    大多數文件使用一個大數據塊。
+    由於文件長度小於一個數據塊長度，
+    實際使用到的內存與文件長度成正比。
+    例如，採用 -9
+    選項壓縮一個 20,000
+    字節的文件時，
+    將分配 7600k 的內存，
+    但其中只用到了 400k+20000*8=560k
+    字節。同樣地，在解壓縮時將分配
+    3700k 內存，但只用到 100k + 20000
+    * 4 = 180 k 字節。</p>
+<p class="Pp">下表總結了不同數據塊長度下的內存用量。同時列出的還有
+    Calgary 文本壓縮語料
+    庫中的 14
+    個文件的壓縮長度，這
+    14
+    個文件壓縮前總長度爲
+    3,141,622 字節。
+    這些數據顯示了壓縮率是如何隨數據塊長度變化的。
+    由於這一語料庫主要由小文件組成，
+    所以這些數字並沒有充分體現出大文件情況下，
+    採用大數據塊所能達到的較高壓縮率的優勢。</p>
+<p class="Pp">
+   壓縮時 解壓縮 解壓縮 -s
+    語料庫文件
+   Flag 內存用量 內存用量
+    選項內存用量
+    壓縮長度</p>
+<p class="Pp">
+   -1 1200k 500k 350k 914704
+   -2 2000k 900k 600k 877703
+   -3 2800k 1300k 850k 860338
+   -4 3600k 1700k 1100k 846899
+   -5 4400k 2100k 1350k 845160
+   -6 5200k 2500k 1600k 838626
+   -7 6100k 2900k 1850k 834096
+   -8 6800k 3300k 2100k 828642
+   -9 7600k 3700k 2350k 828642</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="從損壞的文件中恢復數據">從損壞的文件中恢復數據<a class="anchor" href="#%E5%BE%9E%E6%90%8D%E5%A3%9E%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD%E6%81%A2%E5%BE%A9%E6%95%B8%E6%93%9A">¶</a></h1>
+<i>bzip2</i>
+  按數據塊對數據進行壓縮，數據塊長度通常爲
+  900k
+  字節。每個數據塊被獨立地處理。
+  如果由於介質或傳輸錯誤導致多數據塊的
+  .bz2
+  文件損壞，有可能將文件中未損壞的
+  數據塊中的數據恢復。
+<p class="Pp">壓縮後的數據塊以一個
+    48
+    位的結構分界，因而有可能在合理的範圍內找到塊邊界。
+    每個數據塊也帶着自己的
+    32 位 CRC
+    校驗碼，因此可以區分損壞與未損壞的數據塊。</p>
+<p class="Pp"><i>bzip2recover</i>
+    是一個簡單的程序，它的功能是在
+    .bz2
+    文件中尋找數據塊，並將每個數據塊寫到
+    自己的 .bz2
+    文件中。然後可以用
+    <i>bzip2</i> -t
+    測試結果的完整性，將未損壞的部分解壓縮。</p>
+<p class="Pp"><i>bzip2recover</i>
+    只有一個命令行變量，即損壞文件的名字。輸出結果是一系列象
+    &#34;rec0001file.bz2&#34;、 &#34;rec0002file.bz2&#34;
+    這樣的文件，
+    每個文件含有從損壞文件中找出的數據塊。
+    輸出文件名設計爲在接下來的處理中可方便地使用通配符，
+    例如，&#34;bzip2 -dc
+    rec*file.bz2&gt;recovered_data&#34;，可按正確的次序列出文件。</p>
+<p class="Pp"><i>bzip2recover</i>
+    在處理大文件時最有用，
+    因爲大文件含有很多數據塊。
+    顯然用它處理單個數據塊的損壞文件不會有任何結果，
+    因爲一個損壞的數據塊是無法恢復的。
+    如果想盡量減少潛在的由於介質及傳輸錯誤導致的數據損壞，
+    可以考慮採用較小的數據塊長度進行壓縮。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="有關性能的註解">有關性能的註解<a class="anchor" href="#%E6%9C%89%E9%97%9C%E6%80%A7%E8%83%BD%E7%9A%84%E8%A8%BB%E8%A7%A3">¶</a></h1>
+在壓縮的排序階段，
+  相似的字符串將被聚集在一起。
+  因此，
+  對於包含很長重複符號
+  的文件， 例如象
+  &#34;aabaabaabaab......&#34;
+  這樣的字符串（重複幾百次），
+  壓縮速度會
+  比通常情況慢得多。 0.9.5
+  及其以上版本在處理這樣的重複時，
+  速度比以前版本提高
+  了很多。
+  最壞情況與平均情況下的壓縮時間之比約爲
+  10:1。 對於以前的版本，
+  這一數字大約是 100:1
+  以上。你如果願意，
+  可採用 -vvvv
+  選項來非常詳細地監視這一過程。
+<p class="Pp">解壓縮速度並不受這些現象的影響。</p>
+<p class="Pp"><i>bzip2</i>
+    通常分配出幾兆字節的內存用於處理數據，
+    對這些內存的訪問是以相當隨機的方式
+    進行的。 這意味着，
+    壓縮及解壓縮的性能在很大程度上取決於機器上處理高速緩存
+    未命中的速度。
+    因此，
+    已經觀察到對程序作很小的減少失敗率的改動會導致不成比例的很大的性能
+    上的提升。 我設想
+    <i>bzip2</i>
+    在有大量高速緩存機器上的性能最佳。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="警告">警告<a class="anchor" href="#%E8%AD%A6%E5%91%8A">¶</a></h1>
+I/O
+  錯誤信息並不是很有用。
+  <i>bzip2</i> 會盡量探測 I/O
+  錯誤信息並乾淨地退出，
+  但問題的細節有時看上去很容易引起誤解。
+<p class="Pp">本手冊頁適用於 0.9.5
+    版的 <i>bzip2。</i>
+    由這一版本的 bzip2
+    產生的壓縮數據與以前的公開版本
+    0.1pl2、0.9.0 完全兼容，
+    但有一個例外：0.9.0
+    及其以上版本能正確解壓縮多個連在一起的壓縮文件，0.1pl2
+    則不能，
+    它將在解壓縮完數據流中的第一個文件之後停止。</p>
+<p class="Pp"><i>bzip2recover</i> 採用 32
+    位的整型數表示壓縮文件中位的位置，
+    因此它無法處理大於 512
+    兆字節的文件。
+    但這一問題很容易解決。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者">作者<a class="anchor" href="#%E4%BD%9C%E8%80%85">¶</a></h1>
+Julian Seward, jseward@acm.org.
+<p class="Pp"><a href="../..//www.muraroa.demon.co.uk</a></p>
+<p class="Pp"><i>bzip2</i>
+    包含的想法及概念至少歸功於下列人員：
+    Michael Burrows 和 David
+    Wheeler（塊排序變換），
+    David Wheeler（Huffman 編碼器）， Peter
+    Fenwick（原始 bzip
+    的結構編程模型及許多改進），Alistair
+    Moffat、 Ian Witten（原始 bzip
+    中的算法編碼）。
+    我非常感激他們的幫助、
+    支持以及建議。
+    參見源發佈的手冊中有關文檔來源中的線索。
+    Christian von Roques
+    曾鼓勵我尋找更快的排序算法，
+    以提高壓縮速度。 bela Lubkin
+    曾鼓勵我改進最壞情況下的壓縮性能。
+    很多人給我發來修補程序，
+    幫助解決移植問題，
+    租借機器，提出建議等。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>Liu JingSong &lt;js-liu@263.net&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+2001/01/31
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中國_Linux_論壇_man_手冊頁翻譯計劃]">[中國 Linux 論壇 man 手冊頁翻譯計劃]<a class="anchor" href="#%5B%E4%B8%AD%E5%9C%8B_Linux_%E8%AB%96%E5%A3%87_man_%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%5D">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+bzip2.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-17T21:40:37Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"bzip2(1)\"}}]}"
+</script>

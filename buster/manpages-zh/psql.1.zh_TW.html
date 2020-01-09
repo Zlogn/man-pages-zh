@@ -1,0 +1,2700 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>psql(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/postgresql-client-11/psql.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/psql.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/psql.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; psql(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/psql.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/psql.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS" title="SYNOPSIS">SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#OPTIONS_%E9%81%B8%E9%A0%85" title="OPTIONS 選項">OPTIONS 選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#EXIT_STATUS_%E9%80%80%E5%87%BA%E7%8B%80%E6%85%8B" title="EXIT STATUS 退出狀態">EXIT STATUS 退出狀態</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#USAGE_%E7%94%A8%E6%B3%95" title="USAGE 用法">USAGE 用法</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ENVIRONMENT_%E7%92%B0%E5%A2%83" title="ENVIRONMENT 環境">ENVIRONMENT 環境</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#FILES" title="FILES">FILES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES_%E6%B3%A8%E6%84%8F" title="NOTES 注意">NOTES 注意</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#EXAMPLES_%E4%BE%8B%E5%AD%90" title="EXAMPLES 例子">EXAMPLES 例子</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AD%AF%E8%80%85" title="譯者">譯者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/psql.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/psql.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/psql.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/postgresql-client-11/psql.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/psql.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/psql.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">PSQL(1)</td>
+    <td class="head-vol">PostgreSQL Client Applications</td>
+    <td class="head-rtitle">PSQL(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+psql - PostgreSQL 交互終端
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS">SYNOPSIS<a class="anchor" href="#SYNOPSIS">¶</a></h1>
+<b>psql</b> [<b></b><i>option</i><b></b>...<b></b>] [<b></b><i>dbname</i><b></b>
+  [<b></b><i>username</i><b></b>]<b></b>]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>psql</b>
+  是一個以終端爲基礎的
+  PostgreSQL
+  前端。它允許你交互地鍵入查詢，把它們發出給
+  PostgreSQL，
+  然後看看查詢的結果。另外，輸入可以來自一個文件。還有，
+  它提供了一些元命令和多種類
+  shell
+  地特性來實現書寫腳本以及對大量任務的自動化。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="OPTIONS_選項">OPTIONS 選項<a class="anchor" href="#OPTIONS_%E9%81%B8%E9%A0%85">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>-a</b></dt>
+  <dd></dd>
+  <dt><b>--echo-all</b></dt>
+  <dd>
+    
+      在讀取行時向屏幕打印所有內容。
+      這個選項在腳本處理時比交互模式時更有用。這個選項等效於設置變量
+      ECHO 爲 all。</dd>
+  <dt><b>-A</b></dt>
+  <dd></dd>
+  <dt><b>--no-align</b></dt>
+  <dd>
+    
+      切換爲非對齊輸出模式。（缺省輸出模式是對齊的。）</dd>
+  <dt><b>-c</b><i>command</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--command</b><i>command</i><b></b></dt>
+  <dd>聲明 psql
+      將執行一條查詢字串，
+      command，然後退出。這一點在
+      shell 腳本里很有用。
+      <i>command</i>
+      必須是一條完全可以被服務器分析的查詢字串（也就是說，它不包含
+      psql特有的特性），
+      或者是一個反斜槓命令。這樣你就不會混合
+      SQL 和 psql
+      元命令。要想混合使用，你可以把字串定向到<b>psql</b>
+      裏，象這樣： echo &#34;\x\ select *
+      from foo;&#34; | psql。
+    <p class="Pp">
+      
+        如果命令字串包含多個
+        SQL
+        命令，那麼他們在一個事務裏處理，
+        除非在字串裏包含了明確的
+        BEGIN/COMMIT
+        命令把他們分成多個事務。
+        這個和從 psql
+        的標準輸入裏給它填充相同字串不同。</p>
+  </dd>
+  <dt><b>-d</b><i>dbname</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--dbname</b><i>dbname</i><b></b></dt>
+  <dd>
+    
+      聲明想要聯接的數據庫名稱。等效於在命令行行上把
+      dbname
+      聲明爲第一個非選項參數。</dd>
+  <dt><b>-e</b></dt>
+  <dd></dd>
+  <dt><b>--echo-queries</b></dt>
+  <dd>
+    
+      顯示所由發送給服務器的查詢。
+      等效於把變量 ECHO
+      設置爲 queries。</dd>
+  <dt><b>-E</b></dt>
+  <dd></dd>
+  <dt><b>--echo-hidden</b></dt>
+  <dd>
+     回顯由<b>\d</b>
+      和其他反斜槓命令生成的實際查詢。
+      如果你希望在你自己的程序裏包含類似的功能，
+      你就可以使用這個選項。這等效於在psql裏設置變量ECHO_HIDDEN。</dd>
+  <dt><b>-f</b><i>filename</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--file</b><i>filename</i><b></b></dt>
+  <dd>
+     使用
+      filename作爲命令的語句源而不是交互式讀入查詢。
+      在處理完文件後，psql
+      結束。這個選項在很多方面等效於內部命令<b>\i</b>。
+    <p class="Pp">如果<i>filename</i> 是-
+        （連字符），則從標準輸入讀取。</p>
+    <p class="Pp">
+       使用這個選項與用 psql
+        &lt; filename
+        有微小的區別。通常，兩者都回按照你預期那樣運行，但是使用
+        -f打開了一些很好的特性，
+        比如帶行號的錯誤信息。而且，使用這個選項還有可能有減小啓動負荷的機會。
+        另一方面，如果你把所有內容手工輸入，
+        使用 shell
+        輸入定向的方式（理論上）能保證生成和你已經得到的完全一樣的輸出（譯註：重複運行命令）。</p>
+  </dd>
+  <dt><b>-F</b><i>separator</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--field-separator</b><i>separator</i><b></b></dt>
+  <dd>
+     使用 separator
+      作爲域分隔符。等效於
+      <b>\pset</b> <b>fieldsep</b> 或<b>\f</b>。</dd>
+  <dt><b>-h</b><i>hostname</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--host</b><i>hostname</i><b></b></dt>
+  <dd>
+    
+      聲明正在運行服務器的主機名。
+      如果主機名以斜扛開頭，則它被用做到
+      Unix 域套接字的路徑。</dd>
+  <dt><b>-H</b></dt>
+  <dd></dd>
+  <dt><b>--html</b></dt>
+  <dd>
+    
+      打開HTML格式輸出。等效於\pset
+      format html 或<b>\H</b> 命令。</dd>
+  <dt><b>-l</b></dt>
+  <dd></dd>
+  <dt><b>--list</b></dt>
+  <dd>
+    
+      列出所有可用的數據庫，然後退出。其他非聯接選項將被忽略。類似於內部命令
+      <b>\list</b>。</dd>
+  <dt><b>-o</b><i>filename</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--output</b><i>filename</i><b></b></dt>
+  <dd>
+    
+      將所有查詢輸出定向到文件
+      filename。這個選項等效於命令<b>\o</b>。</dd>
+  <dt><b>-p</b><i>port</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--port</b><i>port</i><b></b></dt>
+  <dd>
+     聲明被服務器偵聽的
+      TCP
+      端口或使用的缺省本地
+      Unix
+      主控套接字文件句柄。
+      缺省的是環境變量PGPORT的值，如果沒有設置的話是編譯是聲明的端口，通常是
+      5432。</dd>
+  <dt><b>-P</b><i>assignment</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--pset</b><i>assignment</i><b></b></dt>
+  <dd>
+    
+      允許你在命令行上以<b>\pset</b>
+      的風格設置打印選項。
+      要注意的是你在這裏用等號分割名稱和值，而不能用空格。
+      因此要把輸出格式設置爲
+      LaTeX，你可以敲入 -P
+      format=latex。</dd>
+  <dt><b>-q</b></dt>
+  <dd></dd>
+  <dt><b>--quiet</b></dt>
+  <dd>
+     聲明 psql
+      將安靜地執行處理任務。
+      缺省時psql將打印歡迎和許多其他輸出信息。
+      如果使用了此選項，這些都不出現。這在和
+      -c
+      選項一起使用時很有效。在
+      psql
+      裏，你可以通過設置
+      QUIET
+      變量實現同樣效果。</dd>
+  <dt><b>-R</b><i>separator</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--record-separator</b><i>separator</i><b></b></dt>
+  <dd>
+     使用 separator
+      做爲記錄分隔符。
+      等效於<b>\pset recordsep</b>
+    命令。</dd>
+  <dt><b>-s</b></dt>
+  <dd></dd>
+  <dt><b>--single-step</b></dt>
+  <dd>
+    
+      進入單步模式運行。意味着每個查詢在發往服務器之前都要提示用戶，
+      用這個選項也可以取消執行。此選項主要用於調試腳本。</dd>
+  <dt><b>-S</b></dt>
+  <dd></dd>
+  <dt><b>--single-line</b></dt>
+  <dd>
+    
+      進入單行運行模式，這時每個命令都將由換行符結束，象分號那樣。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Note:</b> 注意:
+  注意這個模式是給那些堅持要這個特性的人的，我們不鼓勵你這麼用。
+  實際上，如果你在一行裏混合使用
+  SQL
+  和元命令，執行的順序對不熟練的用戶而言不總是清晰的。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>-t</b></dt>
+  <dd></dd>
+  <dt><b>--tuples-only</b></dt>
+  <dd>
+    
+      關閉打印列名稱和結果行計數腳註等信息。完全等效於元命令<b>\t</b>。</dd>
+  <dt><b>-T</b><i>table_options</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--table-attr</b><i>table_options</i><b></b></dt>
+  <dd>
+     允許你聲明放在 HTML table
+      標記裏的選項。
+      參閱<b>\pset</b> 獲取細節。</dd>
+  <dt><b>-u</b></dt>
+  <dd>
+     讓 psql
+      在和數據庫聯接之提示輸入用戶的用戶名和口令。
+    <p class="Pp">
+      
+        這個選項已經廢棄了，因爲它在概念上有漏洞。
+        （提示輸入非缺省用戶名和提示輸入服務器要求的口令是完全兩碼事。）我們鼓勵你用
+        -U 和 -W 選項取代。</p>
+  </dd>
+  <dt><b>-U</b><i>username</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--username</b><i>username</i><b></b></dt>
+  <dd>
+     以用戶 username
+      代替缺省用戶與數據庫聯接。（當然，你必須有這麼做的權限。）</dd>
+  <dt><b>-v</b><i>assignment</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--set</b><i>assignment</i><b></b></dt>
+  <dd></dd>
+  <dt><b>--variable</b><i>assignment</i><b></b></dt>
+  <dd>
+    
+      進行一次變量分配，象內部命令<b>\set</b>
+      那樣。
+      注意，如果有變量名和值的話，你必須在命令行上用等號分隔它們。要重置一個變量，
+      去掉等號。這個分配是在啓動的很早的階段進行的，所以爲內部使用保留的變量可能被再次覆蓋。</dd>
+  <dt><b>-V</b></dt>
+  <dd></dd>
+  <dt><b>--version</b></dt>
+  <dd>
+     顯示psql版本。</dd>
+  <dt><b>-W</b></dt>
+  <dd></dd>
+  <dt><b>--password</b></dt>
+  <dd>
+     要求 psql
+      在與一個數據庫聯接前提示輸入口令。
+      這個選項將在整個會話過程中有效，即使你用元命令
+      <b>\connect</b>
+      改變了所聯接的數據庫。
+    <p class="Pp">在當前版本里，如果服務器要求口令認證，psql
+        自動提出一個口令提示符。因爲目
+        前這個特性是以一個“hack”爲基礎，
+        自動識別有可能奇怪地失效，因此用這個選項
+        強制一個提示符。
+        如果沒有聲明口令提示符而服務器要求口令認證，那麼聯接企圖
+        將失敗。</p>
+  </dd>
+  <dt><b>-x</b></dt>
+  <dd></dd>
+  <dt><b>--expanded</b></dt>
+  <dd>
+    
+      打開擴展表格式模式。等效於<b>\x</b>。</dd>
+  <dt><b>-X,</b></dt>
+  <dd></dd>
+  <dt><b>--no-psqlrc</b></dt>
+  <dd>
+     不讀取啓動文件
+      <i>~/.psqlrc</i>。</dd>
+  <dt><b>-?</b></dt>
+  <dd></dd>
+  <dt><b>--help</b></dt>
+  <dd>
+    
+      顯示關於psql命令行參數的幫助。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXIT_STATUS_退出狀態">EXIT STATUS 退出狀態<a class="anchor" href="#EXIT_STATUS_%E9%80%80%E5%87%BA%E7%8B%80%E6%85%8B">¶</a></h1>
+如果正常結束，那麼<b>psql</b>
+  向 shell 返回
+  0，如果自身發生致命錯誤，則返回
+  1（內存用盡，未找到文件等），
+  如果和數據庫的連接失效而且會話不再活躍則返回
+  2，如果腳本中發生錯誤並且設置了
+  ON_ERROR_STOP 則返回 3。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="USAGE_用法">USAGE 用法<a class="anchor" href="#USAGE_%E7%94%A8%E6%B3%95">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="CONNECTING_TO_A_DATABASE_與一個數據庫聯接">CONNECTING TO A DATABASE 與一個數據庫聯接<a class="anchor" href="#CONNECTING_TO_A_DATABASE_%E8%88%87%E4%B8%80%E5%80%8B%E6%95%B8%E6%93%9A%E5%BA%AB%E8%81%AF%E6%8E%A5">¶</a></h2>
+<b>psql</b> 是一個普通的 PostgreSQL
+  客戶端應用。爲了與一個數據庫聯接，你需要知道你的目標數據庫，
+  服務器的主機名和端口號以及你希望以哪個用戶的身份進行聯接等信息。
+  我們可以通過命令行參數告訴
+  psql 這些信息，分別是
+  -d， -h，-p，和 -U。
+  如果有個參數不屬於任何選項開關，那麼它會被解釋成數據庫名（或者是用戶名－如果數據庫名稱也給出了。）。
+  不是所有這些選項都是必須的，缺省的也可以。如果你省略主機名，
+  psql 將通過 Unix
+  域套接字與本地主機的服務器相聯。
+  缺省的端口號是編譯時確定的。因爲數據庫服務器使用同樣的缺省值，
+  所以在大多數設置下，你可能不需要聲明端口號。缺省的用戶名是你的
+  Unix
+  用戶名，與數據庫同名。
+  要注意的是你不能用任意用戶名與任何數據庫相聯。你的數據庫管理員應該告訴你你的訪問權限。
+  你可以通過設置幾個環境變量
+  PGDATABASE， PGHOST，PGPORT 和 PGUSER
+  爲對應的值的方法節約幾次敲擊。
+<p class="Pp">
+  
+    如果因爲任何原因而無法與數據庫相聯（例如，權限不夠，服務器沒有運行等），
+    psql
+    將返回一個錯誤並退出。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="ENTERING_SQL_COMMANDS_輸入_SQL_命令">ENTERING SQL COMMANDS 輸入 SQL 命令<a class="anchor" href="#ENTERING_SQL_COMMANDS_%E8%BC%B8%E5%85%A5_SQL_%E5%91%BD%E4%BB%A4">¶</a></h2>
+ 通常狀況下，psql
+  提供一個帶有 psql
+  正在與之聯接的接數據庫名的，後綴
+  =&gt;的提示符。例如，
+<p class="Pp"></p>
+<pre>$<b>psql testdb</b>
+Welcome to psql 7.4beta5, the PostgreSQL interactive terminal.
+Type: \copyright for distribution terms
+      \h for help with SQL commands
+      \? for help on internal slash commands
+      \g or terminate with semicolon to execute query
+      \q to quit
+testdb=&gt;
+
+</pre>
+<p class="Pp">
+  
+    用戶可以在這個提示符下鍵入SQL
+    查詢。
+    通常，輸入的行將在命令終止分號出現時送到服務器。
+    一行的終止並不結束命令！因此命令可以因清晰起見跨越好幾行。如果命令發送出去而且沒有錯誤，
+    命令結果會顯示在屏幕上。</p>
+<p class="Pp">
+   當命令正在進行時，psql
+    同樣還輪詢由 LISTEN [<a href="../../buster/manpages-zh/listen.7.zh_TW.html">listen(7)</a>]
+    和 NOTIFY [<a href="../../buster/manpages-zh/notify.7.zh_TW.html">notify(7)</a>]
+    生成的異步通知信號。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="META-COMMANDS_元命令">META-COMMANDS 元命令<a class="anchor" href="#META-COMMANDS_%E5%85%83%E5%91%BD%E4%BB%A4">¶</a></h2>
+ 你在 psql
+  裏輸入的任何以不帶引號的反斜槓（&#39;\&#39;）開頭的東西都是
+  psql
+  元命令，這些命令是由
+  psql
+  自己處理的。這些命令也是令
+  psql
+  可用於管理或書寫腳本的原因。
+  元命令更常見的叫法是斜槓或反斜槓命令。
+<p class="Pp">
+   一個 psql
+    命令的格式是反斜槓後面緊跟一個命令動詞，然後是任意參數。
+    參數與命令動詞和其他參數以任意個空白字符間隔。</p>
+<p class="Pp">
+  
+    要在參數裏面包含空白，你必須用單引號把它包圍起來。
+    要在這樣的參數裏包含單引號，前面加一個反斜槓。
+    任何包含在單引號裏的東西會被進一步進行類
+    C 的替換，把 \n (new line),\t (tab),
+    \<i>digits</i>, \0<i>digits</i>, 和 \0x<i>digits</i>
+    （給出的十進制，八進制，或十六進制碼的字符）替換掉。</p>
+<p class="Pp">
+  
+    如果一個不帶引號的參數以冒號（:）開頭，
+    它會被當作一個psql
+    變量，並且該變量的值會最終成爲真正的參數值。
+    （譯註：類似 ecpg 和 pl/pgsql
+    的變量用法。）</p>
+<p class="Pp">
+   用反引號 （&#34;backticks&#34; `）
+    包圍的內容被當作一個命令行傳入
+    shell。
+    該命令的輸出（刪除了結尾的新行）被當作參數值。上面描述的逃逸（字符）序列在反引號裏也生效。</p>
+<p class="Pp">
+   有些命令以一個 SQL
+    標識的名稱（如，一個表名）爲參數。
+    這些參數遵循 SQL
+    語法關於雙引號的規則：
+    不帶雙引號的標識強制成小寫，
+    而雙引號保護字母不受大小寫轉換，並且允許在標識符中使用空白。
+    在雙引號中，成對的雙引號在結果名字中分析成一個雙引號。比如，
+    FOO&#34;BAR&#34;BAZ 解析成 fooBARbaz，而
+    &#34;A weird&#34;&#34; name&#34; 變成 A weird&#34;
+    name。 name.</p>
+<p class="Pp">
+  
+    對參數的分析在碰到另一個不帶引號的反斜槓時停止。
+    這裏會認爲是一個新的元命令的開始。特殊序列
+    \\
+    （雙反斜槓）標識參數的結尾並將繼續分析後面的
+    SQL
+    命令（如果存在的話）。這樣
+    SQL 和
+    psql命令可以自由的在一行裏面混合。
+    但是在任何情況下，一條元命令的參數不能延續超過行尾。</p>
+<p class="Pp">
+  
+    下列元命令是已定義的：</p>
+<dl class="Bl-tag">
+  <dt><b>\a</b></dt>
+  <dd>
+    
+      如果目前的表輸出格式是不對齊的，切換成對齊的。
+      如果是對齊的，切換成不對齊。這條命令是爲了向後兼容。參閱<b>\pset</b>
+      獲取一個通用的解決方法。</dd>
+  <dt><b>\cd [</b><i>directory</i><b>]</b></dt>
+  <dd>
+    
+      把當前工作目錄改變到
+      directory。
+      沒有參數是則改變到當前用戶的家目錄。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Tip:</b> 提示:
+  要打印出你的當前工作目錄，使用\!pwd.</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>\C [</b><i>title</i><b> ]</b></dt>
+  <dd>
+    
+      把正在打印的表的標題設置爲一個查詢的結果或者取消這樣的設置。
+      這條命令等效於 \pset
+      title<i>title</i>.
+      （這條命令的名稱源於
+      &#34;caption&#34;，因爲以前只是用於在一個
+      HTML
+      表裏面設置標題。）</dd>
+  <dt><b>\connect (or\c) [</b><i>dbname</i><b> [</b><i>username</i><b> ]
+    ]</b></dt>
+  <dd>
+    
+      與一個新的數據庫建立一個聯接，使用/不用一個用戶名。
+      前面的聯接將關閉。如果
+      dbname 是
+      -，那麼就假設是當前數據庫名稱。
+    <p class="Pp">
+       如果省略
+        username，則假設是當前用戶名。</p>
+    <p class="Pp">
+      
+        作爲一條特殊規則，不帶任何參數運行<b>\connect</b>
+        將以缺省用戶身份與缺省數據庫連接（正如你不帶任何參數運行
+        psql 一樣。）</p>
+    <p class="Pp">
+      
+        如果聯接失敗（用戶名錯，訪問拒絕等），那麼將保留前面的聯接--當且僅當在
+        psql
+        處於交互模式下如此。
+        如果運行的是非交互的腳本，處理會馬上停止，並返回一個錯誤。
+        選擇這樣的區別是一方面爲用戶使用方便考慮，另一方面爲保證腳本不會碰巧操作了錯誤的數據庫的安全機制考慮的。</p>
+  </dd>
+  <dt><b>\copy</b><i>table</i><b></b></dt>
+  <dd>
+    
+      執行前端（客戶端）拷貝。這是一個運行
+      SQL COPY 命令的操作，
+      不同的是 SQL COPY
+      是服務器在讀寫指明的文件，而
+      psql
+      讀寫文件並作爲本地的文件系統和服務器之間的路由取出或寫入數據。
+      這意味着文件訪問性和權限都是本地用戶的，而不是服務器的，因此不需要
+      SQL 超級用戶權限。
+    <p class="Pp">
+      
+        這條命令的語法是模擬
+        SQL COPY
+        命令的。（參考它的描述獲取細節。）
+        要注意的是由此而來，有一些特殊的分析規則應用於<b>\copy</b>
+        命令。
+        尤其是變量替換規則和反斜槓代換規則不起作用。</p>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Tip:</b> 提示:
+  此操作不象 SQL COPY
+  命令這樣高效，
+  因爲所有數據必須通過客戶端/服務器聯接。對於大數據量的操作，另一種方法更可行。</div>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<div class="Bd-indent"><b>Note:</b> 注意:
+  注意在客戶端和服務器拷貝時對
+  stdin 和 stdout
+  的解釋的區別：在前端拷貝時，這些總是指
+  psql的輸入和輸出流。在服務器拷貝時
+  stdin 來自 COPY
+  本身的標準輸入（比如，一個帶有
+  -f 選項的腳本）， 而 stdout
+  指的是查詢輸出流（參閱下面的<b>\o</b>
+  元命令）。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>\copyright</b></dt>
+  <dd>
+     顯示 PostgreSQL
+      的版權和版本信息。</dd>
+  <dt><b>\d [</b><i>pattern</i><b> ]</b></dt>
+  <dd>
+    
+      對於每個匹配pattern的關係（表，視圖，索引或者序列），
+      顯示所有列，它們的類型，和任何特殊屬性，象NOT
+      NULL或缺省等－－只要存在。
+      如果實際上這個關係是一個表，任何已定義的索引，主鍵，唯一約束相關的索引，規則，約束，和觸發器也同樣顯示出來，
+      如果關係是一個視圖，還顯示視圖的定義。
+      （&#34;匹配模式&#34;在下面定義。）
+    <p class="Pp">從\d+
+        來的命令也是一樣的，只不過還顯示與表的列關聯的註解。</p>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Note:</b> 注意:
+  如果如果不帶任何pattern調用<b>\d</b>
+  ，
+  等效於<b>\dtvs</b>，將顯示一個所有表，視圖和序列的列表。
+  這完全是出於方便的考慮。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>\da [</b><i>pattern</i><b> ]</b></dt>
+  <dd>
+    
+      列出所有可用聚集函數，以及它們操作的數據類型。如果聲明瞭
+      pattern，那麼只顯示匹配（正則表達式）的聚集函數。</dd>
+  <dt><b>\dc [</b><i>pattern</i><b> ]</b></dt>
+  <dd>
+    
+      列出所有字符集之間的可用轉換。如果聲明瞭
+      pattern，
+      則只列出那些匹配模式的轉換。</dd>
+  <dt><b>\dC</b></dt>
+  <dd>
+    
+    列出所有類型轉換。</dd>
+  <dt><b>\dd [</b><i>pattern</i><b> ]</b></dt>
+  <dd>
+     顯示所有匹配 pattern
+      的描述，如果沒有給出參數，顯示所有可視對象。
+      但是不管怎樣，只有那些有描述內容的對象才顯示出來。
+      （&#34;對象&#34;包括聚集，函數，操作符，類型，
+      關係（表，視圖，索引，序列，大對象），規則和觸發器。）例如：
+    <p class="Pp"></p>
+    <pre>=&gt;<b>\dd version</b>
+                     Object descriptions
+   Schema   |  Name   |  Object  |        Description
+------------+---------+----------+---------------------------
+ pg_catalog | version | function | PostgreSQL version string
+(1 row)
+
+    </pre>
+    <p class="Pp">
+       可以用<b>COMMENT SQL</b>
+        命令生成對對象的描述。</p>
+  </dd>
+  <dt><b>\dD [</b><i>pattern</i><b> ]</b></dt>
+  <dd>
+    
+      列出所有可用域。如果聲明瞭
+      pattern，那麼只顯示匹配的域。</dd>
+  <dt><b>\df [</b><i>pattern</i><b> ]</b></dt>
+  <dd>
+    
+      列出所有可用函數，以及它們的參數和返回的數據類型。如果聲明瞭
+      pattern，那麼只顯示匹配（正則表達式）的函數。如果使用了\df+
+      的形式，每個函數的附加信息，包括語言和描述也會顯示出來。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Note:</b> 注意:
+  爲了減少混亂，\df
+  並不顯示數據類型的 I/O
+  函數。
+  這樣是通過忽略那些接受或者返回類型
+  cstring 的函數實現的。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>\distvS [</b><i>pattern</i><b> ]</b></dt>
+  <dd>
+    
+      這不是一個實際上的命令名稱：字母
+      i，s，t，v，S
+      分別代表索引（index），
+      序列（sequence），表（table），視圖（view）和系統表（system
+      table）。
+      你可以以任意順序聲明任意或者所有這些字母獲得這些對象的一個列表。
+      字幕 S
+      把列表限制於系統對象；如果沒有
+      S，則只顯示非系統對象。
+      如果在命令名上附加了
+      +，那麼還會列出和每個對象相關聯的描述，如果有的話。
+    <p class="Pp">
+       如果聲明瞭
+        pattern，那麼只列出匹配模式的對象。</p>
+  </dd>
+  <dt><b>\dl</b></dt>
+  <dd>這是<b>\lo_list</b>
+      的別名，顯示一個大對象的列表。</dd>
+  <dt><b>\dn [</b><i>pattern</i><b> ]</b></dt>
+  <dd>
+    
+      列出所有可用模式（名字空間）。如果聲明瞭
+      pattern
+      （一個正則表達式），那麼只列出匹配模式的模式名。</dd>
+  <dt><b>\do [</b><i>pattern</i><b> ]</b></dt>
+  <dd>
+    
+      列出所有可用操作符，以及它們的操作數和返回的數據類型。
+      如果聲明瞭
+      pattern，那麼只顯示匹配模式的操作符。</dd>
+  <dt><b>\dp [</b><i>pattern</i><b> ]</b></dt>
+  <dd>
+    
+      生成一列可用的表和它們相關的權限。
+      如果聲明瞭 pattern，
+      那麼只列出名字可以匹配模式的表。
+    <p class="Pp">
+       命令<a href="../../buster/manpages-zh/grant.7.zh_TW.html">grant(7)</a> 和<a href="../../buster/manpages-zh/revoke.7.zh_TW.html">revoke(7)</a>
+        用於設置訪問權限。參閱<a href="../../buster/manpages-zh/grant.7.zh_TW.html">grant(7)</a>
+        獲取更多信息。</p>
+  </dd>
+  <dt><b>\dT [</b><i>pattern</i><b> ]</b></dt>
+  <dd>
+    
+      列出所有數據類型或只顯示那些匹配
+      pattern的。這條命令的\dT+
+      形式顯示更多信息。</dd>
+  <dt><b>\du [</b><i>pattern</i><b> ]</b></dt>
+  <dd>
+    
+      列出所有已配置用戶或者只列出那些匹配
+      pattern 的用戶。</dd>
+  <dt><b>\edit (or\e) [</b><i>filename</i><b> ]</b></dt>
+  <dd>如果聲明瞭 filename，
+      則編輯此文件並且在編輯器退出後將其內容拷貝回查詢緩
+      衝區。
+      如果沒有給出參數，則把當前查詢緩衝區內容拷貝到一個臨時文件然後以相
+      同方式編輯。
+    <p class="Pp">然後根據一般的psql規則重新分析查詢緩衝區，
+        這時整個緩衝區當作一個單行。
+        （因此你無法用這個方法制作“腳本”，用<b>\i</b>
+        做腳本。）
+        這還意味着
+        如果該查詢以分號結尾（或者包含分號），它就會馬上被執行。否則它只是在查詢
+        緩衝區裏等待。</p>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Tip:</b> 提示: psql
+  搜索環境變量 PSQL_EDITOR，EDITOR
+  和
+  VISUAL（以此順序）查找要用到哪個編輯器。如果上面的都沒有設置，使用<i>/bin/vi</i>。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>\echo</b><i>text</i><b> [ ... ]</b></dt>
+  <dd>
+    
+      向標準輸出打印參數，用一個空格分隔並且最後跟着一個新行。
+      這個特性在顯示腳本的輸出時會有用。例如：
+    <p class="Pp"></p>
+    <pre>=&gt;<b>\echo `date`</b>
+Tue Oct 26 21:40:57 CEST 1999
+
+    </pre>
+    
+      果第一個參數是一個無引號的
+      -n，那麼不會寫出結尾的新行。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Tip:</b> 提示:
+  如果你使用<b>\o</b>
+  命令重定向你的查詢的輸出，你可能會用<b>\qecho</b>
+  取代這條命令。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>\encoding [</b><i>encoding</i><b> ]</b></dt>
+  <dd>
+    
+      設置客戶端字符編碼方式。不帶參數時，這條命令顯示當前的編碼方式。</dd>
+  <dt><b>\f [</b><i>string</i><b> ]</b></dt>
+  <dd>
+    
+      爲不對齊的查詢輸出設置域分隔符。缺省時是豎條（|）。
+      參閱<b>\pset</b>
+      獲取設置輸出選項的通用方法。</dd>
+  <dt><b>\g [ {</b><i>filename</i><b> | |</b><i>command</i><b> } ]</b></dt>
+  <dd>
+    
+      把當前的查詢輸入緩衝區的內容發送給服務器並且把輸出輸出到可選的
+      filename
+      或者把輸出定向到一個獨立的
+      Unix shell 執行 command。
+      單獨一個\g
+      實際上等效於一個分號。一個帶有參數的\g
+      是&#34;一次性&#34;的\o
+      命令的代用品。</dd>
+  <dt><b>\help (or\h) [</b><i>command</i><b> ]</b></dt>
+  <dd>
+     給出指定 SQL
+      命令的語法幫助。如果沒有給出
+      command ，那麼 psql
+      將列出可獲得語法幫助的所有命令。如果
+      command
+      是一個星號（&#34;*&#34;），則顯示所有
+      SQL 命令的語法幫助。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Note:</b> 注意:
+  爲簡化敲擊，包含多個單字的命令不需要引用。因此鍵入<i>\help
+  alter table</i> 是正確的。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>\H</b></dt>
+  <dd>
+     打開 HTML
+      查詢輸出格式。如果
+      HTML
+      格式已經打開，則切換回缺省的對齊的文本格式。
+      這個命令是爲了兼容和方便，參閱<b>\pset</b>
+      獲取設置其他輸出選項的內容。</dd>
+  <dt><b>\i</b><i>filename</i><b></b></dt>
+  <dd>
+    
+      從文件filename中讀取並把其內容當作從鍵盤輸入的那樣執行查詢。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Note:</b> 注意:
+  如果你想在屏幕上看到讀入的行，你必須對所有行設置變量
+  ECHO 爲 all。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>\l (or\list)</b></dt>
+  <dd>
+    
+      列出服務器上所有數據庫的名字和它們的所有者以及字符集編碼。在命令名稱後面加一個
+      &#34;+&#34;
+      還可以看到對數據庫的描述。</dd>
+  <dt><b>\lo_export</b><i>loid</i><b></b><i>filename</i><b></b></dt>
+  <dd>
+     從數據庫裏讀取 OID 爲 loid
+      的大對象並把她寫到
+      filename裏。
+      注意這個功能與服務器函數
+      lo_export 有些微小的區別，
+      lo_export
+      運行時帶着運行數據庫服務器的用戶權限，
+      而且是在服務器的文件系統上。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Tip:</b> 提示:
+  使用<b>\lo_list</b>
+  查看大對象的 OID。 OID.</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>\lo_import</b><i>filename</i><b> [</b><i>comment</i><b> ]</b></dt>
+  <dd>
+     把文件存儲爲一個 PostgreSQL
+      大對象。可以帶着一個該對象的註解選項。例如：
+    <p class="Pp"></p>
+    <pre>foo=&gt;<b>\lo_import &#39;/home/peter/pictures/photo.xcf&#39; &#39;a picture of me&#39;</b>
+lo_import 152801
+
+    </pre>
+    
+      響應表明此大對象得到一個對象標識
+      152801，如果你還想訪問該對象，就應該把這個對象標識記住。
+      因此，我們建議總是給每個對象關聯一個人類可讀的註解。那樣就可以用<b>\lo_list</b>
+      命令看到這些註解。
+    <p class="Pp">
+      
+        注意這條命令與服務器端的
+        lo_import
+        有一些區別，因爲這條命令是本地用戶在本地文件系統上操作，
+        而不是以服務器用戶在服務器文件系統上操作。</p>
+  </dd>
+  <dt><b>\lo_list</b></dt>
+  <dd>
+    
+      顯示一個目前存儲在該數據庫裏的所有
+      PostgreSQL
+      大對象和它們的所有者的列表。</dd>
+  <dt><b>\lo_unlink</b><i>loid</i><b></b></dt>
+  <dd>
+    
+      從數據庫裏刪除OID爲<i>loid</i>
+      的大對象。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Tip:</b> 提示:
+  使用<b>\lo_list</b>
+  查找大對象的 OID。 OID.</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>\o [ {</b><i>filename</i><b> | |</b><i>command</i><b>} ]</b></dt>
+  <dd>
+    
+      把後面的查詢結果保存到文件
+      filename
+      裏或者把後面的查詢結果定向到一個獨立的
+      Unix shell 執行 command。
+      如果沒有聲明參數，查詢輸出重置爲標準輸出。
+    <p class="Pp">&#34;查詢結果&#34;包括所有表，命令響應和從數據庫服務器來的提示，
+        同樣還有各種各樣查詢數據庫的反斜槓命令的輸出（如<b>\d</b>），但是沒有錯誤信息。</p>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Tip:</b> 提示:
+  要用文本分散查詢結果之間的輸出，用<b>\qecho</b>。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>\p</b></dt>
+  <dd>
+    
+      打印當前查詢緩衝區到標準輸出。</dd>
+  <dt><b>\pset</b><i>parameter</i><b> [</b><i>value</i><b> ]</b></dt>
+  <dd>
+    
+      這條命令設置影響查詢結果表輸出的選項。parameter
+      描述要設置的選項是哪一個。value
+      的語意也取決於它。
+    <p class="Pp">
+      
+        可調節的打印選項有：</p>
+  </dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>format</b></dt>
+  <dd>
+     設置輸出格式爲
+      unaligned，aligned，html， 或
+      latex之一。允許使用唯一的縮寫。（這也意味着一個字母就夠了。）
+    <p class="Pp">&#34;Unaligned&#34;
+        （不對齊）把一條記錄的所有字段都輸出到一行，
+        用當前有效的域分隔符分隔。這主要用於生成那些要被其他程序讀取的輸出（tab分隔，逗號分隔）。
+        &#34;Aligned&#34;
+        （對齊）模式是標準的，人類可讀的，格式化好了的文本輸出，也是缺省。
+        &#34;HTML&#34; 和 &#34;LaTeX&#34;
+        模式把表輸出爲可用於文檔裏的對應標記語言。它們還不是完整的文檔！
+        （可能對於 HTML
+        變化還不是太大，但是在
+        LaTeX
+        裏，你必須有一個完整的文檔包裝器。）</p>
+  </dd>
+  <dt><b>border</b></dt>
+  <dd>
+    
+      第二個參數必須是一個數字。通常，數字越大，表就有越寬的邊界和越多的線，
+      但是這個參數取決於實際的格式。在HTML模式裏，
+      這個參數會直接翻譯成border=...屬性，在其他的模式裏，
+      只有值 0
+      （無邊界），1
+      （內部分隔線）和 2
+      （表框架）有意義。</dd>
+  <dt><b>expanded (or x)</b></dt>
+  <dd>
+    
+      在正常和擴展格式之間切換。當打開擴展格式時，所有的輸出都是兩列，
+      字段名稱在左，數據在右。
+      這個模式在數據無法放進通常的&#34;水平&#34;模式的屏幕時很有用。
+    <p class="Pp">
+      
+        所有四種輸出模式都支持擴展格式。</p>
+  </dd>
+  <dt><b>null</b></dt>
+  <dd>
+    
+      第二個參數是一個字串，用以代表字段的值爲
+      null 時的打印輸出。
+      缺省是什麼都不打，這樣很容易和類似一個空字串混淆。
+      因此，我們可能選擇\pset
+      null &#39;(null)&#39;。</dd>
+  <dt><b>fieldsep</b></dt>
+  <dd>
+    
+      聲明在非對齊模式時的域分隔符。
+      這樣我們就可以創建其他程序希望的tab或逗號分隔的輸出。要設置
+      tab 域分隔符， 鍵入\pset
+      fieldsep
+      &#39;&#39;。缺省域分隔符是 &#39;|&#39;
+      （一個豎條符號）。</dd>
+  <dt><b>footer</b></dt>
+  <dd>
+     切換默認足標的顯示 (x
+      rows)。</dd>
+  <dt><b>recordsep</b></dt>
+  <dd>
+    
+      聲明在非對齊模式時的記錄分隔符。缺省是換行符。</dd>
+  <dt><b>tuples_only (或 t)</b></dt>
+  <dd>
+    
+      在完全顯示和只顯示記錄之間切換。
+      完全顯示將顯示象列頭，標題和各種腳註等信息。
+      只顯示記錄模式將只顯示實際的表數據。</dd>
+  <dt><b>title [</b><i>text</i><b> ]</b></dt>
+  <dd>
+    
+      爲任何隨後打印的表設置標題。
+      這個參數可以用於給你的輸出一個描述性標記。
+      如果不帶參數，重置標題。</dd>
+  <dt><b>tableattr (or T) [</b><i>text</i><b> ]</b></dt>
+  <dd>
+     允許你聲明放在 HTML table
+      標記裏的任何屬性。例如，可以是
+      cellpadding 或
+      bgcolor。注意你可能不需要在這裏聲明
+      border ，因爲已經在\pset border
+      裏用過了。</dd>
+  <dt><b>pager</b></dt>
+  <dd>
+    
+      控制查詢和psql幫助輸出的分頁器。如果設置了環境變量
+      PAGER，
+      輸出被定向到指定程序，否則使用系統缺省（比如
+      more）。
+    <p class="Pp">
+      
+        如果關閉了分頁器，則不使用它，如果打開了，程序只在需要的時候使用分頁器，也就是說，
+        輸出是到終端，而且那個表很可能無法與屏幕匹配。
+        （psql
+        在決定何時分頁時不是很完美。）\pset
+        pager
+        開關分頁器。我們也可以把分頁器設置爲
+        always，導致我們在任何情況下都使用分頁器。</p>
+  </dd>
+</dl>
+</div>
+<p class="Pp">
+   可以在 &#34;Examples 例子&#34;
+    節看到這些不同格式輸出的示例。</p>
+<p class="Pp"></p>
+<div class="Bd-indent"><b>Tip:</b> 提示:
+  有很多用於<b>\pset</b>
+  的快速命令。參閱
+  <b>\a</b>,<b>\C</b>,<b>\H</b>, <b>\t</b>,<b>\T</b>,
+  和<b>\x</b>。</div>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<div class="Bd-indent"><b>Note:</b> 注意:
+  無參數運行<b>\pset</b>
+  是錯誤的。
+  以後這樣調用將顯示當前打印選項狀態。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>\q</b></dt>
+  <dd>
+     退出 psql 程序。</dd>
+  <dt><b>\qecho</b><i>text</i><b> [ ... ]</b></dt>
+  <dd>
+     這條命令等效於<b>\echo</b>
+      ，區別是所有輸出將寫入由<b>\o</b>
+      設置的輸出通道。</dd>
+  <dt><b>\r</b></dt>
+  <dd>
+    
+      重置（清空）查詢緩衝區。</dd>
+  <dt><b>\s [</b><i>filename</i><b> ]</b></dt>
+  <dd>
+    
+      將命令行歷史打印出或是存放到
+      filename。 如果省略 filename，
+      歷史將輸出到標準輸出。這個選項只有在
+      psql 配置成使用 GNU
+      歷史庫後才生效。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Note:</b> 注意:
+  在當前版本里，這個（
+  GNU
+  歷史庫）不再是必須的了，
+  實際上，在程序結束時自動保存命令行歷史。每次
+  psql
+  啓動都會裝載命令行歷史。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>\set [</b><i>name</i><b> [</b><i>value</i><b> [ ... ]]]</b></dt>
+  <dd>
+     設置內部變量 name 爲 value
+      或着如果給出了多於一個值，
+      設置爲所有這些值的聯接結果。如果沒有給出第二個參數，只設變量不設值。要重置一個變量，使用<b>\unset</b>
+      命令。
+    <p class="Pp">
+      
+        有效的變量名可以包含字符，數字和下劃線。
+        參閱下面的 &#34;Variables
+        變量&#34; 獲取細節。</p>
+    <p class="Pp">
+      
+        儘管你可以設置任何變量爲任意值，
+        psql對一些變量特殊對待。它們在關於變量的節裏面有文檔。</p>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Note:</b> 注意:
+  這條命令是完全和 SQL
+  命令 SET [<a href="../../buster/manpages-zh/set.7.zh_TW.html">set(7)</a>]
+  不一樣的。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>\t</b></dt>
+  <dd>
+    
+      切換輸出的列/字段名的信息頭和行記數腳註。
+      這條命令等效於\pset
+      tuples_only，提供主要爲了方便。</dd>
+  <dt><b>\T</b><i>table_options</i><b></b></dt>
+  <dd>
+    
+      允許你在使用HTML輸出模式時聲明放在
+      table 標記裏的屬性。
+      這條命令等效於\pset tableattr
+      table_options。</dd>
+  <dt><b>\timing</b></dt>
+  <dd>切換每個 SQL
+      語句使用的時間，單位是毫秒。</dd>
+  <dt><b>\w {</b><i>filename</i><b> |</b><i>|command</i><b>}</b></dt>
+  <dd>
+    
+      將當前查詢緩衝區輸出到文件
+      filename 或者定向到 Unix 命令
+      command。</dd>
+  <dt><b>\x</b></dt>
+  <dd>
+    
+      切換擴展行格式。等效於\pset
+      expanded。</dd>
+  <dt><b>\z [</b><i>pattern</i><b> ]</b></dt>
+  <dd>
+    
+      生成一個帶有訪問權限列表的數據庫中所有表的列表。
+      如果給出任何pattern，則被當成一個規則表達式，
+      只顯示匹配的表。
+    <p class="Pp">
+       命令<a href="../../buster/manpages-zh/grant.7.zh_TW.html">grant(7)</a> 和<a href="../../buster/manpages-zh/revoke.7.zh_TW.html">revoke(7)</a>
+        用於設置訪問權限。
+        參閱<a href="../../buster/manpages-zh/grant.7.zh_TW.html">grant(7)</a>
+        獲取更多信息。</p>
+    <p class="Pp">
+      
+        這是<b>\dp</b>（&#34;顯示權限&#34;）的別名。</p>
+  </dd>
+  <dt><b>\! [</b><i>command</i><b> ]</b></dt>
+  <dd>
+     返回到一個獨立的 Unix shell
+      或者執行 Unix 命令 command。
+      參數不會被進一步解釋，shell
+      將看到全部參數。</dd>
+  <dt><b>\?</b></dt>
+  <dd>
+    
+      獲得關於反斜槓命令的幫助信息。</dd>
+</dl>
+<p class="Pp">
+   各種\d 命令都接受一個
+    pattern
+    參數，聲明要顯示的對象名字。*
+    表示&#34;任何字符序列&#34;，
+    而 ?
+    表示&#34;任何單個字符&#34;。（這個表示法和
+    Unix 的 shell
+    文件名模式兼容。）
+    高級用戶也可以使用正則表達式表示法，比如字符表，[0-9]
+    這樣的東西來匹配&#34;任意數字&#34;。
+    要讓任何這些模式匹配字符可以安字面方式解析，那就應該用雙引號包圍它們。</p>
+<p class="Pp">
+  
+    一個包含（無引號的）句點的模式會被解析承一個模式名的模式後面跟着一個對象名的模式。
+    比如，\dt foo*.bar*
+    顯示所有以foo
+    開頭的模式裏的以 bar
+    開頭的表名字。
+    如果沒有出現句點，那麼這個模式只匹配在當前模式搜索路徑中可見的對象。</p>
+<p class="Pp">
+   如果完全省略 pattern
+    參數， 那麼\d
+    命令顯示所有在當前模式搜索路徑中可見的對象。
+    要查閱在數據庫中的所有對象，使用模式
+    *.*。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="ADVANCED_FEATURES_高級特性">ADVANCED FEATURES 高級特性<a class="anchor" href="#ADVANCED_FEATURES_%E9%AB%98%E7%B4%9A%E7%89%B9%E6%80%A7">¶</a></h2>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="VARIABLES_變量">VARIABLES 變量<a class="anchor" href="#VARIABLES_%E8%AE%8A%E9%87%8F">¶</a></h2>
+<b>psql</b> 提供類似通常 Unix
+  命令 shell
+  那樣的變量替換特性。
+  變量只是簡單的名稱/數值對，
+  這裏的值可以是任何長度的任何值。要設置一個變量，使用
+  psql 元命令 <b>\set</b>：
+<p class="Pp"></p>
+<pre>testdb=&gt;<b>\set foo bar</b>
+
+</pre>
+ 把變量&#34;foo&#34; 設置爲值
+  &#34;bar&#34;。
+  要檢索變量的內容，在變量名前面放上冒號然後把它用在任意斜槓命令裏：
+<p class="Pp"></p>
+<pre>testdb=&gt;<b>\echo :foo</b>
+bar
+
+</pre>
+<p class="Pp"></p>
+<div class="Bd-indent"><b>Note:</b> 注意: <b>\set</b>
+  的參數服從和其他命令一樣的替換規則。
+  因此你可以構造有趣的引用，象\set
+  :foo &#39;something&#39; 這樣，
+  獲得分別象Perl或
+  PHP那樣有名的&#34;軟連接（soft
+  links）&#34;或&#34;變量
+  變量&#34;。
+  不幸的是（或者
+  萬幸的？），用這些構造不能做任何有用的事情。另一方面，\set
+  bar :foo
+  是一個非常有效的拷貝變量的方法。</div>
+<p class="Pp"></p>
+<p class="Pp">
+  
+    如果你不帶第二個參數調用<b>\set</b>，
+    那麼只是設置這個變量而沒有值。
+    要重置（或刪除）一個變量，使用命令<b>\unset</b>。</p>
+<p class="Pp"><b>psql</b>
+    的內部變量可以包括任意順序，
+    任意數量的字母，數字和下劃線。
+    有一些常用變量被 psql
+    另眼相待。它們是一些選項設置，
+    這些選項在運行時可以通過改變變量的值或者改變一些應用的表現狀態而改變。
+    儘管你可以把這些變量用於其他用途，但是我們不鼓勵這麼做，因爲程序的特性可能會很快變得非常奇怪。
+    通常，所有特殊對待的變量都是由大寫字母組成（可能還有數字和下劃線）。
+    爲了保證和未來的最大限度的兼容性，請避免使用這樣的變量。
+    下面是一個所有特殊對待的變量列表。</p>
+<dl class="Bl-tag">
+  <dt><b>AUTOCOMMIT</b></dt>
+  <dd>
+     如果是
+      on（缺省），那麼每個
+      SQL
+      命令都在成功完成後自動提交。
+      要推遲這種模式下的提交，你必須輸入一個
+      BEGIN 或者 START TRANSACTION SQL 命令。
+      如果是 off
+      或者未設置，SQL
+      命令不會提交，知道你明確地發出
+      COMMIT 或者 END。
+      關閉自動提交的模式是通過爲你明確發出一個
+      BEGIN 實現的，
+      它是放在任何尚未在一個事務塊中並且自己不是
+      BEGIN
+      或者其它事務控制命令的前面。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Note:</b> 注意:
+  在關閉自動提交的模式下，你必須明確放棄任何失敗的事務，方法是執行
+  ABORT 或者 ROLLBACK。
+  還要注意如果你不提交就退出會話，你的工作會丟失。</div>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<div class="Bd-indent"><b>Note:</b> 注意:
+  自動提交打開方式是
+  PostgreSQL 傳統的行爲，
+  但是關閉自動提交更接近
+  SQL
+  規範。如果你喜歡關閉自動提交，你應該在你的<i>.psqlrc</i>
+  文件裏設置它。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>DBNAME</b></dt>
+  <dd>
+    
+      你正在聯接着的數據庫名稱。
+      每次你與一個數據庫聯結都會設置這個值（包括程序啓動），但是可以刪除。</dd>
+  <dt><b>ECHO</b></dt>
+  <dd>
+     如果置爲 all，
+      輸入的或者來自一個腳本的所有行在分析或執行前都寫到標準輸出。
+      要在程序啓動時聲明這些，使用
+      -a如果設置爲 queries， psql
+      只是在查詢發送給服務器之前打印出來。
+      實現這個功能的命令行選項是
+      -e。</dd>
+  <dt><b>ECHO_HIDDEN</b></dt>
+  <dd>
+    
+      當設置了這個變量並且一個反斜槓命令查詢數據庫時，首先顯示查詢。
+      這樣你可以學習 PostgreSQL
+      內部的東西並且在你自己的程序裏提供類似功能。如果你設置該變量的值爲
+      &#34;noexec&#34;，查詢只是顯示出來但是實際上不發送到服務器和執行。</dd>
+  <dt><b>ENCODING</b></dt>
+  <dd>
+    
+      當前的客戶端字符集編碼。</dd>
+  <dt><b>HISTCONTROL</b></dt>
+  <dd>
+     如果這個變量設置爲
+      ignorespace，
+      以空格開始的行將不會進入歷史列表。
+      如果設置爲變量
+      ignoredups，
+      與以前歷史記錄裏匹配的行也不會進入歷史記錄。值
+      ignoreboth是上面兩個的結合。
+      如果刪除此變量或者其值爲任何與上面的值不同的東西，
+      所有交互模式讀入的行都被保存入歷史列表。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Note:</b> 注意:
+  這個特性是無恥地從<b>bash</b>
+  裏剽竊來的。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>HISTSIZE</b></dt>
+  <dd>
+    
+      存在命令歷史裏的命令的個數。缺省值是
+      500。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Note:</b> 注意:
+  這個特性是無恥地從<b>bash</b>
+  裏剽竊來的。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>HOST</b></dt>
+  <dd>
+    
+      當前你正聯接的數據庫服務器主機。
+      這是在每次你與數據庫聯接時（包括程序啓動）設置的，但是可以刪除。</dd>
+  <dt><b>IGNOREEOF</b></dt>
+  <dd>
+    
+      如果刪除此變量，向一個交互的
+      psql會話發送一個 EOF
+      （通常是<b>Control</b>+<b>D</b>）將終止應用。如果設置爲一個數字值，那麼在應用終止前該數值的
+      EOF 字符將被忽略。
+      如果設置了此變量但是沒有數字值，缺省是
+      10。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+<div class="Bd-indent"><b>Note:</b> 注意:
+  這個特性是無恥地從<b>bash</b>
+  裏剽竊來的。</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>LASTOID</b></dt>
+  <dd>
+    
+      最後影響的oid值，即爲從一條
+      INSERT 或 lo_insert
+      命令返回的值。
+      此變量只保證在下一條
+      SQL
+      命令的結果顯示之前有效。</dd>
+  <dt><b>ON_ERROR_STOP</b></dt>
+  <dd>
+    
+      缺省時，如果非交互的腳本碰到一個錯誤，象一條錯誤的
+      SQL
+      命令或者內部元命令，處理會繼續進行。
+      這是 psql 的傳統特性，
+      但是有時候我們不太希望這樣。如果設置了這個變量，腳本處理將馬上停止。
+      如果該腳本是從另外一個腳本調用的，那個腳本也會按同樣的方式停止。
+      如果最外層的腳本不是從一次交互的
+      psql
+      會話中調用的而是用
+      -f 選項調用的，psql
+      將返回錯誤代碼
+      3，以示這個情況與致命錯誤條件的區別（錯誤代碼
+      1）。</dd>
+  <dt><b>PORT</b></dt>
+  <dd>
+    
+      當前你正在聯接的數據庫服務器的端口。
+      這是在每次你與數據庫聯接時（包括程序啓動）設置的，但是可以刪除。</dd>
+  <dt><b>PROMPT1</b></dt>
+  <dd></dd>
+  <dt><b>PROMPT2</b></dt>
+  <dd></dd>
+  <dt><b>PROMPT3</b></dt>
+  <dd>
+     這些指明psql
+      顯示的提示符看上去象什麼。
+      參閱下面的 &#34;Prompting
+      提示符&#34;。</dd>
+  <dt><b>QUIET</b></dt>
+  <dd>
+    
+      這個變量等效於命令行選項
+      -q。
+      可能在交互模式下沒有什麼用。</dd>
+  <dt><b>SINGLELINE</b></dt>
+  <dd>
+    
+      這個變量等效於設置命令行選項
+      -S。你可以在運行時刪除或設置它。</dd>
+  <dt><b>SINGLESTEP</b></dt>
+  <dd>
+    
+      這個變量等效於命令行選項<b>-s</b>。</dd>
+  <dt><b>USER</b></dt>
+  <dd>
+    
+      當前你正用於聯接的數據庫用戶。
+      這是在每次你與數據庫聯接時（包括程序啓動）設置的，但是可以刪除/重置。</dd>
+  <dt><b>VERBOSITY</b></dt>
+  <dd>
+    
+      這個選項可以設置爲值
+      default，verbose，或者 terse
+      以控制錯誤報告的冗餘行。</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="SQL_INTERPOLATION_代換">SQL INTERPOLATION 代換<a class="anchor" href="#SQL_INTERPOLATION_%E4%BB%A3%E6%8F%9B">¶</a></h2>
+ 一個附加的 psql
+  變量的有用特性是你可以把它們替換（&#34;代換&#34;）成正規的
+  SQL
+  語句。這樣做的語法同樣還是變量名前面加一個冒號（:）。
+<p class="Pp"></p>
+<pre>testdb=&gt;<b>\set foo &#39;my_table&#39;</b>
+testdb=&gt;<b>SELECT * FROM :foo;</b>
+
+</pre>
+
+  將會查詢表my_table。變量的值是逐字拷貝的，
+  所以它甚至可以包含不對稱的引號或反斜槓命令。你必須保證你輸入的東西是有意義的。
+  變量替換將不會在引號引起來的
+  SQL 語句裏面發生。
+<p class="Pp">
+  
+    利用這個功能的一個時髦的應用是通過使用一個隨後的語句中最後插入的
+    OID
+    建立一個外鍵仿真場景。
+    另一個可能用到這個機制的地方是把一個文件的內容拷貝到一個字段裏面去。
+    首先把文件裝載到一個變量然後象上面那樣處理。</p>
+<p class="Pp"></p>
+<pre>testdb=&gt;<b>\set content &#39;\&#39;&#39; `cat my_file.txt` &#39;\&#39;&#39;</b>
+testdb=&gt;<b>INSERT INTO my_table VALUES (:content);</b>
+
+</pre>
+
+  這樣處理的一個可能問題是
+  my_file.txt
+  可能包含單引號。這些需要被逃逸以免在處理第三行時不會導致語法錯誤。
+  可以使用程序 sed
+  來做這個處理：
+<p class="Pp"></p>
+<pre>testdb=&gt;<b>\set content &#39;\&#39;&#39; `sed -e &#34;s/&#39;/\\\\\\&#39;/g&#34; &lt; my_file.txt` &#39;\&#39;&#39;</b>
+
+</pre>
+
+  觀察正確數量的反斜槓（6）！你可以這樣解釋它：在
+  psql 分析完這行後，它把
+  sed -e &#34;s/&#39;/\\\&#39;/g&#34; &lt; my_file.txt
+  傳遞給shell。 shell
+  將對雙引號裏的東西做其處理然後用參數
+  -e 和
+ s/&#39;/\\&#39;/g 執行 sed。當
+  sed分析這些時，
+  它將把雙反斜槓替換爲單個反斜槓然後進行替換。
+  可能有時候你認爲所有
+  Unix
+  命令使用同一個逃逸字符是個好事。
+  但具有諷刺意味的事實是你可能不得不逃逸所有反斜槓，因爲
+  SQL
+  文本常量同樣也慘遭這種解釋。
+  這種情況下你可能最好在外部準備文件。
+<p class="Pp">
+  
+    因爲冒號也可以合法的出現在
+    SQL
+    命令裏，便有下面規則的應用：
+    如果沒有設置變量，字符序列
+    &#34;冒號+名稱&#34;
+    不會被改變。
+    在任何情況下你都可以用反斜槓逃逸冒號以保護它免於被解釋。
+    （變量的冒號語法是 SQL
+    用於嵌入查詢語言的標準，如
+    ECPG。用於數組片段和類型轉換的冒號語法是
+    PostgreSQL
+    擴展，因此有衝突。）</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="PROMPTING_提示符">PROMPTING 提示符<a class="anchor" href="#PROMPTING_%E6%8F%90%E7%A4%BA%E7%AC%A6">¶</a></h2>
+<b>psql</b>
+  使用的提示符可以根據你的喜好客戶化。三個變量
+  PROMPT1，PROMPT2，和 PROMPT3
+  包含描述提示符的外觀的字串和特殊逃逸序列。Prompt
+  1 是 psql
+  請求一個新命令時的使用的正常提示符。
+  Prompt 2
+  是在一個命令輸入期待更多輸入時（因爲查詢沒有用一個分號結束或者引號沒有關閉）顯示的提示符。
+  Prompt 3 在你運行一個 SQL COPY
+  命令和等待你在終端上鍵入記錄時使用。
+<p class="Pp">
+  
+    相應的提示符變量的值是按字面打印的，除非碰到一個百分號（%）。這時某些其他的文本被替換，
+    替換爲何物取決於下一個字符。已定義的替換是：</p>
+<dl class="Bl-tag">
+  <dt><b>%M</b></dt>
+  <dd>
+    
+      數據庫服務器主機名全名（帶着域名），如果聯接是通過
+      Unix
+      域套接字進行的就是
+      [local]， 或者如果 Unix
+      域套接字不是編譯的缺省位置，就是
+      [local:<i>/dir/name</i>]。</dd>
+  <dt><b>%m</b></dt>
+  <dd>
+    
+      數據庫服務器的主機名刪去第一個點後面的部分剩下的東西。
+      或者如果聯接是通過
+      Unix 域套接字，就是
+      [local]。</dd>
+  <dt><b>%&gt;</b></dt>
+  <dd>
+    
+      數據庫服務器正在偵聽的端口號。</dd>
+  <dt><b>%n</b></dt>
+  <dd>
+    
+      數據庫會話的用戶名。
+      （這個值的擴展可能在一個數據庫會話過程中因爲<b>SET
+      SESSION AUTHORIZATION</b>
+      命令而改變。）</dd>
+  <dt><b>%/</b></dt>
+  <dd>當前數據庫名稱。</dd>
+  <dt><b>%~</b></dt>
+  <dd>類似 %/，
+      但如果數據庫是你的缺省數據庫輸出是&#34;~&#34;
+      （波浪線（tilde））。</dd>
+  <dt><b>%#</b></dt>
+  <dd>
+    
+      如果會話用戶是數據庫超級用戶，使用
+      &#34;#&#34;，否則用&#34;&gt;&#34;。
+      （這個值的擴展可能在一個數據庫會話過程中因爲<b>SET
+      SESSION AUTHORIZATION</b>
+      命令而改變。）</dd>
+  <dt><b>%R</b></dt>
+  <dd>
+     對於 prompt 1 通常是
+      =，但是如果是單行模式則是
+      ^，而如果會話與數據庫斷開（如果onnect
+      失敗可能發生）是
+      !。對於 prompt 2 該序列被
+      -，*，一個單引號或者一個雙引號代替，
+      這取決於
+      psql是否等待更多的輸入（因爲查詢沒有終止，或着正在一個
+      /* ...
+      */註釋裏面，或者因爲你在引號裏面）。對於
+      prompt 3
+      該序列不解釋成任何東西。</dd>
+  <dt><b>%x</b></dt>
+  <dd>
+    
+      事務狀態：如果不在事務塊裏，是一個空字串，如果在事務塊裏，是
+      *，
+      如果在一個失敗的事務塊裏是
+      !，或者無法判斷事務狀態時爲
+      ?
+      （比如，因爲沒有連接）。</dd>
+  <dt><b>%</b><i>digits</i><b></b></dt>
+  <dd>
+     如果 digits 以 0x 開頭，
+      那麼其餘字符被解釋成一個十六進制數字並且替換爲對應（十六進制碼）的字符。
+      如果第一個數字是
+      0，該字符被解釋成一個八進制數字並且替換爲對應的（八進制碼）的字符。
+      否則認爲是一個十進制數字。</dd>
+  <dt><b>%:</b><i>name</i><b>:</b></dt>
+  <dd>psql變量name的值。參閱
+      &#34;Variables 變量&#34;
+      節獲取細節。</dd>
+  <dt><b>%`</b><i>command</i><b>`</b></dt>
+  <dd>command的輸出，
+      類似於通常的反引號（back-tick）替換。</dd>
+</dl>
+<p class="Pp">
+  
+    要在提示符裏插入百分號，鍵入%%。缺省提示符等效於
+    &#39;%/%R%# &#39; 用於 prompts 1 和
+    2，以及&#39;&gt;&gt; &#39; 用於 prompt 3。</p>
+<p class="Pp"></p>
+<div class="Bd-indent"><b>Note:</b> 注意:
+  這個特性是無恥地從tcsh
+  裏剽竊來的。</div>
+<p class="Pp"></p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="COMMAND-LINE_EDITING_命令行編輯">COMMAND-LINE EDITING 命令行編輯<a class="anchor" href="#COMMAND-LINE_EDITING_%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%B7%A8%E8%BC%AF">¶</a></h2>
+<b>psql</b>
+  爲了編輯和檢索命令行的方便支持
+  readline 和歷史庫。
+  命令歷史存放在你的家目錄的一個叫
+  .psql_history 的文件裏，
+  並且當 psql
+  啓動的時候會裝載進來。
+  還支持 Tab
+  補齊，儘管該補齊邏輯並不是一個
+  SQL 分析器必備的。
+  如果因某些原因你不喜歡
+  tab
+  補齊，你可以把下面幾行放在你的家目錄的一個叫<i>.inputrc</i>
+  的文件裏關閉這個特性：
+<p class="Pp"></p>
+<pre>$if psql
+set disable-completion on
+$endif
+
+</pre>
+（這不是 psql 的特性，
+  是<b>Readline</b>
+  的。參考它的文檔獲取更多細節。）
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ENVIRONMENT_環境">ENVIRONMENT 環境<a class="anchor" href="#ENVIRONMENT_%E7%92%B0%E5%A2%83">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>HOME</b></dt>
+  <dd>
+    
+      初始化文件（.psqlrc）和命令歷史文件（<i>.psql_history</i>）的目錄。</dd>
+  <dt><b>PAGER</b></dt>
+  <dd>
+    
+      如果查詢結果在一頁裏放不下，那麼它們被定向到這個命令。
+      典型的值是 more 或者
+      less。
+      缺省的是平臺相關的。我們可以用<b>\pset</b>
+      命令關閉分頁器。</dd>
+  <dt><b>PGDATABASE</b></dt>
+  <dd>
+     缺省連接的數據庫</dd>
+  <dt><b>PGHOST</b></dt>
+  <dd></dd>
+  <dt><b>PGPORT</b></dt>
+  <dd></dd>
+  <dt><b>PGUSER</b></dt>
+  <dd>
+     缺省連接參數</dd>
+  <dt><b>PSQL_EDITOR</b></dt>
+  <dd></dd>
+  <dt><b>EDITOR</b></dt>
+  <dd></dd>
+  <dt><b>VISUAL</b></dt>
+  <dd><b>\e</b>
+      命令使用的編輯器。這些變量是按照上面的順序檢查的；設置最早的最先使用。</dd>
+  <dt><b>SHELL</b></dt>
+  <dd><b>\!</b>
+    命令執行的命令。</dd>
+  <dt><b>TMPDIR</b></dt>
+  <dd>
+    
+      存儲臨時文件的目錄。缺省是<i>/tmp</i>。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="FILES">FILES<a class="anchor" href="#FILES">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>•</dt>
+  <dd>
+     在啓動之前，psql
+      視圖讀取並
+      執行來自文件<i>$HOME/.psqlrc</i>
+      的命令。
+      它將用於設置客戶端或者服務器的風格（使用<b>\set</b>
+      和<b>SET</b> 命令）。</dd>
+  <dt>•</dt>
+  <dd>
+    
+      命令行歷史存儲在<i>$HOME/.psql_history</i>。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES_注意">NOTES 注意<a class="anchor" href="#NOTES_%E6%B3%A8%E6%84%8F">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>•</dt>
+  <dd>
+     一些
+      psql的早期版本允許一個單字母的反斜槓命令（元命令）的第一個參數直接跟在命令後面，
+      而不用空白間隔。出於兼容性原因，這個特性仍然在某些程度上被支持，但是我不準備在這裏詳細解釋，因爲我不鼓勵這樣使用。
+      不過如果你收到莫名其妙的信息，想想這個用法。例如
+    <p class="Pp"></p>
+    <pre>testdb=&gt;<b>\foo</b>
+Field separator is &#34;oo&#34;.
+
+    </pre>
+    
+      可能不是你想要的東西。</dd>
+  <dt>•</dt>
+  <dd><b>psql</b>
+      只能與同版本的服務器平穩地工作。
+      這不意味着其他組合會完全失敗，但是可能有微小的或者不那麼微小的問題。
+      如果服務器的版本不同，反斜槓命令是特別容易失效的。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES_例子">EXAMPLES 例子<a class="anchor" href="#EXAMPLES_%E4%BE%8B%E5%AD%90">¶</a></h1>
+
+  第一個例子演示瞭如何把一個查詢分成多個行進行輸入。注意提示符的變化：
+<p class="Pp"></p>
+<pre>testdb=&gt;<b>CREATE TABLE my_table (</b>
+testdb(&gt;<b> first integer not null default 0,</b>
+testdb(&gt;<b> second text</b>
+testdb-&gt;<b>);</b>
+CREATE TABLE
+
+</pre>
+ 現在再看看錶定義：
+<p class="Pp"></p>
+<pre>testdb=&gt;<b>\d my_table</b>
+             Table &#34;my_table&#34;
+ Attribute |  Type   |      Modifier
+-----------+---------+--------------------
+ first     | integer | not null default 0
+ second    | text    |
+
+</pre>
+
+  把提示符變成更有趣的東西：
+<p class="Pp"></p>
+<pre>testdb=&gt;<b>\set PROMPT1 &#39;%n@%m %~%R%# &#39;</b>
+peter@localhost testdb=&gt;
+
+</pre>
+
+  假設你用數據填充了表並且想看一眼：
+<p class="Pp"></p>
+<pre>peter@localhost testdb=&gt; SELECT * FROM my_table;
+ first | second
+-------+--------
+     1 | one
+     2 | two
+     3 | three
+     4 | four
+(4 rows)
+
+</pre>
+ 你可以用<b>\pset</b>
+  命令讓這個查詢看起來不一樣：
+<p class="Pp"></p>
+<pre>peter@localhost testdb=&gt;<b>\pset border 2</b>
+Border style is 2.
+peter@localhost testdb=&gt;<b>SELECT * FROM my_table;</b>
++-------+--------+
+| first | second |
++-------+--------+
+|     1 | one    |
+|     2 | two    |
+|     3 | three  |
+|     4 | four   |
++-------+--------+
+(4 rows)
+peter@localhost testdb=&gt;<b>\pset border 0</b>
+Border style is 0.
+peter@localhost testdb=&gt;<b>SELECT * FROM my_table;</b>
+first second
+----- ------
+    1 one
+    2 two
+    3 three
+    4 four
+(4 rows)
+peter@localhost testdb=&gt;<b>\pset border 1</b>
+Border style is 1.
+peter@localhost testdb=&gt;<b>\pset format unaligned</b>
+Output format is unaligned.
+peter@localhost testdb=&gt;<b>\pset fieldsep &#34;,&#34;</b>
+Field separator is &#34;,&#34;.
+peter@localhost testdb=&gt;<b>\pset tuples_only</b>
+Showing only tuples.
+peter@localhost testdb=&gt;<b>SELECT second, first FROM my_table;</b>
+one,1
+two,2
+three,3
+four,4
+
+</pre>
+
+  還可以用短（縮寫）命令：
+<p class="Pp"></p>
+<pre>peter@localhost testdb=&gt;<b>\a\t\x</b>
+Output format is aligned.
+Tuples only is off.
+Expanded display is on.
+peter@localhost testdb=&gt;<b>SELECT * FROM my_table;</b>
+-[ RECORD 1 ]-
+first  | 1
+second | one
+-[ RECORD 2 ]-
+first  | 2
+second | two
+-[ RECORD 3 ]-
+first  | 3
+second | three
+-[ RECORD 4 ]-
+first  | 4
+second | four
+
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="譯者">譯者<a class="anchor" href="#%E8%AD%AF%E8%80%85">¶</a></h1>
+<b>Postgresql 中文網站</b> <b>何偉平
+  &lt;laser@pgsqldb.org&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-02</td>
+    <td class="foot-os">Application</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+psql.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-10T09:38:52Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"psql(1)\"}}]}"
+</script>

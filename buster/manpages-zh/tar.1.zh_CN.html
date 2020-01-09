@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tar(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/tar.1.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/tar/tar.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es-extra/tar.1.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-hu/tar.1.hu.html" hreflang="hu">
+<link rel="alternate" href="../../buster/manpages-ja/tar.1.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/tar.1.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/tar.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/tar.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; tar(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/tar.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/tar.1.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%90%8D%E5%AD%97" title="名字">名字</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%80%BB%E8%A7%88" title="总览">总览</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%BA%94%E7%94%A8%E4%B8%BE%E4%BE%8B" title="应用举例">应用举例</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E" title="参数说明">参数说明</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9" title="常用选项">常用选项</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%89%80%E6%9C%89%E9%80%89%E9%A1%B9" title="所有选项">所有选项</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8A%A5%E5%91%8A_BUGS" title="报告 BUGS">报告 BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85" title="作者">作者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AF%91%E8%80%85" title="译者">译者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0" title="中文版最新更新">中文版最新更新</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/tar.1.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/tar.1.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/tar.1.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/tar.1.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/tar/tar.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es-extra/tar.1.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-hu/tar.1.hu.html" title="Hungarian (hu)">magyar</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/tar.1.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/tar.1.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/tar.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/tar.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/tar.1.zh_CN.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/tcllib/tar.3tcl.en.html">3tcl (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/libarchive-dev/tar.5.en.html">5 (<span title="File formats and conventions eg /etc/passwd">formats</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">TAR(1)</td>
+    <td class="head-vol">tar</td>
+    <td class="head-rtitle">TAR(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="名字">名字<a class="anchor" href="#%E5%90%8D%E5%AD%97">¶</a></h1>
+tar - tar
+  档案文件管理程序的 GNU
+  版本。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="总览">总览<a class="anchor" href="#%E6%80%BB%E8%A7%88">¶</a></h1>
+<b>tar</b> <i>&lt;操作参数&gt; [选项]</i>
+<p class="Pp"><i>操作参数:</i></p>
+<pre><b>[-]A --catenate --concatenate</b>
+<b>[-]c --create</b>
+<b>[-]d --diff --compare</b>
+<b>[-]r --append</b>
+<b>[-]t --list</b>
+<b>[-]u --update</b>
+<b>[-]x --extract --get</b>
+<b>--delete</b>
+</pre>
+<p class="Pp"><i>常用选项:</i></p>
+<pre><b>-C</b>, <b>--directory</b> 目录
+<b>-f</b>, <b>--file</b> 文件
+<b>-j</b>, <b>--bzip2</b>
+<b>-J</b>, <b>--xz</b>
+<b>-p</b>, <b>--preserve-permissions</b>
+<b>-v</b>, <b>--verbose</b>
+<b>-z</b>, <b>--gzip</b>
+</pre>
+<p class="Pp"><i>所有选项:</i>
+  <br/>
+  [ <b>-a</b>, <b>--auto-compress</b> ] [ <b>--add-file</b> 文件 ] [
+    <b>--anchored</b> ] [ <b>--atime-preserve</b> ] [ <b>-b</b>,
+    <b>--blocking-factor</b> N ] [ <b>-B</b>, <b>--read-full-records</b> ] [
+    <b>--backup</b>[=备份类型] ] [
+    <b>--block-compress</b> ] [ <b>-C</b>, <b>--directory</b> 目录 ]
+    [ <b>--checkpoint</b> ] [ <b>--delay-directory-restore</b> ] [
+    <b>--exclude</b> 文件或目录 ] [
+    <b>--exclude-caches</b> ] [ <b>--exclude-caches-all</b> ] [
+    <b>--exclude-caches-under</b> ] [ <b>--exclude-tag</b> 文件 ] [
+    <b>--exclude-tag-all</b> 文件 ] [ <b>--exclude-tag-under</b>
+    文件 ] [ <b>-f</b>, <b>--file</b>
+    [主机名:]文件 ] [ <b>-F</b>,
+    <b>--info-script</b> 文件, <b>--new-volume-script</b>
+    文件 ] [ <b>--force-local</b> ] [ <b>--format</b>
+    格式 ] [ <b>-g</b>, <b>--listed-incremental</b> 快照
+    ] [ <b>-G</b>, <b>--incremental</b> ] [ <b>--group</b> 组 ] [
+    <b>-h</b>, <b>--dereference</b> ] [ <b>--help</b> ] [ <b>-i</b>,
+    <b>--ignore-zeros</b> ] [ <b>-I</b>, <b>--use-compress-program</b>
+    程序 ] [ <b>--ignore-case</b> ] [ <b>--ignore-command-error</b>
+    ] [ <b>--ignore-failed-read</b> ] [ <b>--index-file</b> 文件 ] [
+    <b>-j</b>, <b>--bzip2</b> ] [ <b>-J</b>, <b>--xz</b> ] [ <b>-k</b>,
+    <b>--keep-old-files</b> ] [ <b>-K</b>, <b>--starting-file</b>
+    文件 ] [ <b>--keep-newer-files</b> ] [ <b>-l</b>,
+    <b>--check-links</b> ] [ <b>-L</b>, <b>--tape-length</b> N ] [ <b>--lzip</b>
+    ] [ <b>--lzma</b> ] [ <b>--lzop</b> ] [ <b>-m</b>, <b>--touch</b>,
+    <b>--modification-time</b> ] [ <b>-M</b>, <b>--multi-volume</b> ] [
+    <b>--mode</b> 权限 ] [ <b>--mtime</b> 日期 ] [
+    <b>-N</b>, <b>--after-date</b> 日期, <b>--newer</b>
+    日期 ] [ <b>--newer-mtime</b> 日期 ] [
+    <b>--no-anchored</b> ] [ <b>--no-auto-compress</b> ] [
+    <b>--no-delay-directory-restore</b> ] [ <b>--no-ignore-case</b> ] [
+    <b>--no-ignore-command-error</b> ] [ <b>--no-overwrite-dir</b> ] [
+    <b>--no-quote-chars</b> ] [ <b>--no-recursion</b> ] [
+    <b>--no-same-permissions</b> ] [ <b>--no-unquote</b> ] [
+    <b>--no-wildcards</b> ] [ <b>--no-wildcards-match-slash</b> ] [
+    <b>--null</b> ] [ <b>--numeric-owner</b> ] [ <b>-o</b>,
+    <b>--old-archive</b>, <b>--portability</b>, <b>--no-same-owner</b> ] [
+    <b>-O</b>, <b>--to-stdout</b> ] [ <b>--occurrence</b> 次数 ] [
+    <b>--one-file-system</b> ] [ <b>--overwrite</b> ] [ <b>--overwrite-dir</b> ]
+    [ <b>--owner</b> 用户 ] [ <b>-p</b>, <b>--same-permissions</b>,
+    <b>--preserve-permissions</b> ] [ <b>-P</b>, <b>--absolute-names</b> ] [
+    <b>--pax-option</b> 关键字列表 ] [
+    <b>--posix</b> ] [ <b>--preserve</b> ] [ <b>--quote-chars</b>
+    字符串 ] [ <b>--quote-style</b> 风格 ] [
+    <b>-R</b>, <b>--block-number</b> ] [ <b>--record-size</b>
+    字节数 ] [ <b>--recursion</b> ] [
+    <b>--recursive-unlink</b> ] [ <b>--remove-files</b> ] [ <b>--restrict</b> ]
+    [ <b>--rmt-command</b> 命令 ] [ <b>--rsh-command</b>
+    命令 ] [ <b>-s</b>, <b>--same-order</b>, <b>--preserve-order</b>
+    ] [ <b>-S</b>, <b>--sparse</b> ] [ <b>--same-owner</b> ] [
+    <b>--show-defaults</b> ] [ <b>--show-omitted-dirs</b> ] [
+    <b>--show-transformed-names</b>, <b>--show-stored-names</b> ] [
+    <b>--strip-components</b> 目录层数 ] [
+    <b>--suffix</b> 后缀 ] [ <b>-T</b>, <b>--files-from</b>
+    文件 ] [ <b>--test-label</b> ] [ <b>--to-command</b>
+    命令 ] [ <b>--transform</b> sed表达式 ] [
+    <b>--totals</b> ] [ <b>-U</b>, <b>--unlink-first</b> ] [ <b>--unquote</b> ]
+    [ <b>--utc</b> ] [ <b>-v</b>, <b>--verbose</b> ] [ <b>-V</b>, <b>--label</b>
+    名称 ] [ <b>--version</b> ] [ <b>--volno-file</b>
+    文件 ] [ <b>-w</b>, <b>--interactive</b>, <b>--confirmation</b>
+    ] [ <b>-W</b>, <b>--verify</b> ] [ <b>--wildcards</b> ] [
+    <b>--wildcards-match-slash</b> ] [ <b>-X</b>, <b>--exclude-from</b>
+    文件 ] [ <b>-z</b>, <b>--gzip</b>, <b>--gunzip</b>,
+    <b>--ungzip</b> ] [ <b>-Z</b>, <b>--compress</b>, <b>--uncompress</b> ] [
+    <b>-[0-7][lmh]</b> ]</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+这是<b>tar</b>的GNU版本的手册页。
+  <b>tar</b>是一个用于储存或提取<i>tar文件</i>的程序。
+  <i>tar文件</i>可放在磁盘中，
+  也可以存为普通文件。
+  <b>tar</b> 的第一个参数必须是操作参数A、c、d、r、t、u、x
+  中的一个，
+  参数后面可跟着任意可选选项。
+  <b>tar</b>的最后一个参数是你要处理的文件或目录的名字。
+  如果你指定了一个目录，
+  该目录的所有子目录都将被加入存档。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="应用举例">应用举例<a class="anchor" href="#%E5%BA%94%E7%94%A8%E4%B8%BE%E4%BE%8B">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>tar -xvf foo.tar</b></dt>
+  <dd>提取 foo.tar
+      文件并显示提取过程</dd>
+  <dt><b>tar -xzf foo.tar.gz</b></dt>
+  <dd>提取用 gzip 压缩的文件
+      foo.tar.gz</dd>
+  <dt><b>tar -cjf foo.tar.bz2 bar/</b></dt>
+  <dd>用 bzip 为目录 bar
+      创建一个叫做
+      foo.tar.bz2存档</dd>
+  <dt><b>tar -xjf foo.tar.bz2 -C bar/</b></dt>
+  <dd>把用 bzip 压缩的文件 foo.tar.bz2
+      提取到 bar 目录</dd>
+  <dt><b>tar -xzf foo.tar.gz blah.txt</b></dt>
+  <dd>把文件 blah.txt 从 foo.tar.gz
+      中提取出来</dd>
+</dl>
+<p class="Pp">注意:
+    当压缩或提取的时候，
+    压缩类型选项常常是不必需的，
+    因为<b>tar</b>会根据文件的后缀自动选择压缩类型。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参数说明">参数说明<a class="anchor" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>下列参数中必须有至少一个被使用：</b></dt>
+  <dd></dd>
+  <dt><b>-A</b>, <b>--catenate</b>, <b>--concatenate</b></dt>
+  <dd>将一存档与已有的存档合并</dd>
+  <dt><b>-c</b>, <b>--create</b></dt>
+  <dd>创建一个新的存档</dd>
+  <dt><b>-d</b>, <b>--diff</b>, <b>--compare</b></dt>
+  <dd>比较存档与相应的未存档文件的不同之处</dd>
+  <dt><b>-r</b>, <b>--append</b></dt>
+  <dd>将文件附加到存档结尾</dd>
+  <dt><b>-t</b>, <b>--list</b></dt>
+  <dd>列出存档中文件的目录</dd>
+  <dt><b>-u</b>, <b>--update</b></dt>
+  <dd>仅将较新的文件附加到存档中</dd>
+  <dt><b>-x</b>, <b>--extract</b>, <b>--get</b></dt>
+  <dd>从存档提取文件</dd>
+  <dt><b>--delete</b></dt>
+  <dd>把指定文件从存档中删除（不要用于磁带！）</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="常用选项">常用选项<a class="anchor" href="#%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>-C</b>, <b>--directory</b> 目录</dt>
+  <dd>提取存档到指定目录</dd>
+  <dt><b>-f</b>, <b>--file</b> [主机名:]文件</dt>
+  <dd>指定存档或设备中的文件
+      (默认是 &#34;-&#34;， 表示 标准输入/输出)</dd>
+  <dt><b>-j</b>, <b>--bzip2</b></dt>
+  <dd>用 bzip2
+      处理存档; 用于 .bz2 文件</dd>
+  <dt><b>-J</b>, <b>--xz</b></dt>
+  <dd>用 xz
+      处理存档; 用于 .xz 文件</dd>
+  <dt><b>-p</b>, <b>--preserve-permissions</b></dt>
+  <dd>提取所有保护信息</dd>
+  <dt><b>-v</b>, <b>--verbose</b></dt>
+  <dd>显示文件处理过程</dd>
+  <dt><b>-z</b>, <b>--gzip</b>, <b>--ungzip</b></dt>
+  <dd>用 gzip
+      处理存档; 用于 .gz 文件</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="所有选项">所有选项<a class="anchor" href="#%E6%89%80%E6%9C%89%E9%80%89%E9%A1%B9">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>-a</b>, <b>--auto-compress</b></dt>
+  <dd>根据存档后缀来选择压缩程序</dd>
+  <dt><b>--add-file</b> 文件</dt>
+  <dd>添加指定文件到存档
+      (对以下标线开头的文件很有用)</dd>
+  <dt><b>--anchored</b></dt>
+  <dd>patterns will match the start of file names</dd>
+  <dt><b>--atime-preserve</b></dt>
+  <dd>不改变存档中文件的访问时间</dd>
+  <dt><b>-b</b>, <b>--blocking-factor</b> N</dt>
+  <dd>指定块大小为 Nx512
+      字节（默认N=20)</dd>
+  <dt><b>-B</b>, <b>--read-full-blocks</b></dt>
+  <dd>读取时重组块 (用于读取4.2BSD
+      pipes)</dd>
+  <dt><b>--backup</b>[=备份类型]</dt>
+  <dd>备份文件而不是删除它们,
+      备份类型有simple、numbered等</dd>
+  <dt><b>--block-compress</b></dt>
+  <dd>让磁带的输出结果成块输出</dd>
+  <dt><b>-C</b>, <b>--directory</b> 目录</dt>
+  <dd>提取文档到指定目录</dd>
+  <dt><b>--checkpoint</b></dt>
+  <dd>读取存档时显示目录名</dd>
+  <dt><b>--delay-directory-restore</b></dt>
+  <dd>延迟对已提取目录的修改时间和权限的设定，
+      直到提取结束</dd>
+  <dt><b>--exclude</b> 文件或目录</dt>
+  <dd>排除指定文件或目录</dd>
+  <dt><b>--exclude-caches</b></dt>
+  <dd>排除带有 缓存目录 标记的目录</dd>
+  <dt><b>--exclude-tag</b> 文件</dt>
+  <dd>排除包含指定文件的目录</dd>
+  <dt><b>-f</b>, <b>--file</b> [主机名:]文件</dt>
+  <dd>指定存档或设备中的文件
+      (默认是 &#34;-&#34;， 表示 标准输入/输出)</dd>
+  <dt><b>-F</b>, <b>--info-script</b> 文件,
+    <b>--new-volume-script</b> 文件</dt>
+  <dd>在每卷磁带的结尾运行脚本
+      （会应用<i>--multi-volume</i>选项）</dd>
+  <dt><b>--force-local</b></dt>
+  <dd>存档文件是本地的， 即使它的名称中含有冒号</dd>
+  <dt><b>--format</b> FORMAT</dt>
+  <dd>选择创建存档的格式
+    <pre><i>v7</i> - Unix V7
+<i>oldgnu</i> - GNU tar &lt;=1.12
+<i>gnu</i> - GNU tar 1.13
+<i>ustar</i> - POSIX.1-1988
+<i>posix</i> - POSIX.1-2001
+    </pre>
+  </dd>
+  <dt><b>-g</b>, <b>--listed-incremental</b> 快照</dt>
+  <dd>创建/列出/提取 新GNU格式的增量备份</dd>
+  <dt><b>--group</b> 组</dt>
+  <dd>将添加到存档的文件的组标识设置为指定组，
+      而不是源文件所在的组;
+      这个选项对提取无效</dd>
+  <dt><b>-G</b>, <b>--incremental</b></dt>
+  <dd>创建/列出/提取 旧GNU格式的增量备份</dd>
+  <dt><b>-h</b>, <b>--dereference</b></dt>
+  <dd>不存入符号链接; 存入链接指向的文件</dd>
+  <dt><b>--help</b></dt>
+  <dd>显示像本手册这样的帮助信息，
+      但不像这么详细</dd>
+  <dt><b>-i</b>, <b>--ignore-zeros</b></dt>
+  <dd>忽略存档中的 0
+      字节块
+      （那通常意味着文件结束)</dd>
+  <dt><b>-I</b>, <b>--use-compress-program</b> 程序</dt>
+  <dd>通过指定程序访问存档
+      (该程序通常是一个压缩程序;
+      它需能接受 <i>-d</i> 参数)</dd>
+  <dt><b>--ignore-case</b></dt>
+  <dd>排除文件时不区分大小写</dd>
+  <dt><b>--ignore-command-error</b></dt>
+  <dd>忽略子程序的退出代码</dd>
+  <dt><b>--ignore-failed-read</b></dt>
+  <dd>遇到不可读文件的非零状态不退出</dd>
+  <dt><b>--index-file</b> 文件</dt>
+  <dd>将处理过程信息输出到指定文件，
+      而不是输出到标准输出</dd>
+  <dt><b>-j</b>, <b>--bzip2</b></dt>
+  <dd>用 bzip2
+      处理存档， 用于 .bz2 文件</dd>
+  <dt><b>-J</b>, <b>--xz</b></dt>
+  <dd>用 xz
+      处理存档， 用于 .xz 文件</dd>
+  <dt><b>-k</b>, <b>--keep-old-files</b></dt>
+  <dd>保留已存在的文件; 不用存档中的文件覆盖它们</dd>
+  <dt><b>-K</b>, <b>--starting-file</b> FILE</dt>
+  <dd>从存档中的指定文件处开始</dd>
+  <dt><b>--keep-newer-files</b></dt>
+  <dd>不覆盖比存档新的文件</dd>
+  <dt><b>-l</b>, <b>--check-links</b></dt>
+  <dd>如果文件系统中文件的硬链接数和存档中记录的不同，
+      则发出警告</dd>
+  <dt><b>-L</b>, <b>--tape-length</b> N</dt>
+  <dd>在写入了N*1024字节后，
+      更换磁带</dd>
+  <dt><b>-m</b>, <b>--touch</b>, <b>--modification-time</b></dt>
+  <dd>不提取文件的修改时间</dd>
+  <dt><b>-M</b>, <b>--multi-volume</b></dt>
+  <dd>创建/列出/提取
+      多卷存档</dd>
+  <dt><b>--mode</b> 权限</dt>
+  <dd>添加文件时应用指定的权限
+      (参看 <a href="../../buster/manpages-zh/chmod.1.zh_CN.html">chmod(1)</a>)</dd>
+  <dt><b>--mtime</b> 日期</dt>
+  <dd>当创建存档时， 使用指定日期作为存档成员的修改日期，
+      而不是使用文件的实际修改时间</dd>
+  <dt><b>-N</b>, <b>--after-date</b> 日期, <b>--newer</b>
+    日期</dt>
+  <dd>只存储在指定日期后有修改或状态更新
+      (权限， ACLs， 扩展属性， ...)的文件</dd>
+  <dt><b>--newer-mtime</b> 日期</dt>
+  <dd>和 <i>--newer</i> 类似，
+      但是只存储指定日期后有修改的文件</dd>
+  <dt><b>--no-anchored</b></dt>
+  <dd>匹配任意‘/’后字符项<i>--exclude</i>一起使用</dd>
+  <dt><b>--no-auto-compress</b></dt>
+  <dd>不根据存档后缀来决定使用哪个压缩程序</dd>
+  <dt><b>--no-delay-directory-restore</b></dt>
+  <dd>在目录中的所有文件都被提取完成时，
+      就设定该目录的修改时间和权限;
+      这是默认设置</dd>
+  <dt><b>--no-ignore-command-error</b></dt>
+  <dd>对以非零状态终止的子程序的显示警告</dd>
+  <dt><b>--no-ignore-case</b></dt>
+  <dd>用 <i>--exclude</i> 匹配时区分大小写</dd>
+  <dt><b>--no-overwrite-dir</b></dt>
+  <dd>从存档中提取文件时， 保留已存在目录的元数据。</dd>
+  <dt><b>--no-quote-chars</b> 字符串</dt>
+  <dd>把指定字符串中的字符从<i>--quote-chars</i>选项指定的字符中去除</dd>
+  <dt><b>--no-recursion</b></dt>
+  <dd>不递归进入子目录</dd>
+  <dt><b>--no-same-permissions</b></dt>
+  <dd>提取时应用用户的umask，
+      而不是用已记录的权限</dd>
+  <dt><b>--no-unquote</b></dt>
+  <dd>将所有输入文件或成员的名字作为普通文字，
+      不解释转义序列</dd>
+  <dt><b>--no-wildcards</b></dt>
+  <dd>不对<i>--exclude</i>使用通配符</dd>
+  <dt><b>--no-wildcards-match-slash</b></dt>
+  <dd><i>--exclude</i>的通配符不匹配斜杠(/)</dd>
+  <dt><b>--null</b></dt>
+  <dd><i>--files-from</i>读取以空值终止的名字，
+      禁用<i>--directory</i></dd>
+  <dt><b>--numeric-owner</b></dt>
+  <dd>总是用数字作为
+      用户/组 的名字</dd>
+  <dt><b>-o</b>, <b>--old-archive</b>, <b>--portability</b></dt>
+  <dd>相当于<i>--format=v7</i>；
+      当创建存档时<i>-o</i>选项表示这个行为
+      （已弃用的行为）</dd>
+  <dt><b>-o</b>, <b>--no-same-owner</b></dt>
+  <dd>提取时不恢复所有权；
+      当提取时<i>-o</i>选项表示这个行为</dd>
+  <dt><b>-O</b>, <b>--to-stdout</b></dt>
+  <dd>将文件提取到标准输出</dd>
+  <dt><b>--occurrence</b> 次数</dt>
+  <dd>只处理指定次数每个已被命名的文件的在操作中的出现；
+      用于<i>--delete</i>, <i>--diff</i>, <i>--extract</i>, 或
+      <i>--list</i></dd>
+  <dt><b>--one-file-system</b></dt>
+  <dd>创建存档时停留在本地文件系统</dd>
+  <dt><b>--overwrite</b></dt>
+  <dd>提取时覆盖已存在的文件和目录中的元数据</dd>
+  <dt><b>--overwrite-dir</b></dt>
+  <dd>提取时覆盖目录中的元数据</dd>
+  <dt><b>--owner</b> 用户</dt>
+  <dd>将文件所有者设为指定用户，
+      而不是原文件的所有者；
+      这个选项对提取无效</dd>
+  <dt><b>-p</b>, <b>--preserve-permissions</b>, <b>--same-permissions</b></dt>
+  <dd>提取所有保护信息</dd>
+  <dt><b>-P</b>, <b>--absolute-names</b></dt>
+  <dd>将文件名开头的“/”符号看作文件名的一部分</dd>
+  <dt><b>--pax-option</b> 关键字列表</dt>
+  <dd>修改<b>tar</b>处理扩展头关键字的方式，
+      只用于POSIX.1-2001存档</dd>
+  <dt><b>--posix</b></dt>
+  <dd>相当于<i>--format=posix</i></dd>
+  <dt><b>--preserve</b></dt>
+  <dd>相当于<i>--preserve-permissions</i>加上<i>--same-order</i></dd>
+  <dt><b>--quote-chars</b> 字符串</dt>
+  <dd>总是标出指定字符串中包含的的字符，
+      即使已选择的标识风格不标识它们</dd>
+  <dt><b>--quote-style</b> 风格</dt>
+  <dd>设定显示成员和文件名称的标识风格</dd>
+  <dt><b>-R</b>, <b>--record-number</b></dt>
+  <dd>显示存档中每条信息的记录数字</dd>
+  <dt><b>--record-size</b> 字节数</dt>
+  <dd>访问存档时每条记录使用指定的字节数</dd>
+  <dt><b>--recursion</b></dt>
+  <dd>递归进入目录</dd>
+  <dt><b>--recursive-unlink</b></dt>
+  <dd>提取目录之前先把存在的相同名称的目录删除</dd>
+  <dt><b>--remove-files</b></dt>
+  <dd>把文件加入到存档后删除这些文件</dd>
+  <dt><b>--restrict</b></dt>
+  <dd>禁用一些有潜在害处的选项；
+      目前这会禁用多卷菜单中对shell的调用</dd>
+  <dt><b>--rmt-command</b> 命令</dt>
+  <dd>用指定的命令代替默认的/usr/sbin/rmt</dd>
+  <dt><b>--rsh-command</b> 命令</dt>
+  <dd>用指定的远程命令代替<a href="../../buster/rsh-client/rsh.1.en.html">rsh(1)</a></dd>
+  <dt><b>-s</b>, <b>--same-order</b>, <b>--preserve-order</b></dt>
+  <dd>名称列表会被排序以匹配存档</dd>
+  <dt><b>-S</b>, <b>--sparse</b></dt>
+  <dd>高效地处理稀疏文件</dd>
+  <dt><b>--same-owner</b></dt>
+  <dd>以相同的所有权创建提取出的文件</dd>
+  <dt><b>--show-defaults</b></dt>
+  <dd>显示<b>tar</b>使用的默认选项</dd>
+  <dt><b>--show-omitted-dirs</b></dt>
+  <dd>显示提取时<b>tar</b>跳过的目录</dd>
+  <dt><b>--show-transformed-names</b>, <b>--show-stored-names</b></dt>
+  <dd>应用了任何<b>sed</b>转换之后，
+      显示文件或成员名字</dd>
+  <dt><b>--strip-components</b> 目录层数</dt>
+  <dd>在提取前，
+      把文件从前往后指定层数的目录都从提取路径中去掉，
+      如果文件包含在指定层数中，
+      则不被提取</dd>
+  <dt><b>--suffix</b> 后缀</dt>
+  <dd>备份文件时，
+      使用指定的后缀，
+      而不是使用默认后缀‘～’</dd>
+  <dt><b>-T</b>, <b>--files-from</b> 文件</dt>
+  <dd>从指定文件中获得要提取或创建的存档的名字</dd>
+  <dt><b>--test-label</b></dt>
+  <dd>读取卷标；
+      如果一个词被指定了，
+      则测试它是否匹配这个卷标</dd>
+  <dt><b>--to-command</b> 命令</dt>
+  <dd>提取期间，
+      将提取的文件导入到指定命令的标准输入</dd>
+  <dt><b>--totals</b></dt>
+  <dd>显示用--create参数写入的总字节数</dd>
+  <dt><b>--transform</b> sed表达式</dt>
+  <dd>用<b>sed</b>的转换表达式转换文件或成员的名字</dd>
+  <dt><b>-U</b>, <b>--unlink-first</b></dt>
+  <dd>提取文件之前，删除已存在的与之同名的文件</dd>
+  <dt><b>--unquote</b></dt>
+  <dd>不标识输入文件或成员的名字；
+      这是默认选项</dd>
+  <dt><b>--utc</b></dt>
+  <dd>以UTC时间显示文件的修改日期</dd>
+  <dt><b>-v</b>, <b>--verbose</b></dt>
+  <dd>列出文件的处理情况</dd>
+  <dt><b>-V</b>, <b>--label</b> 名称</dt>
+  <dd>用指定卷名创建存档</dd>
+  <dt><b>--version</b></dt>
+  <dd>显示<b>tar</b>程序的版本信息</dd>
+  <dt><b>--volno-file</b> 文件</dt>
+  <dd>保持追踪指定文件中多卷存档的卷编号；
+      和<i>--multi-volume</i>一起使用</dd>
+  <dt><b>-w</b>, <b>--interactive</b>, <b>--confirmation</b></dt>
+  <dd>每一个动作都要求确认</dd>
+  <dt><b>-W</b>, <b>--verify</b></dt>
+  <dd>写完存档后对其进行校验</dd>
+  <dt><b>--wildcards</b></dt>
+  <dd>对<i>--exclude</i>用通配符</dd>
+  <dt><b>--wildcards-match-slash</b></dt>
+  <dd><i>--exclude</i>的通配符匹配斜杠(/)</dd>
+  <dt><b>-X</b>, <b>--exclude-from</b> 文件</dt>
+  <dd>
+    <p class="Pp">排除列在指定文件中的文件</p>
+  </dd>
+  <dt><b>-z</b>, <b>--gzip</b>, <b>--gunzip</b>, <b>--ungzip</b></dt>
+  <dd>用gzip对存档进行操作</dd>
+  <dt><b>-Z</b>, <b>--compress</b>, <b>--uncompress</b></dt>
+  <dd>用compress对存档进行操作</dd>
+  <dt><b>-[0-7][lmh]</b></dt>
+  <dd>指定驱动器[0-7]和压缩密度[低中高]</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+GNU世界的人，
+  通常不喜欢man手册，
+  而是写文档代替之。
+  <b>tar</b>的维护者也是如此。
+  所以， 这个man手册页可能会不完全，
+  或者不够新，
+  它被包含在Gentoo的portage树中，
+  因为man是一个非常好的工具：）。
+  这个man手册页最初取自Debian Linux，
+  从那时起已在这里被很好地更新。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="报告_BUGS">报告 BUGS<a class="anchor" href="#%E6%8A%A5%E5%91%8A_BUGS">¶</a></h1>
+请通过 <a href="../../">../../</a> 报告Bug。
+  翻译问题请联系译者或到
+  <a href="../../lidaobing/manpages-zh/">../../lidaobing/manpages-zh/</a> 提交问题
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者">作者<a class="anchor" href="#%E4%BD%9C%E8%80%85">¶</a></h1>
+<pre>Debian Linux <a href="../../">../../</a>
+Mike Frysinger &lt;vapier@gentoo.org&gt;
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="译者">译者<a class="anchor" href="#%E8%AF%91%E8%80%85">¶</a></h1>
+<pre>CMPP 中文手册页计划 <a href="../..//cmpp.linuxforum.net</a> (2001/08/08)
+Saigut &lt;gosaigut@gmail.com&gt; (2013/11/09)
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文版最新更新">中文版最新更新<a class="anchor" href="#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0">¶</a></h1>
+<b>2014/10/04</b>
+<br/>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">Mar 2010</td>
+    <td class="foot-os">GNU</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+tar.1.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-10T15:43:12Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"tar(1)\"}}]}"
+</script>

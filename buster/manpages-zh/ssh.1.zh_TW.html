@@ -1,0 +1,1946 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ssh(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/openssh-client/ssh.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-tr/ssh.1.tr.html" hreflang="tr">
+<link rel="alternate" href="../../buster/manpages-zh/ssh.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/ssh.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; ssh(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ssh.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ssh.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_%28SYNOPSIS%29" title="總覽 (SYNOPSIS)">總覽 (SYNOPSIS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_%28DESCRIPTION%29" title="描述 (DESCRIPTION)">描述 (DESCRIPTION)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6_%28CONFIGURATION_FILES%29" title="配置文件 (CONFIGURATION FILES)">配置文件 (CONFIGURATION FILES)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%92%B0%E5%A2%83%E8%AE%8A%E9%87%8F_%28ENVIRONMENT%29" title="環境變量 (ENVIRONMENT)">環境變量 (ENVIRONMENT)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6_%28FILES%29" title="文件 (FILES)">文件 (FILES)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%A8%BA%E6%96%B7_%28DIAGNOSTICS%29" title="診斷 (DIAGNOSTICS)">診斷 (DIAGNOSTICS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85_%28AUTHORS%29" title="作者 (AUTHORS)">作者 (AUTHORS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%A6%E8%A6%8B_%28SEE_ALSO%29" title="另見 (SEE ALSO)">另見 (SEE ALSO)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B" title="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/ssh.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/ssh.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/ssh.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/openssh-client/ssh.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-tr/ssh.1.tr.html" title="Turkish (tr)">Türkçe</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ssh.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/ssh.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/ssh.1.zh_TW.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/erlang-manpages/ssh.3erl.en.html">3erl (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/erlang-manpages/ssh.7.en.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-hu/ssh.8.hu.html">8 (<span title="System administration commands (usually only for root)">sysadmin</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">SSH(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">SSH(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+<code class="Nm">ssh</code> —
+<div class="Nd">OpenSSH SSH 客戶端
+  (遠程登錄程序)</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_(SYNOPSIS)">總覽 (SYNOPSIS)<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_(SYNOPSIS)">¶</a></h1>
+<code class="Nm">ssh</code> [<code class="Fl">-l</code>
+  <var class="Ar">login_name</var>] <var class="Ar">hostname</var> |
+  <var class="Ar">user@hostname</var> [<var class="Ar">command</var>]
+<p class="Pp"><code class="Nm">ssh</code>
+    [<code class="Fl">-afgknqstvxACNTX1246</code>]
+    [<code class="Fl">-b</code> <var class="Ar">bind_address</var>]
+    [<code class="Fl">-c</code> <var class="Ar">cipher_spec</var>]
+    [<code class="Fl">-e</code> <var class="Ar">escape_char</var>]
+    [<code class="Fl">-i</code> <var class="Ar">identity_file</var>]
+    [<code class="Fl">-l</code> <var class="Ar">login_name</var>]
+    [<code class="Fl">-m</code> <var class="Ar">mac_spec</var>]
+    [<code class="Fl">-o</code> <var class="Ar">option</var>]
+    [<code class="Fl">-p</code> <var class="Ar">port</var>]
+    [<code class="Fl">-F</code> <var class="Ar">configfile</var>]
+    [<code class="Fl">-L</code>
+    <var class="Ar">port</var>:<var class="Ar">host</var>:<var class="Ar">hostport</var>]
+    [<code class="Fl">-R</code>
+    <var class="Ar">port</var>:<var class="Ar">host</var>:<var class="Ar">hostport</var>]
+    [<code class="Fl">-D</code> <var class="Ar">port</var>] <var class="Ar">hostname</var>
+    | <var class="Ar">user@hostname</var>
+  [<var class="Ar">command</var>]</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_(DESCRIPTION)">描述 (DESCRIPTION)<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_(DESCRIPTION)">¶</a></h1>
+<code class="Nm">ssh</code> (SSH 客戶端)
+  用於登錄遠程主機,
+  並且在遠程主機上執行命令.
+  它的目的是替換 rlogin 和 rsh,
+  同時在不安全的網絡之上,
+  兩個互不
+  信任的主機之間,
+  提供加密的,
+  安全的通信連接. X11
+  連接和任意 TCP/IP
+  端口均可以通過此安全通道轉發(forward).
+<p class="Pp">當用戶通過
+    <code class="Nm">ssh</code>
+    連接並登錄主機
+    <var class="Ar">hostname</var> 後,
+    根據所用的協議版本,
+    用戶必須通過下述方法之一向遠程主機證明他/她的身份:</p>
+<section class="Ss">
+<h2 class="Ss" id="SSH_協議第一版">SSH 協議第一版<a class="anchor" href="#SSH_%E5%8D%94%E8%AD%B0%E7%AC%AC%E4%B8%80%E7%89%88">¶</a></h2>
+第一,
+  如果發出登錄命令的本地主機已經列在遠程主機的
+  <span class="Pa">/etc/hosts.equiv</span> 或
+  <span class="Pa">/etc/ssh/shosts.equiv</span> 文件中,
+  並且兩端的用戶名相同,
+  則立即允許該用戶登錄.
+  第二,
+  如果遠程主機的用戶根目錄
+  (home 目錄) 下存在
+  <span class="Pa">.rhosts</span> 或 <span class="Pa">.shosts</span>,
+  並且其中有一行包含了客戶機的名字和客戶機上的用戶名,
+  則允許該用戶登錄.
+  一般來說,
+  服務器不允許單獨使用這種認證方式,
+  因爲它不安全.
+<p class="Pp">第二種認證方法是
+    <span class="Pa">rhosts</span> 或 <span class="Pa">hosts.equiv</span>
+    文件結合基於 RSA
+    的主機認證.
+    這意味着如果
+    <span class="Pa">$HOME/.rhosts</span>,
+    <span class="Pa">$HOME/.shosts</span>,
+    <span class="Pa">/etc/hosts.equiv</span>, 或
+    <span class="Pa">/etc/ssh/shosts.equiv</span>
+    允許登錄,
+    並且如果服務器能夠驗證客戶的主機密鑰(host
+    key) (參見
+    <a class="Sx" href="#__u6587___u4EF6_(FILE)">文件(FILE)</a>
+    節的 <span class="Pa">/etc/ssh/ssh_known_hosts</span> 和
+    <span class="Pa">$HOME/.ssh/known_hosts</span> ),
+    主機才允許客戶登錄.
+    這個認證方法關閉了因
+    IP 欺騙, DNS
+    欺騙和路由欺騙造成的安全漏洞.
+    [系統管理員注意:
+    一般說來 <span class="Pa">/etc/hosts.equiv</span>,
+    <span class="Pa">$HOME/.rhosts</span>, 和 rlogin/rsh
+    協議的本質是不可靠地,
+    要安全就應該關掉它們.]</p>
+<p class="Pp">作爲第三種認證方式,
+    <code class="Nm">ssh</code> 支持基於 RSA
+    的認證.
+    這種方案依託於公開密鑰算法:
+    密碼系統的加密和解密通過不同的密鑰完成,
+    無法
+    通過加密密鑰推導出解密密鑰.
+    RSA 就是這種密碼系統.
+    每個用戶創建一對公開/私密鑰匙用於認證.
+    服務器知道用戶的公鑰,
+    只有用戶知道他自己的私鑰.
+    <span class="Pa">$HOME/.ssh/authorized_keys</span>
+    文件列出允許登錄的(用戶的)公鑰.
+    當用戶開始登錄,
+    <code class="Nm">ssh</code>
+    程序告訴服務器它準備使用哪對鑰匙(公鑰)做認證.
+    服務器檢查這隻密鑰(公鑰)是否獲得許可,
+    如果許可,
+    服務器向用戶
+    (實際上是用戶面前運行的
+    <code class="Nm">ssh</code> 程序)
+    發出測試,
+    用用戶的公鑰加密一個隨機數.
+    這個隨機數只能用正確的私鑰解密.
+    隨後用戶的客戶程序用私鑰解出測試數字,
+    即可證明他/她掌握私鑰,
+    而又無需(把私鑰)暴露給服務器.</p>
+<p class="Pp"><code class="Nm">ssh</code>
+    能夠自動執行 RSA
+    認證協議.
+    用戶通過運行
+    <a class="Xr"><a href="../../buster/openssh-client/ssh-keygen.1.en.html">ssh-keygen(1)</a></a> 創建他/她的
+    RSA 密鑰對.
+    私鑰存放在用戶根目錄下的
+    <span class="Pa">$HOME/.ssh/identity</span> 中,
+    而公鑰存放在
+    <span class="Pa">$HOME/.ssh/identity.pub</span> 中. 隨後,
+    用戶應該把
+    <span class="Pa">identity.pub</span>
+    複製到遠程服務器中,
+    作爲 <span class="Pa">$HOME/.ssh/authorized_keys</span>
+    存放到他/她的用戶根目錄下
+    ( <span class="Pa">authorized_keys</span>
+    對應傳統的
+    <span class="Pa">$HOME/.rhosts</span> 文件,
+    每一行只有一隻密鑰,
+    儘管一行可以很長).
+    用戶無須密碼就可以直接登錄.
+    RSA 認證遠比 rhosts
+    認證安全.</p>
+<p class="Pp">RAS
+    認證最便捷的用法大概就是使用認證代理(authentication
+    agent) 了. 詳見 <a class="Xr"><a href="../../buster/openssh-client/ssh-agent.1.en.html">ssh-agent(1)</a></a>
+    手冊頁.</p>
+<p class="Pp">如果這些認證方式都失敗了,
+    <code class="Nm">ssh</code>
+    就提示用戶輸入口令(password),
+    然後把口令送到服務器做驗證.
+    由於整個通信過程是
+    加密的,
+    因此別人不可能通過偵聽網絡獲得這個口令.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="SSH_協議第二版">SSH 協議第二版<a class="anchor" href="#SSH_%E5%8D%94%E8%AD%B0%E7%AC%AC%E4%BA%8C%E7%89%88">¶</a></h2>
+當用戶以協議第二版連接時,
+  類似的認證方法一樣有效.
+  如果使用了
+  <code class="Cm">PreferredAuthentications</code>
+  的默認內容,
+  客戶端首先試着用基於主機的認證方法進行連接;
+  如果這個方法失敗了
+  就用公開密鑰方法作認證;
+  最後, 如果它也失敗了,
+  就進入鍵盤操作, 試試
+  用戶口令認證.
+<p class="Pp">這個公開密鑰方法類似於上一節描述的
+    RAS 認證, 並且允許使用 RAS
+    或 DSA 算法:
+    客戶端用他的私鑰 (
+    <span class="Pa">$HOME/.ssh/id_dsa</span> 或
+    <span class="Pa">$HOME/.ssh/id_rsa</span> )
+    對會話標識符(session
+    identifier)簽名,
+    然後把結果送到服務器.
+    服務器檢查
+    <span class="Pa">$HOME/.ssh/authorized_keys</span>
+    中是否有匹配的公鑰,
+    如果密鑰和簽名都正確,
+    訪問就可以繼續進行.
+    會話標識符來自共享的
+    Diffie-Hellman 值,
+    只有客戶端和服務器端才知道這個值.</p>
+<p class="Pp">如果公鑰認證失敗或無效,
+    用戶口令將會加密後送到遠端主機來證明用戶的身份.</p>
+<p class="Pp">另外, <code class="Nm">ssh</code>
+    支持基於主機或測試應答的認證方式.</p>
+<p class="Pp">協議第二版提供附加機制增強保密性
+    (數據流用 3DES, Blowfish, CAST128 或 Arcfour
+    加密) 和完整性 (hmac-md5, hmac-sha1).
+    注意,
+    協議第一版缺少強有力的機制確保連接的完整性.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="登錄會話和遠程執行">登錄會話和遠程執行<a class="anchor" href="#%E7%99%BB%E9%8C%84%E6%9C%83%E8%A9%B1%E5%92%8C%E9%81%A0%E7%A8%8B%E5%9F%B7%E8%A1%8C">¶</a></h2>
+服務器接受用戶身份後,
+  服務器即可以執行給定的命令,
+  也可以讓用戶登錄並給他
+  一個正常的 shell.
+  所有和遠端命令或 shell
+  的通信被自動加密.
+<p class="Pp">如果分配了僞終端(pseudo-terminal)(普通的登錄會話),
+    用戶可以使用後面將
+    提到的 escape 字符.</p>
+<p class="Pp">如果沒有分配僞終端,
+    則會話是透明的(transparent),
+    能夠可靠的傳送二進制數據.
+    大多數系統上,
+    即使分配了終端, 把 escape
+    字符設爲 “none”
+    也可以讓會話透明.</p>
+<p class="Pp">當遠程主機上的命令或
+    shell 退出時, 會話即結束,
+    並關閉所有 X11 和 TCP/IP
+    連接.
+    遠端程序的返回碼做爲
+    <code class="Nm">ssh</code>
+    的返回碼返回.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Escape_字符">Escape 字符<a class="anchor" href="#Escape_%E5%AD%97%E7%AC%A6">¶</a></h2>
+如果啓用了僞終端,
+  <code class="Nm">ssh</code> 能夠通過 escape
+  字符支持一組功能.
+<p class="Pp">單獨的波浪符可以用
+    <code class="Ic">~~</code> 送出去,
+    只要後面不跟下面列舉的字符,
+    也可以把它直接送出去.
+    escape
+    字符必須接在換行(newline)後面,
+    這樣才具有特別含義.
+    在配置文件中可以用
+    <code class="Cm">EscapeChar</code> 命令更改 escape
+    字符,
+    在命令行上可以用
+    <code class="Fl">-e</code> 選項更改.</p>
+<p class="Pp">已支持的 escape 命令
+    (假設是默認的
+    ‘<code class="Li">~</code>’) 有:</p>
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#~."><code class="Cm" id="~.">~.</code></a></dt>
+  <dd>斷開連接</dd>
+  <dt><a class="permalink" href="#~_Z"><code class="Cm" id="~_Z">~^Z</code></a></dt>
+  <dd>把 ssh 送到後臺</dd>
+  <dt><a class="permalink" href="#~_"><code class="Cm" id="~_">~#</code></a></dt>
+  <dd>列出轉發的連接 (forwarded
+      connection)</dd>
+  <dt><a class="permalink" href="#~&amp;"><code class="Cm" id="~&amp;">~&amp;</code></a></dt>
+  <dd>當等待轉發的連接/X11會話結束時,
+      ssh 在後臺退出登錄</dd>
+  <dt><a class="permalink" href="#~?"><code class="Cm" id="~?">~?</code></a></dt>
+  <dd>顯示 escape 字符的列表</dd>
+  <dt><a class="permalink" href="#~C"><code class="Cm" id="~C">~C</code></a></dt>
+  <dd>打開命令行 (僅用於
+      <code class="Fl">-L</code> 和 <code class="Fl">-R</code>
+      選項增加端口轉發)</dd>
+  <dt><a class="permalink" href="#~R"><code class="Cm" id="~R">~R</code></a></dt>
+  <dd>請求連接的重建(rekeying)
+      (僅用於SSH協議第二版,
+      且對方支持)</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="X11_和_TCP_轉發_(forwarding)">X11 和 TCP 轉發 (forwarding)<a class="anchor" href="#X11_%E5%92%8C_TCP_%E8%BD%89%E7%99%BC_(forwarding)">¶</a></h2>
+如果 <code class="Cm">ForwardX11</code>
+  變量設爲 “yes”
+  (或參見後面對 <code class="Fl">-X</code>
+  和 <code class="Fl">-x</code> 選項的描述),
+  並且用戶正在使用 X11
+  (設置了 <code class="Ev">DISPLAY</code>
+  環境變量), 和 X11
+  顯示器的連接將自動以這種形式轉發到遠端:
+  任何用 shell
+  或命令啓動的 X11
+  程序將穿過加密的通道,
+  從本地機器連接真正的
+  X 服務器.
+  用戶不應該手動設置
+  <code class="Ev">DISPLAY</code>.
+  可以在命令行上,
+  也可以在配置文件中設置
+  X11 連接的轉發.
+<p class="Pp"><code class="Nm">ssh</code> 設置的
+    <code class="Ev">DISPLAY</code>
+    值將指向服務器,
+    但是顯示器號大於零.
+    這很自然, 因爲
+    <code class="Nm">ssh</code>
+    在服務器上創建了一個
+    “proxy” X 服務器,
+    把連接通過加密通道轉發出去.</p>
+<p class="Pp"><code class="Nm">ssh</code>
+    將自動在服務器上設置
+    Xauthority 數據.
+    目的是這樣的: SSH
+    生成一個隨機的授權
+    cookie, 存放在服務器的 Xauthority
+    中. SSH
+    檢查並確保轉發的連接攜帶了這個
+    cookie, 打開連接後,
+    把它替換爲真正的 cookie.
+    真正的認證 cookie
+    絕不會送往服務器
+    (也不會有任何明文傳送的
+    cookie).</p>
+<p class="Pp">如果 <code class="Cm">ForwardAgent</code>
+    變量設爲 “yes”
+    (或參見後面對 <code class="Fl">-A</code>
+    和 <code class="Fl">-a</code>
+    選項的描述),
+    並且用戶正在使用認證代理(authentication
+    agent),
+    則和代理的連接將自動轉發到遠程主機.</p>
+<p class="Pp">既可以在命令行上,
+    也可以在配置文件中指定通過加密通道轉發的任何
+    TCP/IP 連接. TCP/IP
+    轉向的應用有, 比如說,
+    和電子錢包的安全連接,
+    或者是穿過防火牆等.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="服務器認證">服務器認證<a class="anchor" href="#%E6%9C%8D%E5%8B%99%E5%99%A8%E8%AA%8D%E8%AD%89">¶</a></h2>
+<code class="Nm">ssh</code>
+  自動維護並檢查一個身份數據庫,
+  它包含所有(成功)來訪的主機的身份數據.
+  主機密鑰存放在用戶根目錄下的
+  <span class="Pa">$HOME/.ssh/known_hosts</span> 文件中.
+  另外, SSH 自動檢查
+  <span class="Pa">/etc/ssh/ssh_known_hosts</span>
+  裏面已知的主機.
+  任何新主機將被自動添加到用戶文件中.
+  如果某個主機的身份發生改變,
+  <code class="Nm">ssh</code> 就會發出警告,
+  並且關閉對它的密碼認證,
+  以防止特洛伊木馬竊取用戶密碼.
+  這個機制的另一個目的是防止中間人攻擊,
+  否則這種攻擊可能會繞過加密系統.
+  <code class="Cm">StrictHostKeyChecking</code>
+  選項用來防止登錄到主機密鑰不能識別或發生改變的那些機器.
+<p class="Pp">命令行選項有:</p>
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#a"><code class="Fl" id="a">-a</code></a></dt>
+  <dd>禁止轉發認證代理的連接.</dd>
+  <dt><a class="permalink" href="#A"><code class="Fl" id="A">-A</code></a></dt>
+  <dd>允許轉發認證代理的連接.
+      可以在配置文件中對每個主機單獨設定這個參數.
+    <p class="Pp">代理轉發須謹慎.
+        某些用戶能夠在遠程主機上繞過文件訪問權限
+        (由於代理的 UNIX 域 socket),
+        他們可以通過轉發的連接訪問本地代理.
+        攻擊者不可能從代理獲得密鑰內容,
+        但是他們能夠操作這些密鑰,
+        利用加載到代理上
+        的身份信息通過認證.</p>
+  </dd>
+  <dt><a class="permalink" href="#b"><code class="Fl" id="b">-b</code></a>
+    <var class="Ar">bind_address</var></dt>
+  <dd>在擁有多個接口或地址別名的機器上,
+      指定收發接口.</dd>
+  <dt><a class="permalink" href="#c"><code class="Fl" id="c">-c</code></a>
+    <var class="Ar">blowfish|3des|des</var></dt>
+  <dd>選擇加密會話的密碼術.
+      <var class="Ar">3des</var> 是默認算法.
+      <var class="Ar">3des</var> (triple-des)
+      用三支不同的密鑰做加密-解密-加密三次運算,
+      被認爲比較可靠.
+      <var class="Ar">blowfish</var>
+      是一種快速的分組加密術(block
+      cipher), 非常安全,
+      而且速度比 <var class="Ar">3des</var>
+      快的多. <var class="Ar">des</var>
+      僅支持 <code class="Nm">ssh</code>
+      客戶端,
+      目的是能夠和老式的不支持
+      <var class="Ar">3des</var>
+      的協議第一版互操作.
+      由於其密碼算法上的弱點,
+      強烈建議避免使用.</dd>
+  <dt><a class="permalink" href="#c_2"><code class="Fl" id="c_2">-c</code></a>
+    <var class="Ar">cipher_spec</var></dt>
+  <dd>另外,
+      對於協議第二版,
+      這裏可以指定一組用逗號隔開,
+      按優先順序排列的密碼術.
+      詳見 <code class="Cm">Ciphers</code>.</dd>
+  <dt><a class="permalink" href="#e"><code class="Fl" id="e">-e</code></a>
+    <var class="Ar">ch|^ch|none</var></dt>
+  <dd>設置 pty 會話的 escape 字符
+      (默認字符:
+      ‘<code class="Li">~</code>’). escape
+      字符只在行首有效, escape
+      字符後面跟一個點
+      (‘<code class="Li">.</code>’)
+      表示結束連接, 跟一個
+      control-Z 表示掛起連接(suspend),
+      跟 escape 字符自己
+      表示輸出這個字符.
+      把這個字符設爲
+      “none” 則禁止 escape 功能,
+      使會話完全透明.</dd>
+  <dt><a class="permalink" href="#f"><code class="Fl" id="f">-f</code></a></dt>
+  <dd>要求 <code class="Nm">ssh</code>
+      在執行命令前退至後臺.
+      它用於當 <code class="Nm">ssh</code>
+      準備詢問口令或密語,
+      但是用戶希望它在後臺進行.
+      該選項隱含了
+      <code class="Fl">-n</code> 選項.
+      在遠端機器上啓動 X11
+      程序的推薦手法就是類似於
+      <code class="Ic">ssh -f host xterm</code> 的命令.</dd>
+  <dt><a class="permalink" href="#g"><code class="Fl" id="g">-g</code></a></dt>
+  <dd>允許遠端主機連接本地轉發的端口.</dd>
+  <dt><a class="permalink" href="#i"><code class="Fl" id="i">-i</code></a>
+    <var class="Ar">identity_file</var></dt>
+  <dd>指定一個 RSA 或 DSA
+      認證所需的身份(私鑰)文件.
+      默認文件是協議第一版的
+      <span class="Pa">$HOME/.ssh/identity</span>
+      以及協議第二版的
+      <span class="Pa">$HOME/.ssh/id_rsa</span> 和
+      <span class="Pa">$HOME/.ssh/id_dsa</span> 文件.
+      也可以在配置文件中對每個主機單獨指定身份文件.
+      可以同時使用多個
+      <code class="Fl">-i</code> 選項
+      (也可以在配置文件中指定多個身份文件).</dd>
+  <dt><a class="permalink" href="#I"><code class="Fl" id="I">-I</code></a>
+    <var class="Ar">smartcard_device</var></dt>
+  <dd>指定智能卡(smartcard)設備.
+      參數是設備文件,
+      <code class="Nm">ssh</code>
+      能夠用它和智能卡通信,
+      智能卡里面存儲了用戶的
+      RSA 私鑰.</dd>
+  <dt><a class="permalink" href="#k"><code class="Fl" id="k">-k</code></a></dt>
+  <dd>禁止轉發 Kerberos 門票和 AFS
+      令牌.
+      可以在配置文件中對每個主機單獨設定這個參數.</dd>
+  <dt><a class="permalink" href="#l"><code class="Fl" id="l">-l</code></a>
+    <var class="Ar">login_name</var></dt>
+  <dd>指定登錄遠程主機的用戶.
+      可以在配置文件中對每個主機單獨設定這個參數.</dd>
+  <dt><a class="permalink" href="#m"><code class="Fl" id="m">-m</code></a>
+    <var class="Ar">mac_spec</var></dt>
+  <dd>另外,
+      對於協議第二版,
+      這裏可以指定一組用逗號隔開,
+      按優先順序排列的
+      MAC(消息驗證碼)算法 (message
+      authentication code). 詳情以
+      <code class="Cm">MACs</code>
+      爲關鍵字查詢.</dd>
+  <dt><a class="permalink" href="#n"><code class="Fl" id="n">-n</code></a></dt>
+  <dd>把 stdin 重定向到
+      <span class="Pa">/dev/null</span>
+      (實際上防止從 stdin
+      讀取數據). <code class="Nm">ssh</code>
+      在後臺運行時一定會用到這個選項.
+      它的常用技巧是遠程運行
+      X11 程序. 例如, <code class="Ic">ssh -n
+      shadows.cs.hut.fi emacs &amp;</code> 將會在
+      shadows.cs.hut.fi 上啓動 emacs,
+      同時自動在加密通道中轉發
+      X11 連接. <code class="Nm">ssh</code>
+      在後臺運行.
+      (但是如果 <code class="Nm">ssh</code>
+      要求口令或密語,
+      這種方式就無法工作;
+      參見 <code class="Fl">-f</code> 選項.)</dd>
+  <dt><a class="permalink" href="#N"><code class="Fl" id="N">-N</code></a></dt>
+  <dd>不執行遠程命令.
+      用於轉發端口.
+      (僅限協議第二版)</dd>
+  <dt><a class="permalink" href="#o"><code class="Fl" id="o">-o</code></a>
+    <var class="Ar">option</var></dt>
+  <dd>可以在這裏給出某些選項,
+      格式和配置文件中的格式一樣.
+      它用來設置那些沒有命令行開關的選項.</dd>
+  <dt><a class="permalink" href="#p"><code class="Fl" id="p">-p</code></a>
+    <var class="Ar">port</var></dt>
+  <dd>指定遠程主機的端口.
+      可以在配置文件中對每個主機單獨設定這個參數.</dd>
+  <dt><a class="permalink" href="#q"><code class="Fl" id="q">-q</code></a></dt>
+  <dd>安靜模式.
+      消除所有的警告和診斷信息.</dd>
+  <dt><a class="permalink" href="#s"><code class="Fl" id="s">-s</code></a></dt>
+  <dd>請求遠程系統激活一個子系統.
+      子系統是 SSH2
+      協議的一個特性,
+      能夠協助
+      其他應用程序(如
+      sftp)把SSH用做安全通路.
+      子系統通過遠程命令指定.</dd>
+  <dt><a class="permalink" href="#t"><code class="Fl" id="t">-t</code></a></dt>
+  <dd>強制分配僞終端.
+      可以在遠程機器上執行任何全屏幕(screen-based)程序,
+      所以非常有用,
+      例如菜單服務. 並聯的
+      <code class="Fl">-t</code>
+      選項強制分配終端,
+      即使 <code class="Nm">ssh</code>
+      沒有本地終端.</dd>
+  <dt><a class="permalink" href="#T"><code class="Fl" id="T">-T</code></a></dt>
+  <dd>禁止分配僞終端.</dd>
+  <dt><a class="permalink" href="#v"><code class="Fl" id="v">-v</code></a></dt>
+  <dd>冗詳模式. 使 <code class="Nm">ssh</code>
+      打印關於運行情況的調試信息.
+      在調試連接,
+      認證和配置問題時非常有用.
+      並聯的 <code class="Fl">-v</code>
+      選項能夠增加冗詳程度.
+      最多爲三個.</dd>
+  <dt><a class="permalink" href="#x"><code class="Fl" id="x">-x</code></a></dt>
+  <dd>禁止 X11 轉發.</dd>
+  <dt><a class="permalink" href="#X"><code class="Fl" id="X">-X</code></a></dt>
+  <dd>允許 X11 轉發.
+      可以在配置文件中對每個主機單獨設定這個參數.
+    <p class="Pp">應該謹慎使用 X11
+        轉發.
+        如果用戶在遠程主機上能夠繞過文件訪問權限
+        (根據用戶的X授權數據庫),
+        他就可以通過轉發的連接訪問本地
+        X11 顯示器.
+        攻擊者可以據此採取行動,
+        如監視鍵盤輸入等.</p>
+  </dd>
+  <dt><a class="permalink" href="#C"><code class="Fl" id="C">-C</code></a></dt>
+  <dd>要求進行數據壓縮
+      (包括 stdin, stdout, stderr 以及轉發
+      X11 和 TCP/IP 連接 的數據).
+      壓縮算法和 <a class="Xr"><a href="../../buster/manpages-zh/gzip.1.zh_TW.html">gzip(1)</a></a>
+      的一樣,
+      協議第一版中,
+      壓縮級別 “level” 用
+      <code class="Cm">CompressionLevel</code> 選項控制.
+      壓縮技術在 modem
+      線路或其他慢速連接上很有用,
+      但是在高速網絡上反而
+      可能降低速度.
+      可以在配置文件中對每個主機單獨設定這個參數.
+      另見 <code class="Cm">Compression</code>
+    選項.</dd>
+  <dt><a class="permalink" href="#F"><code class="Fl" id="F">-F</code></a>
+    <var class="Ar">configfile</var></dt>
+  <dd>指定一個用戶級配置文件.
+      如果在命令行上指定了配置文件,
+      系統級配置文件
+      (<span class="Pa">/etc/ssh/ssh_config</span>)
+      將被忽略.
+      默認的用戶級配置文件是
+      <span class="Pa">$HOME/.ssh/config</span>.</dd>
+  <dt><a class="permalink" href="#L"><code class="Fl" id="L">-L</code></a>
+    <var class="Ar">port:host:hostport</var></dt>
+  <dd>將本地機(客戶機)的某個端口轉發到遠端指定機器的指定端口.
+      工作原理是這樣的,
+      本地機器上分配了一個
+      socket 偵聽 <var class="Ar">port</var> 端口,
+      一旦這個端口上有了連接,
+      該連接就經過安全通道轉發出去,
+      同時遠程主機和
+      <var class="Ar">host</var> 的 <var class="Ar">hostport</var>
+      端口建立連接.
+      可以在配置文件中指定端口的轉發.
+      只有 root
+      才能轉發特權端口. IPv6
+      地址用另一種格式說明:
+      <var class="Ar">port/host/hostport</var></dd>
+  <dt><a class="permalink" href="#R"><code class="Fl" id="R">-R</code></a>
+    <var class="Ar">port:host:hostport</var></dt>
+  <dd>將遠程主機(服務器)的某個端口轉發到本地端指定機器的指定端口.
+      工作原理是這樣的,
+      遠程主機上分配了一個
+      socket 偵聽 <var class="Ar">port</var> 端口,
+      一旦這個端口上有了連接,
+      該連接就經過安全通道轉向出去,
+      同時本地主機和
+      <var class="Ar">host</var> 的 <var class="Ar">hostport</var>
+      端口建立連接.
+      可以在配置文件中指定端口的轉發.
+      只有用 root
+      登錄遠程主機
+      才能轉發特權端口. IPv6
+      地址用另一種格式說明:
+      <var class="Ar">port/host/hostport</var></dd>
+  <dt><a class="permalink" href="#D"><code class="Fl" id="D">-D</code></a>
+    <var class="Ar">port</var></dt>
+  <dd>指定一個本地機器
+      “動態的”
+      應用程序端口轉發.
+      工作原理是這樣的,
+      本地機器上分配了一個
+      socket 偵聽 <var class="Ar">port</var> 端口,
+      一旦這個端口上有了連接,
+      該連接就經過安全通道轉發出去,
+      根據應用程序的協議可以判斷出遠程主機將和哪裏連接.
+      目前支持 SOCKS4 協議,
+      <code class="Nm">ssh</code> 將充當 SOCKS4
+      服務器. 只有 root
+      才能轉發特權端口.
+      可以在配置文件中指定動態端口的轉發.</dd>
+  <dt><a class="permalink" href="#1"><code class="Fl" id="1">-1</code></a></dt>
+  <dd>強制 <code class="Nm">ssh</code>
+      只使用協議第一版.</dd>
+  <dt><a class="permalink" href="#2"><code class="Fl" id="2">-2</code></a></dt>
+  <dd>強制 <code class="Nm">ssh</code>
+      只使用協議第二版.</dd>
+  <dt><a class="permalink" href="#4"><code class="Fl" id="4">-4</code></a></dt>
+  <dd>強制 <code class="Nm">ssh</code> 只使用 IPv4
+      地址.</dd>
+  <dt><a class="permalink" href="#6"><code class="Fl" id="6">-6</code></a></dt>
+  <dd>強制 <code class="Nm">ssh</code> 只使用 IPv6
+      地址.</dd>
+</dl>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="配置文件_(CONFIGURATION_FILES)">配置文件 (CONFIGURATION FILES)<a class="anchor" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6_(CONFIGURATION_FILES)">¶</a></h1>
+<code class="Nm">ssh</code>
+  可以從用戶級配置文件和系統級配置文件中獲取更多的配置數據.
+  配置文件的格式及其內容參見
+  <a class="Xr"><a href="../../buster/openssh-client/ssh_config.5.en.html">ssh_config(5)</a></a>.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="環境變量_(ENVIRONMENT)">環境變量 (ENVIRONMENT)<a class="anchor" href="#%E7%92%B0%E5%A2%83%E8%AE%8A%E9%87%8F_(ENVIRONMENT)">¶</a></h1>
+<code class="Nm">ssh</code>
+  一般將設置下面的環境變量:
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#DISPLAY"><code class="Ev" id="DISPLAY">DISPLAY</code></a></dt>
+  <dd>環境變量 <code class="Ev">DISPLAY</code>
+      指出 X11 服務器的位置.
+      <code class="Nm">ssh</code>
+      自動設置這個變量,
+      變量指向 “hostname:n”
+      格式的數據, 其中 hostname
+      指出運行 shell 的主機, 而
+      n 是大於等於 1 的整數.
+      <code class="Nm">ssh</code>
+      根據這個數據,
+      用安全通路轉發 X11
+      連接.
+      用戶一般不需要主動設置
+      <code class="Ev">DISPLAY</code> 變量,
+      否則會導致 X11
+      連接不安全
+      (而且會導致用戶手工複製所需的授權
+      cookie).</dd>
+  <dt><a class="permalink" href="#HOME"><code class="Ev" id="HOME">HOME</code></a></dt>
+  <dd>設置爲用戶根目錄的路徑.</dd>
+  <dt><a class="permalink" href="#LOGNAME"><code class="Ev" id="LOGNAME">LOGNAME</code></a></dt>
+  <dd>等於 <code class="Ev">USER</code>;
+      用來兼容使用這個變量的系統.</dd>
+  <dt><a class="permalink" href="#MAIL"><code class="Ev" id="MAIL">MAIL</code></a></dt>
+  <dd>設置爲用戶郵箱的路徑.</dd>
+  <dt><a class="permalink" href="#PATH"><code class="Ev" id="PATH">PATH</code></a></dt>
+  <dd>設置爲默認的
+      <code class="Ev">PATH</code>, 如同編譯
+      <code class="Nm">ssh</code>
+      時要求的一樣.</dd>
+  <dt><a class="permalink" href="#SSH_ASKPASS"><code class="Ev" id="SSH_ASKPASS">SSH_ASKPASS</code></a></dt>
+  <dd>如果 <code class="Nm">ssh</code>
+      需要一個密語(passphrase),
+      只要它是終端上啓動的,
+      它會從當前終端上讀取.
+      如果 <code class="Nm">ssh</code>
+      沒有聯接終端,
+      但是設置了 <code class="Ev">DISPLAY</code>
+      和 <code class="Ev">SSH_ASKPASS</code> 變量,
+      <code class="Nm">ssh</code> 就運行
+      <code class="Ev">SSH_ASKPASS</code>
+      指定的程序, 打開一個
+      X11 窗口讀取密語. 當從
+      <span class="Pa">.Xsession</span> 或類似的 script
+      中調用 <code class="Nm">ssh</code> 時,
+      這個功能特別有用.
+      (注意,
+      某些機器上可能需要將輸入重定向爲
+      <span class="Pa">/dev/null</span> 才能工作.)</dd>
+  <dt><a class="permalink" href="#SSH_AUTH_SOCK"><code class="Ev" id="SSH_AUTH_SOCK">SSH_AUTH_SOCK</code></a></dt>
+  <dd>標識某個 UNIX 域 socket
+      的路徑,
+      用於和代理通信.</dd>
+  <dt><a class="permalink" href="#SSH_CONNECTION"><code class="Ev" id="SSH_CONNECTION">SSH_CONNECTION</code></a></dt>
+  <dd>標識連接的客戶端和服務器端.
+      變量包含四個用空格隔開的字段:
+      客戶端IP地址,
+      客戶端端口號,
+      服務器IP地址,
+      服務器端口號.</dd>
+  <dt><a class="permalink" href="#SSH_ORIGINAL_COMMAND"><code class="Ev" id="SSH_ORIGINAL_COMMAND">SSH_ORIGINAL_COMMAND</code></a></dt>
+  <dd>如果強制執行了某條命令,
+      該變量就保存了最初的命令行.
+      可以用它獲取初始參數.</dd>
+  <dt><a class="permalink" href="#SSH_TTY"><code class="Ev" id="SSH_TTY">SSH_TTY</code></a></dt>
+  <dd>設置爲關聯當前 shell
+      或命令的終端名字(設備的路徑).
+      如果會話沒有終端,
+      就不設置這個變量.</dd>
+  <dt><a class="permalink" href="#TZ"><code class="Ev" id="TZ">TZ</code></a></dt>
+  <dd>如果啓動後臺進程(daemon)時設置了時區,
+      就設置這個時區變量,
+      指出現在的時區
+      (就是說,
+      後臺進程會把這個變量傳給新建連接).</dd>
+  <dt><a class="permalink" href="#USER"><code class="Ev" id="USER">USER</code></a></dt>
+  <dd>設置爲登錄的用戶名.</dd>
+</dl>
+<p class="Pp">另外,
+    如果允許用戶改變他們的環境數據,
+    而且有 <span class="Pa">$HOME/.ssh/environment</span>
+    這個文件, <code class="Nm">ssh</code>
+    將讀取其中數據, 把
+    “VARNAME=value”
+    這種格式的數據行添加進環境數據區.
+    另見 <a class="Xr"><a href="../../buster/openssh-server/sshd_config.5.en.html">sshd_config(5)</a></a> 的
+    <code class="Cm">PermitUserEnvironment</code> 選項.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件_(FILES)">文件 (FILES)<a class="anchor" href="#%E6%96%87%E4%BB%B6_(FILES)">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><span class="Pa">$HOME/.ssh/known_hosts</span></dt>
+  <dd>主機密鑰的記錄,
+      記錄有用戶登錄上來,
+      但是沒有列在
+      <span class="Pa">/etc/ssh/ssh_known_hosts</span>
+      中的主機. 參見
+      <a class="Xr"><a href="../../buster/openssh-server/sshd.8.en.html">sshd(8)</a></a>.</dd>
+  <dt><span class="Pa">$HOME/.ssh/identity, $HOME/.ssh/id_dsa,
+    $HOME/.ssh/id_rsa</span></dt>
+  <dd>包含了用戶的身份信息.
+      它們分別是協議第一版的
+      RSA, 協議第二版的 DSA,
+      協議第二版的 RSA.
+      這些文件存有敏感信息,
+      只應由該用戶讀取,
+      不允許其他用戶
+      訪問(讀/寫/執行). 注意,
+      如果一個私鑰文件能夠讓其他用戶訪問,
+      <code class="Nm">ssh</code>
+      將忽略這個文件.
+      在生成密鑰的時候可以指定一個密語(passphrase),
+      用這個密語和 3DES
+      加密文件的敏感部分.</dd>
+  <dt><span class="Pa">$HOME/.ssh/identity.pub, $HOME/.ssh/id_dsa.pub,
+    $HOME/.ssh/id_rsa.pub</span></dt>
+  <dd>包含認證用的公鑰
+      (以文本格式保存的身份文件的公開部分).
+      如果用戶希望用協議第一版的
+      RSA 認證登錄這些機器,
+      <span class="Pa">$HOME/.ssh/identity.pub</span>
+      的內容應該添加到所有機器的
+      <span class="Pa">$HOME/.ssh/authorized_keys</span> 中.
+      如果用戶希望用協議第二版的
+      DSA/RSA 認證登錄這些機器,
+      <span class="Pa">$HOME/.ssh/id_dsa.pub</span> 和
+      <span class="Pa">$HOME/.ssh/id_rsa.pub</span>
+      的內容應該添加到所有機器的
+      <span class="Pa">$HOME/.ssh/authorized_keys</span> 中.
+      這些文件沒有敏感數據,
+      可以(但不是必須)讓任何人讀取.
+      ssh
+      絕不會自動訪問這些文件,
+      它們也不是不可或缺;
+      只是爲了用戶方便才提供這些文件.</dd>
+  <dt><span class="Pa">$HOME/.ssh/config</span></dt>
+  <dd>用戶級配置文件.
+      <a class="Xr"><a href="../../buster/openssh-client/ssh_config.5.en.html">ssh_config(5)</a></a>
+      描述了文件格式及其配置選項.</dd>
+  <dt><span class="Pa">$HOME/.ssh/authorized_keys</span></dt>
+  <dd>存放 RSA/DSA 公鑰,
+      用戶通過它登錄機器.
+      <a class="Xr"><a href="../../buster/openssh-server/sshd.8.en.html">sshd(8)</a></a>
+      手冊頁描述了這個文件的格式.
+      最簡單的文件格式和
+      .pub 身份文件一樣.
+      文件內容並非高度敏感,
+      但是仍然建議僅讓此文件的用戶讀寫,
+      而拒絕其他用戶的訪問.</dd>
+  <dt><span class="Pa">/etc/ssh/ssh_known_hosts</span></dt>
+  <dd>已知的主機密鑰的系統級列表.
+      系統管理員應該準備好這個文件,
+      把所需主機的公鑰
+      保存在文件裏面.
+      這個文件應該能夠全局讀取.
+      文件中一行一支公鑰,
+      格式是
+      (字段用空格隔開):
+      系統名字, 公鑰,
+      可選的註釋域.
+      如果同一個機器使用了多個名字,
+      所有名字都應該(用逗號隔開)列出來.
+      文件格式在 <a class="Xr"><a href="../../buster/openssh-server/sshd.8.en.html">sshd(8)</a></a>
+      手冊頁中有描述.
+    <p class="Pp">登錄的時候,
+        <a class="Xr"><a href="../../buster/openssh-server/sshd.8.en.html">sshd(8)</a></a>
+        用規範的系統名字(名字服務器返回的)確認客戶機;
+        其他名字也需要,
+        因爲校驗密鑰前
+        <code class="Nm">ssh</code>
+        不會把用戶提供的名字轉換爲規範名字,
+        防止能夠操作名字服務器的人欺騙主機認證.</p>
+  </dd>
+  <dt><span class="Pa">/etc/ssh/ssh_config</span></dt>
+  <dd>系統級配置文件.
+      <a class="Xr"><a href="../../buster/openssh-client/ssh_config.5.en.html">ssh_config(5)</a></a>
+      描述了文件格式和配置選項.</dd>
+  <dt><span class="Pa">/etc/ssh/ssh_host_key, /etc/ssh/ssh_host_dsa_key,
+    /etc/ssh/ssh_host_rsa_key</span></dt>
+  <dd>這三個文件包含了主機密鑰的私有部分,
+      它們用於
+      <code class="Cm">RhostsRSAAuthentication</code> 和
+      <code class="Cm">HostbasedAuthentication</code>.
+      如果使用了協議第一版的
+      <code class="Cm">RhostsRSAAuthentication</code> 方法,
+      <code class="Nm">ssh</code> 必須是 setuid root,
+      因爲只有 root
+      才能讀取主機密鑰.
+      而對於協議第二版的
+      <code class="Cm">HostbasedAuthentication</code> 方法,
+      <code class="Nm">ssh</code> 使用
+      <a class="Xr"><a href="../../buster/openssh-client/ssh-keysign.8.en.html">ssh-keysign(8)</a></a>
+      訪問主機密鑰.
+      這樣消除了驗證身份時對
+      <code class="Nm">ssh</code> setuid root 的要求.
+      默認情況下 <code class="Nm">ssh</code>
+      不是 setuid root.</dd>
+  <dt><span class="Pa">$HOME/.rhosts</span></dt>
+  <dd>該文件用於 <span class="Pa">.rhosts</span>
+      認證,
+      裏面列出允許登錄的主機/用戶對.
+      (注意 rlogin 和 rsh
+      也使用這個文件,
+      導致這個文件的應用變得不安全)
+      文件中的每一行包括一個主機名字(用名字服務器返回的規範名字),
+      和主機上的 用戶名字,
+      用空格隔開.
+      某些機器上,
+      如果用戶根目錄位於
+      NFS 分區,
+      這個文件可能需要全局可讀,
+      因爲 <a class="Xr"><a href="../../buster/openssh-server/sshd.8.en.html">sshd(8)</a></a> 以 root
+      身份讀它. 此外,
+      該文件必須屬於這個用戶,
+      其他人不允許持有寫權限.
+      對大多數機器推薦的訪問權限是,
+      它的用戶可以讀寫,
+      而不讓其他人訪問.
+    <p class="Pp">注意,
+        默認情況下會安裝
+        <a class="Xr"><a href="../../buster/openssh-server/sshd.8.en.html">sshd(8)</a></a> , 因此在允許
+        .rhosts 認證前, <a class="Xr"><a href="../../buster/openssh-server/sshd.8.en.html">sshd(8)</a></a>
+        要求成功進行了 RSA
+        主機驗證. 如果沒有
+        <span class="Pa">/etc/ssh/ssh_known_hosts</span>
+        文件存放客戶的主機密鑰,
+        密鑰可以存放在
+        <span class="Pa">$HOME/.ssh/known_hosts</span> 中.
+        最簡單的做法是用 ssh
+        從服務器回連客戶機;
+        這樣會自動把主機密鑰添加到
+        <span class="Pa">$HOME/.ssh/known_hosts</span>.</p>
+  </dd>
+  <dt><span class="Pa">$HOME/.shosts</span></dt>
+  <dd>這個文件的用法和
+      <span class="Pa">.rhosts</span> 完全一樣.
+      它的目的是允許
+      <code class="Nm">ssh</code> 做 rhosts
+      認證的同時防止
+      <code class="Nm">rlogin</code> 或 <a class="Xr"><a href="../../buster/rsh-client/rsh.1.en.html">rsh(1)</a></a>
+      登錄.</dd>
+  <dt><span class="Pa">/etc/hosts.equiv</span></dt>
+  <dd><span class="Pa">.rhosts 認證</span>
+      使用這個文件.
+      它包含規範的主機名字,
+      一行一個( <a class="Xr"><a href="../../buster/openssh-server/sshd.8.en.html">sshd(8)</a></a>
+      手冊頁描述了完整的格式).
+      如果文件中發現了客戶機的名字,
+      而且客戶機和服務器的用戶名相同,
+      則自動允許登錄.
+      另外, 一般情況下要求
+      RSA 主機認證成功.
+      這個文件只應該讓 root
+      可寫.</dd>
+  <dt><span class="Pa">/etc/ssh/shosts.equiv</span></dt>
+  <dd>這個文件的用法和
+      <span class="Pa">/etc/hosts.equiv</span> 完全一樣.
+      用於允許 <code class="Nm">ssh</code>
+      登錄, 但不允許 rsh/rlogin
+      的時候.</dd>
+  <dt><span class="Pa">/etc/ssh/sshrc</span></dt>
+  <dd>當用戶登錄後, 運行 shell
+      (或命令)前, <code class="Nm">ssh</code>
+      執行這個文件中的命令.
+      詳見 <a class="Xr"><a href="../../buster/openssh-server/sshd.8.en.html">sshd(8)</a></a> 手冊頁.</dd>
+  <dt><span class="Pa">$HOME/.ssh/rc</span></dt>
+  <dd>當用戶登錄後, 運行 shell
+      (或命令)前, <code class="Nm">ssh</code>
+      執行這個文件中的命令.
+      詳見 <a class="Xr"><a href="../../buster/openssh-server/sshd.8.en.html">sshd(8)</a></a> 手冊頁.</dd>
+  <dt><span class="Pa">$HOME/.ssh/environment</span></dt>
+  <dd>含有關於環境變量的附加定義,
+      另見前面的
+      <a class="Sx" href="#ENVIRONMENT">ENVIRONMENT</a> 節.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="診斷_(DIAGNOSTICS)">診斷 (DIAGNOSTICS)<a class="anchor" href="#%E8%A8%BA%E6%96%B7_(DIAGNOSTICS)">¶</a></h1>
+<code class="Nm">ssh</code>
+  結束時的狀態碼就是遠端命令結束時的返回碼,
+  如果發生了錯誤就返回255.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者_(AUTHORS)">作者 (AUTHORS)<a class="anchor" href="#%E4%BD%9C%E8%80%85_(AUTHORS)">¶</a></h1>
+OpenSSH 源自最初 Tatu Ylonen
+  發表的自由 ssh 1.2.12. Aaron Campbell, Bob Beck,
+  Markus Friedl, Niels Provos, Theo de Raadt 和 Dug Song
+  消除了許多 BUGS,
+  增加新的特徵,
+  從而創建了 OpenSSH. Markus Friedl
+  貢獻了對 SSH
+  協議1.5版和2.0版的支持.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="另見_(SEE_ALSO)">另見 (SEE ALSO)<a class="anchor" href="#%E5%8F%A6%E8%A6%8B_(SEE_ALSO)">¶</a></h1>
+<a class="Xr"><a href="../../buster/rsh-client/rsh.1.en.html">rsh(1)</a></a>, <a class="Xr"><a href="../../buster/manpages-zh/scp.1.zh_TW.html">scp(1)</a></a>, <a class="Xr"><a href="../../buster/openssh-client/sftp.1.en.html">sftp(1)</a></a>,
+  <a class="Xr"><a href="../../buster/openssh-client/ssh-add.1.en.html">ssh-add(1)</a></a>, <a class="Xr"><a href="../../buster/openssh-client/ssh-agent.1.en.html">ssh-agent(1)</a></a>,
+  <a class="Xr"><a href="../../buster/openssh-client/ssh-keygen.1.en.html">ssh-keygen(1)</a></a>, <a class="Xr"><a href="../../buster/telnet/telnet.1.en.html">telnet(1)</a></a>,
+  <a class="Xr"><a href="../../buster/openssh-client/ssh_config.5.en.html">ssh_config(5)</a></a>, <a class="Xr"><a href="../../buster/openssh-client/ssh-keysign.8.en.html">ssh-keysign(8)</a></a>,
+  <a class="Xr"><a href="../../buster/openssh-server/sshd.8.en.html">sshd(8)</a></a> <cite class="Rs"><span class="RsA">T. Ylonen</span>,
+  <span class="RsA">T. Kivinen</span>, <span class="RsA">M. Saarinen</span>,
+  <span class="RsA">T. Rinne</span>, and <span class="RsA">S. Lehtinen</span>,
+  <span class="RsT">SSH Protocol Architecture</span>,
+  <span class="RsN">draft-ietf-secsh-architecture-12.txt</span>,
+  <span class="RsD">January 2002</span>, <span class="RsO">work in progress
+  material</span>.</cite>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+徐明 &lt;xuming@users.sourceforge.net&gt;
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+2004/06/11 第一版
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B">¶</a></h1>
+<a href="../..//cmpp.linuxforum.net</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">September 25, 1999</td>
+    <td class="foot-os">Linux 4.19.0-6-amd64</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+ssh.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2020-01-04T21:36:38Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"ssh(1)\"}}]}"
+</script>

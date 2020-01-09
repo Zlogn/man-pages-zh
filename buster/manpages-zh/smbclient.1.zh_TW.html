@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>smbclient(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/smbclient/smbclient.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-pl/smbclient.1.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/smbclient.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/smbclient.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; smbclient(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/smbclient.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/smbclient.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS" title="總覽 SYNOPSIS">總覽 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%B8%E9%A0%85_OPTIONS" title="選項 OPTIONS">選項 OPTIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%93%8D%E4%BD%9C_OPERATIONS" title="操作 OPERATIONS">操作 OPERATIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%B3%A8%E6%84%8F_NOTES" title="注意 NOTES">注意 NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%92%B0%E5%A2%83%E8%AE%8A%E9%87%8F_ENVIRONMENT_VARIABLES" title="環境變量 ENVIRONMENT VARIABLES">環境變量 ENVIRONMENT VARIABLES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%AE%89%E8%A3%9D_INSTALLATION" title="安裝 INSTALLATION">安裝 INSTALLATION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%A8%BA%E6%96%B7_DIAGNOSTICS" title="診斷 DIAGNOSTICS">診斷 DIAGNOSTICS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%89%88%E6%9C%AC_VERSION" title="版本 VERSION">版本 VERSION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85_AUTHOR" title="作者 AUTHOR">作者 AUTHOR</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/smbclient.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/smbclient.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/smbclient.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/smbclient/smbclient.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/smbclient.1.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/smbclient.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/smbclient.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">SMBCLIENT(1)</td>
+    <td class="head-vol"></td>
+    <td class="head-rtitle">SMBCLIENT(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+smbclient -
+  類似FTP操作方式的訪問SMB/CIFS服務器資源的客戶端
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_SYNOPSIS">總覽 SYNOPSIS<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS">¶</a></h1>
+<b>smbclient</b> {servicename} [password] [-b &lt;buffer size&gt;] [-d
+  debuglevel] [-D Directory] [-U username] [-W workgroup] [-M &lt;netbios
+  name&gt;] [-m maxprotocol] [-A authfile] [-N] [-l logfile] [-L &lt;netbios
+  name&gt;] [-I destinationIP] [-E] [-c &lt;command string&gt;] [-i scope] [-O
+  &lt;socket options&gt;] [-p port] [-R &lt;name resolve order&gt;] [-s &lt;smb
+  config file&gt;] [-T&lt;c|x&gt;IXFqgbNan] [-k]
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+此程序是<b>Samba</b>(7)套件的一部分。
+<p class="Pp"></p>
+<p class="Pp"><b>smbclient</b>
+    是個可以和SMB/CIFS服務器“交談”的客戶端程序。它提供
+    了類似FTP程序(參見<b>ftp</b>
+    (1))的用戶界面。它可以完成的操作包括象從服務
+    器下載文件到本地，上傳本地文件到服務器及在服務器上查找目錄信息等。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="選項_OPTIONS">選項 OPTIONS<a class="anchor" href="#%E9%81%B8%E9%A0%85_OPTIONS">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>servicename</dt>
+  <dd>
+    <p class="Pp">servicename就是你要使用的服務名稱。服務名使用<i>//server/service</i>這樣的形式，其中<i>server
+        </i>
+        是提供服務的SMB/CIFS服務器的NetBIOS名字，而<i>service</i>
+        是可獲得服務資源的名稱。所以如果要聯接服務器&#34;smbserver&#34;上的&#34;printer&#34;服務的話，應該使用這樣的服務名稱：<i>//smbserver/printer
+        </i></p>
+    <p class="Pp">注意服務名不使用服務器的IP(或DNS)主機名，而應該用NetBIOS名，而它可能與服務器的IP主機名相同當然也可能不相同。</p>
+    <p class="Pp">服務器名是根據<b>smbclient</b>使用的<i>-R</i>
+        參數或者<a href="../../buster/manpages-zh/smb.conf.5.zh_TW.html">smb.conf(5)</a>配置文件中的名稱解析順序參數來解析的。名稱解析參數使管理員可以控制名稱解析的順序和方法。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>password</dt>
+  <dd>
+    <p class="Pp">用password指定訪問服務時所需的口令。如果使用了這個選項，就假定使用了<i>-N</i>(suppress
+        password
+        prompt)參數，在執行過程中不出現口令提示。</p>
+    <p class="Pp">口令沒有默認值。如果在命令行上沒有提供口令(或者使用這個參數，或者在<i>-U-fR參數中指定)，並且也沒有使用</i><i>-N</i>選項，那麼即使需要的服務項不要求口令，程序也會提供要用戶輸入一個口令。(如果服務不需要口令，只要簡單地打個回車就向服務器迴應了一個空口令)</p>
+    <p class="Pp">
+      
+        注意：有些服務器(包括OS/2和Windows
+        for
+        Workgroups)會強調使用大寫口令，它們會拒絕小寫或者大小寫混合的口令。</p>
+    <p class="Pp">在腳本中使用口令要小心。(可能有安全問題嘛！)</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-R &lt;name resolve order&gt;</dt>
+  <dd>通過指定這個選項讓Samba套件中的程序決定使用怎樣的名字解析服務及其次序來解決主機名和IP的對應。這個選項以一個以空格分隔的不同的名稱解析方法爲選項值。
+    <p class="Pp">可選值是：“lmhosts”，“host”，“wins”和“bcast”。這些選項使名字解析按以下的方法來進行：</p>
+    <p class="Pp"><b>lmhosts</b>:
+        向Samba的lmhosts文件查詢IP地址。If
+        the line in lmhosts has no name type attached to the NetBIOS name (see
+        the <a href="../../buster/manpages-zh/lmhosts.5.zh_TW.html">lmhosts(5)</a> for details) then any name type matches for
+        lookup.</p>
+    <p class="Pp"><b>host</b>:
+        用標準的名字到IP地址解析方法：系統<i>/etc/hosts</i>文件，NIS或DNS查詢。如何使用這個名字解析由系統決定。舉例來說，在IRIX或者Solaris系統中，<i>/etc/nsswitch.conf</i>文件會處理這些問題。
+        Note that this method is only used if the NetBIOS name type being
+        queried is the 0x20 (server) name type, otherwise it is ignored.</p>
+    <p class="Pp"><b>wins</b>:
+        用配置文件中<i>wins
+        server</i>選項列出的地址來查詢名字。如果沒有指定WINS服務器的話	會略過這種方法。</p>
+    <p class="Pp"><b>bcast</b>:
+        向配置文件中<i>interfaces</i>參數列出的每個已知本地接口進行廣播來進行查詢。這是最不可靠的名字解析方法，因爲它要求目標主機在本地子網內。</p>
+    <p class="Pp">如果不使用這個參數的話，將按
+        <a href="../../buster/manpages-zh/smb.conf.5.zh_TW.html">smb.conf(5)</a>配置文件中(name resolve
+        order)參數指定的次序來進行名字解析。</p>
+    <p class="Pp">默認的解析次序是lmhosts，host，wins，bcast，在不使用這個參數或者沒有在<a href="../../buster/manpages-zh/smb.conf.5.zh_TW.html">smb.conf(5)</a>配置文件中設定<i>name
+        resolve order
+        </i>參數的情況下將使用這樣的次序進行解析。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-M NetBIOS name</dt>
+  <dd>使用這個選項可以讓你以“WinPopup”
+      協議向其它計算機發送信息。一旦聯接成功你就可以發送信息了，結束時可以按^D(Ctl-D).
+    <p class="Pp">如果接受方計算機也正在運行WinPopup的話，用戶會收到發送的信息並且系統可能會鳴叫一聲。如果對方並沒有運行WinPopup的話信息就被丟棄，而不會發出出錯信息。</p>
+    <p class="Pp">如果發送的信息超過1600字節的話會自動被截斷，因爲這是此協議規定的極限。</p>
+    <p class="Pp">這裏有個很有用的小技巧，通過<b>smbclient</b>，用cat處理信息，例如：</p>
+    <p class="Pp"><b> cat mymessage.txt | smbclient -M FRED </b>
+        將會把 <i>mymessage.txt</i>
+        中的信息發送給主機
+        FRED.</p>
+    <p class="Pp">你也許會發現<i>-U</i>和<i>-I</i>選項很有用，因爲它們允許你控制信息的源地址和目的地址部分。</p>
+    <p class="Pp">參見<a href="../../buster/manpages-zh/smb.conf.5.zh_TW.html">smb.conf(5)</a>配置文件中的<i>message
+        command</i>參數獲得如何在Samba中處理新進的WinPopup消息的詳細描述。</p>
+    <p class="Pp"><b>注意</b>：如果你總是要用你的WfWg
+        PC的WinPopup來接收消息的話可以在你的Windows機器中把它拷到“啓動”中。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-p port</dt>
+  <dd>聯接服務器所用的TCP端口號。標準(衆所周知)的SMB/CIFS服務器TCP端口是139，當然也是默認值。
+    <p class="Pp"></p>
+  </dd>
+  <dt>-h|--help</dt>
+  <dd>打印出命令行幫助信息。
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-I IP-address</dt>
+  <dd>指定要聯接的服務器IP地址。當然格式應該是“a.b.c.d”。
+    <p class="Pp">通常client會使用上面介紹過的<i>name
+        resolve
+        order</i>參數中描述的NetBIOS名字解析機制通過查詢嘗試查找一個已命名的SMB/CIFS服務器。使用這個參數會強制客戶端程序採用指定的IP地址而忽略要聯接的服務資源的NetBIOS名部分。</p>
+    <p class="Pp">這個參數並沒有默認值。如果不指定的話程序會用上面說的方法來自動檢測。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-E</dt>
+  <dd>當使用了這個參數後，程序會把信息寫到標準錯誤流(stderr)而不是標準輸入流中。
+    <p class="Pp">默認情況下，程序會把信息寫入標準輸入中
+        -
+        典型的例子是用戶的tty。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-L</dt>
+  <dd>此選項允許你查看服務器上可以獲得的服務資源。使用<b>smbclient
+      -L host</b>
+      命令會顯示一份列表。如果你的NetBIOS名與TCP/IP域名不匹配或者要在其它網絡上查找主機時，<i>-I
+      </i> 選項會非常有用。
+    <p class="Pp"></p>
+  </dd>
+  <dt>-t terminal code</dt>
+  <dd>用這個選項告訴<b>smbclient</b>怎樣解釋從遠程服務器上傳來的文件名。通常，UNIX系統對亞洲多字節的語言的實現與SMB/CIFS服務器使用的字符集不同(例如用<b>EUC</b>代替<b>
+      SJIS</b>)。設置這個參數可以讓<b>smbclient</b>
+      在UNIX文件名與SMB文件名之間進行正確的轉換。不過，這個選項還沒有經過嚴格的測試，所以可能會有些問題。
+    <p class="Pp">終端編碼包含CWsjis, CWeuc,
+        CWjis7, CWjis8, CWjunet, CWhex, CWcap.
+        當然這個列表並不完整，要獲取完整列表請查看samba
+        源碼。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-b buffersize</dt>
+  <dd>在對服務器進行上/下傳文件時可以用這個選項來改變傳輸緩衝大小。默認值是65520個字節。當從一個Win9x的服務器上進行文件傳輸時，把這個值設爲稍小一點的值(例如1200字節)可以得到一些速度提升。
+    <p class="Pp"></p>
+  </dd>
+  <dt>-V</dt>
+  <dd>Prints the program version number.
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-s &lt;configuration file&gt;</dt>
+  <dd>指定的這個文件包含服務器需要的配置詳細信息。文件中的信息包含針對服務器的信息，比如使用什麼printcap文件，還有所有服務器提供的服務的描述。參見<i>smb.conf</i>來獲得更多信息。默認的配置文件名是在編譯時指定的。
+    <p class="Pp"></p>
+  </dd>
+  <dt>-d|--debug=debuglevel</dt>
+  <dd><i>debuglevel</i>
+      調試等級是個從0到10的整數。參數未指定時默認值爲0。
+    <p class="Pp">如果這個值越高，越多關於服務器的詳細活動信息將被記錄到文件中。在0調試級時，只記錄緊急錯誤和嚴重警告。對於平日的運行服務，1調試級是個合理的等級，它只產生小量的關於執行操作的信息。</p>
+    <p class="Pp">1以上的調試級將產生相當多的記錄數據，並且只在解決問題時纔有用。3以上的調試級只被設計爲讓開發者使用並會產生極大數量的記錄數據，而且其中很多部分非常難以理解。</p>
+    <p class="Pp">注意在此使用這個參數將越過在<i>smb.conf</i>
+        (5)文件中的<i>log
+        level</i>參數。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-l|--logfile=logbasename</dt>
+  <dd>指定一個記錄和調試的文件名。文件會被添加<b>.client</b>擴展名。記錄文件無法被客戶端刪除。
+    <p class="Pp"></p>
+  </dd>
+  <dt>-N</dt>
+  <dd>如果指定了這個選項，就會省略通常的口令提示。當訪問無需口令的服務資源時它很有用。
+    <p class="Pp">除非在命令行上輸入了口令或者使用了上述這個選項，否則用戶將被提示要求輸入一個口令。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-k</dt>
+  <dd>Try to authenticate with kerberos. Only useful in an Active Directory
+      environment.
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-A|--authfile=filename</dt>
+  <dd>This option allows you to specify a file from which to read the username
+      and password used in the connection. The format of the file is
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+    <pre>username = &lt;value&gt;
+password = &lt;value&gt;
+domain   = &lt;value&gt;
+    </pre>
+    <p class="Pp"></p>
+    <p class="Pp">Make certain that the permissions on the file restrict access
+        from unwanted users.</p>
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-U|--user=username[%password]</dt>
+  <dd>這個參數指定程序聯接時使用的用戶名或者用戶名和密碼
+    <p class="Pp">如果沒指定%password，將提示用戶輸入。程序會使用環境變量USER或LOGNAME，如果任何一個存在就會被轉換爲大寫。如果既沒有用戶名也不存在環境變量的話，將使用<b>GUEST</b>作爲用戶名。</p>
+    <p class="Pp">A third option is to use a credentials file which contains the
+        plaintext of the username and password. This option is mainly provided
+        for scripts where the admin does not wish to pass the credentials on the
+        command line or via environment variables. If this method is used, make
+        certain that the permissions on the file restrict access from unwanted
+        users. See the <i>-A</i> for more details.</p>
+    <p class="Pp">在腳本中包含口令或者使用PASSWD環境變量時要小心。而且在很多系統中，運行的命令行可以通過<b>ps</b>命令來查看，所以讓<b>rpcclient</b>提示輸入口令並直接鍵入會比較安全。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-n &lt;primary NetBIOS name&gt;</dt>
+  <dd>使用這個選項讓你越過機器的主機名而使用你要用的NetBIOS名。這樣作和設置<i>smb.conf</i>文件中的<i>netbios
+      name</i>選項作用相同。但是，命令行設置比配置文件中的設置優先級高。
+    <p class="Pp"></p>
+  </dd>
+  <dt>-i &lt;scope&gt;</dt>
+  <dd>這個參數指定一個產生NetBIOS名字時<b>nmblookup</b>用來通信所需要的NetBIOS範圍。對於NetBIOS範圍這個概念，可以參見rfc1001.txt和rfc1002.txt這兩個文件中的詳細定義。實際上這個NetBIOS範圍的概念<b>很少</b>被用到，僅當你作爲負責整個NetBIOS通信的管理員時纔要設置。
+    <p class="Pp"></p>
+  </dd>
+  <dt>-W|--workgroup=domain</dt>
+  <dd>設置用戶名的SMB域。這個選項越過了smb.conf配置文件中的默認域。如果指定的域與服務器NetBIOS名相同，會使得用戶使用服務器本地安全管理local
+      SAM來登錄(與域SAM相反).
+    <p class="Pp"></p>
+  </dd>
+  <dt>-O socket options</dt>
+  <dd>TCP套接字選項用來在客戶端設定套接字方面的功能。參見<a href="../../buster/manpages-zh/smb.conf.5.zh_TW.html">smb.conf(5)</a>手冊頁中的socket
+      options參數獲得合法的選項列表。
+    <p class="Pp"></p>
+  </dd>
+  <dt>-T tar options</dt>
+  <dd>我們可以用smbclient來對位於SMB/CIFS共享資源上的所有文件建立兼容<b><a href="../../buster/manpages-zh/tar.1.zh_TW.html">tar(1)</a>
+      </b>
+      格式的備份。可使用的tar選項是以下這些：
+    <p class="Pp"><i>c</i> -
+        在unix系統上建立一個tar文件。當然了，卷文件名，目標設備都必須給出，或者用&#34;-&#34;代表標準輸出。如果用	標準輸出，你必須把記錄等級調到它的最低值-d0以避免影響產生的tar文件。這個標誌的功能正好與<i>x</i>標誌相反。</p>
+    <p class="Pp"><i>x</i> -
+        用這個標誌可以把本地的一個tar備份文件釋放(恢復)到共享資源上。除非使用了-D選項，tar備份文件將從共享資源的頂層開始恢復。當然了，使用這個參數時後面必須緊跟一個想要恢復的文件名，設備，或者用&#34;-&#34;代表標準輸入。與上面一樣，這個標誌的功能正好與<i>c</i>標誌的功能相反。恢復後文件的建立時間(mtime)會被tar文件中保存的日期來替換,
+        而目錄無法做到這一點的。</p>
+    <p class="Pp"><i>I</i> -
+        用這個標誌可以包含文件和目錄。當在用-T參數時指定了一個文件名的話這就是默認的操作了。在釋放或建立時tar文件都會包含這些內容(同時不會包含其他的內容)。參見下面的示例。文件名通配符有兩種方式，參見下面<i>r</i>
+        。</p>
+    <p class="Pp"><i>X</i> -
+        排除文件和目錄。在釋放或者建立備份時使這些文件或目錄不被包含在內。請看下面的示例文件名通配符有兩種方式，參見下面<i>r</i>
+        。</p>
+    <p class="Pp"><i>b</i> -
+        塊大小。在這個標誌後必須用一個合法的塊大小(大於0)。使建立備份時寫入到塊大小*TBLOCK(通常是512字節)這樣	大小的塊中。</p>
+    <p class="Pp"><i>g</i> -
+        增量備份。只備份設置了歸檔位的文件。必須與<i>c</i>標誌一起使用。</p>
+    <p class="Pp"><i>q</i> -
+        靜態工作。當操作進行時沒有輸出。它的意義與tar相應的靜態工作模式一樣。</p>
+    <p class="Pp"><i>r</i> -
+        用正則表達式來描述包含或排除操作。當用HAVE_REGEX_H編譯的話，用通常的正則表達式可以描述排除操作及要排除的文件，但是這種模式工作非常慢。如果沒有用HAVE_REGEX_H的話，僅僅可以用通配符&#39;*&#39;和&#39;?&#39;。</p>
+    <p class="Pp"><i>N</i> -
+        時間更新(newer)的文件.在這個標誌後面必須是一個用來與共享中的文件創建時間做比較的文件名。只有共享中的文件比指定的文件要新的時候纔會被備份。必須	與<i>c</i>標誌一起使用。</p>
+    <p class="Pp"><i>a</i>
+        -設定歸檔位。使用這個標誌在備份時對文件設置歸檔位。必須與<i>g</i>和fIc標誌一起用.</p>
+    <p class="Pp"><b>Tar Long File Names</b></p>
+    <p class="Pp"><b>smbclient</b>的tar選項現在可以在備份與恢復操作時支持長文件名了。但是，文件的完整路徑描述必須小於1024
+        個字節。而且，當建立了一個歸檔包時，<b>smbclient</b>的tar選面會用文件相對路徑寫入歸檔包中，而不是絕對路徑。</p>
+    <p class="Pp"><b>Tar Filenames</b></p>
+    <p class="Pp">所有的文件名都要以DOS路徑名(以&#39;\\&#39;作分隔符)或UNIX路徑名(以&#39;/&#39;作分隔符)給出。</p>
+    <p class="Pp"></p>
+    <p class="Pp"><b>示例 </b></p>
+    <p class="Pp">把備份文件<i>backup.tar</i>恢復到位於mypc上的myshare中(無須口令)</p>
+    <p class="Pp"><b>smbclient //mypc/yshare &#34;&#34; -N -Tx backup.tar
+      </b></p>
+    <p class="Pp">恢復除了<i>users/docs</i>以外的所有內容</p>
+    <p class="Pp"><b>smbclient //mypc/myshare &#34;&#34; -N -TXx backup.tar
+        users/docs</b></p>
+    <p class="Pp">在<i>
+        users/docs</i>下建立一個備份文件</p>
+    <p class="Pp"><b>smbclient //mypc/myshare &#34;&#34; -N -Tc backup.tar
+        users/docs </b></p>
+    <p class="Pp">與上面操作相同，不過用的是DOS路徑名</p>
+    <p class="Pp"><b>smbclient //mypc/myshare &#34;&#34; -N -tc backup.tar
+        users\docs </b></p>
+    <p class="Pp">對共享資源上所有內容(文件和目錄)作一完整的備份</p>
+    <p class="Pp"><b>smbclient //mypc/myshare &#34;&#34; -N -Tc backup.tar *
+        </b></p>
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>-D initial directory</dt>
+  <dd>在開始前用這個參數來改變初始目錄。可能只在用tar的-T選項才用。
+    <p class="Pp"></p>
+  </dd>
+  <dt>-c command string</dt>
+  <dd>命令字符串串是一個以單引號(“&#39;”)分隔的用來替換標準輸入提示的一系列命令列表，這個參數意味着<i>
+      -N</i>。
+    <p class="Pp">當使用腳本或者要打印標準輸入信息到服務器時這個選項就非常有用了，例如：<b>-c
+        &#39;print -&#39;</b></p>
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="操作_OPERATIONS">操作 OPERATIONS<a class="anchor" href="#%E6%93%8D%E4%BD%9C_OPERATIONS">¶</a></h1>
+一旦運行了這個命令，就會在用戶的提示行出現以下信息：
+<p class="Pp"></p>
+<p class="Pp">smb:\&gt;</p>
+<p class="Pp"></p>
+<p class="Pp">反斜槓符(&#34;\\&#34;)指出了在服務器上用戶當前的工作路徑，如果這個路徑改變了的話，相同的提示也會改變。</p>
+<p class="Pp"></p>
+<p class="Pp">提示符表示用戶準備好並等待執行一個用戶命令。每個命令都是一個單獨的詞，一般隨後可以有選擇地指定一些命令所需的參數。命令和參數之間用空格來分隔，除非有其它規定。當然所有命令都區分大小寫，而參數可能不一定要區分大小寫，不過這應該由命令來決定。</p>
+<p class="Pp"></p>
+<p class="Pp">要在文件名中使用空格的話必須用雙引號封閉，例如：&#34;a
+    long file name&#34;。</p>
+<p class="Pp"></p>
+<p class="Pp">以方括號(&#34;[]&#34;)封閉的參數是可選項，如果沒有使用，命令還是以默認的情況執行；而以尖括號&lt;&gt;封閉的參數就是必須的了。</p>
+<p class="Pp"></p>
+<p class="Pp">注意，所有對服務器的命令操作實際上是完成的是向服務器發送一個請求。因而，這種動作可能在服務器到服務器之間會作些改變，這由服務器的實現方式來決定。</p>
+<p class="Pp"></p>
+<p class="Pp">下面以字母次序給出可以使用的命令。</p>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt>? [command]</dt>
+  <dd>如果指定了<i>command</i>
+      ，那麼?命令就顯示該命令的一些簡單介紹信息。如果單獨使用?的話，它會
+      給出一份給用命令的列表。
+    <p class="Pp"></p>
+  </dd>
+  <dt>! [shell command]</dt>
+  <dd>如果指定了 <i>shell
+      command</i>，那麼!命令會執行一個本地的命令解釋器並運行指定的shell命令。如果不指定
+      要運行哪個shell命令，那麼就只執行一個本地命令解釋器。
+    <p class="Pp"></p>
+  </dd>
+  <dt>altname file</dt>
+  <dd>The client will request that the server return the &#34;alternate&#34;
+      name (the 8.3 name) for a file or directory.
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>cancel jobid0 [jobid1] ... [jobidN]</dt>
+  <dd>The client will request that the server cancel the printjobs identified by
+      the given numeric print job ids.
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>chmod file mode in octal</dt>
+  <dd>This command depends on the server supporting the CIFS UNIX extensions and
+      will fail if the server does not. The client requests that the server
+      change the UNIX permissions to the given octal mode, in standard UNIX
+      format.
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>chown file uid gid</dt>
+  <dd>This command depends on the server supporting the CIFS UNIX extensions and
+      will fail if the server does not. The client requests that the server
+      change the UNIX user and group ownership to the given decimal values. Note
+      there is currently no way to remotely look up the UNIX uid and gid values
+      for a given name. This may be addressed in future versions of the CIFS
+      UNIX extensions.
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>cd [directory name]</dt>
+  <dd>如果指定了&#34;directory
+      name&#34;，那麼服務器的當前工作路徑就改爲用戶指定的路徑。如果指定了任何不可訪問的目錄的話，該操作就失敗了。
+    <p class="Pp">如果不指定目錄名，就向用戶給出服務器當前工作路徑。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>del &lt;mask&gt;</dt>
+  <dd>刪除所有當前工作路徑中匹配<i>mask</i>的文件。
+    <p class="Pp"></p>
+  </dd>
+  <dt>dir &lt;mask&gt;</dt>
+  <dd>列出所有當前工作路徑中匹配<i>mask</i>的文件。
+    <p class="Pp"></p>
+  </dd>
+  <dt>exit</dt>
+  <dd>終止聯接並退出程序。
+    <p class="Pp"></p>
+  </dd>
+  <dt>get &lt;remote file name&gt; [local file name]</dt>
+  <dd>把服務器上名爲<i>remote file
+      name</i>的文件到拷貝到本地，名稱爲<i>local
+      file
+      name</i>。要注意的是，<b>smbclient</b>所用的傳送模式爲二進制模式。同時參見lowercase命令。
+    <p class="Pp"></p>
+  </dd>
+  <dt>help [command]</dt>
+  <dd>同以上的?命令相同。
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>lcd [directory name]</dt>
+  <dd>把本機目錄改爲<i>directory
+      name</i>指定的地點。如果要換的目錄是不可訪問的話，操作將會失敗。
+    <p class="Pp">如果不指定目錄名，則顯示當前本機的工作路徑。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>link source destination</dt>
+  <dd>This command depends on the server supporting the CIFS UNIX extensions and
+      will fail if the server does not. The client requests that the server
+      create a hard link between the source and destination files. The source
+      file must not exist.
+    <p class="Pp"></p>
+  </dd>
+  <dt>lowercase</dt>
+  <dd>在get和mget命令中選用小寫字符作爲文件名。
+    <p class="Pp">當選擇了小寫狀態時，用get和mget命令時會把本地文件名都轉換爲小寫。從服務器上拷貝MSDOS
+        文件時這個選項非常有用，因爲小寫文件名是UNIX系統的標準。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>ls &lt;mask&gt;</dt>
+  <dd>同以上的dir命令。
+    <p class="Pp"></p>
+  </dd>
+  <dt>mask &lt;mask&gt;</dt>
+  <dd>此命令允許用戶設置在mget和mput命令的遞歸形式操作中使用的一個掩碼(通配符)。
+    <p class="Pp">當選擇了遞歸複製目錄時，mget和mput命令指定這個掩碼(通配符)作爲目錄過濾器。</p>
+    <p class="Pp">用mask命令指定的掩碼可以用來過濾目錄中的文件。例如，如果在mget命令中指定了掩碼&#34;source*&#34;，並且用mask命令指定了文件掩碼&#34;*.c&#34;，並且選擇了遞歸複製目錄的話，mget命令會下載所有在當前工作目錄中匹配&#34;source*&#34;的目錄以及其下所有匹配&#34;*.c&#34;
+        的文件。</p>
+    <p class="Pp">注意掩碼(通配符)默認值是空(等價於&#34;*&#34;)，除非使用mask命令來改變它。它會一直保持最近一次指定的值。爲了避免出現意外的結果，在使用了mget和mput命令之後把值改回&#34;*&#34;是比較明智的。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>md &lt;directory name&gt;</dt>
+  <dd>同以上的mkdir命令。
+    <p class="Pp"></p>
+  </dd>
+  <dt>mget &lt;mask&gt;</dt>
+  <dd>複製服務器上所有匹配<i>mask</i>
+      的文件到本機。
+    <p class="Pp">注意<i>mask</i>在命令的遞歸調用和非遞歸調用兩種方法之間有不同的解釋含義
+        -
+        請參考recurse和mask命令獲得更多信息。其次就是<b>smbclient</b>傳送的方式是二進制的。另見lowercase命令。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>mkdir &lt;directory name&gt;</dt>
+  <dd>在服務器上建立指定名稱的目錄(當然用戶要有相應的訪問權限)。
+    <p class="Pp"></p>
+  </dd>
+  <dt>mput &lt;mask&gt;</dt>
+  <dd>複製本機上當前目錄內所有匹配<i>mask</i>
+      的文件到服務器當前工作目錄。
+    <p class="Pp">注意<i>mask</i>在命令的遞歸調用和非遞歸調用兩種方法之間有不同的解釋含義
+        -
+        請參考recurse和mask命令獲得更多信息。其次就是<b>smbclient</b>
+        傳送的方式是二進制的。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>print &lt;file name&gt;</dt>
+  <dd>打印本機上指定的文件到服務器的可打印資源上。
+    <p class="Pp">參見printmode命令。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>printmode &lt;graphics or text&gt;</dt>
+  <dd>設定打印模式以適應二進制數據(例如圖形信息)或文本，這樣後續的打印命令皆使用當前設好的打印模式。
+    <p class="Pp"></p>
+  </dd>
+  <dt>prompt</dt>
+  <dd>在執行mget和mput命令時使用對文件名的提示。
+    <p class="Pp">當用提示時，在執行命令期間會提示用戶對每個要傳送的文件進行確認。反之，所有傳送操作都不會出現提示。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>put &lt;local file name&gt; [remote file name]</dt>
+  <dd>
+     從本機拷貝名爲<i>local file
+      name</i>的文件到服務器上並取名爲<i>remote
+      file
+      name</i>。與上面提到的一樣，<b>smbclient</b>
+      傳送用的是二進制模式。參見lowercase命令。
+    <p class="Pp"></p>
+  </dd>
+  <dt>queue</dt>
+  <dd>用來顯示打印隊列、任務標識、名稱、容量大小和當前狀態。
+    <p class="Pp"></p>
+  </dd>
+  <dt>quit</dt>
+  <dd>參見exit命令。
+    <p class="Pp"></p>
+  </dd>
+  <dt>rd &lt;directory name&gt;</dt>
+  <dd>參見rmdir命令。
+    <p class="Pp"></p>
+  </dd>
+  <dt>recurse</dt>
+  <dd>以目錄遞歸方式運行mget和mput命令。
+    <p class="Pp">當使用了遞歸方式時，這些執行的命令會處理源目錄下所有的子目錄，進入匹配通配符的子目錄。只有與mask命令指定的通配符相符的文件纔會被處理。參見mask命令。</p>
+    <p class="Pp">當沒有使用這種遞歸方式時，只有源主機當前工作目錄中與匹配通配符的文件纔會被複制。mask命令指定的通配符將被忽略。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>rm &lt;mask&gt;</dt>
+  <dd>刪除所有服務器上當前工作目錄中與<i>mask</i>相符的文件。
+    <p class="Pp"></p>
+  </dd>
+  <dt>rmdir &lt;directory name&gt;</dt>
+  <dd>從服務器上刪除指定的目錄，當然了，需要一定的用戶訪問權限。
+    <p class="Pp"></p>
+  </dd>
+  <dt>setmode &lt;filename&gt; &lt;perm=[+|\-]rsha&gt;</dt>
+  <dd>與DOS命令attrib類似的東東，用來設定文件權限，例如：
+    <p class="Pp"><b>setmode myfile +r </b></p>
+    <p class="Pp">將把myfile設爲只讀。</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>symlink source destination</dt>
+  <dd>This command depends on the server supporting the CIFS UNIX extensions and
+      will fail if the server does not. The client requests that the server
+      create a symbolic hard link between the source and destination files. The
+      source file must not exist. Note that the server will not create a link to
+      any path that lies outside the currently connected share. This is enforced
+      by the Samba server.
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt>tar &lt;c|x&gt;[IXbgNa]</dt>
+  <dd>執行一個tar操作。參見上面的
+      <i>-T </i>
+      命令行選項。tarmode命令可能會影響具體的行爲。還有就是g(增量方式)和N(新建方式)會改變tarmode設定。這裏要注意的是
+      tar
+      x參數前加&#34;-&#34;可能會導致命令不執行，應當使用命令行選項方式。
+    <p class="Pp"></p>
+  </dd>
+  <dt>blocksize &lt;blocksize&gt;</dt>
+  <dd>塊大小。參數後必須跟一上合法的(就是比0大的數啦)塊尺寸。因爲在執行命令時，tar文件要被寫到一個大小爲<i>blocksize</i>*TBLOCK(一般是512字節)的塊中。
+    <p class="Pp"></p>
+  </dd>
+  <dt>tarmode &lt;full|inc|reset|noreset&gt;</dt>
+  <dd>根據歸檔位來改變tar的行爲。當用完全備份時，tar會備份所有的內容而不管歸檔位是如何設置的，這正好是默認的工作模式。當爲增量模式時，它只備份置有歸檔位的文件。而用重組模式時，tar會對所有要備份文件的歸檔位進行復位(同時讀/寫共享)。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="注意_NOTES">注意 NOTES<a class="anchor" href="#%E6%B3%A8%E6%84%8F_NOTES">¶</a></h1>
+一些服務器對用戶提供的用戶名、口令、共享資源名(也就是服務名)和機器名的大小寫形式非常挑剔。如果你聯接失敗，試一下全部用大寫。
+<p class="Pp"></p>
+<p class="Pp">通常你在聯接某種服務器時用-n選項會方便一點。例如OS/2
+    LanManager會強調要使用合法的NetBIOS名字，所以你需要提供讓服務器可以理解的合法名字。</p>
+<p class="Pp"></p>
+<p class="Pp">smbclient支持在服務器使用LANMAN2及更高的協議時使用長文件名。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="環境變量_ENVIRONMENT_VARIABLES">環境變量 ENVIRONMENT VARIABLES<a class="anchor" href="#%E7%92%B0%E5%A2%83%E8%AE%8A%E9%87%8F_ENVIRONMENT_VARIABLES">¶</a></h1>
+<b>USER</b>變量包含使用客戶端的用戶的用戶名。只有當連接的協議等級足夠高，支持會話級別的口令時才使用此信息。
+<p class="Pp"></p>
+<p class="Pp"><b>PASSWD</b>變量包含使用客戶端的用戶的口令。只有當連接的協議等級足夠高，支持會話級別的口令時才使用此信息。</p>
+<p class="Pp"></p>
+<p class="Pp">The variable <b>LIBSMB_PROG</b> may contain the path, executed
+    with system(), which the client should connect to instead of connecting to a
+    server. This functionality is primarily intended as a development aid, and
+    works best when using a LMHOSTS file</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="安裝_INSTALLATION">安裝 INSTALLATION<a class="anchor" href="#%E5%AE%89%E8%A3%9D_INSTALLATION">¶</a></h1>
+存放這個程序的位置對於個人的系統管理員來說也是件麻煩事。下面僅僅是一些建議。
+<p class="Pp"></p>
+<p class="Pp">推薦你把smbclient軟件包安裝到<i>/usr/local/samba/bin/</i>或<i>
+    /usr/samba/bin/</i>目錄中，而這個目錄對所有人來說應該是隻讀的，對root纔是可寫的。程序本身可以被所有人調用，但是它<b>不</b>是setuid或者setgid的。</p>
+<p class="Pp"></p>
+<p class="Pp">而程序的記錄文件應該放在一個用戶可讀寫的目錄中。</p>
+<p class="Pp"></p>
+<p class="Pp">要測試這個程序，你要先知道運行SMB/CIFS的服務器名。這個服務器可能運行着<a href="../../buster/manpages-zh/smbd.8.zh_TW.html">smbd(8)</a>
+    a守護進程並提供一個用戶可以訪問的端口(通常端口號大於1024)，這樣用戶就可以用這些數據來測試了。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="診斷_DIAGNOSTICS">診斷 DIAGNOSTICS<a class="anchor" href="#%E8%A8%BA%E6%96%B7_DIAGNOSTICS">¶</a></h1>
+通常情況下診斷信息都記錄到指定好的記錄文件中。這個文件的名稱是在編譯時指定的，但也可以用命令行來指定。
+<p class="Pp"></p>
+<p class="Pp">用戶可以得到的診斷信息的數量和種類取決於用戶執行客戶端程序時所用的調試等級。如果你發現有問題的話，把調試級設到3並詳細閱讀記錄文件裏的內容。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="版本_VERSION">版本 VERSION<a class="anchor" href="#%E7%89%88%E6%9C%AC_VERSION">¶</a></h1>
+此手冊頁是針對Samba套件版本2.2的。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者_AUTHOR">作者 AUTHOR<a class="anchor" href="#%E4%BD%9C%E8%80%85_AUTHOR">¶</a></h1>
+samba軟件和相關工具最初由Andrew
+  Tridgell創建。samba現在由Samba Team
+  作爲開源軟件來發展，類似linux內核的開發方式。
+<p class="Pp"></p>
+<p class="Pp">最初的samba手冊頁是 Karl
+    Auer寫的。
+    手冊頁源碼已經轉換爲YODL格式(另一種很好的開源軟件，可以在ftp://ftp.ice.rug.nl/pub/unix找到)，由Jeremy
+    Sllison 更新到Samba2.0 版本。 Gerald
+    Carter
+    在Samba2.2中將它轉化爲DocBook
+    格式。 Alexander Bokovoy 在Samba
+    3.0中實現了DocBook XML4.2
+    格式的轉換。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>meaculpa &lt;meaculpa@21cn.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2000/12/08</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8Blinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+smbclient.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-16T15:43:35Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"smbclient(1)\"}}]}"
+</script>

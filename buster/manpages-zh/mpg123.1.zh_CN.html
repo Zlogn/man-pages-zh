@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mpg123(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/mpg123/mpg123.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/mpg321/mpg123.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-ja/mpg123.1.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-zh/mpg123.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/mpg123.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; mpg123(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/mpg123.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/mpg123.1.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%91%BD%E4%BB%A4%E5%90%8D" title="命令名">命令名</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AF%AD%E6%B3%95" title="语法">语法</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%89%E9%A1%B9" title="选项">选项</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%93%8D%E4%BD%9C%E6%95%B0" title="操作数">操作数</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#HTTP_%E6%94%AF%E6%8C%81" title="HTTP 支持">HTTP 支持</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%AD" title="中断">中断</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%9B%B8%E5%85%B3%E8%AF%B4%E6%98%8E" title="相关说明">相关说明</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%B3%A8%E6%84%8F" title="注意">注意</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85" title="作者">作者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D" title="[中文版维护人]">[中文版维护人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/mpg123.1.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/mpg123.1.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/mpg123.1.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/mpg123/mpg123.1.en.html" title="English (en)">English</a>
+
+<span class="pkgname">mpg123</span>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/mpg321/mpg123.1.en.html" title="English (en)">English</a>
+
+<span class="pkgname">mpg321</span>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/mpg123.1.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/mpg123.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/mpg123.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle"><a href="../../buster/manpages-zh/mpg123.1.zh_CN.html">mpg123(1)</a></td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle"><a href="../../buster/manpages-zh/mpg123.1.zh_CN.html">mpg123(1)</a></td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="命令名">命令名<a class="anchor" href="#%E5%91%BD%E4%BB%A4%E5%90%8D">¶</a></h1>
+mpg123 - 播放 MPEG 1.0/2.0 Layer-1, -2, -3
+  音频文件
+</section>
+<section class="Sh">
+<h1 class="Sh" id="语法">语法<a class="anchor" href="#%E8%AF%AD%E6%B3%95">¶</a></h1>
+<b>mpg123</b> [ <b>-tscvqy01m24</b> ][ <b>-b</b><i> size</i> ][ <b>-k</b><i>
+  num</i> ][ <b>-n</b><i> num</i> ][ <b>-f</b><i> factor</i> ][ <b>-r</b><i>
+  rate</i> ][ <b>-g</b><i> gain</i> ][ <b>-a</b><i> dev</i> ][ <b>-o s</b> |
+  <b>-o h</b> | <b>-o l</b> ][ <b>-d</b><i> n</i> ][ <b>-h</b><i> n</i> ][
+  <b>-p</b><i> proxy</i> ][ <b>-@</b><i> file</i> ] <i>file</i> ... | <i>URL</i>
+  ... | <b>-</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>mpg123</b> 从一个或多个
+  <i>文件</i> 或者 <i>URL</i>
+  读取MPEG-1/2音频比特流
+  (如果指定 `-&#39; 选项,
+  则从标准输入读取),
+  然后使用音频设备进行播放(默认),
+  或将解码结果送
+  到标准输出上.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="选项">选项<a class="anchor" href="#%E9%80%89%E9%A1%B9">¶</a></h1>
+<b>mpg123</b>
+  接收传统的POSIX风格的单字母选项,
+  也接收GNU风格的长单词选项.
+  这两 种选项分别以 `-&#39; 和
+  &#34;--&#34; 开头.
+<dl class="Bl-tag">
+  <dt><b>-t</b>, <b>--test</b></dt>
+  <dd>测试模式.
+      对音频流进行解码,
+      但不输出.</dd>
+  <dt><b>-s</b>, <b>--stdout</b></dt>
+  <dd>将解码结果送到标准输出上,
+      而不使用音频设备进行播放.
+      如果 <b>mpg123</b>
+      不支持你的音频硬件,
+      你就可以试试这一选项,
+      这时, <b>mpg123</b> 以本机
+      字节顺序(host byte
+      order)输出16比特的立体声线性PCM(脉冲编码调制)
+      音频裸数据(没有数据头).</dd>
+  <dt><b>-c</b>, <b>--check</b></dt>
+  <dd>对每一帧进行滤波器越界检查,
+      如发生则报告之.</dd>
+  <dt><b>-v</b>, <b>--verbose</b></dt>
+  <dd>播放时显示更多信息,
+      比如显示当前正在解码的帧号.</dd>
+  <dt><b>-q</b>, <b>--quiet</b></dt>
+  <dd>安静模式.
+      不显示诊断信息.</dd>
+  <dt><b>-y</b>, <b>--resync</b></dt>
+  <dd>如果输入文件发生错误,
+      则重新进行同步并继续解码.
+      另外, 对那些文件
+      头损坏的MPEG文件, 通常
+      <b>mpg123</b>
+      会拒绝播放并显示 &#39; Illegal
+      header&#39;, 但如果指定本选项,
+      <b>mpg123</b>
+      会试图从损坏的文件头中恢复并进行播放.
+      小心:
+      损坏的MPEG文件在播放到损坏处时可能出现尖利刺耳的噪声,
+      如果 音量过大,
+      可能损坏扬声器.</dd>
+  <dt><b>-0</b>, <b>--single0</b>; <b>-1</b>, <b>--single1</b></dt>
+  <dd>只对0(左) 声道或者1(右)
+      声道进行解码.
+      这两个选项只对立体声的MPEG
+      音频流有效.</dd>
+  <dt><b>-m</b>, <b>--singlemix</b></dt>
+  <dd>将两个声道混音.
+      此选项只对MPEG
+      Layer-3的立体声音频流有效,
+      并可比
+      完全立体声解码节省一些
+      CPU时间.</dd>
+  <dt><b>-2</b>, <b>--2to1</b>; <b>-4</b>, <b>--4to1</b></dt>
+  <dd>将输出流的采样率将低至标准的1/2
+      (22kHz) 或者1/4 (11kHz). 使用这
+      两个选项可以减少一些CPU的负荷,
+      但是声音质量会下降(至少使用11kHz
+      采样率时会很难听).</dd>
+  <dt><b>-b </b><i>size</i>, <b>--buffer </b><i>size</i></dt>
+  <dd>用 <i>size</i>
+      指定输出缓冲区的大小,
+      单位为千字节.
+      使用此选项通常可以避
+      免由频繁的系统操作造成的
+      声音输出时断时续的现象.
+      <i>size</i> 的值小于
+      300时就没什么意义了,
+      建议至少取1024(即使用1Mb的缓冲区,
+      可以缓冲
+      相当于6秒钟的音频数据).
+      <i>size</i> 的默认值为0,
+      即不进行输出缓冲.</dd>
+  <dt><b>-k </b><i>num</i>, <b>--skip </b><i>num</i></dt>
+  <dd>跳过前 <i>num</i> 帧.
+      不指定此选项时,
+      默认从第1帧开始解码.</dd>
+  <dt><b>-n </b><i>num</i>, <b>--frames </b><i>num</i></dt>
+  <dd>只对前 <i>num</i>
+      帧进行解码.
+      不指定此选项时,
+      默认对整个音频流进行解码.</dd>
+  <dt><b>-f </b><i>factor</i>, <b>--scale </b><i>factor</i></dt>
+  <dd>改变缩放因子 <i>factor</i>
+      的值(默认值为32768).</dd>
+  <dt><b>-r </b><i>rate</i>, <b>--rate </b><i>rate</i></dt>
+  <dd>设置采样率 <i>rate</i>
+      (默认为自动设置).
+      使用这一选项后, <b>mpg123</b>
+      会自动
+      将速率转换成不依赖于MPEG流速率的一个恒定比特率.
+      此选项应该和 --stereo 或 --mono
+      联合起来使用.</dd>
+  <dt><b>-g </b><i>gain</i>, <b>--gain </b><i>gain</i></dt>
+  <dd>设置音频硬件输出增益
+      <i>gain</i>
+    (默认为保持不变).</dd>
+  <dt><b>-a </b><i>dev</i>, <b>--audiodevice </b><i>dev</i></dt>
+  <dd>指定音频设备.
+      默认的音频设备与系统配置有关(通常是
+      /dev/audio 或 /dev/dsp ),
+      如果系统中有多个音频设备而默认的又不是你想用的那个,
+      就可使用本选项.</dd>
+  <dt><b>-o s</b>, <b>--speaker</b></dt>
+  <dd>将声音导出到主板上的扬声器上.</dd>
+  <dt><b>-o h</b>, <b>--headphones</b></dt>
+  <dd>将声音导出到耳机连接器上.</dd>
+  <dt><b>-o l</b>, <b>--lineout</b></dt>
+  <dd>将声音导出到Line-Out连接器上.</dd>
+  <dt><b>-d </b><i>n</i>, <b>--doublespeed </b><i>n</i></dt>
+  <dd>每 <i>n</i> 帧播放一帧.
+      这会使MPEG流的播放速度提高为正常速度的
+      <i>n</i> 倍,
+      从而可以产生特殊的声音效果.
+      此选项可以和 <b>--halfspeed</b>
+      选项组合使 用,
+      实现类似每4帧播放3帧(译者注:
+      指定-d 4 -h 3)的效果.
+      如果使用 此选项,
+      不要指望声音质量会很好.</dd>
+  <dt><b>-h </b><i>n</i>, <b>--halfspeed </b><i>n</i></dt>
+  <dd>将每帧都播放 <i>n</i> 遍.
+      这会使MPEG流的播放速度降低为正常速度的
+      <i>1</i>/<i>n</i>,
+      从而可以产生特殊的声音效果.
+      此选项可以和 <b>--doublespeed</b>
+      选项组合 使用,
+      实现类似每3帧播放2帧(译者注:
+      指定-h 2 -d 3)的效果.
+      如果使 用此选项,
+      不要指望声音质量会很好.</dd>
+  <dt><b>-p </b><i>URL </i>| <b>none</b>, <b>--proxy </b><i>URL </i>|
+    <b>none</b></dt>
+  <dd>指定 <i>proxy</i>
+      作为HTTP请求的代理.
+      指定的格式应是一个完整的URL
+      (如&#34;../../&#34;),
+      但是可以省略前缀&#34;<a href="../..//&#34;,</a>
+      端口
+      号port(默认的端口为80)和末尾的&#39;/&#39;.
+      如果指定为 <b>none</b>
+      ,则不使用代 理,
+      直接向服务器请求文件.
+      更多细节请看 &#34;HTTP
+      支持&#34; 小节.</dd>
+  <dt><b>-u </b><i>auth</i>, <b>--auth </b><i>auth</i></dt>
+  <dd>如果通过HTTP下载文件时服务器要求提供认证信息,
+      则由 <i>auth</i> 指定, 其
+      格式为
+      &#34;用户名:密码&#34;
+      (不包括引号).</dd>
+  <dt><b>-@ </b><i>file</i>, <b>--list </b><i>file</i></dt>
+  <dd>从 <i>file</i>
+      指定的文件中读取将要播放的MPEG音频流所在的文件和(或)URL,
+      如果
+      命令行中还指定了其它的文件和(或)URL,
+      也将其包含进播放清单.
+      如果指定 <i>file</i> 为
+      `-&#39;而非一个普通的文件名,
+      <b>mpg123</b> 将从标准输入读
+      取文件名和(或)URL,
+      或者读取一个指向播放清单文件的URL.
+      注意: <b>-@</b>
+      选项只能使用一次(如果多处指定,
+      则只有最后一个有效).</dd>
+  <dt><b>-z</b>, <b>--shuffle</b></dt>
+  <dd>随机播放.
+      按随机的顺序播放命令行和清单文件中指定的音频文件.</dd>
+  <dt><b>--stereo</b></dt>
+  <dd>强制立体声输出.</dd>
+  <dt><b>--reopen</b></dt>
+  <dd>强制在播放完一个文件后重新打开音频设备.</dd>
+  <dt><b>--8bit</b></dt>
+  <dd>强制8比特输出.</dd>
+  <dt><b>-Z</b>, <b>--random</b></dt>
+  <dd>完全随机播放.
+      (译者注: 与 --shuffle
+      选项的区别是,
+      指定本选项有可
+      能重复多次播放同一文件)</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="操作数">操作数<a class="anchor" href="#%E6%93%8D%E4%BD%9C%E6%95%B0">¶</a></h1>
+<b>mpg123</b> 支持下面的操作数:
+<dl class="Bl-tag">
+  <dt><i>file</i></dt>
+  <dd>指定输入文件的路径.
+      这些文件必须包含合法的MPEG-1/2音频
+      Layer-1, Layer-2或Layer-3的比特流.
+      如果指定为&#39;-&#39;,
+      将从标准输入读取MPEG数
+      据. 进一步,
+      如果以&#34;<a href="../..//&#34;开头,</a>
+      则认为指定 了一个
+      <i>URL</i> (请看下一 节).</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="HTTP_支持">HTTP 支持<a class="anchor" href="#HTTP_%E6%94%AF%E6%8C%81">¶</a></h1>
+除了能从普通文件和标准输入读取MPEG音频流,
+  <b>mpg123</b> 还支持通过HTTP协
+  议从万
+  维网(WWW)上获取由URL(统一资源定位符)指定的文件.
+  一个URL是一个以 &#34;<a href="../..//&#34;</a>
+  为前缀的字符串, 当
+  <b>mpg123</b> 识别到这个前缀,
+  它会尝试开启一个
+  到相应服务器的连接,
+  接着获取相应的文件并进行解码播放.
+<p class="Pp">很多时候, 从WWW缓存,
+    或所谓的网络代理比直接从服务器更容易获取文件.
+    为利 用这种便利, <b>mpg123</b>
+    会依次检查 <b>MP3_HTTP_PROXY</b>,
+    <b>http_proxy</b>和<b>HTTP_PROXY,</b>
+    这三个环境变量是否被设置,
+    并将第一个被设置的变量的值作为指定的代理.
+    如
+    果你需要自己指定另外的代理,
+    可以使用 <b>-p</b>
+    命令行选项
+    (请看&#34;选项&#34;小节).
+    使用 <b>-p none</b>
+    选项将不使用任何代理而直接连接服务器,
+    即使前面所述的三个
+    变量被设置.</p>
+<p class="Pp">值得注意的是,
+    为了能从一个WWW服务器获取并流畅地播放MPEG音频文件,
+    必须有
+    足够快的网络连接.
+    例如,
+    为了能播放速率为128kbit/s的MPEG文件,
+    所需的
+    网络带宽至少应该是128kbit/s加上网络协
+    议本身的传输开销.
+    如果网络常发生
+    短时中断, 可以试试用
+    <b>-b</b>
+    选项指定一个缓冲区.
+    如果你所在的网络根本无
+    法达到实时传输MPEG音频文件所需的带宽,
+    就只好使用 <a href="../../buster/lynx-common/lynx.1.en.html">lynx(1)</a>
+    之类的软件先将
+    文件下载到本地硬盘上再进行播放了.</p>
+<p class="Pp">如果服务器要求认证,
+    可以使用 <b>-u auth</b>
+    选项(请看&#34;选项&#34;小节)指定用户名和密
+    码.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中断">中断<a class="anchor" href="#%E4%B8%AD%E6%96%AD">¶</a></h1>
+任何时候按Ctrl-C键都能中断
+  <b>mpg123</b> 的运行.
+  如果有多个文件在播放,
+  Ctrl-C
+  会终止当前文件的播放并
+  开始播放下一个文件,
+  这种情况下,
+  如果你想终止整
+  个程序的运行,
+  必须连按两次Ctrl-C
+  (在约一秒钟之内).
+<p class="Pp">注意,
+    按了Ctrl-C之后声音也许不会马上消失,
+    这是因为系统的音频设备缓冲了
+    一部分数据.
+    这种延迟随系统不同而不同,
+    但通常都不超过1到2秒.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="相关说明">相关说明<a class="anchor" href="#%E7%9B%B8%E5%85%B3%E8%AF%B4%E6%98%8E">¶</a></h1>
+<a href="../../buster/lynx-common/lynx.1.en.html">lynx(1)</a>, <a href="../../buster/sox/sox.1.en.html">sox(1)</a>, <a href="../../buster/manpages-zh/intro.1.zh_CN.html">intro(1)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="注意">注意<a class="anchor" href="#%E6%B3%A8%E6%84%8F">¶</a></h1>
+MPEG音频解码,
+  特别是Layer-3的解码,
+  需要CPU进行大量的运算.
+  为能达到实时 解码,
+  你的计算机至少应该配备Pentium,
+  Alpha, SuperSparc或性能相当的处
+  理器. 同时你可以使用
+  <b>-singlemix</b>
+  选项进行单声道解码,
+  对Layer-3, 这多少
+  能减少一点CPU负荷.
+  此外你也可以考虑使用
+  <b>-2</b> 和 <b>-4</b> 选项.
+<p class="Pp">如果这些方法都不奏效,
+    试试用 <b>-s</b>
+    选项将解码结果送到标准输出上并将其定向
+    到一个文件中,
+    然后再用适当的工具播放这个文件.
+    你也许会用到 <a href="../../buster/sox/sox.1.en.html">sox(1)</a>
+    这个 工具,
+    它能将文件转换成你的音频播放器所用的格式.</p>
+<p class="Pp">还有一点就是 <b>mpg123</b>
+    总是输出16比特的立体声数据(如果指定
+    <b>-0</b>或<b>-1</b> 选项中
+    的一个,
+    立体声两个声道的数据是相同的).
+    如果系统硬件要求其它格式,
+    比如8
+    比特的单声道的数据,
+    同样可以使用 <a href="../../buster/sox/sox.1.en.html">sox(1)</a>
+    进行转化.</p>
+<p class="Pp">如果你的系统本身足够快,
+    能够进行实时解码,
+    只是在系统负荷较重时(如定时任
+    务,
+    用户远程登录或启动`大&#39;程序等)出现停顿,
+    你应该用 <b>-b</b>
+    选项指定一个不小
+    于1000K字节的缓冲区.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>已知的BUG和局限性:</dt>
+  <dd>
+    <br/>
+    MPEG-2, Layer-1和-2未经 测试.
+      可能不能工作.(Layer-3应该能工作.)
+    <br/>
+    不提供对自由格式的音频流的支持.
+    <br/>
+    对Layer-1的支持未经
+      严格测试.
+    <br/>
+    未进行CRC错误校验.
+    <br/>
+    没有对DEC Digital Unix, Ultrix 和 IBM
+      AIX平台上的音频硬件提供支
+      持,
+      因此在这些平台上必须使用
+      <b>-s</b> 选项.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者">作者<a class="anchor" href="#%E4%BD%9C%E8%80%85">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>主要作者:</dt>
+  <dd>
+    <br/>
+    Michael Hipp &lt;hippm@informatik.uni-tuebingen.de&gt;</dd>
+  <dt>使用了下面的代码或借鉴了其中的思想:</dt>
+  <dd>
+    <br/>
+    MPEG Software Simulation Group (Base package)
+    <br/>
+    Philipp Knirsch &lt;phil@mpik-tueb.mpg.de&gt; (DCT36/manual unroll)
+    <br/>
+    Tobias Bading &lt;bading@cs.tu-berlin.de&gt; (subband synthesis)
+    <br/>
+    Jeff Tsay &lt;ctsay@pasteur.eecs.berkeley.edu&gt; (DCT36)
+    <br/>
+    Thomas Woerner (SGI Audio)
+    <br/>
+    Damien Clermonte &lt;clermond@esiee.fr&gt; (HP-UX audio fixes)
+    <br/>
+    Oliver Fromme &lt;oliver.fromme@heim3.tu-clausthal.de&gt;</dd>
+</dl>
+<p class="Pp">网络参考资料:
+    <a href="../../~hipp/mpg123.html">../../~hipp/mpg123.html</a>
+  <br/>
+  <a href="../../~olli/mpg123/">../../~olli/mpg123/</a>
+  <br/>
+  (包含关于mpg123邮件组的信息)</p>
+<p class="Pp">在此获取最新版本:
+  <br/>
+  <a href="../../pub/unix/audio/mpg123">../../pub/unix/audio/mpg123</a></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版维护人]">[中文版维护人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D">¶</a></h1>
+linuxipy &lt;groove@ustc.edu&gt;
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+2004/2/29
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9B%BDlinux%E8%AE%BA%E5%9D%9Bman%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">21 Apr 1997</td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+mpg123.1.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-24T09:40:06Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"mpg123(1)\"}}]}"
+</script>

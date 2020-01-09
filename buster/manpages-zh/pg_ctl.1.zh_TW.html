@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pg_ctl(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/postgresql-11/pg_ctl.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/pg_ctl.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/pg_ctl.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; pg_ctl(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/pg_ctl.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/pg_ctl.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS" title="SYNOPSIS">SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#OPTIONS_%E9%81%B8%E9%A0%85" title="OPTIONS 選項">OPTIONS 選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ENVIRONMENT_%E7%92%B0%E5%A2%83" title="ENVIRONMENT 環境">ENVIRONMENT 環境</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#FILES_%E6%96%87%E4%BB%B6" title="FILES 文件">FILES 文件</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES_%E6%B3%A8%E6%84%8F" title="NOTES 注意">NOTES 注意</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#EXAMPLES_%E4%BE%8B%E5%AD%90" title="EXAMPLES 例子">EXAMPLES 例子</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SEE_ALSO_%E5%8F%83%E8%A6%8B" title="SEE ALSO 參見">SEE ALSO 參見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AD%AF%E8%80%85" title="譯者">譯者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/pg_ctl.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/pg_ctl.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/pg_ctl.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/postgresql-11/pg_ctl.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/pg_ctl.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/pg_ctl.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">PG_CTL(1)</td>
+    <td class="head-vol">PostgreSQL Server Applications</td>
+    <td class="head-rtitle">PG_CTL(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+pg_ctl - 啓動，停止和重啓
+  PostgreSQL 服務器
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS">SYNOPSIS<a class="anchor" href="#SYNOPSIS">¶</a></h1>
+<b>pg_ctl</b> <b>start</b> [ <b>-w </b>] [ <b>-s </b>] [ <b>-D
+  </b><i>datadir</i> <b> </b>] [ <b>-l </b><i>filename</i><b> </b>] [ <b>-o
+  </b><i>options</i><b> </b>] [ <b>-p </b><i>path</i><b> </b>]
+<p class="Pp"><b>pg_ctl</b> <b>stop</b> [ <b>-W </b>] [ <b>-s </b>] [ <b>-D
+    </b><i>datadir</i><b> </b>] [ <b>-m </b><b> s[mart]</b> | <b>f[ast]</b> |
+    <b>i[mmediate]</b><b> </b>]</p>
+<p class="Pp"><b>pg_ctl</b> <b>restart</b> [ <b>-w </b>] [ <b>-s </b>] [ <b>-D
+    </b> <i>datadir</i><b> </b>] [ <b>-m </b><b> s[mart]</b> | <b>f[ast]</b> |
+    <b>i[mmediate]</b><b> </b>] [ <b>-o </b><i>options</i><b> </b>]</p>
+<p class="Pp"><b>pg_ctl</b> <b>reload</b> [ <b>-s </b>] [ <b>-D
+    </b><i>datadir</i> <b> </b>]</p>
+<p class="Pp"><b>pg_ctl</b> <b>status</b> [ <b>-D </b><i>datadir</i><b>
+  </b>]</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>pg_ctl</b>
+  是一個用於啓動，停止，
+  或者重起 PostgreSQL
+  後端服務器（postmaster），
+  或者顯示一個運行着的服務器的狀態的工具，
+  儘管我們可以手動啓動服務器，但是
+  pg_ctl
+  封裝了重新定向日誌輸出，
+  與終端和進程組合理分離，以及另外提供了一個選項用於有控制的關閉。
+<p class="Pp">在 <b>start</b>
+    模式裏會啓動一個新的服務器。
+    服務器是在後臺啓動的，標準輸入被附着到了
+    /dev/null 上。如果使用了
+    -l，那麼標準輸出和標準錯誤被定向到一個日誌文件，
+    要麼就是重新定向到
+    pg_ctl
+    的標準輸出（而不是標準錯誤）。
+    如果沒有選定日誌文件，pg_ctl
+    的標準輸出應該重新定向到一個文件或者用管道輸出到另外一個進程，
+    比如那些日誌旋轉程序，否則，postmaster
+    將把它的輸出寫到控制終端（在後臺）並且將不會脫離
+    shell 的進程組。</p>
+<p class="Pp">在 <b>stop</b>
+    模式下，那個正在特定數據目錄運行的服務器被關閉。
+    你可以用 -m
+    選項選擇三種不同的關閉模式：&#34;Smart&#34;
+    模式等待所有客戶端中斷聯接。
+    這個是缺省。&#34;Fast&#34;
+    模式並不等待客戶端中斷聯接。
+    所有活躍事務都被回捲並且客戶端都強制斷開。
+    &#34;Immediate&#34;
+    模式將在沒有乾淨關閉的情況下退出。這麼做將導致在重新啓動的時候的恢復。</p>
+<p class="Pp"><b>restart</b>
+    實際上是先執行一個停止，然後緊跟一個啓動。它允許變換
+    <b>postmaster</b>
+  命令行的選項。</p>
+<p class="Pp"><b>reload</b> 模式簡單地給
+    <b>postmaster</b> 發送一個 SIGHUP
+    信號，導致它重新讀取她的配置文件
+    （<i>postgresql.conf</i>, <i>pg_hba.conf</i> 等等）
+    這樣就允許修改配置文件選項而不用完全重啓系統來使之生效。</p>
+<p class="Pp"><b>status</b>
+    模式監查一個服務器是否在指定的數據目錄運行，
+    如果是，那麼顯示其 PID
+    和調用它的命令行選項。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="OPTIONS_選項">OPTIONS 選項<a class="anchor" href="#OPTIONS_%E9%81%B8%E9%A0%85">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>-D </b><i>datadir</i><b></b></dt>
+  <dd>
+    
+      聲明該數據庫文件的文件系統位置。
+      如果忽略這個選項，使用環境變量
+      PGDATA。</dd>
+  <dt><b>-l </b><i>filename</i><b></b></dt>
+  <dd>
+    
+      把服務器日誌輸出附加在
+      filename 文件上。
+      如果該文件不存在，那麼創建它。umask設置爲
+      077，
+      因此缺省時是不允許從其它用戶向日志文件訪問的。</dd>
+  <dt><b>-m </b><i>mode</i><b></b></dt>
+  <dd>
+     聲明關閉模式。mode
+      可以是smart, fast, 或者
+      immediate，或者是這三個之一的第一個字母。</dd>
+  <dt><b>-o </b><i>options</i><b></b></dt>
+  <dd>
+     聲明要直接傳遞給
+      <b>postmaster</b> 的選項。
+    <p class="Pp">
+      
+        參數通常都用單或者雙引號包圍以保證它們作爲一個整體傳遞。</p>
+  </dd>
+  <dt><b>-p </b><i>path</i><b></b></dt>
+  <dd>
+     聲明 postmaster
+      可執行文件的位置。
+      缺省時 postmaster 是從和 pg_ctl
+      相同的目錄取出，如果不是，
+      那麼就是寫死的安裝目錄。除非你想幹點什麼特別的事情，並且得到類似沒有找到
+      postmaster這樣的錯誤，
+      否則沒有必要使用這個選項。</dd>
+  <dt><b>-s</b></dt>
+  <dd>
+    
+      只打印錯誤，而不打印提示性信息。</dd>
+  <dt><b>-w</b></dt>
+  <dd>
+    
+      等待啓動或者關閉的完成。在
+      60 秒後超時。
+      這個參數是關閉時的缺省值。
+      成功的關閉是以刪除
+      PID
+      文件爲標誌的。對於啓動而言，
+      一次成功的 <b>psql -l</b>
+      就標誌着成功。 pg_ctl
+      將視圖使用對 psql
+      合適的端口，如果存在環境變量
+      PGPORT，那麼用它。
+      否則，它將查找看看在
+      postgresql.conf
+      文件裏面是否設置了一個端口。
+      如果都沒有，它將使用
+      PostgreSQL
+      編譯時的缺省端口（缺省是
+      5432）。</dd>
+  <dt><b>-W</b></dt>
+  <dd>
+    
+      不等待啓動或者停止的完成。這是啓動和重起的缺省。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ENVIRONMENT_環境">ENVIRONMENT 環境<a class="anchor" href="#ENVIRONMENT_%E7%92%B0%E5%A2%83">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>PGDATA</b></dt>
+  <dd>
+     缺省數據目錄位置</dd>
+  <dt><b>PGPORT</b></dt>
+  <dd><a href="../../buster/manpages-zh/psql.1.zh_TW.html">psql(1)</a> 的缺省端口（由 -w
+      選項使用）。</dd>
+</dl>
+<p class="Pp">
+  
+    其它的環境變量，參閱
+    <a href="../../buster/manpages-zh/postmaster.1.zh_TW.html">postmaster(1)</a>.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="FILES_文件">FILES 文件<a class="anchor" href="#FILES_%E6%96%87%E4%BB%B6">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b></b><i>postmaster.pid</i><b></b></dt>
+  <dd>
+    
+      這個文件存在於數據目錄中是爲了幫助
+      pg_ctl
+      判斷服務器當前是否在運行。</dd>
+  <dt><b></b><i>postmaster.opts.default</i><b></b></dt>
+  <dd>
+    
+      如果這個文件存在於數據目錄，<b>pg_ctl</b>（在
+      <b>start</b>
+      模式下）將把文件地內容當作傳遞給
+      <b>postmaster</b>
+      命令的選項傳遞過去，除非被
+      <b>-o</b> 選項覆蓋。</dd>
+  <dt><b></b><i>postmaster.opts</i><b></b></dt>
+  <dd>如果這個文件存在於數據目錄，<b>pg_ctl</b>（在
+      <b>start</b>
+      模式下）將把文件地內容當作傳遞給
+      <b>postmaster</b>
+      命令的選項傳遞過去，除非被
+      <b>-o</b>
+      選項覆蓋。這個文件的內容也會在
+      status
+    模式裏顯示出來。</dd>
+  <dt><b></b><i>postgresql.conf</i><b></b></dt>
+  <dd>
+    
+      這個文件在數據目錄中，會分析它以查找和
+      psql
+      一起用的合適的端口（在
+      start 模式裏給出 -w
+      的時候。）</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES_注意">NOTES 注意<a class="anchor" href="#NOTES_%E6%B3%A8%E6%84%8F">¶</a></h1>
+
+  等待完全啓動還不是一個定義得很完整的操作，
+  如果訪問控制設置爲本地客戶端在沒有手工交互的情況下不能訪問的話還可能會失效。（比如，口令認證）。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES_例子">EXAMPLES 例子<a class="anchor" href="#EXAMPLES_%E4%BE%8B%E5%AD%90">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="STARTING_THE_SERVER_啓動服務器">STARTING THE SERVER 啓動服務器<a class="anchor" href="#STARTING_THE_SERVER_%E5%95%93%E5%8B%95%E6%9C%8D%E5%8B%99%E5%99%A8">¶</a></h2>
+ 啓動服務器：
+<p class="Pp"></p>
+<pre>$ <b>pg_ctl start</b>
+
+</pre>
+<p class="Pp">
+  
+    啓動服務器的一個例子，
+    等到服務器
+    啓動了才退出：</p>
+<p class="Pp"></p>
+<pre>$ <b>pg_ctl -w start</b>
+
+</pre>
+<p class="Pp">
+   用於一個 postmaster 使用端口
+    5433，而且不帶 fsync
+    運行，使用：</p>
+<p class="Pp"></p>
+<pre>$ <b>pg_ctl -o &#34;-F -p 5433&#34; start</b>
+
+</pre>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="STOPPING_THE_SERVER_停止服務器">STOPPING THE SERVER 停止服務器<a class="anchor" href="#STOPPING_THE_SERVER_%E5%81%9C%E6%AD%A2%E6%9C%8D%E5%8B%99%E5%99%A8">¶</a></h2>
+<pre>$ <b>pg_ctl stop</b>
+
+</pre>
+ 停止服務器，使用 -m
+  開關允許我們控制如何把後端停下來。
+  -w等待服務器停止。-m
+  聲明後端的停止模式。
+</section>
+<section class="Ss">
+<h2 class="Ss" id="RESTARTING_THE_SERVER_重起服務器">RESTARTING THE SERVER 重起服務器<a class="anchor" href="#RESTARTING_THE_SERVER_%E9%87%8D%E8%B5%B7%E6%9C%8D%E5%8B%99%E5%99%A8">¶</a></h2>
+
+  這個命令幾乎等於先停止
+  postmaster
+  然後再啓動她，只不過
+  <b>pg_ctl</b>
+  保存並重新使用上一次運行
+  postmaster
+  的命令行參數。重起服務器的最簡單的方法是：
+<p class="Pp"></p>
+<pre>$ <b>pg_ctl restart</b>
+
+</pre>
+<p class="Pp">
+  
+    重起服務器，等待其停止和重起：</p>
+<p class="Pp"></p>
+<pre>$ <b>pg_ctl -w restart</b>
+
+</pre>
+<p class="Pp">
+   使用 5433
+    重起並且重起後關閉
+    fsync：</p>
+<p class="Pp"></p>
+<pre>$ <b>pg_ctl -o &#34;-F -p 5433&#34; restart</b>
+
+</pre>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="SHOWING_THE_SERVER_STATUS_顯示服務器狀態">SHOWING THE SERVER STATUS 顯示服務器狀態<a class="anchor" href="#SHOWING_THE_SERVER_STATUS_%E9%A1%AF%E7%A4%BA%E6%9C%8D%E5%8B%99%E5%99%A8%E7%8B%80%E6%85%8B">¶</a></h2>
+ 下面是來自 <b>pg_ctl</b>
+  的狀態輸出的例子：
+<p class="Pp"></p>
+<pre>$ <b>pg_ctl status</b>
+pg_ctl: postmaster is running (pid: 13718)
+Command line was:
+/usr/local/pgsql/bin/postmaster &#39;-D&#39; &#39;/usr/local/pgsql/data&#39; &#39;-p&#39; &#39;5433&#39; &#39;-B&#39; &#39;128&#39;
+
+</pre>
+
+  這是在重起模式裏使用的命令行。
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO_參見">SEE ALSO 參見<a class="anchor" href="#SEE_ALSO_%E5%8F%83%E8%A6%8B">¶</a></h1>
+<a href="../../buster/manpages-zh/postmaster.1.zh_TW.html">postmaster(1)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="譯者">譯者<a class="anchor" href="#%E8%AD%AF%E8%80%85">¶</a></h1>
+<b>Postgresql 中文網站</b> <b>何偉平
+  &lt;laser@pgsqldb.org&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-02</td>
+    <td class="foot-os">Application</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+pg_ctl.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-10T09:38:45Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"pg_ctl(1)\"}}]}"
+</script>

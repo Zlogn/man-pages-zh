@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>perlfaq7(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/perlfaq7.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/perlfaq7.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; perlfaq7(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlfaq7.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlfaq7.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#AUTHOR_AND_COPYRIGHT" title="AUTHOR AND COPYRIGHT">AUTHOR AND COPYRIGHT</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AD%AF%E8%80%85" title="譯者">譯者</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlfaq7.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/perlfaq7.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/perlfaq7.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlfaq7.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlfaq7.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/perl-doc/perlfaq7.1.en.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlfaq7.7.zh_TW.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">PERLFAQ7(7)</td>
+    <td class="head-vol">Perl Programmers Reference Guide</td>
+    <td class="head-rtitle">PERLFAQ7(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<p class="Pp">
+  <br/>
+</p>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+perlfaq7 - 綜合的問題 (2003/07/24 02:17:21)
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+本節討論綜合的 Perl
+  語言問題，不適於在其他所有段落中討論的問題
+<br/>
+<p class="Pp"><b>我能拿到 Perl的
+    BNF/yacc/RE嗎？</b></p>
+<p class="Pp">沒有 BNF,
+    但是你可以從源代碼的
+    perly.y 文件的 yacc
+    語法中自行歸納，如果你足夠勇敢的話。語法依賴於非常智能的詞法分析，因此也要準備好閱讀
+    toke.c。</p>
+<p class="Pp">用 Chaim
+    Frenkel的話：&#34;Perl的語法無法被簡化到可以用
+    BNF
+    表示。解析Perl的工作是分散於
+    yacc、lexer、煙霧和鏡子之間。&#34;
+  <br/>
+</p>
+<p class="Pp"><b>$@%*這些符號是什麼意思？我怎麼知道何時該使用他們呢？</b></p>
+<p class="Pp">它們都是類型限定符號，在
+    perldata 中詳述：</p>
+<p class="Pp"></p>
+<pre>    $ 標量值，數字，字符串或引用
+    @ 數組
+    % 散列，關聯數組
+    &amp; 子程序，也就是函數，過程，方法
+    * 代表這個符號的所有類型。在版本4中，可以用作指針，但是在新的 perl 中可以只用引用就可以了
+</pre>
+<p class="Pp">有些其他的符號你可能會碰到但卻不是指定形態用的有：</p>
+<p class="Pp"></p>
+<pre>    &lt;&gt; 這是用來從一個文件句柄裏輸入一份記錄
+    \ 取某樣東西的引用
+</pre>
+<p class="Pp">注意 &lt;FILE&gt;
+    不是用來指定文件類型，亦非此句柄的名字。它只是
+    將&lt;&gt;這個運算符作用在
+    FILE這個句柄上。在標量上下文
+    (scalar context) 中，它自 FILE
+    把手一次讀入一行
+    (嗯，該說一筆記錄，參看
+    $/)，在序列情境 (list
+    context)下，則一次將
+    全部的內容讀
+    入。當對檔案使用開、關或其它
+    &lt;&gt;之外的動作、或甚至只是提到把
+    手時，切記不要使用
+    &lt;&gt;。下面的用法是正確的：<span class="Li">&#34;eof(FH)&#34;</span>,
+    <span class="Li">&#34;seek(FH, 0,</span> <span class="Li">2)&#34;</span>
+    以及 &#34;copying from STDIN to FILE&#34;.
+  <br/>
+</p>
+<p class="Pp"><b>字串加引號或使用分號及逗號是否絕對必要/還是完全沒必要？</b></p>
+<p class="Pp">通常一個沒有冠上形態符號的字
+    (bareword)是不需被納入引號裏的，但在大多數的情況下或許該這麼做
+    (在 <span class="Li">&#34;use strict&#34;</span>
+    下則是必須的)。但由一個簡單的字(不能是一個已定義的副函數之名稱)所構成的索引值，和
+    <span class="Li">&#34;=&gt;&#34;</span>
+    左端的運算子，都會被視爲已納入引號了：</p>
+<p class="Pp"></p>
+<pre>    這些                     和這些一樣
+    ------------            ---------------
+    $foo{line}              $foo{&#34;line&#34;}
+    bar =&gt; stuff            &#34;bar&#34; =&gt; stuff
+</pre>
+<p class="Pp">一個區塊末端的分號可有可無，一個序列的最後一個逗號亦同。良好的寫作風格
+    (參看perlstyle)中建議除了在單行程式
+    (one-liners)的情況外都將他們加上去：</p>
+<p class="Pp"></p>
+<pre>    if ($whoops) { exit 1 }
+    @nums = (1, 2, 3);
+</pre>
+<p class="Pp"></p>
+<pre>    if ($whoops) {
+        exit 1;
+    }
+    @lines = (
+        &#34;There Beren came from mountains cold&#34;,
+        &#34;And lost he wandered under leaves&#34;,
+    );
+</pre>
+<br/>
+<p class="Pp"><b>我如何跳過一些傳回值？</b></p>
+<p class="Pp">一種方法是將傳回值當作序列來對待，然後用索引來指名其中的某個位置：</p>
+<p class="Pp"></p>
+<pre>        $dir = (getpwnam($user))[7];
+</pre>
+<p class="Pp">另一種方法就是在等號左端用
+    undef 作元素：</p>
+<p class="Pp"></p>
+<pre>    ($dev, $ino, undef, undef, $uid, $gid) = stat($file);
+</pre>
+<p class="Pp">也可以用一個列表片段來僅選擇你需要的元素：</p>
+<p class="Pp"></p>
+<pre>        ($dev, $ino, $uid, $gid) = ( stat($file) )[0,1,4,5];
+</pre>
+<br/>
+<p class="Pp"><b>我如何暫時濾掉警告訊息？</b></p>
+<p class="Pp">如果正在運行 Perl 5.6.0
+    或更高版本， <span class="Li">&#34;use
+    warnings&#34;</span>
+    編用可以對警告如何產生進行很好的控制。參見
+    perllexwarn 中的細節</p>
+<p class="Pp"></p>
+<pre>    {
+        no warnings;          # 暫時關掉警告訊息
+        $a = $b + $c;         # 我知道這些變數可能未定義
+    }
+</pre>
+<p class="Pp">如果運行舊版本的
+    Perl，變量 <span class="Li">$^W</span> (在 perlvar
+    中有記載)
+    控制了這個塊的運行時警告：</p>
+<p class="Pp"></p>
+<pre>    {
+        local $^W = 0;        # 暫時關掉警告訊息
+        $a = $b + $c;         # 我知道這些變數可能未定義
+    }
+</pre>
+<p class="Pp">注意，像所有的標點符號變數一樣，目前不能對
+    <span class="Li">$^W</span> 用 my()，只能用
+    local()。
+  <br/>
+</p>
+<p class="Pp"><b>什麼是一個擴充?</b></p>
+<p class="Pp">一種從
+    Perl呼叫編譯好的
+    C程式碼的方法。閱讀
+    perlxstut是個多瞭解擴充(extensions)的好方法。
+  <br/>
+</p>
+<p class="Pp"><b>爲何
+    Perl運算子的優先順序和
+    C的不一樣？</b></p>
+<p class="Pp">事實上它們是相同的。所有
+    Perl自
+    C借過來的運算子都具備與原來在
+    C
+    中相同的優先順序。問題出在那些
+    C沒有的運算子，特別是那些將其右方一律當成序列情境對待的函數，例如
+    print, chmod,
+    exec等等。這類的函數被稱作序列運算子(&#34;list
+    operators&#34;)，在
+    perlop的優先順序表中就是這麼稱呼。</p>
+<p class="Pp">一個常犯的錯誤像是：</p>
+<p class="Pp"></p>
+<pre>    unlink $file ⎪⎪ die &#34;snafu&#34;;
+</pre>
+<p class="Pp">這會被解譯器看成是：</p>
+<p class="Pp"></p>
+<pre>    unlink ($file ⎪⎪ die &#34;snafu&#34;);
+</pre>
+<p class="Pp">要避免此問題，須加上括號或是用超低優先的
+    <span class="Li">&#34;or&#34;</span> 運算子：</p>
+<p class="Pp"></p>
+<pre>    (unlink $file) ⎪⎪ die &#34;snafu&#34;;
+    unlink $file or die &#34;snafu&#34;;
+</pre>
+<p class="Pp">這些“英文的”運算子
+    (and, or, xor,及
+    not)是刻意設計成較一般序列運算子低的優先順序，這就是爲了解決前述的狀況。</p>
+<p class="Pp">另一個擁有出人意料的優先順序者爲指數。它甚至高於負號，這使得
+    <span class="Li">&#34;-2**2&#34;</span>變成負四而非正四。他同時也會“向右靠”(right-associate)，意思是說
+    <span class="Li">&#34;2**3**2&#34;</span>
+    代表二的九次方，而不是八的平方。</p>
+<p class="Pp">Although it has the same precedence as in C, Perl&#39;s
+    <span class="Li">&#34;?:&#34;</span> operator produces an lvalue. This
+    assigns <span class="Li">$x</span> to either <span class="Li">$a</span> or
+    <span class="Li">$b</span>, depending on the trueness of
+    <span class="Li">$maybe:</span></p>
+<p class="Pp"></p>
+<pre>    ($maybe ? $a : $b) = $x;
+</pre>
+<br/>
+<p class="Pp"><b>我如何聲明/創建一個數據結構？</b></p>
+<p class="Pp">一般來說，我們不
+    ``聲明&#39;&#39;
+    一個結構。用一個
+    (通常是匿名的)
+    散列的引用 (hash
+    reference)即可。參看 perlref 以及
+    perldsc，裏面有更多資料。以下是一個範例：</p>
+<p class="Pp"></p>
+<pre>    $person = {};                   # new anonymous hash
+    $person-&gt;{AGE}  = 24;           # set field AGE to 24
+    $person-&gt;{NAME} = &#34;Nat&#34;;        # set field NAME to &#34;Nat&#34;
+</pre>
+<p class="Pp">如果你要的是更嚴謹的寫法，看看
+    perltoot 。
+  <br/>
+</p>
+<p class="Pp"><b>如何創建一個模塊？</b></p>
+<p class="Pp">一個模組就是一個放在同名檔案裏的包裹(package)。例如，Hello::There模組會放在Hello/There.pm。perlmod
+    裏有詳盡說明。Exporter
+    也會很有幫助。如果你正在寫一個
+    C 或是混合了 C及 Perl
+    的模組，那麼你就該讀
+    perlxstut 。</p>
+<p class="Pp">The <span class="Li">&#34;h2xs&#34;</span> program will create
+    stubs for all the important stuff for you:</p>
+<p class="Pp"></p>
+<pre>  % h2xs -XA -n My::Module
+</pre>
+<p class="Pp">The <span class="Li">&#34;-X&#34;</span> switch tells
+    <span class="Li">&#34;h2xs&#34;</span> that you are not using
+    <span class="Li">&#34;XS&#34;</span> extension code. The
+    <span class="Li">&#34;-A&#34;</span> switch tells
+    <span class="Li">&#34;h2xs&#34;</span> that you are not using the
+    AutoLoader, and the <span class="Li">&#34;-n&#34;</span> switch specifies
+    the name of the module. See h2xs for more details.
+  <br/>
+</p>
+<p class="Pp"><b>如何創建一個類？</b></p>
+<p class="Pp">perltoot
+    裏面有對於類和對象的介紹，
+    perlobj 和 perlbot 也有。
+  <br/>
+</p>
+<p class="Pp"><b>如何知道一個變量是否是污染的？</b></p>
+<p class="Pp">可以使用 Scalar::Util
+    模塊中的 <i>tainted()</i> 函數
+    (可從 CPAN
+    獲取，也包含在 Perl 5.8.0
+    中)。參見 perlsec 中的 &#34;Laundering
+    and Detecting Tainted Data&#34; 。
+  <br/>
+</p>
+<p class="Pp"><b>什麼是閉包？</b></p>
+<p class="Pp">關於閉包的說明，請看
+    perlref 。</p>
+<p class="Pp">閉包
+    (closure)是個精確但又很難解釋的計算機科學名詞。在
+    Perl
+    裏面，閉包是以匿名函數的形式來實現，具有持續參照位於該函數範圍之外的文字式變數值的能力。這些外部的文字變數會神奇地保留它們在閉包函數最初定義時的值
+    (深連結)。</p>
+<p class="Pp">如果一個程式語言容許函數遞迴另一個函數的話
+    (像 Perl
+    就是)，閉包便具有意義。要注意的是，有些語言雖提供匿名函數的功能，但卻無法正確處理閉包；
+    Python
+    這個語言便是一例。如果要想多瞭解閉包的話，建議你去找本功能性程式設計的教科書來看。Scheme這個語言不僅支援閉包，更鼓勵多加使用。</p>
+<p class="Pp">以下是個典型的產生函數的函數：</p>
+<p class="Pp"></p>
+<pre>    sub add_function_generator {
+      return sub { shift + shift };
+    }
+</pre>
+<p class="Pp"></p>
+<pre>    $add_sub = add_function_generator();
+    $sum = $add_sub-&gt;(4,5);                # $sum is 9 now.
+</pre>
+<p class="Pp">閉包用起來就像是個
+    函數樣板，其中保留了一些可以在稍後再填入的空格。
+    add_function_generator()
+    所遞迴的匿名函數在技術上來講並不能算是一個閉包，因爲它沒有用到任何位在這個函數範圍之外的文字變數。</p>
+<p class="Pp">把上面這個例子和下面這個
+    make_adder()函數對照一下，下面這個函數所遞迴的匿名函數中使用了一個外部的文字變數。這種指名外部函數的作法需要由
+    Perl遞迴一個適當的閉包，因此那個文字變數在匿名函數產生之時的值便永久地被鎖進閉
+    包裏。</p>
+<p class="Pp"></p>
+<pre>    sub make_adder {
+        my $addpiece = shift;
+        return sub { shift + $addpiece };
+    }
+</pre>
+<p class="Pp"></p>
+<pre>    $f1 = make_adder(20);
+    $f2 = make_adder(555);
+</pre>
+<p class="Pp">這樣一來
+    <span class="Li">&#34;&amp;$f1($n)&#34;</span>
+    永遠會是
+    20加上你傳進去的值
+    <span class="Li">$n</span> ，而
+    <span class="Li">&#34;&amp;$f2($n)&#34;</span> 將
+    永遠會是
+    555加上你傳進去的值
+    $n。<span class="Li">$addpiece</span>
+    的值會在閉包中保留下來。</p>
+<p class="Pp">閉包在比較實際的場合中也常用得到，譬如當你想把一些程式碼傳入一個函數時：</p>
+<p class="Pp"></p>
+<pre>    my $line;
+    timeout( 30, sub { $line = &lt;STDIN&gt; } );
+</pre>
+<p class="Pp">如果要執行的程式碼當初是以字串的形式傳入的話，即
+    <span class="Li">&#39;$line = &lt;STDIN&gt;&#39;</span> ，那麼
+    timeout()
+    這個假想的函數在回到該函數被呼叫時所在的範圍後便無法再擷取
+    <span class="Li">$line</span>
+    這個文字變數的值了。
+  <br/>
+</p>
+<p class="Pp"><b>什麼是變量自殺，我應該怎樣防止它？</b></p>
+<p class="Pp">變數自殺指的是
+    (暫時或是永久)地失去一個變數的值。造成這個現象的原因是做範圍界定的
+    my() 和 local()和閉包或
+    foreach()迴圈變數及函數參數相互影響
+    所致。過去很容易偶爾丟失變量，現在就困難多了，可以試試這段代碼：</p>
+<p class="Pp"></p>
+<pre>    my $f = &#34;foo&#34;;
+    sub T {
+      while ($i++ &lt; 3) { my $f = $f; $f .= &#34;bar&#34;; print $f, &#34;\n&#34; }
+    }
+    T;
+    print &#34;Finally $f\n&#34;;
+</pre>
+<p class="Pp">有叄個 &#34;bar&#34;
+    加進去的 <span class="Li">$f</span>
+    變數應該是一個新的
+    <span class="Li">$f</span> (因爲 <span class="Li">&#34;my
+    $f&#34;</span>
+    在每個循環都應該創造一個新的區域變數)。然而，實際上並非如此。這個臭蟲最新的
+    Perl 版本中已被修正 (在
+    5.004_05, 5.005_03 和 5.005_56
+    上測試過)。
+  <br/>
+</p>
+<p class="Pp"><b>如何傳遞/返回一個{函數
+    Function, 文件句柄 FileHandle, 數組
+    Array,散列 Hash, 方法 Method,
+    正則表達式 Regex}?</b></p>
+<p class="Pp">除了正規表現式這個特例外，你需要以傳參考值的方式傳資料給這些物件。參看
+    perlsub 中的 &#34;Pass by
+    Reference&#34;，裏面有針對此問題的討論，以及
+    perlref
+    裏面有引用的資訊。</p>
+<p class="Pp">參見下面的 ``Passing
+    Regexes&#39;&#39;，學習如何傳遞正則表達式。</p>
+<dl class="Bl-tag">
+  <dt>傳遞變量和函數</dt>
+  <dd>一般的變數和函數是相當簡單的：只要傳一個指向現存的匿名變數或函數的參考值即可：
+    <p class="Pp"></p>
+    <pre>    func( \$some_scalar );
+    </pre>
+    <p class="Pp"></p>
+    <pre>    func( \@some_array  );
+    func( [ 1 .. 10 ]   );
+    </pre>
+    <p class="Pp"></p>
+    <pre>    func( \%some_hash   );
+    func( { this =&gt; 10, that =&gt; 20 }   );
+    </pre>
+    <p class="Pp"></p>
+    <pre>    func( \&amp;some_func   );
+    func( sub { $_[0] ** $_[1] }   );
+    </pre>
+  </dd>
+  <dt>傳遞文件句柄</dt>
+  <dd>在 Perl5.6
+      中，你可以用標量變量表示文件句柄，並將它與其他標量同樣處理
+    <p class="Pp"></p>
+    <pre>        open my $fh, $filename or die &#34;Cannot open $filename! $!&#34;;
+        func( $fh );
+    </pre>
+    <p class="Pp"></p>
+    <pre>        sub func {
+                my $passed_fh = shift;
+    </pre>
+    <p class="Pp"></p>
+    <pre>                my $line = &lt;$fh&gt;;
+                }
+    </pre>
+    <p class="Pp">在 Perl5.6
+        之前，必須用
+        <span class="Li">*FH</span> 或
+        <span class="Li">&#34;\*FH&#34;</span>
+        語法。這叫做
+        &#34;typeglobs&#34;--參見 perldata 中的
+        &#34;Typeglobs and Filehandles&#34; 和 perlsub 中的
+        &#34;Pass by Reference&#34;。</p>
+  </dd>
+  <dt>傳遞正則表達式</dt>
+  <dd>要傳遞正則表達式，你需要使用足夠新的
+      Perl 發行，足以支持
+      <span class="Li">&#34;qr//&#34;</span>
+      構造方式的版本，傳遞字符串，使用一個捕獲異常的
+      eval，或者其他更聰明的辦法。
+    <p class="Pp">這裏有一個如何傳遞正則表達式字符串的例子，使用
+        <span class="Li">&#34;qr//&#34;</span>:</p>
+    <p class="Pp"></p>
+    <pre>    sub compare($$) {
+        my ($val1, $regex) = @_;
+        my $retval = $val1 =~ /$regex/;
+        return $retval;
+    }
+    $match = compare(&#34;old McDonald&#34;, qr/d.*D/i);
+    </pre>
+    <p class="Pp">注意 <span class="Li">&#34;qr//&#34;</span>
+        如何允許在後面加上標誌。這個模式在編譯期被編譯，儘管它後來才執行。
+        <span class="Li">&#34;qr//&#34;</span>
+        表示法雖然好用，但是直到
+        5.005
+        發行中才引入。在那之前，你必須用不直觀的辦法。例如，如果沒有
+        <span class="Li">&#34;qr//&#34;</span> 的話:</p>
+    <p class="Pp"></p>
+    <pre>    sub compare($$) {
+        my ($val1, $regex) = @_;
+        my $retval = eval { $val1 =~ /$regex/ };
+        die if $@;
+        return $retval;
+    }
+    </pre>
+    <p class="Pp"></p>
+    <pre>    $match = compare(&#34;old McDonald&#34;, q/($?i)d.*D/);
+    </pre>
+    <p class="Pp">確保你沒有任何這樣的東西：</p>
+    <p class="Pp"></p>
+    <pre>    return eval &#34;\$val =~ /$regex/&#34;;   # WRONG
+    </pre>
+    <p class="Pp">否則別人會靠雙引號括起來的字串以及
+        eval
+        雙重解譯的本質而偷偷插入
+        shell指令來作壞事。例如：</p>
+    <p class="Pp"></p>
+    <pre>    $pattern_of_evil = &#39;danger ${ system(&#34;rm -rf * &amp;&#34;) } danger&#39;;
+    </pre>
+    <p class="Pp"></p>
+    <pre>    eval &#34;\$string =~ /$pattern_of_evil/&#34;;
+    </pre>
+    <p class="Pp">想學非常非常聰明的方法的讀者可以參考
+        O&#39;Reilly 出的 Mastering Regular
+        Expressions這本書，作者是
+        Jeffrey Friedl。其中第 273頁的
+        Build_MatchMany_Function()特別的有趣。在
+        perlfaq2中可以找到有關本書
+        的資料。</p>
+  </dd>
+  <dt>傳遞方法</dt>
+  <dd>要傳遞一個對象方法給一個函數，可以這樣做：
+    <p class="Pp"></p>
+    <pre>    call_a_lot(10, $some_obj, &#34;methname&#34;)
+    sub call_a_lot {
+        my ($count, $widget, $trick) = @_;
+        for (my $i = 0; $i &lt; $count; $i++) {
+            $widget-&gt;$trick();
+        }
+    }
+    </pre>
+    <p class="Pp">或者，使用一個閉包來包含這個對象，它的方法調用及參數：</p>
+    <p class="Pp"></p>
+    <pre>    my $whatnot =  sub { $some_obj-&gt;obfuscate(@args) };
+    func($whatnot);
+    sub func {
+        my $code = shift;
+        &amp;$code();
+    }
+    </pre>
+    <p class="Pp">也可以研究 UNIVERSAL
+        類別中的 can()方法
+        (附於標準 Perl 版本中)。
+      <br/>
+    </p>
+  </dd>
+</dl>
+<p class="Pp"><b>How do I create a static variable?</b></p>
+<p class="Pp">就像與
+    Perl相關的其他事情一樣，``條條大路通羅馬&#39;&#39;
+    (TMTOWTDI)。對其他語言來說叫做
+    ``靜態變數&#39;&#39; (static
+    variable)的東西，在
+    Perl裏面可能是一個函數私有的變數(只有該函數自己看得到，且在不同的呼叫間保持定值)，或是一個檔案私有(file-private)變數(只有同一個檔案中的函數纔看得到)。</p>
+<p class="Pp">以下就是實作函數私有變數的程式：</p>
+<p class="Pp"></p>
+<pre>    BEGIN {
+        my $counter = 42;
+        sub prev_counter { return --$counter }
+        sub next_counter { return $counter++ }
+    }
+</pre>
+<p class="Pp">prev_counter() 和 next_counter()
+    將會共用一個於編譯時初始化的私有變數
+    $counter。</p>
+<p class="Pp">要聲明一個檔案私有(file-private)變數，你仍然得使用
+    my()，將它放在檔案開頭處最外圍。假設現在是在
+    Pax.pm 這個檔案裏：</p>
+<p class="Pp"></p>
+<pre>    package Pax;
+    my $started = scalar(localtime(time()));
+</pre>
+<p class="Pp"></p>
+<pre>    sub begun { return $started }
+</pre>
+<p class="Pp">當用 <span class="Li">&#34;use Pax&#34;</span>
+    或 <span class="Li">&#34;require Pax&#34;</span>
+    載入此模組時，這個變數就會被初始化。不過它不會被資源回收，像其他出了有效範圍的變數那樣，因爲
+    begun()函數要用到它，但是沒有其他函數能擷取它。這個變數不能以
+    <span class="Li">$Pax::started</span>
+    的形式來擷取，因爲它所存在的範圍與此包裹無關。它存在的範圍是這個檔案。可想見地，一個檔案裏可以放好幾個包裹，而所有的包裹都擷取同一個私有變數，但從另一個檔案中，即使是屬於同一個包裹(package)，也不能取得它的值。</p>
+<p class="Pp">參見 perlsub 中的 &#34;Persistent Private
+    Variables&#34; 的細節.
+  <br/>
+</p>
+<p class="Pp"><b>What&#39;s the difference between dynamic and lexical (static)
+    scoping? Between </b><i>local()</i><b> and </b><i>my()</i><b>?</b></p>
+<p class="Pp">local($x) 將全域變數
+    $x的原值存起來，並在此函數執行期間賦予一個新
+    值，此值可以從此函數所呼叫的其他函數裏看見。這整個步驟是在執行期間完成的，所以才叫做動態範圍選取
+    (dynamic
+    scoping)。local()影響的是全域變數，或者稱作包裹變數或動態變數。</p>
+<p class="Pp"><span class="Li">&#34;my($x)&#34;</span>
+    會創造一個只能在目前這個函數裏看得見的新變數。這個步驟是在編譯期完成(compile-time)，所以稱作文字式或是靜態範圍選取。my()總是作用在私有變數，也稱作文字式變數或(不當地)稱作靜態(範圍選取)變數。</p>
+<p class="Pp">例如：</p>
+<p class="Pp"></p>
+<pre>    sub visible {
+        print &#34;var has value $var\n&#34;;
+    }
+</pre>
+<p class="Pp"></p>
+<pre>    sub dynamic {
+        local $var = &#39;local&#39;;   # 爲全局變量暫時賦值
+        visible();              # 調用 $var 變量
+    }
+</pre>
+<p class="Pp"></p>
+<pre>    sub lexical {
+        my $var = &#39;private&#39;;    # 新的私有變量 $var
+        visible();              # (在 sub 作用域之外不可見)
+    }
+</pre>
+<p class="Pp"></p>
+<pre>    $var = &#39;global&#39;;
+</pre>
+<p class="Pp"></p>
+<pre>    visible();                  # prints global
+    dynamic();                  # prints local
+    lexical();                  # prints global
+</pre>
+<p class="Pp">你可以發現在整個過程中
+    ``private&#39;&#39;這個值都印不出來。那是因爲
+    $var的值只存在於lexical()
+    函數的區塊裏面，對它所呼叫的函數來說是看不到的。</p>
+<p class="Pp">總結來說，local()不會產生你想像中的私有、區域變數。它只是將一個暫時的值授予一個全域變數。如果你要的是私有的變數，那麼
+    my() 纔是你要找的。</p>
+<p class="Pp">參見 perlsub 中的 &#34;Private Variables
+    via <i>my()</i>&#34; 以及 &#34;Temporary Values via
+    <i>local()</i>&#34; 來獲取詳情
+  <br/>
+</p>
+<p class="Pp"><b>在存在同名內部變量的作用域中，如何存取一個動態變量？</b></p>
+<p class="Pp">如果你知道你所在的是哪一個包裹(package)的話，你可以直接指名，就像寫
+    <span class="Li">$Some_Pack::var</span>
+    這樣。注意 <span class="Li">$::var</span>
+    這個寫法
+    並非表示目前此包裹
+    (package) 內的動態變數
+    $var，而是指在 main包裹(package)
+    裏的那個，就等價於
+    <span class="Li">$main::var</span> 。</p>
+<p class="Pp"></p>
+<pre>        use vars &#39;$var&#39;;
+        local $var = &#34;global&#34;;
+        my    $var = &#34;lexical&#34;;
+</pre>
+<p class="Pp"></p>
+<pre>        print &#34;lexical is $var\n&#34;;
+        print &#34;global  is $main::var\n&#34;;
+</pre>
+<p class="Pp">可選的，可以使用編譯器指令
+    <i>our()</i>
+    來在當前靜態作用域中引入動態變量</p>
+<p class="Pp"></p>
+<pre>        require 5.006; # our() did not exist before 5.6
+        use vars &#39;$var&#39;;
+</pre>
+<p class="Pp"></p>
+<pre>        local $var = &#34;global&#34;;
+        my $var    = &#34;lexical&#34;;
+</pre>
+<p class="Pp"></p>
+<pre>        print &#34;lexical is $var\n&#34;;
+</pre>
+<p class="Pp"></p>
+<pre>        {
+          our $var;
+          print &#34;global  is $var\n&#34;;
+        }
+</pre>
+<br/>
+<p class="Pp"><b>深連接和淺連接有什麼不同？</b></p>
+<p class="Pp">在深連結中，匿名函數中所用到的文字式變數值是以該函數產生時所在的範圍爲準。在淺連結中，這些變數值是以函數被呼叫時所在的範圍爲準，如果在這個範圍中恰巧有同名的變數，便使用這些當地變數的值。Perl總是使用文字式變數(就是以
+    my()創造的)式的深連結。然而，動態變數(也稱作全域(global)，區域(local)，或包裹(package)變數)在功效上是淺連結。就把這當作是少用它們的另一個理由好
+    了。請參考
+    &#34;什麼是閉包&#34;
+    一節。
+  <br/>
+</p>
+<p class="Pp"><b>爲什麼 </b></p>
+<p class="Pp">local()會把
+    =號右邊以序列情境來對待。而
+    &lt;FH&gt; 這個閱讀的
+    動作，就像
+    Perl裏許多的函數以及運算子一樣，會自動分辨出自己被呼叫時所在的情境並且採取適當的作法。一般來說，scalar()函數可以幫點忙。這個函數實際上對資料本身不會有任何作用(與一般所認爲的相反)，但是會告訴它所作用的函數要以對待純量值的方法來運算。如果那個函數沒有預先定義好碰到純量情境的行爲，那麼它當然也幫不了你(例如
+    sort() 函數)。</p>
+<p class="Pp">然而，在以上這個例子
+    (local...)中，只要省略括號便可強制使用標量情境：</p>
+<p class="Pp"></p>
+<pre>    local($foo) = &lt;FILE&gt;;           # WRONG
+    local($foo) = scalar(&lt;FILE&gt;);   # ok
+    local $foo  = &lt;FILE&gt;;           # right
+</pre>
+<p class="Pp">其實在這個例子中，或許你該改用文字式變數
+    (lexical variables)，不過會碰到
+    的問題跟上面一樣：</p>
+<p class="Pp"></p>
+<pre>    my($foo) = &lt;FILE&gt;;  # WRONG
+    my $foo  = &lt;FILE&gt;;  # right
+</pre>
+<br/>
+<p class="Pp"><b>如何重定義一個內建函數，操作符
+    或者方法？</b></p>
+<p class="Pp">爲什麼要這麼做？
+    :-)</p>
+<p class="Pp">如果你要覆蓋掉某個內建函數，例如說
+    open()，那你得將其定義從另一個模組載
+    入。參考 perlsub 中的 Overriding Builtin
+    Functions。在 &#34;Class::Template&#34;
+    裏面也有個範例。</p>
+<p class="Pp">如果你要覆蓋掉一個
+    Perl運算子，像是
+    <span class="Li">&#34;+&#34;</span> 或
+    <span class="Li">&#34;**&#34;</span>,
+    那你該使用 <span class="Li">&#34;use
+    overload&#34;</span> 這個編用，在
+    overload 中有記載。</p>
+<p class="Pp">如果你要覆蓋父類別
+    (parent class)裏的方法呼叫 (method
+    calls)，請看 perltoot 中的 Overridden Methods
+    。
+  <br/>
+</p>
+<p class="Pp"><b>調用函數時 &amp;foo 和
+    foo()
+  的形式有什麼不同?</b></p>
+<p class="Pp">當你用
+    &amp;foo的方式呼叫一個函數時，你等於讓這個函數擷取你目前
+    @_裏面的值，同時也跳過原型定義
+    (prototypes)不用。這表式此函數抓到的是你當時的
+    @_， 而非一個空的
+    @_！雖然嚴格講起來它也不能算是個
+    bug (但是在
+    perlsub裏面是這麼說的)但在大部份情況下，這也算不上是個特別功能。</p>
+<p class="Pp">當你用
+    &amp;foo()的方式呼叫你的函數時，你會得到一個新的
+    @_，但是原型定義
+    仍然會被避開不用。</p>
+<p class="Pp">在一般情況下，你該用
+    foo()的方式去呼叫函數。只有在編譯器已事先知道這個函數的定義時，括號才能省略，譬如當這個函數所在的模組或包裹被
+    use (但如果是被
+    require則不行)時，或是透過先前提及或
+    use
+    subs宣告等方法，讓編譯器先接觸到這個函數的定義。用這種呼叫方式，即使是當括號省掉時，你都會得到一個乾淨的
+    @_，不會有任何不該出現的舊值殘留在上面。
+  <br/>
+</p>
+<p class="Pp"><b>如何創建一個分支語句？</b></p>
+<p class="Pp">這個問題在 perlsyn
+    文件裏有更詳盡的解釋。簡單來說，因爲
+    Perl本身已提供了多種不同的條件測試方法可供使用
+    (數值比較、字串比較、
+    glob比較、正規表示式
+    對應、覆蓋比較，及其它)，所以並沒有正式的
+    case敘述語法。雖然自
+    perl1起這就一直是許多人期盼的一個項目，但因
+    Larry無法決定怎樣纔是呈現這功能的最好方法，因此還是將它略掉。</p>
+<p class="Pp">從 Perl 5.8 開始，要使用
+    swtich 和 case，可以使用 Switch
+    擴展，就是這樣：</p>
+<p class="Pp"></p>
+<pre>        use Switch;
+</pre>
+<p class="Pp">此後就可以用 switch 和
+    case 了. It is not as fast as it could be because it&#39;s not really part
+    of the language (it&#39;s done using source filters) but it is available, and
+    it&#39;s very flexible.</p>
+<p class="Pp">But if one wants to use pure Perl, the general answer is to write
+    a construct like this:</p>
+<p class="Pp"></p>
+<pre>    for ($variable_to_test) {
+        if    (/pat1/)  { }     # do something
+        elsif (/pat2/)  { }     # do something else
+        elsif (/pat3/)  { }     # do something else
+        else            { }     # default
+    }
+</pre>
+<p class="Pp">下面這個簡單的
+    switch範例以模式對應爲基礎。我們將要做的是對儲存在
+    $whatchamacallit裏面的參考值
+    (reference)的類型進行多重條件的判斷。【譯註：$whatchamacallit
+    函意爲 $what_you_might_call_it】</p>
+<p class="Pp"></p>
+<pre>    SWITCH: for (ref $whatchamacallit) {
+</pre>
+<p class="Pp"></p>
+<pre>        /^$/            &amp;&amp; die &#34;not a reference&#34;;
+</pre>
+<p class="Pp"></p>
+<pre>        /SCALAR/        &amp;&amp; do {
+                                print_scalar($$ref);
+                                last SWITCH;
+                        };
+</pre>
+<p class="Pp"></p>
+<pre>        /ARRAY/         &amp;&amp; do {
+                                print_array(@$ref);
+                                last SWITCH;
+                        };
+</pre>
+<p class="Pp"></p>
+<pre>        /HASH/          &amp;&amp; do {
+                                print_hash(%$ref);
+                                last SWITCH;
+                        };
+</pre>
+<p class="Pp"></p>
+<pre>        /CODE/          &amp;&amp; do {
+                                warn &#34;can&#39;t print function ref&#34;;
+                                last SWITCH;
+                        };
+</pre>
+<p class="Pp"></p>
+<pre>        # DEFAULT
+</pre>
+<p class="Pp"></p>
+<pre>        warn &#34;User defined type skipped&#34;;
+</pre>
+<p class="Pp"></p>
+<pre>    }
+</pre>
+<p class="Pp">See <span class="Li">&#34;perlsyn/&#34;Basic BLOCKs and Switch
+    Statements&#34;&#34;</span> for many other examples in this style.</p>
+<p class="Pp">Sometimes you should change the positions of the constant and the
+    variable. For example, let&#39;s say you wanted to test which of many answers
+    you were given, but in a case-insensitive way that also allows
+    abbreviations. You can use the following technique if the strings all start
+    with different characters or if you want to arrange the matches so that one
+    takes precedence over another, as <span class="Li">&#34;SEND&#34;</span>
+    has precedence over <span class="Li">&#34;STOP&#34;</span> here:</p>
+<p class="Pp"></p>
+<pre>    chomp($answer = &lt;&gt;);
+    if    (&#34;SEND&#34;  =~ /^\Q$answer/i) { print &#34;Action is send\n&#34;  }
+    elsif (&#34;STOP&#34;  =~ /^\Q$answer/i) { print &#34;Action is stop\n&#34;  }
+    elsif (&#34;ABORT&#34; =~ /^\Q$answer/i) { print &#34;Action is abort\n&#34; }
+    elsif (&#34;LIST&#34;  =~ /^\Q$answer/i) { print &#34;Action is list\n&#34;  }
+    elsif (&#34;EDIT&#34;  =~ /^\Q$answer/i) { print &#34;Action is edit\n&#34;  }
+</pre>
+<p class="Pp">A totally different approach is to create a hash of function
+    references.</p>
+<p class="Pp"></p>
+<pre>    my %commands = (
+        &#34;happy&#34; =&gt; \&amp;joy,
+        &#34;sad&#34;,  =&gt; \&amp;sullen,
+        &#34;done&#34;  =&gt; sub { die &#34;See ya!&#34; },
+        &#34;mad&#34;   =&gt; \&amp;angry,
+    );
+</pre>
+<p class="Pp"></p>
+<pre>    print &#34;How are you? &#34;;
+    chomp($string = &lt;STDIN&gt;);
+    if ($commands{$string}) {
+        $commands{$string}-&gt;();
+    } else {
+        print &#34;No such command: $string\n&#34;;
+    }
+</pre>
+<br/>
+<p class="Pp"><b>如何捕獲對未定義變量，函數或方法的訪問？</b></p>
+<p class="Pp">在 perlsub 中的 &#34;Autoloading&#34; 和
+    perltoot 中的 &#34;AUTOLOAD: Proxy Methods&#34; 裏
+    提到的 AUTOLOAD
+    方法讓你能捕捉對於未定義函數與方法的呼叫。</p>
+<p class="Pp">When it comes to undefined variables that would trigger a warning
+    under <span class="Li">&#34;use warnings&#34;</span>, you can promote the
+    warning to an error.</p>
+<p class="Pp"></p>
+<pre>        use warnings FATAL =&gt; qw(uninitialized);
+</pre>
+<br/>
+<p class="Pp"><b>爲什麼找不到包含在同一個文件中的方法？</b></p>
+<p class="Pp">一些可能的原因：你用的繼承給搞混了、你拼錯了該方法的名字，或是物件的類別錯誤。這些事在
+    perltoot裏都有更詳盡的說明。同時你也可以用
+    <span class="Li">&#34;print ref($object)&#34;</span>
+    來找出 <span class="Li">$object</span>
+    這個物件是被歸到哪個類別底下。</p>
+<p class="Pp">另一個可能的原因是你在
+    Perl還不知道這個包裹
+    (package)存在之前便將某個類別名稱在間接式物件語法中使用
+    (例如 <span class="Li">&#34;find Guru
+    &#34;Samy&#34;&#34;</span>)。最好是在開始使用你的包裹前，先確定都已經先把它們定義好了，如果你用的是
+    use 而非
+    require的話，這件事便會自動處理好。不然的話，確定你使用箭頭式語法
+    (例如，<span class="Li">&#34;Guru-&gt;find(&#34;Samy&#34;)&#34;</span>))。在perlobj
+    裏面對於物件的記號有詳盡解釋。</p>
+<p class="Pp">Make sure to read about creating modules in perlmod and the perils
+    of indirect objects in &#34;Method Invocation&#34; in perlobj.
+  <br/>
+</p>
+<p class="Pp"><b>如何找到當前的包？</b></p>
+<p class="Pp">如果只是一個隨意的程式的話，你可以用下面的方法找出目前正被編譯的包裹爲何：</p>
+<p class="Pp"></p>
+<pre>    my $packname = __PACKAGE__;
+</pre>
+<p class="Pp">但如果是一個方法的話，而且印出的錯誤訊息中要包含呼叫此方法的物件
+    (不見得就是把這個方法編譯進去的那個物件)則：</p>
+<p class="Pp"></p>
+<pre>    sub amethod {
+        my $self  = shift;
+        my $class = ref($self) ⎪⎪ $self;
+        warn &#34;called me from a $class object&#34;;
+    }
+</pre>
+<br/>
+<p class="Pp"><b>如何註釋掉大塊的
+    perl 代碼？</b></p>
+<p class="Pp">用內嵌
+    POD格式的方法把程式碼變註解。將要註釋掉的塊包含在
+    POD 標記內, 例如 <span class="Li">&#34;=for
+    nobody&#34;</span> 和 <span class="Li">&#34;=cut&#34;</span>
+    (標誌着 POD 塊的結束).</p>
+<p class="Pp"></p>
+<pre>    # 這是程式
+</pre>
+<p class="Pp"></p>
+<pre>    =for nobody
+</pre>
+<p class="Pp"></p>
+<pre>    all of this stuff
+</pre>
+<p class="Pp"></p>
+<pre>    接下來此處所有的文字都會被忽略
+</pre>
+<p class="Pp"></p>
+<pre>    =cut
+</pre>
+<p class="Pp"></p>
+<pre>    # program continues
+</pre>
+<p class="Pp">The pod directives cannot go just anywhere. You must put a pod
+    directive where the parser is expecting a new statement, not just in the
+    middle of an expression or some other arbitrary grammar production.</p>
+<p class="Pp">See perlpod for more details.
+  <br/>
+</p>
+<p class="Pp"><b>How do I clear a package?</b></p>
+<p class="Pp">Use this code, provided by Mark-Jason Dominus:</p>
+<p class="Pp"></p>
+<pre>    sub scrub_package {
+        no strict &#39;refs&#39;;
+        my $pack = shift;
+        die &#34;Shouldn&#39;t delete main package&#34;
+            if $pack eq &#34;&#34; ⎪⎪ $pack eq &#34;main&#34;;
+        my $stash = *{$pack . &#39;::&#39;}{HASH};
+        my $name;
+        foreach $name (keys %$stash) {
+            my $fullname = $pack . &#39;::&#39; . $name;
+            # Get rid of everything with that name.
+            undef $$fullname;
+            undef @$fullname;
+            undef %$fullname;
+            undef &amp;$fullname;
+            undef *$fullname;
+        }
+    }
+</pre>
+<p class="Pp">Or, if you&#39;re using a recent release of Perl, you can just use the
+    <i>Symbol::delete_package()</i> function instead.
+  <br/>
+</p>
+<p class="Pp"><b>How can I use a variable as a variable name?</b></p>
+<p class="Pp">Beginners often think they want to have a variable contain the
+    name of a variable.</p>
+<p class="Pp"></p>
+<pre>    $fred    = 23;
+    $varname = &#34;fred&#34;;
+    ++$$varname;         # $fred now 24
+</pre>
+<p class="Pp">This works <i>sometimes</i>, but it is a very bad idea for two
+    reasons.</p>
+<p class="Pp">The first reason is that this technique <i>only works on
+    global</i> <i>variables</i>. That means that if
+    <span class="Li">$fred</span> is a lexical variable created with <i>my()</i>
+    in the above example, the code wouldn&#39;t work at all: you&#39;d accidentally
+    access the global and skip right over the private lexical altogether. Global
+    variables are bad because they can easily collide accidentally and in
+    general make for non-scalable and confusing code.</p>
+<p class="Pp">Symbolic references are forbidden under the
+    <span class="Li">&#34;use strict&#34;</span> pragma. They are not true
+    references and consequently are not reference counted or garbage
+  collected.</p>
+<p class="Pp">The other reason why using a variable to hold the name of another
+    variable is a bad idea is that the question often stems from a lack of
+    understanding of Perl data structures, particularly hashes. By using
+    symbolic references, you are just using the package&#39;s symbol-table hash
+    (like <span class="Li">%main::</span>) instead of a user-defined hash. The
+    solution is to use your own hash or a real reference instead.</p>
+<p class="Pp"></p>
+<pre>    $USER_VARS{&#34;fred&#34;} = 23;
+    $varname = &#34;fred&#34;;
+    $USER_VARS{$varname}++;  # not $$varname++
+</pre>
+<p class="Pp">There we&#39;re using the <span class="Li">%USER_VARS</span> hash
+    instead of symbolic references. Sometimes this comes up in reading strings
+    from the user with variable references and wanting to expand them to the
+    values of your perl program&#39;s variables. This is also a bad idea because it
+    conflates the program-addressable namespace and the user-addressable one.
+    Instead of reading a string and expanding it to the actual contents of your
+    program&#39;s own variables:</p>
+<p class="Pp"></p>
+<pre>    $str = &#39;this has a $fred and $barney in it&#39;;
+    $str =~ s/(\$\w+)/$1/eeg;             # need double eval
+</pre>
+<p class="Pp">it would be better to keep a hash around like
+    <span class="Li">%USER_VARS</span> and have variable references actually
+    refer to entries in that hash:</p>
+<p class="Pp"></p>
+<pre>    $str =~ s/\$(\w+)/$USER_VARS{$1}/g;   # no /e here at all
+</pre>
+<p class="Pp">That&#39;s faster, cleaner, and safer than the previous approach. Of
+    course, you don&#39;t need to use a dollar sign. You could use your own scheme
+    to make it less confusing, like bracketed percent symbols, etc.</p>
+<p class="Pp"></p>
+<pre>    $str = &#39;this has a %fred% and %barney% in it&#39;;
+    $str =~ s/%(\w+)%/$USER_VARS{$1}/g;   # no /e here at all
+</pre>
+<p class="Pp">Another reason that folks sometimes think they want a variable to
+    contain the name of a variable is because they don&#39;t know how to build
+    proper data structures using hashes. For example, let&#39;s say they wanted two
+    hashes in their program: <span class="Li">%fred</span> and
+    <span class="Li">%barney</span>, and that they wanted to use another scalar
+    variable to refer to those by name.</p>
+<p class="Pp"></p>
+<pre>    $name = &#34;fred&#34;;
+    $$name{WIFE} = &#34;wilma&#34;;     # set %fred
+</pre>
+<p class="Pp"></p>
+<pre>    $name = &#34;barney&#34;;
+    $$name{WIFE} = &#34;betty&#34;;     # set %barney
+</pre>
+<p class="Pp">This is still a symbolic reference, and is still saddled with the
+    problems enumerated above. It would be far better to write:</p>
+<p class="Pp"></p>
+<pre>    $folks{&#34;fred&#34;}{WIFE}   = &#34;wilma&#34;;
+    $folks{&#34;barney&#34;}{WIFE} = &#34;betty&#34;;
+</pre>
+<p class="Pp">And just use a multilevel hash to start with.</p>
+<p class="Pp">The only times that you absolutely <i>must</i> use symbolic
+    references are when you really must refer to the symbol table. This may be
+    because it&#39;s something that can&#39;t take a real reference to, such as a format
+    name. Doing so may also be important for method calls, since these always go
+    through the symbol table for resolution.</p>
+<p class="Pp">In those cases, you would turn off <span class="Li">&#34;strict
+    &#39;refs&#39;&#34;</span> temporarily so you can play around with the symbol
+    table. For example:</p>
+<p class="Pp"></p>
+<pre>    @colors = qw(red blue green yellow orange purple violet);
+    for my $name (@colors) {
+        no strict &#39;refs&#39;;  # renege for the block
+        *$name = sub { &#34;&lt;FONT COLOR=&#39;$name&#39;&gt;@_&lt;/FONT&gt;&#34; };
+    }
+</pre>
+<p class="Pp">All those functions (<i>red()</i>, <i>blue()</i>, <i>green()</i>,
+    etc.) appear to be separate, but the real code in the closure actually was
+    compiled only once.</p>
+<p class="Pp">So, sometimes you might want to use symbolic references to
+    directly manipulate the symbol table. This doesn&#39;t matter for formats,
+    handles, and subroutines, because they are always global--you can&#39;t use
+    <i>my()</i> on them. For scalars, arrays, and hashes, though--and usually
+    for subroutines-- you probably only want to use hard references.
+  <br/>
+</p>
+<p class="Pp"><b>What does &#34;bad interpreter&#34; mean?</b></p>
+<p class="Pp">The &#34;bad interpreter&#34; message comes from the shell, not
+    perl. The actual message may vary depending on your platform, shell, and
+    locale settings.</p>
+<p class="Pp">If you see &#34;bad interpreter - no such file or
+    directory&#34;, the first line in your perl script (the &#34;shebang&#34;
+    line) does not contain the right path to perl (or any other program capable
+    of running scripts). Sometimes this happens when you move the script from
+    one machine to another and each machine has a different path to
+    perl---/usr/bin/perl versus /usr/local/bin/perl for instance.</p>
+<p class="Pp">If you see &#34;bad interpreter: Permission denied&#34;, you
+    need to make your script executable.</p>
+<p class="Pp">In either case, you should still be able to run the scripts with
+    perl explicitly:</p>
+<p class="Pp"></p>
+<pre>        % perl script.pl
+</pre>
+<p class="Pp">If you get a message like &#34;perl: command not found&#34;,
+    perl is not in your PATH, which might also mean that the location of perl is
+    not where you expect it so you need to adjust your shebang line.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="AUTHOR_AND_COPYRIGHT">AUTHOR AND COPYRIGHT<a class="anchor" href="#AUTHOR_AND_COPYRIGHT">¶</a></h1>
+Copyright (c) 1997-2002 Tom Christiansen and Nathan Torkington. All rights
+  reserved.
+<p class="Pp">This documentation is free; you can redistribute it and/or modify
+    it under the same terms as Perl itself.</p>
+<p class="Pp">Irrespective of its distribution, all code examples in this file
+    are hereby placed into the public domain. You are permitted and encouraged
+    to use this code in your own programs for fun or for profit as you see fit.
+    A simple comment in the code giving credit would be courteous but is not
+    required.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="譯者">譯者<a class="anchor" href="#%E8%AD%AF%E8%80%85">¶</a></h1>
+<b>陳彥銘，蕭百齡，兩隻老虎工作室</b>
+<br/>
+<p class="Pp"><b>跋</b></p>
+<p class="Pp">本頁面中文版由中文
+    man 手冊頁計劃提供。
+  <br/>
+  中文 man
+    手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-25</td>
+    <td class="foot-os">perl v5.8.3</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+perlfaq7.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-28T03:40:59Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"perlfaq7(7)\"}}]}"
+</script>

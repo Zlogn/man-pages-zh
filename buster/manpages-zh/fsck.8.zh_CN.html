@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>fsck(8) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/fsck.8.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/util-linux/fsck.8.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-ja/fsck.8.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/fsck.8.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-tr/fsck.8.tr.html" hreflang="tr">
+<link rel="alternate" href="../../buster/manpages-zh/fsck.8.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/fsck.8.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="8">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; fsck(8)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/fsck.8">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/fsck.8.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%80%BB%E8%A7%88_SYNOPSIS" title="总览 SYNOPSIS">总览 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%89%E9%A1%B9_OPTIONS" title="选项 OPTIONS">选项 OPTIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85_AUTHOR" title="作者 AUTHOR">作者 AUTHOR</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6_FILES" title="文件 FILES">文件 FILES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F_ENVIRONMENT_VARIABLES" title="环境变量 ENVIRONMENT VARIABLES">环境变量 ENVIRONMENT VARIABLES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E8%A7%81_SEE_ALSO" title="参见 SEE ALSO">参见 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D" title="[中文版维护人]">[中文版维护人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/fsck.8.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/fsck.8.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/fsck.8.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/fsck.8.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/util-linux/fsck.8.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/fsck.8.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/fsck.8.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-tr/fsck.8.tr.html" title="Turkish (tr)">Türkçe</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/fsck.8.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/fsck.8.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">FSCK(8)</td>
+    <td class="head-vol">System Manager&#39;s Manual</td>
+    <td class="head-rtitle">FSCK(8)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+fsck -
+  检查并修复Linux文件系统
+</section>
+<section class="Sh">
+<h1 class="Sh" id="总览_SYNOPSIS">总览 SYNOPSIS<a class="anchor" href="#%E6%80%BB%E8%A7%88_SYNOPSIS">¶</a></h1>
+<b>fsck</b> [ <b>-sACVRTNP</b> ] [ <b>-t</b> <i>fstype</i> ] <i>[filesys ...
+  ]</i> [--] [ <b>fs-specific-options</b> ]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+<b>fsck</b>
+  通常用来检查并适当修复一个或多个Linux文件系统.
+  <i>filesys</i>
+  可以是一个设备名(例如:
+  <i>/dev/hdc1</i>, <i>/dev/sdb2</i>),
+  一个挂载点(例如: <i>/</i>,
+  <i>/usr</i>, <i>/home</i>),
+  或一个ext2文件系统的磁盘标签,
+  也可以是UUID指定符(例如:
+  UUID=8868abf6-88c5-4a83-98b8-bfc24057f7bd 或 LABEL=root).
+  通常， <b>fsck</b>
+  会试着以并行的方式同时在不同的物理磁盘上运行文件系统检查，这样可以减少对所有文件系统进行检查的时间。
+<p class="Pp">如果没有在命令行指定文件系统，并且没有指定
+    <b>-A</b> 选项， <b>fsck</b>
+    将默认顺序地检查
+    <b>/etc/fstab</b>
+    中登记的文件系统。这和使用
+    <b>-As</b> 选项是相同的。</p>
+<p class="Pp"><b>fsck</b>
+    退出的返回值是下列情况之和：
+  <br/>
+  	0	- 没有错误
+  <br/>
+  	1	- 文件系统有错但已修复
+  <br/>
+  	2	- 系统应当重启
+  <br/>
+  	4	- 文件系统错误没有修复
+  <br/>
+  	8	- 运行错误
+  <br/>
+  	16	- 用法或语法错误
+  <br/>
+  	32	- 用户撤销了fsck 操作
+  <br/>
+  	128	- 共享库出错
+  <br/>
+  当检测多个文件系统时，退出的返回值是对每个文件系统检查的返回值按位或的结果。</p>
+<p class="Pp">实际上， <b>fsck</b> 只是Linux
+    中不同的文件系统检查器(<b>fsck</b>.<i>fstype</i>)的一个前端。首先，它在
+    <i>/sbin</i>
+    中搜索特定文件系统的检查器，然后在
+    <i>/etc/fs</i> 和 <i>/etc</i>
+    中搜索，最后在 PATH
+    环境变量中列出的路径中搜索。请查看特定文件系统的检查器的手册页来获取细节信息。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="选项_OPTIONS">选项 OPTIONS<a class="anchor" href="#%E9%80%89%E9%A1%B9_OPTIONS">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>-s</b></dt>
+  <dd>顺序地进行 <b>fsck</b>
+      操作。如果你要检查多个文件系统，并且检查器运行在交互模式，这样作比较有好处。(注意:
+      <a href="../../buster/e2fsprogs/e2fsck.8.en.html">e2fsck(8)</a>
+      默认是以交互方式运行的。要使
+      <a href="../../buster/e2fsprogs/e2fsck.8.en.html">e2fsck(8)</a>
+      以非交互方式运行，你必须指定
+      <b>-p</b> 和 <b>-a</b>
+      选项，如果你想要自动纠正错误，或
+      <b>-n</b>
+      选项，如果不想自动纠正错误。)</dd>
+  <dt><b>-t</b><i> fslist</i></dt>
+  <dd>指定要检查的文件系统的类型。当指定了
+      <b>-A</b> 标志时，只有 <i>fslist</i>
+      中列出的类型的文件系统会被检查。
+      <i>fslist</i>
+      参数是一个以逗号分隔的文件系统类型列表以及选项说明符。可以在这个以逗号分隔的列表的所有文件系统前面加上否定前缀
+      &#39;<b>no</b>&#39; 或 &#39;<b>!</b>&#39;
+      来使得只有没有列在
+      <i>fslist</i>
+      中的文件系统将被检查。如果并非
+      <i>fslist</i>
+      中列出的所有文件系统都加上了否定前缀，那么只有
+      <i>fslist</i>
+      中列出的文件系统将被检查。
+    <p class="Pp">选项说明符也可能包含在这个以逗号分隔的列表
+        <i>fslist</i>
+        中。它们的格式是
+        <b>opts=</b><i>fs-option</i>
+        。如果出现了选项说明符，那么只有在
+        <b>/etc/fstab</b>
+        中它们的挂载选项字段中不包含
+        <i>fs-option</i>
+        的文件系统将被检查。
+        如果选项说明符有否定前缀，那么只有在
+        <b>/etc/fstab</b>
+        中它们的挂载选项字段中包含
+        <i>fs-option</i>
+        的文件系统将被检查。</p>
+    <p class="Pp">例如，如果 <i>fslist</i>
+        中出现了 <b>opts=ro</b>
+        那么只有 <b>/etc/fstab</b>
+        中，挂载选项包含
+        <b>ro</b>
+        的文件系统将被检查。</p>
+    <p class="Pp">为了和Mandrake
+        发行版兼容(它的启动脚本依赖于一个未经许可而对
+        <b>fsck</b>
+        程序用户接口作出的改变)，如果
+        <i>fslist</i> 中有一个 <b>loop</b>
+        文件系统，它被视为指定了
+        <b>opts=loop</b> 作为 <b>-t</b>
+        选项的参数。</p>
+    <p class="Pp">一般地，文件系统类型是在
+        <i>/etc/fstab</i> 中通过搜索与
+        <i>filesys</i>
+        相应的条目得到的。如果不能这样推知类型，并且
+        <b>-t</b>
+        选项只有一个文件系统参数，
+        <b>fsck</b>
+        将使用指定的文件系统类型。如果不能使用这种类型，将使用默认的文件系统类型(当前是ext2)。</p>
+  </dd>
+  <dt><b>-A</b></dt>
+  <dd>搜索 <i>/etc/fstab</i>
+      文件，一次检查所有在文件中有定义的文件系统。这个选项典型地用在
+      <i>/etc/rc</i>
+      系统初始化文件中，而不使用多条命令来分别检查各独立的分区。
+    <p class="Pp">如果没有使用 <b>-P</b>
+        选项，则根文件系统将第一个被检查。之后，将按
+        <i>/etc/fstab</i>
+        文件中第六字段
+        <i>fs_passno</i>
+        指定的顺序对各文件系统进行检查。
+        <i>fs_passno</i> 值为0
+        的文件系统将被跳过，不会被检查。
+        <i>fs_passno</i> 值大于0
+        的文件系统将被按顺序检查，
+        <i>fs_passno
+        值最小的文件系统将被最先检查。</i>
+        如果多个文件系统有相同的pass号，fsck将试着并行处理这些文件系统，尽管它不允许在同一个物理磁盘上同时运行多个文件系统检查程序。</p>
+    <p class="Pp">因此， <i>/etc/fstab</i>
+        文件中的一个很普遍的设置是将root文件系统的
+        <i>fs_passno</i>
+        设为1，定义其它文件系统的
+        <i>fs_passno</i>
+        为2。这样就充许 <b>fsck</b>
+        程序自动以并行的方式运行文件系统检查，
+        如果这样有好处的话。系统管理员可能会出于某些原因而不希望并行运行多个文件系统检查--例如，如果内存不够，那么过多的换页会成为系统瓶颈。</p>
+  </dd>
+  <dt><b>-C</b></dt>
+  <dd>如果文件系统检查器支持的话(当前只有ext2)，显示进度条。fsck
+      将管理各文件系统检查器，使得同一时间它们中只能有一个可以显示进度条。</dd>
+  <dt><b>-N</b></dt>
+  <dd>不执行，仅仅显示将执行的操作。</dd>
+  <dt><b>-P</b></dt>
+  <dd>当设置了 <b>-A</b>
+      标志时，将并行检查root文件系统和其他文件系统。这样是世界上最不安全的做法，因为如果root文件系统有问题，
+      <a href="../../buster/e2fsprogs/e2fsck.8.en.html">e2fsck(8)</a>
+      这样的程序可执行文件将被破坏！这个选项是为不想把root
+      文件系统分得小而紧凑(这才是正确的做法)的系统管理员准备的。</dd>
+  <dt><b>-R</b></dt>
+  <dd>当使用 <b>-A</b>
+      标志来检查所有文件系统时，跳过root文件系统
+      (它可能已经被挂载为可读写)。</dd>
+  <dt><b>-T</b></dt>
+  <dd>启动时不显示标题。</dd>
+  <dt><b>-V</b></dt>
+  <dd>产生冗余输出，包含所有被执行的特定文件系统的命令。</dd>
+  <dt><b>fs-specific-options</b></dt>
+  <dd><b>fsck</b>
+      不理解的选项被传递给特定文件系统的检查器。这些选项
+      <b>决不能</b>
+      有参数，因为 <b>fsck</b>
+      不能判断出哪个选项有参数，那些没有。</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>以 <b>--</b>
+      引导的选项和参数将被当作特定文件系统的选项传给它的检查器。</dd>
+  <dt></dt>
+  <dd>注意 fsck
+      没有为传递任意复杂的选项给特定文件系统的检查器而专门设计。如果你要做复杂的操作，请直接执行特定文件系统的检查器。如果你传给
+      <b>fsck</b>
+      极其复杂的选项和参数，它没有按照你想要的那样工作，
+      <b>不要把它报告为一个bug！</b>
+      You&#39;re almost certainly doing something that you shouldn&#39;t be doing with
+      <b>fsck.</b></dd>
+</dl>
+<p class="Pp">当前，标准的特定文件系统的选项仍在改进之中。尽管不能保证，还是有下列这些选项可以被大部分文件系统检查器所支持。</p>
+<dl class="Bl-tag">
+  <dt><b>-a</b></dt>
+  <dd>不提问，自动修复文件系统(请小心使用此选项)。注意
+      <a href="../../buster/e2fsprogs/e2fsck.8.en.html">e2fsck(8)</a> 支持 <b>-a</b>
+      仅仅是为了向前兼容。这个选项被映射到
+      <b>e2fsck</b> 的 <b>-p</b>
+      选项，那比较安全一点，不像大多数文件系统检查器支持的
+      <b>-a</b> 那样。</dd>
+  <dt><b>-r</b></dt>
+  <dd>交互式地修复文件系统错误(询问确认)。注意:
+      如果多个 fsck
+      在并行执行，这不是一个好想法。还要注意
+      <b>e2fsck</b>
+      的默认行为；它也只为了向前兼容才保留这个选项。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者_AUTHOR">作者 AUTHOR<a class="anchor" href="#%E4%BD%9C%E8%80%85_AUTHOR">¶</a></h1>
+Theodore Ts&#39;o (tytso@mit.edu)
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件_FILES">文件 FILES<a class="anchor" href="#%E6%96%87%E4%BB%B6_FILES">¶</a></h1>
+<i>/etc/fstab</i>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="环境变量_ENVIRONMENT_VARIABLES">环境变量 ENVIRONMENT VARIABLES<a class="anchor" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F_ENVIRONMENT_VARIABLES">¶</a></h1>
+<b>fsck</b>
+  程序的行为受下列环境变量影响：
+<dl class="Bl-tag">
+  <dt><b>FSCK_FORCE_ALL_PARALLEL</b></dt>
+  <dd>如果设置了这个环境变量，
+      <b>fsck</b>
+      将试着并行运行所有指定的文件系统检查，不管这些文件系统是不是在同一设备上。(这对于RAID系统或者高端存储系统比如IBM或者EMC出售的那种很有用)</dd>
+  <dt><b>FSCK_MAX_INST</b></dt>
+  <dd>这个环境变量将限制同时可以运行的文件系统检查器的最大数量。这样使得拥有大量磁盘的系统避免
+      <b>fsck</b>
+      一次启动过多文件系统检查器，那样有可能耗尽机器的CPU和内存资源。如果值为0，可以孵化出没有限制的数量的进程，这是当前的默认值。将来版本的
+      <b>fsck</b>
+      将试着根据收集操作系统的统计数据，自动判断应当启动多少文件系统检查。</dd>
+  <dt><b>PATH</b></dt>
+  <dd><b>PATH</b>
+      环境变量用来查找文件系统检查器。一些系统目录会被最先搜索：
+      <b>/sbin</b>, <b>/sbin/fs.d</b>, <b>/sbin/fs</b>, <b>/etc/fs</b>, 和
+      <b>/etc</b>. 然后才搜索 <b>PATH</b>
+      环境变量中设置的目录集合。</dd>
+  <dt><b>FSTAB_FILE</b></dt>
+  <dd>这个环境变量允许系统管理员指定
+      <b>/etc/fstab</b>
+      文件的位置。它也为
+      <b>fsck</b>
+      的开发者做测试之用。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参见_SEE_ALSO">参见 SEE ALSO<a class="anchor" href="#%E5%8F%82%E8%A7%81_SEE_ALSO">¶</a></h1>
+<a href="../../buster/mount/fstab.5.en.html">fstab(5)</a>, <a href="../../buster/manpages-zh/mkfs.8.zh_CN.html">mkfs(8)</a>, <a href="../../buster/util-linux/fsck.minix.8.en.html">fsck.minix(8)</a>, <a href="../../buster/e2fsprogs/fsck.ext2.8.en.html">fsck.ext2(8)</a>
+  或者 <a href="../../buster/e2fsprogs/e2fsck.8.en.html">e2fsck(8)</a>, <b>fsck.xiafs</b>(8).
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版维护人]">[中文版维护人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D">¶</a></h1>
+<b>袁乙钧 &lt;bbbush@163.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2003.11.01</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9B%BDlinux%E8%AE%BA%E5%9D%9Bman%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">July 2003</td>
+    <td class="foot-os">E2fsprogs version 1.34</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+fsck.8.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-17T21:41:11Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"fsck(8)\"}}]}"
+</script>

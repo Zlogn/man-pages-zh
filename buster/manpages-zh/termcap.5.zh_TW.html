@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>termcap(5) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/termcap.5.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/manpages/termcap.5.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es/termcap.5.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-ja/termcap.5.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pt/termcap.5.pt.html" hreflang="pt">
+<link rel="alternate" href="../../buster/manpages-zh/termcap.5.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/termcap.5.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="5">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; termcap(5)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/termcap.5">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/termcap.5.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO" title="參見 SEE ALSO">參見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/termcap.5.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/termcap.5.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/termcap.5.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/termcap.5.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages/termcap.5.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es/termcap.5.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/termcap.5.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pt/termcap.5.pt.html" title="Portuguese (pt)">português (pt)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/termcap.5.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/termcap.5.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/ncurses-doc/termcap.3ncurses.en.html">3ncurses (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/termcap.5.zh_TW.html">5 (<span title="File formats and conventions eg /etc/passwd">formats</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">TERMCAP(5)</td>
+    <td class="head-vol">Linux Programmer&#39;s Manual</td>
+    <td class="head-rtitle">TERMCAP(5)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+termcap - 終端功能數據庫
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+<b>termcap 數據庫是一個過時
+  (obsolete)
+  工具，用來描述以字符爲單位的終端和打印機的功能。它之所以被保留，是爲了兼容古老的程序；新程序應當使用</b>
+  <a href="../../buster/ncurses-bin/terminfo.5.en.html">terminfo(5)</a>
+  數據庫和相關的庫。
+<p class="Pp"><b>/etc/termcap</b> 是一個 ASCII
+    文件
+    (數據庫主控文件)，列出了許多不同類型終端的功能。程序可以讀取它，來找到控制實際使用的終端的可視化屬性的特定的脫逸字符
+    (escape
+    code)。(終端的其他方面是
+    stty 處理的。)termcap
+    數據庫按照 TERM
+    環境變量進行索引。</p>
+<p class="Pp"><b>Termcap</b>
+    條目必須以單個邏輯行定義，在新行符處應當用
+    `\&#39; 來續行。字段以 `:&#39;
+    分隔。每個條目的第一個字段從左邊起始，包含一系列終端的名稱，以
+    &#39;|&#39; 分隔。</p>
+<p class="Pp">第一個子字段可能
+    (在 4.3 及以前的 BSD termcap
+    條目中)
+    包含由兩個字符組成的簡稱。這個簡稱可以由大寫或小寫字母組成。在
+    4.4BSD termcap
+    條目中，這個字段被忽略。</p>
+<p class="Pp">第二個子字段
+    (在較新的 4.4BSD
+    格式中是第一個字段)
+    包括環境變量 TERM
+    使用的名字。只能使用小寫字母。可選的硬件功能應當通過附加一個連字符
+    (hyphen)
+    和後綴來標記。參見下面的範例。一般使用的後綴是
+    w (行寬超過 80 個字符)，am
+    (自動加邊)，nam
+    (不自動加邊)，和 rv
+    (反轉視頻顯示)。</p>
+<p class="Pp">第三個子字段包含一個對這個
+    termcap
+    條目的長的描述性的名字。</p>
+<p class="Pp">接下來的字段包含終端功能。任何連續的功能行必須從左邊縮進一個指標符
+    (tab) 位置。</p>
+<p class="Pp">儘管沒有定義順序，建議你將布爾值寫在最先，然後是數字值，最後是字符串值；按照字母排序，沒有大小寫之分。類似功能可以寫在同一行。</p>
+<p class="Pp"></p>
+<pre>例如：
+
+Head line: vt|vt101|DEC VT 101 terminal in 80 character mode:\
+Head line: Vt|vt101-w|DEC VT 101 terminal in (wide) 132 character mode:\
+Boolean: :bs:\
+Numeric: :co#80:\
+String: :sr=\E[H:\
+</pre>
+<section class="Ss">
+<h2 class="Ss" id="布爾值_Boolean_Capabilities">布爾值 Boolean Capabilities<a class="anchor" href="#%E5%B8%83%E7%88%BE%E5%80%BC_Boolean_Capabilities">¶</a></h2>
+<pre>5i	打印機不在屏幕上回顯
+am	自動加邊，意味着自動卷行
+bs	Control-H (8 dec.) 執行一個退格 (backspace)
+bw	在行的左邊退格回到上一行的右邊
+da	顯示保留在屏幕上方
+db	顯示保留在屏幕下方
+eo	一個空格刪除光標所在位置的所有字符
+es	工作在狀態行的轉義順序 (escape sequence) 和特殊字符
+gn	普通設備
+hc	這是一個硬拷貝終端
+HC	光標不在底線時幾乎看不見
+hs	有一個狀態線
+hz	Hazeltine bug, 終端不能打印 ~ 符號
+in	終端插入空字符，不是空格，來填充空白
+km	終端有一個meta鍵
+mi	光標移動是工作在插入模式下
+ms	光標移動是工作在突出/下劃線 (standout/underline) 模式
+NP	無填充字符
+NR	ti 不能反轉爲 te
+nx	無填充，必須使用 XON/XOFF
+os	終端能重擊 (將光標置於要改變的字符下面，再通過鍵盤輸入一個字符來替換原來的字符。)
+ul	終端不能被重擊，只能下劃線
+xb	蜂窩信號，f1 發射 ESCAPE, f2 發射 ^C
+xn	換行/返轉信號
+xo	終端使用xon/xoff協議
+xs	打印的文字超過突出的文本，將顯示在突出的位置
+xt	 Teleray 信號，破壞tabs 和奇數化突出模式(standout mode)
+</pre>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="數字值_Numeric_Capabilities">數字值 Numeric Capabilities<a class="anchor" href="#%E6%95%B8%E5%AD%97%E5%80%BC_Numeric_Capabilities">¶</a></h2>
+<pre>co	列數
+dB	硬拷貝終端上退格 (backspace) 延時，以毫秒爲單位
+dC	硬拷貝終端上回車 (carriage return) 延時，以毫秒爲單位
+dF	硬拷貝終端上打印紙進紙 (form feed) 延時，以毫秒爲單位
+dN	硬拷貝終端上新行符 (new line) 的延時，以毫秒爲單位
+dT	硬拷貝終端上製表符停止位 (tabulator stop) 的延時，以毫秒爲單位
+dV	硬拷貝終端上垂直製表符停止位的延時，以毫秒爲單位
+it	tab 位置間的差分
+lh	軟標籤高度
+lm	內存線（Lines of memory）
+lw	軟標籤的寬度
+li	行數
+Nl	軟標籤的數目
+pb	需要填充的最低波特率
+sg	突出信號
+ug	下劃線信號
+vt	虛擬終端數目
+ws	若狀態線寬度與屏幕寬度不同時的大小
+</pre>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="字符串值_String_Capabilities">字符串值 String Capabilities<a class="anchor" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%80%BC_String_Capabilities">¶</a></h2>
+<pre>!1	轉義爲保存鍵
+!2	轉義爲掛起鍵
+!3	轉義爲撤消鍵
+#1	轉義爲幫助鍵
+#2	轉義爲 home 鍵
+#3	轉義爲輸入鍵
+#4	轉義爲光標左移鍵
+%0	重做 (redo) 鍵
+%1	幫助鍵
+%2	標記鍵
+%3	信息 (message) 鍵
+%4	轉移鍵
+%5	下一對象 (next-object) 鍵
+%6	打開鍵
+%7	選項鍵
+%8	上一對象鍵
+%9	打印鍵
+%a	轉義爲信息 (message) 鍵
+%b	轉義爲轉移鍵
+%c	轉義爲next鍵
+%d	轉義爲options鍵
+%e	轉義爲previous鍵
+%f	轉義爲打印鍵
+%g	轉義爲redo鍵
+%h	轉義爲替換鍵
+%i	轉義爲光標右移鍵
+%j	轉義爲恢復鍵
+&amp;0	轉義爲取消鍵
+&amp;1	參考鍵
+&amp;2	刷新鍵
+&amp;3	替換鍵
+&amp;4	重新開始鍵
+&amp;5	恢復鍵
+&amp;6	保存鍵
+&amp;7	掛起鍵
+&amp;8	撤銷鍵
+&amp;9	轉義爲開始鍵
+*0	轉義爲查找鍵
+*1	轉義爲命令鍵
+*2	轉義爲拷貝鍵
+*3	轉義爲創建鍵
+*4	轉義爲刪除字符
+*5	轉義爲刪除行
+*6	選擇鍵
+*7	轉義爲結束鍵
+*8	轉義爲清除行鍵
+*9	轉義爲退出鍵
+@0	查找鍵
+@1	開始鍵
+@2	取消鍵
+@3	關閉鍵
+@4	命令鍵
+@5	拷貝鍵
+@6	創建鍵
+@7	結束鍵
+@8	回車/發送鍵
+@9	退出鍵
+al	插入新行
+AL	縮進 %1 行
+ac	成對的圖形字符塊，映射替代的字符集
+ae	結束替代的字符集
+as	爲圖形字符塊開始替代的字符集
+bc	退格，如果沒有 ^H
+bl	鈴聲
+bt	移動到前一個tab停止位
+cb	從行的開始處清除到光標處
+cc	虛設命令字符
+cd	清除到屏幕的末端
+ce	清除到行末
+ch	水平移動光標到 %1列
+cl	清除屏幕並將光標置位
+cm	光標移動到%1行，%2列 (屏幕中)
+CM	光標移動到%1行，%2列 (內存中)
+cr	回車
+cs	翻滾區域，從%1行到%2行
+ct	清除tab
+cv	垂直移動光標到%1行
+dc	刪除一個字符
+DC	刪除%1個字符
+dl	刪除一行
+DL	刪除%1行
+dm	開始delete模式
+do	光標下移一行
+DO	光標下移#1行
+ds	使狀態行不可用
+eA	激活替代的字符集
+ec	從光標處開始，刪除%1個字符
+ed	結束delete模式
+ei	結束insert模式
+ff	硬拷貝終端上的走紙符
+fs	在進入狀態行之前返回字符到他的位置
+F1	由功能鍵F11發送的字符串
+F2	由功能鍵F12發送的字符串
+F3	由功能鍵F14發送的字符串
+...	...
+F9	由功能鍵F19發送的字符串
+FA	由功能鍵F20發送的字符串
+FB	由功能鍵F21發送的字符串
+...	...
+FZ	由功能鍵F45發送的字符串
+Fa	由功能鍵F46發送的字符串
+Fb	由功能鍵F47發送的字符串
+...	...
+Fr	由功能鍵F63發送的字符串
+hd	移動光標到下一行的中間
+ho	光標置初始位
+hu	移動光標到上一行的中間
+i1	登錄時，初始化的字符串1
+i3	登錄時，初始化的字符串3
+is	登錄時，初始化的字符串2
+ic	插入一個字符
+IC	插入%1個字符
+if	初始化文件
+im	開始插入模式
+ip	插入填充時間和插入後所需要的特殊字符
+iP	初始化程序
+K1	輔助鍵盤的上左鍵
+K2	輔助鍵盤的center鍵
+K3	輔助鍵盤的上右鍵
+K4	輔助鍵盤的底部左鍵
+K5	輔助鍵盤的底部右鍵
+k0	功能鍵0
+k1	功能鍵1
+k2	功能鍵2
+k3	功能鍵3
+k4	功能鍵4
+k5	功能鍵5
+k6	功能鍵6
+k7	功能鍵7
+k8	功能鍵8
+k9	功能鍵9
+k;	功能鍵10
+ka	清除所有的tab鍵
+kA	插入行鍵
+kb	退格鍵
+kB	退回tab停止位
+kC	清屏鍵
+kd	光標下移鍵
+kD	刪除光標下的字符鍵
+ke	關閉輔助鍵盤
+kE	清除到行末
+kF	向前/後滾卷
+kh	光標置初始位鍵
+kH	光標hown down鍵
+kI	插入字符/插入模式鍵
+kl	光標左移鍵
+kL	整行刪除鍵
+kM	退出插入模式
+kN	下一頁
+kP	上一頁
+kr	光標右移鍵
+kR	向後/前滾卷鍵
+ks	開輔助鍵盤
+kS	清除到屏幕末端
+kt	清除這個tab鍵
+kT	設置這兒的tab鍵
+ku	光標向上鍵
+l0	如果沒有f0，第零個標籤功能鍵
+l1	如果沒有f1，第一個標籤功能鍵
+l2	如果沒有f2，第二個標籤功能鍵
+...	...
+la	如果沒有f10，第十個標籤功能鍵
+le	光標左移一個字符
+ll	移動光標到左底角
+LE	光標左移%1個字符
+LF	 關閉軟標籤
+LO	開啓軟標籤
+mb	開始閃爍
+MC	清除軟標記
+md	開始粗體模式
+me	開始所有的模式如so, us, mb, md 和 mr
+mh	開始半閃爍模式
+mk	暗模式 (看不見字符)
+ML	設置左軟標記
+mm	使終端爲meta模式
+mo	使終端離開meta模式
+mp	打開保護屬性
+mr	開始反亮模式
+MR	設置右軟標記
+nd	光標右移一個字符
+nw	回車命令
+pc	填充字符
+pf	關閉打印機
+pk	對鍵%1編程，如同用戶打印一樣發送字符串%2
+pl	對鍵%1編程，以本地模式執行字符串%2
+pn	對軟標籤%1編程來顯示字符串%2
+po	打開打印機
+pO	打開打印機%1 (&lt;256)字節
+ps	在打印機上打印屏幕內容
+px	對鍵%1編程來發送字符串%2給計算機
+r1	向設定的終端重置字符串1到sane模式
+r2	向設定的終端重置字符串2到sane模式
+r3	向設定的終端重置字符串3到sane模式
+RA	取消自動標記功能
+rc	恢復存儲的光標位置
+rf	重設字符串文件名
+RF	終端輸入請求
+RI	光標右移%1個字符
+rp	重複字符%1，共%2次
+rP	替換模式中，在字符發送後填充
+rs	重設字符串
+RX	關閉XON/XOFF流量控制
+sa	設置 %1 %2 %3 %4 %5 %6 %7 %8 %9屬性
+SA	激活自動標記功能
+sc	保存光標位置
+se	結束突出模式
+sf	正常滾卷一行
+SF	正常滾卷%1行
+so	開始突出模式
+sr	反向滾卷
+SR	向上滾卷%1行
+st	 設置所有行的製表符的停止位到當前列
+SX	打開XON/XOFF流量控制
+ta	移動到下一個硬件tab
+tc	 從另一個登記項讀取終端描述
+te	結束使用光標動作的程序
+ti	開始光標動作的程序
+ts	移動光標到狀態行的%1列
+uc	光標下方字符下劃線，並向右移動光標
+ue	結束下劃線
+up	光標向上一行
+UP	光標向上%1行
+us	開始下劃線
+vb	可視化鬧鈴
+ve	正常的可見光標
+vi	光標不可見
+vs	突出光標
+wi	設置窗口，從%1行到%2行，從3%列到4%列
+XF	XOFF字符，如果沒有 ^S
+</pre>
+<p class="Pp">還有一些方法定義字符串值功能的控制代碼:</p>
+<p class="Pp">通常的字符表示它們自己，除了
+    &#39;^&#39;,&#39;´ 和 &#39;%&#39; 。</p>
+<p class="Pp">一個 &#39;^x&#39;
+    表示Control-x.	Control-A等於 1
+    個10進制數。</p>
+<p class="Pp">\x
+    表示一個特殊的代碼。x
+    可以是以下的一個字符:</p>
+<div class="Bd-indent">E 轉義符 Escape (27)
+<br/>
+n 換行 Linefeed (10)
+<br/>
+r 回車 Carriage return (13)
+<br/>
+t 製表符 Tabulation (9)
+<br/>
+b 退格 Backspace (8)
+<br/>
+f 走紙符 Form feed (12)
+<br/>
+0 空字符 Null character. \xxx
+  指定八進制爲 xxx
+  的字符.</div>
+<dl class="Bl-tag">
+  <dt>i</dt>
+  <dd>逐一增加參數</dd>
+  <dt>r</dt>
+  <dd>單個參數功能</dd>
+  <dt>+</dt>
+  <dd>增加下一個字符的值到這個參數並以二進制輸出</dd>
+  <dt>2</dt>
+  <dd>對於2，用一個字段將參數以ASCII輸出</dd>
+  <dt>d</dt>
+  <dd>對於3，用一個字段將參數以ASCII輸出</dd>
+  <dt>%</dt>
+  <dd>打印一個 &#39;%&#39;</dd>
+</dl>
+<p class="Pp">如果你使用二進制輸出，那麼你應該避免空字符，因爲它是字符串的終止符。如果Tab鍵能夠成爲一個參數的二進制輸出，你應該重新設置Tab鍵長度。</p>
+<dl class="Bl-tag">
+  <dt>警告:</dt>
+  <dd>以上參數的元字符是針對
+      Minix 系統的
+      termcap，可能有一些問題，因爲可能不是完全與
+      Linux 的 termcap 兼容的。</dd>
+</dl>
+<p class="Pp">圖形字符塊通過三個字符串值功能來指定：</p>
+<dl class="Bl-tag">
+  <dt>as</dt>
+  <dd>開始替代的字符集</dd>
+  <dt>ae</dt>
+  <dd>結束</dd>
+  <dt>ac</dt>
+  <dd>字符對。第一個字符是圖形字符塊的名稱，第二個字符是它的定義。</dd>
+</dl>
+<p class="Pp">可以用下面這些名稱：</p>
+<p class="Pp"></p>
+<pre>+	右箭頭 right arrow (&gt;)
+,	 左箭頭 left arrow (&lt;)
+.	下箭頭 down arrow (v)
+0	全直角 full square (#)
+I	上箭頭 latern (#)
+-	上箭頭 upper arrow (^)
+&#39;	菱形 rhombus (+)
+a	棋板 chess board (:)
+f	度數 degree (&#39;)
+g	加-減 plus-minus (#)
+h	正方形 square (#)
+j	右下角 right bottom corner (+)
+k	右上角 right upper corner (+)
+l	左上角 left upper corner (+)
+m	左下角 left bottom corner (+)
+n	十字 cross (+)
+o	頂線 upper horizontal line (-)
+q	中線 middle horizontal line (-)
+s	下劃線 bottom horizontal line (_)
+t	左側T型 left tee (+)
+u	右側T型 right tee (+)
+v	底部T型 bottom tee (+)
+w	常規T型 normal tee (+)
+x	垂直線 vertical line (|)
+~	段落 paragraph (???)
+</pre>
+<p class="Pp">如果缺少相應功能，將缺省使用圓括號中的值，那是
+    curses 庫使用的值。</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_SEE_ALSO">參見 SEE ALSO<a class="anchor" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO">¶</a></h1>
+<a href="../../buster/ncurses-doc/termcap.3ncurses.en.html">termcap(3)</a>, <a href="../../buster/ncurses-doc/curses.3ncurses.en.html">curses(3)</a>, <a href="../../buster/ncurses-bin/terminfo.5.en.html">terminfo(5)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>Timebob &lt;timebob@21cn.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2000.12.15</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8Blinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os">Linux</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+termcap.5.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-26T15:38:12Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"termcap(5)\"}}]}"
+</script>

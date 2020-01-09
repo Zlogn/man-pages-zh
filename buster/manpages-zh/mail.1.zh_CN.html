@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mail(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/bsd-mailx/mail.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/mailutils/mail.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/nmh/mail.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/mail.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/mail.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; mail(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/mail.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/mail.1.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME%28%E5%90%8D%E7%A7%B0%29" title="NAME(名称)">NAME(名称)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS%28%E6%80%BB%E8%A7%88%29" title="SYNOPSIS(总览)">SYNOPSIS(总览)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#INTRODUCTION%28%E4%BB%8B%E7%BB%8D%29" title="INTRODUCTION(介绍)">INTRODUCTION(介绍)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SUMMARY%28%E6%80%BB%E7%BB%93%29" title="SUMMARY(总结)">SUMMARY(总结)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ENVIRONMENT%28%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%29" title="ENVIRONMENT(环境变量)">ENVIRONMENT(环境变量)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#FILES%28%E7%9B%B8%E5%85%B3%E6%96%87%E4%BB%B6%29" title="FILES(相关文件)">FILES(相关文件)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SEE_ALSO%28%E5%8F%A6%E8%A7%81%29" title="SEE ALSO(另见)">SEE ALSO(另见)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#HISTORY%28%E5%8E%86%E5%8F%B2%29" title="HISTORY(历史)">HISTORY(历史)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D" title="[中文版维护人]">[中文版维护人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/mail.1.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/mail.1.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/mail.1.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/bsd-mailx/mail.1.en.html" title="English (en)">English</a>
+
+<span class="pkgname">bsd-mailx</span>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/mailutils/mail.1.en.html" title="English (en)">English</a>
+
+<span class="pkgname">mailutils</span>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/nmh/mail.1.en.html" title="English (en)">English</a>
+
+<span class="pkgname">nmh</span>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/mail.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/mail.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">MAIL(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">MAIL(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME(名称)">NAME(名称)<a class="anchor" href="#NAME(%E5%90%8D%E7%A7%B0)">¶</a></h1>
+<code class="Nm">mail</code> —
+<div class="Nd">发送和接收邮件</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS(总览)">SYNOPSIS(总览)<a class="anchor" href="#SYNOPSIS(%E6%80%BB%E8%A7%88)">¶</a></h1>
+<code class="Nm">mail</code> [<code class="Fl">-iInv</code>]
+  [<code class="Fl">-s</code> <var class="Ar">subject</var>]
+  [<code class="Fl">-c</code> <var class="Ar">cc-addr</var>]
+  [<code class="Fl">-b</code> <var class="Ar">bcc-addr</var>]
+  <var class="Ar">to-addr...</var> <code class="Nm">mail</code>
+  [<code class="Fl">-iInNv</code>] <code class="Fl">-f</code>
+  [<var class="Ar">name</var>] <code class="Nm">mail</code>
+  [<code class="Fl">-iInNv</code>] [<code class="Fl">-u</code>
+  <var class="Ar">user</var>]
+</section>
+<section class="Sh">
+<h1 class="Sh" id="INTRODUCTION(介绍)">INTRODUCTION(介绍)<a class="anchor" href="#INTRODUCTION(%E4%BB%8B%E7%BB%8D)">¶</a></h1>
+<code class="Nm">Mail</code>
+  是一个智能化的邮件处理系统,它具有
+  <a class="Xr"><a href="../../buster/ed/ed.1.en.html">ed(1)</a></a>
+  的命令语法回忆功能,只是用消息替换了行罢了.
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#v"><code class="Fl" id="v">-v</code></a></dt>
+  <dd>详尽模式.
+      传输邮件的细节都呈现在用户的终端上.</dd>
+  <dt><a class="permalink" href="#i"><code class="Fl" id="i">-i</code></a></dt>
+  <dd>忽略tty中断信号.
+      这对于在嘈杂的电话线路上使用
+      <code class="Nm">mail</code> 特别有用.</dd>
+  <dt><a class="permalink" href="#I"><code class="Fl" id="I">-I</code></a></dt>
+  <dd>强迫mail以交互模式运行,即使其不是通过终端输入的.
+      特别地,正在发送邮件时,
+      ‘<code class="Ic">~</code>’
+      特殊字符只在交互模式下才起作用.</dd>
+  <dt><a class="permalink" href="#n"><code class="Fl" id="n">-n</code></a></dt>
+  <dd>禁止在启动时读取
+      <span class="Pa">/etc/mail.rc</span></dd>
+  <dt><a class="permalink" href="#N"><code class="Fl" id="N">-N</code></a></dt>
+  <dd>当阅读邮件或编辑邮件夹时禁止消息头的初始化显示.</dd>
+  <dt><a class="permalink" href="#s"><code class="Fl" id="s">-s</code></a></dt>
+  <dd>在命令行上指定主题(仅把
+      <code class="Fl">-s</code>
+      标识后的第一个参数用作主题;注意对包含空格的主题加上引号.)</dd>
+  <dt><a class="permalink" href="#c"><code class="Fl" id="c">-c</code></a></dt>
+  <dd>发送复件(carbon copy)给用户
+      <var class="Ar">list</var></dd>
+  <dt><a class="permalink" href="#b"><code class="Fl" id="b">-b</code></a></dt>
+  <dd>发送隐藏的复写副本(blind
+      carbon copy)给用户 <var class="Ar">list</var>.
+      list应为以逗号分隔的名字列表.</dd>
+  <dt><a class="permalink" href="#f"><code class="Fl" id="f">-f</code></a></dt>
+  <dd>读入你的 <var class="Ar">mbox</var>
+      (或指定文件)
+      中的内容进行处理;当你
+      <var class="Ar">quit</var> 时, <code class="Nm">mail</code>
+      会把未删除的消息写回该文件.</dd>
+  <dt><a class="permalink" href="#u"><code class="Fl" id="u">-u</code></a></dt>
+  <dd>相当于:
+    <p class="Pp"></p>
+    <div class="Bd Bd-indent"><code class="Li">mail -f
+      /var/spool/mail/user</code></div>
+  </dd>
+</dl>
+<section class="Ss">
+<h2 class="Ss" id="Sending_mail(发送邮件)">Sending mail(发送邮件)<a class="anchor" href="#Sending_mail(%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6)">¶</a></h2>
+要发送一条消息给一个或更多的人,
+  <code class="Nm">mail</code>
+  可以以邮件将要发送的人名作为参数进行调用.
+  然后要求你输入你的消息,并在每行的开头跟着
+  一个 ‘<code class="Li">control-D</code>’
+  下面的部分 <var class="Ar">Replying to or
+  originating mail</var>, 描述了一些
+  <code class="Nm">mail</code>
+  用于帮助你操作信件的功能.
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Reading_mail(阅读邮件)">Reading mail(阅读邮件)<a class="anchor" href="#Reading_mail(%E9%98%85%E8%AF%BB%E9%82%AE%E4%BB%B6)">¶</a></h2>
+在一般的用法中
+  <code class="Nm">mail</code>
+  不带任何参数,并通过邮局(post
+  office)检查你的邮件,然后对于每条找到的消息打印出一个
+  行头.当前的消息初始为第一条消息(序号1),而且可以使用
+  <code class="Ic">print</code>
+  命令(可简省为
+  ‘<code class="Li"><code class="Ic">p</code></code>’)
+  打印. 你可以使用命令
+  ‘<code class="Li"><code class="Ic">+</code></code>’ 和
+  ‘<code class="Li"><code class="Ic">-</code></code>’
+  如在 <a class="Xr"><a href="../../buster/ed/ed.1.en.html">ed(1)</a></a>
+  的各行间移动一样前后移动消息,或者移动到一个简单的序号.
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Disposing_of_mail(丢弃邮件).">Disposing of mail(丢弃邮件).<a class="anchor" href="#Disposing_of_mail(%E4%B8%A2%E5%BC%83%E9%82%AE%E4%BB%B6).">¶</a></h2>
+在检查了消息之后,你可以
+  <code class="Ic">delete</code>
+  ‘<code class="Li"><code class="Ic">d</code></code>’)
+  这条消息或者 <code class="Ic">reply</code>
+  ‘<code class="Li"><code class="Ic">r</code></code>’) 它.
+  删除会导致 <code class="Nm">mail</code>
+  程序遗忘该条消息.
+  这并非不能撤销;可以通过给定其序号来
+  <code class="Ic">undeleted</code>
+  ‘<code class="Li"><code class="Ic">u</code></code>’)
+  该条消息,或者
+  通过指定 <code class="Ic">exit</code>
+  ‘<code class="Li"><code class="Ic">x</code></code>’)
+  命令来终止 <code class="Nm">mail</code>
+  的会话.
+  不过,删除了的消息就会永远消失不再出现.
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Specifying_messages(指定消息)">Specifying messages(指定消息)<a class="anchor" href="#Specifying_messages(%E6%8C%87%E5%AE%9A%E6%B6%88%E6%81%AF)">¶</a></h2>
+命令如 <code class="Ic">print</code> 和
+  <code class="Ic">delete</code>
+  可以给定一组消息的序号作为参数来一次性对这组消息进行操作.
+  所以, “<code class="Li">delete 1 2</code>”
+  会删除消息1和2,而
+  “<code class="Li">delete 1-5</code>”
+  会删除消息1到5.
+  特殊名字
+  ‘<code class="Li"><code class="Li">*</code></code>’
+  表示所有消息,而
+  ‘<code class="Li"><code class="Li">$</code></code>’
+  表示最后一条消息;因此用来打印一条消息的首几行的命令
+  <code class="Ic">top</code> 可用在
+  “<code class="Li">top *</code>”
+  中以打印所有消息的首几行.
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Replying_to_or_originating_mail(回复或发送邮件).">Replying to or originating mail(回复或发送邮件).<a class="anchor" href="#Replying_to_or_originating_mail(%E5%9B%9E%E5%A4%8D%E6%88%96%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6).">¶</a></h2>
+你可以使用 <code class="Ic">reply</code>
+  命令来回复一条消息,将它发送回消息的发送者.
+  你输入的一直到文末的文本定义了该条消息的内容.
+  当你正在操作一条消息时,
+  <code class="Nm">mail</code> 处理以字符
+  ‘<code class="Li"><code class="Ic">~</code></code>’
+  开头的行会有些特殊.
+  例如,输入
+  ‘<code class="Li"><code class="Ic">~m</code></code>’
+  (这一行就这么一句)会放置一个当前消息的拷贝到回复中,其可以通过tabstop右移位(参见下
+  面的 <i class="Em">indentprefix</i> 变量).
+  其它扩展符可用来设置主题字段,添加和删除消息的收件人,并且允许你返回编辑器来修改消
+  息,或者用shell执行某些命令.
+  (这些选项都在下面的summary中给定.)
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Ending_a_mail_processing_session(终止邮件处理会话).">Ending a mail processing session(终止邮件处理会话).<a class="anchor" href="#Ending_a_mail_processing_session(%E7%BB%88%E6%AD%A2%E9%82%AE%E4%BB%B6%E5%A4%84%E7%90%86%E4%BC%9A%E8%AF%9D).">¶</a></h2>
+你可以使用 <code class="Ic">quit</code>
+  ‘<code class="Li"><code class="Ic">q</code></code>’)
+  命令来终止 <code class="Nm">mail</code>
+  会话.
+  检查了的邮件会转到你的
+  <var class="Ar">mbox</var>
+  文件,除非它们因为删除而被丢弃了.
+  未检查的邮件则返回到邮局.
+  (参见上面的 <code class="Fl">-f</code>
+  选项).
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Personal_and_systemwide_distribution_lists(个人和系统的发送列表).">Personal and systemwide distribution lists(个人和系统的发送列表).<a class="anchor" href="#Personal_and_systemwide_distribution_lists(%E4%B8%AA%E4%BA%BA%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8F%91%E9%80%81%E5%88%97%E8%A1%A8).">¶</a></h2>
+可以创建个人的发送列表,这样,例如你发送邮件到
+  “<code class="Li">cohorts</code>”
+  时,即可发送它给一组人.
+  这样的列表可以通过在你home目录下的文件
+  <span class="Pa">.mailrc</span>
+  中放置如下一行:
+<p class="Pp"></p>
+<div class="Bd Bd-indent"><code class="Li">alias cohorts bill ozalp jkf mark
+  kridle@ucbcory</code></div>
+<p class="Pp">来实现.
+    这类别名的当前列表可以使用
+    <code class="Nm">mail</code> 中的 <code class="Ic">alias</code>
+    命令来显示.
+    系统级的发送列表可以通过编辑
+    <span class="Pa">/etc/aliases</span>
+    来创建,参看 <a class="Xr"><a href="../../buster/manpages-zh/aliases.5.zh_CN.html">aliases(5)</a></a>
+    和 <a class="Xr"><a href="../../buster/exim4-daemon-light/sendmail.8.en.html">sendmail(8)</a></a>;
+    这些具有不同的语法.
+    在你发送的邮件中,私有别名会在发送给其他人的邮件中展开,这样他们就能够
+    <code class="Ic">reply</code> 给收件人.
+    系统级的 <code class="Ic">aliases</code>
+    在邮件发送时不会展开,但是当所有邮件通过
+    <a class="Xr">sendmail</a>
+    时,任何返回机器的回复信都会展开系统级别名.</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Network_mail(网络邮件)(ARPA,UUCP,Berknet)">Network mail(网络邮件)(ARPA,UUCP,Berknet)<a class="anchor" href="#Network_mail(%E7%BD%91%E7%BB%9C%E9%82%AE%E4%BB%B6)(ARPA,UUCP,Berknet)">¶</a></h2>
+参见 <a class="Xr"><a href="../../buster/manpages-zh/mailaddr.7.zh_CN.html">mailaddr(7)</a></a>
+  以获知关于网络地址的描述.
+<p class="Pp"><code class="Nm">Mail</code> 可以在
+    <span class="Pa">.mailrc</span>
+    文件中设置一些选项以改变其操作;因而
+    “<code class="Li">set askcc</code>” 会激活
+    <var class="Ar">askcc</var> 功能.
+    (这些选项都总结在下面.)</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SUMMARY(总结)">SUMMARY(总结)<a class="anchor" href="#SUMMARY(%E6%80%BB%E7%BB%93)">¶</a></h1>
+(改编自`Mail Reference Manual&#39;)
+<p class="Pp">每条命令单独占一行,而且可能带有参数跟在命令字后.
+    命令不需要完全输入 -
+    使用第一个匹配输入前缀的命令.
+    对于那些以消息列表作为参数的命令,如果没有给定消息列表,那么使用满足命令要求的下一
+    条消息.
+    如果当前消息之后没有任何消息,那么搜索继续向前进行.如果根本没有合适的消息,
+    <code class="Nm">mail</code> 输出
+    “<span class="No">applicable messages</span>” 并且
+    终止该命令.</p>
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#_-"><code class="Ic" id="_-">-</code></a></dt>
+  <dd>打印出接下来的消息.
+      如果给定一个序号
+      <var class="Ar">n</var>
+      作为参数,那么会转到
+      <var class="Ar">n</var>&#39;th
+      前面的消息并打印它.</dd>
+  <dt><a class="permalink" href="#?"><code class="Ic" id="?">?</code></a></dt>
+  <dd>打印命令概要.</dd>
+  <dt><a class="permalink" href="#!"><code class="Ic" id="!">!</code></a></dt>
+  <dd>执行后面跟着的shell命令
+      (参看 <a class="Xr"><a href="../../buster/dash/sh.1.en.html">sh(1)</a></a> 和
+      <a class="Xr"><a href="../../buster/tcsh/csh.1.en.html">csh(1)</a></a>)</dd>
+  <dt><a class="permalink" href="#Print"><code class="Ic" id="Print">Print</code></a></dt>
+  <dd>(<code class="Ic">P</code>) 如同 <code class="Ic">print</code>
+      一样,不过它还会打印出忽略的消息头字段.
+      另见 <code class="Ic">print</code>,
+      <code class="Ic">ignore</code> 以及
+      <code class="Ic">retain</code>.</dd>
+  <dt><a class="permalink" href="#Reply"><code class="Ic" id="Reply">Reply</code></a></dt>
+  <dd>(<code class="Ic">R</code>)
+      回复信件给发送者.
+      不回复给发送来的邮件中的其它收件人.</dd>
+  <dt><a class="permalink" href="#Type"><code class="Ic" id="Type">Type</code></a></dt>
+  <dd>(<code class="Ic">T</code>) 与 <code class="Ic">Print</code>
+      命令一致.</dd>
+  <dt><a class="permalink" href="#alias"><code class="Ic" id="alias">alias</code></a></dt>
+  <dd>(<code class="Ic">a</code>)
+      不带参数,打印出所有当前定义的别名..
+      带一个参数,打印该别名.
+      带多于一个的参数,则创建一个新的别名或对老的进行修改,</dd>
+  <dt><a class="permalink" href="#alternates"><code class="Ic" id="alternates">alternates</code></a></dt>
+  <dd>(<code class="Ic">alt</code>)
+      如果你在数台机器上有账号.
+      <code class="Ic">alternates</code>
+      命令很有用.它可以用来通知
+      <code class="Nm">mail</code>
+      列出的地址实际都是你的.
+      当你 <code class="Ic">回复</code>
+      消息时, <code class="Nm">mail</code>
+      就不会发送消息的拷贝到任何列在
+      <code class="Ic">alternates</code>
+      列表中的地址. 如果
+      <code class="Ic">alternates</code>
+      命令未给定参数,那么显示当前alternate的名字.</dd>
+  <dt><a class="permalink" href="#chdir"><code class="Ic" id="chdir">chdir</code></a></dt>
+  <dd>(<code class="Ic">c</code>)
+      如果指定了的话,修改用户的工作目录为指定的目录.
+      如果没有指定目录,那么修改为用户的登录目录.</dd>
+  <dt><a class="permalink" href="#copy"><code class="Ic" id="copy">copy</code></a></dt>
+  <dd>(<code class="Ic">co</code>) <code class="Ic">copy</code>
+      命令与 <code class="Ic">save</code>
+      一样,唯一的例外是当你退出时,它不会标明删除了的消息.</dd>
+  <dt><a class="permalink" href="#delete"><code class="Ic" id="delete">delete</code></a></dt>
+  <dd>(<code class="Ic">d</code>)
+      以消息列表作为参数,并且标明它们全部被删除.
+      删除了的消息不会保存在
+      <var class="Ar">mbox</var> 中,
+      也不会对大多数其它命令可用.</dd>
+  <dt><a class="permalink" href="#dp"><code class="Ic" id="dp">dp</code></a></dt>
+  <dd>(也作 <code class="Ic">dt</code>)
+      删除当前消息并打印下一条消息.
+      如果没有下一条消息,
+      <code class="Nm">mail</code> 输出 “<code class="Li">at
+      EOF</code>”.</dd>
+  <dt><a class="permalink" href="#edit"><code class="Ic" id="edit">edit</code></a></dt>
+  <dd>(<code class="Ic">e</code>)
+      读取一组消息,并把文本编辑器按序指向每条消息.
+      在从编辑器返回时,消息会再读回.</dd>
+  <dt><a class="permalink" href="#exit"><code class="Ic" id="exit">exit</code></a></dt>
+  <dd>(<code class="Ic">ex</code> 或者 <code class="Ic">x</code>)
+      不修改用户的系统邮箱,他的
+      <var class="Ar">mbox</var> 文件,或者在
+      <code class="Fl">-f</code>
+      中的编辑文件而立即返回到shell.</dd>
+  <dt><a class="permalink" href="#file"><code class="Ic" id="file">file</code></a></dt>
+  <dd>(<code class="Ic">fi</code>) 与 <code class="Ic">folder</code>
+      相同.</dd>
+  <dt><a class="permalink" href="#folders"><code class="Ic" id="folders">folders</code></a></dt>
+  <dd>列出在你的邮件夹目录中的邮件夹名.</dd>
+  <dt><a class="permalink" href="#folder"><code class="Ic" id="folder">folder</code></a></dt>
+  <dd>(<code class="Ic">fo</code>) <code class="Ic">folder</code>
+      命令用来转到一个新的邮件文件或文件夹.
+      不带参数时,它会告知你当前在阅读的文件.
+      如果你给定了一个参数,它会在当前文件中写完你刚作的修改(例如删除)并读入新的文件.
+      对名字有一些特别的约定.
+      #表示前一个文件,
+      %表示你的系统邮箱,
+      %user表示user的系统邮箱,
+      &amp;表示你的 <var class="Ar">mbox</var>
+      文件,而
+      +folder表示在你的folder目录中的一个文件.</dd>
+  <dt><a class="permalink" href="#from"><code class="Ic" id="from">from</code></a></dt>
+  <dd>(<code class="Ic">f</code>)
+      读取一组消息并打印出其消息头.</dd>
+  <dt><a class="permalink" href="#headers"><code class="Ic" id="headers">headers</code></a></dt>
+  <dd>(<code class="Ic">h</code>)
+      显示消息头的当前范围,这是一个18-消息组.
+      如果 给定了一个
+      ‘<code class="Li">+</code>’
+      参数,那么会打印下一个18-消息组,而如果给定了一个
+      ‘<code class="Li">-</code>’
+      参数,那么会打印前一个18-消息组.</dd>
+  <dt><a class="permalink" href="#help"><code class="Ic" id="help">help</code></a></dt>
+  <dd>与 <code class="Ic">?</code> 同义.</dd>
+  <dt><a class="permalink" href="#hold"><code class="Ic" id="hold">hold</code></a></dt>
+  <dd>(<code class="Ic">ho</code>, 也作
+      <code class="Ic">preserve</code>)
+      读取一个消息列表,并标记其中的每条消息保存到用户的系统邮箱中,而非
+      <var class="Ar">mbox</var> 中.
+      这不会覆盖 <code class="Ic">delete</code>
+      命令.</dd>
+  <dt><a class="permalink" href="#ignore"><code class="Ic" id="ignore">ignore</code></a></dt>
+  <dd>添加一列消息头字段到
+      <var class="Ar">ignored list</var> 中.
+      当你打印一条消息时,在ignore
+      list中的消息头字段不会在你的终端上打印出来.
+      这条命令对于抑制特定的机器生成的消息头字段很方便.
+      <code class="Ic">Type</code> 和 <code class="Ic">Print</code>
+      命令可以用来完整地打印一条消息,包括忽略的字段.
+      如果 <code class="Ic">ignore</code>
+      不带任何参数执行,它会列出当前设置的忽略的字段.</dd>
+  <dt><a class="permalink" href="#mail"><code class="Ic" id="mail">mail</code></a></dt>
+  <dd>(<code class="Ic">m</code>)
+      以登录名和发送组名作为参数并发送邮件给这些人.</dd>
+  <dt><a class="permalink" href="#mbox"><code class="Ic" id="mbox">mbox</code></a></dt>
+  <dd>标明当你退出时,消息列表会发送到你的home目录下的
+      <code class="Ic">mbox</code> 中. 如果你
+      <i class="Em">没有</i> 设置
+      <code class="Ic">hold</code>
+      选项,这就是消息默认的操作行为.</dd>
+  <dt><a class="permalink" href="#next"><code class="Ic" id="next">next</code></a></dt>
+  <dd>(<code class="Ic">n</code>) 类似 <code class="Ic">+</code>
+      或 CR)
+      转到按序的下一条消息并输出它.
+      如果带了参数列表,则输出下一个匹配的消息.</dd>
+  <dt><a class="permalink" href="#preserve"><code class="Ic" id="preserve">preserve</code></a></dt>
+  <dd>(<code class="Ic">pre</code>) 与 <code class="Ic">hold</code>
+      同义.</dd>
+  <dt><a class="permalink" href="#print"><code class="Ic" id="print">print</code></a></dt>
+  <dd>(<code class="Ic">p</code>)
+      读取消息列表,并在用户终端上输出每条消息.</dd>
+  <dt><a class="permalink" href="#quit"><code class="Ic" id="quit">quit</code></a></dt>
+  <dd>(<code class="Ic">q</code>)
+      终止会话,保存所有未删除而且未保存的消息到用户的登录目录下的
+      <var class="Ar">mbox</var>
+      文件中,并保留所有使用
+      <code class="Ic">hold</code> 或者
+      <code class="Ic">preserve</code>
+      标记或者从未关联的消息到他的系统邮箱中,另外从他的系统邮箱中删除所有其它消息.
+      如果新的邮件在这次会话中到达,会给出
+      “<code class="Li">You have new mail</code>”
+      消息.
+      如果在编辑邮箱文件时指定了
+      <code class="Fl">-f</code>
+      标识,那么编辑的文件会重写.
+      返回到Shell会受影响,除非编辑文件的重写失败,在这种情况下,用户可以使用
+      <code class="Ic">exit</code> 命令退出.</dd>
+  <dt><a class="permalink" href="#reply"><code class="Ic" id="reply">reply</code></a></dt>
+  <dd>(<code class="Ic">r</code>)
+      读取消息列表并发送邮件给发送者和指定消息的所有收件人.
+      默认消息不能够删除.</dd>
+  <dt><a class="permalink" href="#respond"><code class="Ic" id="respond">respond</code></a></dt>
+  <dd>与 <code class="Ic">reply</code> 同义.</dd>
+  <dt><a class="permalink" href="#retain"><code class="Ic" id="retain">retain</code></a></dt>
+  <dd>添加消息头字段列表到
+      <var class="Ar">retained list</var> 中.
+      只有在retain
+      list中的消息头字段才会在你打印一条消息时显示在你的终端上.
+      所有其它消息头字段都抑制了.
+      <code class="Ic">Type</code> 和 <code class="Ic">Print</code>
+      命令可以用来完整地打印一条消息.
+      如果 <code class="Ic">retain</code>
+      不带任何参数执行,它会列出保留字段(retained
+      field)的当前设置.</dd>
+  <dt><a class="permalink" href="#save"><code class="Ic" id="save">save</code></a></dt>
+  <dd>(<code class="Ic">s</code>)
+      读取一个消息列表和一个文件名,并按序添加每条消息到该文件末尾.
+      文件名应以加引号,后面跟着回应到用户终端上的行数和字符数.</dd>
+  <dt><a class="permalink" href="#set"><code class="Ic" id="set">set</code></a></dt>
+  <dd>(<code class="Ic">se</code>)
+      如果不带任何参数,打印所有变量值.
+      否则,设置选项.
+      参数为以下格式:
+      <var class="Ar">option=value</var>
+      (在=前后都没有空格)或者
+      <var class="Ar">option</var>.
+      引号标记可能需要放到赋值语句的任何部分以括起空格或者退格符,也即
+      “<code class="Li">set
+      indentprefix=&#34;-&amp;gt;&#34;</code>”</dd>
+  <dt><a class="permalink" href="#saveignore"><code class="Ic" id="saveignore">saveignore</code></a></dt>
+  <dd><a class="permalink" href="#Saveignore"><code class="Ic" id="Saveignore">Saveignore</code></a>
+      用来 <code class="Ic">save</code>
+      <code class="Ic">ignore</code> 的内容并
+      <code class="Ic">print</code> 和 <code class="Ic">type</code>.
+      这样标记的消息头字段当通过
+      <code class="Ic">save</code>
+      保存消息或者当自动保存到
+      <var class="Ar">mbox</var>
+      中时会过滤掉.</dd>
+  <dt><a class="permalink" href="#saveretain"><code class="Ic" id="saveretain">saveretain</code></a></dt>
+  <dd><a class="permalink" href="#Saveretain"><code class="Ic" id="Saveretain">Saveretain</code></a>
+      用来 <code class="Ic">save</code>
+      <code class="Ic">retain</code> 中的内容,并
+      <code class="Ic">print</code> 和 <code class="Ic">type</code>.
+      这样标记的消息头字段当通过
+      <code class="Ic">save</code>
+      保存消息或者当自动保存到
+      <var class="Ar">mbox</var>
+      中时会过滤掉.
+      <code class="Ic">Saveretain</code> 覆盖
+      <code class="Ic">saveignore</code>.</dd>
+  <dt><a class="permalink" href="#shell"><code class="Ic" id="shell">shell</code></a></dt>
+  <dd>(<code class="Ic">sh</code>)
+      调用shell的交互式版本.</dd>
+  <dt><a class="permalink" href="#size"><code class="Ic" id="size">size</code></a></dt>
+  <dd>读取一组消息并打印出每条消息按字符的大小.</dd>
+  <dt><a class="permalink" href="#source"><code class="Ic" id="source">source</code></a></dt>
+  <dd><a class="permalink" href="#source_2"><code class="Ic" id="source_2">source</code></a>
+      命令从一个文件读取命令.</dd>
+  <dt><a class="permalink" href="#top"><code class="Ic" id="top">top</code></a></dt>
+  <dd>读取一组消息并打印每条消息的头几行.
+      打印的行数通过变量
+      <code class="Ic">toplines</code>
+      控制,默认为5行.</dd>
+  <dt><a class="permalink" href="#type"><code class="Ic" id="type">type</code></a></dt>
+  <dd>(<code class="Ic">t</code>) 与 <code class="Ic">print</code>
+      同义.</dd>
+  <dt><a class="permalink" href="#unalias"><code class="Ic" id="unalias">unalias</code></a></dt>
+  <dd>读取一列由 <code class="Ic">alias</code>
+      命令定义的名字并丢弃已有的用户组.
+      组名将不再有任何作用.</dd>
+  <dt><a class="permalink" href="#undelete"><code class="Ic" id="undelete">undelete</code></a></dt>
+  <dd>(<code class="Ic">u</code>)
+      读取一列消息并标记每条消息为
+      <code class="Ic">未</code> 删除.</dd>
+  <dt><a class="permalink" href="#unread"><code class="Ic" id="unread">unread</code></a></dt>
+  <dd>(<code class="Ic">U</code>)
+      读取一列消息并标记每条消息为
+      <code class="Ic">尚未</code> 阅读.</dd>
+  <dt><a class="permalink" href="#unset"><code class="Ic" id="unset">unset</code></a></dt>
+  <dd>读取一列选项名并丢弃他们已有的值;
+      这是 <code class="Ic">set</code>
+      的反向操作.</dd>
+  <dt><a class="permalink" href="#visual"><code class="Ic" id="visual">visual</code></a></dt>
+  <dd>(<code class="Ic">v</code>)
+      读取一列消息并对每条消息调用显示的编辑器.</dd>
+  <dt><a class="permalink" href="#write"><code class="Ic" id="write">write</code></a></dt>
+  <dd>(<code class="Ic">w</code>) 与 <code class="Ic">save</code>
+      相似,不同之处在于
+      <code class="Ic">只保存</code>
+      消息体而
+      (<var class="Ar">不保存</var>)
+      消息头).
+      这对于通过消息系统发送和接收源程序文本的情况有很大的用处.</dd>
+  <dt><a class="permalink" href="#xit"><code class="Ic" id="xit">xit</code></a></dt>
+  <dd>(<code class="Ic">x</code>) 与 <code class="Ic">exit</code>
+      同义.</dd>
+  <dt><a class="permalink" href="#z"><code class="Ic" id="z">z</code></a></dt>
+  <dd><code class="Nm">Mail</code>
+      表示当消息头的窗口满了时,如在
+      <code class="Ic">headers</code>
+      命令中描述的那样显示.
+      你可以使用 <code class="Ic">z</code>
+      命令移动 <code class="Nm">mail</code>&#39;s
+      通告到下一个窗口.
+      同样,你也可以通过使用
+      <code class="Ic">z-</code>
+      移动到前一个窗口.</dd>
+</dl>
+<section class="Ss">
+<h2 class="Ss" id="Tilde/Escapes(代字符/扩展符)">Tilde/Escapes(代字符/扩展符)<a class="anchor" href="#Tilde/Escapes(%E4%BB%A3%E5%AD%97%E7%AC%A6/%E6%89%A9%E5%B1%95%E7%AC%A6)">¶</a></h2>
+以下是对tilde
+  escapes的归纳,这用于操作消息以执行特殊的功能.
+  Tilde escapes只在行首被承认.
+  名字 “<i class="Em">tilde escape</i>”
+  可能有些用词不当,因为实际的escape字符可通过选项
+  <code class="Ic">escape</code> 设置.
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#~!"><code class="Ic" id="~!">~!</code></a><var class="Ar">command</var></dt>
+  <dd>执行指定的shell命令,然后返回消息.</dd>
+  <dt><a class="permalink" href="#~b"><code class="Ic" id="~b">~b</code></a><var class="Ar">name
+    ...</var></dt>
+  <dd>添加给定名字到复制(carbon
+      copy)的收件人列表中,但是不在Cc:行中显示出来(&#34;blind&#34;
+      ca rbon copy).</dd>
+  <dt><a class="permalink" href="#~c"><code class="Ic" id="~c">~c</code></a><var class="Ar">name
+    ...</var></dt>
+  <dd>添加给定名字到复制(carbon
+      copy)的收件人列表中.</dd>
+  <dt><a class="permalink" href="#~d"><code class="Ic" id="~d">~d</code></a></dt>
+  <dd>从你的home目录中读取文件
+      “<span class="Pa">dead.letter</span>”
+      到消息中.</dd>
+  <dt><a class="permalink" href="#~e"><code class="Ic" id="~e">~e</code></a></dt>
+  <dd>对当前收集的消息调用文本编辑器.
+      在编辑完成之后,你可以继续在消息中添加文本.</dd>
+  <dt><a class="permalink" href="#~f"><code class="Ic" id="~f">~f</code></a><var class="Ar">messages</var></dt>
+  <dd>读取命名的messages到将要发送的消息中.
+      如果没有指定messages,那么就读取当前消息.
+      当前被忽略(通过
+      <code class="Ic">ignore</code> 或者
+      <code class="Ic">retain</code>
+      命令)的消息头不包括在内.</dd>
+  <dt><a class="permalink" href="#~F"><code class="Ic" id="~F">~F</code></a><var class="Ar">messages</var></dt>
+  <dd>类似于 <code class="Ic">~f,</code>
+      不过这包括了所有的消息头.</dd>
+  <dt><a class="permalink" href="#~h"><code class="Ic" id="~h">~h</code></a></dt>
+  <dd>通过逐一输入的方式编辑消息头字段,并且允许用户添加文本到消息的末尾或者通过使用当前
+      终端的消除和抹掉字符来修改字段.</dd>
+  <dt><a class="permalink" href="#~m"><code class="Ic" id="~m">~m</code></a><var class="Ar">messages</var></dt>
+  <dd>读取命名的messages到将要发送的消息中,以tab或者
+      <var class="Ar">indentprefix</var> 的值交错.
+      如果没有指定messages,则读取当前消息.
+      当前被忽略(通过
+      <code class="Ic">ignore</code> 或者
+      <code class="Ic">retain</code>
+      命令)的消息头不包括在内.</dd>
+  <dt><a class="permalink" href="#~M"><code class="Ic" id="~M">~M</code></a><var class="Ar">messages</var></dt>
+  <dd>类似于 <code class="Ic">~m,</code>
+      不过这包括了所有的消息头.</dd>
+  <dt><a class="permalink" href="#~p"><code class="Ic" id="~p">~p</code></a></dt>
+  <dd>打印出当前收集的消息,以消息头字段开始.</dd>
+  <dt><a class="permalink" href="#~q"><code class="Ic" id="~q">~q</code></a></dt>
+  <dd>放弃发送消息,如果设置了
+      <code class="Ic">save</code>,
+      则复制消息到你home目录下的
+      “<span class="Pa">dead.letter</span>” 中.</dd>
+  <dt><a class="permalink" href="#~r"><code class="Ic" id="~r">~r</code></a><var class="Ar">filename</var></dt>
+  <dd>读取指定的file到消息中.</dd>
+  <dt><a class="permalink" href="#~s"><code class="Ic" id="~s">~s</code></a><var class="Ar">string</var></dt>
+  <dd>使得指定的string成为当前的主题字段.</dd>
+  <dt><a class="permalink" href="#~_&amp;t"><code class="Ic" id="~_&amp;t">~t</code></a><var class="Ar">name
+    ...</var></dt>
+  <dd>添加给定的name到直接的收件人列表中.</dd>
+  <dt><a class="permalink" href="#~_&amp;v"><code class="Ic" id="~_&amp;v">~v</code></a></dt>
+  <dd>对当前收集的消息调用后备的编辑器(由
+      <code class="Ev">VISUAL</code> 选项定义).
+      通常,备用的编辑器是屏幕编辑器.
+      你退出编辑器后,你可以继续在消息的末尾添加文本.</dd>
+  <dt><a class="permalink" href="#~w"><code class="Ic" id="~w">~w</code></a><var class="Ar">command</var></dt>
+  <dd>使消息通过command的过滤.
+      如果command没有输出或者反常地终止,则会保留消息的原始文本.
+      命令 <a class="Xr"><a href="../../buster/manpages-zh/fmt.1.zh_CN.html">fmt(1)</a></a> 经常用作
+      <code class="Ic">command</code>
+      来重新验证消息.</dd>
+  <dt>~:<var class="Ar">mail-command</var></dt>
+  <dd>执行给定的mail command.
+      但是,不是所有命令都允许的.</dd>
+  <dt><a class="permalink" href="#~"><code class="Ic" id="~">~</code></a><var class="Ar">string</var></dt>
+  <dd>插入文本string到消息中,前面以单个的~开头.
+      如果你已经修改了escape字符,那么你应该重复这个字符以发送它.</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Mail_Options(邮件选项)">Mail Options(邮件选项)<a class="anchor" href="#Mail_Options(%E9%82%AE%E4%BB%B6%E9%80%89%E9%A1%B9)">¶</a></h2>
+选项通过 <code class="Ic">set</code> 和
+  <code class="Ic">unset</code> 命令控制.
+  选项可以是二进制的,在这种情况下,只对它们是否设置了有意义;或者是字符串,这种情况下
+  的实际值才有意义.
+  二进制选项包括以下一些:
+<dl class="Bl-tag">
+  <dt><var class="Ar">append</var></dt>
+  <dd>使得保存在 <var class="Ar">mbox</var>
+      中的消息添加到末尾而不是加到前面.
+      这通常是应该设置的(也许在
+      <span class="Pa">/etc/mail.rc</span> 中)</dd>
+  <dt><var class="Ar">ask, asksub</var></dt>
+  <dd>使得 <code class="Nm">mail</code>
+      提示你输入发送的每条消息的主题.
+      如果你用一个简单的换行符应答,则发送无主题的字段.</dd>
+  <dt><var class="Ar">askcc</var></dt>
+  <dd>提示你输入附加的复写(carbon
+      copy)的收件人在每条消息之后.
+      以换行符回应表示你满意当前的列表.</dd>
+  <dt><var class="Ar">askbcc</var></dt>
+  <dd>提示你输入附加的隐藏的复写(blind
+      carbon
+      copy)的收件人在每条消息之后.
+      以换行符回应表示你满意当前的列表.</dd>
+  <dt><var class="Ar">autoprint</var></dt>
+  <dd>使得 <code class="Ic">delete</code> 命令如
+      <code class="Ic">dp</code> 一样. -
+      这样,在删除一条消息之后,下一条消息会自动输出.</dd>
+  <dt><var class="Ar">debug</var></dt>
+  <dd>设置二进制选项
+      <var class="Ar">debug</var>
+      与命令行上指定
+      <code class="Fl">-d</code>
+      一样,这会使得
+      <code class="Nm">mail</code>
+      输出各种有用的信息来调试
+      <code class="Nm">mail</code>.</dd>
+  <dt><var class="Ar">dot</var></dt>
+  <dd>二进制选项 <var class="Ar">dot</var>
+      使得 <code class="Nm">mail</code>
+      解释一行只有单一的句点为你发送消息的结束.</dd>
+  <dt><var class="Ar">hold</var></dt>
+  <dd>该选项用来保存消息在默认的系统邮箱中.</dd>
+  <dt><var class="Ar">ignore</var></dt>
+  <dd>使得忽略来自终端的中断信号,并且以@&#39;s响应.</dd>
+  <dt><var class="Ar">ignoreeof</var></dt>
+  <dd>一个与 <var class="Ar">dot</var>
+      相关的选项就是
+      <var class="Ar">ignoreeof</var>, 它使得
+      <code class="Nm">mail</code>
+      拒绝接受control-d为消息的结束.
+      <var class="Ar">Ignoreeof</var>
+      同样也适用于
+      <code class="Nm">mail</code> 命令模式.</dd>
+  <dt><var class="Ar">metoo</var></dt>
+  <dd>通常,当包括发送者的一组展开时,发送者会在展开中删除.
+      设置该选项会使得发送者包括在组中.</dd>
+  <dt><var class="Ar">noheader</var></dt>
+  <dd>设置选项 <var class="Ar">noheader</var>
+      与在命令行中指定
+      <code class="Fl">-N</code> 标识一样.</dd>
+  <dt><var class="Ar">nosave</var></dt>
+  <dd>正常情况下,当你使用
+      RUBOUT (erase或者delete)
+      中止一条消息时,
+      <code class="Nm">mail</code>
+      会复制部分信件到你home目录下的文件
+      “<span class="Pa">dead.letter</span>” 中.
+      设置二进制选项
+      <var class="Ar">nosave</var>
+      可以阻止这么做.</dd>
+  <dt><var class="Ar">Replyall</var></dt>
+  <dd>颠倒 <code class="Ic">reply</code> 和
+      <code class="Ic">Reply</code>
+    命令的含义.</dd>
+  <dt><var class="Ar">quiet</var></dt>
+  <dd>当第一次调用时,禁止打印版本.</dd>
+  <dt><var class="Ar">searchheaders</var></dt>
+  <dd>如果设置了这个选项,那么在格式``/x:y&#39;&#39;中的消息列表区分标志会对所有在头字段``x&#39;&#39;中
+      包含子字符串``y&#39;&#39;的消息展开.字符串查找是区分大小写的.</dd>
+  <dt><var class="Ar">verbose</var></dt>
+  <dd>设置选项 <var class="Ar">verbose</var>
+      与在字符行下使用
+      <code class="Fl">-v</code> 标识一样.
+      当邮件运行在verbose模式时,
+      实际传递的消息会显示在用户的终端上.</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Option_String_Values(选项字符串值)">Option String Values(选项字符串值)<a class="anchor" href="#Option_String_Values(%E9%80%89%E9%A1%B9%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%80%BC)">¶</a></h2>
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#EDITOR"><code class="Ev" id="EDITOR">EDITOR</code></a></dt>
+  <dd>在 <code class="Ic">edit</code> 命令和
+      <code class="Ic">~e</code>
+      扩展符中使用的文本编辑器的路径名.
+      如果没有定义,那么使用默认的编辑器.</dd>
+  <dt><a class="permalink" href="#LISTER"><code class="Ev" id="LISTER">LISTER</code></a></dt>
+  <dd>在 <code class="Ic">folders</code>
+      命令中使用的目录浏览器的路径名.
+      默认为 <span class="Pa">/bin/ls</span>.</dd>
+  <dt><a class="permalink" href="#PAGER"><code class="Ev" id="PAGER">PAGER</code></a></dt>
+  <dd>在 <code class="Ic">more</code>
+      命令或者当设置了
+      <code class="Ic">crt</code>
+      变量时使用的程序的路径名.
+      如果该选项没有定义,默认使用
+      <a class="Xr"><a href="../../buster/manpages-zh/more.1.zh_CN.html">more(1)</a></a>.</dd>
+  <dt><a class="permalink" href="#SHELL"><code class="Ev" id="SHELL">SHELL</code></a></dt>
+  <dd>在 <code class="Ic">!</code> 命令和
+      <code class="Ic">~!</code>
+      扩展符中使用的shell的路径名.
+      如果未定义该选项,则使用默认的shell.</dd>
+  <dt><a class="permalink" href="#VISUAL"><code class="Ev" id="VISUAL">VISUAL</code></a></dt>
+  <dd>在 <code class="Ic">visual</code> 命令和
+      <code class="Ic">~v</code>
+      扩展符中使用的文本编辑器的路径名.</dd>
+  <dt><var class="Va">crt</var></dt>
+  <dd>赋值的选项 <var class="Va">crt</var>
+      用作限额以决定一条消息在使用
+      <code class="Ev">PAGER</code>
+      阅读它之前有多长.
+      如果 <var class="Va">crt</var>
+      没有赋值,那么保存在系统中的终端显示高度用来确定限额(参见
+      <a class="Xr"><a href="../../buster/manpages-zh/stty.1.zh_CN.html">stty(1)</a></a>).</dd>
+  <dt><var class="Ar">escape</var></dt>
+  <dd>如果定义了,那么该选项的第一个字符给出扩展符中替换~的字符.</dd>
+  <dt><var class="Ar">folder</var></dt>
+  <dd>存储消息的文件夹的目录名.
+      如果该名字以`/&#39;开头,
+      <code class="Nm">mail</code>
+      会把它当作绝对路径名;否则,文件目录相对于你的home目录查找.</dd>
+  <dt><a class="permalink" href="#MBOX"><code class="Ev" id="MBOX">MBOX</code></a></dt>
+  <dd><var class="Ar">mbox</var> 文件的名字.
+      它可以为一个文件夹名.
+      默认为在用户home目录下的
+      “<code class="Li">mbox</code>”.</dd>
+  <dt><var class="Ar">record</var></dt>
+  <dd>如果定义了,指定用来存档所有外发邮件的文件的路径名.
+      如果没有定义,那么外发邮件将不被保存.</dd>
+  <dt><var class="Ar">indentprefix</var></dt>
+  <dd>在``~m&#39;&#39; tilde
+      escape中用作交错消息的字符串,替换一般情况下的tab字符(^I).
+      如果其中包含了空格或者tab,确信对值加了引号.</dd>
+  <dt><var class="Ar">toplines</var></dt>
+  <dd>如果定义了,指定使用
+      <code class="Ic">top</code>
+      命令打印的消息的行数;一般情况下,打印前5行.</dd>
+</dl>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ENVIRONMENT(环境变量)">ENVIRONMENT(环境变量)<a class="anchor" href="#ENVIRONMENT(%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F)">¶</a></h1>
+<code class="Nm">Mail</code> 使用了
+  <code class="Ev">HOME</code> 和 <code class="Ev">USER</code>
+  环境变量.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="FILES(相关文件)">FILES(相关文件)<a class="anchor" href="#FILES(%E7%9B%B8%E5%85%B3%E6%96%87%E4%BB%B6)">¶</a></h1>
+<dl class="Bl-tag Bl-compact">
+  <dt><span class="Pa">/var/spool/mail/*</span></dt>
+  <dd>邮局.</dd>
+  <dt>~/mbox</dt>
+  <dd>用户的老邮件.</dd>
+  <dt>~/.mailrc</dt>
+  <dd>给定初始邮件命令的文件.</dd>
+  <dt><span class="Pa">/tmp/R*</span></dt>
+  <dd>临时文件.</dd>
+  <dt><span class="Pa">/usr/lib/mail.*help</span></dt>
+  <dd>帮助文件.</dd>
+  <dt><span class="Pa">/etc/mail.rc</span></dt>
+  <dd>系统初始化文件.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO(另见)">SEE ALSO(另见)<a class="anchor" href="#SEE_ALSO(%E5%8F%A6%E8%A7%81)">¶</a></h1>
+<a class="Xr"><a href="../../buster/manpages-zh/fmt.1.zh_CN.html">fmt(1)</a></a>, <a class="Xr"><a href="../../buster/postfix/newaliases.1.en.html">newaliases(1)</a></a>,
+  <a class="Xr"><a href="../../buster/vacation/vacation.1.en.html">vacation(1)</a></a>, <a class="Xr"><a href="../../buster/manpages-zh/aliases.5.zh_CN.html">aliases(5)</a></a>,
+  <a class="Xr"><a href="../../buster/manpages-zh/mailaddr.7.zh_CN.html">mailaddr(7)</a></a>, <a class="Xr"><a href="../../buster/exim4-daemon-light/sendmail.8.en.html">sendmail(8)</a></a> 和
+  <cite class="Rs"><span class="RsT">The Mail Reference Manual.</span>.</cite>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="HISTORY(历史)">HISTORY(历史)<a class="anchor" href="#HISTORY(%E5%8E%86%E5%8F%B2)">¶</a></h1>
+<code class="Nm">mail</code> 命令出现在
+  <span class="Ux">Version 6 AT&amp;T UNIX</span> 中.
+  该man页源自 <span class="RsT">The Mail Reference
+  Manual</span> 原作者为Kurt Shoens.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+有一些标识没有列在文档中.
+  大多数对一般用户都是没有用处的.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版维护人]">[中文版维护人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D">¶</a></h1>
+riser &lt;boomer@ccidnet.com&gt;
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+2001/08/08
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9B%BDlinux%E8%AE%BA%E5%9D%9Bman%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%E3%80%8B:">¶</a></h1>
+<a href="../..//cmpp.linuxforum.net</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">1993年12月30日</td>
+    <td class="foot-os">BSD 4</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+mail.1.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-24T09:39:40Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"mail(1)\"}}]}"
+</script>

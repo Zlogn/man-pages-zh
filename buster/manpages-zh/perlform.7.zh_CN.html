@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>perlform(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/perlform.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/perlform.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; perlform(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlform.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlform.7.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES" title="NOTES">NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#WARNINGS_%E8%AD%A6%E5%91%8A" title="WARNINGS 警告">WARNINGS 警告</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA" title="中文版维护人">中文版维护人</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0" title="中文版最新更新">中文版最新更新</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92" title="中文手册页翻译计划">中文手册页翻译计划</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlform.7.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/perlform.7.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/perlform.7.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlform.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlform.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/perl-doc/perlform.1.en.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlform.7.zh_CN.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">PERLFORM(7)</td>
+    <td class="head-vol">Perl Programmers Reference Guide</td>
+    <td class="head-rtitle">PERLFORM(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+perlform - Perl 格式
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+Perl的一些内部机制、可以帮助我们产生一份简单的格式化图表。经过perl的处理，你列印的格式可以接近于你所见的外貌。它可以记录如你现在正处在哪个页面，每个页面的行数与何时列印出页面的标题。关键字，format()
+  格式函数与write()执行函数是直接引自FORTRAN语法。详情可参阅
+  perlfunc。幸运的是列印的格式可读性又有所提高。几乎类似BASIC
+  的PRINT
+  USING。可以把它想象为简单的
+  <a href="../../buster/manpages-zh/nroff.1.zh_CN.html">nroff(1)</a>.
+<p class="Pp">有如子程序与包一样，格式只是语句的声明，而不是执行调用。故它可以放在程式的任何位置（一般最好是把它们集中在一块）。与perl的其它变量名字类型不同，
+    格式命名有别于一般的独自的定义。也就是说，你有一个名为Foo的函数，它与另一个格式名称为Foo的东西是完全不同。但是缺省的格式名称与有关连的文件句柄可用相同的名字。所以缺省的输出格式名称STDOUT，它的文件句柄名称就是STDOUT。而对缺省格式名称TEMP，它的文件句柄名称也可以是TEMP。虽然名称一样但两者并不相同。</p>
+<p class="Pp">输出格式的语法如下：</p>
+<p class="Pp"></p>
+<pre>    format NAME =
+    FORMLIST
+    .
+</pre>
+<p class="Pp">如省略格式名称，格式名称将以标准输出STDOUT命名。而格式项目将包括了好几个连续横行。每一行属于下列叁种型态之一：</p>
+<dl class="Bl-tag">
+  <dt>1.</dt>
+  <dd>注释（comment),
+      以符号“#”置于每行的开头。</dd>
+  <dt>2.</dt>
+  <dd>图案行(picture
+      line)，规定了单一行的格式化外观。</dd>
+  <dt>3.</dt>
+  <dd>参数行,
+      提供一些数值以对应前面的图案行。</dd>
+</dl>
+<p class="Pp">图案行的输出效果就与我们看到的一样，除了某些值域栏位会给相对应数值取代外，每个输入栏位都以一个@或
+    ^
+    控制符开头。这些单行内的控制符不能做任何窜改取代(勿与数组变量@混淆)。@栏位是属于正常形态的栏位，而^栏位则用来表示可以输入多行文字。至于该栏位则由&lt;
+    &gt; 或 ⎪
+    符号跟随其后指定向左、右、或居中对齐。并同时跟据该符号的数目，输入指定资料的长度。如变量内容超过限定长度、格式列印时会自动删除多馀的部份。</p>
+<p class="Pp">另一种指定向右对齐方式，是使用#符号来指定一个数字栏位。如此可方便小数点定位。如果输入值里还包含一个换行字元(0，则仅列印出该换行字元前的资料。最后图案行出现的@*这个特别符号标记，可以用来列印多行并且不被截掉的数值。</p>
+<p class="Pp">接下来的一行、是跟据图案行里的值域栏位输入相应的数值。如果是利用运算式提供数值的话、必须以逗号分隔。因为所有的表示法都会被当成一个串连内容再行处理。所以一个单一的串列表示法也可产生多个串列资料。如果表示法是利用括号围起，可能会展开好几行。若想如是安排，第一行的第一个单字必须是以左括号开始。如果运算式内有小数点的数字类型须要处理、同时图案行的相关符号也指出小数位须列印出来(除了图案行内的包含小数点&#34;.&#34;的数字控制符号#外)。小数点列印出的外貌,
+    以当地的运行版本决定(LC_NUMERIC
+    locale)。也就是说、在德文地区使用小数格示输出时、小数点的显示将是&#34;,&#34;而非&#34;.&#34;。相关资料请参考
+    perllocale 与 &#34;警告&#34;</p>
+<p class="Pp">图案行里的栏位如果以^控制符开头、格式将会作特殊化处理。如果该栏位是注解栏位又没定义其值、栏位将以空白取代。若是其它型态、则视为一种填补资料的状态。
+    在此、我们不能随便填入任意表示法进去。相反、必须以相关的变量输入字串内容。perl会尽量将文字放入该栏位、然后把字串的前面部份删去。当你下次使用该字串变量时、可以使用后面的字串部份(换句话说、在执行write函数时、字串变量的内容是会改变的)。正常情况下、你必须使用一类似垂直状的堆块来放置要输入的文字、以便整齐列印出一柱状文字。如你列印的文字太长、想以&#34;...&#34;取代过长的文字时、你可以借由更改
+    $:
+    变量值来取代分隔字元。也就是当你使用ENGLISH模块时的
+    $FORMAT_LINE_BREAK_CHARACTERS的意思。</p>
+<p class="Pp">使用^符号栏位可产生不定长度的记录栏位。如果要列印的文字很短、你想压缩掉文字后的空白、请在想压缩掉的空白地方加上一个&#34;~&#34;控制符号。如果重复使用两个&#34;~&#34;符号、则该行会被重复列印、直到该栏位的所有文字列印完毕为止
+    (如你同时使用&#34;@&#34;值域栏位的话、切记每次要输入不同的数值)。</p>
+<p class="Pp">列印格示标题的缺省处理方法、是将正使用的格式名称后加上_TOP字样既可。其内容将会列印至每页的开头部份。请参考
+    perlfunc/write 函数</p>
+<p class="Pp">例如：</p>
+<p class="Pp"></p>
+<pre> # a report on the /etc/passwd file
+ format STDOUT_TOP =
+                         Passwd File
+ Name                Login    Office   Uid   Gid Home
+ ------------------------------------------------------------------
+ .
+ format STDOUT =
+ @&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; @⎪⎪⎪⎪⎪⎪⎪ @&lt;&lt;&lt;&lt;&lt;&lt;@&gt;&gt;&gt;&gt; @&gt;&gt;&gt;&gt; @&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+ $name,              $login,  $office,$uid,$gid, $home
+ .
+</pre>
+<p class="Pp"></p>
+<pre> # a report from a bug report form
+ format STDOUT_TOP =
+                         Bug Reports
+ @&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;     @⎪⎪⎪         @&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
+ $system,                      $%,         $date
+ ------------------------------------------------------------------
+ .
+ format STDOUT =
+ Subject: @&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+          $subject
+ Index: @&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; ^&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+        $index,                       $description
+ Priority: @&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; Date: @&lt;&lt;&lt;&lt;&lt;&lt;&lt; ^&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+           $priority,        $date,   $description
+ From: @&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; ^&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+       $from,                         $description
+ Assigned to: @&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; ^&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+              $programmer,            $description
+ ~                                    ^&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+                                      $description
+ ~                                    ^&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+                                      $description
+ ~                                    ^&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+                                      $description
+ ~                                    ^&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+                                      $description
+ ~                                    ^&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;...
+                                      $description
+ .
+</pre>
+<p class="Pp">我们也有可能在同一个输出管道同时使用print
+    与
+    write函数。但使用时、必须修改$-的特殊内置变量值(使用English模块的话、则是使用$FORMAT_LINES-LEFT变量)。
+  <br/>
+</p>
+<p class="Pp"><b>Format Variables 格式变量</b></p>
+<p class="Pp">当前的格式名称一向都是存放于$~这个特殊变量内($FORMAT_NAME)，而每页的开头格式则存放在$^($FORMAT-TOP_NAME)，输出页为$%($FORMAT_PAGE_NUMBER)，每页行数是$=
+    ($FORMAT_LINE_PER_PAGE)，自动输出格式是放在$⎪($OUTPUT_AUTOFLUSH)、要输出到每页开头部份的字串存放在$^L
+    ($FORMAT-FORMFEED)。这些变量的有效范围，都是以某一个文件句柄为单元。因此、你必须调用select()函数来调用适当的文件句柄来改变变量内容。</p>
+<p class="Pp"></p>
+<pre>    select((select(OUTF),
+            $~ = &#34;My_Other_Format&#34;,
+            $^ = &#34;My_Top_Format&#34;
+           )[0]);
+</pre>
+<p class="Pp">难看吧！这就是一般用法。如此一来、你至少可用临是变量来存放前一个文件句柄。事实上、这已是较好的作法，除了可读性提高外、也提供你一个位置暂停程式的执行，方变你一次到位除错。</p>
+<p class="Pp"></p>
+<pre>    $ofh = select(OUTF);
+    $~ = &#34;My_Other_Format&#34;;
+    $^ = &#34;My_Top_Format&#34;;
+    select($ofh);
+</pre>
+<p class="Pp">如果你使用English模块，你甚至可以输入英文变量名称</p>
+<p class="Pp"></p>
+<pre>    use English &#39;-no_match_vars&#39;;
+    $ofh = select(OUTF);
+    $FORMAT_NAME     = &#34;My_Other_Format&#34;;
+    $FORMAT_TOP_NAME = &#34;My_Top_Format&#34;;
+    select($ofh);
+</pre>
+<p class="Pp">但你还是要调用select()函数。因此我们建议你用FileHandle模块。现在你可用小写英文字母的格式名称来处理这些特殊变量。</p>
+<p class="Pp"></p>
+<pre>    use FileHandle;
+    format_name     OUTF &#34;My_Other_Format&#34;;
+    format_top_name OUTF &#34;My_Top_Format&#34;;
+</pre>
+<p class="Pp">好多了吧！</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES">NOTES<a class="anchor" href="#NOTES">¶</a></h1>
+因为数值行的内容可能保括任何的表示法
+  (我们指的是 @ 栏位而非 ^
+  栏位)。因此你可使用其它函数、建立更加复杂的处理方法。好像使用
+  printf
+  函数、或自己定义的函数。列如：
+<p class="Pp"></p>
+<pre>    format Ident =
+        @&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+        &amp;commify($n)
+    .
+</pre>
+<p class="Pp">在栏位输入真正的@
+    或^符号：</p>
+<p class="Pp"></p>
+<pre>    format Ident =
+    I have an @ here.
+            &#34;@&#34;
+    .
+</pre>
+<p class="Pp">将整行字置中对齐：</p>
+<p class="Pp"></p>
+<pre>    format Ident =
+    @⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪
+            &#34;Some text line&#34;
+    .
+</pre>
+<p class="Pp">我们并无任何内建的方法让你指定如、某个栏位要对齐该页面最右等诸如此类事项。但你仍然能列印出你想要的格式。跟据目前页面直行数目，调用eval()函数来处理它：</p>
+<p class="Pp"></p>
+<pre>    $format  = &#34;format STDOUT = \n&#34;
+             . &#39;^&#39; . &#39;&lt;&#39; x $cols . &#34;\n&#34;
+             . &#39;$entry&#39; . &#34;\n&#34;
+             . &#34;\t^&#34; . &#34;&lt;&#34; x ($cols-8) . &#34;~~\n&#34;
+             . &#39;$entry&#39; . &#34;\n&#34;
+             . &#34;.\n&#34;;
+    print $format if $Debugging;
+    eval $format;
+    die $@ if $@;
+</pre>
+<p class="Pp">它可能列印出下列格式外貌：</p>
+<p class="Pp"></p>
+<pre> format STDOUT =
+ ^&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+ $entry
+         ^&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;~~
+ $entry
+ .
+</pre>
+<p class="Pp">下面是一个有点类似fmt(1)的小程式：</p>
+<p class="Pp"></p>
+<pre> format =
+ ^&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; ~~
+ $_
+</pre>
+<p class="Pp"></p>
+<pre> .
+</pre>
+<p class="Pp"></p>
+<pre> $/ = &#39;&#39;;
+ while (&lt;&gt;) {
+     s/\s*\n\s*/ /g;
+     write;
+ }
+</pre>
+<br/>
+<p class="Pp"><b>Footers 页脚</b></p>
+<p class="Pp">虽然我们有$FORMAT_TOP_NAME来记录每页开头部份的格式，却没有一个相对应的方法来自动指定每页的底部格式。问题是、我们并不知到某个格式资料可能会多大，除非你真的去执行它。这是我们将来要处理的重点之一。</p>
+<p class="Pp">这是一个暂时的应用方案
+    如果你有一个固定大小的页脚、你可在每次调用write函数前检查变量$FORMAT_LINES_LEFT，然后自行印出该资料。</p>
+<p class="Pp">还有一个方法，就是开启一个管道。调用open(MYSELF,”⎪-”)
+    (参考 perlfunc/open()
+    函数)。并调用write函数把资料输往MYSELF、而不是标准输出STDOUT。然后利用子串列的标准输入、来重新处理每页开头或结尾所要附加的资料部份。这虽不方便，但还是可办到的。
+  <br/>
+</p>
+<p class="Pp"><b>Accessing Formatting Internals
+    格式处理的核心</b></p>
+<p class="Pp">至于低阶格式的机制，你可调用formlin()函数直接处理$^A变量($ACCUMUNATOR)。</p>
+<p class="Pp">例如：</p>
+<p class="Pp"></p>
+<pre>    $str = formline &lt;&lt;&#39;END&#39;, 1,2,3;
+    @&lt;&lt;&lt;  @⎪⎪⎪  @&gt;&gt;&gt;
+    END
+</pre>
+<p class="Pp"></p>
+<pre>    print &#34;Wow, I just stored `$^A&#39; in the accumulator!\n&#34;;
+</pre>
+<p class="Pp">或是设计一个子程式swrite()。它对于
+    write 的脚色相当于sprint
+    对于 print。</p>
+<p class="Pp"></p>
+<pre>    use Carp;
+    sub swrite {
+        croak &#34;usage: swrite PICTURE ARGS&#34; unless @_;
+        my $format = shift;
+        $^A = &#34;&#34;;
+        formline($format,@_);
+        return $^A;
+    }
+</pre>
+<p class="Pp"></p>
+<pre>    $string = swrite(&lt;&lt;&#39;END&#39;, 1, 2, 3);
+ Check me out
+ @&lt;&lt;&lt;  @⎪⎪⎪  @&gt;&gt;&gt;
+ END
+    print $string;
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="WARNINGS_警告">WARNINGS 警告<a class="anchor" href="#WARNINGS_%E8%AD%A6%E5%91%8A">¶</a></h1>
+不当处理显示结束格示内容的点操作符号、有时也会同时影响你的网络的电邮功能(跟据过往经验、错误是必然而不能避免)。如果使用电邮输出格式内容、你应先处理好结束格式点操作符位置。切勿放置于左边界、以免被SMTP截去。
+<p class="Pp">局部变量(引用”my”定义变量)、在调用格式化输出时不会被察觉。除非在使用局部变量的串程内另行定义(5.001版本前并没有局部变量一词)。</p>
+<p class="Pp">格式输出是 perl
+    语言里维一受制于编程使用地区的部分。如果当前的使用地区使用LC_NUMERIC，那小数点符号的格式化输出必以当地方式显示。perl
+    不会理会当地的所须格式，除非你调用了
+    use
+    locale。但格式列印又不受控于use
+    locale。因为locale
+    它只在使用的块内有效。同时跟据历史原因、格式的作用域不仅包括在块内。进一步详情参阅
+    perllocale 本地化文档。</p>
+<p class="Pp">格式输出时、程式串内的空白符号0,相当于一个空白单元。所以你可以想像格式列印相当于先处理变量：</p>
+<p class="Pp"></p>
+<pre> $value =~ tr/\n\t\f/ /;
+</pre>
+<p class="Pp">除非图案行已定义、馀下的空白符号
+    将强制性另印新行。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文版维护人">中文版维护人<a class="anchor" href="#%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA">¶</a></h1>
+<b>小高　&lt;you@email.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文版最新更新">中文版最新更新<a class="anchor" href="#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0">¶</a></h1>
+<b>2001年12月9日星期日</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文手册页翻译计划">中文手册页翻译计划<a class="anchor" href="#%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+<br/>
+<p class="Pp"><b>跋</b></p>
+<p class="Pp">本页面中文版由中文
+    man 手册页计划提供。
+  <br/>
+  中文 man
+    手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-25</td>
+    <td class="foot-os">perl v5.8.3</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+perlform.7.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-28T03:40:59Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"perlform(7)\"}}]}"
+</script>

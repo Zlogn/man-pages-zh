@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>perlboot(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/perlboot.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/perlboot.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; perlboot(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlboot.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlboot.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SEE_ALSO_%E5%8F%83%E8%A6%8B" title="SEE ALSO 參見">SEE ALSO 參見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#COPYRIGHT" title="COPYRIGHT">COPYRIGHT</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA" title="中文版維護人">中文版維護人</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0" title="中文版最新更新">中文版最新更新</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83" title="中文手冊頁翻譯計劃">中文手冊頁翻譯計劃</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlboot.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/perlboot.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/perlboot.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlboot.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlboot.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/perl-doc/perlboot.1.en.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlboot.7.zh_TW.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">PERLBOOT(7)</td>
+    <td class="head-vol">Perl Programmers Reference Guide</td>
+    <td class="head-rtitle">PERLBOOT(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+perlboot -
+  初學者的面向對象教程
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+如果你對其他語言中的對象並不熟悉的話,
+  那麼其他有關perl對象的文件可能使你感到恐懼,
+  比如 perlobj ,
+  這是基礎性的參考文件,
+  和 perltoot,
+  這是介紹perl對象的特性的教程.
+<p class="Pp">所以,
+    讓我們走另一條路,假定你沒有任何關於對象的概念.
+    你需要了解子程序 (perlsub),
+    引用 (perlref et. seq.), 和
+    包(或模塊) (perlmod),
+    如果還不清楚的話,先把他們搞清楚.
+  <br/>
+</p>
+<p class="Pp"><b>If we could talk to the
+    animals...如果我們能和動物交談</b></p>
+<p class="Pp">讓我們讓動物講會兒話:</p>
+<p class="Pp"></p>
+<pre>    sub Cow::speak {
+      print &#34;a Cow goes moooo!\n&#34;;
+    }
+    sub Horse::speak {
+      print &#34;a Horse goes neigh!\n&#34;;
+    }
+    sub Sheep::speak {
+      print &#34;a Sheep goes baaaah!\n&#34;
+    }
+</pre>
+<p class="Pp"></p>
+<pre>    Cow::speak;
+    Horse::speak;
+    Sheep::speak;
+</pre>
+<p class="Pp">結果是:</p>
+<p class="Pp"></p>
+<pre>    a Cow goes moooo!
+    a Horse goes neigh!
+    a Sheep goes baaaah!
+</pre>
+<p class="Pp">沒什麼特別的.
+    只是簡單的子程序,
+    雖然來自不同的包,
+    並用完整的包名來調用.
+    那麼讓我們建立一個完整的牧場吧:</p>
+<p class="Pp"></p>
+<pre>    # Cow::speak, Horse::speak, Sheep::speak 與上同
+    @pasture = qw(Cow Cow Horse Sheep Sheep);
+    foreach $animal (@pasture) {
+      &amp;{$animal.&#34;::speak&#34;};
+    }
+</pre>
+<p class="Pp">結果是:</p>
+<p class="Pp"></p>
+<pre>    a Cow goes moooo!
+    a Cow goes moooo!
+    a Horse goes neigh!
+    a Sheep goes baaaah!
+    a Sheep goes baaaah!
+</pre>
+<p class="Pp">嗯.
+    這裏的符號代碼引用有些不太好.
+    我們正依賴於 <span class="Li">&#34;no
+    strict subs&#34;</span> 模式,
+    在稍大些的程序中應儘量避免.
+    那爲什麼要這樣呢?
+    因爲我們要調用的子程序和它所在的包似乎是不可分的.</p>
+<p class="Pp">真的是這樣嗎?
+  <br/>
+</p>
+<p class="Pp"><b>Introducing the method invocation arrow
+    調用方法時的箭頭符號</b></p>
+<p class="Pp">現在,我們說
+    <span class="Li">&#34;Class-&gt;method&#34;</span>
+    是調用了包(或模塊)<span class="Li">&#34;Class&#34;</span>中的
+    <span class="Li">&#34;method&#34;</span> 方法。(Here,
+    &#34;Class&#34; is used in its &#34;category&#34; meaning, not its
+    &#34;scholastic&#34; meaning.)
+    不是很準確,不過我們會一步一步的來做.
+    現在,可以這樣做:</p>
+<p class="Pp"></p>
+<pre>    # Cow::speak, Horse::speak, Sheep::speak as before
+    Cow-&gt;speak;
+    Horse-&gt;speak;
+    Sheep-&gt;speak;
+</pre>
+<p class="Pp">輸出爲:</p>
+<p class="Pp"></p>
+<pre>    a Cow goes moooo!
+    a Horse goes neigh!
+    a Sheep goes baaaah!
+</pre>
+<p class="Pp">還不是很有趣.
+    一樣的字符,常量,沒有變量.
+    但是,
+    不同部分可以分開了.
+    請看:</p>
+<p class="Pp"></p>
+<pre>    $a = &#34;Cow&#34;;
+    $a-&gt;speak; # invokes Cow-&gt;speak
+</pre>
+<p class="Pp">哇!
+    現在包名與子程序名可以分開了,
+    我們可以用變量來表示包名.
+    這樣,在使用 <span class="Li">&#34;use strict
+    refs&#34;</span>
+    預編譯指令時也可以正常工作了.
+  <br/>
+</p>
+<p class="Pp"><b>Invoking a barnyard
+    創建一個牲口棚</b></p>
+<p class="Pp">現在讓我們把箭頭用到牲口棚的例子中，範例:</p>
+<p class="Pp"></p>
+<pre>    sub Cow::speak {
+      print &#34;a Cow goes moooo!\n&#34;;
+    }
+    sub Horse::speak {
+      print &#34;a Horse goes neigh!\n&#34;;
+    }
+    sub Sheep::speak {
+      print &#34;a Sheep goes baaaah!\n&#34;
+    }
+</pre>
+<p class="Pp"></p>
+<pre>    @pasture = qw(Cow Cow Horse Sheep Sheep);
+    foreach $animal (@pasture) {
+      $animal-&gt;speak;
+    }
+</pre>
+<p class="Pp">現在我們所有的動物都能說話了,
+    而且不用使用代碼引用.</p>
+<p class="Pp">不過注意到那些相同的代碼.
+    每個 <span class="Li">&#34;speak&#34;</span>
+    子程序的結構是相同的:
+    一個 <span class="Li">&#34;print&#34;</span>
+    操作符和一個基本相同的字符串，只有兩個詞不同.
+    如果我們可以析出相同的部分就更好了，如果將來要把
+    <span class="Li">&#34;goes&#34;</span> 替換爲
+    <span class="Li">&#34;says&#34;</span>
+    時就簡單得多了</p>
+<p class="Pp">實際上這並不困難,
+    不過在這之前我們應該對箭頭符號瞭解的更多一些.
+  <br/>
+</p>
+<p class="Pp"><b>The extra parameter of method invocation
+    方法調用時的額外參數</b></p>
+<p class="Pp">語句:</p>
+<p class="Pp"></p>
+<pre>    Class-&gt;method(@args)
+</pre>
+<p class="Pp">這樣調用函數
+    <span class="Li">&#34;Class::method&#34;</span>：</p>
+<p class="Pp"></p>
+<pre>    Class::method(&#34;Class&#34;, @args);
+</pre>
+<p class="Pp">(如果子程序找不到,&#34;繼承，inheritance&#34;
+    開始起作用,這在後面會講到).
+    這意味着我們得到的第一個參數是類名(如果沒有給出其他參數，它就是調用時的唯一參數).所以我們可以象這樣重寫
+    <span class="Li">&#34;Sheep&#34;</span> speaking
+  子程序:</p>
+<p class="Pp"></p>
+<pre>    sub Sheep::speak {
+      my $class = shift;
+      print &#34;a $class goes baaaah!\n&#34;;
+    }
+</pre>
+<p class="Pp">另外的動物與此類似:</p>
+<p class="Pp"></p>
+<pre>    sub Cow::speak {
+      my $class = shift;
+      print &#34;a $class goes moooo!\n&#34;;
+    }
+    sub Horse::speak {
+      my $class = shift;
+      print &#34;a $class goes neigh!\n&#34;;
+    }
+</pre>
+<p class="Pp">每次 <span class="Li">$class</span>
+    都會得到與子程序相關的正確的值.
+    但是,還是有很多相似的結構.
+    可以再簡單些嗎? 是的.
+    可以通過在一個類中調用其它的方法來實現.
+  <br/>
+</p>
+<p class="Pp"><b>Calling a second method to simplify things
+    調用另一個方法以簡化操作</b></p>
+<p class="Pp">我們在 <span class="Li">&#34;speak&#34;</span>
+    中調用 <span class="Li">&#34;sound&#34;</span>.
+    這個方法提供聲音的內容.</p>
+<p class="Pp"></p>
+<pre>    { package Cow;
+      sub sound { &#34;moooo&#34; }
+      sub speak {
+        my $class = shift;
+        print &#34;a $class goes &#34;, $class-&gt;sound, &#34;!\n&#34;
+      }
+    }
+</pre>
+<p class="Pp">現在, 當我們調用
+    <span class="Li">&#34;Cow-&gt;speak&#34;</span> 時,
+    我們在 <span class="Li">&#34;speak&#34;</span>
+    中得到 <span class="Li">&#34;Cow&#34;</span>
+    的類 <span class="Li">$class</span>.
+    他會選擇
+    <span class="Li">&#34;Cow-&gt;sound&#34;</span> 方法,
+    然後返回 <span class="Li">&#34;moooo&#34;</span>.
+    那如果是 <span class="Li">&#34;Horse&#34;</span>
+    呢?</p>
+<p class="Pp"></p>
+<pre>    { package Horse;
+      sub sound { &#34;neigh&#34; }
+      sub speak {
+        my $class = shift;
+        print &#34;a $class goes &#34;, $class-&gt;sound, &#34;!\n&#34;
+      }
+    }
+</pre>
+<p class="Pp">僅僅包名和聲音有變化.
+    因此我們可以在Cow和Horse中共用
+    <span class="Li">&#34;speak&#34;</span> 嗎?
+    是的,通過繼承實現!
+  <br/>
+</p>
+<p class="Pp"><b>Inheriting the windpipes
+  繼承氣管</b></p>
+<p class="Pp">我們創建一個公共函數包,命名爲
+    <span class="Li">&#34;Animal&#34;</span>,在其中定義
+    <span class="Li">&#34;speak&#34;</span>:</p>
+<p class="Pp"></p>
+<pre>    { package Animal;
+      sub speak {
+        my $class = shift;
+        print &#34;a $class goes &#34;, $class-&gt;sound, &#34;!\n&#34;
+      }
+    }
+</pre>
+<p class="Pp">然後,在每個動物那裏
+    &#34;繼承，inherits&#34;
+    <span class="Li">&#34;Animal&#34;</span> 類,
+    同時賦予每個動物各自的聲音:</p>
+<p class="Pp"></p>
+<pre>    { package Cow;
+      @ISA = qw(Animal);
+      sub sound { &#34;moooo&#34; }
+    }
+</pre>
+<p class="Pp">注意增加的數組
+    <span class="Li">@ISA</span> .
+    我們馬上講到它.</p>
+<p class="Pp">現在當我們調用
+    <span class="Li">&#34;Cow-&gt;speak&#34;</span>
+    時會發生什麼?</p>
+<p class="Pp">首先,
+    Perl構造參數列表.
+    在這種情況下, 只有
+    <span class="Li">&#34;Cow&#34;</span>. 然後Perl
+    查找 <span class="Li">&#34;Cow::speak&#34;</span>.
+    但是找不到,
+    所以Perl檢查繼承數組
+    <span class="Li">@Cow::ISA</span>. 找到了,
+    那裏只有一個
+    <span class="Li">&#34;Animal&#34;</span></p>
+<p class="Pp">Perl 然後在
+    <span class="Li">&#34;Animal&#34;</span> 中查找
+    <span class="Li">&#34;speak&#34;</span>,
+    <span class="Li">&#34;Animal::speak&#34;</span>. 找到了,
+    然後調用該子程序,
+    參數在一開始就被固定了.</p>
+<p class="Pp">在子程序
+    <span class="Li">&#34;Animal::speak&#34;</span> 中,
+    <span class="Li">$class</span> 是
+    <span class="Li">&#34;Cow&#34;</span>
+    (第一個參數).
+    在我們調用
+    <span class="Li">&#34;$class-&gt;sound&#34;</span> 時,
+    首先尋找
+    <span class="Li">&#34;Cow-&gt;sound&#34;</span> ,
+    找到了, 因此不用查看
+    <span class="Li">@ISA</span>. 成功!
+  <br/>
+</p>
+<p class="Pp"><b>關於@ISA應該注意的幾點問題</b></p>
+<p class="Pp">神奇的 <span class="Li">@ISA</span>
+    變量 (讀作 &#34;is a&#34; 而不是
+    &#34;ice-uh&#34;), 聲明瞭
+    <span class="Li">&#34;Cow&#34;</span> 是一個(&#34;is
+    a&#34;) <span class="Li">&#34;Animal&#34;</span>。
+    注意它是一個數組,而不是一個單值,
+    因爲在個別情況下,
+    需要在幾個父類中尋找方法.</p>
+<p class="Pp">如果 <span class="Li">&#34;Animal&#34;</span>
+    也有一個 <span class="Li">@ISA</span>,
+    我們也要查看它.
+    尋找是遞歸的,深度優先,在每個
+    <span class="Li">@ISA</span>
+    中從左到右尋找.
+    一般地,每個 <span class="Li">@ISA</span>
+    只有一個元素(多元素意味着多繼承和多重的頭痛),
+    這樣我們可以得到一個漂亮的繼承樹.</p>
+<p class="Pp">如果使用 <span class="Li">&#34;use
+    strict&#34;</span>, @ISA會引起抱怨,
+    因爲它不是含有顯式包名的變量,
+    也不是字典變量 (&#34;my&#34;).
+    我們不能把它用做&#34;my&#34;變量(它必須屬於所繼承的包),但是也還是有幾種解決的辦法.</p>
+<p class="Pp">最簡單的辦法是加上包名:</p>
+<p class="Pp"></p>
+<pre>    @Cow::ISA = qw(Animal);
+</pre>
+<p class="Pp">或者使用包聲明:</p>
+<p class="Pp"></p>
+<pre>    package Cow;
+    use vars qw(@ISA);
+    @ISA = qw(Animal);
+</pre>
+<p class="Pp">如果你希望把包放到程序內,
+    可以把:</p>
+<p class="Pp"></p>
+<pre>    package Cow;
+    use Animal;
+    use vars qw(@ISA);
+    @ISA = qw(Animal);
+</pre>
+<p class="Pp">簡寫爲:</p>
+<p class="Pp"></p>
+<pre>    package Cow;
+    use base qw(Animal);
+</pre>
+<p class="Pp">這就精簡多了.
+  <br/>
+</p>
+<p class="Pp"><b>Overriding the methods 方法重載</b></p>
+<p class="Pp">讓我們添上一隻老鼠,
+    它的聲音差不多聽不到:</p>
+<p class="Pp"></p>
+<pre>    # Animal package from before
+    { package Mouse;
+      @ISA = qw(Animal);
+      sub sound { &#34;squeak&#34; }
+      sub speak {
+        my $class = shift;
+        print &#34;a $class goes &#34;, $class-&gt;sound, &#34;!\n&#34;;
+        print &#34;[but you can barely hear it!]\n&#34;;
+      }
+    }
+</pre>
+<p class="Pp"></p>
+<pre>    Mouse-&gt;speak;
+</pre>
+<p class="Pp">輸出爲:</p>
+<p class="Pp"></p>
+<pre>    a Mouse goes squeak!
+    [but you can barely hear it!]
+</pre>
+<p class="Pp">在這裏,
+    <span class="Li">&#34;Mouse&#34;</span>
+    有它自己的speak 函數,
+    所以 <span class="Li">&#34;Mouse-&gt;speak&#34;</span>
+    不會調用<span class="Li">&#34;Animal-&gt;speak&#34;</span>.
+    這叫做重載 &#34;overriding&#34;.
+    實際上,
+    我們甚至不用說<span class="Li">&#34;Mouse&#34;</span>
+    是 <span class="Li">&#34;Animal&#34;</span>, 因爲
+    <span class="Li">&#34;speak&#34;</span>
+    所用到的所有方法在
+    <span class="Li">&#34;Mouse&#34;</span>
+    中都有定義.</p>
+<p class="Pp">但是有些代碼與
+    <span class="Li">&#34;Animal-&gt;speak&#34;</span>
+    的相同 ,
+    這在程序維護時是個問題.
+    我們能不能讓
+    <span class="Li">&#34;Mouse&#34;</span> 與其它
+    <span class="Li">&#34;Animal&#34;</span>
+    作相同的事,但是給它加上特殊的部分呢?
+    可以!</p>
+<p class="Pp">首先,我們可以直接調用
+    <span class="Li">&#34;Animal::speak&#34;</span> 方法:</p>
+<p class="Pp"></p>
+<pre>    # Animal package from before
+    { package Mouse;
+      @ISA = qw(Animal);
+      sub sound { &#34;squeak&#34; }
+      sub speak {
+        my $class = shift;
+        Animal::speak($class);
+        print &#34;[but you can barely hear it!]\n&#34;;
+      }
+    }
+</pre>
+<p class="Pp">注意我們必須使用
+    <span class="Li">$class</span>
+    (幾乎肯定是<span class="Li">&#34;Mouse&#34;</span>)
+    作爲 <span class="Li">&#34;Animal::speak&#34;</span>
+    的第一個參數,
+    因爲我們沒有用箭頭符號.
+    那爲什麼不用呢? 嗯,
+    如果我們在那兒調用
+    <span class="Li">&#34;Animal-&gt;speak&#34;</span>,
+    則第一個參數是
+    <span class="Li">&#34;Animal&#34;</span> 而不是
+    <span class="Li">&#34;Mouse&#34;</span> ,
+    這樣當調用
+    <span class="Li">&#34;sound&#34;</span> 時,
+    就找不到正確的函數了.</p>
+<p class="Pp">雖然如此,直接調用
+    <span class="Li">&#34;Animal::speak&#34;</span>
+    確實不怎麼好. 萬一
+    <span class="Li">&#34;Animal::speak&#34;</span> 不存在,
+    而是繼承自
+    <span class="Li">@Animal::ISA</span>
+    中的某個類呢?
+    因爲沒有使用箭頭符號,
+    我們只有一次機會去調用正確的函數.</p>
+<p class="Pp">還要注意到,現在類名
+    <span class="Li">&#34;Animal&#34;</span>
+    直接在子程序中使用.
+    如果維護代碼的人沒有注意到這一點,
+    改變了 &lt;Mouse&gt; 的
+    <span class="Li">@ISA</span>，沒有注意到
+    <span class="Li">&#34;speak&#34;</span> 用到了
+    <span class="Li">&#34;Animal&#34;</span>
+    那就會出問題. 因此,
+    這可能不是一個好方法.
+  <br/>
+</p>
+<p class="Pp"><b>Starting the search from a different place
+    從其它地方開始尋找</b></p>
+<p class="Pp">較好的解決辦法是讓Perl從繼承鏈的上一級開始尋找:</p>
+<p class="Pp"></p>
+<pre>    # same Animal as before
+    { package Mouse;
+      # same @ISA, &amp;sound as before
+      sub speak {
+        my $class = shift;
+        $class-&gt;Animal::speak;
+        print &#34;[but you can barely hear it!]\n&#34;;
+      }
+    }
+</pre>
+<p class="Pp">這就對了.
+    使用這一語法, 我們從
+    <span class="Li">&#34;Animal&#34;</span> 尋找
+    <span class="Li">&#34;speak&#34;</span>,
+    在找不到時尋找
+    <span class="Li">&#34;Animal&#34;</span>
+    的繼承鏈.且第一個參數是
+    <span class="Li">$class</span>, 所以
+    <span class="Li">&#34;speak&#34;</span>
+    和<span class="Li">&#34;Mouse::sound&#34;</span>
+    都會被正確地調用.</p>
+<p class="Pp">但這還不是最好的方法.我們還必須調整
+    <span class="Li">@ISA</span> 的元素順序.
+    更糟糕的是, 如果
+    <span class="Li">&#34;Mouse&#34;</span>
+    有多個父類在
+    <span class="Li">@ISA</span>,
+    我們還要知道哪個類定義了
+    <span class="Li">&#34;speak&#34;</span>.
+    那麼,有沒有更好的辦法呢?
+  <br/>
+</p>
+<p class="Pp"><b>The SUPER way of doing things
+    使用SUPER方法</b></p>
+<p class="Pp">通過把
+    <span class="Li">&#34;Animal&#34;</span> 改成
+    <span class="Li">&#34;SUPER&#34;</span> 類,
+    程序可以自動在所有父類中(<span class="Li">@ISA</span>):</p>
+<p class="Pp"></p>
+<pre>    # same Animal as before
+    { package Mouse;
+      # same @ISA, &amp;sound as before
+      sub speak {
+        my $class = shift;
+        $class-&gt;SUPER::speak;
+        print &#34;[but you can barely hear it!]\n&#34;;
+      }
+    }
+</pre>
+<p class="Pp"><span class="Li">&#34;SUPER::speak&#34;</span>
+    意味着在當前包的
+    <span class="Li">@ISA</span> 中尋找
+    <span class="Li">&#34;speak&#34;</span>,
+    調用第一個找到的函數。注意它不會查找
+    <span class="Li">$class</span> 的 <span class="Li">@ISA</span>
+  <br/>
+</p>
+<p class="Pp"><b>Where we&#39;re at so
+    far...到現在爲止我們學了些什麼</b></p>
+<p class="Pp">我們已經看到了箭頭符號語法:</p>
+<p class="Pp"></p>
+<pre>  Class-&gt;method(@args);
+</pre>
+<p class="Pp">和它的等價形式:</p>
+<p class="Pp"></p>
+<pre>  $a = &#34;Class&#34;;
+  $a-&gt;method(@args);
+</pre>
+<p class="Pp">它們構造這樣一個參數列表:</p>
+<p class="Pp"></p>
+<pre>  (&#34;Class&#34;, @args)
+</pre>
+<p class="Pp">並調用</p>
+<p class="Pp"></p>
+<pre>  Class::method(&#34;Class&#34;, @Args);
+</pre>
+<p class="Pp">但是，如果找不到
+    <span class="Li">&#34;Class::method&#34;</span>,
+    程序會查看 <span class="Li">@Class::ISA</span>
+    (遞歸的) 找到一個包含
+    <span class="Li">&#34;method&#34;</span>
+    的包,然後執行它.</p>
+<p class="Pp">使用這種簡單的語法,
+    我們可以有類方法,(多)繼承,重載,以及其它擴展.
+    使用我們已經學到的東西,
+    我們可以析出公共的代碼,以各種不同的形式重用同一工具.
+    這是對象能夠提供的核心內容,
+    但是對象還能夠提供實例數據,
+    這一點我們還沒有涉及.
+  <br/>
+</p>
+<p class="Pp"><b>A horse is a horse, of course of course -- or is it?
+    馬就是馬——真的是這樣嗎?</b></p>
+<p class="Pp">我們從
+    <span class="Li">&#34;Animal&#34;</span> 和
+    <span class="Li">&#34;Horse&#34;</span>
+    類的代碼開始:</p>
+<p class="Pp"></p>
+<pre>  { package Animal;
+    sub speak {
+      my $class = shift;
+      print &#34;a $class goes &#34;, $class-&gt;sound, &#34;!\n&#34;
+    }
+  }
+  { package Horse;
+    @ISA = qw(Animal);
+    sub sound { &#34;neigh&#34; }
+  }
+</pre>
+<p class="Pp">這樣使得我們調用
+    <span class="Li">&#34;Horse-&gt;speak&#34;</span>，從而向上調用
+    <span class="Li">&#34;Animal::speak&#34;</span>，然後調用
+    <span class="Li">&#34;Horse::sound&#34;</span>
+    來獲得指定的聲音，輸出爲:</p>
+<p class="Pp"></p>
+<pre>  a Horse goes neigh!
+</pre>
+<p class="Pp">但是我們所有的馬都是相同的.
+    如果我增加一個子程序,
+    所有的馬都會共享它.
+    這在創建相同的馬時確實不錯,
+    但是我們如何能夠區分不同的馬呢?
+    比如,
+    假設我想給我的第一匹馬起個名字.
+    應該有辦法使得它的名字和別的馬的名字不同.</p>
+<p class="Pp">這可以通過創建一個
+    &#34;實例,instance&#34; 來實現.
+    實例是由類創建的.
+    在Perl中,
+    任何引用都可以是實例,
+    就讓我們從最簡單的引用開始吧,一個標量引用:</p>
+<p class="Pp"></p>
+<pre>  my $name = &#34;Mr. Ed&#34;;
+  my $talking = \$name;
+</pre>
+<p class="Pp">現在 <span class="Li">$talking</span>
+    是指向實例特有數據(
+    <span class="Li">$name</span>
+    )的引用。把這個引用變成真正的實例的是一個特殊的操作符,叫做
+    <span class="Li">&#34;bless&#34;</span>:</p>
+<p class="Pp"></p>
+<pre>  bless $talking, Horse;
+</pre>
+<p class="Pp">這個操作符把包名
+    <span class="Li">&#34;Horse&#34;</span>
+    中的所有信息存放到引用所指向的東西中.
+    這時,我們說 <span class="Li">$talking</span>
+    是 <span class="Li">&#34;Horse&#34;</span>
+    的一個實例 . 也就是說,
+    它是一匹獨特的馬.
+    引用並沒有改變,
+    還可以用於間接引用操作符.
+  <br/>
+</p>
+<p class="Pp"><b>Invoking an instance method
+    調用實例方法</b></p>
+<p class="Pp">箭頭符號可以用於實例.
+    那麼, 聽聽 <span class="Li">$talking</span>
+    的聲音吧:</p>
+<p class="Pp"></p>
+<pre>  my $noise = $talking-&gt;sound;
+</pre>
+<p class="Pp">要調用
+    <span class="Li">&#34;sound&#34;</span>, Perl
+    首先注意到 <span class="Li">$talking</span>
+    是一個 blessed 引用
+    (因此是一個實例).
+    它會構造一個參數列表,
+    現在只有 <span class="Li">$talking</span>.
+    (在後面我們會看到參數們在實例變量之後,
+    與使用類時相似.)</p>
+<p class="Pp">然後,是真正有意思的部分:
+    Perl 查找實例所屬的類,
+    這裏是 <span class="Li">&#34;Horse&#34;</span>,
+    在其中尋找對應的方法.
+    這裏, <span class="Li">&#34;Horse::sound&#34;</span>
+    直接可以找到(不用使用繼承),
+    最後這樣調用:</p>
+<p class="Pp"></p>
+<pre>  Horse::sound($talking)
+</pre>
+<p class="Pp">注意這裏的第一個參數還是實例本身,
+    而不像前面我們學到的是類名.
+    最後返回值是
+    <span class="Li">&#34;neigh&#34;</span>,
+    它被賦值給 <span class="Li">$noise</span>
+    變量.</p>
+<p class="Pp">如果找不到 Horse::sound,
+    會在 <span class="Li">@Horse::ISA</span>
+    列表中查找.
+    類方法與實例方法的唯一區別是調用時的第一個參數是實例(一個blessed引用)還是一個類名(一個字符串).
+  <br/>
+</p>
+<p class="Pp"><b>Accessing the instance data
+    訪問實例數據</b></p>
+<p class="Pp">因爲我們得到的第一個參數是實例,我們可以訪問實例特有的數據.
+    我們可以取得馬的名字:</p>
+<p class="Pp"></p>
+<pre>  { package Horse;
+    @ISA = qw(Animal);
+    sub sound { &#34;neigh&#34; }
+    sub name {
+      my $self = shift;
+      $$self;
+    }
+  }
+</pre>
+<p class="Pp">現在,我們調用名字:</p>
+<p class="Pp"></p>
+<pre>  print $talking-&gt;name, &#34; says &#34;, $talking-&gt;sound, &#34;\n&#34;;
+</pre>
+<p class="Pp">在 <span class="Li">&#34;Horse::name&#34;</span> 中,
+    <span class="Li">@_</span> 數組僅含有
+    <span class="Li">$talking</span>, shift 將
+    <span class="Li">$talking</span> 賦給了
+    <span class="Li">$self</span>.
+    (傳統上我們在處理實例方法時總是把第一個元素賦給
+    <span class="Li">$self</span>,
+    所以你也應該這麼做,
+    除非你有不這樣做的充分理由.)
+    然後, <span class="Li">$self</span>
+    被標量化,成爲 <span class="Li">&#34;Mr.
+    Ed&#34;</span>, 這就行了.
+  輸出是:</p>
+<p class="Pp"></p>
+<pre>  Mr. Ed says neigh.
+</pre>
+<br/>
+<p class="Pp"><b>How to build a horse
+    如何創建一匹馬</b></p>
+<p class="Pp">當然啦,如果我們手工創建所有的馬,
+    我們會出很多錯誤.
+    不僅如此,我們還褻瀆了面向對象編程的特性,因爲在那種情況下馬的&#34;內臟&#34;也可見了.
+    如果你是獸醫的話,這倒正好,
+    可是如果你僅僅是個愛馬者呢?
+    所以,我們讓 Horse
+    類來創建一匹新馬:</p>
+<p class="Pp"></p>
+<pre>  { package Horse;
+    @ISA = qw(Animal);
+    sub sound { &#34;neigh&#34; }
+    sub name {
+      my $self = shift;
+      $$self;
+    }
+    sub named {
+      my $class = shift;
+      my $name = shift;
+      bless \$name, $class;
+    }
+  }
+</pre>
+<p class="Pp">現在,我們可以用
+    <span class="Li">&#34;named&#34;</span>
+    方法創建一匹馬:</p>
+<p class="Pp"></p>
+<pre>  my $talking = Horse-&gt;named(&#34;Mr. Ed&#34;);
+</pre>
+<p class="Pp">注意到我們有回到了類方法,
+    所以傳遞給
+    <span class="Li">&#34;Horse::named&#34;</span>
+    的兩個參數是
+    <span class="Li">&#34;Horse&#34;</span> 和
+    <span class="Li">&#34;Mr. Ed&#34;</span>. &#34;bless&#34;
+    操作符不僅將
+    <span class="Li">$name</span> 實例化,
+    且將指向 <span class="Li">$name</span>
+    的引用作爲返回值返回.
+    這樣,
+    我們就創建了一匹馬.</p>
+<p class="Pp">這裏,我們調用了構造器
+    <span class="Li">&#34;named&#34;</span>,
+    它的參數就是特定的
+    <span class="Li">&#34;Horse&#34;</span> 的名字.
+    你可以使用不同的構造器用不同的名字建立不同的對象(比如記錄它的譜系或生日).
+    但是,
+    你會發現多數使用Perl的人更喜歡把構造器命名爲
+    <span class="Li">&#34;new&#34;</span>,
+    並使用不同的方法解釋
+    <span class="Li">&#34;new&#34;</span> 的參數.
+    兩種都挺好,只要你能創建對象就行.
+    (你會自己創建一個,對嗎?)
+  <br/>
+</p>
+<p class="Pp"><b>Inheriting the constructor
+    繼承構造器</b></p>
+<p class="Pp">但是那個方法中有沒有什麼對於
+    <span class="Li">&#34;Horse&#34;</span>
+    來說比較特殊的東西呢?
+    沒有. 因此, 從
+    <span class="Li">&#34;Animal&#34;</span>
+    創建其它任何東西也可以使用相同的方法,我們來試試::</p>
+<p class="Pp"></p>
+<pre>  { package Animal;
+    sub speak {
+      my $class = shift;
+      print &#34;a $class goes &#34;, $class-&gt;sound, &#34;!\n&#34;
+    }
+    sub name {
+      my $self = shift;
+      $$self;
+    }
+    sub named {
+      my $class = shift;
+      my $name = shift;
+      bless \$name, $class;
+    }
+  }
+  { package Horse;
+    @ISA = qw(Animal);
+    sub sound { &#34;neigh&#34; }
+  }
+</pre>
+<p class="Pp">好了,
+    但是以實例調用
+    <span class="Li">&#34;speak&#34;</span>
+    會產生什麼結果呢?</p>
+<p class="Pp"></p>
+<pre>  my $talking = Horse-&gt;named(&#34;Mr. Ed&#34;);
+  $talking-&gt;speak;
+</pre>
+<p class="Pp">我們得到的是:</p>
+<p class="Pp"></p>
+<pre>  a Horse=SCALAR(0xaca42ac) goes neigh!
+</pre>
+<p class="Pp">爲什麼?因爲
+    <span class="Li">&#34;Animal::speak&#34;</span>
+    希望它的第一個參數是類名,
+    而不是實例.
+    當實例被傳入時,我們希望使用的是字符串而不是實例本身,顯示的結果不是我們所希望的.
+  <br/>
+</p>
+<p class="Pp"><b>Making a method work with either classes or instances
+    使方法同時支持類和實例</b></p>
+<p class="Pp">我們需要做的是讓方法檢測它是被實例調用的還是被類調用的.
+    最直接的方法是使用
+    <span class="Li">&#34;ref&#34;</span> 操作符.
+    它在參數是實例時返回字符串,在參數是類名時返回
+    <span class="Li">&#34;undef&#34;</span>.
+    我們首先改寫
+    <span class="Li">&#34;name&#34;</span> 方法:</p>
+<p class="Pp"></p>
+<pre>  sub name {
+    my $either = shift;
+    ref $either
+      ? $$either # it&#39;s an instance, return name
+      : &#34;an unnamed $either&#34;; # it&#39;s a class, return generic
+  }
+</pre>
+<p class="Pp">在這兒, <span class="Li">&#34;?:&#34;</span>
+    操作符決定是選擇間接引用(dereference)還是派生字符串.
+    現在我們可以同時使用類或實例了.
+    注意我修改了第一個參數爲
+    <span class="Li">$either</span>
+    來表示期望的變化:</p>
+<p class="Pp"></p>
+<pre>  my $talking = Horse-&gt;named(&#34;Mr. Ed&#34;);
+  print Horse-&gt;name, &#34;\n&#34;; # prints &#34;an unnamed Horse\n&#34;
+  print $talking-&gt;name, &#34;\n&#34;; # prints &#34;Mr Ed.\n&#34;
+</pre>
+<p class="Pp">我們可以改寫
+    <span class="Li">&#34;speak&#34;</span> :</p>
+<p class="Pp"></p>
+<pre>  sub speak {
+    my $either = shift;
+    print $either-&gt;name, &#34; goes &#34;, $either-&gt;sound, &#34;\n&#34;;
+  }
+</pre>
+<p class="Pp">而 <span class="Li">&#34;sound&#34;</span>
+    本來就可以工作.
+    那麼現在就一切完成了!
+  <br/>
+</p>
+<p class="Pp"><b>Adding parameters to a method
+    給方法加參數</b></p>
+<p class="Pp">讓我們訓練動物們吃飯:</p>
+<p class="Pp"></p>
+<pre>  { package Animal;
+    sub named {
+      my $class = shift;
+      my $name = shift;
+      bless \$name, $class;
+    }
+    sub name {
+      my $either = shift;
+      ref $either
+        ? $$either # it&#39;s an instance, return name
+        : &#34;an unnamed $either&#34;; # it&#39;s a class, return generic
+    }
+    sub speak {
+      my $either = shift;
+      print $either-&gt;name, &#34; goes &#34;, $either-&gt;sound, &#34;\n&#34;;
+    }
+    sub eat {
+      my $either = shift;
+      my $food = shift;
+      print $either-&gt;name, &#34; eats $food.\n&#34;;
+    }
+  }
+  { package Horse;
+    @ISA = qw(Animal);
+    sub sound { &#34;neigh&#34; }
+  }
+  { package Sheep;
+    @ISA = qw(Animal);
+    sub sound { &#34;baaaah&#34; }
+  }
+</pre>
+<p class="Pp">試試吧:</p>
+<p class="Pp"></p>
+<pre>  my $talking = Horse-&gt;named(&#34;Mr. Ed&#34;);
+  $talking-&gt;eat(&#34;hay&#34;);
+  Sheep-&gt;eat(&#34;grass&#34;);
+</pre>
+<p class="Pp">輸出爲:</p>
+<p class="Pp"></p>
+<pre>  Mr. Ed eats hay.
+  an unnamed Sheep eats grass.
+</pre>
+<p class="Pp">有參數的實例方法調用時首先得到實例的引用，然後得到參數的列表。因此第一個調用實際上是這樣的:</p>
+<p class="Pp"></p>
+<pre>  Animal::eat($talking, &#34;hay&#34;);
+</pre>
+<br/>
+<p class="Pp"><b>More interesting instances
+    更多有趣的實例</b></p>
+<p class="Pp">如果實例需要更多的數據該怎麼辦呢?
+    更多的項目產生更有趣的實例,
+    每個項目可以是一個引用或者甚至是一個對象.
+    最簡單的方法是把它們存放到哈希中.
+    哈希中的關鍵詞叫做&#39;實例變量&#34;(instance
+    variables)或者&#34;成員變量&#34;(member
+    variables)，相應的值也就是變量的值。</p>
+<p class="Pp">但是我們怎麼把馬放到哈希中呢?
+    回憶到對象是被實例化(blessed)的引用.
+    我們可以簡單地創建一個祝福了的哈希引用,同時相關的的內容也作些修改就可以了.</p>
+<p class="Pp">讓我們創建一隻有名字有顏色的綿羊：</p>
+<p class="Pp"></p>
+<pre>  my $bad = bless { Name =&gt; &#34;Evil&#34;, Color =&gt; &#34;black&#34; }, Sheep;
+</pre>
+<p class="Pp">那麼
+    <span class="Li">&#34;$bad-&gt;{Name}&#34;</span> 是
+    <span class="Li">&#34;Evil&#34;</span>,
+    <span class="Li">&#34;$bad-&gt;{Color}&#34;</span> 是
+    <span class="Li">&#34;black&#34;</span>.
+    但是我們想通過
+    <span class="Li">&#34;$bad-&gt;name&#34;</span>
+    存取綿羊的名字name,
+    這有點的問題,因爲現在它期望一個標量引用.
+    別擔心,因爲修正它很簡單:</p>
+<p class="Pp"></p>
+<pre>  ## in Animal
+  sub name {
+    my $either = shift;
+    ref $either ?
+      $either-&gt;{Name} :
+      &#34;an unnamed $either&#34;;
+  }
+</pre>
+<p class="Pp"><span class="Li">&#34;named&#34;</span>
+    當然還是創建標量的綿羊,
+    如下修正就好了:</p>
+<p class="Pp"></p>
+<pre>  ## in Animal
+  sub named {
+    my $class = shift;
+    my $name = shift;
+    my $self = { Name =&gt; $name, Color =&gt; $class-&gt;default_color };
+    bless $self, $class;
+  }
+</pre>
+<p class="Pp">默認顏色
+    <span class="Li">&#34;default_color&#34;</span> 是什麼?
+    嗯, 如果 <span class="Li">&#34;named&#34;</span>
+    只有一個參數name,
+    我們還是希望有個顏色,
+    所以我們設定一個類初始化顏色.
+    對綿羊來說,
+    白色比較好:</p>
+<p class="Pp"></p>
+<pre>  ## in Sheep
+  sub default_color { &#34;white&#34; }
+</pre>
+<p class="Pp">爲了避免爲每個類定義顏色,
+    我們可以在
+    <span class="Li">&#34;Animal&#34;</span>
+    中定義一個
+    &#34;缺省的缺省，backstop&#34;
+    的顏色:</p>
+<p class="Pp"></p>
+<pre>  ## in Animal
+  sub default_color { &#34;brown&#34; }
+</pre>
+<p class="Pp">現在, 因爲只有
+    <span class="Li">&#34;name&#34;</span> 和
+    <span class="Li">&#34;named&#34;</span> 與對象的
+    &#34;結構，structure&#34; 相關,
+    其餘的部分可以保持不變,
+    所以 <span class="Li">&#34;speak&#34;</span>
+    工作正常.
+  <br/>
+</p>
+<p class="Pp"><b>A horse of a different color
+    一匹不同顏色的馬</b></p>
+<p class="Pp">但是如果所有的馬都是棕色的,也挺煩人的.
+    所以我們可以寫個方法來改變馬的顏色.</p>
+<p class="Pp"></p>
+<pre>  ## in Animal
+  sub color {
+    $_[0]-&gt;{Color}
+  }
+  sub set_color {
+    $_[0]-&gt;{Color} = $_[1];
+  }
+</pre>
+<p class="Pp">注意到存取參數的不同方法了嗎:
+    <span class="Li">$_[0]</span> 直接使用,
+    而沒有用 <span class="Li">&#34;shift&#34;</span>.
+    (這在我們頻繁存取時可以節省一些時間.)
+    現在我們可以把Mr.
+    Ed的顏色變過來:</p>
+<p class="Pp"></p>
+<pre>  my $talking = Horse-&gt;named(&#34;Mr. Ed&#34;);
+  $talking-&gt;set_color(&#34;black-and-white&#34;);
+  print $talking-&gt;name, &#34; is colored &#34;, $talking-&gt;color, &#34;\n&#34;;
+</pre>
+<p class="Pp">結果是:</p>
+<p class="Pp"></p>
+<pre>  Mr. Ed is colored black-and-white
+</pre>
+<br/>
+<p class="Pp"><b>Summary 總結</b></p>
+<p class="Pp">現在我們講了類方法,構造器,實例方法,實例數據,甚至還有存取器(accessor).
+    但是這些還僅僅是開始.
+    我們還沒有講到以兩個函數
+    getters,setters
+    形式出現的存取器，析構器(destructor),間接對象(indirect
+    object notation),子類(subclasses that add instance
+    data),per-class data,重載(overloading),&#34;isa&#34; 和
+    &#34;can&#34;
+    測試,公共類(<span class="Li">&#34;UNIVERSAL&#34;</span>
+    class),等等.
+    這有待其它文檔去講解了.
+    無論如何,希望本文使你對對象有所瞭解.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO_參見">SEE ALSO 參見<a class="anchor" href="#SEE_ALSO_%E5%8F%83%E8%A6%8B">¶</a></h1>
+更多信息可參見 perlobj
+  (這裏有更多的Perl對象的細節,而本文的是基礎),
+  perltoot
+  (面向對象的中級教程),
+  perlbot (更多的技巧),
+  以及書籍,比如Damian
+  Conway的不錯的書叫做《面向對象的Perl
+  (<i>Object Oriented Perl</i>)》。
+<p class="Pp">某些模塊可能對你有用，它們是
+    Class::Accessor, Class::Class, Class::Contract, Class::Data::Inheritable,
+    Class::MethodMaker 還有 Tie::SecureHash</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="COPYRIGHT">COPYRIGHT<a class="anchor" href="#COPYRIGHT">¶</a></h1>
+Copyright (c) 1999, 2000 by Randal L. Schwartz and Stonehenge Consulting
+  Services, Inc. Permission is hereby granted to distribute this document intact
+  with the Perl distribution, and in accordance with the licenses of the Perl
+  distribution; derived documents must include this copyright notice intact.
+<p class="Pp">Portions of this text have been derived from Perl Training
+    materials originally appearing in the <i>Packages, References, Objects,
+    and</i> <i>Modules</i> course taught by instructors for Stonehenge
+    Consulting Services, Inc. and used with permission.</p>
+<p class="Pp">Portions of this text have been derived from materials originally
+    appearing in <i>Linux Magazine</i> and used with permission.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文版維護人">中文版維護人<a class="anchor" href="#%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA">¶</a></h1>
+<b>redcandle &lt;redcandle51@chinaren.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文版最新更新">中文版最新更新<a class="anchor" href="#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0">¶</a></h1>
+<b>2001年12月9日星期日</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文手冊頁翻譯計劃">中文手冊頁翻譯計劃<a class="anchor" href="#%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+<br/>
+<p class="Pp"><b>跋</b></p>
+<p class="Pp">本頁面中文版由中文
+    man 手冊頁計劃提供。
+  <br/>
+  中文 man
+    手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-25</td>
+    <td class="foot-os">perl v5.8.3</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+perlboot.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-28T03:40:56Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"perlboot(7)\"}}]}"
+</script>

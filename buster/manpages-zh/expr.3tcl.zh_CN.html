@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>expr(3tcl) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/tcl8.6-doc/expr.3tcl.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-pl-dev/expr.3tcl.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/expr.3tcl.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/expr.3tcl.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="3tcl">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; expr(3tcl)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/expr.3tcl">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/expr.3tcl.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%80%BB%E8%A7%88_SYNOPSIS" title="总览 SYNOPSIS">总览 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%93%8D%E4%BD%9C%E6%95%B0_OPERANDS" title="操作数 OPERANDS">操作数 OPERANDS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6_OPERATORS" title="操作符 OPERATORS">操作符 OPERATORS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%95%B0%E5%AD%A6%E5%87%BD%E6%95%B0_MATH_FUNCTIONS" title="数学函数 MATH FUNCTIONS">数学函数 MATH FUNCTIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B1%BB%E5%9E%8B_TYPES,_%E6%BA%A2%E5%87%BA_OVERFLOW,_%E5%92%8C_%E7%B2%BE%E5%BA%A6_PRECISION" title="类型 TYPES, 溢出 OVERFLOW, 和 精度 PRECISION">类型 TYPES, 溢出 OVERFLOW, 和 精度 PRECISION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C_STRING_OPERATIONS" title="字符串操作 STRING OPERATIONS">字符串操作 STRING OPERATIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%80%A7%E8%83%BD%E7%9A%84%E8%80%83%E8%99%91_PERFORMANCE_CONSIDERATIONS" title="性能的考虑 PERFORMANCE CONSIDERATIONS">性能的考虑 PERFORMANCE CONSIDERATIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%85%B3%E9%94%AE%E5%AD%97_KEYWORDS" title="关键字 KEYWORDS">关键字 KEYWORDS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D" title="[中文版维护人]">[中文版维护人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中国 Linux 论坛 man 手册页翻译计划》:">《中国 Linux 论坛 man 手册页翻译计划》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/expr.3tcl.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/expr.3tcl.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/expr.3tcl.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/tcl8.6-doc/expr.3tcl.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl-dev/expr.3tcl.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/expr.3tcl.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/expr.3tcl.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/expr.1.zh_CN.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/expr.3tcl.zh_CN.html">3tcl (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">expr(3tcl)</td>
+    <td class="head-vol">Tcl Built-In Commands</td>
+    <td class="head-rtitle">expr(3tcl)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<pre>
+
+</pre>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+expr - 求一个表达式的值
+</section>
+<section class="Sh">
+<h1 class="Sh" id="总览_SYNOPSIS">总览 SYNOPSIS<a class="anchor" href="#%E6%80%BB%E8%A7%88_SYNOPSIS">¶</a></h1>
+<b>expr </b><i>arg </i>?<i>arg arg ...</i>?
+<pre>
+
+</pre>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+连接(concatenate)所有 <i>arg</i>
+  (在它们中间添加分隔符空格)，把结果作为一个Tcl
+  表示式来求值(evaluate)并返回结果。在
+  Tcl
+  表达式中允许的操作符式在
+  C
+  表达式中允许的操作符的一个子集，并且它们与相应的
+  C
+  操作符有相同意义和优先级。表达式几乎总是产生一个数值结果(整数或浮点数的值)。例如，表达式
+<div class="Bd-indent">
+<pre><b>expr 8.2 + 6</b>
+</pre>
+</div>
+求值出 14.2. Tcl 表达式与 C
+  表达式在操作数指定的方式上有区别。还有，Tcl
+  表达式支持非数值操作符和字符串比较。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="操作数_OPERANDS">操作数 OPERANDS<a class="anchor" href="#%E6%93%8D%E4%BD%9C%E6%95%B0_OPERANDS">¶</a></h1>
+一个 Tcl
+  表达式由操作符、操作数和括号的组合构成。在操作符、操作数和括号之间可使用白空格；它被表达式的指令所忽略。指定整数值可以使用十进制(通常的情况)、八进制(如果操作数的第一个字符是
+  <b>0</b>)、或十六进制(如果操作数的前两个字符是
+  <b>0x</b>)。如果一个操作数没有上述的整数格式，则如果可能的话把它作为浮点数对待。指定浮点数可以使用任何遵从
+  ANSI 的 C
+  编译器可接受方式(除了在多数安装(installation)中不允许
+  <b>f</b>、<b>F</b>、<b>l</b><b> </b>和 <b>L</b>
+  后缀)。例如，下列的数都是有效的浮点数:
+  2.1、3.、6e4、7.91e+16。如果没有可能的数值解释，则一个操作数被作为字符串来保留(并且对它只提供一组有限的操作符)。
+<p class="Pp">可以用下列方式指定操作数:</p>
+<dl class="Bl-tag">
+  <dt>[1]</dt>
+  <dd>为一个数值值，要么是整数要么是浮点数。</dd>
+  <dt>[2]</dt>
+  <dd>作为一个 Tcl
+      变量，使用标准的 <b>$</b>
+      记号。变量的值将被用作操作数。</dd>
+  <dt>[3]</dt>
+  <dd>作为用双引号包围起来的一个字符串。表达式分析器将在引号之间的信息上完成反斜杠、变量和命令替换，并把结果值用作操作数。</dd>
+  <dt>[4]</dt>
+  <dd>作为用花括号包围起来的一个字符串。在左花括号和相匹配的右花括号之间的字符将被用作操作数而不做任何替换。</dd>
+  <dt>[5]</dt>
+  <dd>作为一个用方括号包围起来的
+      Tcl
+      命令。命令将被执行并且它的结果将被用作操作数。</dd>
+  <dt>[6]</dt>
+  <dd>作为一个数学函数，它的参数可以是操作数的任何上述形式，比如
+      <b>sin($x)</b>。参见下面的已定义的函数的一个列表。</dd>
+</dl>
+<p class="Pp">在上述替换发生的地方(例如在被引用起来的字符串当中)，他们由表达式的指令来完成。但是，在调用表达式处理器之前命令分析器可能已经完成了一个额外的替换层。如下面讨论的那样，通常最好把表达式包围在花括号中来防止命令分析器在这些内容上进行替换。</p>
+<p class="Pp">举一些简单的表达式的例子，假设变量<b>a</b>
+    的值是 3 并且变量 <b>b</b>
+    的值是
+    6。则下面的每行左边的命令将生成右边的值。</p>
+<div class="Bd-indent">
+<pre><b>expr 3.1 + $a	6.1</b>
+<b>expr 2 + &#34;$a.$b&#34;	5.6</b>
+<b>expr 4*[llength &#34;6 2&#34;]	8</b>
+<b>expr {{word one} &lt; &#34;word $a&#34;}	0</b>
+</pre>
+</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="操作符_OPERATORS">操作符 OPERATORS<a class="anchor" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6_OPERATORS">¶</a></h1>
+下面列出了有效的操作符，用优先级的降序分组:
+<dl class="Bl-tag">
+  <dt><b>-  +  ~  !</b></dt>
+  <dd>一元(Unary，也译为单目)减，一元加，位(bit-wise)
+      NOT，逻辑
+      NOT。这些操作符不能提供给字符串操作数，并且位
+      NOT 只能提供给整数。</dd>
+  <dt><b>*  /  %</b></dt>
+  <dd>乘，除，求余。这些操作符不能提供给字符串操作数，并且求余只能提供给整数。余数将总是与除数有相同的符号并且绝对值小于除数。</dd>
+  <dt><b>+  -</b></dt>
+  <dd>加和减。对任何数值操作数均有效。</dd>
+  <dt><b>&lt;&lt;  &gt;&gt;</b></dt>
+  <dd>左移和右移。只对整数操作数有效。一右移总是传播(propagate)符号位。</dd>
+  <dt><b>&lt;  &gt;  &lt;=  &gt;=</b></dt>
+  <dd>Boolean
+      小于，大于，小于等于，大于等于。如果条件是真则每个操作符产生
+      1，否则
+      0。这些操作符可以象提供给数值操作数一样提供给字符串，在这种情况下使用字符串比较。</dd>
+  <dt><b>==  !=</b></dt>
+  <dd>Boolean
+      等于和不等于。每个操作符产生一个零/一结果。对所有操作数类型有效。</dd>
+  <dt><b>&amp;</b></dt>
+  <dd>位与。只对整数操作数有效。</dd>
+  <dt><b>^</b></dt>
+  <dd>位异或。只对整数操作数有效。</dd>
+  <dt><b>|</b></dt>
+  <dd>位或。只对整数操作数有效。</dd>
+  <dt><b>&amp;&amp;</b></dt>
+  <dd>逻辑与。如果两个操作数都是非零则生成一个
+      1，否则生成 0。只对
+      boolean
+      和数值(整数或浮点数)操作数有效。</dd>
+  <dt><b>||</b></dt>
+  <dd>逻辑或。如果两个操作数都是零则生成一个
+      0，否则生成 1。只对
+      boolean
+      和数值(整数或浮点数)操作数有效。</dd>
+  <dt><i>x</i><b>?</b><i>y</i><b>:</b><i>z</i></dt>
+  <dd>If-then-else，如同 C
+      语言那样。如果 <i>x</i>
+      求值为非零，则结果是
+      <i>y</i><i>
+      </i>的值。否则结果是 <i>z
+      </i>的值。<i>x</i>操作数必须是一个数值值。</dd>
+</dl>
+<p class="Pp">参见 C
+    手册来得到对每个操作符的生成结果的更详细的描述。所有相同的优先级的二元操作符从左至右的组合(group)。例如，命令</p>
+<div class="Bd-indent">
+<pre><b>expr 4*2 &lt; 7</b>
+</pre>
+</div>
+返回 0.
+<p class="Pp"><b>&amp;&amp;</b>, <b>||</b>, 和 <b>?:</b>
+    操作符“惰性求值”，如同
+    C
+    语言那样，这意味着如果操作数对确定结果不是必须的则不被求值。例如，命令</p>
+<div class="Bd-indent">
+<pre><b>expr {$v ? [a] : [b]}</b>
+</pre>
+</div>
+中实际上只有 <b>[a]</b> 或
+  <b>[b]</b>中的一个将被求值，依赖于
+  <b>$v
+  </b>的值。注意，这只在整个表达式被包围在花括号中时是真的；否则
+  Tcl 分析器将在调用 <b>expr</b>
+  命令之前求值 <b>[a]</b> 和
+  <b>[b]</b> 二者。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="数学函数_MATH_FUNCTIONS">数学函数 MATH FUNCTIONS<a class="anchor" href="#%E6%95%B0%E5%AD%A6%E5%87%BD%E6%95%B0_MATH_FUNCTIONS">¶</a></h1>
+Tcl
+  支持在表达式中的下列数学函数:
+<div class="Bd-indent">
+<pre>
+
+<b>abs</b>	<b>cosh</b>	<b>log</b>	<b>sqrt</b>
+<b>acos</b>	<b>double</b>	<b>log10</b>	<b>srand</b>
+<b>asin</b>	<b>exp</b>	<b>pow</b>	<b>tan</b>
+<b>atan</b>	<b>floor</b>	<b>rand</b>	<b>tanh</b>
+<b>atan2</b>	<b>fmod</b>	<b>round</b>
+<b>ceil</b>	<b>hypot</b>	<b>sin</b>
+<b>cos</b>	<b>int</b>	<b>sinh</b>
+</pre>
+</div>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>abs(</b><i>arg</i><b>)</b></dt>
+  <dd>返回 <i>arg</i>
+      的绝对值。<i>Arg</i>可以要么式整数要么是浮点数，并且结果以同样的形式返回。</dd>
+  <dt><b>acos(</b><i>arg</i><b>)</b></dt>
+  <dd>返回 <i>arg
+      </i>的反余弦，值域是
+      [0,pi]
+      弧度。<i>Arg</i>的定义域是
+      [-1,1]。 .TP <b>asin(</b><i>arg</i><b>)</b> 返回 <i>arg
+      </i>的反正弦，值域是
+      [-pi/2,pi/2] 弧度。<i>Arg</i>
+      的定义域是 [-1,1]。</dd>
+  <dt><b>atan(</b><i>arg</i><b>)</b></dt>
+  <dd>返回 <i>arg
+      </i>的反正切，值域是
+      [-pi/2,pi/2] 弧度。</dd>
+  <dt><b>atan2(</b><i>x, y</i><b>)</b></dt>
+  <dd>返回 <i>y</i>/<i>x</i><i>
+      </i>的反正切，值域是
+      [-pi,pi] 和，<i>x</i> 和 <i>y</i>
+      不能都是 0。</dd>
+  <dt><b>ceil(</b><i>arg</i><b>)</b></dt>
+  <dd>返回不小于 <i>arg
+      </i>的最小的整数值。</dd>
+  <dt><b>cos(</b><i>arg</i><b>)</b></dt>
+  <dd>返回 <i>arg
+      </i>的余弦，单位是弧度。</dd>
+  <dt><b>cosh(</b><i>arg</i><b>)</b></dt>
+  <dd>返回 <i>arg</i>
+      的双曲余弦，如果结果导致溢出，返回一个错误。</dd>
+  <dt><b>double(</b><i>arg</i><b>)</b></dt>
+  <dd>如果 <i>arg</i>
+      是一个浮点值，返回
+      <i>arg</i>；否则把 <i>arg</i>
+      转换成浮点数并返回转换后的值。</dd>
+  <dt><b>exp(</b><i>arg</i><b>)</b></dt>
+  <dd>返回 <i>arg</i>
+      的指数，定义为
+      e**<i>arg</i>。如果结果导致溢出，返回一个错误。</dd>
+  <dt><b>floor(</b><i>arg</i><b>)</b></dt>
+  <dd>返回不大于 <i>arg
+      </i>的最大整数值。</dd>
+  <dt><b>fmod(</b><i>x, y</i><b>)</b></dt>
+  <dd>返回 <i>x</i> 除以 <i>y</i>
+      得到的浮点余数。如果
+      <i>y</i> 是
+      0，返回一个错误。</dd>
+  <dt><b>hypot(</b><i>x, y</i><b>)</b></dt>
+  <dd>计算一个直角三角形的斜边的长度(<i>x</i>*<i>x</i>+<i>y</i>*<i>y</i>)。</dd>
+  <dt><b>int(</b><i>arg</i><b>)</b></dt>
+  <dd>如果 <i>arg</i>
+      是一个整数值，返回
+      <i>arg</i>，否则通过截取<i>arg</i>
+      (的整数部分)来把它转换成整数并返回转换后的值。</dd>
+  <dt><b>log(</b><i>arg</i><b>)</b></dt>
+  <dd>返回 <i>arg
+      </i>的自然对数。<i>Arg</i>
+      必须是正数值。</dd>
+  <dt><b>log10(</b><i>arg</i><b>)</b></dt>
+  <dd>返回 <i>arg </i>的以10
+      为底的对数(常用对数)。<i>Arg</i>必须是正数值。</dd>
+  <dt><b>pow(</b><i>x, y</i><b>)</b></dt>
+  <dd>计算 <i>x</i> 的 <i>y</i>
+      次幂。如果 <i>x</i>
+      是负数，<i>y</i>
+      必须是一个整数值。</dd>
+  <dt><b>rand()</b></dt>
+  <dd>返回一个大于等于零且小于
+      1
+      的一个(随机)浮点数，这个范围用数学术语是区间[0,1)。种子来自机器的内部时钟或用
+      srand 函数人为设定。</dd>
+  <dt><b>round(</b><i>arg</i><b>)</b></dt>
+  <dd>如果 <i>arg</i>
+      是一个整数，返回
+      <i>arg</i>，否则通过四舍五入把
+      <i>arg</i>
+      转换成整数并返回转换后的值。</dd>
+  <dt><b>sin(</b><i>arg</i><b>)</b></dt>
+  <dd>返回 <i>arg
+      </i>的正弦，单位是弧度。</dd>
+  <dt><b>sinh(</b><i>arg</i><b>)</b></dt>
+  <dd>返回 <i>arg</i>
+      的双曲正弦。如果结果导致溢出，返回一个错误。</dd>
+  <dt><b>sqrt(</b><i>arg</i><b>)</b></dt>
+  <dd>返回 <i>arg</i> 的开方。<i>Arg</i>
+      必须是非负数。</dd>
+  <dt><b>srand(</b><i>arg</i><b>)</b></dt>
+  <dd>
+     <i>arg</i>
+      必须是一个整数，它被用于重置随机数生成器的种子。返回用这个种子生成的第一个随机数。每个解释器都有它自己的种子。</dd>
+  <dt><b>tan(</b><i>arg</i><b>)</b></dt>
+  <dd>返回 <i>arg</i>
+      的正切。单位是弧度。</dd>
+  <dt><b>tanh(</b><i>arg</i><b>)</b></dt>
+  <dd>返回 <i>arg</i>
+      的双曲正切。</dd>
+</dl>
+<p class="Pp">除了这些预定义的函数之外，应用可以使用
+    <b>Tcl_CreateMathFunc </b>()
+    定义增补的函数。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="类型_TYPES,_溢出_OVERFLOW,_和_精度_PRECISION">类型 TYPES, 溢出 OVERFLOW, 和 精度 PRECISION<a class="anchor" href="#%E7%B1%BB%E5%9E%8B_TYPES,_%E6%BA%A2%E5%87%BA_OVERFLOW,_%E5%92%8C_%E7%B2%BE%E5%BA%A6_PRECISION">¶</a></h1>
+所有涉及整数的内部运算用
+  C 类型 <i>long</i><i>
+  </i>处置。并且所有涉及浮点数的内部运算用
+  C 类型 <i>double</i>
+  处置。当把一个字符串转换成一个浮点数的时候，若检测到指数溢出则导致一个
+  Tcl
+  错误。对于从字符串转换成整数，溢出检测依赖于在本地
+  C
+  库中的一些例程的行为，所以它应被作为不可靠的来看待。在任何情况下，对中间结果通常不能可靠的检测整数的上溢和下溢。浮点数上溢和下溢的检测通常达到由硬件支持的程度，普遍非常可靠。
+<p class="Pp">整数，浮点数、和字符串的内部表示之间的转换按需要自动完成。对于算术计算，在浮点数介入之前使用整数，此后使用浮点数。例如，</p>
+<div class="Bd-indent">
+<pre><b>expr 5 / 4</b>
+</pre>
+</div>
+返回 1，而
+<div class="Bd-indent">
+<pre><b>expr 5 / 4.0</b>
+<b>expr 5 / ( [string length &#34;abcd&#34;] + 0.0 )</b>
+</pre>
+</div>
+都返回 1.25。
+  返回的浮点值总是带着一个“<b>.</b>”或一个
+  <b>e</b>
+  所以它们看起来不象整数值。例如，
+<div class="Bd-indent">
+<pre><b>expr 20.0/5.0</b>
+</pre>
+</div>
+返回 <b>4.0</b>, 而不是 <b>4</b>.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="字符串操作_STRING_OPERATIONS">字符串操作 STRING OPERATIONS<a class="anchor" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C_STRING_OPERATIONS">¶</a></h1>
+字符串可被用做比较操作符的操作数，尽管表达式求值器尽可能的尝试着作为整数或浮点数来做比较。如果一个比较的操作数中的一个是字符串而其他是数值值，数值操作数被转换回字符串，对整数值使用
+  C <i>sprintf</i> 格式指定符 <b>%d</b>
+  ，对浮点数值使用
+  <b>%g</b>。例如，命令
+<div class="Bd-indent">
+<pre><b>expr {&#34;0x03&#34; &gt; &#34;2&#34;}</b>
+<b>expr {&#34;0y&#34; &lt; &#34;0x12&#34;}</b>
+</pre>
+</div>
+都返回
+  1。做第一个比较使用了整数比较，而做第二个比较在把第二个操作数转换成字符串
+  <b>18</b>之后使用了字符串比较。因为
+  Tcl
+  趋向于尽可能的把值作为数值对待，在你事实上想进行字符串比较并且操作符的值可以是任意的的时候使用象
+  <b>==</b>
+  这样的操作符通常不是个好主意；在这种情况下最好使用
+  <b>string</b>命令。
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="性能的考虑_PERFORMANCE_CONSIDERATIONS">性能的考虑 PERFORMANCE CONSIDERATIONS<a class="anchor" href="#%E6%80%A7%E8%83%BD%E7%9A%84%E8%80%83%E8%99%91_PERFORMANCE_CONSIDERATIONS">¶</a></h1>
+要得到最快的速度和最小的存储需求，就要把表达式包围在花括号中。这允许
+  Tcl
+  字节码编译器生成最好的代码。
+<p class="Pp">象上面所提及的那样，表达式被替换两次:
+    一次由 Tcl
+    解释器，一次由 <b>expr</b>
+    命令。例如，命令</p>
+<div class="Bd-indent">
+<pre><b>set a 3</b>
+<b>set b {$a + 2}</b>
+<b>expr $b*4</b>
+</pre>
+</div>
+返回 11，而不是 4
+  的倍数。这是因为 Tcl
+  分析器将首先把变量
+  <b>b</b>替换成 <b>$a + 2</b>，接着
+  <b>expr</b> 命令将求值表达式
+  <b>$a + 2*4</b>。
+<p class="Pp">多数表达式不需要两轮替换。要它们被包围在花括号中，要么它们的变量和命令替换生成数值或本身不需要替换的字符串。但是，因为一些未用化括号包围起来的表达式需要两轮替换，字节码编译器必须散布(emit)额外的指令来处理这些情况。对于未用化括号包围起来的表达式，代价最高昂的代码是包含命令替换的代码。必须通过在每次执行这个表达式时生成新的代码来实现这些表达式。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="关键字_KEYWORDS">关键字 KEYWORDS<a class="anchor" href="#%E5%85%B3%E9%94%AE%E5%AD%97_KEYWORDS">¶</a></h1>
+arithmetic, boolean, compare, expression, fuzzy comparison
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版维护人]">[中文版维护人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D">¶</a></h1>
+<b>寒蝉退士</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/07/22</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中国_Linux_论坛_man_手册页翻译计划》:">《中国 Linux 论坛 man 手册页翻译计划》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9B%BD_Linux_%E8%AE%BA%E5%9D%9B_man_%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">8.3</td>
+    <td class="foot-os">Tcl</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+expr.3tcl.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-26T21:44:33Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"expr(3tcl)\"}}]}"
+</script>

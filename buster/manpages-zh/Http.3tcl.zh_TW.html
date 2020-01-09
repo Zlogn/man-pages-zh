@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Http(3tcl) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/Http.3tcl.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/Http.3tcl.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="3tcl">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; Http(3tcl)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/Http.3tcl">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/Http.3tcl.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS" title="總覽 SYNOPSIS">總覽 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%91%BD%E4%BB%A4_COMMANDS" title="命令 COMMANDS">命令 COMMANDS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%8C%AF%E8%AA%A4_ERRORS" title="錯誤 ERRORS">錯誤 ERRORS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%8B%80%E6%85%8B%E6%95%B8%E7%B5%84_STATE_ARRAY" title="狀態數組 STATE ARRAY">狀態數組 STATE ARRAY</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%A4%BA%E4%BE%8B_EXAMPLE" title="示例 EXAMPLE">示例 EXAMPLE</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO" title="參見 SEE ALSO">參見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS" title="關鍵字 KEYWORDS">關鍵字 KEYWORDS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國 Linux 論壇 man 手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/Http.3tcl.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/Http.3tcl.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/Http.3tcl.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/Http.3tcl.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/Http.3tcl.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">Http(3tcl)</td>
+    <td class="head-vol">Tcl Built-In Commands</td>
+    <td class="head-rtitle">Http(3tcl)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<pre>
+
+</pre>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+Http - HTTP/1.0
+  協議客戶端的實現。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_SYNOPSIS">總覽 SYNOPSIS<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS">¶</a></h1>
+<b>package require http ?2.4?</b>
+<p class="Pp"><b>::http::config </b><i>?options?</i></p>
+<p class="Pp"><b>::http::geturl </b><i>url ?options?</i></p>
+<p class="Pp"><b>::http::formatQuery </b><i>list</i></p>
+<p class="Pp"><b>::http::reset </b><i>token</i></p>
+<p class="Pp"><b>::http::wait </b><i>token</i></p>
+<p class="Pp"><b>::http::status </b><i>token</i></p>
+<p class="Pp"><b>::http::size </b><i>token</i></p>
+<p class="Pp"><b>::http::code </b><i>token</i></p>
+<p class="Pp"><b>::http::ncode </b><i>token</i></p>
+<p class="Pp"><b>::http::data </b><i>token</i></p>
+<p class="Pp"><b>::http::error </b><i>token</i></p>
+<p class="Pp"><b>::http::cleanup </b><i>token</i></p>
+<p class="Pp"><b>::http::register </b><i>proto port command</i></p>
+<p class="Pp"><b>::http::unregister </b><i>proto</i></p>
+<pre>
+
+</pre>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+<b>http</b>包提供 HTTP/1.0
+  協議的客戶端。這個包實現了
+  HTTP/1.0 的 GET、POST、和 HEAD
+  操作。它允許配置一個代理(proxy)主機來通過防火牆。這個包與
+  <b>Safesock</b>
+  安全策略相容，所以可以被不可信任的
+  applets
+  用來從一些受限制的主機做
+  URL
+  取回(fetching)。可以擴展這個包來支持附加的
+  HTTP 傳輸協議，比如
+  HTTPS，通過
+  <b>http::register</b>，提供一個定製的
+  <b>socket</b> 命令。
+<p class="Pp"><b>::http::geturl</b> 過程做一次
+    HTTP 事務(transaction)。它的 <i>options </i>
+    (選項)確定完成
+    GET、POST、或 HEAD
+    事務中的那一個。<b>::http::geturl</b>
+    的返回值是這個事務的一個記號(token)。這個值也是在::http
+    名字空間中一個數組的名字，這個數組包含關於這個事務的信息。這個數組的元素在狀態數組章節中描述。</p>
+<p class="Pp">如果指定了 <b>-command</b>
+    選項，則在後臺做這個
+    HTTP 操作。<b>::http::geturl</b>
+    在生成一個 HTTP
+    請求和在事務完成時調用的回調過程(callback)之後立即返回。要使它工作，Tcl
+    事件循環必須是活躍的(active)。在
+    Tk
+    應用中總是真的。對於純
+    Tcl
+    應用，調用者可以在調用
+    <b>::http::geturl</b> 之後使用 <b>::http::wait</b>
+    來啓動事件循環。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="命令_COMMANDS">命令 COMMANDS<a class="anchor" href="#%E5%91%BD%E4%BB%A4_COMMANDS">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>::http::config</b> ?<i>options</i>?</dt>
+  <dd>使用 <b>::http::config</b>
+      命令來設置和查詢代理服務器的和端口的名字，和在
+      HTTP
+      請求中使用的用戶代理(User-Agent)名字。如果未指定選項，則返回當前的配製。如果指定了一個單一的參數，則它應該是下面描述的標誌之一。在這種情況下返回設置的當前值。否則，選項應該是定義配置的一系列標誌和值:</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>-accept</b> <i>mimetypes</i></dt>
+  <dd>(指定)請求的接受(類型)頭部(header)。缺省是
+      */*，這意味者接受所有類型的文檔。否則你可以提供用逗號分隔的你想接收的
+      mime(多用途互連網郵件擴展)類型模式的一個列表。例如，&#34;image/gif,
+      image/jpeg, text/*&#34;。</dd>
+  <dt><b>-proxyhost</b> <i>hostname</i></dt>
+  <dd>如果有代理服務器主機的話，它是代理服務器主機的名字。如果這個值是空串，則直接聯繫
+      URL 主機。</dd>
+  <dt><b>-proxyport</b> <i>number</i></dt>
+  <dd>代理服務器端口。</dd>
+  <dt><b>-proxyfilter</b> <i>command</i></dt>
+  <dd>這個命令設置在
+      <b>::http::geturl</b>
+      期間的一個回調過程，用來決定是否爲一個給定主機而要求一個代理服務器。在調用它的時候，向命令
+      <i>command</i>
+      添加的一個參數是主機名字。如果要求一個代理服務器，則這個回調過程應該返回一個有兩個元素的數組，分別是代理服務器和代理服務端口。否則這個過濾器應該返回一個空列表。在
+      <b>-proxyhost</b> 和 <b>-proxyport</b>
+      設置非空的時候，缺省的過濾器返回它們的值。</dd>
+  <dt><b>-useragent</b> <i>string</i></dt>
+  <dd>在 HTTP
+      請求中客戶代理頭部的值。缺省是
+      <b>&#34;Tcl http client package 2.2.&#34;</b></dd>
+</dl>
+</div>
+<dl class="Bl-tag">
+  <dt><b>::http::geturl</b> <i>url</i> ?<i>options</i>?</dt>
+  <dd><b>::http::geturl</b>
+      命令是包中的主過程。<b>-query</b>
+      選項導致一個 POST
+      操作，而 <b>-validate</b>
+      選項導致一個 HEAD
+      操作；否則，進行一個
+      GET 操作。<b>::http::geturl</b>
+      命令返回一個 <i>token</i>
+      (記號)值，可用它來獲得關於這次事務的信息。詳情參見狀態數組和錯誤章節。除非用
+      <b>-command</b> 選項指定在 HTTP
+      事務完成時調用的一個回調過程，否則
+      <b>::http::geturl</b>
+      命令在操作完成之前一直阻塞。
+      <b>::http::geturl</b>
+    接受一些選項:</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>-binary</b> <i>boolean</i></dt>
+  <dd>Specifies whether to force interpreting the url data as binary. Normally
+      this is auto-detected (anything not beginning with a <b>text</b> content
+      type or whose content encoding is <b>gzip</b> or <b>compress</b> is
+      considered binary data).</dd>
+  <dt><b>-blocksize</b> <i>size</i></dt>
+  <dd>在讀 URL
+      時使用塊大小。一次最多讀
+      <i>size</i>
+      字節。讀完每一塊之後，調用
+      <b>-progress</b>
+      回調過程(如果指定着這個選項的話)。</dd>
+  <dt><b>-channel</b> <i>name</i></dt>
+  <dd>複製 URL 內容到叫 <i>name</i>
+      的通道中而不是保存在
+      <b>state(body)</b> 中。</dd>
+  <dt><b>-command</b> <i>callback</i></dt>
+  <dd>在這次 HTTP
+      事務完成之後調用
+      <i>callback</i>。這個選項導致
+      <b>::http::geturl</b>
+      立即返回。<i>callback</i>
+      得到一個增添的參數，它是從
+      <b>::http::geturl</b> 返回的 <i>token</i>
+      (記號)。這個記號是在狀態數組章節中描述的一個數組的名字。下面是這個回調過程的一個模版:</dd>
+</dl>
+<div class="Bd-indent">
+<div class="Bd-indent">
+<pre>proc httpCallback {token} {
+    upvar #0 $token state
+    # Access state as a Tcl array
+}
+</pre>
+</div>
+</div>
+<dl class="Bl-tag">
+  <dt><b>-handler</b> <i>callback</i></dt>
+  <dd>在可獲得 HTTP
+      數據的時候調用 <i>callback</i>
+      ；如果(這個回調)存在，則不對
+      HTTP
+      數據做其他任何事情。這個過程得到兩個增添的參數:
+      給這些 HTTP
+      數據的套接口和從
+      <b>::http::geturl</b> 返回的 <i>token</i>
+      。這個記號是在狀態數組章節中描述的一個數組的名字。回調過程應返回從這個套接口中讀到的字節數目。下面是這個回調過程的一個模版:</dd>
+</dl>
+<div class="Bd-indent">
+<div class="Bd-indent">
+<pre>proc httpHandlerCallback {socket token} {
+    upvar #0 $token state
+    # Access socket, and state as a Tcl array
+    ...
+    (example: set data [read $socket 1000];set nbytes [string length $data])
+    ...
+    return nbytes
+}
+</pre>
+</div>
+</div>
+<dl class="Bl-tag">
+  <dt><b>-headers</b> <i>keyvaluelist</i></dt>
+  <dd>使用這個選項來給 HTTP
+      請求增加額外的頭部。<i>keyvaluelist</i>
+      參數必須是有偶數個元素的一個列表，這些元素是交替的鍵(key)和值。這些鍵變成頭部的字段名字。從這些值中去除(strip)換行符，所以頭部不會被中斷(corrupt)。例如，如果
+      <i>keyvaluelist</i> 是 <b>Pragma no-cache</b> 則在 HTTP
+      請求中包含下列頭部:</dd>
+</dl>
+<div class="Bd-indent">
+<pre>Pragma: no-cache
+</pre>
+</div>
+<dl class="Bl-tag">
+  <dt><b>-progress</b> <i>callback</i></dt>
+  <dd>每次從 URL
+      傳輸數據之後調用這個
+      <i>callback</i>。這個調用得到三個增添的參數:
+      從 <b>::http::geturl</b> 得來的
+      <i>token</i>，從 <b>Content-Length</b>
+      元(meta)數據得來的期望的內容總體大小，和迄今爲止傳輸的字節數。期望的總體大小可以是未知的，在這種情況下向這個回調傳遞零。下面是這個回調過程的一個模版:</dd>
+</dl>
+<div class="Bd-indent">
+<div class="Bd-indent">
+<pre>proc httpProgress {token total current} {
+    upvar #0 $token state
+}
+</pre>
+</div>
+</div>
+<dl class="Bl-tag">
+  <dt><b>-query</b> <i>query</i></dt>
+  <dd>這個標誌導致 <b>::http::geturl</b>
+      去做向服務器傳遞
+      <i>query</i> 的一次 POST
+      請求。這個 <i>query</i>
+      必須是 x-url-encoding
+      編碼格式的一個查詢。可以使用
+      <b>::http::formatQuery</b>
+      過程來做格式化。</dd>
+  <dt><b>-queryblocksize</b> <i>size</i></dt>
+  <dd>在向 URL
+      傳送(post)查詢數據的時候使用這個塊大小。一次最多寫
+      <i>size</i> 字節。
+      在每塊(被傳輸完畢)之後，調用
+      <b>-queryprogress</b>
+      回調過程(如果指定了這個選項的話)。</dd>
+  <dt><b>-querychannel</b> <i>channelID</i></dt>
+  <dd>這個標誌導致 <b>::http::geturl</b>
+      去做向服務器傳遞在
+      <i>channelID</i>
+      中包含的數據的一次
+      POST
+      請求。除非使用了下面的
+      <b>-type</b> 選項，否則在
+      <i>channelID</i>
+      中包含的數據必須是
+      x-url-encoding
+      編碼格式的一個查詢。如果沒有通過
+      <b>-headers</b> 選項指定
+      Content-Length(內容長度)頭部，則
+      <b>::http::geturl</b>
+      嘗試確定傳送的數據的大小來建立這個頭部。如果不能確定這個大小，它返回一個錯誤。</dd>
+  <dt><b>-queryprogress</b> <i>callback</i></dt>
+  <dd>在每次到 URL
+      的數據傳輸之後調用這個
+      <i>callback</i>
+      (例如，POST)，並且表現(act)得與
+      <b>-progress</b>
+      選項精確的相似(回調過程的格式相同)。</dd>
+  <dt><b>-timeout</b> <i>milliseconds</i></dt>
+  <dd>如果 <i>milliseconds</i>
+      是非零(的數)，則
+      <b>::http::geturl</b>
+      設置在這個數字指定的毫秒後發生一個超時(timeout)。如果指定了
+      <b>::http::reset</b> 和 <b>-command</b>
+      回調過程，一個超時導致對它們的調用。在超時發生之後，<b>::http::status</b>
+      的返回值是 <b>timeout</b>。</dd>
+  <dt><b>-type</b> <i>mime-type</i></dt>
+  <dd>使用 <i>mime-type</i> 作爲 <b>Content-Type</b>
+      (內容類型)的值，在一次
+      POST
+      操作期間，替換缺省值(<b>application/x-www-form-urlencoded</b>)。</dd>
+  <dt><b>-validate</b> <i>boolean</i></dt>
+  <dd>如果 <i>boolean</i> 是非零，則
+      <b>::http::geturl</b> 做一次 HTTP HEAD
+      請求。這個請求返回關於這個
+      URL
+      的元(meta)信息，而不返回(具體)內容。這個事務之後在
+      <b>state(meta) </b>
+      變量中可獲得這些元信息。詳情參見STATE
+      ARRAY章節。</dd>
+</dl>
+</div>
+<dl class="Bl-tag">
+  <dt><b>::http::formatQuery</b> <i>key value</i> ?<i>key value</i> ...?</dt>
+  <dd>這個過程做查詢數據的
+      x-url
+      編碼。它接受偶數個參數，它們是這個查詢的鍵和值。它編碼這些鍵和值，並生成有正確的
+      &amp; 和 =
+      分隔符的一個字符串。
+      結果適合於傳遞給
+      <b>::http::geturl</b> 的 <b>-query</b> 的值。</dd>
+  <dt><b>::http::reset</b> <i>token</i> ?<i>why</i>?</dt>
+  <dd>這個命令重置用 <i>token</i>
+      標識的 HTTP
+      事務。如果有的話，它設置
+      <b>state(status)</b> 值爲
+      <i>why</i>，它的缺省值是
+      <b>reset</b>，並且接着調用註冊的
+      <b>-command</b> 回調。</dd>
+  <dt><b>::http::wait</b> <i>token</i></dt>
+  <dd>這是阻塞並等待一個事務完成的一個方便函數。它使用了
+      <b>vwait</b>
+      所以只能在可信賴的代碼中工作。還有，它對調用
+      <b>::http::geturl</b> 而不加 <b>-command</b>
+      選項的情況沒有用處，在這種情況下
+      <b>::http::geturl</b> 在 HTTP
+      事務完成之前不返回，所以不需等待。</dd>
+  <dt><b>::http::data</b> <i>token</i></dt>
+  <dd>這是返回狀態數組的
+      <b>body</b> 元素(例如，URL
+      數據)的一個方便過程。</dd>
+  <dt><b>::http::error</b> <i>token</i></dt>
+  <dd>這是返回狀態數組的
+      <b>error</b>
+      元素的一個方便過程。</dd>
+  <dt><b>::http::status</b> <i>token</i></dt>
+  <dd>這是返回狀態數組的
+      <b>status</b>
+      元素的一個方便過程。</dd>
+  <dt><b>::http::code</b> <i>token</i></dt>
+  <dd>這是返回狀態數組的
+      <b>http</b>
+      元素的一個方便過程。</dd>
+  <dt><b>::http::ncode</b> <i>token</i></dt>
+  <dd>這是隻返回狀態數組的
+      <b>http</b>
+      元素的數值返回碼(200、404
+      等)的一個方便過程。</dd>
+  <dt><b>::http::size</b> <i>token</i></dt>
+  <dd>這是返回狀態數組的
+      <b>currentsize</b>
+      元素的一個方便過程，它表示在
+      <b>::http::geturl</b> 調用中從 URL
+      接收的字節數。</dd>
+  <dt><b>::http::cleanup</b> <i>token</i></dt>
+  <dd>這個過程清除與由
+      <i>token</i>
+      標識的連接相關的狀態。在這個調用之後，不能使用象
+      <b>::http::data</b>
+      這樣的過程得到關於這個操作的信息。強烈建議你在做完一個特定的
+      HTTP
+      操作之後調用這個函數。不這樣做將導致內存不被釋放，如果你的應用調用
+      <b>::http::geturl</b>
+      次數足夠多，內存泄露(leak)將導致性能下降(hit)...或更糟。</dd>
+  <dt><b>::http::register</b> <i>proto port command</i></dt>
+  <dd>這個過程允許你通過註冊一個前綴、缺省端口、和建立
+      Tcl <b>channel</b>
+      (通道)的命令，提供定製的
+      HTTP 傳輸類型如
+      HTTPS。比如:</dd>
+</dl>
+<div class="Bd-indent">
+<div class="Bd-indent">
+<pre>package require http
+package require tls
+http::register https 443 ::tls::socket
+set token [http::geturl <a href="../../]">../../]</a>
+</pre>
+</div>
+</div>
+<dl class="Bl-tag">
+  <dt><b>::http::unregister</b> <i>proto</i></dt>
+  <dd>這個過程註銷(unregister)以前通過
+      <b>http::register</b>註冊的一個協議處理器(handler)。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="錯誤_ERRORS">錯誤 ERRORS<a class="anchor" href="#%E9%8C%AF%E8%AA%A4_ERRORS">¶</a></h1>
+<b>http::geturl</b>
+  過程在下列情況下將引發(raise)錯誤:
+  無效的命令行選項、一個無效的
+  URL、在一個不存在的主機上的一個
+  URL、或在一個存在的主機的一個不良端口上的一個
+  URL。這些錯誤意味着它不能開始網絡事務。如果它在寫出
+  HTTP
+  請求頭部期間得到了一個
+  I/O
+  錯誤，它也引發一個錯誤。對於同步
+  <b>::http::geturl</b>
+  調用(這個未指定
+  <b>-command</b>)，如果它在讀 HTTP
+  迴應頭部或數據期間得到一個
+  I/O
+  錯誤，它將引發一個錯誤。因爲在這種情況下
+  <b>::http::geturl</b>
+  不返回一個記號，它做所有需要的清除，你的應用沒有必要調用
+  <b>::http::cleanup</b>。
+<p class="Pp">對於異步 <b>::http::geturl</b>
+    調用，除了在讀 HTTP
+    迴應頭部或數據期間出現
+    I/O
+    錯誤之外，所有上述錯誤情況不引起(throw)例外(異常)。這是因爲在寫完
+    HTTP 頭部之後，<b>::http::geturl</b>
+    返回，而餘下的 HTTP
+    事務在後臺發生。命令的回調過程可以通過調用
+    <b>::http::status</b>
+    來檢查狀態，查看在讀的時候是否發生了
+    <i>error</i>
+    錯誤，如果有錯誤，調用
+    <b>::http::error</b>
+    來得到錯誤的消息。</p>
+<p class="Pp">另一個選擇，如果主程序流到達需要知道異步
+    HTTP
+    請求的結果的某點(point)，它可以調用
+    <b>::http::wait</b>
+    並接着象上面的回調過程做的那樣檢查狀態和錯誤。</p>
+<p class="Pp">在任何情況下，你必須在你做完(檢查)的時候調用
+    <b>http::cleanup</b>
+    來刪除狀態數組。</p>
+<p class="Pp">下面描述的是用
+    <b>http::status</b>
+    檢查狀態能確定的 HTTP
+    事務的可能的結果。</p>
+<dl class="Bl-tag">
+  <dt>ok</dt>
+  <dd>如果 HTTP
+      事務完整完成，則狀態將是
+      <b>ok</b>。但是，你仍需檢查
+      <b>http::code</b> 的值來得到 HTTP
+      狀態。<b>http::ncode</b>
+      過程只提供數值的錯誤(代碼)(例如，200，404
+      或 500) 而 <b>http::code</b>
+      過程返回象“HTTP 404 File not
+      found”這樣的一個值。</dd>
+  <dt>eof</dt>
+  <dd>如果服務器關閉了套接口而不迴應，則不引發錯誤，但事務的狀態將是
+      <b>eof</b>。</dd>
+  <dt>error</dt>
+  <dd>錯誤消息將被存儲在狀態數組的
+      <b>error</b> 元素中，可通過
+      <b>::http::error</b> 訪問。</dd>
+</dl>
+<p class="Pp">另一個錯誤的可能是
+    <b>http::geturl</b>
+    在服務器響應並關閉套接口之前不能向服務器寫出所有的
+    post
+    查詢。錯誤消息保存在狀態數組的
+    <b>posterror</b> 元素中，而
+    <b>http::geturl</b>
+    接着嘗試完成這個事務。如果它能讀到服務器的響應，它將以一個
+    <b>ok</b>
+    狀態結束，否則將有一個
+    <b>eof</b> 狀態。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="狀態數組_STATE_ARRAY">狀態數組 STATE ARRAY<a class="anchor" href="#%E7%8B%80%E6%85%8B%E6%95%B8%E7%B5%84_STATE_ARRAY">¶</a></h1>
+<b>::http::geturl</b> 過程返回一個
+  <i>token</i>
+  ，可以用它來得到一個
+  Tcl 數組形式的 HTTP
+  事務狀態。使用下面這個構造(construct)來建立一個易用的數組變量:
+<div class="Bd-indent">
+<pre>upvar #0 $token state
+</pre>
+</div>
+一旦與某個 url
+  有關的數據不再需要，應當清除這個數組來釋放存儲(空間)。爲此提供了
+  <b>http::cleanup</b>
+  過程。這個數組支持下列元素:
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><b>body</b></dt>
+  <dd>URL
+      的內容。如果指定了
+      <b>-channel</b>
+      選項，則它將爲空。用
+      <b>::http::data</b>
+      命令返回這個值。</dd>
+  <dt><b>charset</b></dt>
+  <dd>The value of the charset attribute from the <b>Content-Type</b> meta-data
+      value. If none was specified, this defaults to the RFC standard
+      <b>iso8859-1</b>, or the value of <b>$::http::defaultCharset</b>. Incoming
+      text data will be automatically converted from this charset to utf-8.</dd>
+  <dt><b>coding</b></dt>
+  <dd>A copy of the <b>Content-Encoding</b> meta-data value.</dd>
+  <dt><b>currentsize</b></dt>
+  <dd>當前從 URL
+      取回的字節數。用
+      <b>::http::size</b>
+      命令返回這個值。</dd>
+  <dt><b>error</b></dt>
+  <dd>如果定義了這個元素，這是終止
+      HTTP
+      事務時(描述)錯誤的字符串。</dd>
+  <dt><b>http</b></dt>
+  <dd>從服務器迴應的 HTTP
+      狀態。用 <b>::http::code</b>
+      命令返回這個值。這個值的格式是:</dd>
+</dl>
+<div class="Bd-indent">
+<div class="Bd-indent">
+<pre><i>HTTP/1.0 code string</i>
+</pre>
+</div>
+<i>code</i> 是在 HTTP
+  標準中定義的一個三位數。代碼
+  200 是 OK。以4或5開始
+  的代碼指示錯誤。以3開始的代碼是重定向錯誤。在這種情況下，<b>Location</b>
+  元數據指定包含所需信息的一個新
+  URL。</div>
+<dl class="Bl-tag">
+  <dt><b>meta</b></dt>
+  <dd>HTTP 協議返回描述 URL
+      內容的元數據。狀態數組的
+      <b>meta</b>
+      元素是元數據的鍵和值的一個列表。下面的格式對初始化只包含元數據的一個數組有用:</dd>
+</dl>
+<div class="Bd-indent">
+<div class="Bd-indent">
+<pre>array set meta $state(meta)
+</pre>
+</div>
+下面列出一些元數據的鍵，HTTP
+  標準定義了更多，服務器可自由的添加它們自己的鍵。
+<dl class="Bl-tag">
+  <dt><b>Content-Type</b></dt>
+  <dd>URL
+      內容的類型。例子包括
+      <b>text/html</b>、<b>image/gif</b>、<b>application/postscript</b>
+      和 <b>application/x-tcl</b>。</dd>
+  <dt><b>Content-Length</b></dt>
+  <dd>內容的通告(advertise)的大小。通過
+      <b>::http::geturl</b>
+      獲得的實際大小作爲
+      <b>state(size)</b> 來獲取。</dd>
+  <dt><b>Location</b></dt>
+  <dd>包含所需的數據的一個可替代的
+      URL。</dd>
+</dl>
+</div>
+<dl class="Bl-tag">
+  <dt><b>posterror</b></dt>
+  <dd>在向服務器寫 post
+      查詢時發生的錯誤。如果有的話。</dd>
+  <dt><b>status</b></dt>
+  <dd>對於成功完成是
+      <b>ok</b>，對於用戶重重置(user-reset)是
+      <b>reset</b>，如果在事務完成之前發生了超時則是<b>timeout</b>。或在錯誤的情況下是
+      <b>error</b>。在事務(進行)期間這個值是一個空串。</dd>
+  <dt><b>totalsize</b></dt>
+  <dd><b>Content-Length</b>
+      元數據值的一個複本。</dd>
+  <dt><b>type</b></dt>
+  <dd><b>Content-Type</b>
+      元數據值的一個複本。</dd>
+  <dt><b>url</b></dt>
+  <dd>請求的 URL。</dd>
+</dl>
+</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="示例_EXAMPLE">示例 EXAMPLE<a class="anchor" href="#%E7%A4%BA%E4%BE%8B_EXAMPLE">¶</a></h1>
+<div class="Bd-indent">
+<pre>
+
+# Copy a URL to a file and print meta-data
+proc ::http::copy { url file {chunk 4096} } {
+    set out [open $file w]
+    set token [geturl $url -channel $out -progress ::http::Progress \
+	-blocksize $chunk]
+    close $out
+    # This ends the line started by http::Progress
+    puts stderr &#34;&#34;
+    upvar #0 $token state
+    set max 0
+    foreach {name value} $state(meta) {
+	if {[string length $name] &gt; $max} {
+	    set max [string length $name]
+	}
+	if {[regexp -nocase ^location$ $name]} {
+	    # Handle URL redirects
+	    puts stderr &#34;Location:$value&#34;
+	    return [copy [string trim $value] $file $chunk]
+	}
+    }
+    incr max
+    foreach {name value} $state(meta) {
+	puts [format &#34;%-*s %s&#34; $max $name: $value]
+    }
+    return $token
+}
+proc ::http::Progress {args} {
+    puts -nonewline stderr . ; flush stderr
+}
+</pre>
+</div>
+<p class="Pp"></p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_SEE_ALSO">參見 SEE ALSO<a class="anchor" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO">¶</a></h1>
+safe(n), socket(n), safesock(n)
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="關鍵字_KEYWORDS">關鍵字 KEYWORDS<a class="anchor" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS">¶</a></h1>
+security policy, socket
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>寒蟬退士</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/09/20</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國_Linux_論壇_man_手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8B_Linux_%E8%AB%96%E5%A3%87_man_%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">8.3</td>
+    <td class="foot-os">Tcl</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+Http.3tcl.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:29Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"Http(3tcl)\"}}]}"
+</script>

@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>msmtp(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/msmtp/msmtp.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/msmtp.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/msmtp.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; msmtp(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/msmtp.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/msmtp.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%A6%82%E8%A6%81_%28SYNOPSIS%29" title="概要 (SYNOPSIS)">概要 (SYNOPSIS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_%28DESCRIPTION%29" title="描述 (DESCRIPTION)">描述 (DESCRIPTION)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%80%E5%87%BA%E7%8B%80%E6%85%8B_%28EXIT_STATUS%29" title="退出狀態 (EXIT STATUS)">退出狀態 (EXIT STATUS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%B8%E9%A0%85_%28OPTIONS%29" title="選項 (OPTIONS)">選項 (OPTIONS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%94%A8%E6%B3%95_%28USAGE%29" title="用法 (USAGE)">用法 (USAGE)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6_%28CONFIGURATION_FILES%29" title="配置文件 (CONFIGURATION FILES)">配置文件 (CONFIGURATION FILES)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%AF%84%E4%BE%8B_%28EXAMPLES%29" title="範例 (EXAMPLES)">範例 (EXAMPLES)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6/%E7%B3%BB%E7%B5%B1%E7%92%B0%E5%A2%83_%28FILES_/_ENVIRONMENT%29" title="文件/系統環境 (FILES / ENVIRONMENT)">文件/系統環境 (FILES / ENVIRONMENT)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85_%28AUTHORS%29" title="作者 (AUTHORS)">作者 (AUTHORS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E7%9C%8B_%28SEE_ALSO%29" title="參看 (SEE ALSO)">參看 (SEE ALSO)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%A0%A1%E5%B0%8D%E4%BA%BA%5D" title="[中文版校對人]">[中文版校對人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E3%80%8A%E4%B8%AD%E6%96%87MAN-PAGE%E8%A8%88%E5%8A%83%E3%80%8B" title="《中文MAN-PAGE計劃》">《中文MAN-PAGE計劃》</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/msmtp.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/msmtp.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/msmtp.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/msmtp/msmtp.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/msmtp.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/msmtp.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">MSMTP(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">MSMTP(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+msmtp - An SMTP client
+</section>
+<section class="Sh">
+<h1 class="Sh" id="概要_(SYNOPSIS)">概要 (SYNOPSIS)<a class="anchor" href="#%E6%A6%82%E8%A6%81_(SYNOPSIS)">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>發郵件模式 (默認):</dt>
+  <dd><b>msmtp</b> [option...] [--] recipient...
+    <br/>
+    <b>msmtp</b> [option...] -t [--] [recipient...]</dd>
+  <dt>服務器消息模式:</dt>
+  <dd><b>msmtp</b> [option...] --serverinfo</dd>
+  <dt>遠程消息隊列模式:</dt>
+  <dd><b>msmtp</b> [option...]
+    --rmqs=<i>host</i>|<i>@domain</i>|<i>#queue</i></dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_(DESCRIPTION)">描述 (DESCRIPTION)<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_(DESCRIPTION)">¶</a></h1>
+在默認的發郵件模式下，msmtp
+  從標準輸入讀取郵件，然後把它送給SMTP
+  服務器處理
+<br/>
+當處於服務器消息模式下，msmtp
+  會顯示SMTP
+  服務器的有關信息
+<br/>
+而當它處於遠程消息隊列模式時，msmtp
+  將爲主機或者域發出RMQS
+  請求，或者向SMTP
+  服務器發出隊列請求
+</section>
+<section class="Sh">
+<h1 class="Sh" id="退出狀態_(EXIT_STATUS)">退出狀態 (EXIT STATUS)<a class="anchor" href="#%E9%80%80%E5%87%BA%E7%8B%80%E6%85%8B_(EXIT_STATUS)">¶</a></h1>
+這裏使用標準的sendmail
+  退出狀態代碼，就像在
+  sysexits.h 中定義的那樣
+  想快速上手，可跳到EXAMPLES
+  部分
+</section>
+<section class="Sh">
+<h1 class="Sh" id="選項_(OPTIONS)">選項 (OPTIONS)<a class="anchor" href="#%E9%81%B8%E9%A0%85_(OPTIONS)">¶</a></h1>
+這裏的選項將覆蓋配置文件中的相同選項
+<br/>
+他們在某些地方與sendmail
+  兼容
+<dl class="Bl-tag">
+  <dt><b>一般選項 (General options)</b></dt>
+  <dd></dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt>--version</dt>
+  <dd>顯示版本信息。這些信息包括TLS/SSL
+      庫信息（如果有），用於驗證的庫以及這些庫
+      所支持的驗證方式，還有默認的全局配置文件和用戶配置文件信息</dd>
+  <dt>--help</dt>
+  <dd>顯示幫助</dd>
+  <dt>-P, --pretend</dt>
+  <dd>顯示使用的配置信息，但不真正執行什麼操作。密碼將會以
+      *** 的形式顯示</dd>
+  <dt>-d, --debug</dt>
+  <dd>顯示很多調試信息，包括與SMTP
+      服務器的所有會話。小心使用這個選項（潛在風險）：
+      所有輸出沒經過什麼處理，密碼可能以一種極易解碼的方式被顯示出來</dd>
+</dl>
+</div>
+<dl class="Bl-tag">
+  <dt><b>改變操作模式選項
+    (Changing the mode of operation)</b></dt>
+  <dd></dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt>-S, --serverinfo</dt>
+  <dd>顯示SMTP
+      服務器的信息並退出。信息中包含了所有支持的特性，如郵件大小限制、
+      驗證方式、TLS、DSN
+      等等。如果服務器支持TLS
+      的話，還有TLS
+      證書信息</dd>
+  <dt>--rmqs=(<i>host</i>|<i>@domain</i>|<i>#queue</i>)</dt>
+  <dd>爲指定的主機或者域發送一個開啓遠程消息隊列的請求，或者向SMTP
+      服務器發送隊列
+      請求，並退出</dd>
+</dl>
+</div>
+<dl class="Bl-tag">
+  <dt><b>配置選項 (Configuration options)</b></dt>
+  <dd></dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt>-C, --file=<i>filename</i></dt>
+  <dd>用指定的文件代替~/.msmtprc
+      作爲用戶配置文件</dd>
+  <dt>-a, --account=<i>account_name</i></dt>
+  <dd>用指定的帳號代替&#34;default&#34;
+      字段中的帳號。這個帳號的設置能以命令行選項的方式進行
+      更改。但這個選項不能與
+      <b>--host</b> 合用</dd>
+  <dt>--host=<i>hostname</i></dt>
+  <dd>用命令行指定一個SMTP
+      服務器，不用配置文件中的任何數據。這個選項不能與
+      <b>--account</b> 選項合用</dd>
+  <dt>--port=<i>number</i></dt>
+  <dd>設置要連接的端口。參看下面
+      <b>port</b> 命令</dd>
+  <dt>--timeout=(<i>off</i>|<i>seconds</i>)</dt>
+  <dd>設定網絡超時。參看下面
+      <b>timeout</b>
+      命令。爲了兼容老版本，--connect-timeout
+      作爲這個選項的別名</dd>
+  <dt>--protocol=(<i>smtp</i>|<i>lmtp</i>)</dt>
+  <dd>設定所用的協議。參看下面
+      <b>protocol</b> 命令</dd>
+  <dt>--auth[=(<i>on</i>|<i>off</i>|<i>method</i>)]</dt>
+  <dd>開啓或關閉驗證，也可隨意選擇一個驗證方式。參看下面
+      <b>auth</b> 命令</dd>
+  <dt>--user=<i>[username]</i></dt>
+  <dd>設置或清空用於驗證的用戶名。參看下面
+      <b>user</b> 命令</dd>
+  <dt>--tls[=(<i>on</i>|<i>off</i>)]</dt>
+  <dd>開啓或關閉TLS
+      加密。參看 <b>tls</b> 命令</dd>
+  <dt>--tls-starttls[=(<i>on</i>|<i>off</i>)]</dt>
+  <dd>開啓或關閉TLS
+      加密的STARTTLS 。參看下面
+      <b>tls_starttls</b> 命令</dd>
+  <dt>--tls-trust-file=[<i>file</i>]</dt>
+  <dd>設置或清空TLS 加密的trust
+      file。參看下面 <b>tls_trust_file</b>
+      命令</dd>
+  <dt>--tls-key-file=[<i>file</i>]</dt>
+  <dd>設置或清空TLS 加密的key
+      file。參看下面 <b>tls_key_file</b>
+      命令</dd>
+  <dt>--tls-cert-file=[<i>file</i>]</dt>
+  <dd>設置或清空TLS 加密的cert
+      file。參看下面 <b>tls_cert_file</b>
+      命令</dd>
+  <dt>--tls-certcheck[=(<i>on</i>|<i>off</i>)]</dt>
+  <dd>開啓或關閉TLS
+      加密的證書檢驗。參看下面
+      <b>tls_certcheck</b> 命令</dd>
+  <dt>--tls-force-sslv3[=(<i>on</i>|<i>off</i>)]</dt>
+  <dd>強制使用SSLv3。參看下面
+      <b>tls_force_sslv3</b> 命令</dd>
+  <dt>--domain=[<i>string</i>]</dt>
+  <dd>設置SMTP EHLO (or LMTP
+      LHLO)命令的參數。參看
+      <b>domain</b> 命令</dd>
+</dl>
+</div>
+<dl class="Bl-tag">
+  <dt><b>發件模式的選項 (Options
+    specific to sendmail mode)</b></dt>
+  <dd></dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt>--auto-from[=(<i>on</i>|<i>off</i>)]</dt>
+  <dd>開啓或關閉automatic envelope-from
+      addresses。默認關閉。參看下面
+      <b>auto_from</b> 命令</dd>
+  <dt>-f, --from=<i>address</i><i></i></dt>
+  <dd>設定envelope-from address。僅當
+      <i>auto_from</i> 關閉時纔有用
+    <br/>
+    如果未用 <b>--account</b> 或 <b>--host</b>
+      指定帳號，這個選項會選擇第一個擁有給
+      定envelope-from address
+      的帳號。看看 <b>from</b>
+      命令。如果沒找到符合條件的帳號
+      ，就用&#34;default&#34;</dd>
+  <dt>--maildomain=[<i>domain</i>]</dt>
+  <dd>爲生成的envelope-from addresses
+      指定一個域。僅當
+      <i>auto_from</i> 開啓時纔有用。
+      參看下面 <b>maildomain</b> 命令</dd>
+  <dt>-N, --dsn-notify=(<i>off</i>|<i>cond</i>)</dt>
+  <dd>設置或清空DSN notification
+      conditions。參看下面 <b>dsn_notify</b>
+      命令</dd>
+  <dt>-R, --dsn-return=(<i>off</i>|<i>ret</i>)</dt>
+  <dd>設置或清空 DSN notification
+      amount。參看下面 <b>dsn_return</b>
+      命令。注意爲 兼容sendmail
+      ，<i>hdrs</i> 被定義成 <i>headers</i>
+      的別名</dd>
+  <dt>--keepbcc[=(<i>on</i>|<i>off</i>)]</dt>
+  <dd>是否保留Bcc
+      header。參看下面 <b>keepbcc</b>
+      命令</dd>
+  <dt>-X, --logfile=[<i>file</i>]</dt>
+  <dd>設置或清除log
+      file。參看下面 <b>logfile</b>
+      命令</dd>
+  <dt>--syslog[=(<i>on</i>|<i>off</i>|<i>facility</i>)]</dt>
+  <dd>是否啓用syslog。參看下面
+      <b>syslog</b> 命令</dd>
+  <dt>-t, --read-recipients</dt>
+  <dd>從郵件的To, Cc, Bcc headers
+      處提取收件人地址，而不從命令行讀入</dd>
+  <dt>--</dt>
+  <dd>從這以後的參數均被認爲是收件人地址，即使以
+      &#39;-&#39;
+      開頭。這標誌着選項列表結束了</dd>
+</dl>
+</div>
+<p class="Pp">以下選項可用，但兼容的sendmail
+    忽略。
+  <br/>
+  -B<i>type</i>, -bm, -F<i>name</i>, -G, -h<i>N</i>, -i, -L <i>tag</i>, -m, -n,
+    -O <i>option=value</i>, -o<i>x</i> <i>value</i>, -v</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="用法_(USAGE)">用法 (USAGE)<a class="anchor" href="#%E7%94%A8%E6%B3%95_(USAGE)">¶</a></h1>
+通常，全局配置文件和(或)用戶配置文件包含了SMTP
+  服務器以及如何與之通信的所有信
+  息。但是，幾乎所有的選項也可以在命令行上配置
+<p class="Pp">SMTP 服務器的信息以
+    <i>accounts</i>
+    方式組織在一起。每個帳號描述了一臺SMTP
+    服
+    務器的主機名、驗證設置、TLS
+    設置等等。每個配置文件能定義多個帳號</p>
+<p class="Pp">在發件模式，必須要有一個envelope-from，這被作爲原始發件人發送給SMTP
+    服務器。 當 <i>auto_from</i>
+    開啓時，Envelope-from
+    的地址也能自動生成，或者也能明確地
+    用 <b>form</b> 或 <b>--from</b>
+    設定。<i>auto_from</i>
+    能生成形如 user@domain
+    這樣的地址。user
+    部分將以 <b>$USER</b>
+    代替，如果不行，就用
+    <b>$LOGNAME</b>
+    代替，再不行的話，就用當前登錄的用戶名。domain
+    部分能用 <b>maildomain</b> 設
+    定。如果maildomain
+    未設好，envelope-from
+    中將只有用戶名，而不含域名。</p>
+<p class="Pp">用戶能選擇用哪個帳號，以下方法三選一：</p>
+<dl class="Bl-tag">
+  <dt>--account=<i>id</i></dt>
+  <dd>用給定帳號。命令行選項會覆蓋配置文件中的設定</dd>
+  <dt>--host=<i>hostname</i></dt>
+  <dd>只用來自命令行的選項，不用配置文件中的</dd>
+  <dt>--from=<i>address</i></dt>
+  <dd>從全局或用戶配置文件中選擇與
+      <b>from</b>
+      命令指定的地址匹配的envelop-from
+      地址。 只有 <b>--account</b> 和
+      <b>--host</b>
+      都沒有設定時才用得到這個選項</dd>
+</dl>
+<p class="Pp">如果以上選項一個都沒用到，又或者用了
+    <b>--from</b>
+    但沒有一個帳號與 <b>from</b>
+    命令的結果匹配，那就使用&#34;default&#34;
+    帳號</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="配置文件_(CONFIGURATION_FILES)">配置文件 (CONFIGURATION FILES)<a class="anchor" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6_(CONFIGURATION_FILES)">¶</a></h1>
+如果全局配置文件存在並可讀，會調用文件SYSCONFDIR/msmtprc，SYSCONFDIR
+  依賴於你的 系統。用
+  <b>--version</b>
+  可以找到用了哪個目錄
+<br/>
+如果用戶配置文件存在並可讀，就調用它(默認是~/.msmtprc
+  )。用戶配置中的帳號會覆蓋
+  全局配置中的相同帳號。除了擁有者的讀寫權外，決不給配置文件其它多餘的權限。無論
+  哪個配置文件中的設置都可以用命令行選項更改
+<p class="Pp">配置文件是個普通文本而已，忽略空行和註釋行(以&#39;#&#39;開頭)
+  <br/>
+  其它行必須包含一條命令以及可能的參數
+  <br/>
+  如果參數的第一個或最後一個有空白，要用雙引號(&#34;)括起來
+  <br/>
+  如果文件的第一個字符是&#34;~&#34;，將會用$HOME
+    代替。如果命令能接受一個
+    <i>on</i> 參數，
+    它也會接受空參數並默認它是
+    <i>on</i> 參數。
+  <br/>
+  命令的集合形成groups
+    。每組以 <b>account</b>
+    命令開頭，接着是SMTP
+    服務器的設置</p>
+<p class="Pp">想快速上手，可跳到EXAMPLES
+    部分</p>
+<p class="Pp">命令說明如下：</p>
+<dl class="Bl-tag">
+  <dt>defaults</dt>
+  <dd>設置defaults。接下去的設置命令將當前配置文件中的所有帳號指定默認值</dd>
+  <dt>account <i>name</i> [:<i>account</i>[,...]]</dt>
+  <dd>開始定義新帳號，填充默認值
+    <br/>
+    如果有逗號和預先定義好的帳號名跟在account
+      後面，所有列表中的帳號會擁有同樣的
+      設置，並填充默認值</dd>
+  <dt>host <i>hostname</i></dt>
+  <dd>郵件發送目的地SMTP
+      服務器，參數可以是主機名或者網絡地址。每個帳號都必須包含
+      這個命令</dd>
+  <dt>port <i>number</i></dt>
+  <dd>SMTP
+      服務器監聽端口。默認端口會從你操作系統的service
+      database 中獲取。對於 SMTP
+      來說，服務名是&#34;smtp&#34;
+      (默認端口25)，除非使用不帶STARTTLS
+      的TLS ，在此種
+      情況下服務名是&#34;ssmtp&#34;(445)。對於LMTP，服務名是&#34;lmtp&#34;</dd>
+  <dt>timeout (<i>off</i>|<i>seconds</i>)</dt>
+  <dd>設置或清除網絡超時(以秒計)。<i>off</i>
+      參數表示不設超時，這意味着使用操作系統
+      默認的超時設定
+    <br/>
+    爲與老版本兼容，
+      <i>connect_timeout</i>
+      可作爲這條命令的別名</dd>
+  <dt>protocol (<i>smtp</i>|<i>lmtp</i>)</dt>
+  <dd>設置所用的協議，目前只支持SMTP
+      和LMTP，默認SMTP。想知道默認端口，看上面的
+      <b>port</b> 命令</dd>
+  <dt>auto_from [(<i>on</i>|<i>off</i>)]</dt>
+  <dd>是否允許automatic
+      envelope-from。默認不允許。開啓時，會生成類似user@domain
+      形 式的envelope-from。 user
+      部分將以 <b>$USER</b>
+      代替，如果不行，就用
+      <b>$LOGNAME</b>
+      代替，再不行的話，就用當前登錄的用戶名。domain
+      部分能用 <b>maildomain</b>
+      設定。如果maildomain
+      未設好，envelope-from
+      中將只有用戶名，而
+      不含域名。關閉時，，envelope-from
+      必須明確指定</dd>
+  <dt>from <i>envelope_from</i></dt>
+  <dd>設置envelope-from，僅當 <i>auto_from</i>
+      關閉時纔有用</dd>
+  <dt>maildomain [<i>domain</i>]</dt>
+  <dd>設置envelope
+      域名部分。僅當 <i>auto_from</i>
+      開啓時纔有用，域名可以爲空</dd>
+  <dt>auth [(<i>on</i>|<i>off</i>|<i>method</i>)]</dt>
+  <dd>這條命令控制是否允許SMTP
+      驗證。你沒有必要自己來設定驗證方式，只要用了
+      <i>on</i> 參數，msmtp
+      會爲你選擇一個最佳方案(看下面)。
+    <br/>
+    你可能需要用 <b>user</b>
+      命令來設置一個用戶名，用
+      <b>password</b> 命令設置一個
+      密碼。如果不指定密碼，而msmtp
+      運行時發現在驗證時又需要密碼，msmtp
+      會試着從 ~/.netrc
+      中找一個，如果不行的話，msmtp
+      會提示你輸入一個
+    <br/>
+    支持的驗證方式有
+      <i>plain</i>, <i>cram-md5</i>, <i>digest-md5</i>, <i>gssapi</i>,
+      <i>external</i>, <i>login</i>, and <i>ntlm</i>
+      。注意由於可能缺少下面的驗證庫，你
+      會有一個或多個驗證方式不能用。用
+      <b>--version</b>
+      選項看看支持哪些方法。
+    <br/>
+    <i>plain</i> 和 <i>login</i>
+      把你的驗證信息在網上以明文傳輸，因此應該僅把它們和
+      <b>tls</b> 命令一起用。
+    <br/>
+    如果不自己選擇方式的話，msmtp
+      會選擇SMTP
+      服務器支持的最安全的方式，安全指你的
+      信息在網上不會以明文發送。在TLS
+      加密連接下任何一種驗證方式都是安全的。如果不
+      用TLS ，只有gssapi,digest-md5,cram-md5 and ntlm
+      是安全的。
+    <br/>
+    <i>external</i>
+      方法比較特殊：真正的驗證操作位於SMTP
+      協議之外，發送TLS
+      客戶端 證書(看 <b>tls_cert_file</b>
+      命令)就是個典型例子。<i>external</i>
+      只確認這次驗
+      證對於給定的用戶是否成功，如果不給用戶名的話，就只確認驗證是否成功。[注：總之
+      它就把具體驗證和加密的事情全推給了外面程序，與msmtp
+      無關了]。msmtp
+      不會選這種
+      驗證方式，你必須親自指定。</dd>
+  <dt>user [<i>username</i>]</dt>
+  <dd>設置用於SMTP
+      驗證的用戶名，參數爲空時清除用戶名。證驗操作必須用
+      <b>auth</b> 命 令激活</dd>
+  <dt>password [<i>secret</i>]</dt>
+  <dd>設置用於SMTP
+      驗證的密碼，參數爲空時清除密碼。證驗操作必須用
+      <b>auto</b> 命令
+      激活。如果不指定密碼，而驗證操作又需要密碼，msmtp
+      會試着從 ~/.netrc
+      中找一個，
+      如果不行的話，msmtp
+      會提示你輸入一個</dd>
+  <dt>ntlmdomain [<i>domain</i>]</dt>
+  <dd>設置用於 <i>ntlm</i>
+      驗證方式的域名，默認不用域名(等同於空參數)。但有些服務器好
+      像要的，即便給出的是任意字符串</dd>
+  <dt>tls [(<i>on</i>|<i>off</i>)]</dt>
+  <dd>是否允許TLS/SSL
+      加密連接。不是每個服務器都支持TLS
+      ，但有了TLS，可以防止有人偷聽
+      與SMTP 的對話。除非用
+      <b>tls_certcheck</b>
+      命令關閉服務器證書驗證，否則每次都要
+      完備性檢查。爲全面發揮TLS/SSL
+      效力，推薦用 <b>tls_trust_file</b>
+      命令(看下面)</dd>
+  <dt>tls_starttls [(<i>on</i>|<i>off</i>)]</dt>
+  <dd>缺省狀態下，TLS
+      加密以STARTTLS SMTP
+      命令激活。關閉後，TLS
+      加密會立即啓動(這是
+      有名的SMTP tunneled through
+      TLS/SSL)。默認端口是465
+    <br/>
+    爲兼容老版本，
+      <b>tls_nostarttls</b> 作爲 <b>tls_starttls off</b>
+      的別名</dd>
+  <dt>tls_trust_file [<i>file</i>]</dt>
+  <dd>這條命令激活嚴格的服務器證書驗證。這個文件必須包含一個或多個以PEM
+      格式存在的受
+      信任的證書註冊機構(CAs)。空參數會關閉這個特性。msmtp
+      通過受信文件驗證服務器的
+      可靠性</dd>
+  <dt>tls_key_file [<i>file</i>]</dt>
+  <dd>與 <b>tls_cert_file</b>
+      命令一起，使msmtp
+      在需要時發一份客戶端證書給SMTP
+      服務
+      器。這個文件必須包含PEM
+      格式證書的私鑰。空參數會關閉這個特性</dd>
+  <dt>tls_cert_file [<i>file</i>]</dt>
+  <dd>與 <b>tls_key_file</b>
+      命令一起，使msmtp
+      在需要時發一份客戶端證書給SMTP
+      服務器。
+      這個文件必須包含PEM
+      格式的證書。空參數會關閉這個特性</dd>
+  <dt>tls_certcheck [(<i>on</i>|<i>off</i>)]</dt>
+  <dd>當TLS
+      啓用時，默認對服務器證書進行完備性檢查。如果沒有檢查未通過，會取消TLS
+      連接。
+    <br/>
+    爲兼容老版本，
+      <b>tls_nocertcheck</b> 作爲 <b>tls_certcheck off</b>
+      的別名</dd>
+  <dt>tls_force_sslv3 [(<i>on</i>|<i>off</i>)]</dt>
+  <dd>強制使用TLS/SSL 的SSLv3
+      版本。可能在一些用SSL
+      的老舊服務器上有用。不過萬不得
+      已，別用這個</dd>
+  <dt>dsn_notify (<i>off</i>|<i>condition</i>)</dt>
+  <dd>設定在哪在情況下，郵件系統應該發送DSN
+      (Delivery Status Notification)信息。 <i>off</i>
+      參數明確關閉DSN
+      請求，這意味着讓郵件決定什麼時候發DSN
+      信息，默認如 此。
+      <i>condition</i> 可以是 <i>never</i>
+      ，從不發送請求。或者是以逗號(沒有空
+      格！)分隔的一個或多個下列參數：
+      <i>failure</i> 失敗時發送，
+      <i>delay</i> 延遲時 發送，
+      <i>success</i> 成功時發送。SMTP
+      服務器必須支持DSN
+      才行。</dd>
+  <dt>dsn_return (<i>off</i>|<i>amount</i>)</dt>
+  <dd>在一封郵件中允許返回多少DSN
+      信息。 <i>off</i> 明確關閉DSN
+      請求，這意味着讓郵件
+      系統決定，默認如此。
+      <i>amount</i> 可以是 <i>headers</i>
+      只返回信息頭，<i>full</i>
+      返回郵件全部內容。SMTP
+      服務器必須支持DSN
+      才行</dd>
+  <dt>domain <i>argument</i></dt>
+  <dd>用來設定SMTP EHLO(or LMTP
+      LHLO)命令的參數。默認是
+      <i>localhost</i> (笨方法，但
+      有效)。其它可能的選擇有：郵件地址的域名部分(provider.example
+      for joe@provider.
+      example)，或者如果可能的話給出你主機的完整域名</dd>
+  <dt>keepbcc [(<i>on</i>|<i>off</i>)]</dt>
+  <dd>當發送郵件時是否保留Bcc
+      header
+      信息，默認不保留。</dd>
+  <dt>logfile [<i>file</i>]</dt>
+  <dd>不給參數會關閉記錄，默認如此。
+    <br/>
+    當選擇一個logfile 時，msmtp
+      會爲每一封指定logfile
+      帳號的郵件添加一行記錄
+    <br/>
+    記錄中會包含如下信息：日期、時間、SMTP
+      服務器名字、是否用TLS、是否驗證、用於
+      驗證的用戶名(僅當用了驗證後)、信件來自哪裏、收件人地址、發出去的郵件大小(僅
+      當發送成功時)、SMTP
+      狀態代碼、SMTP
+      錯誤信息(僅當發送失敗且錯誤信息可得時)、
+      錯誤信息(僅當發送失敗且錯誤信息可得時)、退出代碼(來自
+      sysexits.h；EX_OK 代表 發送成功)
+    <br/>
+    如果文件是一短橫(-)，msmtp
+      就把記錄信息輸出至標準輸出</dd>
+  <dt>syslog [(<i>on</i>|<i>off</i>|<i>facility</i>)]</dt>
+  <dd>是否允許syslog 。facility
+      可以是LOG_USER、LOG_MAIL、LOG_LOCAL0...LOG_LOCAL7
+      諸多策略中的一個，默認是LOG_USER。
+    <br/>
+    每次msmtp
+      通過含有這條命令的帳號發郵件時，它均會在syslog
+      服務中以選定的策略追
+      加一條記錄
+    <br/>
+    記錄中會包含如下信息：日期、時間、SMTP
+      服務器名字、是否用TLS、是否驗證、用於
+      驗證的用戶名(僅當用了驗證後)、信件來自哪裏、收件人地址、發出去的郵件大小(僅
+      當發送成功時)、SMTP
+      狀態代碼、SMTP
+      錯誤信息(僅當發送失敗且錯誤信息可得時)、
+      錯誤信息(僅當發送失敗且錯誤信息可得時)、退出代碼(來自
+      sysexits.h；EX_OK 代表
+    發送成功)</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="範例_(EXAMPLES)">範例 (EXAMPLES)<a class="anchor" href="#%E7%AF%84%E4%BE%8B_(EXAMPLES)">¶</a></h1>
+<b>配置文件 (Configuration file)</b>
+<p class="Pp"># Set default values for all following accounts.
+  <br/>
+  defaults
+  <br/>
+  tls on
+  <br/>
+  tls_trust_file /etc/ssl/certs/ca-certificates.crt
+  <br/>
+  logfile ~/.msmtp.log</p>
+<p class="Pp"># A freemail service
+  <br/>
+  account freemail
+  <br/>
+  host smtp.freemail.example
+  <br/>
+  from joe_smith@freemail.example
+  <br/>
+  auth on
+  <br/>
+  user joe.smith
+  <br/>
+  password secret</p>
+<p class="Pp"># A second mail address at the same freemail service
+  <br/>
+  account freemail2 : freemail
+  <br/>
+  from joey@freemail.example</p>
+<p class="Pp"># The SMTP server of the provider.
+  <br/>
+  account provider
+  <br/>
+  host mail.provider.example
+  <br/>
+  from smithjoe@provider.example
+  <br/>
+  auth on
+  <br/>
+  user 123456789
+  <br/>
+  password my_password</p>
+<p class="Pp"># Set a default account
+  <br/>
+  account default : provider</p>
+<p class="Pp"></p>
+<p class="Pp"><b>在Mutt 中使用msmtp (Using msmtp with
+    Mutt)</b></p>
+<p class="Pp">爲msmtp
+    建立一個配置文件，然後把下面幾行加到Mutt
+    配置文件中去
+  <br/>
+  <b>set sendmail=&#34;/path/to/msmtp&#34;</b>
+  <br/>
+  <b>set use_from=yes</b>
+  <br/>
+  <b>set realname=&#34;Your Name&#34;</b>
+  <br/>
+  <b>set from=you@example.com</b>
+  <br/>
+  <b>set envelope_from=yes</b>
+  <br/>
+  envelope_from=yes 讓Mutt 用msmtp的 <b>-f</b>
+    參數。這樣msmtp
+    會選擇符合you@example.com
+    的第一個帳號
+  <br/>
+  你也可以選用 <b>-a</b> 參數
+  <br/>
+  <b>set sendmail=&#34;/path/to/msmtp -a my-account&#34;</b>
+  <br/>
+  或者從命令行中設定所有內容
+  <br/>
+  <b>set sendmail=&#34;/path/to/msmtp --host=mailhub -f me@example.com
+    --tls&#34;</b></p>
+<p class="Pp">如果你有多個郵件帳號，並且想讓Mutt
+    用 <b>-f</b>
+    參數讓你可以在帳號之間輕鬆切換，把下面幾行加到Mutt
+    配置文件中去
+  <br/>
+  <b>macro generic &#34;&lt;esc&gt;1&#34; &#34;:set
+    from=you@example.com&#34;</b>
+  <br/>
+  <b>macro generic &#34;&lt;esc&gt;2&#34; &#34;:set
+    from=you@your-employer.example&#34;</b>
+  <br/>
+  <b>macro generic &#34;&lt;esc&gt;3&#34; &#34;:set
+    from=you@some-other-provider.example&#34;</b></p>
+<p class="Pp"><b>在mail 中用上msmtp (Using msmtp with
+    mail)</b></p>
+<p class="Pp">定義一個默認帳號，然後把下面一行放在
+    ~/.mailrc 中
+  <br/>
+  <b>set sendmail=&#34;/path/to/msmtp&#34;</b></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件/系統環境_(FILES_/_ENVIRONMENT)">文件/系統環境 (FILES / ENVIRONMENT)<a class="anchor" href="#%E6%96%87%E4%BB%B6/%E7%B3%BB%E7%B5%B1%E7%92%B0%E5%A2%83_(FILES_/_ENVIRONMENT)">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>SYSCONFDIR/msmtprc</dt>
+  <dd>全局配置文件。用
+      <b>--version</b>
+      找出系統中的SYSCONFDIR
+      在哪裏</dd>
+  <dt>~/.msmtprc</dt>
+  <dd>用戶配置文件</dd>
+  <dt>~/.netrc</dt>
+  <dd>文件.netrc
+      包含了登錄信息。如果在配置文件中沒有找到密碼信息的話，msmtp
+      會在提
+      示用戶輸入之前先找這個文件。
+      .netrc 的用法在 <a href="../../buster/ftp/netrc.5.en.html">netrc(5)</a> 或
+      <a href="../../buster/manpages-zh/ftp.1.zh_TW.html">ftp(1)</a> 中能找到
+    <br/>
+  </dd>
+  <dt>$USER, $LOGNAME</dt>
+  <dd>在構造信件來源地址時，這些變量會覆蓋用戶的登錄名。如果未指定$USER，就用$LOGNAME</dd>
+  <dt>$TMPDIR</dt>
+  <dd>建立臨時文件的地方。如果未設置就用系統默認定義
+    <br/>
+    僅當用到 <b>-t/--read-recipients</b>
+      選項時，纔會創建臨時文件。這個文件用於緩存郵件頭，不包括郵件本身，所以文件不
+      會太大</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者_(AUTHORS)">作者 (AUTHORS)<a class="anchor" href="#%E4%BD%9C%E8%80%85_(AUTHORS)">¶</a></h1>
+msmtp was written by Martin Lambers &lt;marlam@marlam.de&gt;.
+<br/>
+Other authors are listed in the AUTHORS file in the source distribution.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參看_(SEE_ALSO)">參看 (SEE ALSO)<a class="anchor" href="#%E5%8F%83%E7%9C%8B_(SEE_ALSO)">¶</a></h1>
+<a href="../../buster/mutt/mutt.1.en.html">mutt(1)</a>, <a href="../../buster/manpages-zh/mail.1.zh_TW.html">mail(1)</a>, <a href="../../buster/exim4-daemon-light/sendmail.8.en.html">sendmail(8)</a>, <a href="../../buster/ftp/netrc.5.en.html">netrc(5)</a> or
+  <a href="../../buster/manpages-zh/ftp.1.zh_TW.html">ftp(1)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+&#34;Nickel Cobalt&#34; &lt;angelerosster@gmail.com&gt;
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+2007/05/01
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版校對人]">[中文版校對人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%A0%A1%E5%B0%8D%E4%BA%BA%5D">¶</a></h1>
+&#34;Nickel Cobalt&#34; &lt;angelerosster@gmail.com&gt;
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中文MAN-PAGE計劃》">《中文MAN-PAGE計劃》<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E6%96%87MAN-PAGE%E8%A8%88%E5%8A%83%E3%80%8B">¶</a></h1>
+<a href="../..//cmpp.linuxforum.net</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2006-11</td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+msmtp.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:28Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"msmtp(1)\"}}]}"
+</script>

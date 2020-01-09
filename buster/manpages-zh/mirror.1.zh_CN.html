@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mirror(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/mirror.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/mirror.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; mirror(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/mirror.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/mirror.1.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%80%BB%E8%A7%88_SYNOPSIS" title="总览 SYNOPSIS">总览 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%A0%87%E8%AE%B0_FLAGS" title="标记 FLAGS">标记 FLAGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6_Package_Files" title="文件 Package Files">文件 Package Files</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%A1%A3%E6%A1%88%E5%82%A8%E6%94%BE_FILESTORES" title="档案储放 FILESTORES">档案储放 FILESTORES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%8C%83%E4%BE%8B_EXAMPLES" title="范例 EXAMPLES">范例 EXAMPLES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%90%E7%A4%BA" title="提示">提示</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%BD%91%E8%B7%AF%E8%A7%82%E5%BF%B5%28NETIQUETTE%29" title="网路观念(NETIQUETTE)">网路观念(NETIQUETTE)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E9%98%85_SEE_ALSO" title="参阅 SEE ALSO">参阅 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%99%AB%E8%99%AB_BUGS" title="虫虫 BUGS">虫虫 BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%B3%A8%E6%84%8F_NOTES" title="注意 NOTES">注意 NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85_AUTHOR" title="作者 AUTHOR">作者 AUTHOR</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D" title="[中文版维护人]">[中文版维护人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中国 Linux 论坛 man 手册页翻译计划》:">《中国 Linux 论坛 man 手册页翻译计划》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/mirror.1.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/mirror.1.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/mirror.1.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/mirror.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/mirror.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle"><a href="../../buster/manpages-zh/mirror.1.zh_CN.html">mirror(1)</a></td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle"><a href="../../buster/manpages-zh/mirror.1.zh_CN.html">mirror(1)</a></td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+mirror -
+  映射在远端节点上的档案
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="总览_SYNOPSIS">总览 SYNOPSIS<a class="anchor" href="#%E6%80%BB%E8%A7%88_SYNOPSIS">¶</a></h1>
+mirror [flags] -gsite:pathname mirror [flags] [package-files]
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+Mirror 是以 Perl
+  所写成的一套在执行它的机器与一台远端主机
+  之间使用 ftp
+  协定复制整个目录架构及其内容的软体。它借由在
+  传输之前比较档案时间(time-stamps)
+  以及大小来避免拷贝不必要
+  的档案。除此之外，它还可以选择性地压缩(compress,
+  gzip)以及 分割(split)档案。
+<p class="Pp">它是写给档案维护人员使用的但也可以让任何想要经由
+    ftp 传输
+    大量档案的人使用。</p>
+<p class="Pp">无论如何叫用它，
+    mirror
+    总是执行相同的几个基本步骤。它连线
+    到远端节点，在内部建立本地目标目录(target
+    direction)的目录
+    列表，为远端目录建立一份目录列表，比较它们，建立任何必须的
+    子目录，传输适当的档案（设定它们的档案时间以符合远端节点上
+    的档案时间），建立任何符号链结，然后移除任何已不必要的物件
+    (objects)
+  最后并结束连线。</p>
+<p class="Pp">Mirror
+    可以处理符号链结但并非原本的链结。它不会复制拥有者
+    (owner)或是群组(group)的资讯。如果你需要这些选项其中的任何
+    一个，使用 <a href="../../buster/rdist/rdist.1.en.html">rdist(1)</a>
+    来取代它。</p>
+<p class="Pp">Mirror
+    系以上面所列语法概述其中的一种方法呼叫执行。</p>
+<p class="Pp">第一种方式是用来将一个远端目录撷取回现行目录。如果你要映射
+    的是一个目录，最好是以斜线(&#39;/&#39;)
+    来结束路径名称这样一来远端
+    递回列表（包含往下子目录的列表）会比较小或者是使用
+    -r 旗标
+    来禁止递回（参阅下面所述的
+    -g
+    旗标）。这个方式将不会使用到
+    mirror.defaults 档案。</p>
+<p class="Pp">在上面所列语法概述的第二种方式里，至少需要有一份最少数目的
+    参数而且 mirror
+    是由从配置档案（或标准输入）里读取的设定所
+    控制。如果可以在 mirror
+    执行档所在目录或是
+    PERLLIB 路径里
+    找到一个名为 mirror.defaults
+    档案，那么它会首先被载入。这
+    用来为所有的配置档提供一般化的预设值。</p>
+<p class="Pp">Mirror
+    本来是为映射远端 Un*x
+    系统的档案而写，但是它已逐渐
+    成长(like topsy)。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="标记_FLAGS">标记 FLAGS<a class="anchor" href="#%E6%A0%87%E8%AE%B0_FLAGS">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>-d</dt>
+  <dd>启动侦错。如果下达这个参数超过一次，则侦错层级将会
+      递增。目前有用的最大层级是四。</dd>
+  <dt>-ppackage</dt>
+  <dd>只映射所给定的档案包裹(package)。
+      此选项可下达多次
+      在这种情形下所有给定的档案包裹都将会映射。没有这个
+      选项的话，将映射所有的档案包裹。档案包裹
+      (package) 是一个符合相对于
+      package
+      变数的正规表示式(regexp)</dd>
+  <dt>-R</dt>
+  <dd>类似 -p
+      但是跳过所有的档案包裹直到它找到给定的档案
+      包裹为止。这对于从
+      mirror
+      执行失败而离开的地方重新
+      开始执行会有用。</dd>
+  <dt>-n</dt>
+  <dd>除了比较本地以及远端的目录之外不做任何事，不会执行
+      任何档案传输。将侦错层级设为二，所以你可以看到对于
+      将要执行之动作的追踪。</dd>
+  <dt>-F</dt>
+  <dd>使用暂存的 dbm
+      档案以储放关于档案的资讯。如果你要
+      映射一个非常大的目录这会有用。参阅
+      use_files 这个 变数。</dd>
+  <dt>-g</dt>
+  <dd>节点:路径</dd>
+</dl>
+<p class="Pp">取得给定节点上的所有档案。如果路径符合
+    .*/.+ 那么
+    它是目录的名称而后面的部份则是所要取得之档案名称的
+    样板(pattern)。
+    如果路径符合 .*/
+    则它是目录的名称
+    而且其所有的内容都将会被撷取。另一方面路径还是用
+    在 &#39;/&#39;
+    的样板。如果你使用
+    host:/fred 的话，那么将作出
+    一份远端主机上之 /
+    的完整目录列表。如果所有你想要
+    的是目录 /fred
+    的内容，则指定 host:/fred/
+    才是。</p>
+<dl class="Bl-tag">
+  <dt>-r</dt>
+  <dd>等于 -krecursive=false</dd>
+  <dt>-v</dt>
+  <dd>印出 mirror
+      版本资讯细节并结束。</dd>
+  <dt>-T</dt>
+  <dd>强制将任何本地档案的时间重置成与远端档案相同。一般
+      仅用于以已存在档案内容之处初始一个映射区域的时候。</dd>
+  <dt>-U [档案名称]</dt>
+  <dd>把所有上传的档案记录到所给的档案名称。记得
+      mirror 切换到 local_dir
+      以执行其作业，所以它应该得是完整
+      (full)的路径名称。如果没有给任何参数，其预设值为
+      `pwd`/upload_log.day.month.year.</dd>
+  <dt>-kkey=value</dt>
+  <dd>盖过任何预设关键字的值(key/value)
+      。</dd>
+  <dt>-m</dt>
+  <dd>等于 -kmode_copy=true</dd>
+  <dt>-t</dt>
+  <dd>等于 -ktext_mode=true</dd>
+  <dt>-f</dt>
+  <dd>等于 -kforce=true</dd>
+  <dt>-ssite</dt>
+  <dd>等于 -ksite=site</dd>
+  <dt>-uuser</dt>
+  <dd>等于 -kremote_user=user
+      接著会提示你要求密码，并且
+      还会关闭本地回应(echo)以兹配合。这个密码是用来设定
+      remote_password 用的。</dd>
+  <dt>-L</dt>
+  <dd>只是产生一份输入的美观列表版本。</dd>
+  <dt>-G</dt>
+  <dd>从远端机器取得档案。本地以及远端目录必须在命令列上
+      给定。（这个选项已经不再支援。）</dd>
+  <dt>-P</dt>
+  <dd>把档案放上远端机器。本地以及远端目录必须在命令列上
+      给定。（这个选项已经不再支援。）</dd>
+  <dt>-C filename</dt>
+  <dd>指定配置文件。配合
+      -P 以及 -G
+      选项之配置文件之需。
+      （这个选项已经不再支援。）
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件_Package_Files">文件 Package Files<a class="anchor" href="#%E6%96%87%E4%BB%B6_Package_Files">¶</a></h1>
+配置档会被剖析成一系列的叙述。空白行及以杂凑(hash)符号起始
+  的行会被忽略。每个叙述的形式都是
+<p class="Pp">关键字=值</p>
+<p class="Pp">或是</p>
+<p class="Pp">关键字+值</p>
+<p class="Pp">你可以在关键字以及等号／加号的前面加上空白字元。所有紧跟在
+    等号／加号之后的每样事物都是一个值，这包含任何开头或结尾的
+    空白字元。等号的版本会将关键字设定为该值，而加号的版本会将
+    该值连结到预设值的结尾上。</p>
+<p class="Pp">一个叙述可以在除最后一行以外使用
+    ampersand(&#39;&amp;&#39;) 字元作结束
+    以连续超过多行。尾随在
+    ampersand
+    之后的行，都会以移除所有
+    开头空白字元的方式附加到目前所在行的后面。</p>
+<p class="Pp">这里是一份关键字的列表而且它们预设的值放在
+    square brackets
+    里面列出。以星号标出的选项目前还没有实作出来。</p>
+<p class="Pp">虽然有很多关键字可以设定，内建的预设值将可处理大部分的情况
+    。一般只需要设定 package,
+    site, remote_dir 以及 local_dir 即可。</p>
+<dl class="Bl-tag">
+  <dt>package</dt>
+  <dd>对所要映射的档案包裹而言应该得要是个唯一的
+      名称。[&#39;&#39;]</dd>
+  <dt>comment</dt>
+  <dd>用在报告里。[&#39;&#39;]</dd>
+  <dt>skip</dt>
+  <dd>设定这个项目会使得该档案包裹被跳过。此值会
+      被报告为跳过的原因。（这比
+      commenting the entry out
+      来得容易。）[&#39;&#39;]</dd>
+  <dt>site</dt>
+  <dd>远端节点的节点名称或是
+      IP 位址。[&#39;&#39;]</dd>
+  <dt>remote_dir</dt>
+  <dd>所要映射的远端目录。参阅
+      recursed_hard。 [&#39;&#39;]</dd>
+  <dt>local_dir</dt>
+  <dd>本地目录。[&#39;&#39;]</dd>
+  <dt>remote_user</dt>
+  <dd>用在远端节点的使用者名称。[anonymous]</dd>
+  <dt>remote_password</dt>
+  <dd>用在远端节点的密码。[user@localhostname]</dd>
+  <dt>get_patt</dt>
+  <dd>所要撷取之远端路径名称的正规表示式。[.]</dd>
+  <dt>exclude_patt</dt>
+  <dd>所要忽略之远端目录名称的正规表示式。[&#39;&#39;]</dd>
+  <dt>update_local</dt>
+  <dd>把 get_patt 设为
+      local_dir/*。这在如果你只
+      想要映射远端档案服务处中所选定的子目录时会
+      有用。[false]</dd>
+  <dt>local_ignore</dt>
+  <dd>所要忽略之本地路径名称的正规表示式。对用来
+      跳过受限(restricted)的本地目录有用。[&#39;&#39;]</dd>
+  <dt>do_deletes</dt>
+  <dd>如果目的(destination)
+      档案不存在于来源树中
+      (source tree)中则删除之。[false]</dd>
+  <dt>delete_patt</dt>
+  <dd>检查所要删除之本地路径名称的正规表示式。不
+      符合的名称不会被检查。所有以此样板所选出的
+      档案都会被检查是否符合
+      delete_excl 选项。 [.]</dd>
+  <dt>delete_get_patt</dt>
+  <dd>把 delete_patt 设为 get_patt。[false]</dd>
+  <dt>delete_excl</dt>
+  <dd>永不删除之本地路径名称的正规表示式。[&#39;&#39;]</dd>
+  <dt>save_deletes</dt>
+  <dd>把本地档案储存到 save_dir
+      里取代将其删除。
+    [false]</dd>
+  <dt>save_dir</dt>
+  <dd>当本地档案不存在于远端节点的时候会被转移到
+      此处。[Old]</dd>
+  <dt>max_delete_files</dt>
+  <dd>如果有超过此数的档案会被删除，则不进行删除
+      动作，只发出警告。若此值系以百分比字元作为
+      结束的话则此值为取消删除前之档案的百分比。
+      [10%]</dd>
+  <dt>max_delete_dirs</dt>
+  <dd>如果有超过此数的目录会被删除，则不进行删除
+      动作，只发出警告。若此值系以百分比字元作为
+      结束的话则此值为取消删除前之档案的百分比。
+      [10%]</dd>
+  <dt>max_days</dt>
+  <dd>如果 &gt;0
+      的话，忽略比此日数更久以前的档案。
+      任何被忽略的档案将不会被传输或删除。[0]</dd>
+  <dt>split_max</dt>
+  <dd>如果 &gt;0
+      而且档案的大小比此值大，该档案会被
+      切割以便本地储存（档案名称同时也必须要符合
+      split_patt 选项）。[0]</dd>
+  <dt>spilt_patt</dt>
+  <dd>要储存在本地前需先分割之远端路径名称的正规
+      表示式。[&#39;&#39;]</dd>
+  <dt>split_chunk</dt>
+  <dd>档案所要切割成的大小。[102400]</dd>
+  <dt>ls_lR_file</dt>
+  <dd>包含 ls-lR
+      的远端档案，否则执行远端
+      ls 以
+    取得目录列表。[&#39;&#39;]</dd>
+  <dt>local_ls_lR_file</dt>
+  <dd>包含 ls-lR
+      的本地档案，否则使用远端节点的
+      ls_lR_file
+      取代。这在第一次映射一个很大的
+      档案包裹时有用。[&#39;&#39;]</dd>
+  <dt>recursive</dt>
+  <dd>执行范围包括子目录。[true]</dd>
+  <dt>recuese_hard</dt>
+  <dd>必须对每一个子目录执行
+      cwd 以及 ls 以产生 远端 ls
+      结果。在这种情形下
+      remote_dir 必须
+      是绝对的（从 /
+      开始）而非相对的。使用
+      ftp 里的 pwd
+      指令以找出远端档案区域之路径开始
+      处。（如果 remote_fs 是 vms
+      则不可使用。） [false]</dd>
+  <dt>flags_recursive</dt>
+  <dd>传送给远端 ls
+      用以执行递回列出的旗标。
+      [&#39;-lRat&#39;]</dd>
+  <dt>flags_nonrecursive</dt>
+  <dd>传送给远端 ls
+      用以执行非递回列出的旗标。
+      [&#39;-lat&#39;]</dd>
+  <dt>remote_fs</dt>
+  <dd>远端档案储存型态。处理
+      unix, dls, netware vms, dosftp, macos, lsparse 以及
+      infomac。 细节参阅下面
+      FILESTORES 段落。[unix]</dd>
+  <dt>vms_keep_version</dt>
+  <dd>映射 vms
+      档案时，保留版本编号。若为
+      false
+      ，会抽离版本而只保留基本的档案名称。[true]</dd>
+  <dt>vms_xfer_text</dt>
+  <dd>要以文字模式(TEXT mode)
+      传输之 vms 档案的
+      样板（忽略大小写）。
+      [&#39;readme$|info$|listing$|.c$&#39;]</dd>
+  <dt>name_mappings</dt>
+  <dd>远端到本地的路径名称对映（一个
+      perl s 指令 eg. s:old:new:）。[&#39;&#39;]</dd>
+  <dt>external_mapping</dt>
+  <dd>执行名称对映的外部函式。[&#39;&#39;]</dd>
+  <dt>get_newer</dt>
+  <dd>如果远端档案的日期比本地的新则取回。[true]</dd>
+  <dt>get_size_change</dt>
+  <dd>如果档案的大小与本地的不同则取回。如果档案
+      是在撷取时压缩的，则其大小会自动地忽略掉。
+      [true]</dd>
+  <dt>compress_patt</dt>
+  <dd>储存在本地之前要先压缩之档案的正规表示式。
+      参阅 get_size_change 选项。[&#39;&#39;]</dd>
+  <dt>compress_excl</dt>
+  <dd>不压缩之档案的正规表示式（忽略大小写）。
+      [.(z|gz)$]</dd>
+  <dt>compress_prog</dt>
+  <dd>用来压缩档案的程式。如果设为
+      compress 或是 gzip
+      这两个字的话，则将会自动地设定完整的
+      路径名称以及正确的
+      compress_suffix(副档名) 。使用 gzip
+      的时候，会使用第九级
+      (gzip -9)
+      压缩。注意到可以在
+      compress_prog 之后设定 compress_suffix
+      将其重设为非标准值。
+      [compress]</dd>
+  <dt>compress_suffix</dt>
+  <dd>压缩程式附加到档案后的字元。若压缩程式选项
+      compress_prog 为 compress
+      的话，则此预设值 为
+      .Z 。若 compress_prog 为 gzip
+      的话，则 此预设值为
+      .gz。[&#39;&#39;]</dd>
+  <dt>compress_conv_patt</dt>
+  <dd>如果 compress_prog 是 gzip
+      的话，符合这个
+      样板的档案会被解压缩并在本地储存前以
+      gzip
+      重新压缩。压缩转换只对
+      compress 到 gzip 此
+      转换有意义。[(.Z|.taz)$]</dd>
+  <dt>compress_conv_expr</dt>
+  <dd>把副档名从 compress 转为 gzip
+      形式的 perl
+      表示式。[s/.Z$/.gz/;s/.taz$/.tgz/]</dd>
+  <dt>compress_size_floor</dt>
+  <dd>只压缩比此数值小的档案。[0]</dd>
+  <dt>force_times</dt>
+  <dd>强制要求本地时间符合远端时间。[yes]</dd>
+  <dt>retry_call</dt>
+  <dd>如果初始连线失败，一分钟之后重试一次。这是
+      用来处理一些反向找寻(lookup)进入(incoming)
+      主机但有时会在第一次尝试时超过时间的节点。
+      [yes]</dd>
+  <dt>update_log</dt>
+  <dd>档案名称，系相对于
+      local_dir 选项之设定值
+      ，此处会保留一份更新报告。[&#39;&#39;]</dd>
+  <dt>mail_to</dt>
+  <dd>将一份系统执行工作记录寄给这个以逗点隔开之
+      列表上的人。[&#39;&#39;]</dd>
+  <dt>user</dt>
+  <dd>给予本地路径名称之使用者名称或使用者号码。
+      [&#39;&#39;]</dd>
+  <dt>group</dt>
+  <dd>给予本地路径名称之群组名称或群组号码。[&#39;&#39;]</dd>
+  <dt>file_mode</dt>
+  <dd>给予本地建立之档案的权限。[0444]</dd>
+  <dt>dir_mode</dt>
+  <dd>给予本地建立之目录的权限。[0755]</dd>
+  <dt>timeout</dt>
+  <dd>在此秒数后结束 ftp
+      要求。[40]</dd>
+  <dt>ftp_port</dt>
+  <dd>远端 ftp
+      伺服程式的埠号。[21]</dd>
+  <dt>proxy</dt>
+  <dd>设为 1
+      以使用代理转接(proxy)式的
+      ftp 服务 。[0]</dd>
+  <dt>proxy_ftp_port</dt>
+  <dd>代理服务之 ftp
+      伺服程式的埠号。[4514]</dd>
+  <dt>proxy_gateway</dt>
+  <dd>代理服务之名称，也可用
+      INTERNET_HOST 变数
+      来提供。[internet-gateway]</dd>
+  <dt>mode_copy</dt>
+  <dd>指出是否需要拷贝模式位元(mode
+      bits) 的旗标 。[false]</dd>
+  <dt>interactive</dt>
+  <dd>非批次(non-batch)
+      传输。系以 -g
+      旗标实作。 [false]</dd>
+  <dt>text_mode</dt>
+  <dd>如果为 true
+      的话，档案以文字模式传输。Un*x
+      较喜欢以二进位传输所以这是预设值。[false]</dd>
+  <dt>force</dt>
+  <dd>如果为 true
+      的话，所有档案都将被传输而不去
+      理会档案的大小或时间。[false]</dd>
+  <dt>get_file</dt>
+  <dd>以执行 get 而非 put
+      作为预设。[true]</dd>
+  <dt>verbose</dt>
+  <dd>冗馀讯息。[false]</dd>
+  <dt>delete_source</dt>
+  <dd>一旦传输完成后删除来源档案。（此选项已不再
+      支援。）[false]</dd>
+  <dt>disconnect</dt>
+  <dd>档案包裹结束后从远端节点结束连线。[false]</dd>
+  <dt>mail_prog</dt>
+  <dd>呼叫执行以将信件寄送给
+      mail_to 列表的程式
+      。可以传递 mail_subject
+      参数。预设为 mailx Mail, mail
+      或任何在你的系统上可用的东西。
+      [&#39;&#39;]</dd>
+  <dt>mail_subject</dt>
+  <dd>mirror update [&#39;-s]</dd>
+  <dt>hostname Mirror</dt>
+  <dd>自动地跳过节点名称符合此主机的档案
+      包裹。预设为本地主机名称。[&#39;&#39;]</dd>
+  <dt>use_files</dt>
+  <dd>将 mirroe 所使用的 associative arrays
+      放到 暂存档里。[false]</dd>
+  <dt>umask</dt>
+  <dd>预设不允许任何 setuid
+      的东西通过。[07000]</dd>
+  <dt>remote_group</dt>
+  <dd>如果存在则设定远端
+      &#39;site group&#39; 。[&#39;&#39;]</dd>
+  <dt>remote_gpass</dt>
+  <dd>如果存在则设定远端
+      &#39;site gpass&#39; 。[&#39;&#39;]</dd>
+  <dt>remote_idle</dt>
+  <dd>如果非空(not
+      null)，则尝试并将远端闲置计时
+      (idle timer)设为此值。[&#39;&#39;]</dd>
+  <dt>make_bad_symlinks</dt>
+  <dd>如果为 true
+      的话，将会把符号链结连到不允许
+      （不存在）的路径名称。旧版预设值为
+      true 。 [false]</dd>
+  <dt>follow_local_symlinks</dt>
+  <dd>应该要跟从档案或是目录所指向处之路径名称的
+      正规表示式。这使得
+      mirror 不能够见到本地的
+      符号链结。[&#39;&#39;]</dd>
+  <dt>get_missing</dt>
+  <dd>确实取回档案。当设为
+      false 的时候，只执行
+      删除以及建立符号链结。用来删除比
+      max_days
+      更旧的过时档案而不必撷取这些旧档案。[true]</dd>
+</dl>
+<p class="Pp">每一组关键字定义如何映射一份特定的档案包裹而且应该要以一行
+    唯一的 package
+    开始。档案包裹的名称用在产生报告及
+    -p 参数
+    上，所以应使用较具记忆性的名称。定义每个档案包裹所需的最小
+    需求是 package, site, remote_dir 以及
+    local_dir 。一旦找到 一行 package
+    叙述，所有的预设值都会重设。</p>
+<p class="Pp">如果 package 的名称是 defaults
+    的话，则不会连线到任何节点
+    去，但是所给任何关键字的预设值都会改变。一般而言所有的预设
+    值都在 mirror.defaults
+    这个将会在任何 package
+    细节前自动
+    载入的档案里。</p>
+<p class="Pp"></p>
+<pre># Sample mirror.defaults
+package=defaults
+# The LOCAL hostname - if not the same as `hostname` returns
+# (I advertise the name src.doc.ic.ac.uk but the machine is
+# really puffin.doc.ic.ac.uk.)
+hostname=src.doc.ic.ac.uk
+# Keep all local_dirs relative to here
+local_dir=/public/
+remote_password=ukuug-soft@doc.ic.ac.uk
+</pre>
+<p class="Pp">如果档案包裹不是
+    defaults 的话，则 mirror
+    将会执行下列步骤
+    。除非侦测出一个内部错误，任何错误都将会使得目前的档案包裹
+    被跳过并且尝试下一个。</p>
+<p class="Pp">如果 mirror
+    并非已经连上该节点，它将会从任何已经连上的节点
+    离线并尝试连线到远端节点的
+    ftp
+    伺服程式去。它接著将会使用
+    所给的远端使用者名称及密码签入。一旦连上，
+    mirror 开启二进
+    位传输模式。接下来它切换到所给的本地目录并扫描之以取得已经
+    存在的本地档案的细节。如果必要，将会建立本地目录。一旦这项
+    作业完成，会以类似的方式扫描远端目录。
+    Mirror 系切换到远端
+    目录并执行 ftp LIST
+    指令，然后依据 recursive
+    选项的值传递 flags_recursive
+    选项或 flags_nonrecursive
+    选项来完成。此外
+    也可以撷取一个包含有目录列表的档案。每一个远端路径名称都将
+    会执行任何指定的对映(mapping)
+    以建立本地路径名称。然后任何
+    由 exclude_patt, max_days, get_newer 以及 get_size_change
+    关键字指定的检验都会施行在档案或符号链结上。只有
+    exclude- patt
+    检验会施行在子目录上。</p>
+<p class="Pp">上述过程建立一份所有需要的远端档案以及要储存它们之本地路径
+    名称的列表。</p>
+<p class="Pp">一旦目录列表完成，所有需要的档案都会从远端节点撷取到它们的
+    本地路径名称。作法是把档案撷取到目标目录里的暂存档。如果有
+    需要，暂存档会被压缩(compressed,
+    gzip&#39;ed) 或是切割（或者是
+    压缩后再切割）。当传输成功后再把暂存档改名。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="档案储放_FILESTORES">档案储放 FILESTORES<a class="anchor" href="#%E6%A1%A3%E6%A1%88%E5%82%A8%E6%94%BE_FILESTORES">¶</a></h1>
+Mirror
+  使用远端目录列表以找出可以取得哪些档案。
+  Mirror 本
+  来的目标是连线到 unix 的
+  ftp 伺服程式使用标准的
+  ls 指令。
+  要使用于非标准 ls 的 unix
+  主机或非 unix
+  的主机上它必须要设
+  remote_fs
+  变数以符合将会传回(return)的目录列表类型。此变数
+  (remote_fs) 与其它变数特别是
+  flags_recursive, recurse_hard 以及 get_size_change
+  之间有些交互作用。下列的节次将会秀些
+  在不同档案服务处执行
+  ftp 的 dir
+  指令所产生的结果以及相关
+  变数的建议。在配合某些设定与众不同的档案服务处的时候你可能
+  必须变更此处所建议的变数设定。
+<p class="Pp"></p>
+<pre>remote_fs=unix
+total 65
+-rw-r--r-- 1 ukuug ukuug 2245 Jun 28 20:06 README
+-rw-r--r-- 1 ukuug ukuug 61949 Jun 29 19:13 mirror-2.1.tar.gz
+</pre>
+<p class="Pp">这是预设值而且你应该不必重设任何其它变数。</p>
+<p class="Pp"></p>
+<pre>remote_fs=dls
+00index.txt 189916
+0readme 5793
+1_x/ = OS/2 1.x-specific files
+</pre>
+<p class="Pp">这是某些 unix
+    档案服务处所使用的 ls
+    变化型。它在列表中提供
+    其所知项目的描述。把
+    flags_recursive 设为 -dtR 即可。</p>
+<p class="Pp"></p>
+<pre>remote_fs=netware
+- [R----F--] jrd 1646 May 07 21:43 index
+d [R----F--] jrd 512 Sep 09 10:52 netwire
+d [R----F--] jrd 512 Sep 02 01:31 pktdrvr
+d [RWCE-F--] jrd 512 Sep 04 10:55 incoming
+</pre>
+<p class="Pp">这是 Novell
+    档案服务处所使用的。把
+    recurse_hard 设为 true 并且把 flags_recursive
+    设为空(nothing)的。参阅
+  remote_dir</p>
+<p class="Pp"></p>
+<pre>dosftp
+00-index.txt 6,471 13:54 7/20/93 alabama.txt 1,246 23:29 5/08/92
+alaska.txt 873 23:29 5/08/92 alberta.txt 2,162 23:29 5/08/92
+</pre>
+<p class="Pp">dosftp 是在 dos
+    上执行的一套 ftp
+    伺服程式。recurse_hard 设为 true
+    并且把 flags_recursive
+    设为空(nothing)的。</p>
+<p class="Pp"></p>
+<pre>remote_fs=macos
+-------r-- 0 127 127 Aug 27 13:53 !Gopher Links
+drwxrwxr-x folder 32 Sep 9 16:30 FAQ
+drwxrwx-wx folder 0 Sep 9 09:59 incoming
+</pre>
+<p class="Pp">macos 是麦金塔(Macintosh) ftp
+    伺服程式的一个变化型。虽然此
+    输出类似于 unix 但是 unix
+    这个 remote_fs
+    型态无法应付它是
+    因为每个档案有三个大小。把
+    recurse_hard 设为 true, flags_ recursive
+    设为空(nothing)的，get_size_change
+    设为 false 并 将 compress_patt
+    设为空（最后这个设定是因为此不平常的档案
+    名称会扰乱执行压缩的
+    shell 界面）。参阅 remote_dir
+    设定。</p>
+<p class="Pp"></p>
+<pre>remote_fs=vms
+USERS:[ANONYMOUS.PUBLIC]
+1-README.FIRST;13 9 14-JUN-1993 13:09 [ANONYMOUS] (RWE,RWE,RE,RE)
+PALTER.DIR;1 1 18-JAN-1993 11:56 [ANONYMOUS] (RWE,RWE,RE,RE)
+PRESS-RELEASES.DIR;1
+1 11-AUG-1992 20:05 [ANONYMOUS] (RWE,RWE,,)
+</pre>
+<p class="Pp">alternatively:</p>
+<p class="Pp"></p>
+<pre>[VMSSERV.FILES]ALARM.DIR;1 1/3 5-MAR-1993 18:09
+[VMSSERV.FILES]ALARM.TXT;1 1/3 4-FEB-1993 12:20
+</pre>
+<p class="Pp">把 flags_recursive 设为 &#39;[...]&#39; 并将
+    get_size_change 设为 false。recurse_hard 在 vms
+    上不能使用。除此之外还可以参阅
+    vms_keep_version 以及 vms_xfer_text 变数。</p>
+<dl class="Bl-tag">
+  <dt>remote_fs=infomac</dt>
+  <dd>这个特殊型态仅在处理
+      sumexaim.stanford.edu info-mac 目录之 help/all-files
+      有意义。recurse_hard
+      应该设为 true。</dd>
+  <dt>remote_fs=lsparse</dt>
+  <dd>允许开启高阶除错方式重新剖析由
+      mirror
+      产生的列表。这只对于
+      mirror wizards 有用。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="范例_EXAMPLES">范例 EXAMPLES<a class="anchor" href="#%E8%8C%83%E4%BE%8B_EXAMPLES">¶</a></h1>
+这里是从 src.doc.ic.ac.uk 上来的
+  mirror.defaults 档案:
+<p class="Pp"></p>
+<pre># This is the default mirror settings used by my site:
+# src.doc.ic.ac.uk (146.169.2.1)
+# This is home of the UKUUG Software Distribution Service
+package=defaults
+# The LOCAL hostname - if not the same as `hostname`
+# (I advertise the name src.doc.ic.ac.uk but the machine is
+# really puffin.doc.ic.ac.uk)
+hostname=src.doc.ic.ac.uk
+# Keep all local_dirs relative to here
+local_dir=/public/
+remote_password=ukuug-soft@doc.ic.ac.uk
+mail_to=
+# Don&#39;t mirror file modes. Set all dirs/files to these
+dir_mode=0755
+file_mode=0444
+# By default, files are owned by root.zero
+user=0
+group=0
+# # Keep a log file in each updated directory
+# update_log=.mirror
+update_log=
+# Don&#39;t overwrite my mirror log with the remote one.
+# Don&#39;t retrieve any of their mirror temporary files.
+# Don&#39;t touch anything whose name begins with a space!
+# nor any FSP or gopher files...
+exclude_patt=(^|/)(.mirror$|.in..*.$|MIRROR.LOG|#.*#|.FSP|.c
+ache|.zipped|lost+found/| )
+# Try to compress everything
+compress_patt=.
+compress_prog=compress
+# Don&#39;t compress information files, files that don&#39;t benefit
+from
+# being compressed, files that tell ftpd, gopher, wais... to
+do things,
+# the sources for compression programs...
+# (Note this is the only regexp that is case insensitive.)
+compress_excl+|^.notar$|-z|.taz$|.tar.Z|.arc$|.zip$|.lzh$|.z
+oo$|.exe$|.lha$|.zom$|.gif$|.jpeg$|.jpg$|.mpeg$|.au$|read.*me|index|.message|in
+fo|faq|gzip|compress
+# Don&#39;t delete own mirror log or any .notar files (incl in s
+ubdirs)
+delete_excl=(^|/).(mirror|notar)$
+# Ignore any local readme files
+local_ignore=README.doc.ic
+# Automatically delete local copies of files that the
+# remote site has zapped
+do_deletes=true
+</pre>
+Here are some sample package descriptions:
+<pre>package=gnu
+comment=Powerful and free Un*x utilities
+site=prep.ai.mit.edu
+remote_dir=/pub/gnu
+# Local_dir+ causes gnu to be appended to the default local_
+dir
+# so making /public/gnu
+local_dir+gnu
+exclude_patt+|^ListArchives/|^lost+found/|^scheme-7.0/|^.his
+tory
+# I tend to only keep the latest couple of versions of thing
+s
+# this stops mirror from retrieving the older versions I&#39;ve
+removed
+max_days=30
+do_deletes=false
+package=X11R5
+comment=X Windows (windowing graphics system for Un*x)
+site=export.lcs.mit.edu
+remote_dir=/pub/R5
+local_dir+computing/graphics/systems/X11/pub/R5
+# This is a local symlink to the free-for-all contrib area
+# and is mirrored elsewhere
+local_ignore=^contrib$
+# Don&#39;t compress a thing. It is already compressed
+# but doesn&#39;t look it.
+compress_patt=
+package=cnews
+comment=The C News system
+site=ftp.cs.toronto.edu
+remote_dir=/pub/c-news
+local_dir+computing/usenet/software/transport/c
+compress_excl+|patches/PATCHDATES|WhereFrom
+# THIS IS JUST A TEST
+package=test vms site
+site=vmsbox.somewhere.ac.uk
+local_dir=/tmp/copy4
+remote_dir=vmsserv/files
+remote_fs=vms
+# Must do these settings for VMS
+flags_recursive=[...]
+get_size_change=false
+# and on, and on ...
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="提示">提示<a class="anchor" href="#%E6%8F%90%E7%A4%BA">¶</a></h1>
+要增加一个新的档案包裹，首先打开
+  -n 选项检查它。
+<p class="Pp">如果你要增加到一个已经存在档案的地方，那么通常最好是
+    force
+    本地已经存在的档案时间符合远端的这样将会执行与远端档案之间
+    的时间比较。</p>
+<p class="Pp">尝试并将所有从相同节点撷取的档案包裹放在一起。使用这种方式
+    的话 mirror
+    将仅需签入一次。</p>
+<p class="Pp">记得所有的正规表示式都是
+    Perl 正规表示式。</p>
+<p class="Pp">如果远端节点包含你想展开(&#34;flatten
+    out&#34;)
+    到相对应档案的符号
+    链结，那么以改变传送给远端
+    ls
+  旗标的方式执行之。</p>
+<pre>flags_recursive+L
+</pre>
+或是
+<pre>flags_nonrecursive+L
+</pre>
+首先以在远端节点的 ftp
+  指令下尝试 ls -lRatL
+  的方式来测试
+  远端档案服务处是否有任何符号链结回圈。
+<p class="Pp">如果你正要映射一个非常大而不常改变的节点，等它初次映射后在
+    设定中加上 max_days=7
+    选项。以此方式 mirror
+    在更新的时候仅
+    需要注意最近的档案。然后每个礼拜一次，或者是有必要的时候，
+    以 -kmax_days=-0 呼叫 mirror
+    强制执行一次完整的更新。</p>
+<p class="Pp">如果你不想压缩从远端节点取得的任何东西则最简单的方法就是将
+    compress_patt 设为空(nothing) 的。</p>
+<p class="Pp">如果你想在映射一份档案包裹后执行某个指令那么有个有用的技巧
+    是将 mail_prog
+    变数重设为程式的名称并将
+    mail_to 重设为其 参数。</p>
+<p class="Pp">对于 netware, dosftp, macos 以及 vms
+    而言一般你应该得要把
+    remote_dir 设为远端 ftp
+    伺服程式的 home
+    目录。手动连线并
+    在切换到子目录之前使用
+    pwd 指令找出 home
+    在哪里。如果你仅
+    想要映射整个档案树的一部份那么应该在开头处给定包含此
+    home
+    目录的完整路径名称。</p>
+<p class="Pp">macos
+    的名称有时候会包含一些很难让它们通过
+    un*x shells 的
+    字元。因为档案压缩是经由
+    shell 执行最好设 compress_patt=
+    以便关闭压缩。</p>
+<p class="Pp">macos
+    档案在传输时似乎无论如何其大小都会改变，不管是以二进
+    位或是文字模式。所以最好是设
+    get_size_change=false 较佳。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="网路观念(NETIQUETTE)">网路观念(NETIQUETTE)<a class="anchor" href="#%E7%BD%91%E8%B7%AF%E8%A7%82%E5%BF%B5(NETIQUETTE)">¶</a></h1>
+如果你要映射一个远端节点，请遵守该节点管理者对于存取开节点
+  所设的限制。你通常可以使用标准的
+  ftp
+  指令连到该档案服务处
+  。任何限制一般会作为签入时的标题或是放在一个（希望是）明显
+  的档案里。
+<p class="Pp">这里是，我希望是，一些好的一般原则:</p>
+<p class="Pp">只在本地以及远端节点的工作时间以外映射节点。</p>
+<p class="Pp">尝试每天映射一个远端节点超过一次可能是不友善的。</p>
+<p class="Pp">在映射一个远端节点之前，尝试先从当地的档案服务处寻找该档案
+    包裹，因为没有人会高兴你没有必要地占用许多网路频宽。</p>
+<p class="Pp">如果你有一个当地的档案服务处，那么请告诉别人它的存在让他们
+    不必量费频宽以及 CPU
+    在远端节点上。</p>
+<p class="Pp">要记得在远端节点改变其存取限制时检查你的配置档。</p>
+<p class="Pp">定期检查远端节点是否有新的限制。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参阅_SEE_ALSO">参阅 SEE ALSO<a class="anchor" href="#%E5%8F%82%E9%98%85_SEE_ALSO">¶</a></h1>
+perl(l), <a href="../../buster/manpages-zh/ftp.1.zh_CN.html">ftp(1)</a>, <a href="../../buster/multimail/mm.1.en.html">mm(1)</a>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="虫虫_BUGS">虫虫 BUGS<a class="anchor" href="#%E8%99%AB%E8%99%AB_BUGS">¶</a></h1>
+某些网路观念指引应该要强调。
+<p class="Pp">应该要能够如同符号链结一般地应付链结。</p>
+<p class="Pp">Suffers from creeping featurism.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="注意_NOTES">注意 NOTES<a class="anchor" href="#%E6%B3%A8%E6%84%8F_NOTES">¶</a></h1>
+在 mirror
+  里的物件比你所想的还要近!
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者_AUTHOR">作者 AUTHOR<a class="anchor" href="#%E4%BD%9C%E8%80%85_AUTHOR">¶</a></h1>
+Written by Lee McLoughlin . It uses an extended version of the ftp.pl package
+  originally by: Alan R. Martello which uses the chat2.pl pack- age by: Randal
+  L. Schwartz
+<p class="Pp">Special thanks to the following people for patches, com- ments and
+    other suggestions that have helped to improve mirror. If I have omitted
+    anyone, please contact me.</p>
+<p class="Pp">James Revell Chris Myers Amos Shapira Paul A Vixie Jonathan Kamens
+    Christian Andretzky Kean Stump Anita Eijs Simon E Sperro Aaron Wohl Michael
+    Meissner Michael Graff Bradley Rhoades Edwards Reed Joachim Schrod David
+    Woodgate Pieter Immelman Jost Krieger</p>
+<p class="Pp">Copyright (C) 1999 《Best Linux》. All rights
+    reserved. Revised: 99-11-28. 	</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版维护人]">[中文版维护人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D">¶</a></h1>
+<b>软件教程</b>
+<p class="Pp">最新的版本是mirror-2.9.7(20031118)
+    因此您手上这份1996年的原始文档+1999年的翻译也许不能满足您的要求了。请登录
+    <b><a href="../../packages/mirror/mirror.html">../../packages/mirror/mirror.html</a></b>
+    来参看原文。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/01/01</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中国_Linux_论坛_man_手册页翻译计划》:">《中国 Linux 论坛 man 手册页翻译计划》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9B%BD_Linux_%E8%AE%BA%E5%9D%9B_man_%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+mirror.1.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:14Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"mirror(1)\"}}]}"
+</script>

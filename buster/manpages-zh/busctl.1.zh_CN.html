@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>busctl(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/busctl.1.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/systemd/busctl.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/elogind/busctl.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/busctl.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/busctl.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; busctl(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/busctl.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/busctl.1.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS" title="SYNOPSIS">SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%89%E9%A1%B9" title="选项">选项</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%91%BD%E4%BB%A4" title="命令">命令</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E6%95%B0%E6%A0%BC%E5%BC%8F" title="参数格式">参数格式</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BE%8B%E5%AD%90" title="例子">例子</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E8%A7%81" title="参见">参见</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES" title="NOTES">NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/busctl.1.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/busctl.1.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/busctl.1.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/busctl.1.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/systemd/busctl.1.en.html" title="English (en)">English</a>
+
+<span class="pkgname">systemd</span>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/elogind/busctl.1.en.html" title="English (en)">English</a>
+
+<span class="pkgname">elogind</span>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/busctl.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/busctl.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">BUSCTL(1)</td>
+    <td class="head-vol">busctl</td>
+    <td class="head-rtitle">BUSCTL(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+busctl - 内省与监视 D-Bus 总线
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS">SYNOPSIS<a class="anchor" href="#SYNOPSIS">¶</a></h1>
+<p class="Pp HP"><b>busctl</b> [OPTIONS...] [COMMAND] [<i>NAME</i>...]</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>busctl</b> 可用于内省与监视
+  D-Bus 总线
+</section>
+<section class="Sh">
+<h1 class="Sh" id="选项">选项<a class="anchor" href="#%E9%80%89%E9%A1%B9">¶</a></h1>
+能够识别的命令行选项如下：
+<p class="Pp"><b>--address=</b><b></b><i>ADDRESS</i></p>
+<div class="Bd-indent">连接到 <i>ADDRESS</i>
+  指定的总线，
+  而不是默认的总线(无论是
+  <b>--system</b> 系统总线还是 <b>--user</b>
+  用户总线)。</div>
+<p class="Pp"><b>--show-machine</b></p>
+<div class="Bd-indent">在使用 <b>list</b>
+  命令显示总线上的所有
+  peer 列表时，
+  额外显示一个&#34;MACHINE&#34;列，指明其所属容器的名称。参见
+  <a href="../../buster/systemd-container/systemd-machined.service.8.en.html">systemd-machined.service(8)</a> 手册。</div>
+<p class="Pp"><b>--unique</b></p>
+<div class="Bd-indent">在使用 <b>list</b>
+  命令显示总线上的所有
+  peer 列表时，仅显示
+  &#34;:<i>number</i>.<i>number</i>&#34;
+  格式的&#34;唯一名&#34;(UniqueName)。</div>
+<p class="Pp"><b>--acquired</b></p>
+<div class="Bd-indent">在使用 <b>list</b>
+  命令显示总线上的所有
+  peer 列表时，与 <b>--unique</b>
+  选项正好相反，
+  仅显示&#34;易读名&#34;(well-known
+  name)。</div>
+<p class="Pp"><b>--activatable</b></p>
+<div class="Bd-indent">在使用 <b>list</b>
+  命令显示总线上的所有
+  peer 列表时，
+  仅显示当前未被激活并且可以在被访问时自动激活的
+  peer 。</div>
+<p class="Pp"><b>--match=</b><b></b><i>MATCH</i></p>
+<div class="Bd-indent">在使用 <b>monitor</b>
+  命令监视已交换的消息时，
+  仅显示与 <i>MATCH</i>
+  匹配的消息。 参见
+  <a href="../../buster/libelogind-dev-doc/sd_bus_add_match.3.en.html">sd_bus_add_match(3)</a></div>
+<p class="Pp"><b>--size=</b></p>
+<div class="Bd-indent">在使用 <b>capture</b>
+  命令捕获已交换的消息时，
+  指定允许捕获的最大消息尺寸(&#34;snaplen&#34;)，
+  默认值是 4096 字节。</div>
+<p class="Pp"><b>--list</b></p>
+<div class="Bd-indent">在使用 <b>tree</b>
+  命令显示对象路径时，
+  不以树形缩进显示，而是以平铺列表的格式显示。</div>
+<p class="Pp"><b>--quiet</b></p>
+<div class="Bd-indent">与 <b>call</b>
+  命令连用，禁止显示应答消息。
+  注意：
+  错误消息依然会被显示出来，并且依然可以用返回值判断成败。</div>
+<p class="Pp"><b>--verbose</b></p>
+<div class="Bd-indent">与 <b>call</b> 或 <b>get-property</b>
+  命令连用，
+  表示以详细模式显示输出。</div>
+<p class="Pp"><b>--expect-reply=</b><i>BOOL</i></p>
+<div class="Bd-indent">与 <b>call</b>
+  命令连用，
+  设置是否等待被调用的方法执行完成。
+  &#34;yes&#34;
+  表示等待方法执行完成并且返回应答数据，
+  然后 <b>busctl</b>
+  将返回一个可用于判断方法执行成败的返回码。
+  &#34;no&#34;
+  表示调用方法之后不等待其执行完成也不显示应答数据，
+  而是直接退出，并且不返回有意义的返回码。
+  如果只是想屏蔽应答数据，
+  应该使用 <b>--quiet</b> 选项。
+  默认值为 &#34;yes&#34;</div>
+<p class="Pp"><b>--auto-start=</b><i>BOOL</i></p>
+<div class="Bd-indent">与 <b>call</b>
+  命令连用，
+  设置是否应该隐含的启动当前尚未运行、
+  但是被配置为自动启动的服务。
+  默认是 &#34;yes&#34;</div>
+<p class="Pp"><b>--allow-interactive-authorization=</b><i>BOOL</i></p>
+<div class="Bd-indent">与 <b>call</b>
+  命令连用，
+  设置服务在执行操作时，
+  是否应该强制进行交互式授权(在安全策略已配置的时候)。
+  默认是 &#34;yes&#34;</div>
+<p class="Pp"><b>--timeout=</b><i>SECS</i></p>
+<div class="Bd-indent">与 <b>call</b>
+  命令连用，
+  设置等候方法完成的最大秒数。
+  注意，此处的超时设置对
+  <b>--expect-reply=no</b> 无效。
+  可使用明确的时间单位后缀：
+  us, ms, s, min, h, d, w, month, y 。
+  默认值是&#34;25s&#34;
+  (注意，设为&#34;0&#34;也等价于&#34;25s&#34;)。</div>
+<p class="Pp"><b>--augment-creds=</b><i>BOOL</i></p>
+<div class="Bd-indent">设置 <b>list</b>/<b>status</b>
+  命令报告的凭据数据
+  是否应该被扩展为包含来自
+  /proc 的数据。
+  若设为&#34;yes&#34;(默认值)，
+  那么显示的数据可能会不一致，
+  因为 /proc
+  中的数据可能会更新。</div>
+<p class="Pp"><b>--user</b></p>
+<div class="Bd-indent">与当前调用用户的用户服务管理器(systemd
+  用户实例)通信，
+  而不是默认的系统服务管理器(systemd
+  系统实例)。</div>
+<p class="Pp"><b>--system</b></p>
+<div class="Bd-indent">与系统服务管理器(systemd
+  系统实例)通信，
+  这是默认值。</div>
+<p class="Pp"><b>-H</b>, <b>--host=</b></p>
+<div class="Bd-indent">操作指定的远程主机。可以仅指定一个主机名(hostname)，
+  也可以使用 &#34;username@hostname&#34;
+  格式。 hostname
+  后面还可以加上容器名(以冒号分隔)，
+  也就是形如 &#34;hostname:container&#34;
+  的格式，
+  以表示直接连接到指定主机的指定容器内。
+  操作将通过SSH协议进行，以确保安全。
+  可以通过 <b>machinectl -H </b><b></b><i>HOST</i>
+  命令列出远程主机上的所有容器名称。</div>
+<p class="Pp"><b>-M</b>, <b>--machine=</b></p>
+<div class="Bd-indent">在本地容器内执行操作。
+  必须明确指定容器的名称。</div>
+<p class="Pp"><b>--no-pager</b></p>
+<div class="Bd-indent">不将程序的输出内容管道(pipe)给分页程序。</div>
+<p class="Pp"><b>--no-legend</b></p>
+<div class="Bd-indent">不输出列标题，
+  也就是不在输出列表的头部和尾部显示字段的名称。</div>
+<p class="Pp"><b>-h</b>, <b>--help</b></p>
+<div class="Bd-indent">显示简短的帮助信息并退出。</div>
+<p class="Pp"><b>--version</b></p>
+<div class="Bd-indent">显示简短的版本信息并退出。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="命令">命令<a class="anchor" href="#%E5%91%BD%E4%BB%A4">¶</a></h1>
+能够识别的命令如下：
+<p class="Pp"><b>list</b></p>
+<div class="Bd-indent">显示总线上的所有peer(依据服务名称)，这是默认命令。
+  默认同时显示&#34;唯一名&#34;(UniqueName)与&#34;易读名&#34;(well-known
+  name)， 但是可以使用 <b>--unique</b>
+  与 <b>--acquired</b>
+  选项进行修改。</div>
+<p class="Pp"><b>status</b> [<i>SERVICE</i>]</p>
+<div class="Bd-indent">如果 SERVICE
+  是一个总线服务的&#34;唯一名&#34;或&#34;易读名&#34;，
+  那么显示该服务的进程信息及凭证信息。
+  如果 SERVICE
+  是一个进程的PID，那么显示该进程的进程信息及凭证信息。
+  如果未指定 SERVICE
+  参数，那么显示总线所有者的进程信息及凭证信息。</div>
+<p class="Pp"><b>monitor</b> [<i>SERVICE</i>...]</p>
+<div class="Bd-indent">监视已交换的消息，可使用
+  Ctrl-C 中断监视。
+  如果未指定 <i>SERVICE</i>
+  参数，那么显示总线上的所有消息。
+  如果指定了 <i>SERVICE</i>
+  参数(&#34;唯一名&#34;或&#34;易读名&#34;)，
+  那么仅显示到达此peer或者从此peer发出的消息。</div>
+<p class="Pp"><b>capture</b> [<i>SERVICE</i>...]</p>
+<div class="Bd-indent">与 <b>monitor</b>
+  命令类似，
+  不同之处在于以 pcap
+  格式输出(详见 <b>Libpcap File
+  Format</b>[1])。 强烈推荐将 STDOUT
+  重定向到一个文件中，然后使用
+  <a href="../../buster/wireshark-qt/wireshark.1.en.html">wireshark(1)</a>
+  工具查看与分析。</div>
+<p class="Pp"><b>tree</b> [<i>SERVICE</i>...]</p>
+<div class="Bd-indent">显示服务的对象树。
+  如果给出了 <i>SERVICE</i>
+  参数，
+  那么仅显示指定服务的对象树，
+  否则显示总线上所有具有&#34;易读名&#34;服务的对象树。</div>
+<p class="Pp"><b>introspect</b> <i>SERVICE</i> <i>OBJECT</i>
+  [<i>INTERFACE</i>]</p>
+<div class="Bd-indent">显示SERVICE服务上OBJECT对象(以路径表示)的
+  interface, method, property, signal 值。
+  如果指定了 INTERFACE 参数，
+  那么仅输出指定接口上的成员。</div>
+<p class="Pp"><b>call</b> <i>SERVICE</i> <i>OBJECT</i> <i>INTERFACE</i>
+    <i>METHOD</i> [<i>SIGNATURE</i> [<i>ARGUMENT</i>...]]</p>
+<div class="Bd-indent">调用一个方法并显示应答。
+  必须指定服务名称(SERVICE)、对象路径(OBJECT)、接口名称(INTERFACE)、方法名称(METHOD)。
+  如果要给方法传递参数，
+  那么必须使用类型标记(SIGNATURE)后跟一个参数字符串(ARGUMENT)。
+  格式细节参见下面的&#34;参数格式&#34;小节。
+  可以使用 <b>--quiet</b>
+  选项抑制输出。</div>
+<p class="Pp"><b>get-property</b> <i>SERVICE</i> <i>OBJECT</i> <i>INTERFACE</i>
+    <i>PROPERTY</i>...</p>
+<div class="Bd-indent">显示对象属性的当前值。
+  必须指定服务名称(SERVICE)、对象路径(OBJECT)、接口名称(INTERFACE)、属性名称(PROPERTY)。
+  如果同时指定了多个属性名称，那么将按照每行一个，依次显示每个属性的当前值。
+  默认以精简格式输出，
+  但是可以使用 <b>--verbose</b>
+  选项以详细格式输出。</div>
+<p class="Pp"><b>set-property</b> <i>SERVICE</i> <i>OBJECT</i> <i>INTERFACE</i>
+    <i>PROPERTY</i> <i>SIGNATURE</i> <i>ARGUMENT</i>...</p>
+<div class="Bd-indent">设置对象属性的当前值。
+  必须指定下列参数：
+  服务名称(SERVICE)、对象路径(OBJECT)、接口名称(INTERFACE)、
+  属性名称(PROPERTY)、类型标记(SIGNATURE)、参数字符串(ARGUMENT)。</div>
+<p class="Pp"><b>help</b></p>
+<div class="Bd-indent">显示语法帮助</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参数格式">参数格式<a class="anchor" href="#%E5%8F%82%E6%95%B0%E6%A0%BC%E5%BC%8F">¶</a></h1>
+<b>call</b> 与 <b>set-property</b>
+  命令都接收一个类型标记(SIGNATURE)与多个参数字符串(ARGUMENT)。
+  有关&#34;类型标记&#34;的详细说明，
+  参见 <b>Type system chapter of the D-Bus specification</b>[2]
+  文档的&#34;Type System&#34;小节。
+  对于简单类型(Basic types)，
+  类型标记(SIGNATURE)后面的每个参数(ARGUMENT)都必须是参数值的字符串表示。
+  布尔类型真值可以表示为
+  &#34;true&#34;, &#34;yes&#34;, &#34;on&#34;, &#34;1&#34; ；
+  布尔类型假值可以表示为
+  &#34;false&#34;, &#34;no&#34;, &#34;off&#34;, &#34;0&#34; 。
+  对于数组，先是一个表示数组项数的数字，然后跟着数组中的每一项。
+  对于变量，先是一个表示变量类型的字符，然后跟着变量的值。
+  对于字典与结构，直接指定其内容即可。
+<p class="Pp">例如，</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>s jawoll
+</pre>
+</div>
+<p class="Pp">是一个简单的字符串
+    &#34;jawoll&#34; ，
+    &#34;s&#34;是类型标记，&#34;jawoll&#34;是参数字符串。</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>as 3 hello world foobar
+</pre>
+</div>
+<p class="Pp">是一个字符串数组，包含3个成员，分别是
+    &#34;hello&#34;, &#34;world&#34;, &#34;foobar&#34;</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>a{sv} 3 One s Eins Two u 2 Yes b true
+</pre>
+</div>
+<p class="Pp">是一个字典数组，
+    该字典将字符串映射为变量，包含3个成员，分别是：
+    字符串 &#34;One&#34;
+    映射到字符串 &#34;Eins&#34; ，
+    字符串 &#34;Two&#34;
+    映射到32位无符号整数&#34;2&#34;，
+    字符串 &#34;Yes&#34;
+    映射到布尔真值。</p>
+<p class="Pp">注意， <b>call</b>, <b>get-property</b>,
+    <b>introspect</b>
+    命令在输出应答时也同样是这个格式。
+    由于这个格式过于精简不易理解，
+    所以 <b>call</b> 与 <b>get-property</b>
+    命令提供了 <b>--verbose</b>
+    选项用于输出详细的、
+    易于理解的多行输出格式。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="例子">例子<a class="anchor" href="#%E4%BE%8B%E5%AD%90">¶</a></h1>
+<b>Example 1. 读写属性</b>
+<p class="Pp">下面的两个命令，首先写入一个属性，然后再读取它。
+    该属性位于
+    &#34;org.freedesktop.systemd1&#34; 服务的
+    &#34;/org/freedesktop/systemd1&#34; 对象中，
+    属性名是
+    &#34;org.freedesktop.systemd1.Manager&#34;
+    接口上的 &#34;LogLevel&#34; ，
+    此属性是一个简单的字符串：</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre># busctl set-property org.freedesktop.systemd1 /org/freedesktop/systemd1 org.freedesktop.systemd1.Manager LogLevel s debug
+# busctl get-property org.freedesktop.systemd1 /org/freedesktop/systemd1 org.freedesktop.systemd1.Manager LogLevel s &#34;debug&#34;
+</pre>
+</div>
+<p class="Pp"><b>Example 2. 精简输出与详细输出</b></p>
+<p class="Pp">下面的两个命令，两次读取同一个属性(字符串数组类型)，
+    第一次以精简格式显示，
+    第二次以详细格式显示：</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>$ busctl get-property org.freedesktop.systemd1 /org/freedesktop/systemd1 org.freedesktop.systemd1.Manager Environment
+as 2 &#34;LANG=en_US.utf8&#34; &#34;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin&#34;
+$ busctl get-property --verbose org.freedesktop.systemd1 /org/freedesktop/systemd1 org.freedesktop.systemd1.Manager Environment
+ARRAY &#34;s&#34; {
+        STRING &#34;LANG=en_US.utf8&#34;;
+        STRING &#34;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin&#34;;
+};
+</pre>
+</div>
+<p class="Pp"><b>Example 3. 调用方法</b></p>
+<p class="Pp">下面的命令， 在
+    &#34;org.freedesktop.systemd1&#34; 服务的
+    &#34;/org/freedesktop/systemd1&#34; 对象的
+    &#34;org.freedesktop.systemd1.Manager&#34;
+    接口上调用了 &#34;StartUnit&#34;
+    方法，
+    并且给此方法传递了
+    &#34;cups.service&#34; 与 &#34;replace&#34;
+    两个字符串。
+    而此方法返回了一个对象路径：</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre># busctl call org.freedesktop.systemd1 /org/freedesktop/systemd1 org.freedesktop.systemd1.Manager StartUnit ss &#34;cups.service&#34; &#34;replace&#34;
+o &#34;/org/freedesktop/systemd1/job/42684&#34;
+</pre>
+</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参见">参见<a class="anchor" href="#%E5%8F%82%E8%A7%81">¶</a></h1>
+<a href="../../buster/dbus/dbus-daemon.1.en.html">dbus-daemon(1)</a>, <b>D-Bus</b>[3], <a href="../../buster/libelogind-dev-doc/sd-bus.3.en.html">sd-bus(3)</a>, <a href="../../buster/manpages-zh/systemd.1.zh_CN.html">systemd(1)</a>,
+  <a href="../../buster/systemd-container/machinectl.1.en.html">machinectl(1)</a>, <a href="../../buster/wireshark-qt/wireshark.1.en.html">wireshark(1)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES">NOTES<a class="anchor" href="#NOTES">¶</a></h1>
+<dl class="Bl-tag">
+  <dt> 1.</dt>
+  <dd>Libpcap File Format</dd>
+</dl>
+<div class="Bd-indent"><a href="../../Development/LibpcapFileFormat">../../Development/LibpcapFileFormat</a></div>
+<dl class="Bl-tag">
+  <dt> 2.</dt>
+  <dd>Type system chapter of the D-Bus specification</dd>
+</dl>
+<div class="Bd-indent"><a href="../../doc/dbus-specification.html#type-system">../../doc/dbus-specification.html#type-system</a></div>
+<dl class="Bl-tag">
+  <dt> 3.</dt>
+  <dd>D-Bus</dd>
+</dl>
+<div class="Bd-indent"><a href="../../wiki/Software/dbus">../../wiki/Software/dbus</a></div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<p class="Pp">翻译人员：金步国
+  <br/>
+  金步国作品集：https://www.jinbuguo.com
+  <br/>
+  中文 man
+    手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os">systemd 231</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+busctl.1.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-30T03:48:27Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"busctl(1)\"}}]}"
+</script>

@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ping(8) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/iputils-ping/ping.8.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es-extra/ping.8.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-hu/ping.8.hu.html" hreflang="hu">
+<link rel="alternate" href="../../buster/manpages-it/ping.8.it.html" hreflang="it">
+<link rel="alternate" href="../../buster/manpages-ja/ping.8.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/ping.8.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/ping.8.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/ping.8.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="8">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; ping(8)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ping.8">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ping.8.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%90%8D%E7%A7%B0" title="名称">名称</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%A6%82%E8%A6%81" title="概要">概要</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%89%E9%A1%B9" title="选项">选项</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%BC%BA%E9%99%B7" title="缺陷">缺陷</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%A6%E8%A7%81" title="另见">另见</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8E%86%E5%8F%B2" title="历史">历史</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%AE%89%E5%85%A8%E6%80%A7" title="安全性">安全性</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%8E%B7%E5%8F%96" title="获取">获取</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/ping.8.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/ping.8.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/ping.8.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/iputils-ping/ping.8.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es-extra/ping.8.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-hu/ping.8.hu.html" title="Hungarian (hu)">magyar</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-it/ping.8.it.html" title="Italian (it)">italiano</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/ping.8.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/ping.8.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/ping.8.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ping.8.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/inetutils-ping/ping.1.en.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/ping.8.zh_CN.html">8 (<span title="System administration commands (usually only for root)">sysadmin</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle"><a href="../../buster/manpages-zh/ping.8.zh_CN.html">ping(8)</a></td>
+    <td class="head-vol">系统管理员手册：iptuils</td>
+    <td class="head-rtitle"><a href="../../buster/manpages-zh/ping.8.zh_CN.html">ping(8)</a></td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="名称">名称<a class="anchor" href="#%E5%90%8D%E7%A7%B0">¶</a></h1>
+ping - 向网络主机发送 ICMP
+  回显请求（ECHO_REQUEST）分组
+</section>
+<section class="Sh">
+<h1 class="Sh" id="概要">概要<a class="anchor" href="#%E6%A6%82%E8%A6%81">¶</a></h1>
+<b>ping</b> [<b>-aAbBdDfhLnOqrRUvV46</b>] [<b>-c </b><i>count</i><b></b>] [<b>-F
+  </b> <i>flowlabel</i><b></b>] [<b>-i </b><i>interval</i><b></b>] [<b>-I
+  </b><i>interface</i><b></b>] [<b>-l </b><i>preload</i><b></b>] [<b>-m
+  </b><i>mark</i><b></b>] [<b>-M </b><i>pmtudisc_option</i><b></b>] [<b>-N
+  </b><i>nodeinfo_option</i><b></b>] [<b>-w </b><i>deadline</i><b></b>] [<b>-W
+  </b> <i>timeout</i><b></b>] [<b>-p </b><i>pattern</i><b></b>] [<b>-Q
+  </b><i>tos</i><b></b>] [<b>-s </b><i>packetsize</i><b></b>] [<b>-S
+  </b><i>sndbuf</i><b></b>] [<b>-t </b><i>ttl</i><b></b>] [<b>-T
+  </b><i>timestamp option</i><b></b>] [<b></b><i>hop</i><b></b><i> ...</i>]
+  <b></b> <i>destination</i><b></b>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>ping</b> 使用 ICMP 协议规定的
+  ECHO_REQUEST
+  数据报引发一个来自主机或网管的
+  ICMP ECHO_RESPONSE 回应。 ECHO_REQUEST
+  数据报（“ping”信息）有一个
+  IP 和 ICMP 头部，
+  其后跟随了一个结构，包含一个时间相关的值以及一个任意的“pad”
+  字节的随机数用以填充数据包。
+<p class="Pp"><b>ping</b>可以同时在 IPv4 和
+    IPv6 下工作。
+    如需明确强制指定使用其中某个，可以使用
+    <b>-4</b> 或者 <b>-6</b>。</p>
+<p class="Pp"><b>ping</b> 还可以发送 IPv6
+    节点信息查询（Node Information
+    Quries, RFC4620）。
+    中间节点（<i>hop</i>）可能不被允许，因为
+    IPv6
+    源路由已不赞成使用（RFC5095）。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="选项">选项<a class="anchor" href="#%E9%80%89%E9%A1%B9">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>-4</b></dt>
+  <dd>仅使用 IPv4。</dd>
+  <dt><b>-6</b></dt>
+  <dd>仅使用 IPv6。</dd>
+  <dt><b>-a</b></dt>
+  <dd>Audible ping.</dd>
+  <dt><b>-A</b></dt>
+  <dd>自适应 ping。</dd>
+  <dt><b>-b</b></dt>
+  <dd>允许对一个广播地址进行
+      ping。</dd>
+  <dt><b>-t </b><i>ttl</i><b></b></dt>
+  <dd>仅进行<b>ping</b>。 设置 IP 的
+      TTL（Time to Live）。</dd>
+  <dt><b>-T </b><i>timestamp option</i><b></b></dt>
+  <dd>设置特殊的 IP
+      时间戳选项。 <i>timestamp option</i>
+      可以是
+      <i>tsonly</i>（仅时间戳）、
+      <i>tsandaddr</i>（时间戳和地址）或者
+      <i>tsprespec host1 [host2 [host3
+      [host4]]]</i>（预先指定跳数的时间戳）。</dd>
+  <dt><b>-U</b></dt>
+  <dd>打印完整的用户到用户的延迟（旧行为）。通常情况下
+      <b>ping</b>
+      打印网络往返延时，它们可能不同，例如在
+      DNS 解析出现失败时。</dd>
+  <dt><b>-v</b></dt>
+  <dd>输出详细信息。</dd>
+  <dt><b>-V</b></dt>
+  <dd>显示版本并退出。</dd>
+  <dt><b>-c</b></dt>
+  <dd><i>count</i>
+      在发送(和接收)了正好数量为
+      <i>count</i>
+      的回显应答分组后停止操作。在发送了
+      <i>count</i>
+      个分组后没有收到任何分组的特别情况是发送导致了终止(选程主机或网关不可达)。</dd>
+  <dt><b>-d</b></dt>
+  <dd>在所用的套接字上使用
+      SO_DEBUG 选项。
+      实际上，这个套接字选项没有被
+      Linux 内核所使用。</dd>
+  <dt><b>-D</b></dt>
+  <dd>在每行之前打印时间戳（UNIX
+      时间 + gettimeofday
+      中的毫秒）。</dd>
+  <dt><b>-f</b></dt>
+  <dd>以高速（洪水）方式进行
+      ping。
+      以分组返回的速度来输出其它分组或每秒输出百次。当收到每个回显应答并打印一个退格符时，对每个回显请求都打印一个句点``.&#39;&#39;。这可以快速显示出丢弃了多少个分组，只有超级用户可以用这个选项。这（操作）对网络要求非常苛刻，应该慎重使用。</dd>
+  <dt><b>-i</b></dt>
+  <dd><i>wait</i>
+      在发送每个分组时等待
+      <i>wait</i>
+      个秒数。缺省值为每个分组等待一秒。此选项与-f选项不能同时使用。</dd>
+  <dt><b>-l</b></dt>
+  <dd><i>preload</i> 如果指定 <i>preload</i>
+      ，那么 <b>ping</b>
+      程序在开始正常运行模式前尽可能快地发送分组。同样只有超级用户可以用这个选项。</dd>
+  <dt><b>-n	</b></dt>
+  <dd>只以数字形式输出信息。这样就不尝试去查找主机名了。</dd>
+  <dt><b>-p</b></dt>
+  <dd><i>pattern</i>
+      可以指定最多16个填充字节用于保持分组长度为16的整数倍。在网络上诊断与数据相关问题时此选项很有用。例如``-p
+      ff&#39;&#39;将使发出的分组都用全1填充数据区。</dd>
+  <dt><b>-q	</b></dt>
+  <dd>静态输出。在程序启动和结束时只显示摘要行。</dd>
+  <dt><b>-R	</b></dt>
+  <dd>记录路由。在回显请求分组中包含记录路由选项并在相应的分组返回时显示路由缓冲区。注意IP首部的容量只能存放9条这样的路由。很多主机
+      忽略或禁用此选项。</dd>
+  <dt><b>-r	</b></dt>
+  <dd>在所连接的网络上旁路正常的选路表，直接向主机发送分组。如果主机未处于直接相连的网络上，那么返回一个错误。此选项可用来通过无路由接口对一台主机进行检测(例如当接口已被
+      <i>routed</i> 程序丢弃后)。</dd>
+  <dt><b>-s</b></dt>
+  <dd><i>packetsize</i>
+      指定要发送数据的字节量。缺省值为
+      <b>56</b> ，这正好在添加了
+      <b>8</b> 字节的 <i>ICMP</i>
+      首部后组装成 <b>64</b>
+      字节的 <i>ICMP</i> 数据报。</dd>
+  <dt><b>-w</b></dt>
+  <dd><i>waitsecs</i> 在 <i>waitsecs</i> 秒后停止
+      <i>ping</i>
+      程序的执行。当试图检测不可达主机时此选项很有用。</dd>
+</dl>
+<p class="Pp">当用ping来隔离故障时，应首先在本地主机上运行，以检查本地网络接口有效
+    运行。然后，应该进一步检查主机和网关。计算出往返时间和分组丢失率。如
+    果收到重复的分组，虽然这些分组的往返时间要用于计算往返时间的最小/平均
+    /最大值，但是它们不应该算在刚才计算的丢失的分组中。当指定数量的分组已
+    经发送(和接收)时或如果程序被SIGINT信号终止，会显示一份简短的摘要。</p>
+<p class="Pp">如果ping程序根本没有收到任何返回分组，那它将以返回码1退出。出错时返回
+    2。否则返回0。这些值可能用于查看主机存在与否。</p>
+<p class="Pp">此程序专用于网络测试，度量和管理。因为它会使用网络的流量，在正常操作或
+    自动的脚本中使用它并不明智。</p>
+<section class="Ss">
+<h2 class="Ss" id="ICMP分组细节">ICMP分组细节<a class="anchor" href="#ICMP%E5%88%86%E7%BB%84%E7%BB%86%E8%8A%82">¶</a></h2>
+一个无选项的IP首部长为20字节。一个ICMP回显请求分组包含了额外的8个字节
+  用于任意数量的数据。当给出分组长度时，就同时指出了额外数据的长度(缺省为
+  56)。因此接收到的ICMP回显应答这样的一个IP分组内部所含的数据量总是8个字
+  节从而超过了请求数据空间(ICMP首部)。
+<p class="Pp">如果数据空间至少有8个字节大小，ping程序使用此空间的头8个字节来包含一个
+    用于计算往返时间的时间戳。如果指定了填充字节小于8个字节，就不给定往返
+    时间了。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="重复和受损的分组">重复和受损的分组<a class="anchor" href="#%E9%87%8D%E5%A4%8D%E5%92%8C%E5%8F%97%E6%8D%9F%E7%9A%84%E5%88%86%E7%BB%84">¶</a></h2>
+ping程序会报告重复和受损的分组。分组重复不应该发生，不适当的链路层传输
+  可能会导致这样问题。分组重复在很多情况下可能会发生，虽然存在少量重复并
+  不总会导致警告，但并不是个好信号。
+<p class="Pp">分组受损很显然会引起严重警告，并通常会在检测分组的路径上某处指出受损的
+    硬件(在网络中或主机中)。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="尝试不同的数据结构">尝试不同的数据结构<a class="anchor" href="#%E5%B0%9D%E8%AF%95%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">¶</a></h2>
+互联网络并不会因为分组数据部分的内容不同而区别看待分组。不幸的是，与数据相关的问题都已知潜存于网络中，并在一个较长时期内无法检测到。在很多情况下，引起问题的特殊结构是些未完全转换的内容如全1或全0，接近临界的结构如几乎全0。在命令行上没有足够的必要去指定如全0这样的一个数据结构，因为有影响的结构位于数据链路层，并且与指定的和控制器传输的复杂程度有关。
+<p class="Pp">这说明如果你有一个与数据相关的问题，可能必须用很多测试来找出它。如果幸运的话，可以设法查找一个不能在网上发送或发送时要花比同长度的文件更多时间的文件。然后检查此文件中用ping程序的-p选项来指定的重复结构。</p>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="有效时间细节">有效时间细节<a class="anchor" href="#%E6%9C%89%E6%95%88%E6%97%B6%E9%97%B4%E7%BB%86%E8%8A%82">¶</a></h2>
+一个IP分组的TTL值表示分组在被丢弃前穿越IP路由器的最大数据。在现有的实际中，
+  你可以认为互联网上每个路由器都对TTL字段减1。
+<p class="Pp">TCP/IP规定TCP分组的TTL字段应该设为60，但很多系统用较小的值(4.3
+    BSD 用30, 4.2用15)。</p>
+<p class="Pp">此字段可能的最大值为255，多数UNIX系统把ICMP回显请求分组的TTL字段设
+    为255。这就是为什么你可以``ping&#39;&#39;一些主机而不能用telnet(1)和ftp(1)到达。</p>
+<p class="Pp">在正常操作时ping打印它收到分组的TTL值。当选程系统收到一份ping的分组时，
+    在作出响应时可以用TTL字段完成三件事：</p>
+<dl class="Bl-tag">
+  <dt>不变；</dt>
+  <dd>4.3BSD-Tahoe release之前的Berkeley
+      Unix系统是这样做的。
+      在此情况下，收到的分组的TTL值为255减往返路径中的路由器数。</dd>
+  <dt>把它设为255；</dt>
+  <dd>当前的Berkeley
+      Unix系统是这样做的。在此情况下，收到的
+      分组的TTL值为为255减选程系统与执行ping主机之间的路由器数。</dd>
+  <dt>把它设为其它值。</dt>
+  <dd>有些主机对ICMP分组使用与TCP分组相同的值，例如30或
+      60。其它系统使用原始值。(校对者请指教此句之确切含义：meaculpa@21cn.com)</dd>
+</dl>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="缺陷">缺陷<a class="anchor" href="#%E7%BC%BA%E9%99%B7">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>•</dt>
+  <dd>很多主机和网关忽略记录路由（RECORD_ROUTE）选项。</dd>
+  <dt>•</dt>
+  <dd>最大 IP
+      头部长度对如记录路由（RECORD_ROUTE)这样非常有用的选项来说长度太小。
+      但对这个问题也没什么可做的了。</dd>
+  <dt>•</dt>
+  <dd>通常情况并不推荐以高速方式作
+      ping，
+      而且只应当在非常受限的条件下才可对广播地址这样做。</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="另见">另见<a class="anchor" href="#%E5%8F%A6%E8%A7%81">¶</a></h1>
+<b>netstat</b>(1), <a href="../../buster/manpages-zh/ifconfig.8.zh_CN.html">ifconfig(8)</a>.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="历史">历史<a class="anchor" href="#%E5%8E%86%E5%8F%B2">¶</a></h1>
+<b>ping</b> 命令出现于 4.3BSD。
+<p class="Pp">当前文档描述的版本是它在
+    Linux
+    平台上的后续版本。</p>
+<p class="Pp">从版本 s20160815
+    开始，<b>ping6</b>
+    二进制程序不再存在。
+    它已经被合并进了 <b>ping</b>
+    程序中。
+    创建一个名为 <b>ping6</b>
+    指向 <b>ping</b>
+    的符号链接可以提供原有的功能。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="安全性">安全性<a class="anchor" href="#%E5%AE%89%E5%85%A8%E6%80%A7">¶</a></h1>
+<b>ping</b>
+  在下述条件下运行时需要
+  CAP_NET_RAW 能力： 1)
+  如果程序被用于进行
+  non-echo 查询（请见 <b>-N</b>
+  选项），或 2)
+  如果内核不支持 non-raw ICMP
+  套接字，或 3)
+  如果用户不被允许创建
+  ICMP echo 套接字。
+  本程序设计可以用于在设置用户ID为
+  root 的情况下运行。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="获取">获取<a class="anchor" href="#%E8%8E%B7%E5%8F%96">¶</a></h1>
+<b>ping</b> 是 <i>iputils</i>
+  软件包的一部分。
+  其最新版本源代码可以从下述地址获取到：
+  <a href="../../iputils/iputils-current.tar.bz2.">../../iputils/iputils-current.tar.bz2.</a>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2016年11月10日</td>
+    <td class="foot-os">iputils-161105</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+ping.8.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:26Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"ping(8)\"}}]}"
+</script>

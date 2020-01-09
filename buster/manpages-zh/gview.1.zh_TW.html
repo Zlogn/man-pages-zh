@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>gview(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/vim-gui-common/gview.1.da.html" hreflang="da">
+<link rel="alternate" href="../../buster/vim-gui-common/gview.1.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/vim-gui-common/gview.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/vim-gui-common/gview.1.fr.html" hreflang="fr">
+<link rel="alternate" href="../../buster/vim-gui-common/gview.1.it.html" hreflang="it">
+<link rel="alternate" href="../../buster/vim-gui-common/gview.1.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/vim-gui-common/gview.1.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/vim-gui-common/gview.1.ru.html" hreflang="ru">
+<link rel="alternate" href="../../buster/manpages-zh/gview.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/gview.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; gview(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/gview.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/gview.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%90%8D%E7%A8%B1" title="名稱">名稱</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%A6%82%E8%BF%B0" title="概述">概述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%B8%E9%A0%85_%28OPTIONS%29" title="選項 (OPTIONS)">選項 (OPTIONS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%9C%A8%E7%B7%9A%E5%B9%AB%E5%8A%A9_%28ON-LINE_HELP%29" title="在線幫助 (ON-LINE HELP)">在線幫助 (ON-LINE HELP)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6" title="文件">文件</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B" title="參見">參見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85" title="作者">作者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%BC%BA%E9%99%B7" title="缺陷">缺陷</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E5%8E%9F%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版原維護人]">[中文版原維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E5%8E%9F%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版原最新更新]">[中文版原最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E5%8E%9F%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%5D" title="[原中國Linux論壇man手冊頁翻譯計劃]">[原中國Linux論壇man手冊頁翻譯計劃]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/gview.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/gview.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/gview.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/vim-gui-common/gview.1.da.html" title="Danish (da)">dansk</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/vim-gui-common/gview.1.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/vim-gui-common/gview.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/vim-gui-common/gview.1.fr.html" title="French (fr)">français</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/vim-gui-common/gview.1.it.html" title="Italian (it)">italiano</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/vim-gui-common/gview.1.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/vim-gui-common/gview.1.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/vim-gui-common/gview.1.ru.html" title="Russian (ru)">русский</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/gview.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/gview.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">VIM(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">VIM(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="名稱">名稱<a class="anchor" href="#%E5%90%8D%E7%A8%B1">¶</a></h1>
+vim - Vi IMproved,
+  一個程序員的文本編輯器
+</section>
+<section class="Sh">
+<h1 class="Sh" id="概述">概述<a class="anchor" href="#%E6%A6%82%E8%BF%B0">¶</a></h1>
+<b>vim</b> [options] [file ..]
+<br/>
+<b>vim</b> [options] -
+<br/>
+<b>vim</b> [options] -t tag
+<br/>
+<b>vim</b> [options] -q [errorfile]
+<p class="Pp"><b>ex</b>
+  <br/>
+  <b>view</b>
+  <br/>
+  <b>gvim</b> <b>gview</b> <b>evim</b> <b>eview</b>
+  <br/>
+  <b>rvim</b> <b>rview</b> <b>rgvim</b> <b>rgview</b></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>Vim</b> 是一個同 Vi
+  向上兼容的文本編輯器。
+  它可以用來編輯任何純文本。
+  它特別適合用來編輯程序。
+<p class="Pp">它對 Vi
+    作了許多增強：多層撤銷、多窗口、多緩衝區(buffer)、
+    高亮語法顯示、命令行編輯、文件名補全、在線幫助、可視選擇等等。
+    請用 &#34;:help vi_diff.txt&#34; 查看 <b>Vim</b>
+    和 Vi
+  之間差別的摘要。</p>
+<p class="Pp">在運行 <b>Vim</b>
+    的時候，可以用 &#34;:help&#34;
+    命令獲得很多幫助信息。
+    請參考下面的“在線幫助”一節。</p>
+<p class="Pp">通常情況下， <b>vim</b>
+    使用直接把文件名作爲參數的方法來編輯文件：</p>
+<p class="Pp">	vim 文件名</p>
+<p class="Pp">更通用地來說，
+    <b>Vim</b>
+    使用下述方式從命令行啓動：</p>
+<p class="Pp">	vim [選項] [文件列表]</p>
+<p class="Pp">如果沒有給定文件，則編輯器會打開一個空的緩衝區。
+    否則就會用下面四個中的一個方式來選擇要編輯的文件。</p>
+<dl class="Bl-tag">
+  <dt>文件 ..</dt>
+  <dd>文件名列表。
+      第一個會作爲當前文件讀入緩衝區。
+      光標會停在緩衝區的第一行。
+      您可以使用 &#34;:next&#34;
+      命令轉到其它的文件。
+      如果要編輯一個以
+      &#34;-&#34;
+      開頭的文件，請在文件列表前面加上
+      &#34;--&#34;。</dd>
+  <dt>-</dt>
+  <dd>從標準輸入讀取要編輯的文件。命令從標準錯誤讀取，此時標準錯誤應當是一個
+      TTY。</dd>
+  <dt>-t {tag}</dt>
+  <dd>被 編輯的 文件 和
+      光標的 初始位置 由
+      標記 (tag) 決定， 標記
+      有點像 一種 goto 標籤 (goto
+      label). 在 標記文件中 找到
+      標記, 相應的 文件
+      成爲 當前文件,
+      相應的 命令 被執行.
+      這種方式 常用於 C
+      程序, 標記 就是
+      函數名, 當前文件
+      就是 包含 那個函數的
+      文件, 光標 停留在
+      函數的 開始處. 見 &#34;:help
+      tag-commands&#34;。</dd>
+  <dt>-q [errorfile]</dt>
+  <dd>運行時 進入
+      快速修復模式. 讀取
+      [errorfile] 文件 並顯示
+      第一個 錯誤. 如果
+      沒有 [errorfile] 文件, 文件名
+      由 &#39;errorfile&#39; 選項 決定 (在 Amiga
+      爲 &#34;AztecC.Err&#34;, 在
+      其他系統中 爲 &#34;errors.vim&#34;).
+      可以 用 &#34;:cn&#34; 命令
+      跳到 其它錯誤處. 見
+      &#34;:help quickfix&#34;。</dd>
+</dl>
+<p class="Pp"><b>Vim</b> 會 根據
+    不同命令 有 不同的
+    表現, 儘管 它們 可能
+    是 一個 可執行 文件.</p>
+<dl class="Bl-tag">
+  <dt>vim</dt>
+  <dd>正常 模式, 所有 都是
+      默認狀態.</dd>
+  <dt>ex</dt>
+  <dd>以 Ex 模式 運行. 用 &#34;:vi&#34;
+      命令 進入 正常模式.
+      也可以 加上 &#34;-e&#34; 選項
+      進入 此模式.</dd>
+  <dt>view</dt>
+  <dd>以 只讀模式 運行.
+      你被禁止 寫文件.
+      也可以 加上 &#34;-R&#34; 選項
+      進入 此模式.</dd>
+  <dt>gvim gview</dt>
+  <dd>GUI 版本。 開啓 一個
+      新的窗口. 也可以
+      加上 &#34;-g&#34; 選項 進入
+      此模式.</dd>
+  <dt>rvim rview rgvim rgview</dt>
+  <dd>同 上面的 相同, 只是
+      加上了 限制,
+      不能運行 shell 程序, 也
+      不能 暫停 <b>Vim .</b> 也 可以
+      加上 &#34;-Z&#34; 選項 進入
+      此模式.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="選項_(OPTIONS)">選項 (OPTIONS)<a class="anchor" href="#%E9%81%B8%E9%A0%85_(OPTIONS)">¶</a></h1>
+所有選項 都可以 以
+  任何順序 出現, 可以
+  在文件名前, 也可以
+  在文件名後. 沒有
+  參數的 選項 可以
+  出現在 一個 &#34;-&#34; 後面.
+<dl class="Bl-tag">
+  <dt>+[num]</dt>
+  <dd>對於 第一個 文件,
+      光標 會停在 第 &#34;num&#34;
+      行. 如果 沒有 &#34;num&#34; , 則
+      光標 會停在
+      最後一行.</dd>
+  <dt>+/{pat}</dt>
+  <dd>對於 第一個文件,
+      光標 會停在 {pat} 第一次
+      出現的 地方. 搜尋
+      模式 見 &#34;:help search-pattern&#34;。</dd>
+  <dt>+{command}</dt>
+  <dd></dd>
+  <dt>-c {command}</dt>
+  <dd>讀入 第一個 文件後
+      會 執行 {command} 命令. {command}
+      應爲 Ex 命令. 如果 {command} 中
+      包含有 空格, 必須
+      用雙引號 括住
+      (這個取決於所用的 shell).
+      例: Vim &#34;+set si&#34; main.c
+    <br/>
+    注意: 你 最多 可以用 10
+      個 &#34;+&#34; 或者 &#34;-c&#34;
+    命令.</dd>
+  <dt>-b</dt>
+  <dd>二進制模式. 設置
+      一些選項, 這樣
+      就可以 用來 編輯
+      二進制 和 可執行
+      文件 了.</dd>
+  <dt>-C</dt>
+  <dd>兼容. 設置 &#39;compatible&#39; 選項.
+      這樣 就算 存在 .vimrc 文件
+      <b>Vim</b> 也會 基本上 象 Vi
+      一樣了.</dd>
+  <dt>-d {device}</dt>
+  <dd>打開 {device} 用作終端，
+      只在 Amiga 下。 例： &#34;-d
+      con:20/30/600/150&#34;.</dd>
+  <dt>-e</dt>
+  <dd>以 Ex 模式 運行 <b>Vim ，</b>
+      就像 運行 &#34;ex&#34;
+    一樣。</dd>
+  <dt>-f</dt>
+  <dd>前臺 運行。 對於 GUI
+      版本， <b>Vim</b> 不會
+      同運行它的 shell 分離。
+      在 Amiga 中， <b>Vim</b> 不會
+      重新啓動 來 開啓一個
+      新窗口. 這個選項
+      會用在當 <b>Vim</b> 被
+      另外一個 程序執行,
+      並且 這個程序
+      想等編輯動作 結束後
+      再運行 的 時候 (如 mail).
+      在 Amiga 上 &#34;:sh&#34; 和 &#34;:!&#34;
+      不會起作用.</dd>
+  <dt>-F</dt>
+  <dd>如果 <b>Vim</b> 編譯時
+      加入了 對 從右到左
+      書寫的 文件 FKMAP 以及 Farsi
+      鍵盤映射 的支持, <b>Vim</b>
+      會 以 Farsi 模式 運行,
+      比如 設置 &#39;fkmap&#39; 和 &#39;rightleft&#39;
+      選項.不然 <b>Vim</b> 會 顯示
+      一條 錯誤信息 並
+      終止.</dd>
+  <dt>-g</dt>
+  <dd>如果 <b>Vim</b> 編譯時 加入 GUI
+      支持, 會開啓 GUI, 不然
+      <b>Vim</b> 會 顯示 一條
+      錯誤信息 並 終止.</dd>
+  <dt>-h</dt>
+  <dd><b>Vim</b> 顯示 命令行 參數
+      和 選項的 幫助, 然後
+      終止.</dd>
+  <dt>-H</dt>
+  <dd>如果 <b>Vim</b> 編譯時
+      加入了 對 從右到左
+      書寫的 文件 RIGHTLEFT 以及
+      Hebrew 鍵盤映射 的支持，
+      <b>Vim</b> 會以 Hebrew 模式 運行,
+      比如 設置 &#39;hkmap&#39; 和 &#39;rightleft&#39;
+      選項. 不然 <b>Vim</b> 會 顯示
+      一條 錯誤信息 並
+      終止.</dd>
+  <dt>-i {viminfo}</dt>
+  <dd>准許 使用 viminfo 文件,
+      這個 選項 設置
+      使用的 文件名,
+      默認的 是 &#34;~/.viminfo&#34;. 用
+      &#34;NONE&#34; 文件名 也可以
+      跳過 使用 .viminfo 文件.</dd>
+  <dt>-L</dt>
+  <dd>同 -r 一樣.</dd>
+  <dt>-l</dt>
+  <dd>Lisp 模式. 打開 &#39;lisp&#39; 和 &#39;showmatch&#39;
+      選項.</dd>
+  <dt>-m</dt>
+  <dd>禁止 修改文件. 設置
+      &#39;write&#39; 選項, 這樣 就不能
+      寫文件了.</dd>
+  <dt>-N</dt>
+  <dd>非兼容 模式. 設置 &#39;compatible&#39;
+      選項. 這樣 <b>Vim</b> 會
+      表現得 更好, 就算 .vimrc
+      文件 不存在 也會 同 Vi
+      不兼容.</dd>
+  <dt>-n</dt>
+  <dd>禁止 交換文件, 這樣
+      在崩潰後 就 不能
+      恢復 文件了. 對於
+      編輯 在很慢的
+      媒體中的 文件
+      很有好處 (比如軟盤),
+      也可以 用 &#34;:set uc=0&#34;
+      禁止交換, 用 &#34;:set uc=200&#34;
+      開啓 交換.</dd>
+  <dt>-o[N]</dt>
+  <dd>打開 N 個窗口.
+      如果沒有 N, 爲
+      每個文件 開一個
+      窗口.</dd>
+  <dt>-R</dt>
+  <dd>只讀 模式. 設置 &#39;readonly&#39;
+      選項. 你 仍然 可以
+      編輯 緩衝區, 但是
+      不能 重寫文件. 如果
+      你要 重寫文件,
+      必須在 Ex 命令中
+      用驚歎號, 比如 &#34;:w!&#34;. -R
+      選項 隱含了 -n 選項
+      (見下). &#39;readonly&#39; 選項 可以 用
+      &#34;:set noro&#34; 設置. 見 &#34;:help
+      &#39;readonly&#39;&#34;.</dd>
+  <dt>-r</dt>
+  <dd>列出 交換文件, 顯示
+      關於 恢復文件的
+      信息.</dd>
+  <dt>-r {file}</dt>
+  <dd>恢復 模式. 交換文件
+      是 用來 恢復 在
+      編輯過程中 崩潰了的
+      文件. 交換 文件名 是
+      被編輯文件名 後面
+      加上 &#34;.swp&#34;. 見 &#34;:help
+    recovery&#34;.</dd>
+  <dt>-s</dt>
+  <dd>安靜 模式. 只在 用
+      &#34;Ex&#34; 啓動 或者 用了
+      &#34;-e&#34; 選項 纔有用.</dd>
+  <dt>-s {scriptin}</dt>
+  <dd>讀入 腳本文件 {scriptin}.
+      文件裏的 字符 就像
+      你 直接 輸入 一樣的,
+      也 可以 用 &#34;:source! {scriptin}&#34;
+      命令 實現 這個功能.
+      如果 在 編輯器
+      結束前 就 讀到了
+      文件尾, 就 接着
+      從鍵盤 讀入.</dd>
+  <dt>-T {terminal}</dt>
+  <dd>告訴 <b>Vim</b> 你 用的
+      終端的 名字, 只有 當
+      不能 自動確定 的時候
+      才這樣. 它 必須是 <b>Vim</b>
+      (builtin) 能辨認的 終端
+      或者是 在 termcap 或者 terminfo
+      文件中 定義了的.</dd>
+  <dt>-u {vimrc}</dt>
+  <dd>用 {vimrc} 文件 裏的 命令
+      來初始化, 跳過 所有
+      其它的 初始化, 用
+      這個 來編輯
+      特殊類型的 文件.
+      也可以 用 &#34;NONE&#34; 來
+      跳過 所有初始化. 在 vim
+      中 用 &#34;:help initialization&#34; 查看
+      更多信息.</dd>
+  <dt>-U {gvimrc}</dt>
+  <dd>用 {gvimrc} 文件 裏的 命令
+      來初始化 GUI, 跳過 所有
+      其它的 GUI 初始化, 也
+      可以 用 &#34;NONE&#34; 來跳過
+      所有 GUI 初始化. 在 vim 中
+      用 &#34;:help gui-init&#34; 查看
+      更多信息.</dd>
+  <dt>-V</dt>
+  <dd>冗長 顯示. 顯示 執行
+      初始化代碼 和 讀入的
+      文件, 並且 寫 viminfo 文件.</dd>
+  <dt>-v</dt>
+  <dd>以 Vi 模式運行 <b>Vim ,</b> 就像
+      運行 &#34;vi&#34; 一樣, 只有
+      運行 &#34;ex&#34; 時 纔有用.</dd>
+  <dt>-w {scriptout}</dt>
+  <dd>所有 在 <b>Vim</b> 退出前
+      你鍵入的 字符 都會被
+      存入 {scriptout} 文件. 這 用來
+      創建一個 腳本文件,
+      你 可以用 &#34;vim -s&#34; 和
+      &#34;:source!&#34; 來使用. 如果
+      {scriptout} 存在, 會 把 字符
+      追加到 後面.</dd>
+  <dt>-W {scriptout}</dt>
+  <dd>同 -w 一樣， 但是
+      是覆蓋 原來的文件.</dd>
+  <dt>-x</dt>
+  <dd>寫文件時 加密.
+      會提示你 輸入密碼.</dd>
+  <dt>-Z</dt>
+  <dd>受限 模式. 同運行 以
+      &#34;r&#34; 開頭的 程序
+    同效.</dd>
+  <dt>--</dt>
+  <dd>表明 選項結束.
+      在此之後的 參數
+      都會被認爲 是
+      文件名, 可以 用這個
+      來編輯 一個 以 &#39;-&#39; 開頭
+      的文件.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="在線幫助_(ON-LINE_HELP)">在線幫助 (ON-LINE HELP)<a class="anchor" href="#%E5%9C%A8%E7%B7%9A%E5%B9%AB%E5%8A%A9_(ON-LINE_HELP)">¶</a></h1>
+在 <b>Vim</b> 中鍵入 &#34;:help&#34; 來
+  獲得 幫助. 用 &#34;:help subject&#34; 來
+  獲得 關於 一個
+  特定主題的 幫助. 例如
+  用 &#34;:help ZZ&#34; 來 獲得 關於
+  &#34;ZZ&#34; 的幫助. 用 &lt;Tab&gt; 和 CTRL-D
+  來 完成 幫助主題 (&#34;:help
+  cmdline-completion&#34;). 可以 用 標記 從
+  一個地方 跳到 另一個
+  地方 (有點像
+  超文本連接, 見 &#34;:help&#34;).
+  所有的 文檔 都可以
+  這樣 來瀏覽, 比如 &#34;:help
+  syntax.txt&#34;.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件">文件<a class="anchor" href="#%E6%96%87%E4%BB%B6">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>/usr/share/vim/vim80/doc/*.txt</dt>
+  <dd><b>Vim</b> 的文檔文件。
+      請使用 &#34;:help doc-file-list&#34;
+      獲得完整的列表。</dd>
+  <dt>/usr/share/vim/vim80/doc/tags</dt>
+  <dd>在文檔文件中查找信息用的標籤文件。</dd>
+  <dt>/usr/share/vim/vim80/syntax/syntax.vim</dt>
+  <dd>系統層面的語法初始化文件。</dd>
+  <dt>/usr/share/vim/vim80/syntax/*.vim</dt>
+  <dd>各種語言的語法文件。</dd>
+  <dt>/usr/share/vim/vimrc</dt>
+  <dd>系統層面的 <b>Vim</b>
+      初始化文件。</dd>
+  <dt>~/.vimrc</dt>
+  <dd>您的個人 <b>Vim</b>
+      初始化文件。</dd>
+  <dt>/usr/share/vim/gvimrc</dt>
+  <dd>系統層面的 gvim
+      初始化文件。</dd>
+  <dt>~/.gvimrc</dt>
+  <dd>您的個人 gvim
+      初始化文件。</dd>
+  <dt>/usr/share/vim/vim80/optwin.vim</dt>
+  <dd>&#34;:options&#34;
+      命令所用的腳本文件，這是個查看和設置選項的好方法。</dd>
+  <dt>/usr/share/vim/vim80/menu.vim</dt>
+  <dd>系統層面的 gvim
+      菜單初始化文件。</dd>
+  <dt>/usr/share/vim/vim80/bugreport.vim</dt>
+  <dd>用來生成錯誤報告的腳本文件。詳見
+      &#34;:help bugs&#34;。</dd>
+  <dt>/usr/share/vim/vim80/filetype.vim</dt>
+  <dd>根據文件名來判定文件類型的腳本文件。詳見
+      &#34;:help &#39;filetype&#39;&#34;。</dd>
+  <dt>/usr/share/vim/vim80/scripts.vim</dt>
+  <dd>根據文件內容來判定文件類型的腳本文件。詳見
+      &#34;:help &#39;filetype&#39;&#34;。</dd>
+  <dt>/usr/share/vim/vim80/print/*.ps</dt>
+  <dd>用於 PostScript
+      打印的文件。</dd>
+</dl>
+<p class="Pp">要了解最新信息，請查看
+    VIM 主頁：
+  <br/>
+  &lt;<a href="url:../../">URL:../../</a>&gt;</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見">參見<a class="anchor" href="#%E5%8F%83%E8%A6%8B">¶</a></h1>
+<a href="../../buster/manpages-zh/vimtutor.1.zh_TW.html">vimtutor(1)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者">作者<a class="anchor" href="#%E4%BD%9C%E8%80%85">¶</a></h1>
+<b>Vim</b> 的大部分都是 Bram Moolenaar
+  在很多人的幫助下完成的。
+  請見 <b>vim</b> 下的 &#34;:help credits&#34;。
+<br/>
+雖然不大可能還有原始的代碼存在,
+  但是 <b>Vim</b> 仍然是基於 Stevie
+  寫的代碼，之後被 Tim
+  Thompson、 Tony Andrews 和 G.R. (Fred) Walter
+  修改而成的。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="缺陷">缺陷<a class="anchor" href="#%E7%BC%BA%E9%99%B7">¶</a></h1>
+也許有吧。 請用 &#34;:help todo&#34;
+  查看已知問題的列表。
+<p class="Pp">請留意，有不少地方可能被其他人視爲缺陷與錯誤，
+    但實際上這只是因爲程序忠實地還原了
+    Vi 的行爲操作。
+    如果你覺得有些地方“因爲和
+    Vi
+    的行爲不一樣”而應該是錯誤的，
+    也許你應該再仔細閱讀一下
+    vi_diff.txt 文件（或者在 Vim
+    中輸入 &#34;help vi_diff.txt&#34;）。
+    您也應該查一查“compatible”和“cpoptions”選項的用法。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版原維護人]">[中文版原維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E5%8E%9F%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>唐友 &lt;tony_ty@263.net&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版原最新更新]">[中文版原最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E5%8E%9F%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/8/30</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[原中國Linux論壇man手冊頁翻譯計劃]">[原中國Linux論壇man手冊頁翻譯計劃]<a class="anchor" href="#%5B%E5%8E%9F%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%5D">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<p class="Pp">獲取日期：2016-12-14
+  <br/>
+  翻譯日期：2016-12-18
+  <br/>
+  中文 man
+    手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2006-04-11</td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+gview.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:37Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"gview(1)\"}}]}"
+</script>

@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ld(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/binutils-common/ld.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es-extra/ld.1.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-ja/ld.1.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-zh/ld.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/ld.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; ld(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ld.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ld.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_%28SYNOPSIS%29" title="總覽 (SYNOPSIS)">總覽 (SYNOPSIS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_%28DESCRIPTION%29" title="描述 (DESCRIPTION)">描述 (DESCRIPTION)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%B8%E9%A0%85_%28OPTIONS%29" title="選項 (OPTIONS)">選項 (OPTIONS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%92%B0%E5%A2%83_%28ENVIRONMENT%29" title="環境 (ENVIRONMENT)">環境 (ENVIRONMENT)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%A6%E8%A6%8B_%28SEE_ALSO%29" title="另見 (SEE ALSO)">另見 (SEE ALSO)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#COPYING" title="COPYING">COPYING</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B" title="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/ld.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/ld.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/ld.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/binutils-common/ld.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es-extra/ld.1.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/ld.1.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ld.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/ld.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle"><a href="../../buster/manpages-zh/ld.1.zh_TW.html">ld(1)</a></td>
+    <td class="head-vol">GNU Development Tools</td>
+    <td class="head-rtitle"><a href="../../buster/manpages-zh/ld.1.zh_TW.html">ld(1)</a></td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<p class="Pp"></p>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+ld - GNU linker (連接器)
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_(SYNOPSIS)">總覽 (SYNOPSIS)<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_(SYNOPSIS)">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>ld</b></dt>
+  <dd>[<b>-o</b> <i>output</i>] <i>objfile</i>...
+    <br/>
+    [<b>-A</b><i>architecture</i>] [<b>-b </b><i>input-format</i>]
+      [<b>-Bstatic</b>] [<b>-Bdynamic</b>] [<b>-Bsymbolic</b>]
+      [<b>-c </b><i>commandfile</i>] [<b>--cref</b>]
+      [<b>-d</b>|<b>-dc</b>|<b>-dp</b>]
+    <br/>
+    [<b>-defsym </b><i>symbol</i> = <i>expression</i>]
+      [<b>--demangle</b>] [<b>--no-demangle</b>] [<b>-e </b><i>entry</i>]
+      [<b>-embedded-relocs</b>] [<b>-E</b>] [<b>-export-dynamic</b>]
+      [<b>-f </b><i>name</i>] [<b>--auxiliary </b><i>name</i>]
+      [<b>-F </b><i>name</i>] [<b>--filter </b><i>name</i>]
+      [<b>-format </b><i>input-format</i>] [<b>-g</b>] [<b>-G</b>
+      <i>size</i> ] [<b>-h </b><i>name</i>]
+      [<b>-soname </b><i>name</i>] [<b>--help</b>] [<b>-i</b>]
+      [<b>-l</b><i>ar</i>] [<b>-L</b><i>searchdir</i>] [<b>-M</b>] [<b>-Map</b>
+      <i>mapfile</i>] [<b>-m</b> <i>emulation</i>] [<b>-n</b>|<b>-N</b>]
+      [<b>-noinhibit-exec</b>] [<b>-no-keep-memory</b>]
+      [<b>-no-warn-mismatch</b>] [<b>-O</b><i>level</i>]
+      [<b>-oformat </b><i>output-format</i>]
+      [<b>-R </b><i>filename</i>] [<b>-relax</b>] [<b>-r</b>|<b>-Ur</b>]
+      [<b>-rpath </b><i>directory</i>]
+      [<b>-rpath-link </b><i>directory</i>] [<b>-S</b>] [<b>-s</b>]
+      [<b>-shared</b>] [<b>-sort-common</b>]
+      [<b>-split-by-reloc </b><i>count</i>] [<b>-split-by-file</b>]
+      [<b>-T </b><i>commandfile</i>]
+      [<b>-Ttext </b><i>textorg</i>]
+      [<b>-Tdata </b><i>dataorg</i>] [<b>-Tbss </b><i>bssorg</i>]
+      [<b>-t</b>] [<b>-u </b><i>sym</i>] [<b>-V</b>] [<b>-v</b>]
+      [<b>--verbose</b>] [<b>--version</b>] [<b>-warn-common</b>]
+      [<b>-warn-constructors</b>] [<b>-warn-multiple-gp</b>] [<b>-warn-once</b>]
+      [<b>-warn-section-align</b>] [<b>--whole-archive</b>]
+      [<b>--no-whole-archive</b>] [<b>--wrap </b><i>symbol</i>]
+      [<b>-X</b>] [<b>-x</b>]</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_(DESCRIPTION)">描述 (DESCRIPTION)<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_(DESCRIPTION)">¶</a></h1>
+<b>ld</b> 合併 一組
+  目標文件(object) 和
+  庫文件(archive), 重定位
+  數據部分, 構建
+  符號引用(symbol reference).
+  一般說來, 編譯 生成
+  可執行文件 的
+  最後步驟 就是 調用 <b>ld</b>.
+<p class="Pp"><b>ld</b> 可以讀取 用
+    連接器命令語言(Linker Command
+    Language) 編寫的 腳本文件,
+    它 能夠 對 連接過程
+    提供 精確 和 全面 的
+    控制. 本 手冊頁 不討論
+    命令語言; 可參看 `<b>info</b>&#39;
+    的 `<b>ld</b>&#39; 項, 或者 手冊 <i>ld: the
+    GNU linker</i> , 裏面有 命令語言
+    的 細節 和 其他 GNU linker 的
+    內容.</p>
+<p class="Pp">這個版本 的 <b>ld</b>
+    使用 通用BFD庫 操作
+    目標文件, <b>ld</b> 能夠 以
+    多種格式 讀入, 連接 和
+    輸出 目標文件 —例如
+    COFF 或 <b>a.out</b>, 能夠 把
+    不同的格式 連接
+    在一起, 產生 各種 有效
+    的 目標文件. 用 `<b>objdump -i</b>&#39;
+    可以 列出 各種
+    體系結構 支持 的 格式
+    列表; 另見 <b>objdump</b>(<b>1</b>).</p>
+<p class="Pp">GNU linker 不僅 靈活 強大,
+    還能夠 比 其他 linker 提供
+    更多 的 診斷信息. 很多
+    linker 只要 碰上 一個錯誤
+    就 立刻停止 執行; 而
+    <b>ld</b> 一有可能 仍然
+    繼續執行, 這樣 容易
+    定位出 其他錯誤
+    (某些情況下,
+    儘管出了錯, 仍然 生成
+    輸出文件).</p>
+<p class="Pp">GNU linker <b>ld</b> 期望 實現
+    更廣泛 的 適用範圍,
+    儘可能 兼容 其他 linker.
+    通過 命令行 和
+    環境變量, 用戶 可以 用
+    ld 執行 多種 操作.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="選項_(OPTIONS)">選項 (OPTIONS)<a class="anchor" href="#%E9%81%B8%E9%A0%85_(OPTIONS)">¶</a></h1>
+過於豐富的
+  命令行選項 使人 感到
+  壓抑, 好在 實際使用 中,
+  多數情況下 只需要
+  掌握 其中 一小部分.
+  例如, 在 一個 標準的,
+  提供 相應支持 的 Unix
+  系統 中, 常常 用 <b>ld</b>
+  連接 標準的 Unix
+  目標文件. 如果要 連接
+  <b>hello.o</b>:
+<p class="Pp">$ ld -o output /lib/crt0.o hello.o -lc</p>
+<p class="Pp">它 告訴 <b>ld</b> 生成
+    一個 叫做 <b>output</b> 的 文件 ,
+    其中 連接了 文件
+    <b>/lib/crt0.o</b> 和 <b>hello.o</b> 以及
+    庫文件 <b>libc.a</b> (在
+    標準搜索目錄下).</p>
+<p class="Pp"><b>ld</b> 的 命令行選項
+    可以 任意順序 出現,
+    甚至 重複出現. 多數
+    情況 下, 如果 用
+    不同的 參數 重複
+    同一種 選項, ld 不會
+    出現 更多的變化,
+    也不會 覆蓋 以前的
+    參數. (指 命令行 中
+    左邊的參數)</p>
+<p class="Pp">例外情況 —
+    某些選項 有 反覆使用
+    的 需要 — 如 <b>-A</b>, <b>-b</b>
+    (或等同的 <b>-format</b>), <b>-defsym</b>,
+    <b>-L</b>, <b>-l</b>, <b>-R</b>, 和 <b>-u</b>.</p>
+<p class="Pp">待連接的 目標文件
+    列表, 即 總覽中的 <i>objfile</i>,
+    可以 放在 命令行選項
+    的 前面, 後面, 或者
+    混雜其中; 但是 不能 把
+    <i>objfile</i> 放置於 某個
+    選項開關 和 它的參數
+    中間.</p>
+<p class="Pp">一般說來 linker 要求
+    至少 輸入 一個
+    目標文件, 但是 可以 用
+    <b>-l</b>, <b>-R</b> 輸入 其他格式
+    的 二進制文件, 或者 用
+    命令語言 編寫的
+    腳本文件. 如果 <i>沒有</i>
+    指定 二進制格式 的
+    輸入文件, linker 就不能
+    產生 輸出文件, 而是
+    顯示 `<b>No input files</b>&#39;.</p>
+<p class="Pp">選項的參數 必須
+    出現在 代表 選項 的
+    字母 後面, 可以有
+    空白符, 也可以 沒有.</p>
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><b>-A</b><i>architecture</i></dt>
+  <dd>在 目前版本 的 <b>ld</b> 中,
+      這個 選項 僅適用於 Intel
+      960 體系系列. 在 <b>ld</b> 的
+      設置 中, <i>architecture</i> 參數 是
+      960 系列 的 成員
+      識別名稱 之一, 由
+      兩個字母 組成;
+      這個選項 指出 期望的
+      輸出目標, 對
+      輸入文件 的
+      不兼容指令 作出
+      警告. 它 能夠 改變 linker
+      對 庫文件 的
+      搜索策略, 以便於
+      支持 體系相關庫,
+      方法是 把
+      體系識別名稱 添加在
+      待搜索 的 文件名
+      尾部.
+    <p class="Pp">例如, 如果 <b>ld</b>
+        命令行 有 `<b>-ACA</b>&#39; 和 `<b>-ltry</b>&#39;,
+        linker 將 搜索 (根據
+        內置的路徑 和 <b>-L</b>
+        指定的路徑) 以下
+        名稱 的 庫文件</p>
+    <p class="Pp">try
+      <br/>
+      libtry.a
+      <br/>
+      tryca
+      <br/>
+      libtryca.a</p>
+    <p class="Pp"></p>
+    <p class="Pp">前兩項 是
+        常規做法; 後兩項
+        源於 `<b>-ACA</b>&#39;.</p>
+    <p class="Pp">將來發布的 <b>ld</b>
+        可能 對 其他
+        體系結構 提供
+        類似功能.</p>
+    <p class="Pp">可以 在 命令行上
+        使用 多個 <b>-A</b> 選項,
+        只要 該 體系 允許 和
+        目標體系 相連,
+        其選項 使 ld 在 搜索 <b>-l</b>
+        指定的庫 中, 增加 和
+        體系結構名稱
+        對應的庫.</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-b </b><i>input-format</i></dt>
+  <dd>指定 輸入目標文件 的
+      二進制格式, 目標文件
+      在 命令行 上 給出,
+      放在 這個選項 的
+      後面. 一般 不需要
+      指定 這個選項, <b>ld</b> 的
+      缺省輸入格式 配置爲
+      各個機器 上 最常用
+      的 格式. <i>input-format</i> 是
+      字符串, BFD 庫 支持的
+      格式 名稱. 選項 <b>-format
+      </b><i>input-format</i> 起 相同的
+      作用, 腳本命令 <b>TARGET</b>
+      也是 一樣.
+    <p class="Pp">連接 某些
+        不尋常的
+        二進制文件 時 需要
+        這個選項. 或者 使用
+        <b>-b</b> 選項 強調
+        格式切換 (連接
+        不同格式 的
+        目標文件), 比如說, 在
+        每組 特定格式 的
+        目標文件 前面 使用 <b>-b
+        </b> <i>input-format</i> 選項.</p>
+    <p class="Pp">環境變量 <b>GNUTARGET</b>
+        用於 指定 缺省格式.
+        也可以 在 腳本文件
+        中 用 <b>TARGET</b> 命令 定義
+        輸入格式.</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-Bstatic</b></dt>
+  <dd>禁止 連接 共享庫.
+      這個選項 只在 支持
+      共享庫 的 平臺 上
+      有意義.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-Bdynamic</b></dt>
+  <dd>連接 動態庫.
+      這個選項 只在 支持
+      共享庫 的 平臺 上
+      有意義, 一般說來 它
+      是 缺省選項.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-Bsymbolic</b></dt>
+  <dd>當 創建 共享庫 的
+      時候, 只要 有可能, 在
+      共享庫 內 編聯(bind reference)
+      全局符號 和 定義(definition).
+      一般說來, 允許
+      連接了 某個 共享庫
+      的 程序 覆蓋
+      共享庫內 的 定義.
+      這個選項 只在 支持
+      共享庫 的 ELF 平臺 上
+      有意義.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-c </b><i>commandfile</i></dt>
+  <dd>告訴 <b>ld</b> 從 文件 <i>commandfile</i>
+      中 讀取 連接 命令.
+      這些 命令 徹底的
+      覆蓋 <b>ld</b> 的 缺省 連接
+      格式 (而不是 添加);
+      <i>commandfile</i> 必須 詳盡的
+      描述 目標格式 的
+      所有細節.
+    <p class="Pp">你 也可以 在
+        命令行 上 直接嵌入
+        連接命令, 把 腳本
+        嵌在 大括弧 `<b>{</b>&#39; 和 `<b>}</b>&#39;
+        中間.</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>--cref</b></dt>
+  <dd>輸出 交叉引用表(cross
+      reference). 如果 創建了
+      連接映像(linker map) 文件,
+      交叉引用表 就 輸出到
+      映像文件 中, 否則
+      送往 標準輸出.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-d</b></dt>
+  <dd></dd>
+  <dt><b>-dc</b></dt>
+  <dd></dd>
+  <dt><b>-dp</b></dt>
+  <dd>這 三個選項 是
+      一回事, 爲了 兼容
+      其他 linker 而 同時提供.
+      即使 已經 指定 <b>ld</b>
+      生成 可重定位文件
+      (<b>-r</b> ), 它們 能爲
+      公共符號(common symbol) 分配
+      空間. 腳本命令
+      <b>FORCE_COMMON_ALLOCATION</b> 起 同樣作用.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-defsym </b><i>symbol</i><b> = </b><i>expression</i></dt>
+  <dd>在 輸出文件 中 創建
+      一個 全局符號, 它
+      含有 <i>expression</i> 給出的
+      絕對地址. 可以 在
+      命令行 使用 多個
+      這樣的 選項. 這個
+      <i>expression</i> 只能 使用
+      有限的 數學形式:
+      十六進制常數,
+      已經存在 的
+      符號名字. 或者 使用
+      <b>+</b> 和 <b>-</b> 加減
+      十六進制常數 或
+      符號. 如果 需要
+      更復雜的 表達式,
+      考慮 使用
+      命令語言腳本.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>--demangle</b></dt>
+  <dd></dd>
+  <dt><b>--no-demangle</b></dt>
+  <dd>這些選項 控制 是否在
+      出錯信息 和 其他信息
+      中, 輸出 可讀的(demangle)
+      符號名稱. 如果
+      使用了 demangle 選項, linker
+      儘量使 符號名稱
+      容易理解: 去掉
+      領頭的 下劃線 (如果
+      被 目標文件格式
+      採用); 把 C++ 難懂的
+      符號名稱 (symbol name) 轉換成
+      可讀的 名稱.
+      缺省情況下 linker 輸出
+      可讀的 符號名稱,
+      除非 設置了 環境變量
+      <b>COLLECT_NO_DEMANGLE .</b> 這些選項
+      能夠 覆蓋 缺省行爲.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-e </b><i>entry</i></dt>
+  <dd>使用 <i>entry (入口)</i> 標識符
+      作爲 程序 執行 的
+      開始端, 而不是
+      缺省入口. 關於
+      缺省入口 和 其他
+      設置 入口 的 方法
+      參見 `<b>info</b>&#39; 的 <b>ld</b>&#39; 項.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-embedded-relocs</b></dt>
+  <dd>這個選項 僅用於 連接
+      MIPS上 嵌入的 PIC 代碼, GNU 的
+      編譯器 和 彙編器 用
+      <b>-membedded-pic</b> 選項 能夠 生成
+      這種代碼. 它使 linker 創建
+      一張 表格, 用於 在
+      運行的時候, 重定位
+      任何 被 靜態初始化
+      爲 指針值 的 數據.
+      詳見 testsuite/ld-empic 的 代碼.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-E</b></dt>
+  <dd></dd>
+  <dt><b>-export-dynamic</b></dt>
+  <dd>當 創建 ELF 文件 時, 把
+      所有 符號 加入
+      動態符號表.
+      一般說來, 動態符號表
+      只包含 動態目標庫(dynamic
+      object) 需要的 符號. 用 <i>dlopen</i>
+      的 時候 需要 這個
+      選項.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-f </b><i>name</i></dt>
+  <dd></dd>
+  <dt><b>--auxiliary </b><i>name</i></dt>
+  <dd>創建 ELF 共享目標庫 時,
+      把 內部的 DT_AUXILIARY 字段
+      設置爲 <i>name.</i> 它 告訴
+      動態linker, 把 該
+      共享目標庫 的 符號表
+      用做 共享目標 <i>name</i> 的
+      符號表 的
+      輔助過濾器.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-F </b><i>name</i></dt>
+  <dd></dd>
+  <dt><b>--filter </b><i>name</i></dt>
+  <dd>創建 ELF 共享目標庫 時,
+      把 內部的 DT_FILTER 字段
+      設置爲 <i>name.</i> 它 告訴
+      動態linker, 把 該
+      共享目標庫 的 符號表
+      用做 共享目標 <i>name</i> 的
+      符號表 的
+      輔助過濾器.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-format </b><i>input-format</i></dt>
+  <dd>等同於 <b>-b</b> <i>input-format</i>.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-g</b></dt>
+  <dd>虛設項; 用於 兼容
+      其他 工具.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-G </b><i>size</i><b></b>把 使用 GP
+    寄存器 優化的
+    目標(文件) 大小
+    限制爲</dt>
+  <dd><i>size .</i> 用於 MIPS ECOFF, 對 其他
+      目標文件格式 無效.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-h </b><i>name</i></dt>
+  <dd></dd>
+  <dt><b>-soname </b><i>name</i></dt>
+  <dd>創建 ELF 共享目標庫 時,
+      把 內部的 DT_SONAME 字段
+      設置爲 name. 如果 某個
+      可執行文件 連接了
+      含有 DT_SONAME 字段 的
+      共享目標庫, 當
+      該程序 運行 時, 動態
+      linker 試圖 根據 DT_SONAME 字段
+      調入 共享的 目標庫,
+      而 不使用 提供給 linker 的
+      文件名.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>--help</b></dt>
+  <dd>在 標準輸出 顯示
+      命令行選項 的 摘要,
+      然後 結束. 這個選項
+      和 <b>--version</b> 選項 使用了
+      兩個 短橫線, 不是
+      一個, 目的是 兼容
+      其他 GNU 程序. 只用 一個
+      短橫線 的 選項
+      是爲了 兼容 其他 linker.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-i</b></dt>
+  <dd>執行 增量連接(incremental link),
+      等同於 <b>-r</b> 選項.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-l</b><i>ar</i></dt>
+  <dd>在 連接文件 列表 中
+      增加 歸檔庫文件 <i>ar</i>.
+      可以 多次 使用
+      這個選項. 凡指定
+      一項 <i>ar</i> , <b>ld</b> 就會 在
+      路徑列表 中 增加
+      一項 對 <b>lib</b><i>ar</i>.a 的 搜索.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-L</b><i>searchdir</i></dt>
+  <dd>這個選項 將 路徑
+      <i>searchdir</i> 添加 到
+      路徑列表 中去, <b>ld</b> 在
+      這個 列表 中 搜索
+      歸檔庫. 可以 多次
+      使用 這個選項.
+    <p class="Pp">缺省的
+        搜索路徑集 (不使用
+        <b>-L</b> 時) 取決於 <b>ld</b>
+        使用的 模擬模式(emulation)
+        及其 配置. 在
+        連接腳本 中, 可以 用
+        <b>SEARCH_DIR</b> 命令 指定
+      路徑.</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-M</b></dt>
+  <dd>在 標準輸出 顯示
+      連接映像 — 有關 <b>ld</b>
+      把 符號 映射到 何處
+      的 診斷信息, 以及
+      全局公共存儲器 的
+      分配 信息.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-Map </b><i>mapfile</i><b></b>把 連接映像
+    輸出到</dt>
+  <dd><i>mapfile</i> 文件 中 — 有關
+      <b>ld</b> 把 符號 映射到
+      何處 的 診斷信息,
+      以及 全局公共存儲器
+      的 分配 信息.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-m </b><i>emulation</i><b></b>模仿</dt>
+  <dd><i>emulation</i> 連接器. 可以 用
+      <i>--verbose</i> 或 <i>-V</i> 選項 列出
+      有效的 模擬項.
+      這個選項 覆蓋 編譯
+      進去 的 缺省項.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-N</b></dt>
+  <dd>指定 可讀寫 的 <b>正文</b>
+      和 <b>數據</b> 節(section). 如果
+      輸出格式 支持 Unix
+      風格的 幻數(magic number), 則
+      輸出文件 標記爲 <b>OMAGIC</b>.
+    <p class="Pp">當 使用 `<b>-N</b>&#39; 選項
+        時, linker 不做 數據段 的
+        頁對齊(page-align).</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-n</b></dt>
+  <dd>設置 正文段 爲 只讀,
+      如果 有可能, <b>NMAGIC</b> 爲
+      可寫.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-noinhibit-exec</b></dt>
+  <dd>一般說來, 如果
+      連接的 時候 發生
+      錯誤, linker 不會 產生
+      輸出文件. 使用了
+      這個 標誌選項, 只要
+      不出 致命差錯,
+      仍能夠 產生
+      輸出文件.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-no-keep-memory</b></dt>
+  <dd>linker 通常 犧牲 內存,
+      優化 速度, 它 把
+      輸入文件 的 符號表
+      緩衝在 內存中.
+      這個選項 使 linker 必要時
+      重複讀取 符號表,
+      以便 優化 內存使用.
+      連接 大型 可執行文件
+      的 時候, linker 有可能
+      內存 不夠, 此時 可以
+      試試 這個選項.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-no-warn-mismatch</b></dt>
+  <dd>一般情況下, 如果
+      試圖 連接 某些
+      不匹配 的 輸入文件,
+      比如說, 按 不同
+      處理器 編譯 的, 或者
+      具有 不同的
+      字節順序(endianness), linker 就會
+      報錯. 這個選項 告訴 linker
+      默許 這種 錯誤. 要
+      小心使用 這個選項,
+      除非 你 正在做 某些
+      特殊 操作, 而且 能夠
+      確定 不需要 linker 報錯.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-o </b><i>output</i></dt>
+  <dd><i>output</i> 用來 指定 <b>ld</b>
+      生成的 程序名; 如果
+      沒有 使用 這個選項,
+      缺省名字 是 `<b>a.out</b>&#39;.
+      腳本命令 <b>OUTPUT</b> 起 同樣
+      作用.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-O</b><i>level</i></dt>
+  <dd>生成 優化的
+      輸出文件. 這個選項
+      佔用 比較多 的 時間,
+      因此 僅 常用於
+      最終文件 的 生成. <i>level</i>
+      是 數值參數. 任何
+      大於零 的 參數
+      意味着 要求 優化.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-oformat </b><i>output-format</i></dt>
+  <dd>指定 輸出目標文件 的
+      二進制格式. 一般
+      不需要 指定
+      這個選項, <b>ld</b> 的 缺省
+      輸出格式 配置爲
+      各個機器 上 最常用
+      的 格式. <i>output-format</i> 是 一個
+      字符串, BFD 庫 支持的
+      格式 名稱. 腳本命令
+      <b>OUTPUT_FORMAT</b> 也可以 指定
+      輸出格式, 但是
+      這個選項 能夠 覆蓋
+      掉 它.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-R </b><i>filename</i></dt>
+  <dd>從 文件 <i>filename</i> 中 讀取
+      符號名稱 及其 地址,
+      但是 不做 重定位,
+      不傳送到 輸出端. 它
+      可以 使 輸出文件
+      符號引用 其他程序中
+      定義的 絕對地址.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-relax</b></dt>
+  <dd>這個選項 的 效果
+      取決於 機器, 目前
+      只支持 H8/300.
+    <p class="Pp">在 某些 平臺 上
+        可以 使用 這個選項
+        做 全局優化, 它 讓 linker
+        解決 程序中 的
+        地址處理, 例如 在
+        輸出目標文件 中
+        緩和(relax) 地址模式
+        以及 合成 (synthesize)
+      新指令.</p>
+    <p class="Pp">其他平臺 也接受
+        `<b>-relax</b>&#39; 選項, 但是
+        不起作用.</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-r</b></dt>
+  <dd>生成 可重定位 輸出
+      — 就是說, 生成的
+      輸出文件 能夠 依次
+      成爲 <b>ld</b> 的 輸入, 一般
+      稱之爲 <i>不完全(partial)</i>
+      連接. 它 有 一個
+      副效應, 在 支持 標準 Unix
+      幻數(magic number) 的 環境 中,
+      這個選項 把 輸出文件
+      的 幻數 設置成 <b>OMAGIC</b>.
+      如果 沒有 指定
+      這個選項, linker 生成
+      絕對定位 的 文件.
+      連接 C++ 程序時,
+      這個選項 <i>不會 </i> 解析
+      出 對 構造子(constructor) 的
+      引用(reference); 不妨 改用 <b>-Ur</b>
+      選項.
+    <p class="Pp">這個選項 的 效果
+        和 <b>-i</b> 一樣.</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-rpath <i>directory</i></b></dt>
+  <dd>增加 一條 對
+      運行時(runtime)庫 的
+      搜索路徑. 這個選項
+      用於 連接 ELF 可執行
+      文件 和 共享目標庫.
+      所有 <b>-rpath</b> 選項 的 參數
+      被 合併, 然後 一起
+      傳遞 給 運行時 linker,
+      運行時 linker 在 運行 的
+      時候 使用 這些 路徑
+      尋找 共享目標庫. <b>-rpath</b>
+      也可以 用來 定位
+      共享目標庫 引用的
+      共享目標庫; 參見 對
+      <b>-rpath-link</b> 選項 的 敘述.
+      如果 連接 ELF
+      可執行文件 時 沒有
+      指定 <b>-rpath</b> 選項, linker
+      就使用 環境變量
+      <b>LD_RUN_PATH</b> 的 內容 — 只要
+      這個 環境變量 存在.
+    <p class="Pp"><b>-rpath</b> 選項 能夠
+        用在 SunOS 上,
+        缺省狀況下, linker 可以
+        根據 給出的 <b>-L</b> 選項
+        形成 運行時
+        搜索路徑. 如果
+        使用了 <b>-rpath</b> 選項,
+        運行時 搜索路徑 從
+        <b>-rpath</b> 中 產生, 而 忽略
+        <b>-L</b> 選項. 這一點
+        有利於 使用 gcc, 在 NFS
+        文件系統 上, gcc 可能
+        產生 許多 <b>-L</b> 選項.</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-rpath-link <i>directory</i></b></dt>
+  <dd>使用 ELF 或 SunOS 的 時候,
+      某些 共享庫 可能
+      需要 其他 共享庫.
+      這種情況 一般 發生在
+      某個 <b>ld -shared</b> 連接 中,
+      輸入文件 包含了
+      共享庫.
+    <p class="Pp">如果 linker 遇到
+        這樣的 依賴情況, 當
+        它 執行 非共享,
+        不可重定位 的 連接
+        時, linker 將 自動 尋找
+        所需的 共享庫, 如果
+        它們 沒有 被 顯明
+        包含, 就 把 它們
+        包含到 連接 中. 在
+        這種情況下, <b>-rpath-link</b>
+        選項 指定了 最先
+        搜索 的 目錄集. <b>-rpath-link</b>
+        能夠 指定 一批 目錄,
+        目錄 用 冒號 隔開.
+        也可以 用 這些
+        目錄名 作爲 參數,
+        重複 使用 這個 選項.</p>
+    <p class="Pp">如果 沒有 找到
+        需要的 共享庫, linker
+        產生 一個 警告, 但是
+        繼續 連接.</p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-S</b></dt>
+  <dd>去掉 輸出文件 中的
+      調試符號信息 (但不是
+      所有符號).
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-s</b></dt>
+  <dd>去掉 輸出文件 中的
+      全部 符號信息.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-shared</b></dt>
+  <dd>創建 一個 共享庫.
+      目前 只支持 ELF 和 SunOS
+      平臺 (在 SunOS 上,
+      這個選項 不是
+      必須的, 如果 沒有
+      使用 <b>-e</b> 選項, 而且
+      存在 不確定 的 符號,
+      linker 將 自動 創建
+      共享庫).
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-sort-common</b></dt>
+  <dd><b>ld</b> 通常 把
+      全局公共符號 放到
+      適當的 輸出節, 按照
+      大小 排序. 首先是
+      單字節符號, 然後是
+      雙字節, 接下來是
+      四字節, 隨後是
+      其他的. 它的 目的是
+      防止 符號間 因爲
+      排布限制 出現 間隙.
+      使用 這個選項 可以
+      禁止 排序.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-split-by-reloc <i>count</i></b></dt>
+  <dd>在 輸出文件 中 創建
+      附加節(extra section), 使得
+      輸出文件 中, 沒有
+      某一個 輸出節 包含
+      大於 <i>count</i> 個 重定位項.
+      它 用於 產生 大型
+      可重定位 COFF 目標文件,
+      可以 插入到 某些
+      實時內核 中; 因爲 COFF
+      不能 在 單一節內
+      存放 65535 以上的
+      重定位項. 注意, 有些
+      目標文件格式 不支持
+      任意 分節, 此時
+      這個選項 將會 操作
+      失敗. 此外, linker 不能夠
+      分割 輸入節, 然後
+      重新分配, 因此 如果
+      某個 輸入節 包含 <i>count</i>
+      以上的 重定位項,
+      相應的 輸出節 將
+      包含 同樣多的
+      重定位項.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-split-by-file</b></dt>
+  <dd>類似於 <b>-split-by-reloc ,</b> 但是
+      它爲 每個 輸入文件
+      建立一個 新的
+      輸出節.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-Ttext </b><i>org</i><b></b>把 <i>org</i></dt>
+  <dd> 作爲 輸出文件 的 段
+      起始地址 — 特別是
+      — <b>bss</b>, <b>data</b>, 或 <b>text</b> 段.
+      <i>org</i> 必須是
+      十六進制整數.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-T </b><i>commandfile</i></dt>
+  <dd>等同於 <b>-c </b><i>commandfile</i>; 用於
+      兼容 其他工具.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-t</b></dt>
+  <dd>在 <b>ld</b> 處理 輸入文件
+      的 時候 顯示 文件名.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-u </b><i>sym</i></dt>
+  <dd>把 <i>sym</i> 作爲 未定義(undefined)
+      的 符號 送入
+      輸出文件. 這樣做
+      可以, 例如, 促使 linker 從
+      標準庫 連接 某個
+      附加的模塊. 允許
+      使用 多個 <b>-u</b> 選項
+      輸入 多個 未定義
+      符號.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-Ur</b></dt>
+  <dd>對於 除 C++ 以外的 任何
+      程序, 這個選項
+      等同於 <b>-r</b>: 生成
+      可重定位 的 輸出 —
+      就是說, 能夠 依次
+      輸入 <b>ld</b> 的 輸出文件.
+      連接 C++ 程序 的 時候,
+      <b>-Ur</b> <i>將</i> 解析 對
+      構造子(constructor) 的
+      引用(reference), 這一點 和 <b>-r</b>
+      不同.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>--verbose</b></dt>
+  <dd>顯示 <b>ld</b> 的 版本號,
+      列出 支持的
+      模擬項(emulation). 顯示 哪些
+      輸入文件 能夠 打開,
+      哪些 不能,
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-v, -V</b></dt>
+  <dd>顯示 <b>ld</b> 的 版本號.
+      此外 <b>-V</b> 選項 能夠
+      列出 支持的 模擬項.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>--version</b></dt>
+  <dd>顯示 <b>ld</b> 的 版本號
+      然後 結束.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-warn-common</b></dt>
+  <dd>當 公共符號 和 其他
+      公共符號 合併 時,
+      或者 和 某個
+      符號定義 合併 時, linker
+      就發出 警告. Unix 系統的
+      linker 允許 這種 有些 草率
+      的 做法, 其他
+      操作系統 則 不行.
+      這個選項 幫助你 在
+      合併 全局符號 的
+      時候 發現 潛在問題.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-warn-constructors</b></dt>
+  <dd>如果 使用了
+      全局構造子(global constructor), linker
+      就發出 警告. 它 只對
+      某些 目標文件結構
+      有用, 對於 如 COFF 或 ELF, 此
+      linker 不能夠 檢測
+      全局構造子 的
+      使用情況.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-warn-multiple-gp</b></dt>
+  <dd>如果 輸出文件 需要
+      多個 全局指針值, linker
+      就發出 警告.
+      這個選項 只能 用於
+      某些 處理器, 如 Alpha.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-warn-once</b></dt>
+  <dd>對 每個 未定義符號
+      只 警告 一次, 而不是
+      每次 引用 這個符號
+      都 警告.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-warn-section-align</b></dt>
+  <dd>如果 某個 輸出節(section)
+      的 地址 因爲
+      邊界對齊 而 發生
+      改變, linker 就發出 警告.
+      典型情況下 由 輸入節
+      設置 邊界, 只有 不做
+      明確指定 的 時候
+      地址 纔會 改變;
+      就是說, SECTIONS 命令 沒有
+      指出 該節 的
+      開始地址.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>--whole-archive</b></dt>
+  <dd>對於 命令行 上 <b>--whole-archive</b>
+      選項 提到的 每個
+      歸檔庫, 連接時 連入
+      歸檔庫 的 全部
+      目標文件, 而不是 在
+      歸檔庫 中 搜索
+      所需的 目標文件.
+      一般用於 把
+      歸檔庫文件 轉變成
+      共享庫文件, 迫使
+      全部 目標文件 進入
+      共享庫.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>--no-whole-archive</b></dt>
+  <dd>關閉 <b>--whole-archive</b> 選項 對
+      歸檔庫 的 影響.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>--wrap </b><i>symbol</i></dt>
+  <dd>對 <i>symbol</i> 使用
+      包裝函數(wrapper function). 任何
+      對 <i>symbol</i> 未定義 的 引用
+      (undefined reference) 將 解析爲
+      <b>__wrap_</b><i>symbol</i><b>.</b> 任何 對
+      <b>__real_</b><i>symbol</i> 未定義 的
+      引用 將 解析爲 <i>symbol.</i>
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-X</b></dt>
+  <dd>刪除 全部 臨時的
+      局部符號. 大多數
+      目的文件 中, 這些
+      局部符號 的 名字 用
+      `<b>L</b> &#39; 做 開頭.
+    <p class="Pp"></p>
+  </dd>
+  <dt><b>-x</b></dt>
+  <dd>刪除 全部 局部符號.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="環境_(ENVIRONMENT)">環境 (ENVIRONMENT)<a class="anchor" href="#%E7%92%B0%E5%A2%83_(ENVIRONMENT)">¶</a></h1>
+通過 環境變量 <b>GNUTARGET</b>
+  可以 改變 <b>ld</b> 的 行爲.
+<p class="Pp">如果 沒有 使用 <b>-b</b>
+    選項 (或 相同的 <b>-format</b>),
+    <b>GNUTARGET</b> 決定了 輸入文件
+    的 目標格式, 其值 應爲
+    BFD的 名稱之一. 如果
+    沒有 <b>GNUTARGET </b> 環境變量,
+    <b>ld</b> 就使用 主機的
+    本地格式. 如果 <b>GNUTARGET</b>
+    設置爲 <b>default</b>, BFD 通過
+    檢查 輸入文件 的
+    二進制格式 判斷
+    輸入格式; 這個方法
+    通常 有效, 但 隱含
+    歧義, 這是因爲 沒有
+    辦法 保證 標誌
+    目標文件格式 的 幻數
+    是 唯一的. 不過,
+    各個系統 配置 BFD 的
+    時候, 會把 系統
+    約定的格式 放在
+    搜索列表 的 前面, 因此
+    能夠 按照 約定 消除
+    歧義.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="另見_(SEE_ALSO)">另見 (SEE ALSO)<a class="anchor" href="#%E5%8F%A6%E8%A6%8B_(SEE_ALSO)">¶</a></h1>
+<b>objdump</b>(<b>1</b>)
+<br/>
+`<b>ld</b>&#39; 和 `<b>binutils</b>&#39; 項 ( <b>info</b>)
+<br/>
+<i>ld: the GNU linker, Steve Chamberlain and Roland Pesch;</i> <i>The GNU Binary
+  Utilities, Roland H. Pesch.</i>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="COPYING">COPYING<a class="anchor" href="#COPYING">¶</a></h1>
+Copyright (c) 1991, 92, 93, 94, 95, 96, 97, 1998 Free Software Foundation, Inc.
+<p class="Pp">Permission is granted to make and distribute verbatim copies of
+    this manual provided the copyright notice and this permission notice are
+    preserved on all copies.</p>
+<p class="Pp">Permission is granted to copy and distribute modified versions of
+    this manual under the conditions for verbatim copying, provided that the
+    entire resulting derived work is distributed under the terms of a permission
+    notice identical to this one.</p>
+<p class="Pp">Permission is granted to copy and distribute translations of this
+    manual into another language, under the above conditions for modified
+    versions, except that this permission notice may be included in translations
+    approved by the Free Software Foundation instead of in the original
+  English.</p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>徐明 &lt;xuming@users.sourceforge.net&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2003/05/13</b> 第一版
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">17 August 1992</td>
+    <td class="foot-os">cygnus support</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+ld.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:27Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"ld(1)\"}}]}"
+</script>

@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>perlfaq(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/perlfaq.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/perlfaq.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; perlfaq(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlfaq.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlfaq.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#Credits_%E8%87%B4%E8%AC%9D" title="Credits 致謝">Credits 致謝</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#Author_and_Copyright_Information" title="Author and Copyright Information">Author and Copyright Information</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#Table_of_Contents_%E7%9B%AE%E9%8C%84" title="Table of Contents 目錄">Table of Contents 目錄</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#The_Questions_%E5%95%8F%E9%A1%8C" title="The Questions 問題">The Questions 問題</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AD%AF%E8%80%85" title="譯者">譯者</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlfaq.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/perlfaq.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/perlfaq.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlfaq.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlfaq.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/perl-doc/perlfaq.1.en.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlfaq.7.zh_TW.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">PERLFAQ(7)</td>
+    <td class="head-vol">Perl Programmers Reference Guide</td>
+    <td class="head-rtitle">PERLFAQ(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+perlfaq - Perl 常問問題集 (2003/01/31 17:37:17)
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+perlfaq
+  按照主題劃分爲多個文檔，在本文檔的末尾有一個目錄。
+<br/>
+<p class="Pp"><b>Where to get the perlfaq
+    如何取得這份文件？</b></p>
+<p class="Pp">這份文件會定期投到
+    comp.lang.perl.misc。也可以在許多網站上找到它，例如
+    <a href="../../">../../</a> 還有 <a href="../../">../../</a>
+    譯者注：兩隻老虎工作室的位置是
+    <a href="../../cgi-bin/2T/perl/">../../cgi-bin/2T/perl/</a> 還有
+    <a href="ftp://www.math.ncu.edu.tw/pub/staff/chenym/FAQ/Perl/">ftp://www.math.ncu.edu.tw/pub/staff/chenym/FAQ/Perl/</a> 還有
+    &lt;pailing@2Ti.com&gt;
+  <br/>
+</p>
+<p class="Pp"><b>How to contribute to the perlfaq 如何爲
+    perlfaq 做貢獻？</b></p>
+<p class="Pp">你可以將更正，擴充以及建議以郵件方式發送到
+    perlfaq-workers@perl.org .
+    這個地址不能用來提問題，它只用來修正當前的
+    FAQ。如果有問題那麼投遞到新聞組
+    comp.lang.perl.misc。可以在
+    <a href="../../cvsweb/perlfaq/">../../cvsweb/perlfaq/</a> 查看源碼樹
+    (它是在主源碼樹之外)。CVS
+    倉庫記錄了對 FAQ
+    的所有改變。
+  <br/>
+</p>
+<p class="Pp"><b>What will happen if you mail your Perl programming problems to
+    the authors
+    如果把編程問題寄給作者怎麼樣？</b></p>
+<p class="Pp">作者大概不會理會您所提的問題，除非您是在建議把一些新問題加進
+    FAQ去，但如果是這樣的話這些問題當初就該寄到
+    perlfaq-workers@perl.com 處纔對。</p>
+<p class="Pp">您應該已經閱讀了這份
+    FAQ
+    的第二部分，您應該知道
+    comp.lang.perl.misc
+    纔是尋求免費建議的適當地方。如果您的問題真的很重要而且您急着要得到正確解答，那麼您該請一個顧問。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="Credits_致謝">Credits 致謝<a class="anchor" href="#Credits_%E8%87%B4%E8%AC%9D">¶</a></h1>
+最初的 perlfaq 由 Tom Christiansen
+  完成，接着在 Tom 和 Nathan
+  Torkington
+  的合作下得以擴展。當前的文檔由
+  perlfaq-workers (perlfaq-workers@perl.org)
+  進行維護，很多人貢獻了解答，更正和評註。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="Author_and_Copyright_Information">Author and Copyright Information<a class="anchor" href="#Author_and_Copyright_Information">¶</a></h1>
+Copyright (c) 1997-2003 Tom Christiansen, Nathan Torkington, and other
+  contributors noted in the answers.
+<p class="Pp">All rights reserved.
+  <br/>
+</p>
+<p class="Pp"><b>Bundled Distributions</b></p>
+<p class="Pp">This documentation is free; you can redistribute it and/or modify
+    it under the same terms as Perl itself.</p>
+<p class="Pp">Irrespective of its distribution, all code examples in these files
+    are hereby placed into the public domain. You are permitted and encouraged
+    to use this code in your own programs for fun or for profit as you see fit.
+    A simple comment in the code giving credit would be courteous but is not
+    required.
+  <br/>
+</p>
+<p class="Pp"><b>Disclaimer</b></p>
+<p class="Pp">This information is offered in good faith and in the hope that it
+    may be of use, but is not guaranteed to be correct, up to date, or suitable
+    for any particular purpose whatsoever. The authors accept no liability in
+    respect of this information or its use.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="Table_of_Contents_目錄">Table of Contents 目錄<a class="anchor" href="#Table_of_Contents_%E7%9B%AE%E9%8C%84">¶</a></h1>
+<dl class="Bl-tag">
+  <dt>perlfaq - 本文檔</dt>
+  <dd></dd>
+  <dt>perlfaq1 - 有關 Perl
+    的一般問題</dt>
+  <dd></dd>
+  <dt>perlfaq2 - 獲取和學習 Perl</dt>
+  <dd></dd>
+  <dt>perlfaq3 - 編程工具</dt>
+  <dd></dd>
+  <dt>perlfaq4 - 數據操作</dt>
+  <dd></dd>
+  <dt>perlfaq5 - 文件和格式</dt>
+  <dd></dd>
+  <dt>perlfaq6 - 正則表達式</dt>
+  <dd></dd>
+  <dt>perlfaq7 - 綜合的問題</dt>
+  <dd></dd>
+  <dt>perlfaq8 - 系統交互</dt>
+  <dd></dd>
+  <dt>perlfaq9 - 網絡</dt>
+  <dd></dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="The_Questions_問題">The Questions 問題<a class="anchor" href="#The_Questions_%E5%95%8F%E9%A1%8C">¶</a></h1>
+<p class="Pp"><b>perlfaq1: 有關 Perl
+    的一般問題</b></p>
+<p class="Pp">有關 Perl
+    的一般的，非技術層次的問題</p>
+<ul class="Bl-bullet">
+  <li>什麼是 Perl?</li>
+  <li>誰對 Perl
+      提供支持？誰開發了它？爲什麼它是自由的？</li>
+  <li>我該用哪一個版本的
+      Perl？</li>
+  <li>perl4 和 perl5 各代表什麼？</li>
+  <li>perl6 是什麼?</li>
+  <li>Perl的發展已穩定了嗎？</li>
+  <li>Perl難學嗎？</li>
+  <li>Perl和其他的程設語言比起來如何？例如
+      Java, Python, REXX, Scheme,或 Tcl？</li>
+  <li>我可以用
+      Perl來做【某種差事】嗎？</li>
+  <li>哪些場合下不適合用
+      Perl？</li>
+  <li>「perl」和「Perl」有什麼不同？</li>
+  <li>Perl程式應算是 program還是
+      script？</li>
+  <li>JAPH 是什麼？</li>
+  <li>到哪兒可拿到 Larry Wall
+      的智慧諷語 (witticisms)？</li>
+  <li>我要如何取信、說服我的系統管理者／上司／屬下使用第
+      5/5.8.3 版的
+      Perl，而不去用其他的語言？
+    <br/>
+  </li>
+</ul>
+<p class="Pp"><b>perlfaq2: 獲取和學習 Perl</b></p>
+<p class="Pp">從哪裏尋找 Perl
+    的源程序和文檔，支持以及相關事項</p>
+<ul class="Bl-bullet">
+  <li>哪些平臺上有
+      Perl？要到哪裏去找？</li>
+  <li>要如何取得以二進制形式發行的
+      Perl？</li>
+  <li>我的系統裏沒有
+      C編譯器。要如何編譯
+      perl？</li>
+  <li>我直接將
+      Perl的執行檔從一臺機器上覆制到另一臺機器上，但是程式跑不起來。</li>
+  <li>我抓回了原始碼，試着編譯
+      perl，但是 gdbm/dynamic
+      loading/malloc/linking/...部分失敗。要如何將它搞定？</li>
+  <li>Perl有哪些模組和延伸？
+      CPAN是什麼？
+      CPAN/src/...又代表什麼？</li>
+  <li>是不是有一個經
+      ISO【國際標準局】或
+      ANSI【美國國家標準局】認可的
+      Perl版本？</li>
+  <li>Perl的相關資料要上哪兒找？</li>
+  <li>USENET上有哪些專門討論
+      Perl的新聞討論羣？問題該投到哪裏？</li>
+  <li>如果我想投程式原始碼，該投到哪個板子上？</li>
+  <li>Perl 書籍</li>
+  <li>和 Perl 有關的雜誌</li>
+  <li>網路上的 Perl：接觸 FTP 和
+      WWW</li>
+  <li>有哪些討論 Perl
+      的郵件列表？</li>
+  <li>comp.lang.perl.misc 的檔案庫</li>
+  <li>如何購買商業版本的
+      Perl？</li>
+  <li>如果發現
+      bugs要向何處報告？</li>
+  <li>什麼是 perl.com? Perl Mongers? pm.org? perl.org?
+      cpan.org?
+    <br/>
+  </li>
+</ul>
+<p class="Pp"><b>perlfaq3: 編程工具</b></p>
+<p class="Pp">編程工具和編程支持</p>
+<ul class="Bl-bullet">
+  <li>我如何作 (任何事)?</li>
+  <li>如何以交互的方式使用
+      Perl?</li>
+  <li>有 Perl shell嗎?</li>
+  <li>怎樣查找我的系統中安裝了哪些模塊</li>
+  <li>如何替我的 Perl
+      程式除蟲?</li>
+  <li>如何檢測 (profile) 我的 perl
+      程式?</li>
+  <li>如何替我的
+      Perl程式作交叉參考
+      (cross-reference)?</li>
+  <li>有
+      Perl專用的美化列印程式
+      (pretty-printer)嗎?</li>
+  <li>有 Perl的 ctags 嗎?</li>
+  <li>有沒有一個 IDE
+      或圖形界面的 Perl
+      編輯器？</li>
+  <li>哪兒有 vi 用的 Perl 宏？</li>
+  <li>給 emacs用的
+      perl模式又要去哪抓呢?</li>
+  <li>如何在 Perl裏使用 curses?</li>
+  <li>X或 Tk如何與 Perl配合呢?</li>
+  <li>如何不靠 CGI或 Tk
+      幫助作出簡單的目錄（選單）?</li>
+  <li>如何讓我的
+      Perl程式跑得更快些?</li>
+  <li>如何讓我的 Perl
+      程序少用一些內存？</li>
+  <li>把局部變量的引用返回是不安全的做法嗎?</li>
+  <li>我如何釋放一個數組或散列以縮小我的程式尺寸?</li>
+  <li>如何讓我的 CGI腳本
+      (script)執行起來更有效率?</li>
+  <li>如何隱藏
+      Perl程式的原始碼?</li>
+  <li>如何把我的
+      Perl程式碼編譯成 byte code或
+    C?</li>
+  <li>怎樣把 Perl 編譯成 Java?</li>
+  <li>如何才能讓
+      <span class="Li">&#34;#!perl&#34;</span> 在 [MS-DOS,NT,...]
+      下起作用?</li>
+  <li>我能利用命令行寫出有用的程式嗎?</li>
+  <li>爲何一行的 perl
+      程式無法在我的
+      DOS/Mac/VMS系統上運作?</li>
+  <li>我得去哪裏學 Perl的
+      CGI或是 Web程式設計呢?</li>
+  <li>從哪裏可以學習面向對象的
+      Perl 編程？</li>
+  <li>從哪裏可以學習將 Perl
+      與 C 連接？[h2xs, xsubpp]</li>
+  <li>我已經閱讀了 perlembed,perlguts
+      等等，但是還是不能在我的
+      C 程序中嵌入
+      perl；我作錯了什麼？</li>
+  <li>我試着運行我的腳本時，看到了這樣的消息。它是什麼意思？</li>
+  <li>什麼是 MakeMaker?
+    <br/>
+  </li>
+</ul>
+<p class="Pp"><b>perlfaq4: 數據操作</b></p>
+<p class="Pp">操縱數字，日期，字符串，數組，散列以及各種其他數據類型。</p>
+<ul class="Bl-bullet">
+  <li>Why am I getting long decimals (eg, 19.9499999999999) instead of the
+      numbers I should be getting (eg, 19.95)?</li>
+  <li>Why isn&#39;t my octal data interpreted correctly?</li>
+  <li>Does Perl have a <i>round()</i> function? What about <i>ceil()</i> and
+      <i>floor()</i>? Trig functions?</li>
+  <li>How do I convert between numeric representations?</li>
+  <li>Why doesn&#39;t &amp; work the way I want it to?</li>
+  <li>How do I multiply matrices?</li>
+  <li>How do I perform an operation on a series of integers?</li>
+  <li>How can I output Roman numerals?</li>
+  <li>Why aren&#39;t my random numbers random?</li>
+  <li>How do I get a random number between X and Y?</li>
+  <li>How do I find the day or week of the year?</li>
+  <li>How do I find the current century or millennium?</li>
+  <li>How can I compare two dates and find the difference?</li>
+  <li>How can I take a string and turn it into epoch seconds?</li>
+  <li>How can I find the Julian Day?</li>
+  <li>How do I find yesterday&#39;s date?</li>
+  <li>Does Perl have a Year 2000 problem? Is Perl Y2K compliant?</li>
+  <li>How do I validate input?</li>
+  <li>How do I unescape a string?</li>
+  <li>How do I remove consecutive pairs of characters?</li>
+  <li>How do I expand function calls in a string?</li>
+  <li>How do I find matching/nesting anything?</li>
+  <li>How do I reverse a string?</li>
+  <li>How do I expand tabs in a string?</li>
+  <li>How do I reformat a paragraph?</li>
+  <li>How can I access or change N characters of a string?</li>
+  <li>How do I change the Nth occurrence of something?</li>
+  <li>How can I count the number of occurrences of a substring within a
+    string?</li>
+  <li>How do I capitalize all the words on one line?</li>
+  <li>How can I split a [character] delimited string except when inside
+      [character]?</li>
+  <li>How do I strip blank space from the beginning/end of a string?</li>
+  <li>How do I pad a string with blanks or pad a number with zeroes?</li>
+  <li>How do I extract selected columns from a string?</li>
+  <li>How do I find the soundex value of a string?</li>
+  <li>How can I expand variables in text strings?</li>
+  <li>What&#39;s wrong with always quoting &#34;$vars&#34;?</li>
+  <li>Why don&#39;t my &lt;&lt;HERE documents work?</li>
+  <li>What is the difference between a list and an array?</li>
+  <li>What is the difference between <span class="Li">$array</span>[1] and
+      <span class="Li">@array</span>[1]?</li>
+  <li>How can I remove duplicate elements from a list or array?</li>
+  <li>How can I tell whether a certain element is contained in a list or
+    array?</li>
+  <li>How do I compute the difference of two arrays? How do I compute the
+      intersection of two arrays?</li>
+  <li>How do I test whether two arrays or hashes are equal?</li>
+  <li>How do I find the first array element for which a condition is true?</li>
+  <li>How do I handle linked lists?</li>
+  <li>How do I handle circular lists?</li>
+  <li>How do I shuffle an array randomly?</li>
+  <li>How do I process/modify each element of an array?</li>
+  <li>How do I select a random element from an array?</li>
+  <li>How do I permute N elements of a list?</li>
+  <li>How do I sort an array by (anything)?</li>
+  <li>How do I manipulate arrays of bits?</li>
+  <li>Why does <i>defined()</i> return true on empty arrays and hashes?</li>
+  <li>How do I process an entire hash?</li>
+  <li>What happens if I add or remove keys from a hash while iterating over
+    it?</li>
+  <li>How do I look up a hash element by value?</li>
+  <li>How can I know how many entries are in a hash?</li>
+  <li>How do I sort a hash (optionally by value instead of key)?</li>
+  <li>How can I always keep my hash sorted?</li>
+  <li>What&#39;s the difference between &#34;delete&#34; and &#34;undef&#34;
+      with hashes?</li>
+  <li>Why don&#39;t my tied hashes make the defined/exists distinction?</li>
+  <li>How do I reset an <i>each()</i> operation part-way through?</li>
+  <li>How can I get the unique keys from two hashes?</li>
+  <li>How can I store a multidimensional array in a DBM file?</li>
+  <li>How can I make my hash remember the order I put elements into it?</li>
+  <li>Why does passing a subroutine an undefined element in a hash create
+    it?</li>
+  <li>How can I make the Perl equivalent of a C structure/C++ class/hash or
+      array of hashes or arrays?</li>
+  <li>How can I use a reference as a hash key?</li>
+  <li>How do I handle binary data correctly?</li>
+  <li>How do I determine whether a scalar is a number/whole/integer/float?</li>
+  <li>How do I keep persistent data across program calls?</li>
+  <li>How do I print out or copy a recursive data structure?</li>
+  <li>How do I define methods for every class/object?</li>
+  <li>How do I verify a credit card checksum?</li>
+  <li>How do I pack arrays of doubles or floats for XS code?
+    <br/>
+  </li>
+</ul>
+<p class="Pp"><b>perlfaq5: 文件和格式</b></p>
+<p class="Pp">I/O and the &#34;f&#34; issues: filehandles, flushing, formats,
+    and footers.</p>
+<ul class="Bl-bullet">
+  <li>How do I flush/unbuffer an output filehandle? Why must I do this?</li>
+  <li>How do I change one line in a file/delete a line in a file/insert a line
+      in the middle of a file/append to the beginning of a file?</li>
+  <li>How do I count the number of lines in a file?</li>
+  <li>How can I use Perl&#39;s <span class="Li">&#34;-i&#34;</span> option from
+      within a program?</li>
+  <li>How do I make a temporary file name?</li>
+  <li>How can I manipulate fixed-record-length files?</li>
+  <li>How can I make a filehandle local to a subroutine? How do I pass
+      filehandles between subroutines? How do I make an array of
+    filehandles?</li>
+  <li>How can I use a filehandle indirectly?</li>
+  <li>How can I set up a footer format to be used with <i>write()</i>?</li>
+  <li>How can I <i>write()</i> into a string?</li>
+  <li>How can I output my numbers with commas added?</li>
+  <li>How can I translate tildes (~) in a filename?</li>
+  <li>How come when I open a file read-write it wipes it out?</li>
+  <li>Why do I sometimes get an &#34;Argument list too long&#34; when I use
+      &lt;*&gt;?</li>
+  <li>Is there a leak/bug in <i>glob()</i>?</li>
+  <li>How can I open a file with a leading &#34;&gt;&#34; or trailing
+    blanks?</li>
+  <li>How can I reliably rename a file?</li>
+  <li>How can I lock a file?</li>
+  <li>Why can&#39;t I just open(FH, &#34;&gt;file.lock&#34;)?</li>
+  <li>I still don&#39;t get locking. I just want to increment the number in the
+      file. How can I do this?</li>
+  <li>All I want to do is append a small amount of text to the end of a file. Do
+      I still have to use locking?</li>
+  <li>How do I randomly update a binary file?</li>
+  <li>How do I get a file&#39;s timestamp in perl?</li>
+  <li>How do I set a file&#39;s timestamp in perl?</li>
+  <li>How do I print to more than one file at once?</li>
+  <li>How can I read in an entire file all at once?</li>
+  <li>How can I read in a file by paragraphs?</li>
+  <li>How can I read a single character from a file? From the keyboard?</li>
+  <li>How can I tell whether there&#39;s a character waiting on a filehandle?</li>
+  <li>How do I do a <span class="Li">&#34;tail -f&#34;</span> in perl?</li>
+  <li>How do I <i>dup()</i> a filehandle in Perl?</li>
+  <li>How do I close a file descriptor by number?</li>
+  <li>Why can&#39;t I use &#34;C:\temp\foo&#34; in DOS paths? What doesn&#39;t
+      `C:\temp\foo.exe` work?</li>
+  <li>Why doesn&#39;t glob(&#34;*.*&#34;) get all the files?</li>
+  <li>Why does Perl let me delete read-only files? Why does
+      <span class="Li">&#34;-i&#34;</span> clobber protected files? Isn&#39;t this
+      a bug in Perl?</li>
+  <li>How do I select a random line from a file?</li>
+  <li>Why do I get weird spaces when I print an array of lines?
+    <br/>
+  </li>
+</ul>
+<p class="Pp"><b>perlfaq6: 正則表達式</b></p>
+<p class="Pp">模式匹配和正則表達式。</p>
+<ul class="Bl-bullet">
+  <li>我該如何使用正規表示式纔不至於寫出不合語法且難以維護的程式碼?</li>
+  <li>我無法匹配超過一行的內容，哪裏出了問題?</li>
+  <li>我如何取出位於不同行的兩個模式間之內容?</li>
+  <li>我把一個正規表示式放入
+      $/但卻沒有用。錯在哪裏?</li>
+  <li>如何在
+      LHS端【譯註：式子中運算元左端部份】作不區別大小寫式的替換，但在
+      RHS端【右端】保留大小寫區別?</li>
+  <li>如何使 <span class="Li">&#34;\w&#34;</span>
+      對應到附重音記號
+      (accented)的字元?</li>
+  <li>如何作一個適合不同
+      locale【譯註：語言環境，國家地區在文字編碼上各自的慣例】的
+      <span class="Li">&#34;/[a-zA-Z]/&#34;</span> 對應?</li>
+  <li>在一個正規表示式裏如何引入
+      (quote) 變量?</li>
+  <li><span class="Li">&#34;/o&#34;</span>
+      到底是幹麼用的?</li>
+  <li>如何使用正規表示式將檔案中
+      C語言樣式的註解刪掉?</li>
+  <li>我能用
+      Perl的正規表示式去對應成對的符號嗎?</li>
+  <li>有人說正規表示式很貪婪，那是什麼意思?該如何避免它所帶來的問題?</li>
+  <li>如何處理每一行的每個字?</li>
+  <li>我如何印出文字出現頻率或行出現頻率的綱要?</li>
+  <li>如何能作近似對應?</li>
+  <li>我如何有效率地一次對應多個正規表示式?</li>
+  <li>爲何我用 <span class="Li">&#34;\b&#34;</span>
+      作字界搜尋時會失敗呢?</li>
+  <li>爲什麼每當我用 $&amp;,
+      $`,或
+      $&#39;時程式的速度就慢下來了呢?</li>
+  <li>正規表示式中的
+      <span class="Li">&#34;\G&#34;</span>
+      能給我什麼好處?</li>
+  <li>Perl正規表示引擎是 DFA 或
+      NFA?它們是 POSIX 相容的嗎?</li>
+  <li>在無返回值上下文中用
+      grep或 map有什麼不對?</li>
+  <li>如何對應多位元組字母所構成的字串?</li>
+  <li>如何匹配用戶提供的模式？
+    <br/>
+  </li>
+</ul>
+<p class="Pp"><b>perlfaq7: 綜合的問題</b></p>
+<p class="Pp">綜合的 Perl
+    語言問題，不適於在其他所有段落中討論的問題</p>
+<ul class="Bl-bullet">
+  <li>我能拿到 Perl的
+    BNF/yacc/RE嗎？</li>
+  <li>$@%*這些符號是什麼意思？我怎麼知道何時該使用他們呢？</li>
+  <li>字串加引號或使用分號及逗號是否絕對必要/還是完全沒必要？</li>
+  <li>我如何跳過一些傳回值？</li>
+  <li>我如何暫時濾掉警告訊息？</li>
+  <li>什麼是一個擴充
+      (extension)？</li>
+  <li>爲何
+      Perl運算子的優先順序和
+      C的不一樣？</li>
+  <li>我如何聲明/創建一個數據結構？</li>
+  <li>如何創建一個模塊？</li>
+  <li>如何創建一個類？</li>
+  <li>如何知道一個變量是否是污染的？</li>
+  <li>什麼是閉包？</li>
+  <li>什麼是變量自殺，我應該怎樣防止它？</li>
+  <li>如何傳遞/返回一個{函數
+      Function, 文件句柄 FileHandle, 數組
+      Array, 散列 Hash, 方法 Method,
+      正則表達式 Regex}?</li>
+  <li>如何創建一個靜態變量？</li>
+  <li>動態和靜態作用域有什麼區別？<i>local()</i>
+      和 <i>my()</i> 呢?</li>
+  <li>在存在同名內部變量的作用域中，如何存取一個動態變量？</li>
+  <li>深連接和淺連接有什麼不同？</li>
+  <li>爲什麼 &#34;my($foo) = &lt;FILE&gt;;&#34;
+      不工作？</li>
+  <li>如何重定義一個內建函數，操作符
+      或者方法？</li>
+  <li>調用函數時 &amp;foo 和 <i>foo()</i>
+      的形式有什麼不同?</li>
+  <li>如何創建一個分支語句？</li>
+  <li>如何捕獲對未定義變量，函數或方法的訪問？</li>
+  <li>爲什麼找不到包含在同一個文件中的方法？</li>
+  <li>如何找到當前的包？</li>
+  <li>如何註釋掉大塊的 perl
+      代碼？</li>
+  <li>如何清空一個包？</li>
+  <li>如何使用變量值作爲一個變量名？</li>
+  <li>&#34;bad interpreter&#34; 是什麼意思?
+    <br/>
+  </li>
+</ul>
+<p class="Pp"><b>perlfaq8: 系統交互</b></p>
+<p class="Pp">進程間通信 (IPC),
+    用戶界面控制
+    (鍵盤，屏幕和指點設備)。</p>
+<ul class="Bl-bullet">
+  <li>如何找出正在運行的操作系統？</li>
+  <li>爲什麼 <i>exec()</i> 不返回?</li>
+  <li>如何對鍵盤／螢幕／滑鼠做些花樣？</li>
+  <li>如何打印有顏色的內容？</li>
+  <li>如何只讀取一個鍵而不等待按下回車？</li>
+  <li>如何檢測鍵盤上已有輸入？</li>
+  <li>如何清屏？</li>
+  <li>如何獲取屏幕大小？</li>
+  <li>如何向使用者詢問密碼？</li>
+  <li>如何讀寫串口？</li>
+  <li>如何解碼加密的口令文件？</li>
+  <li>如何在後臺開啓進程？</li>
+  <li>如何截獲控制字符/信號？</li>
+  <li>在 Unix 系統中如何修改
+      shadow 文件？</li>
+  <li>如何設置時間和日期？</li>
+  <li>如何 <i>sleep()</i> 或 <i>alarm()</i>
+      少於一秒的時間?</li>
+  <li>如何測度少於一秒的時間？</li>
+  <li>如何做 atexit()或
+      setjmp()/longjmp()的動作？（異常處理）</li>
+  <li>爲何我的 sockets程式在 System V
+      (Solaris)系統下不能用？「不支持的協議」這個錯誤訊息又是什麼意思？</li>
+  <li>如何從
+      Perl裏呼叫系統中獨特的
+      C函數？</li>
+  <li>在哪裏可以找引入檔來做
+      ioctl()或 syscall()？</li>
+  <li>爲何 setuid
+      perl程式會抱怨關於系統核心的問題？</li>
+  <li>如何打開對某程式既輸入又輸出的管道
+      (pipe)？</li>
+  <li>爲何用
+      system()卻得不到一個指令的輸出呢？</li>
+  <li>如何補捉外部指令的
+      STDERR？</li>
+  <li>爲何當管道開啓失敗時
+      open()不會傳回錯誤訊息？</li>
+  <li>在輸出值是空的情境裏使用反向引號有何不對？</li>
+  <li>如何不經過
+      shell處理來呼叫反向引號？</li>
+  <li>爲何給了 EOF（Unix上是
+      ^D，MS-DOS上是
+      ^Z）後我的程式就不能從
+      STDIN讀取東西了呢？</li>
+  <li>如何把 shell程式轉成
+      perl？</li>
+  <li>perl能處理 telnet或 ftp
+      會話嗎？</li>
+  <li>如何在 Perl裏達到
+      Expect的功能？</li>
+  <li>有沒有可能將
+      perl的指令列隱藏起來，以躲避像
+      &#34;ps&#34;之類的程式？</li>
+  <li>我在 perl script裏
+      {更動目錄，更改我的使用環境}。爲何這些改變在程式執行完後就消失了呢？如何讓我做的修改顯露出來？</li>
+  <li>如何關閉一個程序的文件句柄而不用等它完成呢？</li>
+  <li>如何 fork
+      一個守護進程？</li>
+  <li>如何知道自己是否在交互地運行？</li>
+  <li>如何爲緩慢的事件設置超時？</li>
+  <li>如何設置 CPU 限額?</li>
+  <li>如何避免在 Unix
+      系統中產生殭屍進程？</li>
+  <li>如何使用 SQL 數據庫?</li>
+  <li>如何使 <i>system()</i> 在收到
+      control-C 時退出?</li>
+  <li>如何無阻塞地打開一個文件？</li>
+  <li>如何從 CPAN 安裝模塊?</li>
+  <li>require 和 use
+      的區別是什麼？</li>
+  <li>如何設置我自己的模塊/庫路徑？</li>
+  <li>如何將我自己的程序的路徑加入到模塊/庫搜索路徑中？</li>
+  <li>如何在運行時將一個目錄加入到我的
+      include 路徑中？</li>
+  <li>什麼是
+      socket.ph，從哪兒可以得到它？
+    <br/>
+  </li>
+</ul>
+<p class="Pp"><b>perlfaq9: 網絡</b></p>
+<p class="Pp">網絡通信，互聯網以及少量有關
+    web 的內容</p>
+<ul class="Bl-bullet">
+  <li>一個 CGI
+      腳本的迴應的正確格式是什麼？</li>
+  <li>我的 CGI
+      腳本從命令行執行正常，但是在瀏覽器中不行
+      (500 Server Error)。</li>
+  <li>如何從 CGI
+      程序中得到好一點的錯誤提示？</li>
+  <li>如何將字符串中的 HTML
+      刪除？</li>
+  <li>如何展開 URL?</li>
+  <li>如何從用戶的機器上下載文件？如何打開其他機器上的文件？</li>
+  <li>如何在 HTML
+      添加一個彈出菜單?</li>
+  <li>如何獲取 HTML 文件?</li>
+  <li>如何根據提交的內容自動生成一個
+      HTML ?</li>
+  <li>如何解碼或創建 web
+      中的 %-encoding?</li>
+  <li>如何重定向到其他頁面？</li>
+  <li>如何爲我的網頁加上密碼？</li>
+  <li>如何用 Perl 修改我的 .htpasswd
+      和 .htgroup 文件?</li>
+  <li>如何確保用戶不會在表單中輸入使我的
+      CGI 腳本作壞事的值？</li>
+  <li>如何解釋一個郵件頭？</li>
+  <li>如何解碼一個 CGI
+      表單？</li>
+  <li>如何檢測一個有效的郵件地址？</li>
+  <li>如何解碼一個 MIME/BASE64
+      字符串?</li>
+  <li>如何返回用戶的郵件地址？</li>
+  <li>如何發郵件？</li>
+  <li>如何使用 MIME
+      來爲郵件消息增加附件？</li>
+  <li>如何讀郵件？</li>
+  <li>如何找到我的主機名/域名/IP
+      地址？</li>
+  <li>如何獲取一篇新聞文章或活動的新聞組？</li>
+  <li>如何獲取/上傳一個 FTP
+      文件?</li>
+  <li>如何進行遠程過程調用
+      RPC ?</li>
+</ul>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="譯者">譯者<a class="anchor" href="#%E8%AD%AF%E8%80%85">¶</a></h1>
+<b>蕭百齡，兩隻老虎工作室，bbbush</b>
+<br/>
+<p class="Pp"><b>跋</b></p>
+<p class="Pp">本頁面中文版由中文
+    man 手冊頁計劃提供。
+  <br/>
+  中文 man
+    手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-25</td>
+    <td class="foot-os">perl v5.8.3</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+perlfaq.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-28T03:40:58Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"perlfaq(7)\"}}]}"
+</script>

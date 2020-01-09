@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>perlsec(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/perlsec.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/perlsec.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; perlsec(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlsec.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlsec.7.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SEE_ALSO_%E5%8F%82%E8%A7%81" title="SEE ALSO 参见">SEE ALSO 参见</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA" title="中文版维护人">中文版维护人</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0" title="中文版最新更新">中文版最新更新</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92" title="中文手册页翻译计划">中文手册页翻译计划</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlsec.7.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/perlsec.7.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/perlsec.7.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlsec.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlsec.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/perl-doc/perlsec.1.en.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlsec.7.zh_CN.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">PERLSEC(7)</td>
+    <td class="head-vol">Perl Programmers Reference Guide</td>
+    <td class="head-rtitle">PERLSEC(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+perlsec - Perl 安全
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+Perl可以轻松写出安全的程序，即使运行时有特殊权限，比如setuid或setgid程序。许多脚本的命令行里有多项替换语句，Perl却不是这样，它使用更多传统方法而少有艰深。而且，由于perl语言有更多内在功能，它可以更少的依赖于其他（可能不可信的）程序来完成根本目的。
+<p class="Pp">
+  
+    当Perl检测到程序中真实的用户或组ID与有效用户或组ID不同时，它自动地开启一种叫做“污染模式”特殊的安全性检测。setuid的unix的权限位是04000，setgid
+    的UNIX权限位是02000；它们都有可能被设置。你也可以用命令行标识
+    <b>-T</b>
+    明确地开启“污染模式”。强烈建议服务器程序或者在以其他人身份运行的程序（比如CGI脚本）使用此标识符。一旦污染模式被打开，它在脚本的余下内容中一直开启。</p>
+<p class="Pp">在“污染模式”中，Perl使用叫做“污染检测”的特殊预防方法来防止明显的和不易被察觉的陷阱。一些检测相当简单，如检查路径目录以确定它们对其他人是不可写的；小心的程序员一向做此类检测。其他的检测已经得到Perl本身最好的支持，这些检测尤其使写一个set-id的Perl程序比相应的C程序更安全。</p>
+<p class="Pp">你不可以使用来自程序之外的数据来影响程序之外的事情——至少不是偶然的。所有命令行参数，环境变量，本地信息（参见perllocale），特定系统调用的结果（readdir(),readlink(),shmread()的变量,msgrcv()的返回信息,getpwxxx()调用返回的密码、gcos和shell域）和所有文件输入都被标记成“污染的”。“污染的”数据既不可以直接或间接在任何调用一个子shell命令中使用，也不能在任何修改文件、目录或进程的命令中使用，但有以下例外：</p>
+<ul class="Bl-bullet">
+  <li>print和syswrite的参数不被检查是否被污染。</li>
+  <li>符号方法
+    <p class="Pp"></p>
+    <pre>    $obj-&gt;$method(@args);
+    </pre>
+    <p class="Pp">以及符号的子引用</p>
+    <p class="Pp"></p>
+    <pre>    &amp;{$foo}(@args);
+    $foo-&gt;(@args);
+    </pre>
+    <p class="Pp">不会被检查是否被污染。这要求额外的小心，除非你希望外部数据影响你的控制流。除非你小心地限制这些符号值是什么，人们可以从
+        Perl
+        代码外部调用函数，类似
+        POSIX::system，来运行任意外部代码。</p>
+  </li>
+</ul>
+<p class="Pp">为了效率原因，Perl
+    对数据是否已被污染持保守的看法。如果一个表达式包含污染的数据，任何子表达式都被认为污染的，即使自表达式的值与污染的数据无关</p>
+<p class="Pp">由于污染与每个标量值相关，一个数组或散列的元素可以只有一部分被污染。散列的键永远不会被污染。</p>
+<p class="Pp">例如：</p>
+<p class="Pp"></p>
+<pre>    $arg = shift;               # $arg 是污染的
+    $hid = $arg, &#39;bar&#39;;         # $hid 也是污染的
+    $line = &lt;&gt;;                 # 污染的
+    $line = &lt;STDIN&gt;;            # 仍旧是污染的
+    open FOO, &#34;/home/me/bar&#34; or die $!;
+    $line = &lt;FOO&gt;;              # 还是污染的
+    $path = $ENV{&#39;PATH&#39;};       # 污染的, 但是请看下面
+    $data = &#39;abc&#39;;              # 非污染的
+</pre>
+<p class="Pp"></p>
+<pre>    system &#34;echo $arg&#34;;         # 不安全的
+    system &#34;/bin/echo&#34;, $arg;   # 认为不安全
+                                # (Perl 不知道 /bin/echo)
+    system &#34;echo $hid&#34;;         # 不安全的
+    system &#34;echo $data&#34;;        # 如果PATH被设定，那么才是安全的
+</pre>
+<p class="Pp"></p>
+<pre>    $path = $ENV{&#39;PATH&#39;};       # $path 现在是污染的
+</pre>
+<p class="Pp"></p>
+<pre>    $ENV{&#39;PATH&#39;} = &#39;/bin:/usr/bin&#39;;
+    delete @ENV{&#39;IFS&#39;, &#39;CDPATH&#39;, &#39;ENV&#39;, &#39;BASH_ENV&#39;};
+</pre>
+<p class="Pp"></p>
+<pre>    $path = $ENV{&#39;PATH&#39;};       # $path 现在不是污染的
+    system &#34;echo $data&#34;;        # 现在是安全的!
+</pre>
+<p class="Pp"></p>
+<pre>    open(FOO, &#34;&lt; $arg&#34;);        # OK - 只读文件
+    open(FOO, &#34;&gt; $arg&#34;);        # Not OK - 试图去写
+</pre>
+<p class="Pp"></p>
+<pre>    open(FOO,&#34;echo $arg⎪&#34;);     # Not OK
+    open(FOO,&#34;-⎪&#34;)
+        or exec &#39;echo&#39;, $arg;   # 同样 not OK
+</pre>
+<p class="Pp"></p>
+<pre>    $shout = `echo $arg`;       # 不安全的, $shout 现在是污染的
+</pre>
+<p class="Pp"></p>
+<pre>    unlink $data, $arg;         # 不安全的
+    umask $arg;                 # 不安全的
+</pre>
+<p class="Pp"></p>
+<pre>    exec &#34;echo $arg&#34;;           # 不安全的
+    exec &#34;echo&#34;, $arg;          # 不安全的
+    exec &#34;sh&#34;, &#39;-c&#39;, $arg;      # 非常不安全！
+</pre>
+<p class="Pp"></p>
+<pre>    @files = &lt;*.c&gt;;             # 不安全的 (使用 readdir() 或其他)
+    @files = glob(&#39;*.c&#39;);       # 不安全的 (使用 readdir() 或其他)
+</pre>
+<p class="Pp"></p>
+<pre>    # In Perl releases older than 5.6.0 the &lt;*.c&gt; and glob(&#39;*.c&#39;) would
+    # have used an external program to do the filename expansion; but in
+    # either case the result is tainted since the list of filenames comes
+    # from outside of the program.
+</pre>
+<p class="Pp"></p>
+<pre>    $bad = ($arg, 23);          # $bad will be tainted
+    $arg, `true`;               # Insecure (although it isn&#39;t really)
+</pre>
+<p class="Pp">如果你试图做一些不安全的事情，你会得到类似&#34;Insecure
+    dependency&#34;或&#34;Insecure
+    $ENV{PATH}&#34;的致命错误。
+  <br/>
+</p>
+<p class="Pp"><b>Laundering and Detecting Tainted Data
+    清洗和检测污染数据</b></p>
+<p class="Pp">测试一个变量是否含有污染的数据，谁的用法会引发一条&#34;Insecure
+    dependency&#34;信息，在你附近的CPAN镜像查找Taint.pm模块，它应该在1997年左右就可以得到
+    。或者你可以用is_tainted()函数。</p>
+<p class="Pp"></p>
+<pre>    sub is_tainted {
+        return ! eval { eval(&#34;#&#34; . substr(join(&#34;&#34;, @_), 0, 0)); 1 };
+    }
+</pre>
+<p class="Pp">此函数利用了“表达式中任何一部分存在的污染数据致使整个表达式都被污染”。操作员测试每个参数是否被污染会使效率低下。相反，稍稍高效且稳定的方法是，只要一个表达式中任何一部分存取一个被污染的值，那么这个表达式被认为是被污染的。</p>
+<p class="Pp">但是仅仅测试数据是否被污染还不够。有时你必须清除数据的污染。唯一的通过污染机制的方法是引用正则表达式中的一个子模式。Perl假定如果你用$1,
+    $2等等引用一个子串，那么你就知道你在做什么。也就是说你必须思考而不是盲目的解除污染，或者违抗整个机制。校验变量是否只含有好的字符（已知的好的字符）比检查它是否含有坏的字符要好。是因为很可能就把意料之外的坏字符漏掉。</p>
+<p class="Pp">下面的例子是一个检查数据中是否只含有单词（字母、数字、下划线）、连字符、&#39;@&#39;符号或者是&#39;.&#39;。</p>
+<p class="Pp"></p>
+<pre>    if ($data =~ /^([-\@\w.]+)$/) {
+        $data = $1;                     # $data now untainted
+    } else {
+        die &#34;Bad data in &#39;$data&#39;&#34;;      # log this somewhere
+    }
+</pre>
+<p class="Pp">这完全没有问题，因为/1128/从理论上讲会不安全，因为它匹配任何字符，而Perl将不再检查它们。我们的经验是当你解除污染时，必须对匹配模式极其的小心。使用正则表达式清洗数据是解除污染的唯一机制，除非你使用下面才详细叙述的派生一个特权被降低的字进程的方法。</p>
+<p class="Pp">如果程序中使用了use
+    locale，那么上面的例子将不会解除$data的污染，因为168[u914D]的字符是由locale决定的。Perl认为locale的定义是不可信的，因为它们包含程序之外
+    的数据。如果你在写一个locale-aware的程序，并且想使用包含168[u6B63]则表达式清洗数据，那么请在同一块内的表达式之前加上no
+    locale。参见perllocale/SECURITY以获
+    得更多的信息。
+  <br/>
+</p>
+<p class="Pp"><b></b></p>
+<p class="Pp">当你使脚本程序可执行，就是可以像命令一样让它们工作时，系统会把&#34;#!&#34;行的开关传递给Perl。Perl检查setuid（或setgid）程序的任何和&#34;#!&#34;行开关匹配的命令行开关。一些Unix或Unix-like系统环境强制在&#34;#!&#34;行使用一个开关，所以你也许必须用类似-wU的开关而不是-w
+    -U。（这个问题只出现在支持#!、setuid、setgid脚本的Unix或Unix-like系统环境中）
+  <br/>
+</p>
+<p class="Pp"><b>Taint mode and @INC</b></p>
+<p class="Pp">When the taint mode (<span class="Li">&#34;-T&#34;</span>) is in
+    effect, the &#34;.&#34; directory is removed from
+    <span class="Li">@INC</span>, and the environment variables
+    <span class="Li">&#34;PERL5LIB&#34;</span> and
+    <span class="Li">&#34;PERLLIB&#34;</span> are ignored by Perl. You can
+    still adjust <span class="Li">@INC</span> from outside the program by using
+    the <span class="Li">&#34;-I&#34;</span> command line option as explained
+    in perlrun. The two environment variables are ignored because they are
+    obscured, and a user running a program could be unaware that they are set,
+    whereas the <span class="Li">&#34;-I&#34;</span> option is clearly visible
+    and therefore permitted.</p>
+<p class="Pp">Another way to modify <span class="Li">@INC</span> without
+    modifying the program, is to use the <span class="Li">&#34;lib&#34;</span>
+    pragma, e.g.:</p>
+<p class="Pp"></p>
+<pre>  perl -Mlib=/foo program
+</pre>
+<p class="Pp">The benefit of using
+    <span class="Li">&#34;-Mlib=/foo&#34;</span> over
+    <span class="Li">&#34;-I/foo&#34;</span>, is that the former will
+    automagically remove any duplicated directories, while the later will not.
+  <br/>
+</p>
+<p class="Pp"><b>Cleaning Up Your Path 清理路径</b></p>
+<p class="Pp">对于&#34;Insecure
+    $ENV{PATH}&#34;这样的信息，你必须把$ENV{PATH}设置为已知的，并且路径中的任何目录都对于非本用户或非本组成员不可写。你也许会在即使路径名是完全合法的情况下收到那条信息表示非常惊讶。当你没有提供程序一个完整的路径时，它不会被引起；相反，若你从未设置PATH环境变量，或者你没有把它设置安全，它就会被引起。因为Perl不能保证可疑的可执行程序是不是它本身将执行其他的依赖于PATH的程序，它确定是你设定的PATH。</p>
+<p class="Pp">PATH不是唯一可能导致问题的变量。因为一些shell会使用IFS，CDPATH，ENV和BASH_ENV，Perl在开始子进程时检查它们是否也为空或者未污染。你也许会在你的set-id和污染检测模式下的脚本程序中加入这些东西：</p>
+<p class="Pp"></p>
+<pre>    delete @ENV{qw(IFS CDPATH ENV BASH_ENV)};   # 使 %ENV 更安全
+</pre>
+<p class="Pp">当然，无论是否使用污染变量都有可能出现麻烦。在处理任何由用户提供的文件名的文件时，要做周密的测试。必须时，可以在去掉用户（或组！）的特权之后再进行类似open的操作。Perl不阻止你打开污染的文件名并读取内容，所以要小心对待打印出的内容。污染机制的目的是防止愚蠢的错误，不是使人懒惰不去思考。</p>
+<p class="Pp">当你传递给system和exec明确的参数列表而非含有通配符的字符串时，Perl不会调用shell去扩展通配符。不幸的是，open，glob，backtick（译注：backtick为反引号）函数并不提供这样的特性，所以当使用它们的时候必须非常仔细。</p>
+<p class="Pp">Perl为从一个setuid或setgid程序打开文件或管道提供了一个安全的方法：创建一个减少权限的子进程来为你完成那些“肮脏”的工作。首先，用特殊的OPEN语法创建一个子进程，使其和父进程通过一个管道相连。现在子进程把它的ID和其他诸如环境变量，umask，当前工作目录的性质重新设置回原始的或安全的变量。然后让该不具有任何特权的子进程来完成OPEN和其他的系统调用。最终，子进程把它成功存取的数据传递给父进程。因为文件或管道是由运行于比父进程权限低的子进程打开的，所以它不容易被欺骗去做它不该做的事情。</p>
+<p class="Pp">这里有一个安全使用backtick的方法。注意当shell可能扩展时，exec是如何不被调用的。这是目前来调用可能被shell转义的东西最好的方法：从不调用shell。</p>
+<p class="Pp"></p>
+<pre>        use English &#39;-no_match_vars&#39;;
+        die &#34;Can&#39;t fork: $!&#34; unless defined($pid = open(KID, &#34;-⎪&#34;));
+        if ($pid) {           # parent
+            while (&lt;KID&gt;) {
+                # do something
+            }
+            close KID;
+        } else {
+            my @temp     = ($EUID, $EGID);
+            my $orig_uid = $UID;
+            my $orig_gid = $GID;
+            $EUID = $UID;
+            $EGID = $GID;
+            # Drop privileges
+            $UID  = $orig_uid;
+            $GID  = $orig_gid;
+            # Make sure privs are really gone
+            ($EUID, $EGID) = @temp;
+            die &#34;Can&#39;t drop privileges&#34;
+                unless $UID == $EUID  &amp;&amp; $GID eq $EGID;
+            $ENV{PATH} = &#34;/bin:/usr/bin&#34;; # Minimal PATH.
+            # Consider sanitizing the environment even more.
+            exec &#39;myprog&#39;, &#39;arg1&#39;, &#39;arg2&#39;
+                or die &#34;can&#39;t exec myprog: $!&#34;;
+        }
+</pre>
+<p class="Pp">
+  
+    使用类似的策略可以让glob使用通配符扩展，虽然也可以用readdir。</p>
+<p class="Pp">当你虽然相信自己并没有写有问题的程序，但并不信任程序的最终使用者不会企图让它做坏事时，污染检测最为有用。此类安全检查对set-id和以其他用户身份运行的程序（如CGI）非常有用。</p>
+<p class="Pp">若连程序的作者都不可信的话，情况就不同了。当某人给你一段程序并和你说，“给，试试看。”对于此类安全问题，使用包含在Perl发行版中的Safe模块。这个模块允许程序员建立特殊的隔间，在其中所有的系统调用都被截获，并且名字空间入口被严格控制。
+  <br/>
+</p>
+<p class="Pp"><b>Security Bugs 安全问题</b></p>
+<p class="Pp">除了源于赋予像脚本一样灵活的系统特权这类明显的问题，在许多Unix版本中，set-id脚本从一开始就是天生不安全的。问题出在内核的条件竞争。在内核打开文件来查看应该运行哪个解释器和当（现在已set-id）解释器回过头来重新打开文件并解释它的这两个事件之间，可疑的文件也许已经改变了，特别是当系统中有符号连接时。</p>
+<p class="Pp">幸运的是，这个内核的“特性”有时可以被关闭。不幸的是，有两个方法来关闭它。系统可以简单的宣布任何含有set-id位的脚本都是不合法的，这个显然用处不大。另一个是忽略脚本中的set-id位。如果后者被设置为真，那么当Perl注意到其它脚本中无效的setuid/gid位时,它可以模仿
+    setuid和setgid的机制。这是通过一个叫做suidperl的特殊程序来实现的，它在需要时自动被调用。</p>
+<p class="Pp">但是，如果内核的set-id脚本特性没有被关闭，Perl就会大声抱怨你的set-id程序是不安全的。你要么需要关闭内核的set-id脚本特性，要么为脚本制作一个C
+    Wrapper。一个C
+    Wrapper就是一个除了调用你的Perl程序其他什么都不干的已编译程序。已编译程序不受此内核问题的影响去找set-id脚本的麻烦。这里有一个简单的C
+    Wrapper：</p>
+<p class="Pp"></p>
+<pre>    #define REAL_PATH &#34;/path/to/script&#34;
+    main(ac, av)
+        char **av;
+    {
+        execv(REAL_PATH, av);
+    }
+</pre>
+<p class="Pp">把此C
+    Wrapper编译成可执行二进制文件，对它setuid或setgid而不是你的脚本。</p>
+<p class="Pp">近几年，软件商开始提供没有此安全问题的系统。在它们中，当内核把将要被打开的set-id脚本的名字传递给解释器时，它将不会传递可能出现问题的路径名而是传递/dev/fd/3。这是一个已经在脚本上打开的特殊文件，所以将不会出现条件竞争问题。在这些系统中，Perl需要在编译时带上-DSETUID_SCRIPTS_ARE_SECURE_NOW参数。Configure程序将自己完成这个任务，所以你永远不必要自己指出此点。现在SVR4和BSD4.4都采用此种方法来避免内核条件竞争。</p>
+<p class="Pp">在Perl 5.6.1
+    发行之前，suidperl的代码问题可能导致安全漏洞。
+  <br/>
+</p>
+<p class="Pp"><b>Protecting Your Programs
+    保护你的程序</b></p>
+<p class="Pp">有很多种方法可以隐藏你的Perl程序源代码，它们具有不同等级的“安全性”。</p>
+<p class="Pp">首先，你不能去掉“读”权限，因为源代码必须在被读取之后才能编译和解释。（这并不意味着CGI脚本的源代码在网上是可被读取的）所以你必须把权限设置为对外界友好的0755。这使在你本地系统上的人只能查看源代码。</p>
+<p class="Pp">一些人错误的认为这是一个安全问题。如果你的程序不安全，而你依赖人们不知道如何利用这些漏洞，这是不安全的。通常某些人在没有看源代码的情况下就可以利用这些漏洞。以隐藏来实现所谓的“安全”而不是修复漏洞，是非常不安全的。</p>
+<p class="Pp">你可以试着通过源代码过滤器（CPAN上的Filter::*）来实现加密。但是骇客有可能把它解密。你可以试着使用下面描述的字节码编译器和解释器，但是骇客有可能把它反编译。这些对想看你代码的人造成不同难度的困难。但是没有一种可以完全的避免（不光是Perl，所有语言都一样）。</p>
+<p class="Pp">如果你担心有人会通过你的程序得利，那么你可以在最低行写一个限制性的许可证来寻求法律保护。当然如果你用类似“这是某某公司的私人程序，你无权使用它”的声明来授权你的软件并发布它的话，那会是非常危险的。你应该找一个律师确定你的许可证的措辞可以在法庭上站得住脚。
+  <br/>
+</p>
+<p class="Pp"><b>Unicode</b></p>
+<p class="Pp">Unicode is a new and complex technology and one may easily
+    overlook certain security pitfalls. See perluniintro for an overview and
+    perlunicode for details, and &#34;Security Implications of Unicode&#34; in
+    perlunicode for security implications in particular.
+  <br/>
+</p>
+<p class="Pp"><b>Algorithmic Complexity Attacks</b></p>
+<p class="Pp">Certain internal algorithms used in the implementation of Perl can
+    be attacked by choosing the input carefully to consume large amounts of
+    either time or space or both. This can lead into the so-called <i>Denial of
+    Service</i> (DoS) attacks.</p>
+<ul class="Bl-bullet">
+  <li>Hash Function - the algorithm used to &#34;order&#34; hash elements has
+      been changed several times during the development of Perl, mainly to be
+      reasonably fast. In Perl 5.8.1 also the security aspect was taken into
+      account.
+    <p class="Pp">In Perls before 5.8.1 one could rather easily generate data
+        that as hash keys would cause Perl to consume large amounts of time
+        because internal structure of hashes would badly degenerate. In Perl
+        5.8.1 the hash function is randomly perturbed by a pseudorandom seed
+        which makes generating such naughty hash keys harder. See
+        &#34;PERL_HASH_SEED&#34; in perlrun for more information.</p>
+    <p class="Pp">The random perturbation is done by default but if one wants
+        for some reason emulate the old behaviour one can set the environment
+        variable PERL_HASH_SEED to zero (or any other integer). One possible
+        reason for wanting to emulate the old behaviour is that in the new
+        behaviour consecutive runs of Perl will order hash keys differently,
+        which may confuse some applications (like Data::Dumper: the outputs of
+        two different runs are no more identical).</p>
+    <p class="Pp"><b>Perl has never guaranteed any ordering of the hash
+        keys</b>, and the ordering has already changed several times during the
+        lifetime of Perl 5. Also, the ordering of hash keys has always been, and
+        continues to be, affected by the insertion order.</p>
+    <p class="Pp">Also note that while the order of the hash elements might be
+        randomised, this &#34;pseudoordering&#34; should <b>not</b> be used
+        for applications like shuffling a list randomly (use
+        <i>List::Util::shuffle()</i> for that, see List::Util, a standard core
+        module since Perl 5.8.0; or the CPAN module
+        Algorithm::Numerical::Shuffle), or for generating permutations (use e.g.
+        the CPAN modules Algorithm::Permute or Algorithm::FastPermute), or for
+        any cryptographic applications.</p>
+  </li>
+  <li>Regular expressions - Perl&#39;s regular expression engine is so called NFA
+      (Non-Finite Automaton), which among other things means that it can rather
+      easily consume large amounts of both time and space if the regular
+      expression may match in several ways. Careful crafting of the regular
+      expressions can help but quite often there really isn&#39;t much one can do
+      (the book &#34;Mastering Regular Expressions&#34; is required reading,
+      see perlfaq2). Running out of space manifests itself by Perl running out
+      of memory.</li>
+  <li>Sorting - the quicksort algorithm used in Perls before 5.8.0 to implement
+      the <i>sort()</i> function is very easy to trick into misbehaving so that
+      it consumes a lot of time. Nothing more is required than resorting a list
+      already sorted. Starting from Perl 5.8.0 a different sorting algorithm,
+      mergesort, is used. Mergesort is insensitive to its input data, so it
+      cannot be similarly fooled.</li>
+</ul>
+<p class="Pp">See &lt;<a href="../../~scrosby/hash/">../../~scrosby/hash/</a>&gt; for more
+    information, and any computer science text book on the algorithmic
+    complexity.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SEE_ALSO_参见">SEE ALSO 参见<a class="anchor" href="#SEE_ALSO_%E5%8F%82%E8%A7%81">¶</a></h1>
+perlrun中关于清理环境变量的描述
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文版维护人">中文版维护人<a class="anchor" href="#%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA">¶</a></h1>
+<b>nan1nan1 &lt;nan1nan1@hotmail.com&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文版最新更新">中文版最新更新<a class="anchor" href="#%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0">¶</a></h1>
+<b>2001年12月23日星期日</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="中文手册页翻译计划">中文手册页翻译计划<a class="anchor" href="#%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+<br/>
+<p class="Pp"><b>跋</b></p>
+<p class="Pp">本页面中文版由中文
+    man 手册页计划提供。
+  <br/>
+  中文 man
+    手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-25</td>
+    <td class="foot-os">perl v5.8.3</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+perlsec.7.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-28T03:41:04Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"perlsec(7)\"}}]}"
+</script>

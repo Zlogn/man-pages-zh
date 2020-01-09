@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hdparm(8) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/hdparm/hdparm.8.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-ja/hdparm.8.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/hdparm.8.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/hdparm.8.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/hdparm.8.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="8">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; hdparm(8)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/hdparm.8">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/hdparm.8.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD" title="總覽">總覽</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%B8%E9%A0%85" title="選項">選項</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85" title="作者">作者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%A6%E8%A6%8B" title="另見">另見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/hdparm.8.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/hdparm.8.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/hdparm.8.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/hdparm/hdparm.8.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/hdparm.8.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/hdparm.8.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/hdparm.8.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/hdparm.8.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">HDPARM(8)</td>
+    <td class="head-vol">System Manager&#39;s Manual</td>
+    <td class="head-rtitle">HDPARM(8)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+hdparm - 獲取/設置硬盤參數
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽">總覽<a class="anchor" href="#%E7%B8%BD%E8%A6%BD">¶</a></h1>
+<b>hdparm</b> [ <b>-a</b> [扇區數] ] [ <b>-A</b> [0|1] ] [
+  <b>-c</b> [芯片組模式] ] [ <b>-C</b> ] [
+  <b>-d</b> [0|1] ] [ <b>-f</b> ] [ <b>-g</b> ] [ <b>-i</b> ] [ <b>-k</b> [0|1]
+  ] [ <b>-K</b> [0|1] ] [ <b>-L</b> [0|1] ] [ <b>-m</b>
+  [扇區數] ] [ <b>-p</b> [0|1|2|3|4|5] ] [ <b>-P</b>
+  [扇區數] ] [ <b>-q</b> ] [ <b>-r</b> [0|1] ] [ <b>-S</b>
+  [超時] ] [ <b>-T</b> ] [ <b>-t</b> ] [ <b>-u</b> [0|1] ] [
+  <b>-v</b> ] [ <b>-W</b> [0|1] ] [ <b>-X</b> [傳輸模式]
+  ] [ <b>-y</b> ] [ <b>-Y</b> ] [ <b>-Z</b> ] [設備] ..
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+<b>hdparm</b>
+  提供一個實現各種硬盤控制動作的命令行接口,它由內建
+  Linux
+  IDE/ST-506設備驅動程序支持.要實現這種功能需要Linux
+  核心版本爲1.2.13或更高.在早期的核心下有一些選項可能不能正
+  常工作.另外,一些選項只是爲包含了新的IDE設備驅動程序的核心
+  所支持,像2.0.10版或者更高版本的核心.如果hdparm程序是在使用
+  舊的核心文件(在目錄usr/include/linux下)的機器上被編譯的,這
+  些選項將無法獲得.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="選項">選項<a class="anchor" href="#%E9%81%B8%E9%A0%85">¶</a></h1>
+當未給出標記時, <i>-acdgkmnru</i>
+  被作爲假設值
+  (除非一個給定的設備是SCSI設備或某種老式
+  XT型MFM/RLL,在這種情況下 <i>-gr</i>
+  和 <i>-adgr</i> 分別是默認值).
+<dl class="Bl-tag">
+  <dt><i>-a</i></dt>
+  <dd>爲文件系統提前獲得/設置扇區號,可以用來改善連續讀取大文件時的
+      系統性能,具體方式爲提前讀取額外的預期中正在運行的任務所需要的
+      數據塊.在當前核心版本(2.0.10版)中默認設置爲8個扇區(4KB).對於
+      大多數用途,這個值看起來不錯,但在一個大多數文件訪問行爲是隨機
+      搜索的系統中,設置一個小一些的值可能效果會更好.當然,很多
+      IDE驅動器也有一個獨立的內建的預讀功能,這在很多情況下可以緩解
+      對文件系統預讀功能的需求.</dd>
+  <dt><i>-A</i></dt>
+  <dd>關閉/打開IDE驅動器預讀功能(通常默認爲打開).</dd>
+  <dt><i>-c</i></dt>
+  <dd>查詢/打開(E)IDE 32-bit I/O
+      支持.一個數字的參數可以被用來
+      打開/關閉32-bit I/O
+      支持.當前支持的值包括
+      <i>0</i> 關閉 32-bit I/O 支持, <i>1</i>
+      打開 32-bit 數據傳輸, 和
+      <i>3</i>
+      以一個芯片組要求的特殊的
+      <i>sync</i> 流程打開 32-bit data 傳輸.
+      值 <i>3</i> 幾乎對所有的32-bit
+      IDE
+      芯片組起作用,但導致稍微多一些的系統開銷.
+      注意,32-bit數據傳輸僅僅用於通過PCI或VLB總線與接口卡的連接;
+      所有的IDE驅動器通過排線從接口卡獲得的連接僅爲16-bit.</dd>
+  <dt><i>-C</i></dt>
+  <dd>檢查當前IDE能耗模式狀態,
+      結果將是下面幾種之一
+      <b>未知</b>
+      (驅動器不支持此命令),
+      <b>活動/閒置</b>
+      (普通操作), <b>待機</b>
+      (低能耗模式,驅動器待機),
+      or <b>睡眠</b>
+      (最低能耗模式,
+      驅動器被完全關閉).
+      選項 <b>-S, -y, -Y,</b> and <b>-Z</b>
+      用來操縱能耗模式.</dd>
+  <dt><i>-d</i></dt>
+  <dd>爲驅動器關閉/打開
+      &#34;using_dma&#34; 標誌.
+      此選項僅對一些支持
+      DMA並且對於IDE驅動程序來說是已知的驅動器-接口組合
+      (包括所有被支持的XT接口).特別的,Intel
+      Triton 芯片組
+      能和很多驅動器一起實現總線控制
+      DMA 操作.(根據實驗).使用
+      <i>-X34</i> 選項與 <i>-d1</i>
+      選項組合確保驅動器自身是爲多字DMA模式2設計的.
+      使用DMA不一定對吞吐量或系統性能有改進,但很多人信賴它.</dd>
+  <dt><i>-E</i></dt>
+  <dd>設置光盤驅動器速度.對於一般性操作這不是必須的,因爲驅動器將自動地自
+      行選擇自己的速度.如果你想要使用它,就在選項後提供一個數字,通常是2或4.</dd>
+  <dt><i>-f</i></dt>
+  <dd>當設備退出時同步並刷新指針高速緩存.此操作也作爲選項
+      <i>-t</i> 和 <i>-T</i>
+      定時的一部分被執行</dd>
+  <dt><i>-g</i></dt>
+  <dd>顯示驅動器物理位置(柱面,磁頭,扇區),設備的大小(以扇區爲單位),
+      以及相對於驅動器起始的設備偏移量(以扇區爲單位).</dd>
+  <dt><i>-h</i></dt>
+  <dd>顯示簡要使用信息(幫助).</dd>
+  <dt><i>-i</i></dt>
+  <dd>顯示引導驅動器時獲得的識別信息,如果有的話.
+      這是一種現代IDE驅動器特性,可能不被較老式的設備支持.
+      返回的數據可能是或不是當前的,這取決於自系統引導後的行爲.
+      然而,當前的複合模式的扇區計數始終被給出.
+      要獲得更多的關於識別信息的詳細闡釋,請查閱
+      <i>AT Attachment Interface for Disk Drives</i> (ANSI ASC X3T9.2 working
+      draft, revision 4a, April 19/93).</dd>
+  <dt><i>-I</i></dt>
+  <dd>直接從驅動器獲取識別信息,
+      並以原始的,未經過修改和更正的形式顯示.
+      否則便與選項 <i>-i</i>
+      相同.</dd>
+  <dt><i>-k</i></dt>
+  <dd>獲得/設置驅動器
+      keep_settings_over_reset 標誌.
+      當此標誌被設置,驅動程序將在一個軟性的重置後保護選項
+      <i>-dmu</i>
+      (如同在出錯恢復流程中完成的那樣)
+      此標誌默認值爲關 ,
+      以防止可能由與 <i>-dmu</i>
+      組合設置導致的驅動器重置循環.
+      選項 <i>-k</i>
+      應該僅在你確信用一組選定的設置進行正確的系統操作之後被設置.
+      實際中,校驗驅動器能夠讀/些並且在此過程中沒有出錯記錄(核心消息,
+      大多數系統上/var/adm/messages中),是測試一個配置(在用-k之前)必須的.</dd>
+  <dt><i>-K</i></dt>
+  <dd>設置驅動器的 keep_features_over_reset
+      標誌.
+      此項設置使驅動器在軟性重置後保留
+      <i>-APSWXZ</i> 標誌的設置
+      (如同在出錯恢復流程中完成的那樣).
+      並非所有的驅動器都支持此項特性.</dd>
+  <dt><i>-L</i></dt>
+  <dd>設置驅動器的doorlock標誌.
+      設置爲 <b>1</b>
+      將鎖住一些移動式硬驅動器(像
+      Syquest,ZIP,Jazz..)的
+      門鎖機構.設置爲 <b>0</b>
+      將解鎖.一般Linux根據驅動器用法自動維護門鎖機構.(當安裝一個文件
+      系統時鎖住).但在系統關閉時,如果根分區在一個移動式磁盤上,
+      可能會有麻煩,因爲在關閉後根分區仍在處在安裝狀態(只讀).
+      所以,使用這個命令在根文件系統以只讀的方式重新被安裝
+      <b>後</b>
+      ,用戶可以在關閉後從驅動器中移走磁盤.</dd>
+  <dt><i>-m</i></dt>
+  <dd>獲得/設置驅動器多重扇區I/O的扇區數.設置爲
+      <b>0</b>
+      關閉這項特性.多重扇區模式(aka
+      IDE Block 模式),是大多數
+      現代硬盤驅動器的一項特性,它允許每次I/O中斷傳輸多個扇區,
+      而不是通常的一次中斷一個.當這項特性被打開時,操作系統
+      處理磁盤I/O的開銷降低30-50%.在許多系統上,它也會在任何
+      地方增加5% - 50%
+      的數據流量大多數驅動器支持最小的設置
+      爲2,4,8或,16個(扇區).較大的設置也可能存在,這取決於驅
+      動器.在許多系統上設置爲16或32看起來是最理想的.
+      Western
+      Digital在他們的許多驅動器上推薦設置爲4或8.
+      歸因於微小的(32kB)磁盤緩衝和非最優化的緩衝算法.
+      選項 <b>-i</b>
+      被用來查出一個已安裝驅動器支持的最大設置
+      (在輸出中查找 MaxMultSect
+      值).一些驅動器聲稱支持多重扇區模式,
+      但在某些設置下丟失數據.在極少的情況下,這樣的失敗會導致
+      <b>嚴重的文件系統損壞.</b></dd>
+  <dt><i>-p</i></dt>
+  <dd>嘗試爲指定的PIO模式對IDE接口芯片重編程,或者嘗試爲驅動器支持
+      的最佳的PIO模式進行自動調整.核心中僅針對於一些&#34;知名&#34;的芯片組
+      支持這項特性,甚至這種支持不一定是最好的.一些IDE芯片組不能爲
+      一個單一的驅動器改變PIO模式,在這種情況下此選項可能導致PIO
+      模式的設置影響到
+      <i>兩個</i>
+      驅動器.許多IDE芯片組支持少於或多於標準的六個(0到5)PIO模式,
+      所以實際實現的精確速度設置將由芯片組和驅動器複雜的配合改變.
+      <i>謹慎使用.</i>
+      這項特性不包含任何針對不謹慎的保護措施,一個不成功的結果
+      可能導致
+      <i>嚴重的文件系統損壞.</i></dd>
+  <dt><i>-P</i></dt>
+  <dd>爲驅動器的內部預讀機制設置最大扇區數.
+      不是所有的驅動器都支持這項特性.</dd>
+  <dt><i>-q</i></dt>
+  <dd>安靜的操作下一個標誌,壓制正常輸出.
+      當從/etc/rc.c/rc.local運行時,可用來減輕屏幕混亂程度.
+      不適用於 <i>-i</i> 或 <i>-v</i> 或
+      <i>-t</i> 或 <i>-T</i> 標誌.</dd>
+  <dt><i>-r</i></dt>
+  <dd>獲得/設置驅動器的只讀標誌.當被設置時,設備上的寫操作被禁止.</dd>
+  <dt><i>-R</i></dt>
+  <dd>登記一個IDE接口.
+      <b>危險.</b> 參見 <b>-U</b>
+      選項獲取更多信息.</dd>
+  <dt><i>-S</i></dt>
+  <dd>設置驅動器待機(低速運轉)超時值.
+      驅動器根據此值決定在關閉主軸電機以節約能耗之前等待多長
+      時間(沒有磁盤操作).在這種狀態下,驅動器可能需要來響應一
+      個接下來的磁盤訪問,雖然大多數驅動器要快很多.超時值的編
+      碼有些特別.值0表示&#34;關&#34;.值1到240被指定爲5秒的倍數,
+      也就是超時可以從5秒到20分鐘.值241到251指定30分鐘的1到11倍,
+      也就是超時可以從30分鐘到5.5個小時.值252表示超時21分鐘,
+      253設置一個銷售商定義的超時,255表示21分15秒.</dd>
+  <dt><i>-T</i></dt>
+  <dd>用於以基準測試和比較爲目的的緩存讀取計時.要得到有意義的結果,
+      應該在內存不少於2M,系統沒有其它活動(沒有其它活動的程序)
+      的條件下,重複操作2-3次.它顯示了不存取磁盤直接從Linux緩存
+      讀取數據的速度.這項測量實際上標示了被測系統的處理器,緩存
+      和內存的吞吐量.
+      如果標誌 <i>-t</i>
+      也被指定,那麼一個基於
+      <i>-T</i>
+      輸出結果的修正量將被綜合到
+      <i>-t</i>
+      操作報告的結果中.</dd>
+  <dt><i>-t</i></dt>
+  <dd>用於以基準測試和比較爲目的的緩存讀取計時.要得到有意義的結果,
+      應該在內存不少於2M,系統沒有其它活動(沒有其它活動的程序)
+      的條件下,重複操作2-3次.它顯示了不使用預先的數據緩衝從磁盤
+      這項測量標示了Linux下沒有任何文件系統開銷時磁盤可以支持多快
+      的連續數據讀取.爲確保測量的精確,緩存在
+      <i>-t</i>
+      的過程中通過BLKFLSBUF控制被刷新.
+      如果標誌 <i>-T</i>
+      也被指定,那麼一個基於
+      <i>-T</i>
+      數促結果的修正量將被綜合到
+      <i>-t</i>
+      操作報告的結果中.</dd>
+  <dt><i>-u</i></dt>
+  <dd>獲得/設置驅動器&#34;不屏蔽中斷&#34;標誌.設置爲
+      <b>1</b>
+      允許驅動器在磁盤中斷處理過程中不屏蔽別的中斷,
+      它極大改善了Linux的響應性能,並排除了&#34;串行端口溢出&#34;錯誤.
+      <b>謹慎使用:</b>
+      一些驅動器/控制器組合不能承受可能是潛在的
+      I/O 增長, 而導致
+      <b>嚴重的文件系統損壞.</b>
+      特別, <b>CMD-640B</b> 和 <b>RZ1000</b> (E)IDE
+      接口可能是
+      <b>不可靠的</b>
+      (由於某種硬件缺陷),當在早於
+      2.0.16
+      版本的核心下使用此選項時.
+      關閉這些接口的(通常通過設置BIOS/CMOS)
+      <b>IDE 預讀</b>
+      特性可以安全的解決這個問題.</dd>
+  <dt><i>-U</i></dt>
+  <dd>註銷一個IDE接口.
+      <b>危險.</b> <b>-R</b>
+      的對應選項.
+      是爲特別設計用來做熱交換的硬件準備的(很罕見!).
+      使用時要有充分的知識和
+      <b>非常的謹慎</b>
+      ,因爲它很容易終止或破壞你的系統.
+      hdparm 的源代碼包括一個
+      &#39;contrib&#39; 目錄,裏面有一些
+      用戶捐贈的在一臺 ThinkPad
+      600E的UltraBay上作熱交換的記錄.
+      自己去冒險吧.</dd>
+  <dt><i>-v</i></dt>
+  <dd>顯示所有的設置, 除了
+      -i (像 -acdgkmnru 對於 IDE, -gr 對於 SCSI
+      或 -adgr 對於 XT).
+      這也是未指定任何標誌時的默認操作.</dd>
+  <dt><i>-W</i></dt>
+  <dd>關閉/打開 IDE
+      驅動器的寫緩存特性
+      (通常默認爲 OFF ).</dd>
+  <dt><i>-X</i></dt>
+  <dd>爲較新的 (E)IDE/ATA2
+      驅動器設置 IDE
+      傳輸模式 .
+      特別是當在一個被支持的接口芯片組(像
+      Intel 430FX Triton)
+      上打開通向一個驅動器的DMA時與選項
+      <i>-d1</i>
+      組合使用,在這裏用
+      <i>-X34</i> 來選擇多字 DMA 模式2
+      傳輸. 對於支持 UltraDMA burst timings
+      的系統,用 <i>-X66</i> 來選擇
+      UltraDMA mode2 傳輸
+      (你需要在這之前爲 UltraDMA
+      準備好被支持的芯片組).
+      另外, <i>幾乎沒有必要</i>
+      使用此標誌,因爲大多數/全部現代
+      IDE
+      驅動器默認它們最快的
+     PIO 傳輸模式爲打開.
+      所以擺弄它是沒有必要的也是冒險的.
+      在支持 alternate
+      傳輸模式的驅動器上,
+      <i>-X</i> 可以被 <i>僅</i>
+      用來選擇模式.
+      在改變傳輸模式之前,
+      應該爲新模式的設置給
+      IDE 接口跳線或編程(見
+      <i>-p</i> 標誌)
+      以防止數據的丟失或損壞.
+      <i>請非常小心地使用它!</i>
+      對於 Linux 使用的 PIO
+      傳輸模式,此值就是要求的
+      PIO 模式號加 8. 這樣, 值 09
+      設置 PIO mode1, 10 設置 PIO mode2,
+     11 設置 PIO mode3. 設置爲 00
+      還原驅動器的默認 PIO
+      模式, 01 關閉 IORDY.
+      對於多字 DMA,
+      使用的值時要求的 DMA
+      模式號加 32. 對於 UltraDMA
+      ,相應的值是要求 UltraDMA
+      模式號加64.</dd>
+  <dt><i>-y</i></dt>
+  <dd>迫使一個 IDE
+      驅動器立即進入低能耗
+      <b>待機</b> 模式,
+      通常使它低速運轉.
+      當前能耗模式狀態可以用
+      <b>-C</b> 標誌來檢查.</dd>
+  <dt><i>-Y</i></dt>
+  <dd>迫使一個 IDE
+      驅動器立即進入最低能耗
+      <b>睡眠</b> 模式,
+      使它完全關閉.
+      一個來自硬件或軟件的重置
+      可以重新喚醒驅動器.
+      ( 如果需要,Linux IDE
+      驅動器將自動產生一個重置
+      ).</dd>
+  <dt><i>-Z</i></dt>
+  <dd>關閉某些 Seagate 驅動器(STxxx
+      型?)的自動節能功能,
+      以防止它們在不適當的時候空轉或低速運轉.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+像上面提到的, <b>-m
+  扇區數</b> 和 <b>-u 1</b>
+  選項尤其要小心使用,
+  最好在一個只讀文件系統上使用.
+  大多數驅動器和這些特性配合得很好,但有一些驅動器/控制器
+  組合不是100%兼容的.使用可能導致文件系統損壞.
+  請在實驗之前給所有的數據作備份!
+<p class="Pp">某些選項 (例如: -r
+    對於 SCSI)
+    可能在舊的核心下因爲核心不
+    支持必要的 icctl()
+    而不能工作.</p>
+<p class="Pp">雖然這個命令只是爲使用
+    (E)IDE
+    硬盤設備準備的,但有幾個選項
+    也能夠(允許)用於帶有
+    XT 接口的 SCSI 硬盤設備和
+    MFM/RLL 硬盤.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者">作者<a class="anchor" href="#%E4%BD%9C%E8%80%85">¶</a></h1>
+<b>hdparm</b> 是由 Mark Lord &lt;mlord@pobox.com&gt;, Linux (E)IDE
+  驅動程序
+  的主要開發者和維護者編寫的,並聽取了很多網友的建議.
+<p class="Pp">關閉 Seagate
+    自動節能的代碼是徵得
+   Tomi
+    Leppikangas(tomilepp@paju.oulu.fi)允許使用的.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="另見">另見<a class="anchor" href="#%E5%8F%A6%E8%A6%8B">¶</a></h1>
+<b>AT Attachment Interface for Disk Drives,</b> ANSI ASC X3T9.2 working draft,
+  revision 4a, April 19, 1993.
+<p class="Pp"><b>AT Attachment Interface with Extensions (ATA-2),</b> ANSI ASC
+    X3T9.2 working draft, revision 2f, July 26, 1994.</p>
+<p class="Pp"><b>Western Digital Enhanced IDE Implementation Guide,</b> by
+    Western Digital Corporation, revision 5.0, November 10, 1993.</p>
+<p class="Pp"><b>Enhanced Disk Drive Specification,</b> by Phoenix Technologies
+    Ltd., version 1.0, January 25, 1994.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"> 2000年2月 </td>
+    <td class="foot-os">版本 3.9</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+hdparm.8.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:34Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"hdparm(8)\"}}]}"
+</script>

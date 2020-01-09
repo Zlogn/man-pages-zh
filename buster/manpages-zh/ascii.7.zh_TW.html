@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ascii(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/ascii.7.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/manpages/ascii.7.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es/ascii.7.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-hu/ascii.7.hu.html" hreflang="hu">
+<link rel="alternate" href="../../buster/manpages-it/ascii.7.it.html" hreflang="it">
+<link rel="alternate" href="../../buster/manpages-ja/ascii.7.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/ascii.7.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-pt/ascii.7.pt.html" hreflang="pt">
+<link rel="alternate" href="../../buster/manpages-zh/ascii.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/ascii.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; ascii(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ascii.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ascii.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES" title="NOTES">NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%80%83" title="參考">參考</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%A1%8C%E7%BD%B2" title="題署">題署</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#_manpages-zh_%E9%A0%85%E7%9B%AE" title=" manpages-zh 項目"> manpages-zh 項目</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/ascii.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/ascii.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/ascii.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/ascii.7.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages/ascii.7.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es/ascii.7.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-hu/ascii.7.hu.html" title="Hungarian (hu)">magyar</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-it/ascii.7.it.html" title="Italian (it)">italiano</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/ascii.7.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/ascii.7.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pt/ascii.7.pt.html" title="Portuguese (pt)">português (pt)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/ascii.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/ascii.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/ascii/ascii.1.en.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/9base/ascii.1plan9.en.html">1plan9 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/ascii.7.zh_TW.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">ASCII(7)</td>
+    <td class="head-vol">Linux Programmer&#39;s Manual</td>
+    <td class="head-rtitle">ASCII(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+ascii -
+  在八進制，十進制，十六進制中的
+  ASCII 字符集編碼
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+ASCII
+  是美國對於信息交換的標準代碼。它是7位碼。
+  許多8位碼（比如 ISO 8859-1，
+  Linux 的默認字符集）容納
+  ASCII
+  作爲它們的下半部分。對應的國際
+  ASSII 是 ISO 646。
+<p class="Pp">下列的表格包含這
+    128 ASCII 字符.</p>
+<p class="Pp">注意 C 程序 <span class="Li">&#39;\X&#39;</span>
+    擴展（轉義）.</p>
+<p class="Pp"></p>
+<table class="tbl">
+  <tbody><tr style="border-bottom-style: solid;">
+    <td>Oct</td>
+    <td>Dec</td>
+    <td>Hex</td>
+    <td>Char</td>
+    <td>Oct</td>
+    <td>Dec</td>
+    <td>Hex</td>
+    <td>Char</td>
+  </tr>
+  <tr>
+    <td>000</td>
+    <td>0</td>
+    <td>00</td>
+    <td>NUL &#39;\0&#39;</td>
+    <td>100</td>
+    <td>64</td>
+    <td>40</td>
+    <td>@</td>
+  </tr>
+  <tr>
+    <td>001</td>
+    <td>1</td>
+    <td>01</td>
+    <td>SOH （標題開始）</td>
+    <td>101</td>
+    <td>65</td>
+    <td>41</td>
+    <td>A</td>
+  </tr>
+  <tr>
+    <td>002</td>
+    <td>2</td>
+    <td>02</td>
+    <td>STX （本文開始）</td>
+    <td>102</td>
+    <td>66</td>
+    <td>42</td>
+    <td>B</td>
+  </tr>
+  <tr>
+    <td>003</td>
+    <td>3</td>
+    <td>03</td>
+    <td>ETX （本文結束）</td>
+    <td>103</td>
+    <td>67</td>
+    <td>43</td>
+    <td>C</td>
+  </tr>
+  <tr>
+    <td>004</td>
+    <td>4</td>
+    <td>04</td>
+    <td>EOT （傳輸結束）</td>
+    <td>104</td>
+    <td>68</td>
+    <td>44</td>
+    <td>D</td>
+  </tr>
+  <tr>
+    <td>005</td>
+    <td>5</td>
+    <td>05</td>
+    <td>ENQ （請求）</td>
+    <td>105</td>
+    <td>69</td>
+    <td>45</td>
+    <td>E</td>
+  </tr>
+  <tr>
+    <td>006</td>
+    <td>6</td>
+    <td>06</td>
+    <td>ACK （確認迴應）</td>
+    <td>106</td>
+    <td>70</td>
+    <td>46</td>
+    <td>F</td>
+  </tr>
+  <tr>
+    <td>007</td>
+    <td>7</td>
+    <td>07</td>
+    <td>BEL &#39;\a&#39; （響鈴）</td>
+    <td>107</td>
+    <td>71</td>
+    <td>47</td>
+    <td>G</td>
+  </tr>
+  <tr>
+    <td>010</td>
+    <td>8</td>
+    <td>08</td>
+    <td>BS &#39;\b&#39; （退格）</td>
+    <td>110</td>
+    <td>72</td>
+    <td>48</td>
+    <td>H</td>
+  </tr>
+  <tr>
+    <td>011</td>
+    <td>9</td>
+    <td>09</td>
+    <td>HT &#39;\t&#39;
+      （水平定位符號）</td>
+    <td>111</td>
+    <td>73</td>
+    <td>49</td>
+    <td>I</td>
+  </tr>
+  <tr>
+    <td>012</td>
+    <td>10</td>
+    <td>0A</td>
+    <td>LF &#39;\n&#39; （換行鍵）</td>
+    <td>112</td>
+    <td>74</td>
+    <td>4A</td>
+    <td>J</td>
+  </tr>
+  <tr>
+    <td>013</td>
+    <td>11</td>
+    <td>0B</td>
+    <td>VT &#39;\v&#39;
+      （垂直定位符號）</td>
+    <td>113</td>
+    <td>75</td>
+    <td>4B</td>
+    <td>K</td>
+  </tr>
+  <tr>
+    <td>014</td>
+    <td>12</td>
+    <td>0C</td>
+    <td>FF &#39;\f&#39; （換頁鍵）</td>
+    <td>114</td>
+    <td>76</td>
+    <td>4C</td>
+    <td>L</td>
+  </tr>
+  <tr>
+    <td>015</td>
+    <td>13</td>
+    <td>0D</td>
+    <td>CR &#39;\r&#39; （Enter 鍵）</td>
+    <td>115</td>
+    <td>77</td>
+    <td>4D</td>
+    <td>M</td>
+  </tr>
+  <tr>
+    <td>016</td>
+    <td>14</td>
+    <td>0E</td>
+    <td>SO （取消變換）</td>
+    <td>116</td>
+    <td>78</td>
+    <td>4E</td>
+    <td>N</td>
+  </tr>
+  <tr>
+    <td>017</td>
+    <td>15</td>
+    <td>0F</td>
+    <td>SI （開始變換）</td>
+    <td>117</td>
+    <td>79</td>
+    <td>4F</td>
+    <td>O</td>
+  </tr>
+  <tr>
+    <td>020</td>
+    <td>16</td>
+    <td>10</td>
+    <td>DLE
+      （跳出數據通訊）</td>
+    <td>120</td>
+    <td>80</td>
+    <td>50</td>
+    <td>P</td>
+  </tr>
+  <tr>
+    <td>021</td>
+    <td>17</td>
+    <td>11</td>
+    <td>DC1 （設備控制1）</td>
+    <td>121</td>
+    <td>81</td>
+    <td>51</td>
+    <td>Q</td>
+  </tr>
+  <tr>
+    <td>022</td>
+    <td>18</td>
+    <td>12</td>
+    <td>DC2 （設備控制2）</td>
+    <td>122</td>
+    <td>82</td>
+    <td>52</td>
+    <td>R</td>
+  </tr>
+  <tr>
+    <td>023</td>
+    <td>19</td>
+    <td>13</td>
+    <td>DC3 （設備控制3）</td>
+    <td>123</td>
+    <td>83</td>
+    <td>53</td>
+    <td>S</td>
+  </tr>
+  <tr>
+    <td>024</td>
+    <td>20</td>
+    <td>14</td>
+    <td>DC4 （設備控制4）</td>
+    <td>124</td>
+    <td>84</td>
+    <td>54</td>
+    <td>T</td>
+  </tr>
+  <tr>
+    <td>025</td>
+    <td>21</td>
+    <td>15</td>
+    <td>NAK
+      （確認失敗迴應）</td>
+    <td>125</td>
+    <td>85</td>
+    <td>55</td>
+    <td>U</td>
+  </tr>
+  <tr>
+    <td>026</td>
+    <td>22</td>
+    <td>16</td>
+    <td>SYN （同步用暫停）</td>
+    <td>126</td>
+    <td>86</td>
+    <td>56</td>
+    <td>V</td>
+  </tr>
+  <tr>
+    <td>027</td>
+    <td>23</td>
+    <td>17</td>
+    <td>ETB
+      （區塊傳輸結束）</td>
+    <td>127</td>
+    <td>87</td>
+    <td>57</td>
+    <td>W</td>
+  </tr>
+  <tr>
+    <td>030</td>
+    <td>24</td>
+    <td>18</td>
+    <td>CAN （取消）</td>
+    <td>130</td>
+    <td>88</td>
+    <td>58</td>
+    <td>X</td>
+  </tr>
+  <tr>
+    <td>031</td>
+    <td>25</td>
+    <td>19</td>
+    <td>EM （連接介質中斷）</td>
+    <td>131</td>
+    <td>89</td>
+    <td>59</td>
+    <td>Y</td>
+  </tr>
+  <tr>
+    <td>032</td>
+    <td>26</td>
+    <td>1A</td>
+    <td>SUB （替換）</td>
+    <td>132</td>
+    <td>90</td>
+    <td>5A</td>
+    <td>Z</td>
+  </tr>
+  <tr>
+    <td>033</td>
+    <td>27</td>
+    <td>1B</td>
+    <td>ESC （退出鍵）</td>
+    <td>133</td>
+    <td>91</td>
+    <td>5B</td>
+    <td>[</td>
+  </tr>
+  <tr>
+    <td>034</td>
+    <td>28</td>
+    <td>1C</td>
+    <td>FS （文件分區符）</td>
+    <td>134</td>
+    <td>92</td>
+    <td>5C</td>
+    <td>\ &#39;\\&#39;</td>
+  </tr>
+  <tr>
+    <td>035</td>
+    <td>29</td>
+    <td>1D</td>
+    <td>GS （羣組分隔符）</td>
+    <td>135</td>
+    <td>93</td>
+    <td>5D</td>
+    <td>]</td>
+  </tr>
+  <tr>
+    <td>036</td>
+    <td>30</td>
+    <td>1E</td>
+    <td>RS （記錄分隔符）</td>
+    <td>136</td>
+    <td>94</td>
+    <td>5E</td>
+    <td>^</td>
+  </tr>
+  <tr>
+    <td>037</td>
+    <td>31</td>
+    <td>1F</td>
+    <td>US （單元分隔符）</td>
+    <td>137</td>
+    <td>95</td>
+    <td>5F</td>
+    <td>_</td>
+  </tr>
+  <tr>
+    <td>040</td>
+    <td>32</td>
+    <td>20</td>
+    <td>SPACE</td>
+    <td>140</td>
+    <td>96</td>
+    <td>60</td>
+    <td>`</td>
+  </tr>
+  <tr>
+    <td>041</td>
+    <td>33</td>
+    <td>21</td>
+    <td>!</td>
+    <td>141</td>
+    <td>97</td>
+    <td>61</td>
+    <td>a</td>
+  </tr>
+  <tr>
+    <td>042</td>
+    <td>34</td>
+    <td>22</td>
+    <td>&#34;</td>
+    <td>142</td>
+    <td>98</td>
+    <td>62</td>
+    <td>b</td>
+  </tr>
+  <tr>
+    <td>043</td>
+    <td>35</td>
+    <td>23</td>
+    <td>#</td>
+    <td>143</td>
+    <td>99</td>
+    <td>63</td>
+    <td>c</td>
+  </tr>
+  <tr>
+    <td>044</td>
+    <td>36</td>
+    <td>24</td>
+    <td>$</td>
+    <td>144</td>
+    <td>100</td>
+    <td>64</td>
+    <td>d</td>
+  </tr>
+  <tr>
+    <td>045</td>
+    <td>37</td>
+    <td>25</td>
+    <td>%</td>
+    <td>145</td>
+    <td>101</td>
+    <td>65</td>
+    <td>e</td>
+  </tr>
+  <tr>
+    <td>046</td>
+    <td>38</td>
+    <td>26</td>
+    <td>&amp;</td>
+    <td>146</td>
+    <td>102</td>
+    <td>66</td>
+    <td>f</td>
+  </tr>
+  <tr>
+    <td>047</td>
+    <td>39</td>
+    <td>27</td>
+    <td>´</td>
+    <td>147</td>
+    <td>103</td>
+    <td>67</td>
+    <td>g</td>
+  </tr>
+  <tr>
+    <td>050</td>
+    <td>40</td>
+    <td>28</td>
+    <td>(</td>
+    <td>150</td>
+    <td>104</td>
+    <td>68</td>
+    <td>h</td>
+  </tr>
+  <tr>
+    <td>051</td>
+    <td>41</td>
+    <td>29</td>
+    <td>)</td>
+    <td>151</td>
+    <td>105</td>
+    <td>69</td>
+    <td>i</td>
+  </tr>
+  <tr>
+    <td>052</td>
+    <td>42</td>
+    <td>2A</td>
+    <td>*</td>
+    <td>152</td>
+    <td>106</td>
+    <td>6A</td>
+    <td>j</td>
+  </tr>
+  <tr>
+    <td>053</td>
+    <td>43</td>
+    <td>2B</td>
+    <td>+</td>
+    <td>153</td>
+    <td>107</td>
+    <td>6B</td>
+    <td>k</td>
+  </tr>
+  <tr>
+    <td>054</td>
+    <td>44</td>
+    <td>2C</td>
+    <td>,</td>
+    <td>154</td>
+    <td>108</td>
+    <td>6C</td>
+    <td>l</td>
+  </tr>
+  <tr>
+    <td>055</td>
+    <td>45</td>
+    <td>2D</td>
+    <td>-</td>
+    <td>155</td>
+    <td>109</td>
+    <td>6D</td>
+    <td>m</td>
+  </tr>
+  <tr>
+    <td>056</td>
+    <td>46</td>
+    <td>2E</td>
+    <td>.</td>
+    <td>156</td>
+    <td>110</td>
+    <td>6E</td>
+    <td>n</td>
+  </tr>
+  <tr>
+    <td>057</td>
+    <td>47</td>
+    <td>2F</td>
+    <td>/</td>
+    <td>157</td>
+    <td>111</td>
+    <td>6F</td>
+    <td>o</td>
+  </tr>
+  <tr>
+    <td>060</td>
+    <td>48</td>
+    <td>30</td>
+    <td>0</td>
+    <td>160</td>
+    <td>112</td>
+    <td>70</td>
+    <td>p</td>
+  </tr>
+  <tr>
+    <td>061</td>
+    <td>49</td>
+    <td>31</td>
+    <td>1</td>
+    <td>161</td>
+    <td>113</td>
+    <td>71</td>
+    <td>q</td>
+  </tr>
+  <tr>
+    <td>062</td>
+    <td>50</td>
+    <td>32</td>
+    <td>2</td>
+    <td>162</td>
+    <td>114</td>
+    <td>72</td>
+    <td>r</td>
+  </tr>
+  <tr>
+    <td>063</td>
+    <td>51</td>
+    <td>33</td>
+    <td>3</td>
+    <td>163</td>
+    <td>115</td>
+    <td>73</td>
+    <td>s</td>
+  </tr>
+  <tr>
+    <td>064</td>
+    <td>52</td>
+    <td>34</td>
+    <td>4</td>
+    <td>164</td>
+    <td>116</td>
+    <td>74</td>
+    <td>t</td>
+  </tr>
+  <tr>
+    <td>065</td>
+    <td>53</td>
+    <td>35</td>
+    <td>5</td>
+    <td>165</td>
+    <td>117</td>
+    <td>75</td>
+    <td>u</td>
+  </tr>
+  <tr>
+    <td>066</td>
+    <td>54</td>
+    <td>36</td>
+    <td>6</td>
+    <td>166</td>
+    <td>118</td>
+    <td>76</td>
+    <td>v</td>
+  </tr>
+  <tr>
+    <td>067</td>
+    <td>55</td>
+    <td>37</td>
+    <td>7</td>
+    <td>167</td>
+    <td>119</td>
+    <td>77</td>
+    <td>w</td>
+  </tr>
+  <tr>
+    <td>070</td>
+    <td>56</td>
+    <td>38</td>
+    <td>8</td>
+    <td>170</td>
+    <td>120</td>
+    <td>78</td>
+    <td>x</td>
+  </tr>
+  <tr>
+    <td>071</td>
+    <td>57</td>
+    <td>39</td>
+    <td>9</td>
+    <td>171</td>
+    <td>121</td>
+    <td>79</td>
+    <td>y</td>
+  </tr>
+  <tr>
+    <td>072</td>
+    <td>58</td>
+    <td>3A</td>
+    <td>:</td>
+    <td>172</td>
+    <td>122</td>
+    <td>7A</td>
+    <td>z</td>
+  </tr>
+  <tr>
+    <td>073</td>
+    <td>59</td>
+    <td>3B</td>
+    <td>;</td>
+    <td>173</td>
+    <td>123</td>
+    <td>7B</td>
+    <td>{</td>
+  </tr>
+  <tr>
+    <td>074</td>
+    <td>60</td>
+    <td>3C</td>
+    <td>&lt;</td>
+    <td>174</td>
+    <td>124</td>
+    <td>7C</td>
+    <td>|</td>
+  </tr>
+  <tr>
+    <td>075</td>
+    <td>61</td>
+    <td>3D</td>
+    <td>= </td>
+    <td>175</td>
+    <td>125</td>
+    <td>7D</td>
+    <td>}</td>
+  </tr>
+  <tr>
+    <td>076</td>
+    <td>62</td>
+    <td>3E</td>
+    <td>&gt;</td>
+    <td>176</td>
+    <td>126</td>
+    <td>7E</td>
+    <td>~</td>
+  </tr>
+  <tr>
+    <td>077</td>
+    <td>63</td>
+    <td>3F</td>
+    <td>?</td>
+    <td>177</td>
+    <td>127</td>
+    <td>7F</td>
+    <td>DEL</td>
+  </tr>
+</tbody></table>
+<section class="Ss">
+<h2 class="Ss" id="表格">表格<a class="anchor" href="#%E8%A1%A8%E6%A0%BC">¶</a></h2>
+爲方便起見，我們給出了更緊湊的十六進制和十進制表格。
+<p class="Pp"></p>
+<pre>   2 3 4 5 6 7       30 40 50 60 70 80 90 100 110 120
+ -------------      ---------------------------------
+0:   0 @ P ` p     0:    (  2  &lt;  F  P  Z  d   n   x
+1: ! 1 A Q a q     1:    )  3  =  G  Q  [  e   o   y
+2: &#34; 2 B R b r     2:    *  4  &gt;  H  R  \  f   p   z
+3: # 3 C S c s     3: !  +  5  ?  I  S  ]  g   q   {
+4: $ 4 D T d t     4: &#34;  ,  6  @  J  T  ^  h   r   |
+5: % 5 E U e u     5: #  -  7  A  K  U  _  i   s   }
+6: &amp; 6 F V f v     6: $  .  8  B  L  V  `  j   t   ~
+7: ´ 7 G W g w     7: %  /  9  C  M  W  a  k   u  DEL
+8: ( 8 H X h x     8: &amp;  0  :  D  N  X  b  l   v
+9: ) 9 I Y i y     9: ´  1  ;  E  O  Y  c  m   w
+A: * : J Z j z
+B: + ; K [ k {
+C: , &lt; L \ l |
+D: - = M ] m }
+E: . &gt; N ^ n ~
+F: / ? O _ o DEL
+</pre>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES">NOTES<a class="anchor" href="#NOTES">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="歷史">歷史<a class="anchor" href="#%E6%AD%B7%E5%8F%B2">¶</a></h2>
+在 AT&amp;T UNIX 的 version 7
+  中出現過一份 <b>ascii</b>
+  手冊頁。
+<p class="Pp">在一些舊的終端上，着重號（下劃線）用一個左箭頭顯示,
+    叫 backarrow ,
+    插入符作爲一上箭頭被顯示並且垂直線在中間有一個洞。</p>
+<p class="Pp"></p>
+<p class="Pp">大寫和小寫字符由僅在於一位的不同，還有ASCII字符
+    2
+    不同於雙引號也是一位。
+    這更加容易地爲字符進行編碼，機械（鍵盤）或者是一個非微控制器基礎的電子鍵盤，
+    它們都能在舊的電傳打字機上找到配對。</p>
+<p class="Pp">ASCII
+    標準由美國標準協會(USASI)於1968出版.</p>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參考">參考<a class="anchor" href="#%E5%8F%83%E8%80%83">¶</a></h1>
+<a href="../../buster/manpages/iso_8859-1.7.en.html">iso_8859-1(7)</a>, <a href="../../buster/manpages/iso_8859-10.7.en.html">iso_8859-10(7)</a>, <a href="../../buster/manpages/iso_8859-13.7.en.html">iso_8859-13(7)</a>,
+  <a href="../../buster/manpages/iso_8859-14.7.en.html">iso_8859-14(7)</a>, <a href="../../buster/manpages/iso_8859-15.7.en.html">iso_8859-15(7)</a>, <a href="../../buster/manpages/iso_8859-16.7.en.html">iso_8859-16(7)</a>,
+  <a href="../../buster/manpages/iso_8859-2.7.en.html">iso_8859-2(7)</a>, <a href="../../buster/manpages/iso_8859-3.7.en.html">iso_8859-3(7)</a>, <a href="../../buster/manpages/iso_8859-4.7.en.html">iso_8859-4(7)</a>,
+  <a href="../../buster/manpages/iso_8859-5.7.en.html">iso_8859-5(7)</a>, <a href="../../buster/manpages/iso_8859-6.7.en.html">iso_8859-6(7)</a>, <a href="../../buster/manpages/iso_8859-7.7.en.html">iso_8859-7(7)</a>,
+  <a href="../../buster/manpages/iso_8859-8.7.en.html">iso_8859-8(7)</a>, <a href="../../buster/manpages/iso_8859-9.7.en.html">iso_8859-9(7)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="題署">題署<a class="anchor" href="#%E9%A1%8C%E7%BD%B2">¶</a></h1>
+這個頁面是 Linux <i>man-pages</i> 項目
+  3.53 版本的一部分。
+  這個項目的說明，
+  和報告 Bug 的信息 見於
+  <a href="../../doc/man-pages/.">../../doc/man-pages/.</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>Tom Li &lt;biergaizi2009@gmail.com&gt; (2013/08/31)</b>
+<br/>
+<b>Scorpio &lt;rawk@chinese.com&gt; (2000/10/23)</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2013/08/31</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="_manpages-zh_項目"> manpages-zh 項目<a class="anchor" href="#_manpages-zh_%E9%A0%85%E7%9B%AE">¶</a></h1>
+<b><a href="../../lidaobing/manpages-zh">../../lidaobing/manpages-zh</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國linux論壇man手冊頁翻譯計劃》:">《中國linux論壇man手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8Blinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2009-02-12</td>
+    <td class="foot-os">Linux</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+ascii.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-11-26T15:38:14Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"ascii(7)\"}}]}"
+</script>

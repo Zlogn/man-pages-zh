@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>open(3tcl) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/tcl8.6-doc/open.3tcl.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/open.3tcl.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/open.3tcl.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="3tcl">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; open(3tcl)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/open.3tcl">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/open.3tcl.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS" title="總覽 SYNOPSIS">總覽 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%91%BD%E4%BB%A4%E7%AE%A1%E9%81%93_COMMAND_PIPELINES" title="命令管道 COMMAND PIPELINES">命令管道 COMMAND PIPELINES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1_SERIAL_COMMUNICATIONS" title="串行通信 SERIAL COMMUNICATIONS">串行通信 SERIAL COMMUNICATIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%85%8D%E7%BD%AE%E9%81%B8%E9%A0%85_CONFIGURATION_OPTIONS" title="配置選項 CONFIGURATION OPTIONS">配置選項 CONFIGURATION OPTIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%A7%BB%E6%A4%8D%E8%A6%81%E9%BB%9E_PORTABILITY_ISSUES" title="移植要點 PORTABILITY ISSUES">移植要點 PORTABILITY ISSUES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO" title="參見 SEE ALSO">參見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS" title="關鍵字 KEYWORDS">關鍵字 KEYWORDS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國 Linux 論壇 man 手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/open.3tcl.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/open.3tcl.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/open.3tcl.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/tcl8.6-doc/open.3tcl.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/open.3tcl.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/open.3tcl.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/open.2.zh_TW.html">2 (<span title="System calls (functions provided by the kernel)">syscalls</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/freebsd-manpages/open.2freebsd.en.html">2freebsd (<span title="System calls (functions provided by the kernel)">syscalls</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/perl-doc/open.3perl.en.html">3perl (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/open.3tcl.zh_TW.html">3tcl (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">open(3tcl)</td>
+    <td class="head-vol">Tcl Built-In Commands</td>
+    <td class="head-rtitle">open(3tcl)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<pre>
+
+</pre>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+open -
+  打開基於文件或命令管道的一個通道
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_SYNOPSIS">總覽 SYNOPSIS<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS">¶</a></h1>
+<b>open </b><i>fileName</i>
+<br/>
+<b>open </b><i>fileName access</i>
+<br/>
+<b>open </b><i>fileName access permissions</i>
+<pre>
+
+</pre>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+這個命令打開一個文件、串行端口、或命令管道並返回一個
+  通道標識符用於將來被命令如
+  <b>read</b>、<b>puts</b>、和<b>close
+  </b>調用。如果 <i>fileName</i>
+  的第一個字符不是“|”則命令打開一個文件:
+  <i>fileName</i>
+  給出要打開的文件的名字，並且它必須符合在
+  <b>filename</b>
+  手冊條目中描述的規範。
+<p class="Pp">如果存在 <i>access</i>
+    參數，則它指示以何種方式訪問文件(或命令管道)。在第一種形式下
+    <i>access</i> 可以是下列值:</p>
+<dl class="Bl-tag">
+  <dt><b>r</b></dt>
+  <dd>爲只讀而打開文件；文件必須已經存在。如果未指定
+      <i>access</i>
+      則這個值是缺省值。</dd>
+  <dt><b>r+</b></dt>
+  <dd>爲讀寫而打開文件；文件必須已經存在。</dd>
+  <dt><b>w</b></dt>
+  <dd>爲只寫而打開文件。如果文件已經存在則截斷(truncate)它，如果文件不存在則建立一個新文件。</dd>
+  <dt><b>w+</b></dt>
+  <dd>爲讀寫而打開文件。如果文件已經存在則截斷(truncate)它，如果文件不存在則建立一個新文件。</dd>
+  <dt><b>a</b></dt>
+  <dd>爲只讀而打開文件。如果文件不存在，則建立一個新的空文件。設置初始訪問位置爲文件的結束處。</dd>
+  <dt><b>a+</b></dt>
+  <dd>爲讀寫而打開文件。如果文件不存在，則建立一個新的空文件。設置初始訪問位置爲文件的結束處。</dd>
+</dl>
+<p class="Pp">在第二種形式下，<i>access</i>
+    由某些下列標誌的一個列表構成，所有這些都有標準的
+    POSIX 意義。
+    必須有一個標誌是
+    <b>RDONLY</b>、<b>WRONLY</b> 或 <b>RDWR</b>
+    中的一個。</p>
+<dl class="Bl-tag">
+  <dt><b>RDONLY</b></dt>
+  <dd>爲只讀而打開文件。</dd>
+  <dt><b>WRONLY</b></dt>
+  <dd>爲只寫而打開文件。</dd>
+  <dt><b>RDWR</b></dt>
+  <dd>爲讀寫而打開文件。</dd>
+  <dt><b>APPEND</b></dt>
+  <dd>在每次寫之前把指針設置到文件的結束處。</dd>
+  <dt><b>CREAT</b></dt>
+  <dd>如果文件不存在則建立這個文件(如果沒有這個標誌，在文件不存在時返回一個錯誤)。</dd>
+  <dt><b>EXCL</b></dt>
+  <dd>如果還指定了
+      <b>CREAT</b>，如果文件已經存在則返回一個錯誤。</dd>
+  <dt><b>NOCTTY</b></dt>
+  <dd>如果文件是一個終端設備，這個標誌防止這個文件成爲這個進程的控制終端。</dd>
+  <dt><b>NONBLOCK</b></dt>
+  <dd>在打開文件和可能的後續
+      I/O
+    
+      操作期間防止過程阻塞。這個標誌的真實行爲是依賴於系統的和依賴於設備的；不鼓勵使用它(更好是使用
+      <b>fconfigure</b>
+      命令來使一個文件進入非阻塞模式)。詳情參見你的系統文檔中的
+      <b>open</b> 系統調用的 <b>O_NONBLOCK</b>
+      標誌。</dd>
+  <dt><b>TRUNC</b></dt>
+  <dd>如果文件存在則截斷其爲零長度。</dd>
+</dl>
+<p class="Pp">如果作爲打開過程的一部分而建立了一個新文件，使用
+    <i>permissions</i>
+    (一個整數)並聯合進程的文件模式建立掩碼爲新文件設置權限。<i>Permissions</i>
+    缺省爲 0666。</p>
+<p class="Pp">Note that if you are going to be reading or writing binary data
+    from the channel created by this command, you should use the
+    <b>fconfigure</b> command to change the <b>-translation</b> option of the
+    channel to <b>binary</b> before transferring any binary data. This is in
+    contrast to the ``b&#39;&#39; character passed as part of the equivalent of the
+    <i>access</i> parameter to some versions of the C library <i>fopen()</i>
+    function.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="命令管道_COMMAND_PIPELINES">命令管道 COMMAND PIPELINES<a class="anchor" href="#%E5%91%BD%E4%BB%A4%E7%AE%A1%E9%81%93_COMMAND_PIPELINES">¶</a></h1>
+如果 <i>fileName</i> is
+  的第一個字符是“|”，則把
+  <i>fileName</i>
+  的餘下的字符被作爲描述要調用的一個命令管道的參數的一個列表來對待，與
+  <b>exec
+  </b>對待參數的方式相同。在這種情況下，依賴於
+  access 的值，使用由 <b>open</b>
+  返回的通道標識符來向這個命令的輸入管道寫或從它的輸出管道讀。如果使用了只寫訪問(例如，
+  <i>access</i> 是
+  <b>w</b>)，則除非被這個命令所屏棄(override)，這個(命令)管道的標準輸出被定向到當前的標準輸出上。如果使用了只讀訪問(例如，<i>access</i>
+  是
+  <b>r</b>)，則除非被這個命令所屏棄(override)，這個(命令)管道的標準輸入接受當前的標準輸入。
+<p class="Pp">譯註</p>
+<div class="Bd-indent">
+<pre>打開用來寫的命令管道
+                    Tcl     ==&gt;   Pipeline  ==&gt;   command
++--------+       +--------+      +--------+      +--------+
+| stdin  |&lt;------+ stdin  |  +--&gt;| pipein |   +--+ stdin  |
++--------+       +--------+  |   +--------+   |  +--------+
+| stdout |&lt;--+---+ stdout |  |   | pipeout|&lt;--+  | stdout +--+
++--------+   |   +--------+  |   +--------+      +--------+  |
+             |   | stderr |  |                   | stderr |  |
+             |   +--------+  |                   +--------+  |
+             |   | channel+--+                               |
+             |   +--------+                                  |
+             +-----------------------------------------------+
+打開一個用來讀的命令管道
+             +-----------------------------------------------+
+             |                                               |
++--------+   |   +--------+      +--------+      +--------+  |
+| stdin  |&lt;--+---+ stdin  |      | pipein |&lt;--+  | stdin  +--+
++--------+       +--------+      +--------+   |  +--------+
+| stdout |&lt;------+ stdout |  +--&gt;| pipeout|   +--+ stdout |
++--------+       +--------+  |   +--------+      +--------+
+                 | stderr |  |                   | stderr |
+                 +--------+  |                   +--------+
+                 | channel+--+
+                 +--------+
+                    Tcl     &lt;==    Pipeline  &lt;==  command
+</pre>
+</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="串行通信_SERIAL_COMMUNICATIONS">串行通信 SERIAL COMMUNICATIONS<a class="anchor" href="#%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1_SERIAL_COMMUNICATIONS">¶</a></h1>
+<p class="Pp">如果 <i>fileName</i>
+    參照一個串行端口，則打開特定的串行端口並以依賴於平臺的方式初始化。給
+    <i>fileName</i>
+    用以打開一個串行端口的可接受的值在移植要點中描述。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="配置選項_CONFIGURATION_OPTIONS">配置選項 CONFIGURATION OPTIONS<a class="anchor" href="#%E9%85%8D%E7%BD%AE%E9%81%B8%E9%A0%85_CONFIGURATION_OPTIONS">¶</a></h1>
+使用 <b>fconfigure</b>
+  命令來爲打開的串行端口查詢和設置下列選項:
+<dl class="Bl-tag">
+  <dt><b>-mode
+    </b><i>baud</i><b>,</b><i>parity</i><b>,</b><i>data</i><b>,</b><i>stop</i></dt>
+  <dd>這個選項是由逗號分隔的四個值的一個集合:
+      這個串行端口的波特(baud)率、奇偶校驗(parity)、數據位數、和停止位。<i>baud</i>
+      率是指定連接速度的一個簡單整數。<i>Parity</i>
+      是下列字母之一:
+      <b>n</b>、<b>o</b>、<b>e</b>、<b>m</b>、<b>s</b>；分別表示奇偶校驗選項“none”、“odd”、“even”、“mark”、或“space”。<i>Data</i>
+      是數據位數，應當是從
+      5 到 8
+      中的一個整數，而
+      <i>stop</i>
+      是停止位的數目，應當是整數
+      1 或 2。</dd>
+  <dt><b>-pollinterval </b><i>msec</i></dt>
+  <dd>只在 Windows
+      上串行端口能獲得這個選項，它被用來設置文件事件輪詢(poll)之間的最大時間。這影響整個
+      Tcl
+      解釋器檢查事件中間的時間間隔(總是採用最小的值)。只有在你想要使輪詢這個串行端口的時間間隔小於
+      10 msec
+      (缺省值)時才使用這個選項。</dd>
+  <dt><b>-lasterror</b></dt>
+  <dd>只在 Windows
+      上串行端口能獲得這個選項，並只能查詢(只在直接請求時報告)。在串行通信出錯的情況下，<b>read</b>
+      或 <b>puts</b> 返回一個一般 Tcl
+      文件 I/O
+      錯誤。可以調用 <b>fconfigure
+      -lasterror</b>
+      來得到錯誤詳情的一個列表(例如，FRAME
+      RXOVER)。
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="移植要點_PORTABILITY_ISSUES">移植要點 PORTABILITY ISSUES<a class="anchor" href="#%E7%A7%BB%E6%A4%8D%E8%A6%81%E9%BB%9E_PORTABILITY_ISSUES">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>Windows </b>(所有版本)</dt>
+  <dd>給 <i>fileName</i>
+      來打開一個串行端口的有效值的形式是
+      <b>com</b><i>X</i><b>:</b>，這裏 <i>X</i>
+      是一個數，一般是從 1
+      到
+      4。如果系統有多於四個串行端口，則這個符號(notation)可以表示串行端口從
+      1 到
+      9。嘗試打開一個不存在或序號大於
+      9
+      的串行端口將導致錯誤。打開串行端口的可替代的方法是使用文件名
+      <b>\\.\comX</b>，這裏 X
+      是對應於一個串行端口的任何(整)數；請注意，這個方法在
+      Windows 95 和 Windows 98
+      上相當的慢。</dd>
+  <dt><b>Windows NT</b></dt>
+  <dd>在交互運行 Tcl
+      的時候，如果存在一個控制檯，則在真實的控制檯和使用標準輸入或輸出的一個命令管道之間可能有一些奇怪的相互作用。如果爲讀而打開一個命令管道，在這個控制檯鍵入的一些行將被髮送到命令管道而一些行將別發送到
+      Tcl
+      求值器。如果爲寫而打開一個命令管道，在管道關閉之前，在這個控制檯中鍵入的擊鍵(keystroke)將一直是不可見的。在執行
+      16-bit 或 32-bit
+      應用程序時都可能發生這種事情。這些問題只發生在
+      Tcl
+      和子應用程序同時競爭這個控制檯的時候。如果命令管道是從一個腳本中啓動的，所以
+      Tcl
+      不訪問控制檯，或者命令管道不使用標準輸出或輸出，而是重定向(從或)到一個文件，那麼上述問題不發生。</dd>
+  <dt><b>Windows 95</b></dt>
+  <dd>不能同時爲讀寫而打開一個命令管道來執行一個
+      16-bit DOS
+      應用程序，因爲從一個管道接收標準輸入和向一個管道發送標準輸出的(兩個)
+      16-bit DOS
+      應用程序同步運行。不執行
+      16-bit DOS
+      應用程序的命令管道異步運行並且可以同時爲讀寫而打開。
+    <p class="Pp">在交互運行 Tcl
+        的時候，如果存在一個控制檯，則在真實的控制檯和使用標準輸入或輸出的一個命令管道之間可能有一些奇怪的相互作用。如果爲從一個
+        32-bit
+        應用程序讀而打開一個命令管道，在這個控制檯鍵入的一些擊鍵將被髮送到命令管道而一些擊鍵將別發送到
+        Tcl
+        求值器。如果爲向一個
+        32-bit
+        應用程序寫而打開一個命令管道，在管道關閉之前，在控制檯中將一直沒有輸出是可見的。這些問題只發生在
+        Tcl
+        和子應用程序同時競爭這個控制檯的時候。如果命令管道是從一個腳本中啓動的，所以
+        Tcl
+        不訪問控制檯，或者命令管道不使用標準輸出或輸出，而是重定向(從或)到一個文件，那麼上述問題不發生。</p>
+    <p class="Pp">不論 Tcl
+        是否在交互的運行，如果爲從一個
+        16-bit DOS
+        應用程序讀而打開一個命令管道，在從命令管道的標準輸出收到文件結束之前，對
+        <b>open</b>
+        的調用一直不返回。如果爲向一個
+        16-bit DOS
+        應用程序寫而打開一個命令管道，在管道實際上被關閉之前，沒有數據被髮送到命令管道的標準輸出。象上面描述的那樣，這個問題發生的原因是
+        16-bit DOS
+        應用程序同步運行。</p>
+  </dd>
+  <dt><b>Macintosh</b></dt>
+  <dd>在 Macintosh
+      下目前未實現打開串行端口。
+    <p class="Pp">在 Macintosh
+        不支持打開命令管道，原因是應用程序不支持標準輸入或輸出的概念。</p>
+  </dd>
+  <dt><b>Unix</b>       </dt>
+  <dd>給 <i>fileName</i>
+      來打開一個串行端口的有效值的形式是
+      <b>/dev/tty</b><i>X</i>，這裏的 <i>X</i> 是
+      <b>a</b> 或
+      <b>b</b>，但是可以使用映射到一個串行端口的任何僞文件(pseudo-file)的名字。
+    <p class="Pp">在交互運行 Tcl
+        的時候，如果存在一個控制檯，則在真實的控制檯和使用標準輸入或輸出的一個命令管道之間可能有一些奇怪的相互作用。如果爲讀而打開一個命令管道，在這個控制檯鍵入的一些行將被髮送到命令管道而一些行將別發送到
+        Tcl
+        求值器。這些問題只發生在
+        Tcl
+        和子應用程序同時競爭這個控制檯的時候。如果命令管道是從一個腳本中啓動的，所以
+        Tcl
+        不訪問控制檯，或者命令管道不使用標準輸出或輸出，而是重定向(從或)到一個文件，那麼上述問題不發生。</p>
+  </dd>
+</dl>
+<p class="Pp">關於在不同平臺上執行應用程序請參見
+    <b>exec</b>
+    命令的<b>移植要點</b>章節來得到不特定於命令管道的額外的信息。</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_SEE_ALSO">參見 SEE ALSO<a class="anchor" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO">¶</a></h1>
+file(n), close(n), filename(n), fconfigure(n), gets(n), read(n), puts(n),
+  exec(n), fopen(1)
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="關鍵字_KEYWORDS">關鍵字 KEYWORDS<a class="anchor" href="#%E9%97%9C%E9%8D%B5%E5%AD%97_KEYWORDS">¶</a></h1>
+access mode, append, create, file, non-blocking, open, permissions, pipeline,
+  process, serial
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>寒蟬退士</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/10/16</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國_Linux_論壇_man_手冊頁翻譯計劃》:">《中國 Linux 論壇 man 手冊頁翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8B_Linux_%E8%AB%96%E5%A3%87_man_%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">7.6</td>
+    <td class="foot-os">Tcl</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+open.3tcl.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-26T21:44:40Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"open(3tcl)\"}}]}"
+</script>

@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>file-hierarchy(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/file-hierarchy.7.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/systemd/file-hierarchy.7.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/file-hierarchy.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/file-hierarchy.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; file-hierarchy(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/file-hierarchy.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/file-hierarchy.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E9%AB%94%E7%B5%90%E6%A7%8B" title="總體結構">總體結構</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%8B%E8%A1%8C%E6%99%82%E6%95%B8%E6%93%9A" title="運行時數據">運行時數據</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%99%BC%E8%A1%8C%E5%95%86%E6%8F%90%E4%BE%9B%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%B5%B1%E8%B3%87%E6%BA%90" title="發行商提供的操作系統資源">發行商提供的操作系統資源</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%87%89%E8%A9%B2%E6%8C%81%E4%B9%85%E4%BF%9D%E5%AD%98%E7%9A%84%E6%98%93%E8%AE%8A%E7%B3%BB%E7%B5%B1%E6%95%B8%E6%93%9A" title="應該持久保存的易變系統數據">應該持久保存的易變系統數據</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%99%9B%E6%93%AC%E6%96%87%E4%BB%B6%E7%B3%BB%E7%B5%B1" title="虛擬文件系統">虛擬文件系統</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%85%BC%E5%AE%B9%E6%80%A7%E8%BB%9F%E9%80%A3%E6%8E%A5" title="兼容性軟連接">兼容性軟連接</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%AE%B6%E7%9B%AE%E9%8C%84" title="家目錄">家目錄</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%9D%9E%E7%89%B9%E6%AC%8A%E9%80%B2%E7%A8%8B%E7%9A%84%E5%AF%AB%E6%AC%8A%E9%99%90" title="非特權進程的寫權限">非特權進程的寫權限</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6%E9%A1%9E%E5%9E%8B" title="文件類型">文件類型</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B3%BB%E7%B5%B1%E8%BB%9F%E4%BB%B6%E5%8C%85" title="系統軟件包">系統軟件包</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%94%A8%E6%88%B6%E8%BB%9F%E4%BB%B6%E5%8C%85" title="用戶軟件包">用戶軟件包</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B" title="參見">參見</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES" title="NOTES">NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/file-hierarchy.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/file-hierarchy.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/file-hierarchy.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/file-hierarchy.7.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/systemd/file-hierarchy.7.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/file-hierarchy.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/file-hierarchy.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">FILE-HIERARCHY(7)</td>
+    <td class="head-vol">file-hierarchy</td>
+    <td class="head-rtitle">FILE-HIERARCHY(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+file-hierarchy -
+  文件系統層次結構概覽
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+對於使用 <a href="../../buster/manpages-zh/systemd.1.zh_TW.html">systemd(1)</a>
+  的操作系統來說，
+  其文件系統層次結構遵守
+  <b>File System Hierarchy</b>[1] 與 <a href="../../buster/manpages-zh/hier.7.zh_TW.html">hier(7)</a>
+  規範。
+  本手冊僅描述一個符合上述規範的子集，
+  該子集較小也較現代，
+  並且更加嚴格的遵守上述規範。
+<p class="Pp">許多本文所描述的路徑都可以通過
+    <a href="../../buster/manpages-zh/systemd-path.1.zh_TW.html">systemd-path(1)</a> 工具來查詢。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總體結構">總體結構<a class="anchor" href="#%E7%B8%BD%E9%AB%94%E7%B5%90%E6%A7%8B">¶</a></h1>
+/
+<div class="Bd-indent">文件系統的根。
+  通常是可寫的(也可以是隻讀的)，
+  並且可以是一個 &#34;tmpfs&#34;
+  文件系統。
+  除非是隻讀的，否則不與其他主機共享。</div>
+<p class="Pp">/boot</p>
+<div class="Bd-indent">啓動分區。
+  在UEFI系統上通常是&#34;EFI System
+  Partition&#34;， 參見 <a href="../../buster/systemd/systemd-gpt-auto-generator.8.en.html">systemd-gpt-auto-generator(8)</a>
+  手冊。
+  該目錄通常嚴格位於本機的內置存儲上，
+  並且應該是隻讀的(除非需要安裝內核或引導管理器)。
+  僅當操作系統運行在物理機或者虛擬硬件上時才需要此目錄，
+  因爲這種情況下必須使用引導管理器。</div>
+<p class="Pp">/etc</p>
+<div class="Bd-indent">特定於該操作系統的配置。
+  該目錄可以是隻讀的(也可以是可讀寫的)。
+  通常用於存儲操作系統發行商預設的配置文件，
+  但是應用程序不應該假設該目錄中必然存在某個配置文件，
+  而是應該在期望的配置文件不存在的情況下，
+  回退到默認設置。</div>
+<p class="Pp">/home</p>
+<div class="Bd-indent">存儲普通用戶的家目錄。
+  可以與其他操作系統共享，
+  並且必須是可讀寫的(不能是隻讀的)。
+  該目錄必須僅用於普通用戶，
+  切勿用於系統用戶(系統用戶不只有&#34;root&#34;)。
+  該目錄及其子目錄可以在啓動過程的末尾才變得可用，
+  甚至可以在完成用戶身份認證之後才變得可用。
+  該目錄可以位於功能受限的網絡文件系統上，
+  因此，應用程序不應該假定所有文件系統API在此目錄上都可用。
+  應用程序不應該直接引用該目錄及其子目錄，
+  而是應該通過針對每個用戶設置的
+  <i>$HOME</i> 環境變量來引用，
+  或者根據用戶數據庫中的&#34;家目錄&#34;字段的值來引用。</div>
+<p class="Pp">/root</p>
+<div class="Bd-indent">&#34;root&#34;用戶的家目錄。
+  將根用戶的家目錄放到
+  /home
+  之外是爲了確保即使在
+  /home
+  目錄不可用的情況下，
+  &#34;root&#34;用戶依然可以正常登錄。</div>
+<p class="Pp">/srv</p>
+<div class="Bd-indent">存儲常規服務器數據(載荷)的目錄，由服務器管理員管理。
+  其中的子目錄如何組織，沒有明確的規範。
+  該目錄通常是可寫的，並且可以與其他操作系統共享。
+  該目錄可以在啓動過程的末尾才變得可用。</div>
+<p class="Pp">/tmp</p>
+<div class="Bd-indent">存放小臨時文件的目錄。
+  通常掛載爲一個 &#34;tmpfs&#34;
+  文件系統。
+  切勿在此目錄中存放體積較大的臨時文件(應該使用
+  /var/tmp 目錄)。
+  因爲系統上的所有用戶都可以訪問該目錄，
+  所以必須確保該目錄僅對
+  <a href="../../buster/manpages-dev/mkstemp.3.en.html">mkstemp(3)</a>, <a href="../../buster/manpages-dev/mkdtemp.3.en.html">mkdtemp(3)</a>
+  相關係統調用可寫。
+  該目錄在系統啓動過程中會被清空。
+  並且，如果其中的某些文件持續長時間不被訪問，通常也會被自動刪除。
+  如果應用程序發現
+  <i>$TMPDIR</i>
+  環境變量已經被設置，
+  那麼應該使用 <i>$TMPDIR</i>
+  環境變量的設置，
+  而不應該直接使用 /tmp
+  目錄(參見 <a href="../../buster/manpages/environ.7.en.html">environ(7)</a> 與 <b>IEEE Std
+  1003.1</b>[2] )。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="運行時數據">運行時數據<a class="anchor" href="#%E9%81%8B%E8%A1%8C%E6%99%82%E6%95%B8%E6%93%9A">¶</a></h1>
+/run
+<div class="Bd-indent">一個用於存放系統軟件運行時數據的
+  &#34;tmpfs&#34; 文件系統。
+  該目錄在系統啓動過程中會被清空。
+  該目錄必須總是可寫的，
+  但是通常又應該僅賦予特權應用寫入權限。</div>
+<p class="Pp">/run/log</p>
+<div class="Bd-indent">運行時系統日誌。
+  系統組件可以在這個目錄中存放私有日誌。
+  該目錄必須總是可寫的(即使
+  /var/log
+  目錄尚不能訪問)。</div>
+<p class="Pp">/run/user</p>
+<div class="Bd-indent">針對每個用戶的運行時目錄。
+  通常針對每個用戶單獨掛載一個
+  &#34;tmpfs&#34; 文件系統實例。
+  該目錄必須總是可寫的，
+  並且在系統啓動過程中以及對應的用戶登出後會被自動清空。
+  應用程序不應該直接引用該目錄，而是應該通過針對每個用戶設置的
+  <i>$XDG_RUNTIME_DIR</i>
+  環境變量來引用。
+  詳見 <b>XDG Base Directory Specification</b>[3]</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="發行商提供的操作系統資源">發行商提供的操作系統資源<a class="anchor" href="#%E7%99%BC%E8%A1%8C%E5%95%86%E6%8F%90%E4%BE%9B%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%B5%B1%E8%B3%87%E6%BA%90">¶</a></h1>
+/usr
+<div class="Bd-indent">發行商提供的操作系統資源。
+  通常應該是隻讀的(但非必須是隻讀)。可以與其他主機共享。
+  系統管理員不應該修改此目錄中的內容，
+  除非需要安裝或卸載發行商提供的軟件包。</div>
+<p class="Pp">/usr/bin</p>
+<div class="Bd-indent">存放應當出現在
+  <i>$PATH</i>
+  搜索路徑中的用戶命令(可執行文件)。
+  建議僅將命令行工具放到此目錄中，
+  而例如守護進程之類的非命令行工具，
+  則應該放到 /usr/lib
+  下的子目錄中。</div>
+<p class="Pp">/usr/include</p>
+<div class="Bd-indent">系統庫的 C 與 C++ API
+  頭文件目錄。</div>
+<p class="Pp">/usr/lib</p>
+<div class="Bd-indent">存放通用於所有體系結構的、靜態的發行商專屬數據。
+  這包括軟件包內部使用的可執行文件、
+  以及例如守護進程之類的非命令行工具。
+  這些二進制文件可用於該操作系統支持的所有體系結構。
+  不要在此目錄中放置公共庫，
+  而應該將它們放到
+  <i>$libdir</i>
+  目錄中(參見下文)。</div>
+<p class="Pp">/usr/lib/<i>arch-id</i></p>
+<div class="Bd-indent">存放動態鏈接庫，
+  又被稱爲 <i>$libdir</i> 目錄。
+  <i>arch-id</i> 的具體名稱遵守
+  <b>Multiarch Architecture Specifiers (Tuples)</b>[4]
+  列表的規範。
+  傳統上，<i>$libdir</i> 通常是
+  /usr/lib 與 /usr/lib64 目錄。
+  該目錄不應該用於存放特定於某個軟件的專屬數據，
+  除非這些數據是專屬於特定體系結構的。
+  可以使用下面的命令查詢用於該系統的首選體系結構的
+  <i>$libdir</i> 的值：
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre># systemd-path system-library-arch
+</pre>
+</div>
+</div>
+<p class="Pp">/usr/share</p>
+<div class="Bd-indent">在多個軟件包之間共享的資源，
+  例如文檔、手冊、時區數據、字體等資源。
+  此目錄下的子目錄結構及文件格式，
+  取決於確保軟件之間正常相互操作的各種規範。</div>
+<p class="Pp">/usr/share/doc</p>
+<div class="Bd-indent">操作系統以及各種軟件包的文檔。</div>
+<p class="Pp">/usr/share/factory/etc</p>
+<div class="Bd-indent">發行商提供的默認配置文件倉庫。
+  該目錄中應該放置發行商提供的、
+  所有可能放入 /etc
+  目錄的配置文件的原始默認文件。
+  這個目錄主要是爲了方便恢復默認設置
+  以及對比當前配置與默認配置的不同。</div>
+<p class="Pp">/usr/share/factory/var</p>
+<div class="Bd-indent">與 /usr/share/factory/etc 類似，
+  用於存放發行商提供的
+  /var
+  目錄內容的原始默認文件。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="應該持久保存的易變系統數據">應該持久保存的易變系統數據<a class="anchor" href="#%E6%87%89%E8%A9%B2%E6%8C%81%E4%B9%85%E4%BF%9D%E5%AD%98%E7%9A%84%E6%98%93%E8%AE%8A%E7%B3%BB%E7%B5%B1%E6%95%B8%E6%93%9A">¶</a></h1>
+/var
+<div class="Bd-indent">應該持久保存的易變系統數據。
+  該目錄必須可寫。
+  該目錄可以預先填充發行商預設的數據，
+  但是應用程序可以自行創建所需的文件和目錄。
+  強烈推薦(但非必須)持久保存該目錄中的數據，
+  系統必須在該目錄爲空時依然能夠正常啓動，
+  以支持臨時運行的系統。
+  該目錄可以在啓動過程的末尾才變得可用，
+  因此那些在系統啓動早期運行的組件不應該依賴於此目錄的存在。</div>
+<p class="Pp">/var/cache</p>
+<div class="Bd-indent">應該持久保存的系統緩存。
+  系統組件可以在該目錄中放置非關鍵的緩存。
+  清空該目錄必須不影響應用的正常工作
+  (但應用可以花費額外的時間重建這些緩存)。</div>
+<p class="Pp">/var/lib</p>
+<div class="Bd-indent">應該持久保存的系統數據。
+  系統組件可以在該目錄中放置專屬的數據。</div>
+<p class="Pp">/var/log</p>
+<div class="Bd-indent">應該持久保存的系統日誌。
+  系統組件可以在該目錄中放置專屬的日誌。
+  不過，推薦的方式是通過
+  <a href="../../buster/manpages-dev/syslog.3.en.html">syslog(3)</a> 與 <a href="../../buster/libsystemd-dev/sd_journal_print.3.en.html">sd_journal_print(3)</a>
+  接口記錄日誌。</div>
+<p class="Pp">/var/spool</p>
+<div class="Bd-indent">應該持久保存的系統隊列。
+  例如郵件隊列或打印隊列。</div>
+<p class="Pp">/var/tmp</p>
+<div class="Bd-indent">應該持久保存的臨時文件(通常體積也比較大)。
+  此目錄通常位於持久存儲設備上，並且可以存儲較大的臨時文件。
+  相比較而言，/tmp
+  一般位於內存中，
+  並且僅用於存儲較小的臨時文件。
+  該目錄在系統啓動過程中一般不會被清空，
+  但是，如果其中的某些文件持續長時間不被訪問，通常也會被自動刪除。
+  因爲系統上的所有用戶都可以訪問該目錄，
+  所以必須確保該目錄僅對
+  <a href="../../buster/manpages-dev/mkstemp.3.en.html">mkstemp(3)</a>, <a href="../../buster/manpages-dev/mkdtemp.3.en.html">mkdtemp(3)</a>
+  相關係統調用可寫。
+  如果應用程序發現
+  <i>$TMPDIR</i>
+  環境變量已經被設置，
+  那麼應該使用 <i>$TMPDIR</i>
+  環境變量的設置，
+  而不應該直接使用 /var/tmp
+  目錄(參見 <a href="../../buster/manpages/environ.7.en.html">environ(7)</a>)。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="虛擬文件系統">虛擬文件系統<a class="anchor" href="#%E8%99%9B%E6%93%AC%E6%96%87%E4%BB%B6%E7%B3%BB%E7%B5%B1">¶</a></h1>
+/dev
+<div class="Bd-indent">設備節點的根目錄。
+  通常被掛載爲一個
+  &#34;devtmpfs&#34; 文件系統實例
+  (但在沙盒或容器中可能是其他類型)。
+  該目錄中的內容由內核與
+  <a href="../../buster/udev/systemd-udevd.service.8.en.html">systemd-udevd.service(8)</a>
+  共同管理，其他任何組件都不應該修改此目錄中的內容。
+  可以在該目錄的子目錄中再掛載其他特定用途的虛擬文件系統。</div>
+<p class="Pp">/dev/shm</p>
+<div class="Bd-indent">通過 <a href="../../buster/manpages-dev/shm_open.3.en.html">shm_open(3)</a>
+  創建的POSIX共享內存。
+  因爲它其實是一個
+  &#34;tmpfs&#34; 文件系統，
+  所以在系統啓動過程中會被清空。
+  因爲系統上的所有用戶都可以讀寫該目錄，
+  所以必須注意避免文件名衝突以及安全漏洞(也就是注意權限設置)。
+  對於普通用戶，當其退出登錄時，其在該目錄下創建的文件也會被刪除。
+  通常，在 /run
+  目錄(針對系統進程) 或
+  <i>$XDG_RUNTIME_DIR</i>
+  目錄(針對用戶進程)中使用內存映射文件，
+  是比使用POSIX共享內存更好的解決方案。
+  因爲這些目錄不是全局可寫的，
+  所以不存在文件名衝突以及安全漏洞的問題。</div>
+<p class="Pp">/proc</p>
+<div class="Bd-indent">顯示進程信息以及其他功能的虛擬文件系統。
+  此文件系統主要用作內核與用戶交互的界面。
+  詳見 <a href="../../buster/manpages-zh/proc.5.zh_TW.html">proc(5)</a> 手冊。
+  可以在該目錄的子目錄中再掛載其他特定用途的虛擬文件系統。</div>
+<p class="Pp">/proc/sys</p>
+<div class="Bd-indent">調整內核各項參數的一個界面。
+  主要通過 <a href="../../buster/manpages-zh/sysctl.d.5.zh_TW.html">sysctl.d(5)</a>
+  中的配置文件進行設置。
+  但在沙盒或容器中該目錄通常以只讀方式掛載(也就是禁止修改內核參數)。</div>
+<p class="Pp">/sys</p>
+<div class="Bd-indent">顯示所有已發現設備以及其他功能的虛擬文件系統。
+  此文件系統主要用作內核與用戶交互的界面。
+  在沙盒或容器中該目錄通常以只讀方式掛載。
+  可以在該目錄的子目錄中
+  再掛載其他特定用途的虛擬文件系統。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="兼容性軟連接">兼容性軟連接<a class="anchor" href="#%E5%85%BC%E5%AE%B9%E6%80%A7%E8%BB%9F%E9%80%A3%E6%8E%A5">¶</a></h1>
+/bin, /sbin, /usr/sbin
+<div class="Bd-indent">這三個軟連接都指向
+  /usr/bin
+  以確保對傳統路徑的兼容。</div>
+<p class="Pp">/lib</p>
+<div class="Bd-indent">這個軟連接指向
+  /usr/lib
+  以確保對傳統路徑的兼容。</div>
+<p class="Pp">/lib64</p>
+<div class="Bd-indent">在64位系統上，
+  這個軟連接指向 <i>$libdir</i>
+  以確保對傳統路徑的兼容。
+  此軟連接僅存在於動態加載器位於此路徑的系統架構上。</div>
+<p class="Pp">/var/run</p>
+<div class="Bd-indent">這個軟連接指向
+  /run
+  以確保對傳統路徑的兼容。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="家目錄">家目錄<a class="anchor" href="#%E5%AE%B6%E7%9B%AE%E9%8C%84">¶</a></h1>
+用戶應用如果想要在用戶的家目錄中保存文件或目錄，那麼應該遵守下面的規範。
+  注意，下面的某些目錄雖然比較脆弱，
+  但是已經被 <b>XDG Base Directory
+  Specification</b>[3] 標準化了。
+  其他爲高層次用戶資源定義的位置參見
+  <b>xdg-user-dirs</b>[5] 文檔。
+<p class="Pp">~/.cache</p>
+<div class="Bd-indent">應該持久保存的用戶緩存。
+  應用可以在該目錄中放置非關鍵的用戶緩存。
+  清空該目錄中的緩存必須不影響應用的正常工作
+  (但應用可以花費額外的時間重建這些緩存)。
+  如果應用程序發現
+  <i>$XDG_CACHE_HOME</i>
+  環境變量已經被設置，
+  那麼應該使用 <i>$XDG_CACHE_HOME</i>
+  環境變量的設置，
+  而不應該直接使用 ~/.cache
+  目錄。</div>
+<p class="Pp">~/.config</p>
+<div class="Bd-indent">應該持久保存的用戶配置與狀態。
+  當新用戶剛被創建時，該目錄應該初始爲空或根本不存在。
+  如果期望的配置文件不存在於該目錄中，
+  那麼應用程序應該回退到默認設置，而不應該罷工。
+  如果應用程序發現
+  <i>$XDG_CONFIG_HOME</i>
+  環境變量已經被設置，
+  那麼應該使用 <i>$XDG_CONFIG_HOME</i>
+  環境變量的設置，
+  而不應該直接使用 ~/.config
+  目錄。</div>
+<p class="Pp">~/.local/bin</p>
+<div class="Bd-indent">存放應當出現在用戶專屬的
+  <i>$PATH</i>
+  搜索路徑中的用戶命令(可執行文件)。
+  建議僅將命令行工具放到此目錄中，
+  而例如守護進程之類的非命令行工具，
+  則應該放到 ~/.local/lib
+  下的子目錄中。
+  注意，當在此目錄中存放特定於體系結構的可執行文件時，
+  可能會因爲與其他不同體系結構的系統共享家目錄而出現故障。</div>
+<p class="Pp">~/.local/lib</p>
+<div class="Bd-indent">存放通用於所有體系結構的、靜態的用戶專屬數據。這包括軟件包內部使用的可執行文件、以及例如守護進程之類的非命令行工具。這些二進制文件可用於該操作系統支持的所有體系結構。
+  不要在此目錄中放置公共庫，而應該將它們放到
+  ~/.local/lib/<i>arch-id</i>
+  目錄中(參見下文)。</div>
+<p class="Pp">~/.local/lib/<i>arch-id</i></p>
+<div class="Bd-indent">存放專屬於特定體系結構的動態鏈接庫。
+  <i>arch-id</i> 的具體名稱遵守
+  <b>Multiarch Architecture Specifiers (Tuples)</b>[4]
+  列表的規範。</div>
+<p class="Pp">~/.local/share</p>
+<div class="Bd-indent">在多個軟件包之間共享的資源，例如圖標、字體等資源。
+  此目錄下的子目錄結構及文件格式，
+  取決於確保軟件之間正常相互操作的各種規範。
+  如果應用程序發現
+  <i>$XDG_DATA_HOME</i>
+  環境變量已經被設置，
+  那麼應該使用 <i>$XDG_DATA_HOME</i>
+  環境變量的設置，
+  而不應該直接使用
+  ~/.local/share 目錄。</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="非特權進程的寫權限">非特權進程的寫權限<a class="anchor" href="#%E9%9D%9E%E7%89%B9%E6%AC%8A%E9%80%B2%E7%A8%8B%E7%9A%84%E5%AF%AB%E6%AC%8A%E9%99%90">¶</a></h1>
+非特權進程通常對大多數目錄都沒有寫權限。
+<p class="Pp">但對於普通用戶的非特權進程來說，可以寫入
+    /tmp, /var/tmp, /dev/shm, <i>$HOME</i> (通常位於
+    /home 下), <i>$XDG_RUNTIME_DIR</i> (通常位於
+    /run/user 下) 目錄。</p>
+<p class="Pp">而對於系統的非特權進程來說，則僅可以寫入
+    /tmp, /var/tmp, /dev/shm 目錄。
+    如果系統的非特權進程需要在
+    /var 或 /run
+    目錄中創建一個專屬的、可寫入的目錄，
+    那麼可以在守護進程丟棄特權之前先創建該目錄，或者通過
+    <a href="../../buster/systemd/tmpfiles.d.5.en.html">tmpfiles.d(5)</a>
+    在系統啓動時先創建該目錄，
+    或者通過服務單元文件中的
+    <i>RuntimeDirectory=</i> 指令(詳見
+    <a href="../../buster/systemd/systemd.unit.5.en.html">systemd.unit(5)</a>
+    手冊)創建該目錄。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件類型">文件類型<a class="anchor" href="#%E6%96%87%E4%BB%B6%E9%A1%9E%E5%9E%8B">¶</a></h1>
+Unix文件系統支持不同的文件節點類型：
+  普通文件、目錄、軟連接、字符設備、塊設備、
+  套接字(socket)、管道(FIFO)。
+<p class="Pp">強烈建議僅將設備文件放置在
+    /dev 目錄中、
+    僅將套接字(socket)與管道(FIFO)文件放置在
+    /run 目錄中。
+    而普通文件、目錄、軟連接則可以放置在所有目錄中。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="系統軟件包">系統軟件包<a class="anchor" href="#%E7%B3%BB%E7%B5%B1%E8%BB%9F%E4%BB%B6%E5%8C%85">¶</a></h1>
+系統軟件包的開發者應該嚴格遵守下面的文件佈局規範。
+  下面列出了發行商提供的系統軟件包中各類文件的推薦位置：
+<p class="Pp"><b>Table 1. 系統軟件包中靜態文件的推薦位置</b></p>
+<table class="tbl" border="1" style="border-style: solid;">
+  <tbody><tr>
+    <td>目錄</td>
+    <td>用途</td>
+  </tr>
+  <tr>
+    <td>/usr/bin</td>
+    <td>應該出現在 <i>$PATH</i>
+      搜索路徑中且與體系結構無關的可執行文件。不要將軟件包內部使用的可執行文件或非命令行工具(例如守護進程之類)放到此目錄中。因爲衆多的軟件包都使用此目錄，所以必須選擇獨一無二的可執行文件名稱，以避免衝突。</td>
+  </tr>
+  <tr>
+    <td>/usr/lib/<i>arch-id</i></td>
+    <td>全局通用的體系結構相關的共享庫。因爲衆多的軟件包都使用此目錄，所以必須選擇獨一無二的共享庫名稱，以避免衝突。</td>
+  </tr>
+  <tr>
+    <td>/usr/lib/<i>package</i></td>
+    <td>發行商提供的該軟件包專屬的體系結構無關的靜態資源(可執行文件、庫文件、只讀數據)。</td>
+  </tr>
+  <tr>
+    <td>/usr/lib/<i>arch-id</i>/<i>package</i></td>
+    <td>發行商提供的體系結構相關的該軟件包專屬的資源(通常不包括軟件包內部使用的可執行文件)。</td>
+  </tr>
+  <tr>
+    <td>/usr/include/<i>package</i></td>
+    <td>該軟件包提供的共享庫的
+      C/C++ 頭文件。</td>
+  </tr>
+</tbody></table>
+<p class="Pp"></p>
+<p class="Pp">發行商提供的其他靜態資源應該存放在
+  <br/>
+  /usr/share 目錄下，
+    具體的存放位置應該遵守其他的相關規範。</p>
+<p class="Pp">存放軟件包運行時數據以及配置文件的相關目錄如下：</p>
+<p class="Pp"><b>Table 2. 系統軟件包的運行時數據以及配置文件的推薦位置</b></p>
+<table class="tbl" border="1" style="border-style: solid;">
+  <tbody><tr>
+    <td>目錄</td>
+    <td>用途</td>
+  </tr>
+  <tr>
+    <td>/etc/<i>package</i></td>
+    <td>特定於該系統的配置文件。如果該目錄不存在，那麼軟件包應該儘可能回退到安全的默認設置，而不應該罷工。可選地，可以設置一個
+      <a href="../../buster/systemd/tmpfiles.d.5.en.html">tmpfiles.d(5)</a>
+      配置文件，以實現在系統啓動過程中，從
+      /usr/share/factory
+      目錄中複製(&#34;C&#34;指令)或軟連接(&#34;L&#34;指令)所需的文件到該目錄中。</td>
+  </tr>
+  <tr>
+    <td>/run/<i>package</i></td>
+    <td>軟件包的運行時數據。因爲該目錄會在系統啓動過程中被清空，所以軟件包必須有權限在此目錄中創建子目錄及文件。可選的，可以設置一個
+      <a href="../../buster/systemd/tmpfiles.d.5.en.html">tmpfiles.d(5)</a>
+      配置文件，以實現在系統啓動過程中自動在此目錄中創建所需的子目錄及文件。或者可選的，在服務單元文件中使用
+      <i>RuntimeDirectory=</i> 指令(詳見
+      <a href="../../buster/systemd/systemd.unit.5.en.html">systemd.unit(5)</a>
+      手冊)以達到上述目的。</td>
+  </tr>
+  <tr>
+    <td>/run/log/<i>package</i></td>
+    <td>軟件包的運行時日誌。因爲該目錄會在系統啓動過程中被清空，所以軟件包必須有權限在此目錄中創建子目錄及文件。</td>
+  </tr>
+  <tr>
+    <td>/var/cache/<i>package</i></td>
+    <td>軟件包的持久緩存。清空該目錄必須不影響軟件包的正常工作(但軟件包可以花費額外的時間重建這些緩存)。軟件包必須有權限在此目錄中創建子目錄及文件。</td>
+  </tr>
+  <tr>
+    <td>/var/lib/<i>package</i></td>
+    <td>軟件包的持久專屬數據。存放無法明確分類的持久數據。軟件包必須有權限在此目錄中創建子目錄及文件，因爲在系統啓動時該目錄可能爲空。可選的，可以設置一個
+      <a href="../../buster/systemd/tmpfiles.d.5.en.html">tmpfiles.d(5)</a>
+      配置文件，以實現在系統啓動過程中自動在此目錄中創建所需的子目錄及文件。</td>
+  </tr>
+  <tr>
+    <td>/var/log/<i>package</i></td>
+    <td>軟件包的持久日誌數據。軟件包必須有權限在此目錄中創建子目錄及文件，因爲在系統啓動時該目錄可能爲空。</td>
+  </tr>
+  <tr>
+    <td>/var/spool/<i>package</i></td>
+    <td>軟件包的持久隊列數據。軟件包必須有權限在此目錄中創建子目錄及文件，因爲在系統啓動時該目錄可能爲空。</td>
+  </tr>
+</tbody></table>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="用戶軟件包">用戶軟件包<a class="anchor" href="#%E7%94%A8%E6%88%B6%E8%BB%9F%E4%BB%B6%E5%8C%85">¶</a></h1>
+對於專屬於特定用戶的軟件包，
+  其存貯在用戶家目錄中的文件必須嚴格遵守下面的文件佈局規範。
+  注意，當安裝屬於系統範圍的軟件包時，
+  應該遵守前面&#34;系統軟件包&#34;小節的佈局規範。
+  下面列出了當用戶在其家目錄中安裝專屬軟件包時，
+  由發行商提供的各種類型的文件在用戶家目錄中應該存放的位置：
+<p class="Pp"><b>Table 3. 用戶軟件包中靜態文件的推薦位置</b></p>
+<table class="tbl" border="1" style="border-style: solid;">
+  <tbody><tr>
+    <td>目錄</td>
+    <td>用途</td>
+  </tr>
+  <tr>
+    <td>~/.local/bin</td>
+    <td>應該出現在 <i>$PATH</i>
+      搜索路徑中且與體系結構無關的可執行文件。不要將軟件包內部使用的可執行文件或非命令行工具(例如守護進程之類)放到此目錄中。因爲衆多的軟件包都使用此目錄，所以必須選擇獨一無二的可執行文件名稱，以避免衝突。</td>
+  </tr>
+  <tr>
+    <td>~/.local/lib/<i>arch-id</i></td>
+    <td>全局通用的體系結構相關的共享庫。因爲衆多的軟件包都使用此目錄，所以必須選擇獨一無二的共享庫名稱，以避免衝突。</td>
+  </tr>
+  <tr>
+    <td>~/.local/lib/<i>package</i></td>
+    <td>發行商提供的該軟件包專屬的體系結構無關的靜態資源(可執行文件、庫文件、只讀數據)。</td>
+  </tr>
+  <tr>
+    <td>~/.local/lib/<i>arch-id</i>/<i>package</i></td>
+    <td>發行商提供的體系結構相關的該軟件包專屬的資源(通常不包括軟件包內部使用的可執行文件)。</td>
+  </tr>
+</tbody></table>
+<p class="Pp"></p>
+<p class="Pp">發行商提供的其他靜態資源應該存放在
+  <br/>
+  ~/.local/share 目錄下，
+    具體的存放位置應該遵守其他的相關規範。</p>
+<p class="Pp">存放軟件包運行時數據以及配置文件的相關目錄如下：</p>
+<p class="Pp"><b>Table 4. 用戶軟件包的運行時數據以及配置文件的推薦位置</b></p>
+<table class="tbl" border="1" style="border-style: solid;">
+  <tbody><tr>
+    <td>目錄</td>
+    <td>用途</td>
+  </tr>
+  <tr>
+    <td>~/.config/<i>package</i></td>
+    <td>特定於該用戶的配置文件。如果該目錄不存在，那麼軟件包必須能夠安全的回退到默認設置，而不能罷工。</td>
+  </tr>
+  <tr>
+    <td><i>$XDG_RUNTIME_DIR</i>/<i>package</i></td>
+    <td>特定於該用戶的運行時數據。</td>
+  </tr>
+  <tr>
+    <td>~/.cache/<i>package</i></td>
+    <td>軟件包的持久緩存。清空該目錄必須不影響軟件包的正常工作(但軟件包可以花費額外的時間重建這些緩存)。軟件包必須有權限在此目錄中創建子目錄及文件。</td>
+  </tr>
+</tbody></table>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見">參見<a class="anchor" href="#%E5%8F%83%E8%A6%8B">¶</a></h1>
+<a href="../../buster/manpages-zh/systemd.1.zh_TW.html">systemd(1)</a>,
+<br/>
+<a href="../../buster/manpages-zh/hier.7.zh_TW.html">hier(7)</a>, <a href="../../buster/manpages-zh/systemd-path.1.zh_TW.html">systemd-path(1)</a>, <a href="../../buster/systemd/systemd-gpt-auto-generator.8.en.html">systemd-gpt-auto-generator(8)</a>,
+  <a href="../../buster/manpages-zh/sysctl.d.5.zh_TW.html">sysctl.d(5)</a>, <a href="../../buster/systemd/tmpfiles.d.5.en.html">tmpfiles.d(5)</a>, <a href="../../buster/pkgconf/pkg-config.1.en.html">pkg-config(1)</a>,
+  <a href="../../buster/systemd/systemd.unit.5.en.html">systemd.unit(5)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES">NOTES<a class="anchor" href="#NOTES">¶</a></h1>
+<dl class="Bl-tag">
+  <dt> 1.</dt>
+  <dd>File System Hierarchy</dd>
+</dl>
+<div class="Bd-indent"><a href="../../FHS_2.3/fhs-2.3.html">../../FHS_2.3/fhs-2.3.html</a></div>
+<dl class="Bl-tag">
+  <dt> 2.</dt>
+  <dd>IEEE Std 1003.1</dd>
+</dl>
+<div class="Bd-indent"><a href="../../onlinepubs/9699919799/basedefs/V1_chap08.html#tag_08_03">../../onlinepubs/9699919799/basedefs/V1_chap08.html#tag_08_03</a></div>
+<dl class="Bl-tag">
+  <dt> 3.</dt>
+  <dd>XDG Base Directory Specification</dd>
+</dl>
+<div class="Bd-indent"><a href="../../basedir-spec/basedir-spec-latest.html">../../basedir-spec/basedir-spec-latest.html</a></div>
+<dl class="Bl-tag">
+  <dt> 4.</dt>
+  <dd>Multiarch Architecture Specifiers (Tuples)</dd>
+</dl>
+<div class="Bd-indent"><a href="../../Multiarch/Tuples">../../Multiarch/Tuples</a></div>
+<dl class="Bl-tag">
+  <dt> 5.</dt>
+  <dd>xdg-user-dirs</dd>
+</dl>
+<div class="Bd-indent"><a href="../../wiki/Software/xdg-user-dirs/">../../wiki/Software/xdg-user-dirs/</a></div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<p class="Pp">翻譯人員：金步國
+  <br/>
+  金步國作品集：https://www.jinbuguo.com
+  <br/>
+  中文 man
+    手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os">systemd 231</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+file-hierarchy.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-30T03:48:42Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"file-hierarchy(7)\"}}]}"
+</script>

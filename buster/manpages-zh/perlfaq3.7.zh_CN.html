@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>perlfaq3(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/perlfaq3.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/perlfaq3.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; perlfaq3(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlfaq3.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlfaq3.7.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0" title="DESCRIPTION 描述">DESCRIPTION 描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#AUTHOR_AND_COPYRIGHT" title="AUTHOR AND COPYRIGHT">AUTHOR AND COPYRIGHT</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%AF%91%E8%80%85" title="译者">译者</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlfaq3.7.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/perlfaq3.7.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/perlfaq3.7.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlfaq3.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/perlfaq3.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/perl-doc/perlfaq3.1.en.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/perlfaq3.7.zh_CN.html">7 (<span title="Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)">misc</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">PERLFAQ3(7)</td>
+    <td class="head-vol">Perl Programmers Reference Guide</td>
+    <td class="head-rtitle">PERLFAQ3(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<br/>
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+perlfaq3 - 编程工具 (2003/11/24 19:55:50)
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION_描述">DESCRIPTION 描述<a class="anchor" href="#DESCRIPTION_%E6%8F%8F%E8%BF%B0">¶</a></h1>
+编程工具和编程支持
+<br/>
+<p class="Pp"><b>我如何作
+    (任何事)?</b></p>
+<p class="Pp">你到 CPAN（见
+    perlfaq2）找过了吗?也许别人已经写了某个模组可以解决你的问题。你查过相关的说明文件了吗
+    (man
+    pages)?以下是一份概要的索引:</p>
+<p class="Pp"></p>
+<pre>        基础Basics          perldata, perlvar, perlsyn, perlop, perlsub
+        执行Execution       perlrun, perldebug
+        函数Functions       perlfunc
+        对象Objects         perlref, perlmod, perlobj, perltie
+        数据结构Data Structures perlref, perllol, perldsc
+        模块Modules         perlmod, perlmodlib, perlsub
+        正则表达式Regexes         perlre, perlfunc, perlop, perllocale
+        移植Moving to perl5 perltrap, perl
+        连接Linking w/C     perlxstut, perlxs, perlcall, perlguts, perlembed
+        其他Various         <a href="../../misc/olddoc/FMTEYEWTK.tgz">../../misc/olddoc/FMTEYEWTK.tgz</a>
+                        (这不是一个手册页，但是仍然很有用
+                         是有关 Perl 技术的大量技巧)
+</pre>
+<p class="Pp">perltoc里有一份粗略的
+    perl 说明文件组的目录
+  <br/>
+</p>
+<p class="Pp"><b>如何以交互的方式使用
+    Perl?</b></p>
+<p class="Pp">典型的作法是使用
+    <a href="../../buster/perl-doc/perldebug.1.en.html">perldebug(1)</a>说明文件里提到的
+    Perl
+    除虫器，在一个「空的」（译者：即不存在的）程式上执行，像这样：</p>
+<p class="Pp"></p>
+<pre>    perl -de 42
+</pre>
+<p class="Pp">接下来所打入的任意合法
+    Perl程式码皆会立刻被计算。同时，你可以检查符号表
+    (symbol
+    table)、取得堆叠的记录
+    (stack
+    backtraces)、检视变数值、设定阻断点
+    (set breakpoints)
+    以及其他符号式除虫器
+    (symbolic debuggers)
+    所能作的动作。
+  <br/>
+</p>
+<p class="Pp"><b>有 Perl shell吗?</b></p>
+<p class="Pp">The psh (Perl sh) is currently at version 1.8. The Perl Shell is a
+    shell that combines the interactive nature of a Unix shell with the power of
+    Perl. The goal is a full featured shell that behaves as expected for normal
+    shell activity and uses Perl syntax and functionality for control-flow
+    statements and other things. You can get psh at
+    <a href="../../gregor/psh/">../../gregor/psh/</a> .</p>
+<p class="Pp">Zoidberg is a similar project and provides a shell written in
+    perl, configured in perl and operated in perl. It is intended as a login
+    shell and development environment. It can be found at
+    <a href="../../">../../</a> or your local CPAN mirror.</p>
+<p class="Pp">The Shell.pm module (distributed with Perl) makes Perl try
+    commands which aren&#39;t part of the Perl language as shell commands. perlsh
+    from the source distribution is simplistic and uninteresting, but may still
+    be what you want.
+  <br/>
+</p>
+<p class="Pp"><b>怎样查找我的系统中安装了哪些模块？</b></p>
+<p class="Pp">You can use the ExtUtils::Installed module to show all installed
+    distributions, although it can take awhile to do its magic. The standard
+    library which comes with Perl just shows up as &#34;Perl&#34; (although
+    you can get those with Module::CoreList).</p>
+<p class="Pp"></p>
+<pre>        use ExtUtils::Installed;
+</pre>
+<p class="Pp"></p>
+<pre>        my $inst    = ExtUtils::Installed-&gt;new();
+        my @modules = $inst-&gt;modules();
+</pre>
+<p class="Pp">If you want a list of all of the Perl module filenames, you can
+    use File::Find::Rule.</p>
+<p class="Pp"></p>
+<pre>        use File::Find::Rule;
+</pre>
+<p class="Pp"></p>
+<pre>        my @files = File::Find::Rule-&gt;file()-&gt;name( &#39;*.pm&#39; )-&gt;in( @INC );
+</pre>
+<p class="Pp">If you do not have that module, you can do the same thing with
+    File::Find which is part of the standard library.</p>
+<p class="Pp"></p>
+<pre>    use File::Find;
+    my @files;
+</pre>
+<p class="Pp"></p>
+<pre>    find sub { push @files, $File::Find::name if -f _ &amp;&amp; /\.pm$/ },
+         @INC;
+</pre>
+<p class="Pp"></p>
+<pre>        print join &#34;\n&#34;, @files;
+</pre>
+<p class="Pp">If you simply need to quickly check to see if a module is
+    available, you can check for its documentation. If you can read the
+    documentation the module is most likely installed. If you cannot read the
+    documentation, the module might not have any (in rare cases).</p>
+<p class="Pp"></p>
+<pre>        prompt% perldoc Module::Name
+</pre>
+<p class="Pp">You can also try to include the module in a one-liner to see if
+    perl finds it.</p>
+<p class="Pp"></p>
+<pre>        perl -MModule::Name -e1
+</pre>
+<br/>
+<p class="Pp"><b>如何替我的 Perl
+    程式除虫?</b></p>
+<p class="Pp">你用过 <span class="Li">&#34;use
+    warnings&#34;</span> 或 <span class="Li">&#34;-w&#34;</span>
+    吗？它们启用警告模式，来检测不确定的代码。</p>
+<p class="Pp">你用过 <span class="Li">&#34;use
+    strict&#34;</span> 吗？It prevents you from using symbolic
+    references, makes you predeclare any subroutines that you call as bare
+    words, and (probably most importantly) forces you to predeclare your
+    variables with <span class="Li">&#34;my&#34;</span>,
+    <span class="Li">&#34;our&#34;</span>, or <span class="Li">&#34;use
+    vars&#34;</span>.</p>
+<p class="Pp">Did you check the return values of each and every system call? The
+    operating system (and thus Perl) tells you whether they worked, and if not
+    why.</p>
+<p class="Pp"></p>
+<pre>  open(FH, &#34;&gt; /etc/cantwrite&#34;)
+    or die &#34;Couldn&#39;t write to /etc/cantwrite: $!\n&#34;;
+</pre>
+<p class="Pp">Did you read perltrap? It&#39;s full of gotchas for old and new Perl
+    programmers and even has sections for those of you who are upgrading from
+    languages like <i>awk</i> and <i>C</i>.</p>
+<p class="Pp">Have you tried the Perl debugger, described in perldebug? You can
+    step through your program and see what it&#39;s doing and thus work out why what
+    it&#39;s doing isn&#39;t what it should be doing.
+  <br/>
+</p>
+<p class="Pp"><b>如何检测 (profile) 我的
+    perl 程式?</b></p>
+<p class="Pp">你该自 CPAN抓取 Devel::DProf
+    模组，并且使用 perl
+    标准套件所附的
+    Benchmark.pm。
+    Benchmark.pm让你测量程式码的某部份在执行上所花的时间，而
+    Devel::DProf则详细地替你分析哪一部份的程式用掉多少时间。</p>
+<p class="Pp">Here&#39;s a sample use of Benchmark:</p>
+<p class="Pp"></p>
+<pre>  use Benchmark;
+</pre>
+<p class="Pp"></p>
+<pre>  @junk = `cat /etc/motd`;
+  $count = 10_000;
+</pre>
+<p class="Pp"></p>
+<pre>  timethese($count, {
+            &#39;map&#39; =&gt; sub { my @a = @junk;
+                           map { s/a/b/ } @a;
+                           return @a },
+            &#39;for&#39; =&gt; sub { my @a = @junk;
+                           for (@a) { s/a/b/ };
+                           return @a },
+           });
+</pre>
+<p class="Pp">This is what it prints (on one machine--your results will be
+    dependent on your hardware, operating system, and the load on your
+  machine):</p>
+<p class="Pp"></p>
+<pre>  Benchmark: timing 10000 iterations of for, map...
+         for:  4 secs ( 3.97 usr  0.01 sys =  3.98 cpu)
+         map:  6 secs ( 4.97 usr  0.00 sys =  4.97 cpu)
+</pre>
+<p class="Pp">Be aware that a good benchmark is very hard to write. It only
+    tests the data you give it and proves little about the differing
+    complexities of contrasting algorithms.
+  <br/>
+</p>
+<p class="Pp"><b>如何替我的
+    Perl程式作交叉参考？</b></p>
+<p class="Pp">B::Xref模组可 以替你的
+    Perl程式制作
+    cross-reference报告。用法是：</p>
+<p class="Pp"></p>
+<pre>    perl -MO=Xref[,OPTIONS] scriptname.plx
+</pre>
+<br/>
+<p class="Pp"><b>有
+    Perl专用的美化列印程式吗?</b></p>
+<p class="Pp">Perltidy is a Perl script which indents and reformats Perl scripts
+    to make them easier to read by trying to follow the rules of the perlstyle.
+    If you write Perl scripts, or spend much time reading them, you will
+    probably find it useful. It is available at
+  <a href="../..//perltidy.sourceforge.net</a></p>
+<p class="Pp">Of course, if you simply follow the guidelines in perlstyle, you
+    shouldn&#39;t need to reformat. The habit of formatting your code as you write
+    it will help prevent bugs. Your editor can and should help you with this.
+    The perl-mode or newer cperl-mode for emacs can provide remarkable amounts
+    of help with most (but not all) code, and even less programmable editors can
+    provide significant assistance. Tom Christiansen and many other VI users
+    swear by the following settings in vi and its clones:</p>
+<p class="Pp"></p>
+<pre>    set ai sw=4
+    map! ^O {^M}^[O^T
+</pre>
+<p class="Pp">Put that in your <i>.exrc</i> file (replacing the caret characters
+    with control characters) and away you go. In insert mode, ^T is for
+    indenting, ^D is for undenting, and ^O is for blockdenting-- as it were. A
+    more complete example, with comments, can be found at
+    <a href="../../authors/id/TOMC/scripts/toms.exrc.gz">../../authors/id/TOMC/scripts/toms.exrc.gz</a></p>
+<p class="Pp">The a2ps <a href="../../%7Edemaille/a2ps/black+white.ps.gz">../../%7Edemaille/a2ps/black+white.ps.gz</a>
+    does lots of things related to generating nicely printed output of
+    documents, as does enscript at <a href="../../mtr/genscript/">../../mtr/genscript/</a> .
+  <br/>
+</p>
+<p class="Pp"><b>有 Perl的 ctags 吗?</b></p>
+<p class="Pp">Recent versions of ctags do much more than older versions did.
+    EXUBERANT CTAGS is available from <a href="../../">../../</a> and does a
+    good job of making tags files for perl code.</p>
+<p class="Pp">There is also a simple one at
+    <a href="../../authors/id/TOMC/scripts/ptags.gz">../../authors/id/TOMC/scripts/ptags.gz</a> which may do the trick.
+    It can be easy to hack this into what you want.
+  <br/>
+</p>
+<p class="Pp"><b>Is there an IDE or Windows Perl Editor?</b></p>
+<p class="Pp">Perl programs are just plain text, so any editor will do.</p>
+<p class="Pp">If you&#39;re on Unix, you already have an IDE--Unix itself. The UNIX
+    philosophy is the philosophy of several small tools that each do one thing
+    and do it well. It&#39;s like a carpenter&#39;s toolbox.</p>
+<p class="Pp">If you want an IDE, check the following:</p>
+<dl class="Bl-tag">
+  <dt>Komodo</dt>
+  <dd>ActiveState&#39;s cross-platform (as of April 2001 Windows and Linux),
+      multi-language IDE has Perl support, including a regular expression
+      debugger and remote debugging (
+      <a href="../../Products/Komodo/index.html">../../Products/Komodo/index.html</a> ). (Visual Perl, a
+      Visual Studio.NET plug-in is currently (early 2001) in beta (
+      <a href="../../Products/VisualPerl/index.html">../../Products/VisualPerl/index.html</a> )).</dd>
+  <dt>The Object System</dt>
+  <dd>( <a href="../../object_system/">../../object_system/</a> ) is a Perl web applications
+      development IDE, apparently for any platform that runs Perl.</dd>
+  <dt>Open Perl IDE</dt>
+  <dd>( <a href="../../">../../</a> ) Open Perl IDE is an integrated
+      development environment for writing and debugging Perl scripts with
+      ActiveState&#39;s ActivePerl distribution under Windows 95/98/NT/2000.</dd>
+  <dt>PerlBuilder</dt>
+  <dd>( <a href="../../perl.htm">../../perl.htm</a> ) is an integrated development
+      environment for Windows that supports Perl development.</dd>
+  <dt>visiPerl+</dt>
+  <dd>( <a href="../../visiperl/">../../visiperl/</a> ) From Help Consulting, for
+    Windows.</dd>
+  <dt>OptiPerl</dt>
+  <dd>( <a href="../../">../../</a> ) is a Windows IDE with simulated CGI
+      environment, including debugger and syntax highlighting editor.</dd>
+</dl>
+<p class="Pp">For editors: if you&#39;re on Unix you probably have vi or a vi clone
+    already, and possibly an emacs too, so you may not need to download
+    anything. In any emacs the cperl-mode (M-x cperl-mode) gives you perhaps the
+    best available Perl editing mode in any editor.</p>
+<p class="Pp">If you are using Windows, you can use any editor that lets you
+    work with plain text, such as NotePad or WordPad. Word processors, such as
+    Microsoft Word or WordPerfect, typically do not work since they insert all
+    sorts of behind-the-scenes information, although some allow you to save
+    files as &#34;Text Only&#34;. You can also download text editors designed
+    specifically for programming, such as Textpad ( <a href="../../">../../</a> )
+    and UltraEdit ( <a href="../../">../../</a> ), among others.</p>
+<p class="Pp">If you are using MacOS, the same concerns apply. MacPerl (for
+    Classic environments) comes with a simple editor. Popular external editors
+    are BBEdit ( <a href="../../">../../</a> ) or Alpha (
+    <a href="../../alpha/">../../alpha/</a> ). MacOS X users can use Unix editors as
+    well.</p>
+<dl class="Bl-tag">
+  <dt>GNU Emacs</dt>
+  <dd><a href="../../software/emacs/windows/ntemacs.html">../../software/emacs/windows/ntemacs.html</a></dd>
+  <dt>MicroEMACS</dt>
+  <dd><a href="../../">../../</a></dd>
+  <dt>XEmacs</dt>
+  <dd><a href="../../Download/index.html">../../Download/index.html</a></dd>
+  <dt>Jed</dt>
+  <dd><a href="../../~davis/jed/">../../~davis/jed/</a></dd>
+</dl>
+<p class="Pp">or a vi clone such as</p>
+<dl class="Bl-tag">
+  <dt>Elvis</dt>
+  <dd><a href="ftp://ftp.cs.pdx.edu/pub/elvis/">ftp://ftp.cs.pdx.edu/pub/elvis/</a> <a href="../../elvis/">../../elvis/</a></dd>
+  <dt>Vile</dt>
+  <dd><a href="../../vile/vile.html">../../vile/vile.html</a></dd>
+  <dt>Vim</dt>
+  <dd><a href="../../">../../</a></dd>
+</dl>
+<p class="Pp">For vi lovers in general, Windows or elsewhere:</p>
+<p class="Pp"></p>
+<pre>        <a href="../../thomer/vi/vi.html">../../thomer/vi/vi.html</a>
+</pre>
+<p class="Pp">nvi ( <a href="../../vi/">../../vi/</a> , available from CPAN in
+    src/misc/) is yet another vi clone, unfortunately not available for Windows,
+    but in UNIX platforms you might be interested in trying it out, firstly
+    because strictly speaking it is not a vi clone, it is the real vi, or the
+    new incarnation of it, and secondly because you can embed Perl inside it to
+    use Perl as the scripting language. nvi is not alone in this, though: at
+    least also vim and vile offer an embedded Perl.</p>
+<p class="Pp">The following are Win32 multilanguage editor/IDESs that support
+    Perl:</p>
+<dl class="Bl-tag">
+  <dt>Codewright</dt>
+  <dd><a href="../../">../../</a></dd>
+  <dt>MultiEdit</dt>
+  <dd><a href="../../">../../</a></dd>
+  <dt>SlickEdit</dt>
+  <dd><a href="../../">../../</a></dd>
+</dl>
+<p class="Pp">There is also a toyedit Text widget based editor written in Perl
+    that is distributed with the Tk module on CPAN. The ptkdb (
+    <a href="../../~aep/ptkdb/">../../~aep/ptkdb/</a> ) is a Perl/tk based debugger that acts as
+    a development environment of sorts. Perl Composer (
+    <a href="../../">../../</a> ) is an IDE for Perl/Tk GUI
+  creation.</p>
+<p class="Pp">In addition to an editor/IDE you might be interested in a more
+    powerful shell environment for Win32. Your options include</p>
+<dl class="Bl-tag">
+  <dt>Bash</dt>
+  <dd>from the Cygwin package ( <a href="../../cygwin/">../../cygwin/</a> )</dd>
+  <dt>Ksh</dt>
+  <dd>from the MKS Toolkit ( <a href="../../">../../</a> ), or the Bourne shell of the
+      U/WIN environment ( <a href="../../sw/tools/uwin/">../../sw/tools/uwin/</a> )</dd>
+  <dt>Tcsh</dt>
+  <dd><a href="ftp://ftp.astron.com/pub/tcsh/">ftp://ftp.astron.com/pub/tcsh/</a> , see also
+      <a href="../../software/csh-tcsh-book/">../../software/csh-tcsh-book/</a></dd>
+  <dt>Zsh</dt>
+  <dd><a href="ftp://ftp.blarg.net/users/amol/zsh/">ftp://ftp.blarg.net/users/amol/zsh/</a> , see also <a href="../../">../../</a></dd>
+</dl>
+<p class="Pp">MKS and U/WIN are commercial (U/WIN is free for educational and
+    research purposes), Cygwin is covered by the GNU Public License (but that
+    shouldn&#39;t matter for Perl use). The Cygwin, MKS, and U/WIN all contain (in
+    addition to the shells) a comprehensive set of standard UNIX toolkit
+    utilities.</p>
+<p class="Pp">If you&#39;re transferring text files between Unix and Windows using
+    FTP be sure to transfer them in ASCII mode so the ends of lines are
+    appropriately converted.</p>
+<p class="Pp">On Mac OS the MacPerl Application comes with a simple 32k text
+    editor that behaves like a rudimentary IDE. In contrast to the MacPerl
+    Application the MPW Perl tool can make use of the MPW Shell itself as an
+    editor (with no 32k limit).</p>
+<dl class="Bl-tag">
+  <dt>BBEdit and BBEdit Lite</dt>
+  <dd>are text editors for Mac OS that have a Perl sensitivity mode (
+      <a href="../../">../../</a> ).</dd>
+  <dt>Alpha</dt>
+  <dd>is an editor, written and extensible in Tcl, that nonetheless has built in
+      support for several popular markup and programming languages including
+      Perl and HTML ( <a href="../../">../../</a> ).</dd>
+</dl>
+<p class="Pp">Pepper and Pe are programming language sensitive text editors for
+    Mac OS X and BeOS respectively ( <a href="../../">../../</a> ).
+  <br/>
+</p>
+<p class="Pp"><b>哪儿有 vi 用的 Perl
+    宏？</b></p>
+<p class="Pp">For a complete version of Tom Christiansen&#39;s vi configuration
+    file, see <a href="../../authors/Tom_Christiansen/scripts/toms.exrc.gz">../../authors/Tom_Christiansen/scripts/toms.exrc.gz</a>
+    , the standard benchmark file for vi emulators. The file runs best with nvi,
+    the current version of vi out of Berkeley, which incidentally can be built
+    with an embedded Perl interpreter--see <a href="../../src/misc/">../../src/misc/</a> .
+  <br/>
+</p>
+<p class="Pp"><b>给 emacs用的
+    perl模式又要去哪抓呢?</b></p>
+<p class="Pp">从大约 Emacs 19.22版 (version 19
+    patchlevel 22)起，已内含了
+    perl-mode.el及 perl
+    除虫器的支援。它们应该会和标准的
+    Emacs 19版一起出货。</p>
+<p class="Pp">在
+    perl原始码的目录下，你会找到一个叫作
+    ``emacs&#39;&#39;
+    的目录，里面包括一个
+    cperl-mode
+    可以把程式中的关键字上色、提供内文相关的协助以及其它方便的功能。</p>
+<p class="Pp">注意：``main&#39;foo&#39;&#39;（其中的单引号）会让
+    emacs的 perl-mode
+    出问题，并且会弄乱内
+    缩 (indentation) 与高亮
+    (hilighting)。不过你本来就该用
+    ``main::foo&#39;&#39;的 （译者按： main&#39;foo
+    是表示模组或
+    package的旧式写法；新式的
+    [perl5的]写法是 main::foo）。
+  <br/>
+</p>
+<p class="Pp"><b>如何在 Perl里使用
+    curses?</b></p>
+<p class="Pp">The Curses module from CPAN provides a dynamically loadable object
+    module interface to a curses library. A small demo can be found at the
+    directory <a href="../../authors/Tom_Christiansen/scripts/rep.gz">../../authors/Tom_Christiansen/scripts/rep.gz</a> ; this
+    program repeats a command and updates the screen as needed, rendering <b>rep
+    ps axu</b> similar to <b>top</b>.
+  <br/>
+</p>
+<p class="Pp"><b>X或 Tk如何与
+    Perl配合呢?</b></p>
+<p class="Pp">Tk
+    模块是一个完全以 Perl
+    为基础，面向对象的接口，让你不用学
+    Tcl也可以使用
+    Tk工具组。Sx则是 Athena Widget
+    set专用的介面。两者都可在
+    CPAN取得。参见分类
+    <a href="../../modules/by-category/08_User_Interfaces/">../../modules/by-category/08_User_Interfaces/</a></p>
+<p class="Pp">Invaluable for Perl/Tk programming are the Perl/Tk FAQ at
+    <a href="../../%7Epvhp/ptk/ptkTOC.html">../../%7Epvhp/ptk/ptkTOC.html</a> , the Perl/Tk Reference
+    Guide available at <a href="../../authors/Stephen_O_Lidie/">../../authors/Stephen_O_Lidie/</a> , and the
+    online manpages at
+    <a href="../../%7Eamundson/perl/perltk/toc.html">../../%7Eamundson/perl/perltk/toc.html</a> .
+  <br/>
+</p>
+<p class="Pp"><b>如何不靠 CGI或 Tk
+    帮助作出简单的目录（选单）?</b></p>
+<p class="Pp"><a href="../../authors/id/SKUNZ/perlmenu.v4.0.tar.gz">../../authors/id/SKUNZ/perlmenu.v4.0.tar.gz</a>
+    是个以
+    curses为基础的模组，可以达成你的要求。
+  <br/>
+</p>
+<p class="Pp"><b>如何让我的
+    Perl程式跑得更快些?</b></p>
+<p class="Pp">最好是能设计一个较好的演算法
+    (algorithm)，这通常会让程式有大不相同的表现。Jon
+    Bentley&#39;s book <i>Programming Pearls</i>
+    (没有拼写错误!)
+    中有些你或许想知道的增进效率小技巧。
+    Advice on benchmarking boils down to: benchmark and profile to make sure
+    you&#39;re optimizing the right part, look for better algorithms instead of
+    microtuning your code, and when all else fails consider just buying faster
+    hardware. You will probably want to read the answer to the earlier question
+    ``How do I profile my Perl programs?&#39;&#39; if you haven&#39;t done so already.</p>
+<p class="Pp">其它方法包括自动载入较少使用的
+    Perl
+    程式码。请参看标准
+    perl 套件中的 AutoSplit及
+    AutoLoader模组的用法。或当你能断定程式执行效率的瓶颈在何处时，用
+    C来写那个部份，就像用组合语言来撰写
+    C程式的瓶颈部份一样。与此法相近的是使用以
+    C撰写瓶 颈部份的模组
+    (例如 CPAN中的 PDL 模组)。</p>
+<p class="Pp">如果你目前是将你的
+    perl直译器动态连结到
+    libc.so的话，重新作一份静态连结到
+    libc.a的 perl直译器可以提高
+    10-25%的执行效能。虽然这会使你的
+    perl直译器变得更胖，但你的
+    Perl程式 (及程式设计者)
+    或许会因此而感谢你。详情请参考
+    perl标准套件原始码版本中的
+    INSTALL 档案。</p>
+<p class="Pp">使用
+    undump程式把编译后的档案格式存到硬碟里以加快执行的速度已经是老掉牙的手法了。它已不再是个可行的方法，因为这方法只有几种平台能用，况且它终究不是个治本之
+    道。
+  <br/>
+</p>
+<p class="Pp"><b>如何让我的 Perl
+    程序少用一些内存？</b></p>
+<p class="Pp">当问题变成时间与空间的交易时，
+    Perl
+    几乎总是用记忆体来帮忙解决问题。
+    Perl中的纯量 (Scalar)
+    耗掉的记忆体比
+    C中的字串形态还多，阵列又更多，
+    更别谈杂凑阵列了
+    (Hashes)。关于这一点，我们当然还有很多工作得作，近来发布的版本，已开始针对这些问题做改进了。例如，
+    5.004 版中，
+    重复的散列键 (duplicate hash keys)
+    由使用它的杂凑阵列共用，这样就不用再重新定份位置给它了。</p>
+<p class="Pp">在某些情况下，使用
+    substr()或
+    vec()来模拟数组有很大的好处。例如，一个有上千
+    个布林代数值的阵列将占用至少
+    20,000位元组的空间，但是它可以被转变为一个
+    125位元组的位元向量 (bit
+    vector)以节省相当可观的记忆体。标准套件中的
+    Tie::SubstrHash模组也能够帮助特定形态的资料结构节省些记忆体。若你正在和一些特殊的资料结构奋战
+    (例如，矩阵)，用
+    C写的模组所耗掉的记忆体可能低于同功能并用
+    Perl写的模组。</p>
+<p class="Pp">另一件值得一试的是，查一下你的
+    Perl是以系统内的 malloc 还是
+    Perl内含的 malloc
+    编译起来的。不论是哪个，试着换成另一个，再看看这是否造成任何差别。关于
+    malloc的资讯可在
+    perl标准套件原始码版中的
+    INSTALL 档案找到。键入
+    <span class="Li">&#34;perl -V:usemymalloc&#34;</span>.
+    就可以知道你是否在使用
+    perl的 malloc。</p>
+<p class="Pp">Of course, the best way to save memory is to not do anything to
+    waste it in the first place. Good programming practices can go a long way
+    toward this:</p>
+<dl class="Bl-tag">
+  <dt>* Don&#39;t slurp!</dt>
+  <dd>Don&#39;t read an entire file into memory if you can process it line by line.
+      Or more concretely, use a loop like this:
+    <p class="Pp"></p>
+    <pre>        #
+        # Good Idea
+        #
+        while (&lt;FILE&gt;) {
+           # ...
+        }
+    </pre>
+    <p class="Pp">instead of this:</p>
+    <p class="Pp"></p>
+    <pre>        #
+        # Bad Idea
+        #
+        @data = &lt;FILE&gt;;
+        foreach (@data) {
+            # ...
+        }
+    </pre>
+    <p class="Pp">When the files you&#39;re processing are small, it doesn&#39;t much
+        matter which way you do it, but it makes a huge difference when they
+        start getting larger.</p>
+  </dd>
+  <dt>* Use map and grep selectively</dt>
+  <dd>Remember that both map and grep expect a LIST argument, so doing this:
+    <p class="Pp"></p>
+    <pre>        @wanted = grep {/pattern/} &lt;FILE&gt;;
+    </pre>
+    <p class="Pp">will cause the entire file to be slurped. For large files,
+        it&#39;s better to loop:</p>
+    <p class="Pp"></p>
+    <pre>        while (&lt;FILE&gt;) {
+                push(@wanted, $_) if /pattern/;
+        }
+    </pre>
+  </dd>
+  <dt>* Avoid unnecessary quotes and stringification</dt>
+  <dd>Don&#39;t quote large strings unless absolutely necessary:
+    <p class="Pp"></p>
+    <pre>        my $copy = &#34;$large_string&#34;;
+    </pre>
+    <p class="Pp">makes 2 copies of <span class="Li">$large_string</span> (one
+        for <span class="Li">$copy</span> and another for the quotes),
+      whereas</p>
+    <p class="Pp"></p>
+    <pre>        my $copy = $large_string;
+    </pre>
+    <p class="Pp">only makes one copy.</p>
+    <p class="Pp">Ditto for stringifying large arrays:</p>
+    <p class="Pp"></p>
+    <pre>        {
+                local $, = &#34;\n&#34;;
+                print @big_array;
+        }
+    </pre>
+    <p class="Pp">is much more memory-efficient than either</p>
+    <p class="Pp"></p>
+    <pre>        print join &#34;\n&#34;, @big_array;
+    </pre>
+    <p class="Pp">or</p>
+    <p class="Pp"></p>
+    <pre>        {
+                local $&#34; = &#34;\n&#34;;
+                print &#34;@big_array&#34;;
+        }
+    </pre>
+  </dd>
+  <dt>* Pass by reference</dt>
+  <dd>Pass arrays and hashes by reference, not by value. For one thing, it&#39;s the
+      only way to pass multiple lists or hashes (or both) in a single
+      call/return. It also avoids creating a copy of all the contents. This
+      requires some judgment, however, because any changes will be propagated
+      back to the original data. If you really want to mangle (er, modify) a
+      copy, you&#39;ll have to sacrifice the memory needed to make one.</dd>
+  <dt>* Tie large variables to disk.</dt>
+  <dd>For &#34;big&#34; data stores (i.e. ones that exceed available memory)
+      consider using one of the DB modules to store it on disk instead of in
+      RAM. This will incur a penalty in access time, but that&#39;s probably better
+      than causing your hard disk to thrash due to massive swapping.
+    <br/>
+  </dd>
+</dl>
+<p class="Pp"><b>把局部变量的引用返回是不安全的做法吗?</b></p>
+<p class="Pp">这样是安全的，Perl的资源回收
+    (garbage
+    collection)系统会解决此问题。</p>
+<p class="Pp"></p>
+<pre>    sub makeone {
+        my @a = ( 1 .. 10 );
+        return \@a;
+    }
+</pre>
+<p class="Pp"></p>
+<pre>    for ( 1 .. 10 ) {
+        push @many, makeone();
+    }
+</pre>
+<p class="Pp"></p>
+<pre>    print $many[4][5], &#34;\n&#34;;
+</pre>
+<p class="Pp"></p>
+<pre>    print &#34;@many\n&#34;;
+</pre>
+<br/>
+<p class="Pp"><b>我如何释放一个数组或散列以缩小我的程式尺寸?</b></p>
+<p class="Pp">你无法这么作。系统配置给程式的记忆体是覆水难收。这也是为何执行很长一段时间的程式有时会重新执行
+    (re-exec)它们自己的原因。
+    Some operating systems (notably, systems that use <a href="../../buster/manpages-dev/mmap.2.en.html">mmap(2)</a> for
+    allocating large chunks of memory) can reclaim memory that is no longer
+    used, but on such systems, perl must be configured and compiled to use the
+    OS&#39;s malloc, not perl&#39;s.</p>
+<p class="Pp">然而，在使用你的变数时，明智地用
+    my()来定义执行范围，可让
+    Perl在脱离该范围后
+    将它们所占的空间释放给其它部份的程式。
+    (注：my()的变数也比全域变数执行起来快
+    10%。)当然，一个全域变数永远没有超出范围的时候，所以你无法将它占用的空间自动重新分配，不过，把它
+    undef() 或／和
+    delete()会有相同的效果。总之，在
+    Perl里，你并不能／应该去担心太多有关记忆体定址与解除这件事，而我们连添加这项功能（资料形态的预先定址），目前都已在进行中。
+  <br/>
+</p>
+<p class="Pp"><b>如何让我的 CGI脚本
+    (script)执行起来更有效率?</b></p>
+<p class="Pp">除了使一般
+    Perl程式加快或缩小的平常手段外，一个
+    CGI
+    程式还有其他的顾虑。也许它每秒会被执行好几次。每次它执行时，重新编译所花的时间、加上定址所需的
+    1
+    MB以上的系统记忆体，就是一个大杀手。光是编译成
+    C 是没啥帮助的
+    ，因为瓶颈在于整个程序开始时所负担的包袱
+    (start-up overhead) 。</p>
+<p class="Pp">最起码有两种较流行的方法可以避免这些包袱。一种解法是将
+    mod_perl 或是
+    mod_fastcgi其中一个模组加在你所执行的
+    Apache HTTP server。</p>
+<p class="Pp">有了 mod_perl 和 Apache::*模组
+    (从
+    CPAN取得)，httpd执行时会带起一个内
+    嵌的
+    Perl直译器，而它会预先编译你的程式，并在不产生其它子程序的情况下用同一个定址空间来执行。Apache
+    扩充模组亦给
+    Perl一个连通 server API
+    的管道，所以用
+    Perl写的模组可以做到任何
+    C写的模组所具备的功能。详情请参阅
+    <a href="../../">../../</a></p>
+<p class="Pp">而有了 FCGI模组 (自
+    CPAN取得) 和 mod_fastcgi 模块(从
+    <a href="../../%E5%8F%96%E5%BE%97%29%EF%BC%8C%E6%AF%8F%E4%B8%AA">../../取得)，每个</a> Perl
+    程序将成为一个永久的
+    CGI 守护进程。</p>
+<p class="Pp">这些方法对你的系统与你撰写
+    CGI程式的方法都有超乎想像之外的影响，所以请小心地使用它们。</p>
+<p class="Pp">参见
+    <a href="../../modules/by-category/15_World_Wide_Web_HTML_HTTP_CGI/">../../modules/by-category/15_World_Wide_Web_HTML_HTTP_CGI/</a>
+  .</p>
+<p class="Pp">A non-free, commercial product, ``The Velocity Engine for Perl&#39;&#39;,
+    (<a href="../../">../../</a> or <a href="../../velocigen/">../../velocigen/</a> ) might
+    also be worth looking at. It will allow you to increase the performance of
+    your Perl programs, running programs up to 25 times faster than normal CGI
+    Perl when running in persistent Perl mode or 4 to 5 times faster without any
+    modification to your existing CGI programs. Fully functional evaluation
+    copies are available from the web site.
+  <br/>
+</p>
+<p class="Pp"><b>如何隐藏
+    Perl程式的原始码?</b></p>
+<p class="Pp">删除它。 :-)
+    说真的，有一些具有不同“安全”等级的方法(大部分都不能令人满意)。</p>
+<p class="Pp">首先，你
+    不能拿走读取权，不然你的程式怎么被解译或是编译呢?
+    (不过那也并不表示一个
+    CGI程式的原始码可以被使用者读取。)所以你得让档案权限停留在
+    0755这个友善的阶段。</p>
+<p class="Pp">有些人认为这是个安全上的漏洞。不过若你的程式作的是不安全的事情，光仰赖别人看不见这些漏洞、不知从何下手，那么它依然是不安全的。其实对有些人来说他们并不需要看见程式原始码便可能判定并揭露这些不安全的部份。透过隐瞒达到的安全，就是不修正臭虫反而隐藏它们，实际上是没有安全性可言的。</p>
+<p class="Pp">你可以试着透过原始码过滤模组
+    (CPAN中的
+    Filter::*)来替原始码加密。但高手也许有办法将其解密还原。你也可以用下面提到的
+    byte code
+    编译器与直译器，但高手也有可能反解译它。你可以试试后面提到的原生码编译器
+    (native-code
+    compiler)，但高手也有可能反组译它。这些手段都需要不同难度的技巧才能让别人拿到你的原始码，但没有一种能够很确定地隐藏它。(这对每种语言来说都为真，不是只有
+    Perl)</p>
+<p class="Pp">很容易从 Perl
+    程序中恢复出源码。只要将程序作为
+    perl
+    解释器的参数，并且使用
+    B::
+    中的模块就可以了。B::Deparse
+    模块足以恢复大多数隐藏的代码。再次的，这不是
+    Perl 特有的东西。</p>
+<p class="Pp">如果你所担心的是别人自你的程式码中获利，那么一纸权限执照是能提供你法律上安全的唯一途径。注册你的软体并且写份权限说明，再加上一些具威胁性的句子像“这是
+    XYZ公司未出版的专有软体。你能撷取它并不代表你具有使用的权限...”之类云云。当然，我们不是律师，所以若你想要你的执照中每一句话在法庭上都站得住脚，就去见个律师吧。
+  <br/>
+</p>
+<p class="Pp"><b>如何把我的
+    Perl程式码编译成 byte code或
+    C?</b></p>
+<p class="Pp">Malcolm
+    Beattie已经写了一个多功能的后端编译器，可以从
+    CPAN取得，它就能做到这两项功能。它包含在
+    perl5.005
+    发布中，但是仍然是测试版。这代表着若你是个程式设计
+    员而非寻找万灵解药的人，那么参与其测试就会充满趣味。</p>
+<p class="Pp">请了解光是编译成 C
+    其本身或在本质上并不能保证它就会跑得快更多。那是因为除了在运气好的状况中有一堆可以衍生成出来的原生形态外，平时的
+    Perl
+    执行系统环境依然存在因此依然会花差不多长的执行时间与占用差不多大小的记忆空间。大多数程式能省下来的不过是编译时间，这使执行速度顶多快
+    10-30%。有些罕见的程式能真正从中受利
+    (例如增快好几倍)，但这还得配合原始码的微调。</p>
+<p class="Pp">你或许会惊讶地发现，现行版本的编译器做出来的执行档大小跟你的
+    Perl直译器一样大，有时更大些。那是因为依照现在的写法，所有的程式皆转成一个被
+    eval()的大叙述。只要建造一个动态连结的
+    libperl.so程式库，并将之连结起来，你就可以戏剧性地减少这
+    种浪费。参看
+    perl原始码套件中的 INSTALL
+    pod档案以获得更详尽的讯息。如果你用这方法连结你主要的
+    perl执行档，就能使它变得很渺小。举例来说，在作者之一的系
+    统里， /usr/bin/perl只有
+    11k“小”而已!</p>
+<p class="Pp">In general, the compiler will do nothing to make a Perl program
+    smaller, faster, more portable, or more secure. In fact, it can make your
+    situation worse. The executable will be bigger, your VM system may take
+    longer to load the whole thing, the binary is fragile and hard to fix, and
+    compilation never stopped software piracy in the form of crackers, viruses,
+    or bootleggers. The real advantage of the compiler is merely packaging, and
+    once you see the size of what it makes (well, unless you use a shared
+    <i>libperl.so</i>), you&#39;ll probably want a complete Perl install anyway.
+  <br/>
+</p>
+<p class="Pp"><b>How can I compile Perl into Java?</b></p>
+<p class="Pp">You can also integrate Java and Perl with the Perl Resource Kit
+    from O&#39;Reilly and Associates. See <a href="../../catalog/prkunix/">../../catalog/prkunix/</a>
+  .</p>
+<p class="Pp">Perl 5.6 comes with Java Perl Lingo, or JPL. JPL, still in
+    development, allows Perl code to be called from Java. See jpl/README in the
+    Perl source tree.
+  <br/>
+</p>
+<p class="Pp"><b>如何才能让 </b></p>
+<p class="Pp">OS/2下只要用：</p>
+<p class="Pp"></p>
+<pre>    extproc perl -S -your_switches
+</pre>
+<p class="Pp">当作 <span class="Li">&#34;*.cmd&#34;</span>
+    档案的第一行
+    (<span class="Li">&#34;-S&#34;</span> 是因
+    cmd.exe中其
+    `extproc&#39;处理的臭虫才要的)。DOS使用者应先制作一个相对的
+    batch 档案然后将它以
+    ALTERNATIVE_SHEBANG
+    的方式写成程式。(更多讯息在原始码版本的
+    INSTALL档案里)</p>
+<p class="Pp">The Win95/NT installation, when using the ActiveState port of
+    Perl, will modify the Registry to associate the
+    <span class="Li">&#34;.pl&#34;</span> extension with the perl interpreter.
+    If you install another port, perhaps even building your own Win95/NT Perl
+    from the standard sources by using a Windows port of gcc (e.g., with cygwin
+    or mingw32), then you&#39;ll have to modify the Registry yourself. In addition
+    to associating <span class="Li">&#34;.pl&#34;</span> with the interpreter,
+    NT people can use: <span class="Li">&#34;SET
+    PATHEXT=%PATHEXT%;.PL&#34;</span> to let them run the program
+    <span class="Li">&#34;install-linux.pl&#34;</span> merely by typing
+    <span class="Li">&#34;install-linux&#34;</span>.</p>
+<p class="Pp">麦金塔的
+    perl程式将会有适当的创造者与形态
+    (Creator and
+    Type)，所以双击它们就会执行这些
+    perl 应用程式。</p>
+<p class="Pp">重要:不论你做什么，请千万不要因为觉得沮丧，就把
+    perl 直译器丢到你的
+    cgi-bin目录下，好让你的 web
+    伺服器能执行你的程式。这是一个非常大的安全漏洞。花点时间想想怎样才是正确的做法吧。
+  <br/>
+</p>
+<p class="Pp"><b>我能利用命令行写出有用的程式吗?</b></p>
+<p class="Pp">可以。详情请看
+    perlrun。以下有些范例
+    (假设用的是标准的 Unix
+    shell引言规则)。</p>
+<p class="Pp"></p>
+<pre>    # 把第一栏和最后一栏相加
+    perl -lane &#39;print $F[0] + $F[-1]&#39; *
+</pre>
+<p class="Pp"></p>
+<pre>    # 辨别是否为文字档
+    perl -le &#39;for(@ARGV) {print if -f &amp;&amp; -T _}&#39; *
+</pre>
+<p class="Pp"></p>
+<pre>    # 移除 C程式中的说明
+    perl -0777 -pe &#39;s{/\*.*?\*/}{}gs&#39; foo.c
+</pre>
+<p class="Pp"></p>
+<pre>    # 让档案年轻一个月，躲避 reaper daemons
+    perl -e &#39;$X=24*60*60; utime(time(),time() + 30 * $X,@ARGV)&#39; *
+</pre>
+<p class="Pp"></p>
+<pre>    # 找出第一个未用的 uid
+    perl -le &#39;$i++ while getpwuid($i); print $i&#39;
+</pre>
+<p class="Pp"></p>
+<pre>    # 显示合理的使用说明路径 (manpath)
+    echo $PATH ⎪ perl -nl -072 -e &#39;
+        s![^/+]*$!man!&amp;&amp;-d&amp;&amp;!$s{$_}++&amp;&amp;push@m,$_;END{print&#34;@m&#34;}&#39;
+</pre>
+<p class="Pp">好吧，最后一个例子事实上是「perl程式困惑化」竞赛
+    (Obfuscated Perl)的 参赛作品。 :-)
+  <br/>
+</p>
+<p class="Pp"><b>为何一行的 perl
+    程式无法在我的
+    DOS/Mac/VMS系统上运作?</b></p>
+<p class="Pp">问题通常出在那些系统的命令解译器对于参数的引用与
+    Unix shells
+    所作的解释不同，而后者很不幸的是这些一行
+    perl
+    的生父。在某些系统，也许你得把单引号改成双引号，但这却是你万万
+    不可在 Unix或
+    Plan9系统上作的事。你也许还得把一个
+    %改成 %%。</p>
+<p class="Pp">例如：</p>
+<p class="Pp"></p>
+<pre>    # Unix
+    perl -e &#39;print &#34;Hello world\n&#34;&#39;
+</pre>
+<p class="Pp"></p>
+<pre>    # DOS 和其他机器
+    perl -e &#34;print \&#34;Hello world\n\&#34;&#34;
+</pre>
+<p class="Pp"></p>
+<pre>    # Mac
+    print &#34;Hello world\n&#34;
+     (然后运行 &#34;Myscript&#34; 或按 Shift-Command-R)
+</pre>
+<p class="Pp"></p>
+<pre>    # MPW
+    perl -e &#39;print &#34;Hello world\n&#34;&#39;
+</pre>
+<p class="Pp"></p>
+<pre>    # VMS
+    perl -e &#34;print &#34;&#34;Hello world\n&#34;&#34;&#34;
+</pre>
+<p class="Pp">问题是，这些方法没有一个是完全可靠的：它都得看命令解译器的脸色。在
+    Unix中，前两者通常可以用。在
+    DOS下，两者可能都没有用。若
+    4DOS是命令解译器，下面此法可能比
+    较有希望：</p>
+<p class="Pp"></p>
+<pre>  perl -e &#34;print &lt;Ctrl-x&gt;&#34;Hello world\n&lt;Ctrl-x&gt;&#34;&#34;
+</pre>
+<p class="Pp">在 Mac
+    下，端视你所用的环境为何。
+    MacPerl所附的 shell，或是 MPW，
+    其所支援的参数格式有不少都蛮像
+    Unix
+    shells的，除了它自在地使用
+    Mac 的非
+    ASCII字元当成控制字元。</p>
+<p class="Pp">Using <i>qq()</i>, q(), and <i>qx()</i>, instead of &#34;double
+    quotes&#34;, &#39;single quotes&#39;, and `backticks`, may make one-liners easier
+    to write.</p>
+<p class="Pp">恐怕我得说这问题并没有一般解。白话一点说，它真是一团乱。</p>
+<p class="Pp">[部份答案是由 Kenneth
+    Albanowski 所提供的。]
+  <br/>
+</p>
+<p class="Pp"><b>我得去哪里学 Perl的
+    CGI或是 Web程式设计呢?</b></p>
+<p class="Pp">就模组来说，去
+    CPAN抓 CGI 和 LWP
+    两个模组。就书本来看，参考关于书那部份里特别和
+    web 相关的问题。若有与
+    web相关的疑难杂症，像“为何我收到
+    500错误”或“它在命令列模式下跑得好好的，怎么不能在浏览器下正常执行”时，请参看：</p>
+<p class="Pp"></p>
+<pre>        <a href="../../CGI_MetaFAQ.html">../../CGI_MetaFAQ.html</a>
+</pre>
+<br/>
+<p class="Pp"><b>从哪里可以学习面向对象的
+    Perl 编程？</b></p>
+<p class="Pp">perltoot是个好开始，然后你可以再参考
+    perlobj 和 perlboot，Perltoot，perltooc 以及
+    perlbot
+    (如果你使用老版本的
+    Perl，你可能没有这些。去
+    <a href="../../">../../</a>
+    下载吧，但是首先考虑一下升级你的
+    perl)</p>
+<p class="Pp">有本好书关于 Perl
+    中的 OO 是 &#34;Object-Oriented Perl&#34;
+    作者是 Damian Conway
+    ，出版社为 Manning Publications,
+    <a href="../../Conway/index.html">../../Conway/index.html</a>
+  <br/>
+</p>
+<p class="Pp"><b>从哪里可以学习将
+    Perl 与 C 连接？[h2xs, xsubpp]</b></p>
+<p class="Pp">若你要从
+    Perl程式呼叫 C，就自
+    perlxstut开始向 perlxs ，xsubpp ，及
+    perlguts前进。反之，则读
+    perlembed ，perlcall ，及 perlguts
+    。别忘了你可以从各模组的作者如何写他们的模组及解决他们的问题中学到很多。
+  <br/>
+</p>
+<p class="Pp"><b>我已经阅读了
+    perlembed,perlguts
+    等等，但是还是不能在我的
+    C 程序中嵌入
+    perl；我作错了什么？</b></p>
+<p class="Pp">自 CPAN 下载 ExtUtils::Embed
+    套件，然后执行 `make
+    test&#39;。如果测试成功，就一遍又一遍地读那些
+    pod
+    说明档案。若它失败了，参看
+    perlbug并送一份内有
+    <span class="Li">&#34;make test TEST_VERBOSE=1&#34;</span> 与
+    <span class="Li">&#34;perl -V&#34;</span>
+    输出的报告。
+  <br/>
+</p>
+<p class="Pp"><b>我试着运行我的脚本时，看到了这样的消息。它是什么意思？</b></p>
+<p class="Pp">perldiag有一份完整的
+    perl错误与警告讯息列表，并附有说明文字。你也可以用
+    splain程式 (伴随
+    perl而来)去解释这些错误讯息：</p>
+<p class="Pp"></p>
+<pre>    perl program 2&gt;diag.out
+    splain [-v] [-p] diag.out
+</pre>
+<p class="Pp">更改你的程式让它替你解释这些讯息也可以：</p>
+<p class="Pp"></p>
+<pre>    use diagnostics;
+</pre>
+<p class="Pp">或</p>
+<p class="Pp"></p>
+<pre>    use diagnostics -verbose;
+</pre>
+<br/>
+<p class="Pp"><b>什么是 What&#39;s MakeMaker?</b></p>
+<p class="Pp">此模组 (亦为标准 perl
+    套件之一部份)设计的目的是要替一个模组从一个
+    Makefile.PL 中自动撰写出一个
+    Makefile。详情请看
+  ExtUtils::MakeMaker。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="AUTHOR_AND_COPYRIGHT">AUTHOR AND COPYRIGHT<a class="anchor" href="#AUTHOR_AND_COPYRIGHT">¶</a></h1>
+Copyright (c) 1997-2002 Tom Christiansen and Nathan Torkington. All rights
+  reserved.
+<p class="Pp">This documentation is free; you can redistribute it and/or modify
+    it under the same terms as Perl itself.</p>
+<p class="Pp">Irrespective of its distribution, all code examples here are in
+    the public domain. You are permitted and encouraged to use this code and any
+    derivatives thereof in your own programs for fun or for profit as you see
+    fit. A simple comment in the code giving credit to the FAQ would be
+    courteous but is not required.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="译者">译者<a class="anchor" href="#%E8%AF%91%E8%80%85">¶</a></h1>
+陈彦铭，萧百龄，两只老虎工作室
+<br/>
+<p class="Pp"><b>跋</b></p>
+<p class="Pp">本页面中文版由中文
+    man 手册页计划提供。
+  <br/>
+  中文 man
+    手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2003-11-25</td>
+    <td class="foot-os">perl v5.8.3</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+perlfaq3.7.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-28T03:40:59Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"perlfaq3(7)\"}}]}"
+</script>

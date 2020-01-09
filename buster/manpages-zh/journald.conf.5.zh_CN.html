@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>journald.conf(5) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-de/journald.conf.5.de.html" hreflang="de">
+<link rel="alternate" href="../../buster/systemd/journald.conf.5.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/journald.conf.5.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/journald.conf.5.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="5">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; journald.conf(5)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/journald.conf.5">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/journald.conf.5.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#SYNOPSIS" title="SYNOPSIS">SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%85%8D%E7%BD%AE%E7%9B%AE%E5%BD%95%E5%8F%8A%E5%85%B6%E4%BC%98%E5%85%88%E7%BA%A7" title="配置目录及其优先级">配置目录及其优先级</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%89%E9%A1%B9" title="选项">选项</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%97%A5%E5%BF%97%E8%BD%AC%E5%8F%91" title="日志转发">日志转发</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E8%A7%81" title="参见">参见</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#NOTES" title="NOTES">NOTES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/journald.conf.5.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/journald.conf.5.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/journald.conf.5.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-de/journald.conf.5.de.html" title="German (de)">Deutsch</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/systemd/journald.conf.5.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/journald.conf.5.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/journald.conf.5.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">JOURNALD.CONF(5)</td>
+    <td class="head-vol">journald.conf</td>
+    <td class="head-rtitle">JOURNALD.CONF(5)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+journald.conf, journald.conf.d -
+  日志服务配置文件
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS">SYNOPSIS<a class="anchor" href="#SYNOPSIS">¶</a></h1>
+/etc/systemd/journald.conf
+<p class="Pp">/etc/systemd/journald.conf.d/*.conf</p>
+<p class="Pp">/run/systemd/journald.conf.d/*.conf</p>
+<p class="Pp">/usr/lib/systemd/journald.conf.d/*.conf</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+这些文件用于配置系统日志服务
+  <a href="../../buster/systemd/systemd-journald.service.8.en.html">systemd-journald.service(8)</a> 的行为。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="配置目录及其优先级">配置目录及其优先级<a class="anchor" href="#%E9%85%8D%E7%BD%AE%E7%9B%AE%E5%BD%95%E5%8F%8A%E5%85%B6%E4%BC%98%E5%85%88%E7%BA%A7">¶</a></h1>
+默认设置是在编译期间确定的，
+  所以仅在确实需要修改默认设置的情况下，
+  才需要使用配置文件。位于
+  /etc/systemd/
+  目录中的初始配置文件，
+  仅包含了展示选项默认值的注释，
+  目的在于方便系统管理员查看和直接修改。
+<p class="Pp">如果软件包想要自定义某些默认设置，
+    那么必须将自定义的配置文件安装到
+    /usr/lib/systemd/*.conf.d/ 目录中。 /etc/
+    目录仅供系统管理员使用。
+    系统管理员可以利用下面的逻辑来覆盖默认设置：
+    主配置文件最先被读取，
+    优先级也最低。 所有
+    *.conf.d/ 中的配置文件
+    都会覆盖主配置文件中的设置。
+    所有 *.conf.d/
+    中的配置文件(无论位于哪个目录中)，
+    统一按照文件名的字典顺序处理。
+    如果在多个配置文件中设置了同一个选项，
+    那么仅以文件名最靠后(字典顺序)的那一个为准。
+    为了便于排序，
+    建议给所有 *.conf.d/
+    中的配置文件
+    都加上两位十进制数字的文件名前缀。</p>
+<p class="Pp">如果系统管理员想要屏蔽
+    /usr/lib/
+    目录中的某个配置文件，
+    那么最佳做法是在 /etc/
+    目录中 创建一个指向
+    /dev/null 的同名符号链接，
+    即可彻底屏蔽 /usr/lib/
+    目录中的同名文件。</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="选项">选项<a class="anchor" href="#%E9%80%89%E9%A1%B9">¶</a></h1>
+所有选项都位于 &#34;[Journal]&#34;
+  小节：
+<p class="Pp"><i>Storage=</i></p>
+<div class="Bd-indent">在哪里存储日志文件：
+  &#34;volatile&#34;
+  表示仅保存在内存中，
+  也就是仅保存在 /run/log/journal
+  目录中(将会被自动按需创建)。
+  &#34;persistent&#34;
+  表示优先保存在磁盘上，
+  也就优先保存在 /var/log/journal
+  目录中(将会被自动按需创建)，
+  但若失败(例如在系统启动早期&#34;/var&#34;尚未挂载)，
+  则转而保存在 /run/log/journal
+  目录中(将会被自动按需创建)。
+  &#34;auto&#34;(默认值) 与 &#34;persistent&#34;
+  类似， 但不自动创建
+  /var/log/journal 目录，
+  因此可以根据该目录的存在与否决定日志的保存位置。
+  &#34;none&#34;
+  表示不保存任何日志(直接丢弃所有收集到的日志)，
+  但日志转发(见下文)不受影响。
+  默认值是 &#34;auto&#34;</div>
+<p class="Pp"><i>Compress=</i></p>
+<div class="Bd-indent">默认值&#34;yes&#34;表示：
+  压缩存储大于特定阈值的对象。</div>
+<p class="Pp"><i>Seal=</i></p>
+<div class="Bd-indent">默认值&#34;yes&#34;表示：如果存在一个&#34;sealing
+  key&#34;(由 <a href="../../buster/manpages-zh/journalctl.1.zh_CN.html">journalctl(1)</a> 的 <b>--setup-keys</b>
+  命令创建)，
+  那么就为所有持久保存的日志文件启用
+  FSS(<b>Seekable Sequential Key Generators</b>[1])保护，
+  以避免日志文件被恶意或无意的修改。</div>
+<p class="Pp"><i>SplitMode=</i></p>
+<div class="Bd-indent">设置如何按用户分割日志文件，以实现不同的访问控制策略(日志守护进程会确保每个用户都能读取自己的日志文件)。
+  注意，仅分割持久保存的日志(/var/log/journal)，永不分割内存中的日志(/run/log/journal)。
+  可以使用的分割策略如下：
+  &#34;uid&#34;
+  表示每个用户都有自己专属的日志文件(无论该用户是否拥有登录会话)，
+  但系统用户的日志依然记录到系统日志中。这是默认值。
+<p class="Pp">&#34;none&#34;
+    表示不对日志文件进行分割，而是将所有日志都记录到系统日志中。
+    这意味着非特权用户根本无法读取属于自己的日志信息。</p>
+</div>
+<p class="Pp"><i>RateLimitIntervalSec=</i>, <i>RateLimitBurst=</i></p>
+<div class="Bd-indent">用于限制日志的生成速度(设为零表示不作限制)。
+  <i>RateLimitIntervalSec=</i>
+  用于设置一个时间段长度，默认值是30秒。
+  <i>RateLimitBurst=</i>
+  用于设置一个正整数，表示消息条数，默认值是1000条。
+  表示在 <i>RateLimitIntervalSec=</i>
+  时间段内，
+  每个服务最多允许产生
+  <i>RateLimitBurst=</i>
+  数量(条数)的日志。
+  在同一个时间段内，超出数量限制的日志将被丢弃，直到下一个时间段才能再次开始记录。
+  对于所有被丢弃的日志消息，仅用一条类似&#34;xxx条消息被丢弃&#34;的消息来代替。
+  这个限制是针对每个服务的限制，一个服务超限并不会影响到另一个服务的日志记录。
+  <i>RateLimitIntervalSec=</i>
+  可以使用下面的时间单位：&#34;ms&#34;,
+  &#34;s&#34;, &#34;min&#34;, &#34;h&#34;, &#34;d&#34;</div>
+<p class="Pp"><i>SystemMaxUse=</i>, <i>SystemKeepFree=</i>,
+    <i>SystemMaxFileSize=</i>, <i>SystemMaxFiles=</i>, <i>RuntimeMaxUse=</i>,
+    <i>RuntimeKeepFree=</i>, <i>RuntimeMaxFileSize=</i>,
+  <i>RuntimeMaxFiles=</i></p>
+<div class="Bd-indent">限制日志文件的大小上限。
+  以 &#34;System&#34;
+  开头的选项用于限制磁盘使用量，
+  也就是 /var/log/journal
+  的使用量。 以 &#34;Runtime&#34;
+  开头的选项用于限制内存使用量，
+  也就是 /run/log/journal
+  的使用量。 以 &#34;System&#34;
+  开头的选项仅在 /var/log/journal
+  目录确实存在且可写时才有意义。
+  但以 &#34;Runtime&#34;
+  开头的选项永远有意义。
+  也就是说，
+  在系统启动早期 /var
+  尚未挂载时、
+  或者系统管理员禁止在磁盘上存储日志的时候，
+  仅有 &#34;Runtime&#34;
+  开头的选项有意义。
+  <b>journalctl</b> 与 <b>systemd-journald</b>
+  工具会忽略日志目录中
+  所有后缀名不等于
+  &#34;.journal&#34; 或 &#34;.journal~&#34;
+  的文件。 换句话说，
+  日志目录中不应该存在后缀名不等于
+  &#34;.journal&#34; 或 &#34;.journal~&#34;
+  的文件，
+  因为这些文件永远不会被清理。
+<p class="Pp"><i>SystemMaxUse=</i> 与 <i>RuntimeMaxUse=</i>
+    限制全部日志文件加在一起最多可以占用多少空间。
+    <i>SystemKeepFree=</i> 与 <i>RuntimeKeepFree=</i>
+    表示除日志文件之外，至少保留多少空间给其他用途。
+    <b>systemd-journald</b>
+    会同时考虑这两个因素，
+    并且尽量限制日志文件的总大小，以同时满足这两个限制。</p>
+<p class="Pp"><i>SystemMaxUse=</i> 与 <i>RuntimeMaxUse=</i>
+    的默认值是10%空间与4G空间两者中的较小者；
+    <i>SystemKeepFree=</i> 与 <i>RuntimeKeepFree=</i>
+    的默认值是15%空间与4G空间两者中的较大者；
+    如果在 systemd-journald 启动时，
+    文件系统即将被填满并且已经超越了
+    <i>SystemKeepFree=</i> 或 <i>RuntimeKeepFree=</i>
+    的限制，那么日志记录将被暂停。
+    也就是说，如果在创建日志文件时，文件系统有充足的空闲空间，
+    但是后来文件系统被其他非日志文件过多占用，
+    那么 systemd-journald
+    只会立即暂停日志记录，
+    但不会删除已经存在的日志文件。</p>
+<p class="Pp"><i>SystemMaxFileSize=</i> 与 <i>RuntimeMaxFileSize=</i>
+    限制单个日志文件的最大体积，
+    到达此限制后日志文件将会自动滚动。
+    默认值是对应的
+    <i>SystemMaxUse=</i> 与 <i>RuntimeMaxUse=</i> 值的1/8
+    ，
+    这也意味着日志滚动默认保留7个历史文件。</p>
+<p class="Pp">日志大小的值可以使用以1024为基数的
+    K, M, G, T, P, E 后缀，
+    分别对应于 1024, 1024², ...
+    字节。</p>
+<p class="Pp"><i>SystemMaxFiles=</i> 与 <i>RuntimeMaxFiles=</i>
+    限制最多允许同时存在多少个日志文件，
+    超出此限制后，
+    最老的日志文件将被删除，
+    而当前的活动日志文件则不受影响。
+    默认值为100个。</p>
+</div>
+<p class="Pp"><i>MaxFileSec=</i></p>
+<div class="Bd-indent">日志滚动的时间间隔。
+  通常并不需要使用基于时间的日志滚动策略，
+  因为由 <i>SystemMaxFileSize=</i> 与
+  <i>RuntimeMaxFileSize=</i>
+  控制的基于文件大小的日志滚动策略
+  已经可以确保日志文件的大小不会超标。
+  默认值是一个月，
+  设为零表示禁用基于时间的日志滚动策略。
+  可以使用 &#34;year&#34;, &#34;month&#34;,
+  &#34;week&#34;, &#34;day&#34;, &#34;h&#34;, &#34;m&#34;
+  时间后缀，
+  若不使用后缀则表示以秒为单位。</div>
+<p class="Pp"><i>MaxRetentionSec=</i></p>
+<div class="Bd-indent">日志文件的最大保留期限。
+  当日志文件的最后修改时间超过此期限后将被删除。
+  默认值零表示不使用基于时间的日志删除策略。
+  通常并不需要使用基于时间的日志删除策略，因为由
+  <i>SystemMaxUse=</i> 与 <i>RuntimeMaxUse=</i>
+  控制的基于文件大小的日志滚动策略
+  已经可以确保日志文件的大小不会超标。
+  可以使用 &#34;year&#34;, &#34;month&#34;,
+  &#34;week&#34;, &#34;day&#34;, &#34;h&#34;, &#34;m&#34;
+  时间后缀，
+  若不使用后缀则表示以秒为单位。</div>
+<p class="Pp"><i>SyncIntervalSec=</i></p>
+<div class="Bd-indent">向磁盘刷写日志文件的时间间隔，默认值是五分钟。
+  刷写之后，日志文件将会处于离线(OFFLINE)状态。
+  注意，当接收到 CRIT, ALERT, EMERG
+  级别的日志消息后，
+  将会无条件的立即刷写日志文件。
+  因此该设置仅对 ERR, WARNING, NOTICE,
+  INFO, DEBUG
+  级别的日志消息有意义。</div>
+<p class="Pp"><i>ForwardToSyslog=</i>, <i>ForwardToKMsg=</i>,
+    <i>ForwardToConsole=</i>, <i>ForwardToWall=</i></p>
+<div class="Bd-indent"><i>ForwardToSyslog=</i>
+  表示是否将接收到的日志消息转发给传统的
+  <b>syslog</b>[2]
+  守护进程，默认值为&#34;no&#34;。
+  如果设为&#34;yes&#34;，但是没有任何进程监听对应的套接字，那么这种转发是无意义的。
+  此选项可以被内核引导选项
+  &#34;systemd.journald.forward_to_syslog=&#34; 覆盖。
+  <i>ForwardToKMsg=</i>
+  表示是否将接收到的日志消息转发给内核日志缓冲区(kmsg)，默认值为&#34;no&#34;。
+  此选项可以被内核引导选项
+  &#34;systemd.journald.forward_to_kmsg=&#34; 覆盖。
+  <i>ForwardToConsole=</i>
+  表示是否将接收到的日志消息转发给系统控制台，默认值为&#34;no&#34;。
+  如果设为&#34;yes&#34;，那么可以通过下面的
+  <i>TTYPath=</i> 指定转发目标。
+  此选项可以被内核引导选项
+  &#34;systemd.journald.forward_to_console=&#34; 覆盖。
+  <i>ForwardToWall=</i>
+  表示是否将接收到的日志消息作为警告信息发送给所有已登录用户，默认值为&#34;yes&#34;。
+  此选项可以被内核引导选项
+  &#34;systemd.journald.forward_to_wall=&#34; 覆盖。</div>
+<p class="Pp"><i>MaxLevelStore=</i>, <i>MaxLevelSyslog=</i>,
+    <i>MaxLevelKMsg=</i>, <i>MaxLevelConsole=</i>, <i>MaxLevelWall=</i></p>
+<div class="Bd-indent"><i>MaxLevelStore=</i>
+  设置记录到日志文件中的最高日志等级，默认值为&#34;debug&#34;；
+  <i>MaxLevelSyslog=</i>
+  设置转发给传统的
+  <b>syslog</b>[2]
+  守护进程的最高日志等级，默认值为&#34;debug&#34;；
+  <i>MaxLevelKMsg=</i>
+  设置转发给内核日志缓冲区(kmsg)的最高日志等级，默认值为&#34;notice&#34;；
+  <i>MaxLevelConsole=</i>
+  设置转发给系统控制台的最高日志等级，默认值为&#34;info&#34;；
+  <i>MaxLevelWall=</i>
+  设置作为警告信息发送给所有已登录用户的最高日志等级，默认值为&#34;emerg&#34;；
+  这些选项既可以设为日志等级的名称，
+  也可以设为日志等级对应的数字：
+  &#34;emerg&#34;(0), &#34;alert&#34;(1), &#34;crit&#34;(2),
+  &#34;err&#34;(3), &#34;warning&#34;(4), &#34;notice&#34;(5),
+  &#34;info&#34;(6), &#34;debug&#34;(7) 。
+  所有高于设定等级的日志消息都将被直接丢弃，
+  仅保存/转发小于等于设定等级的日志消息。</div>
+<p class="Pp"><i>TTYPath=</i></p>
+<div class="Bd-indent">指定 <i>ForwardToConsole=yes</i>
+  时所使用的控制台TTY，
+  默认值是 /dev/console</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="日志转发">日志转发<a class="anchor" href="#%E6%97%A5%E5%BF%97%E8%BD%AC%E5%8F%91">¶</a></h1>
+有两种不同的日志转发方法：
+  (1)通过套接字文件(/run/systemd/journal/syslog)
+  可以将收集到的日志消息
+  立即转发给套接字的监听进程(传统的
+  <b>syslog</b>[2] 守护进程)。
+  此方法受 <i>ForwardToSyslog=</i>
+  指令的控制。
+  (2)日志接收进程作为客户端运行，就像
+  <a href="../../buster/manpages-zh/journalctl.1.zh_CN.html">journalctl(1)</a>
+  一样读取日志文件。
+  因此，此方法在 <i>Storage=none</i>
+  时无效。
+  此方法不能实时读取日志消息，
+  但是可以读取先前保存的日志消息(例如在系统启动完成之后读取系统启动早期的日志消息)。
+  此方法还可以读取到完整的日志元数据。
+  此方法一般无法读取当前最新的日志消息，
+  只能读取已经被记录到文件系统上的日志消息。
+  注意，<b>syslog</b>[2]
+  守护进程通常使用此方法(而不是前一种方法)，
+  因此 <i>Storage=</i> 选项(而不是
+  <i>ForwardToSyslog=</i> 选项)
+  不应该设为&#34;none&#34;。
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参见">参见<a class="anchor" href="#%E5%8F%82%E8%A7%81">¶</a></h1>
+<a href="../../buster/manpages-zh/systemd.1.zh_CN.html">systemd(1)</a>, <a href="../../buster/systemd/systemd-journald.service.8.en.html">systemd-journald.service(8)</a>, <a href="../../buster/manpages-zh/journalctl.1.zh_CN.html">journalctl(1)</a>,
+  <a href="../../buster/systemd/systemd.journal-fields.7.en.html">systemd.journal-fields(7)</a>, <a href="../../buster/systemd/systemd-system.conf.5.en.html">systemd-system.conf(5)</a>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="NOTES">NOTES<a class="anchor" href="#NOTES">¶</a></h1>
+<dl class="Bl-tag">
+  <dt> 1.</dt>
+  <dd>Seekable Sequential Key Generators</dd>
+</dl>
+<div class="Bd-indent"><a href="../../2013/397">../../2013/397</a></div>
+<dl class="Bl-tag">
+  <dt> 2.</dt>
+  <dd>syslog</dd>
+</dl>
+<div class="Bd-indent">//linux/sysklogd.html</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<p class="Pp">翻译人员：金步国
+  <br/>
+  金步国作品集：https://www.jinbuguo.com
+  <br/>
+  中文 man
+    手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b></p>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date"></td>
+    <td class="foot-os">systemd 231</td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+journald.conf.5.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-12-30T03:48:35Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"journald.conf(5)\"}}]}"
+</script>

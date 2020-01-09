@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>file(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/file/file.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-es-extra/file.1.es.html" hreflang="es">
+<link rel="alternate" href="../../buster/manpages-hu/file.1.hu.html" hreflang="hu">
+<link rel="alternate" href="../../buster/manpages-ja/file.1.ja.html" hreflang="ja">
+<link rel="alternate" href="../../buster/manpages-pl/file.1.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/file.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/file.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_CN">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; file(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/file.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/file.1.zh_CN.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%80%BB%E8%A7%88" title="总览">总览</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0" title="描述">描述</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%80%89%E9%A1%B9" title="选项">选项</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%96%87%E4%BB%B6" title="文件">文件</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ENVIRONMENT" title="ENVIRONMENT">ENVIRONMENT</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%82%E7%9C%8B" title="参看">参看</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%A0%87%E5%87%86%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7" title="标准的一致性">标准的一致性</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#MAGIC_DIRECTORY" title="MAGIC DIRECTORY">MAGIC DIRECTORY</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%B8%BE%E4%BE%8B" title="举例">举例</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8E%86%E5%8F%B2" title="历史">历史</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85" title="作者">作者</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%90%88%E6%B3%95%E6%80%A7%E9%80%9A%E5%91%8A" title="合法性通告">合法性通告</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%87%AD%E8%99%AB" title="臭虫">臭虫</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%AF%E7%94%A8%E6%80%A7" title="可用性">可用性</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D" title="[中文版维护人]">[中文版维护人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/file.1.zh_CN.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/file.1.zh_CN.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/file.1.zh_CN.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/file/file.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-es-extra/file.1.es.html" title="Spanish (es)">español</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-hu/file.1.hu.html" title="Hungarian (hu)">magyar</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-ja/file.1.ja.html" title="Japanese (ja)">日本語</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/file.1.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/file.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/file.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+other sections
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/file.1.zh_CN.html">1 (<span title="Executable programs or shell commands">progs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/erlang-manpages/file.3erl.en.html">3erl (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/file.3tcl.zh_CN.html">3tcl (<span title="Library calls (functions within program libraries)">libfuncs</span>)</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">FILE(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">FILE(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+file - 确定文件类型
+</section>
+<section class="Sh">
+<h1 class="Sh" id="总览">总览<a class="anchor" href="#%E6%80%BB%E8%A7%88">¶</a></h1>
+<b>file</b> [ <b>-bcnsvzL</b> ] [ <b>-f</b> 命名文件 ] [
+  <b>-m</b> 幻数文件 ] file ...
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述">描述<a class="anchor" href="#%E6%8F%8F%E8%BF%B0">¶</a></h1>
+本手册页说明了3.27版本
+  <b>file</b> 命令的使用. <b>File</b>
+  命令试图检查每个参数以判定文件的类型.
+  检查共有三组，按如下顺序进行:文件系统检查，幻数检查，以及语言检查.
+  <i>文件系统</i>
+  检查成功则输出文件类型.
+<p class="Pp">输出的类型一般会包含以下的词中的一个：
+    <b>text</b> (文件中仅有 <small>ASCII</small>
+    字符，可以用 <small>ASCII</small>
+    终端读此文件，以保证内容的可靠性),
+    <b>executable</b>
+    (文件中保存的是程序编译后的结果，一些UNIX
+    内核或其它内核能理解这类文件),
+    或者 <b>data</b>
+    表示所有其它类型文件(data
+    一般为二进制文件或者不可打印的).
+    但是有的常用的文件格式（如core文件、tar包），虽然也包含二进制数据，
+    却不属于这一类
+    如果要修改 <i>/usr/share/magic</i>
+    或者程序本身, <b>preserve these keywords
+    .</b> 当文件为``text&#39;&#39;
+    类型时，认为此文件为可读文件.
+    不要象在Berkeley环境中那样做
+    - 要把``shell commands text&#39;&#39;改为``shell
+  script&#39;&#39;.</p>
+<p class="Pp">文件系统检查是建立在对
+    <a href="../../buster/manpages-dev/stat.2.en.html">stat(2)</a>
+    系统调用结果的分析上的.
+    程序会分析文件是否为空,或者是否是某种特殊文件.
+    对于所有可在现有系统上使用的文件类型
+    (比如套接
+    口文件，动态链接文件，命名管道文件(FIFOs)
+    等)，
+    只要它在系统头文件
+    <i>sys/stat.h</i>
+    中已经定义过，就可以被检查到.</p>
+<p class="Pp">幻数检查用来检查文件中是否有特殊的固定格式的数据.
+    规范的例子如二进制可执行文件(编译后的程序)
+    <i>a.out</i>
+    ,该文件格式在标准include目录下的
+    <i>a.out.h</i>
+    文件中定义，也可能在
+    <i>exec.h</i> 中定义.
+    这些文件在文件开始部分附近的一个特殊位置保存有一个&#39;幻数&#39;
+    , 通过幻数告诉UNIX
+    操作系统此文件是二进制可执行文件,
+    和其中包含的其它类型.
+    幻数的概念已经扩展到数据文件.任何在文件固定位置有与文件类型
+    相关的不变标识符的文件都可以这样表示.
+    这些文件中的信息可以
+    从幻数文件 <i>/usr/share/magic</i>
+    中读取.</p>
+<p class="Pp">如果文件为 <small>ASCII</small>
+    文件, <b>file</b>
+    会试图检查它的语言.
+    语言检查在文件开始的几个块中(任意位置)查找是否有特殊字符串(参看
+    <i>names.h</i>) 例如，关键字 <b>.br</b>
+    指出此文件很可能是
+    <a href="../../buster/manpages-zh/troff.1.zh_CN.html">troff(1)</a> 输入文件,
+    而关键字 <b>struct</b>
+    指出此文件是C程序.
+    语言检查不如前两组检查可靠，所以放在最后执行.它也用来检查
+    一些混合文件(例如
+    <a href="../../buster/manpages-zh/tar.1.zh_CN.html">tar(1)</a>
+    存档文件)并确定文件是`ascii
+    text&#39;类型还是`data&#39;类型.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="选项">选项<a class="anchor" href="#%E9%80%89%E9%A1%B9">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>-b</b></dt>
+  <dd>不输出文件名
+      (简要模式).</dd>
+  <dt><b>-c</b></dt>
+  <dd>检查时打印输出幻数文件的解析结果.常与
+      <b>-m</b>
+      一起使用，用来在安装幻数文件之前调试它.</dd>
+  <dt><b>-f 命名文件</b></dt>
+  <dd>从在参数表前的
+      <i>命名文件</i>
+      中读出将要检查的文件名(每行一个文件).要有
+      <i>命名文件</i>
+      ，或者至少有一个文件名参数;
+      如果要检查标准输入,
+      使用``-&#39;&#39;作为文件参数.</dd>
+  <dt><b>-m list</b></dt>
+  <dd>指定包含幻数的文件列表.可以是单个文件，也可以是
+      用冒号分开的多个文件.</dd>
+  <dt><b>-n</b></dt>
+  <dd>每检查完一个文件就强制刷新标准输出.
+      仅在检查一组文件时才有效.
+      一般在将文件类型输出到管道时才采用此选项.</dd>
+  <dt><b>-v</b></dt>
+  <dd>打印程序版本并退出.</dd>
+  <dt><b>-z</b></dt>
+  <dd>试图查看压缩文件内部信息.</dd>
+  <dt><b>-L</b></dt>
+  <dd>(在支持符号链接的系统上)选项显示符号链接文件的原文件,
+      就像 <a href="../../buster/manpages-zh/ls.1.zh_CN.html">ls(1)</a> 命令的like-named
+      选项.</dd>
+  <dt><b>-s</b></dt>
+  <dd>通常, <b>file</b>
+      只是试图去检查在文件列表中那些
+      <a href="../../buster/manpages-dev/stat.2.en.html">stat(2)</a>
+      报告为正常文件的文件的类型.由于读特殊文件将可能导致
+      不可知后果，所以这样可以防止发生问题.使用
+      <b>-s</b> 选项时 <b>file</b>
+      命令也将去读文件列表中的块特殊文件和字符特殊文件.
+      一般用于从原始磁盘分区中获得文件系统类型，此文件为块
+      特殊文件.
+      这个选项也导致 <b>file</b>
+      命令忽略 <a href="../../buster/manpages-dev/stat.2.en.html">stat(2)</a>
+      报告的文件大小，因为在有些系统中原始磁盘分区的大小报告为0.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="文件">文件<a class="anchor" href="#%E6%96%87%E4%BB%B6">¶</a></h1>
+<i>/usr/share/magic</i> -
+  默认的幻数列表
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ENVIRONMENT">ENVIRONMENT<a class="anchor" href="#ENVIRONMENT">¶</a></h1>
+环境变量 <b>MAGIC</b>
+  用于设置默认的幻数文件.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="参看">参看<a class="anchor" href="#%E5%8F%82%E7%9C%8B">¶</a></h1>
+<a href="../../buster/manpages-es-extra/magic.4.es.html">magic(4)</a> - 幻数文件的格式.
+<br/>
+<a href="../../buster/manpages-zh/strings.1.zh_CN.html">strings(1)</a>, <a href="../../buster/coreutils/od.1.en.html">od(1)</a>,<b> <a href="../../buster/bsdmainutils/hexdump.1.en.html">hexdump(1)</a></b> -
+  检查非textfile的工具.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="标准的一致性">标准的一致性<a class="anchor" href="#%E6%A0%87%E5%87%86%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7">¶</a></h1>
+本程序比System V
+  的FILE命令强大,
+  几乎能分辨出所有的模糊语言.
+  与System V
+  的FILE命令大部分兼容.本版本能识别更多的magic,
+  但是，也将因此在有些情况下会产生不同输出(尽管更加精确).
+<p class="Pp">本版本与System
+    V的显著区别就是本版本对空格是作为分隔符来
+    处理的,
+    所以不能在格式字符串中包含空格.
+    例如,现有幻数文
+    件中的
+  <br/>
+  &gt;10	string	language impress 	(imPRESS data)
+  <br/>
+  要改为
+  <br/>
+  &gt;10	string	language\ impress	(imPRESS data)
+  <br/>
+  另外,
+    格式字符串中的反斜线符号也要避免.例如，现有幻数文件中的
+  <br/>
+  0	string		\begindata	Andrew Toolkit document
+  <br/>
+  要改为
+  <br/>
+  0	string		\\begindata	Andrew Toolkit document
+  <br/>
+</p>
+<p class="Pp">SunOS releases
+    3.2及以后的版本包括从System
+    V 发展来的 <a href="../../buster/manpages-zh/file.1.zh_CN.html">file(1)</a>
+    命令,但有所扩展.本版本与Sun的file命令差别不大.它包括对
+    `&amp;&#39; 操作符的扩展,例如,
+  <br/>
+  &gt;16	long&amp;0x7fffffff	&gt;0		not stripped</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="MAGIC_DIRECTORY">MAGIC DIRECTORY<a class="anchor" href="#MAGIC_DIRECTORY">¶</a></h1>
+幻数文件项主要是从USENET收集来的,许多人都为此作出了贡献.
+  Christos Zoulas
+  (下边将提到的)将收集附加项信息及修正幻数文件项.
+  幻数文件项的合并表将会定时发布.
+<p class="Pp">幻数文件项的顺序非常重要.不同的系统上的幻数项放的顺序可能不同.
+    如果老的 <b>file</b>
+    命令使用幻数文件，请将旧的幻数文件改名保存，
+    (如改为 <i>/usr/share/magic.orig</i>)
+    以便日后做比较用.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="举例">举例<a class="anchor" href="#%E4%B8%BE%E4%BE%8B">¶</a></h1>
+<pre>$ file file.c file /dev/hda
+file.c:   C program text
+file:     ELF 32-bit LSB executable, Intel 80386, version 1,
+dynamically linked, not stripped
+/dev/hda: block special
+$ file -s /dev/hda{,1,2,3,4,5,6,7,8,9,10}
+/dev/hda:   x86 boot sector
+/dev/hda1:  Linux/i386 ext2 filesystem
+/dev/hda2:  x86 boot sector
+/dev/hda3:  x86 boot sector, extended partition table
+/dev/hda4:  Linux/i386 ext2 filesystem
+/dev/hda5:  Linux/i386 swap file
+/dev/hda6:  Linux/i386 swap file
+/dev/hda7:  Linux/i386 swap file
+/dev/hda8:  Linux/i386 swap file
+/dev/hda9:  empty
+/dev/hda10: empty
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="历史">历史<a class="anchor" href="#%E5%8E%86%E5%8F%B2">¶</a></h1>
+There has been a <b>file</b>
+  命令至少是从研究版本6(手册页时间为1975年1月)开始加入UNIX中的.
+  System V
+  版本引入了一个重要变化:幻数类型的外部表.程序的运
+  行时间有轻微下降,
+  但是复杂性大大增加了.
+<p class="Pp">本程序是基于System V
+    版本的,由Ian
+    Darwin独立设计和编写.</p>
+<p class="Pp">John
+    Gilmore对源代码做了较大修改,在第一版基础上有较大提高.
+    Geoff
+    Collyer发现了一些不足之处，并提供了一些幻数文件项.
+    本程序一直在完善中.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者">作者<a class="anchor" href="#%E4%BD%9C%E8%80%85">¶</a></h1>
+由Ian F. Darwin写源码, UUCP 地址 {utzoo |
+  ihnp4}!darwin!ian, 电子邮件 ian@sq.com,
+  邮寄地址: P.O. Box 603, Station F, Toronto, Ontario,
+  CANADA M4Y 2L8.
+<p class="Pp">由Rob McMahon修改, cudcv@warwick.ac.uk, 1989,
+    并对`&amp;&#39;操作符进行了扩充
+    （不再仅仅是简单的
+    `x&amp;y != 0&#39;，而是象`x&amp;y op
+    z&#39;这样）.</p>
+<p class="Pp">由Guy Harris修改, guy@netapp.com,
+    1993,完成:</p>
+<div class="Bd-indent">
+<p class="Pp">恢复``old-style&#39;&#39; `&amp;&#39;
+    操作符为原来的功能,因为
+    1) Rob
+    McMahon所做的修改打破了原来的使用方式,
+    2) 本版本的 <b>file</b>
+    命令支持的SunOS 的``new-style&#39;&#39; `&amp;&#39;
+    操作符也处理 `x&amp;y op z&#39;, 3)
+    Rob的修改对某些情况没有考虑到;</p>
+<p class="Pp">引入多级`&gt;&#39;;</p>
+<p class="Pp">引入``beshort&#39;&#39;, ``leshort&#39;&#39;,
+    等关键字使得程序能够按照一定的比特顺序
+    查看文件中的比特数，而不是仅按运行
+    <b>file</b>
+    时的本地比特顺序查看.</p>
+</div>
+<p class="Pp">由Ian
+    Darwin和其他作者（包括Christos
+    Zoulas(christos@astron.com)）修改, 1990-1999.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="合法性通告">合法性通告<a class="anchor" href="#%E5%90%88%E6%B3%95%E6%80%A7%E9%80%9A%E5%91%8A">¶</a></h1>
+版权所属 (c) Ian F. Darwin, Toronto, Canada, 1986, 1987,
+  1988, 1989, 1990, 1991, 1992, 1993.
+<p class="Pp">本软件独立于美国电话电报公司，Sun微系统公司，Digital设备公司,
+    Lotus发展公司 ,
+    California大学董事会，X联盟或者MIT,或者自由软件基金会.</p>
+<p class="Pp">本软件独立于美国商业部的任何出口规定,可以自由用于任何国家和行星.</p>
+<p class="Pp">任何人无需授权即可在任何计算机系统上使用此软件用于任何目的，
+    可以自由修改和发布，但要遵守以下限制:</p>
+<p class="Pp">1.
+    作者对使用此软件造成的任何后果不负任何责任，无论多么严重，
+    即使这些后果是由于软件造成的.</p>
+<p class="Pp">2.
+    禁止不如实说明本软件的来源，无论是明确说错或是忽略.
+    由于很少有用户读源码,
+    所以在文件中一定要说明软件来源.</p>
+<p class="Pp">3.
+    修改后的版本必须明白的标明，禁止将其作为原始软件.由于很少有用户读源码,
+    所以在文件中一定要说明软件来源.</p>
+<p class="Pp">4.
+    禁止删除或修改本通告.</p>
+<p class="Pp">随同本包发布的几个支持文件(<i>getopt</i>,
+    <i>strtok</i>)由 Henry
+    Spencer完成，同样适用以上条款.</p>
+<p class="Pp">随同本包发布的几个支持文件(<i>strtol</i>,
+    <i>strchr</i>)属于公共域的;都做了标记.</p>
+<p class="Pp">文件 <i>tar.h</i> 和 <i>is_tar.c</i> 由
+    <b>tar</b> 程序组的John
+    Gilmore完成,无需遵从以上条款.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="臭虫">臭虫<a class="anchor" href="#%E8%87%AD%E8%99%AB">¶</a></h1>
+必定存在一种更好的方法来根据Magdir中的glop来自动创建Magic
+  文件.是什么方法呢?要更好的实现，那么幻数文件应该编译成二进制
+  (就是说， <b>ndbm</b>(3) 或者,
+  在异种网络环境中采用定长的
+  <small>ASCII</small>
+  字符串)来加快启动速度.这样，程序就能达到Version
+  7 中的
+  file命令那样的运行速度,同时又具有System
+  V 版本的灵活性.
+<p class="Pp"><b>File</b>
+    使用的一些算法虽然提高了速度，但精确性降低了，因此
+    在对 <small>ASCII</small>
+    文件内容操作有时会出错.</p>
+<p class="Pp">对 <small>ASCII</small>
+    文件的支持(基本上是对编程语言)过于简单,效率较低，需要重新编译并更新.</p>
+<p class="Pp">在一系列连续行后应该跟着有一个``else&#39;&#39;从句.</p>
+<p class="Pp">幻数文件和关键词应该有正则表达式的支持.
+    使用 <small>ASCII TAB</small>
+    作为分隔符非常不足取，导致很难编辑文件,
+    但也因此受到保护.</p>
+<p class="Pp">在关键词中使用大写字母是可取的.
+    例如, <a href="../../buster/manpages-zh/troff.1.zh_CN.html">troff(1)</a>
+    命令与查看手册页的宏.
+    正则表达式支持将使这易于实现.</p>
+<p class="Pp">本程序没有实现对
+    FORTRAN 的理解.
+    应该能够通过在开始行中出现的关键字识别出FORTRAN
+    .
+    正则表达式支持将使这易于实现.</p>
+<p class="Pp">文件 <i>ascmagic</i>
+    中的关键词表可能应归入Magic文件.
+    这能通过使用象`*&#39;这样的关键词来实现偏移量.</p>
+<p class="Pp">另一个优化是要对幻数文件排序，这样，我们就可以
+    在取得第一个比特，第一个词，第一个长整型，等等的时候完成
+    对它们所有的检查.抱怨在幻数文件项中的冲突.制定一条规则，
+    将幻数项在文件偏移量的基础上排序，胜过在幻数文件里指定位置吗？</p>
+<p class="Pp">本程序应提供一种方法来评价一种猜测有&#34;多么好&#34;.
+    我们去除了一些先前的设想(如，将
+    ``From &#39;&#39;
+    作为文件的最初5个字符)
+    因为它们不如其它的设想好(如，``Newsgroups:&#39;&#39;
+    对&#34;Return-Path:&#34;).
+    如果没有其它的设想提出，就很可能会采纳第一种设想.</p>
+<p class="Pp">本程序比某些file命令执行速度慢.</p>
+<p class="Pp">本手册，特别是本部分，比较长.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="可用性">可用性<a class="anchor" href="#%E5%8F%AF%E7%94%A8%E6%80%A7">¶</a></h1>
+可以通过匿名FTP登陆到
+  <b>ftp.astron.com</b> 在目录下
+  <i>/pub/file/file-X.YY.tar.gz</i>
+  获得作者的命令的最新版本
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版维护人]">[中文版维护人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%BB%B4%E6%8A%A4%E4%BA%BA%5D">¶</a></h1>
+<b>姓名 &lt;email&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2001/07/15</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中国linux论坛man手册页翻译计划》:">《中国linux论坛man手册页翻译计划》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9B%BDlinux%E8%AE%BA%E5%9D%9Bman%E6%89%8B%E5%86%8C%E9%A1%B5%E7%BF%BB%E8%AF%91%E8%AE%A1%E5%88%92%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本页面中文版由中文 man
+  手册页计划提供。
+<br/>
+中文 man
+  手册页计划：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">Copyright but distributable</td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+file.1.zh_CN.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2020-01-06T15:38:22Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"file(1)\"}}]}"
+</script>

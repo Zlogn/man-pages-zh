@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>keymaps(5) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/kbd/keymaps.5.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-pl/keymaps.5.pl.html" hreflang="pl">
+<link rel="alternate" href="../../buster/manpages-zh/keymaps.5.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/keymaps.5.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="5">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; keymaps(5)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/keymaps.5">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/keymaps.5.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_%28DESCRIPTION%29" title="描述 (DESCRIPTION)">描述 (DESCRIPTION)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8C%85%E5%90%AB%E6%96%87%E4%BB%B6_%28INCLUDE_FILES%29" title="包含文件 (INCLUDE FILES)">包含文件 (INCLUDE FILES)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%AD%97%E7%AC%A6%E9%9B%86%E5%AE%9A%E7%BE%A9_%28CHARSET_DEFINITIONS%29" title="字符集定義 (CHARSET DEFINITIONS)">字符集定義 (CHARSET DEFINITIONS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%8D%B5%E5%80%BC%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9A%E7%BE%A9_%28COMPLETE_KEYCODE_DEFINITIONS%29" title="鍵值的完整定義 (COMPLETE KEYCODE DEFINITIONS)">鍵值的完整定義 (COMPLETE KEYCODE DEFINITIONS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%96%AE%E4%B8%80%E4%BF%AE%E9%A3%BE%E9%8D%B5%E5%AE%9A%E7%BE%A9_%28SINGLE_MODIFIER_DEFINITIONS%29" title="單一修飾鍵定義 (SINGLE MODIFIER DEFINITIONS)">單一修飾鍵定義 (SINGLE MODIFIER DEFINITIONS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AE%9A%E7%BE%A9_%28STRING_DEFINITIONS%29" title="字符串定義 (STRING DEFINITIONS)">字符串定義 (STRING DEFINITIONS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B5%84%E5%90%88%E5%AE%9A%E7%BE%A9_%28COMPOSE_DEFINITIONS%29" title="組合定義 (COMPOSE DEFINITIONS)">組合定義 (COMPOSE DEFINITIONS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%AE%E5%AF%AB_%28ABBREVIATIONS%29" title="縮寫 (ABBREVIATIONS)">縮寫 (ABBREVIATIONS)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%A4%BA%E4%BE%8B_%28EXAMPLES%29" title="示例 (EXAMPLES)">示例 (EXAMPLES)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%A6%E8%A6%8B_%28SEE_ALSO%29" title="另見 (SEE ALSO)">另見 (SEE ALSO)</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B" title="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/keymaps.5.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/keymaps.5.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/keymaps.5.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/kbd/keymaps.5.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-pl/keymaps.5.pl.html" title="Polish (pl)">polski</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/keymaps.5.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/keymaps.5.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">KEYMAPS(5)</td>
+    <td class="head-vol">File Formats Manual</td>
+    <td class="head-rtitle">KEYMAPS(5)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+keymaps -
+  對鍵盤映射文件的描述
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_(DESCRIPTION)">描述 (DESCRIPTION)<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_(DESCRIPTION)">¶</a></h1>
+<a href="../../buster/manpages-zh/loadkeys.1.zh_TW.html">loadkeys(1)</a> 能夠 通過 調入
+  指定的 文件 修改
+  鍵盤翻譯表,
+  鍵盤翻譯表 通常 用於
+  內核的 鍵盤驅動程序;
+  另外 <a href="../../buster/manpages-zh/dumpkeys.1.zh_TW.html">dumpkeys(1)</a> 可以 根據
+  鍵盤翻譯表 產生
+  這些文件.
+<p class="Pp"></p>
+<p class="Pp">這些文件 的 結構
+    大體上 和 <a href="../../buster/manpages-zh/xmodmap.1.zh_TW.html">xmodmap(1)</a> 的
+    輸入文件 類似. 文件 由
+    字符集(charset), 鍵定義(key), 和
+    串定義 組成, 可以 包含
+    註釋.</p>
+<p class="Pp"></p>
+<p class="Pp">註釋行 以 <b>!</b> 或 <b>#</b>
+    字符 開始, 到 行尾
+    結束, 忽略 其中 任何
+    字符. 注意, 註釋行
+    不需要 從 第一列 開始,
+    而 <a href="../../buster/manpages-zh/xmodmap.1.zh_TW.html">xmodmap(1)</a> 有 這個 要求.</p>
+<p class="Pp"></p>
+<p class="Pp">鍵盤映射(keymap)文件 是
+    面向行 定義 的; 一個
+    完整的定義 必須 在
+    一個 邏輯行 上 闡明.
+    不過 邏輯行 可以 分割
+    在 多個 物理行 上,
+    只需 在 各個 物理行尾
+    添加 一個 反斜槓 (\)
+    即可.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="包含文件_(INCLUDE_FILES)">包含文件 (INCLUDE FILES)<a class="anchor" href="#%E5%8C%85%E5%90%AB%E6%96%87%E4%BB%B6_(INCLUDE_FILES)">¶</a></h1>
+一個 鍵盤映射表 可以
+  包含 其他 鍵盤映射表,
+  就象這樣:
+<p class="Pp"></p>
+<div class="Bd-indent">include &#34;pathname&#34;</div>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="字符集定義_(CHARSET_DEFINITIONS)">字符集定義 (CHARSET DEFINITIONS)<a class="anchor" href="#%E5%AD%97%E7%AC%A6%E9%9B%86%E5%AE%9A%E7%BE%A9_(CHARSET_DEFINITIONS)">¶</a></h1>
+字符集 定義 的 格式 是:
+<p class="Pp"></p>
+<div class="Bd-indent">charset &#34;iso-8859-x&#34;</div>
+<p class="Pp">它 指出 如何 解釋
+    後面的 keysym. 例如, 在 iso-8859-1
+    中, 符號 mu (或 micro) 的
+    代碼是 0265, 而 iso-8859-7 中的 mu
+    是 0354.</p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="鍵值的完整定義_(COMPLETE_KEYCODE_DEFINITIONS)">鍵值的完整定義 (COMPLETE KEYCODE DEFINITIONS)<a class="anchor" href="#%E9%8D%B5%E5%80%BC%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9A%E7%BE%A9_(COMPLETE_KEYCODE_DEFINITIONS)">¶</a></h1>
+鍵值(keycode) 的 完整定義
+  形式 如下:
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre><b>keycode</b><i> keynumber </i><b>=</b><i> keysym keysym keysym</i><b>...</b>
+</pre>
+</div>
+<p class="Pp"><i>keynumber</i> 是 按鍵的
+    內部 標識值, 大致
+    相當於 它的 掃描碼(scan
+    code). <i>keynumber</i> 可以 用
+    十進制數, 八進制數, 或
+    十六進制數 表示.
+    八進制數 以 零 開始,
+    十六進制數 以 <b>0x</b>
+    開始.</p>
+<p class="Pp"><i>keysym</i> 表示 鍵盤
+    動作(action), 單個 按鍵 可以
+    編聯(bind) 多至 256 個 動作.
+    動作 指 輸出 Latin1 字符 或
+    字符序列, 切換 控制檯
+    或 鍵盤映射, 以及
+    重啓動 機器 等. (可以
+    用 <a href="../../buster/manpages-zh/dumpkeys.1.zh_TW.html">dumpkeys(1)</a> 獲得 完整的
+    列表, 如 <b> dumpkeys -l</b> .)</p>
+<p class="Pp">在 <i>keysym</i> 前面 加上
+    前綴 &#39;+&#39; (加號) 表明 這個
+    keysym 是 字符, 因而 能夠
+    受到 CapLock 的 影響, 就象 Shift
+    的 作用 一樣 (CapLock 反轉 Shift
+    的 狀態). 缺省情況下,
+    配合 CapLock 能夠 產生 ASCII
+    字母 &#39;a&#39;-&#39;z&#39; 和 &#39;A&#39;-&#39;Z&#39;. 如果 Shift+CapsLock
+    無法 產生 小寫字母,
+    試在 映射文件 中
+  加入</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre><b>keycode 30 = +a  A</b>
+</pre>
+</div>
+<p class="Pp"></p>
+<p class="Pp">當 一個 按鍵
+    按下時, 發生 什麼 事件
+    取決於 當時 哪個
+    修飾鍵(modifier) 起作用.
+    鍵盤驅動程序 支持 8 個
+    修飾鍵, 它們是
+    (任意順序) Shift, AltGr, Control, Alt, ShiftL,
+    ShiftR, CtrlL 和 CtrlR. 下面 的 表格
+    列出 各個 修飾鍵
+    對應的 權值, 權值 是 2
+    的 指數:</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><i>修飾鍵</i></dt>
+  <dd><i>權值</i></dd>
+  <dt>Shift</dt>
+  <dd>
+     1</dd>
+  <dt>AltGr</dt>
+  <dd>
+     2</dd>
+  <dt>Control</dt>
+  <dd>
+     4</dd>
+  <dt>Alt</dt>
+  <dd>
+     8</dd>
+  <dt>ShiftL</dt>
+  <dd>
+     16</dd>
+  <dt>ShiftR</dt>
+  <dd>
+     32</dd>
+  <dt>CtrlL</dt>
+  <dd>
+     64</dd>
+  <dt>CtrlR</dt>
+  <dd>128</dd>
+</dl>
+</div>
+<p class="Pp">按鍵 的 有效動作
+    通過 加權值 獲得,
+    加權值 是 有效修飾鍵
+    的 權值和. 缺省情況下
+    沒有 使用 修飾鍵,
+    對應的 動作代碼 是 0,
+    也就是說, 當一個鍵
+    按下 或 彈起 時, 相應
+    動作 位於 鍵定義行 的
+    第一列. 又如, 如果 Shift 和
+    Alt 鍵 處於 有效狀態,
+    產生的 動作代碼 是 9
+    (對應 第十列).</p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+<p class="Pp">通過 編聯 適當的
+    動作, 我們 可以 改變
+    有效的 修飾鍵. 例如,
+    如果 對 某個鍵 編聯了
+    名稱 Shift, 當 這個鍵 按下
+    時, shift 修飾鍵 就 生效, 當
+    這個鍵 彈起 時, shift
+    修飾鍵 狀態 就 解除.
+    如果 對 某個鍵 編聯了
+    名稱 AltGr_Lock, 當 按下
+    這個鍵 時, AltGr 修飾鍵 就
+    生效, 再次 按下 這個鍵
+    就 解除 AltGr 修飾鍵 狀態.
+    (缺省情況下, Shift, AltGr, Control 和
+    Alt 編聯到 同名 按鍵 上;
+    AltGr 指 右側 Alt 鍵.)</p>
+<p class="Pp">注意, 編聯 修飾鍵
+    時 應該 非常 小心,
+    否則 鍵盤映射 可能
+    無法 使用. 例如, 如果
+    某個鍵 的 第一列
+    定義爲 Control, 其他列
+    定義爲 VoidSymbol, 你 就
+    有麻煩 了. 因爲 按下
+    這個鍵 使 Control 修飾鍵
+    生效, 隨後 的 動作
+    應該 來自 第五列
+    (見上表). 因此 當
+    這個鍵 彈起 時, 第五列
+    的 動作 被 採用, 但
+    這裏 是 VoidSymbol, 什麼 都
+    不發生. 這意味着 儘管
+    你 已經 鬆開了 這個鍵,
+    可是 Control 修飾鍵 仍然
+    有效. 反覆 敲擊 這個鍵
+    也 無濟於事. 要 避免
+    這樣 的 事情, 你 應該
+    把 所有的 列 定義爲
+    相同的 修飾符, 爲此
+    後面 將要 介紹 一個
+    常用的 縮寫.</p>
+<p class="Pp"></p>
+<p class="Pp"><i>keysym</i> 可以 採用
+    十進制數, 八進制數,
+    十六進制數 或者
+    符號表示法. 數字表示
+    的 形式 和 <i>keynumber</i> 一樣,
+    而 符號表示 類似於
+    <a href="../../buster/manpages-zh/xmodmap.1.zh_TW.html">xmodmap(1)</a> 中 用的.
+    需要注意 數字符號 的
+    區別. 數字符號 &#39;0&#39;, ..., &#39;9&#39; 在
+    <a href="../../buster/manpages-zh/xmodmap.1.zh_TW.html">xmodmap(1)</a> 中 被換成 對應的
+    單詞 &#39;zero&#39;, &#39;one&#39;, ... &#39;nine&#39;, 防止 和
+    數字表示法 混淆.</p>
+<p class="Pp"></p>
+<p class="Pp">在 <i>keysym</i> 中 使用
+    數字表示法 非常
+    不利於 移植, 這是 因爲
+    不同 的 內核版本 之間,
+    各鍵 的 動作代碼 可能
+    不一樣, 因此 不鼓勵
+    使用 數字表示法, 除非
+    內核 支持的 某項
+    鍵盤動作 在 當前的
+    <a href="../../buster/manpages-zh/loadkeys.1.zh_TW.html">loadkeys(1)</a> 中 沒有 對應的
+    符號名稱.</p>
+<p class="Pp"></p>
+<p class="Pp">下面 介紹 一些
+    縮寫 標記, 它們 能夠
+    增加 可讀性, 減少
+    輸入量, 同時 也能 減少
+    輸入錯誤.</p>
+<p class="Pp">首先, 你 可以 給出
+    一個 映射說明行, 如</p>
+<p class="Pp"></p>
+<div class="Bd-indent">keymaps 0-2,4-5,8,12</div>
+<p class="Pp">表明 鍵定義行 並不
+    使用 全部的 256 列, 而
+    只用 指定的 列.
+    (本例爲: 映射 plain, Shift, AltGr, Control,
+    Control+Shift, Alt 和 Control+Alt, 只有 7 列,
+    而非 256 列.) 如果 沒有
+    定義 這樣的
+    映射說明行, 將 產生
+    缺省 定義 keymaps 0-M, 此處的 M+1
+    是 所有 鍵定義行 中
+    發現 的 最大項數.</p>
+<p class="Pp"></p>
+<p class="Pp">其次, 鍵定義行尾
+    的 VoidSymbol 項 可以 不出現.
+    VoidSymbol 表示 一個
+    鍵盤動作, 它 不產生
+    輸出, 也不出現 其他
+    效果. 例如, 把 30 號鍵
+    定義爲 輸出 &#39;a&#39;, 按下 Shift
+    時 輸出 &#39;A&#39;, 按下 其他
+    修飾鍵 如 AltGr 之類 則
+    什麼都 不做, 你 可以
+    寫成</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>keycode  30 = a	A
+</pre>
+</div>
+<p class="Pp">來 代替 冗長的</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>keycode  30 = a	A	VoidSymbol	VoidSymbol \
+		VoidSymbol VoidSymbol VoidSymbol ...
+</pre>
+</div>
+<p class="Pp">爲了方便, 你 可以
+    用 更簡潔 的 定義.
+    如果 鍵定義行 中, 等號
+    後面 只有 一個 動作碼,
+    它 就可以 擁有 額外的
+    含義. 如果 這個 動作碼
+    (數字 或 符號 形式)
+    不是 一個 ASCII 字符, 這
+    意味着 該 動作碼 在
+    所有 定義了的 行 上
+    有效. 反過來, 如果
+    動作碼 是 ASCII 字符, 位於
+    &#39;a&#39;, ..., &#39;z&#39; 或 &#39;A&#39;, ..., &#39;Z&#39; 之間, 對於
+    不同的 修飾鍵組合, 有
+    如下 定義 (下表 列出
+    兩種 可能情況: 動作碼
+    是 一個 小寫字母,
+    表示爲 &#39;x&#39;, 或者是 一個
+    大寫字母, 表示爲 &#39;Y&#39;.)</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt><i>modifier</i></dt>
+  <dd><i>symbol</i></dd>
+  <dt>none</dt>
+  <dd>x			Y</dd>
+  <dt>Shift</dt>
+  <dd>X			y</dd>
+  <dt>AltGr</dt>
+  <dd>x			Y</dd>
+  <dt>Shift+AltGr</dt>
+  <dd>X			y</dd>
+  <dt>Control</dt>
+  <dd>Control_x		Control_y</dd>
+  <dt>Shift+Control</dt>
+  <dd>Control_x		Control_y</dd>
+  <dt>AltGr+Control</dt>
+  <dd>Control_x		Control_y</dd>
+  <dt>Shift+AltGr+Control</dt>
+  <dd>Control_x		Control_y</dd>
+  <dt>Alt</dt>
+  <dd>Meta_x		Meta_Y</dd>
+  <dt>Shift+Alt</dt>
+  <dd>Meta_X		Meta_y</dd>
+  <dt>AltGr+Alt</dt>
+  <dd>Meta_x		Meta_Y</dd>
+  <dt>Shift+AltGr+Alt</dt>
+  <dd>Meta_X		Meta_y</dd>
+  <dt>Control+Alt</dt>
+  <dd>Meta_Control_x	Meta_Control_y</dd>
+  <dt>Shift+Control+Alt</dt>
+  <dd>Meta_Control_x	Meta_Control_y</dd>
+  <dt>AltGr+Control+Alt</dt>
+  <dd>Meta_Control_x	Meta_Control_y</dd>
+  <dt>Shift+AltGr+Control+Alt</dt>
+  <dd>Meta_Control_x	Meta_Control_y</dd>
+</dl>
+</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="單一修飾鍵定義_(SINGLE_MODIFIER_DEFINITIONS)">單一修飾鍵定義 (SINGLE MODIFIER DEFINITIONS)<a class="anchor" href="#%E5%96%AE%E4%B8%80%E4%BF%AE%E9%A3%BE%E9%8D%B5%E5%AE%9A%E7%BE%A9_(SINGLE_MODIFIER_DEFINITIONS)">¶</a></h1>
+上述 鍵定義行 的 格式
+  總要 定義 全部 M+1 個
+  可能的 組合, 無論 該行
+  是不是 真的 有 那麼多
+  動作. 然而 還有 另一種
+  語法定義, 用來說明
+  只產生 一個 動作 的
+  特定鍵組合. 如果 你的
+  鍵盤映射 只有 少數
+  不符合 需要, 如 AltGr+function 鍵,
+  這個 功能 就特別 有用.
+  你 可以 製作 一個
+  小型文件, 在 調入
+  鍵盤映射文件 後
+  重定義 所需的 映射.
+  這種 形式 的 語法 是:
+<p class="Pp"><b></b>{<b> plain </b>| &lt;modifier sequence&gt; } <b>keycode</b>
+    <i>keynumber</i> <b>=</b> <i>keysym</i></p>
+<p class="Pp">例如:</p>
+<div class="Bd-indent">
+<pre>plain keycode 14 = BackSpace
+control alt keycode 83 = Boot
+alt keycode 105 = Decr_Console
+alt keycode 106 = Incr_Console
+</pre>
+</div>
+這裏的 &#34;plain&#34; 指 該鍵的
+  基本動作 (就是說, 沒有
+  使用 修飾鍵 時), 不影響
+  該鍵 的 其他 修飾鍵
+  組合.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="字符串定義_(STRING_DEFINITIONS)">字符串定義 (STRING DEFINITIONS)<a class="anchor" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AE%9A%E7%BE%A9_(STRING_DEFINITIONS)">¶</a></h1>
+除了 註釋 和 鍵定義行,
+  鍵盤映射表 還包含
+  字符串定義. 它們 用於
+  定義 各個 功能鍵(function key)
+  的 動作碼 輸出 些 什麼.
+  字符串定義 的 語法 是:
+<p class="Pp"></p>
+<div class="Bd-indent"><b>string</b> <i>keysym</i> <b>=</b>
+  &#34;text&#34;</div>
+<p class="Pp"><i>text</i> 包括 文本字符,
+    八進制字符, 或者 三個
+    escape 序列: <b>\n</b>, <b>\\</b>, 和 <b>\&#34;</b>,
+    分別 代表 換行,
+    反斜槓, 和 引號.
+    八進制字符 的 格式 是
+    反斜槓 後面 列出的
+    八進制數字, 最多 三個
+    八進制數字.</p>
+<p class="Pp"></p>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="組合定義_(COMPOSE_DEFINITIONS)">組合定義 (COMPOSE DEFINITIONS)<a class="anchor" href="#%E7%B5%84%E5%90%88%E5%AE%9A%E7%BE%A9_(COMPOSE_DEFINITIONS)">¶</a></h1>
+組合(鍵)定義 的 語法 是:
+<p class="Pp"></p>
+<div class="Bd-indent"><b>compose &#39;</b><i>char</i><b>&#39; &#39;</b><i>char</i><b>&#39; to
+  &#39;</b><i>char</i><b>&#39;</b></div>
+描述 兩個 字節 怎樣
+  組合成 第三者 (當 使用
+  少見的 聲調符 或
+  組合鍵 時). 它 常用來 在
+  標準鍵盤 上 輸入
+  聲調符 之類.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="縮寫_(ABBREVIATIONS)">縮寫 (ABBREVIATIONS)<a class="anchor" href="#%E7%B8%AE%E5%AF%AB_(ABBREVIATIONS)">¶</a></h1>
+從 kbd-0.96 開始 可以 使用
+  多種 縮寫.
+<dl class="Bl-tag">
+  <dt><b>strings as usual</b></dt>
+  <dd>定義 常用 字符串
+      (而不是 它們 編聯的
+      鍵).</dd>
+  <dt><b>compose as usual for &#34;iso-8859-1&#34;</b></dt>
+  <dd>定義 常用 compose 組合.</dd>
+</dl>
+<p class="Pp">如果 想要 知道
+    哪些 <i>keysym</i> 能夠 用在
+    鍵盤映射表 中, 請
+  使用</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre><b>dumpkeys --long-info</b>
+</pre>
+</div>
+<p class="Pp">遺憾的是, 目前
+    仍然 沒有 對 各個 符號
+    的 說明. 您 可以 從
+    符號名稱 上 推測, 或者
+    參考 內核源程序.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="示例_(EXAMPLES)">示例 (EXAMPLES)<a class="anchor" href="#%E7%A4%BA%E4%BE%8B_(EXAMPLES)">¶</a></h1>
+(小心 使用 keymaps 行, 如 `dumpkeys`
+  顯示的 第一行, 或者
+  &#34;keymaps 0-15&#34; 之類)
+<p class="Pp">下面的 輸入項 交換
+    左側 Control 鍵 和 Caps Lock 鍵 的
+    功能:</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>keycode  58 = Control
+keycode  29 = Caps_Lock
+</pre>
+</div>
+<p class="Pp">正常的時候, 鍵值 58
+    是 Caps Lock, 鍵值 29 是 Control 鍵.</p>
+<p class="Pp">下面的 輸入項 使 Shift
+    鍵 和 CapsLock 鍵 更好用
+    一點, 象 老式 打字機.
+    就是說, 按下 Caps Lock 鍵
+    (一次 多次 皆可) 使
+    鍵盤 進入 CapsLock 狀態, 按
+    任一 Shift 鍵 解除 該
+  狀態:</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>keycode  42 = Uncaps_Shift
+keycode  54 = Uncaps_Shift
+keycode  58 = Caps_On
+</pre>
+</div>
+<p class="Pp">下面的 輸入項 設置
+    增強形鍵盤 的 編輯鍵,
+    使 它 更象是 VT200 系列
+    終端:</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>keycode 102 = Insert
+keycode 104 = Remove
+keycode 107 = Prior
+shift keycode 107 = Scroll_Backward
+keycode 110 = Find
+keycode 111 = Select
+control alt   keycode 111 = Boot
+control altgr keycode 111 = Boot
+</pre>
+</div>
+<p class="Pp">下面是 一個 示範,
+    將 字符串 &#34;du\ndf\n&#34; 和 AltGr-D
+    編聯. 我們 使用了
+    &#34;空閒的&#34; 動作碼 F100,
+    通常 它 沒有被 使用:</p>
+<p class="Pp"></p>
+<div class="Bd-indent">
+<pre>altgr keycode 32 = F100
+string F100 = &#34;du\ndf\n&#34;
+</pre>
+<pre></pre>
+</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="另見_(SEE_ALSO)">另見 (SEE ALSO)<a class="anchor" href="#%E5%8F%A6%E8%A6%8B_(SEE_ALSO)">¶</a></h1>
+<a href="../../buster/manpages-zh/loadkeys.1.zh_TW.html">loadkeys(1)</a>, <a href="../../buster/manpages-zh/dumpkeys.1.zh_TW.html">dumpkeys(1)</a>, <a href="../../buster/manpages-zh/showkey.1.zh_TW.html">showkey(1)</a>, <a href="../../buster/manpages-zh/xmodmap.1.zh_TW.html">xmodmap(1)</a>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>徐明 &lt;xuming@users.sourceforge.net&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2003/05/13</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國Linux論壇man手冊頁翻譯計劃》">《中國Linux論壇man手冊頁翻譯計劃》<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8BLinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E9%A0%81%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">24 April 1998</td>
+    <td class="foot-os"></td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+keymaps.5.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:32Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"keymaps(5)\"}}]}"
+</script>

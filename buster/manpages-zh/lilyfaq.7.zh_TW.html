@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>lilyfaq(7) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/manpages-zh/lilyfaq.7.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/lilyfaq.7.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="7">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; lilyfaq(7)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/lilyfaq.7">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/lilyfaq.7.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#QUESTIONS_%E5%95%8F%E9%A1%8C%E8%88%87%E8%A7%A3%E7%AD%94" title="QUESTIONS 問題與解答">QUESTIONS 問題與解答</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#HISTORY_%E6%AD%B7%E5%8F%B2" title="HISTORY 歷史">HISTORY 歷史</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#Copyright" title="Copyright">Copyright</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#AUTHOR" title="AUTHOR">AUTHOR</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/lilyfaq.7.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/lilyfaq.7.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/lilyfaq.7.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/lilyfaq.7.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/lilyfaq.7.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">lilybbs faq(7)</td>
+    <td class="head-vol">Miscellaneous Information Manual</td>
+    <td class="head-rtitle">lilybbs faq(7)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+lilybbs-faq - linux入門以及百合 Linux
+  版精華區導讀
+</section>
+<section class="Sh">
+<h1 class="Sh" id="QUESTIONS_問題與解答">QUESTIONS 問題與解答<a class="anchor" href="#QUESTIONS_%E5%95%8F%E9%A1%8C%E8%88%87%E8%A7%A3%E7%AD%94">¶</a></h1>
+<section class="Ss">
+<h2 class="Ss" id="不需要任何命令的簡單介紹">不需要任何命令的簡單介紹<a class="anchor" href="#%E4%B8%8D%E9%9C%80%E8%A6%81%E4%BB%BB%E4%BD%95%E5%91%BD%E4%BB%A4%E7%9A%84%E7%B0%A1%E5%96%AE%E4%BB%8B%E7%B4%B9">¶</a></h2>
+<dl class="Bl-tag">
+  <dt>歷史</dt>
+  <dd>(APUE
+      提到了1990年之前的unix歷史，還有各種標準
+      ANSI ISO IEEE posix xpg3.... 但是linux 和 BSD
+      尤其是freebsd
+      在其後才大行其道) unix
+      的歷史與 c
+      是緊密相關的，無論是產生髮展還是後來的標準制定。
+      標準的制定反映出的，是當時的競爭之激烈。競爭在標準制定之後得到了抑制，
+      但是這段紛爭的時間卻使unix的發展減緩了
+      另一個阻礙發展的因素是版權，BSD的發展被延遲了，linux在版權上的障礙纔剛剛開始
+      歷史問題可以參閱精華區的“歷史”目錄</dd>
+  <dt>版權模式</dt>
+  <dd>自由軟件版權和開源軟件版權的區別，在於對衍生工作的限制。
+      GPL
+      的限制指出，你可以修改GPL軟件，但是如果要再發行修改過的版本，
+      就必須允許其他任何人對這個版本進行再次修改。根據這一條，很多討論都是
+      沒有必要的。如果你的修改不會再發行，那麼就不必考慮是否公佈修改的細節。
+      也就是說，政府/軍隊的保密限制和GPL是不會衝突的。
+      FDL
+      的限制似乎僅僅需要保留聲明
+      這種保證用戶權力的做法是否有道理，還是不清楚
+      開源軟件版權，例如BSD和類似的X版權，要求在任何衍生工作中保留原作者的信息
+      對再次發行修改後的版本沒有限制
+      不明白爲什麼要這樣做－－其中有一種自信，“捨我其誰”的勇氣吧
+      參閱精華區“歷史文化”目錄</dd>
+  <dt>合作開發模式</dt>
+  <dd>有很多工具用於實現合作開發
+      參閱精華區“軟件開發”目錄</dd>
+  <dt>linux最吸引人的地方是什麼？</dt>
+  <dd>很多人想知道linux爲什麼那麼好，爲什麼讓人着迷
+      我想我喜歡它，因爲它的歷史悠久，結構很清楚很漂亮，很多思想很巧妙
+      也許僅僅是“歷史”就足夠了。懷古的人不在少數吧
+      合作開發，集中大家的智慧，從中可以產生無限的可能
+      自由？共產主義的狂熱精神？天下大同？
+      當然，最直接的就是可以牢牢地將計算機控制在自己手裏，想把它修飾成
+      什麼樣子就做成什麼樣子，可以想出和別人完全不同的生活方式，比如
+      iloveqhq的scheme生活環境，是一般人享受不到的
+      各種新鮮的想法，隨時可以試驗一下－－讓想法時時刺激頭腦
+      象一個遊戲，耗時，費力，需要經常上論壇找攻略，從來沒有一定的玩法</dd>
+  <dt>FUD 是什麼意思？</dt>
+  <dd>2003年末，伴隨SCO對各個有關linux的公司的指控，還有對用戶的威脅恐嚇，
+      各種媒體也紛紛興風作浪，發表聳人聽聞的新聞，例如新浪的一些報道。
+      FUD
+      不僅指這些不負責任的話，還包括對linux等自由軟件/開源軟件的懷疑，
+      對自身的懷疑我自己認爲過分的狂熱也可以叫做FUD。
+      總之，沒有平和的態度就沒辦法實實在在地作事情，所以技術問題之外，
+      爭論還是少一點好，懷疑更要少一點
+      其實所有初學者都會情不自禁地自稱“菜鳥”，會“問弱弱的問題”。問題在於，
+      有沒有抓緊時間提高水平</dd>
+  <dt>目錄 文件 路徑概念</dt>
+  <dd>APUE 中開始就講目錄
+      文件
+      路徑的概念，因爲這幾個概念太基礎了。自從
+      “文件”出現之後，又出現了層次目錄結構，對計算機中資源的管理才逐步
+      發展起來。文件很適合於描述計算機上的資源
+      unix的目錄結構是非常嚴謹的樹形結構，根目錄是“/”，其他目錄和文件都必須
+      在這個目錄下面。每個目錄下面都可以有子目錄和文件，目錄和文件名稱的長度
+      是與文件系統有關的
+      路徑是引用一個目錄或文件時用到的，指示它的位置的字符串。絕對路徑是說
+      從根目錄“/”開始，沿着目錄樹找到需要引用的目錄或文件，然後將中間經歷的
+      節點都寫出來。例如，“/root/abc”
+      是說要找到“abc”
+      文件，就必須從
+      “/”開始，中間經歷
+      “root”
+      目錄才能找到。
+      當前目錄是說用戶正處於樹形目錄的哪個節點上，相對路徑就是要引用的目錄
+      或文件相對於當前目錄的位置。例如，我現在在“/root”
+      目錄當中，要引用
+      “/root/def/xyz”
+      的話，只要用 “def/xyz”
+      就可以了</dd>
+  <dt>文件類型</dt>
+  <dd>文件有不同的類型，在windows裏就可以看到，有文本文件，圖像，聲音，視頻
+      但是在linux中的文件類型要更多。例如，符號鏈接就是非常有用的類型
+      另外，linux中的二進制可執行文件是ELF格式的，不需要擴展名；而windows中
+      是PE格式，有固定的擴展名。所以，兩個系統的應用程序不能換用，有朝一日也許可以
+      linux中很重要的一種文件就是設備文件。幾乎所有的設備都有一個對應的文件，
+      在“/dev”當中
+      例如，硬盤harddisk簡稱hd，那麼系統中的第一個硬盤就是hda，第二個就是hdb.....，
+      然後對應的設備文件就是“/dev/hda”。硬盤上的各個分區用數字來編號，例如
+      第一個硬盤的第一個分區就是“/dev/hda1”，第二個分區就是“/dev/hda2”
+      再舉一個例子，顯卡的設備文件“/dev/fb0”，鼠標設備文件“/dev/input/mice”
+      和“/dev/psaux”
+      要注意的是，linux中的可執行文件可以是二進制的，也可以是文本文件。
+      “可執行”僅僅是文件的一個屬性而已，不像windows中由於文件系統中能保存的
+      屬性信息少，只能通過擴展名來識別文件類型。linux中的文件可以不用擴展名，
+      也可以用任意的擴展名各種各樣的文件類型，是爲了將不同的對象進行統一的處理。
+      我們可以用open lseek read write close
+      來讀寫一個文本文件，也可以用這幾個
+      函數來處理鼠標，讓聲卡播放一段聲音，讀寫一塊硬盤（如果你敢的話）。
+      在windows中，不同的設備處理的方法是不同的，而unix環境中的處理方法是
+      整齊劃一的。控制方法一般是fcntl和ioctl。（誰能告訴我ioctl犯了什麼錯誤了？）</dd>
+  <dt>硬盤分區方式</dt>
+  <dd>硬盤有很多種，分區也有各種各樣的方法。linux支持它們，但是常用的分區方法
+      就只有一種了。這種分區方法的要求是這樣，一塊硬盤上只能有最多四個主分區，
+      最多一個擴展分區；在擴展分區中可以劃分無限多的邏輯分區。記住這三個概念。
+      每個分區的第一個扇區一般都是保留分區信息的，數據一般從第二個扇區開始。
+      分區信息中很重要的內容是“下一個分區的位置在什麼地方”還有“本分區的
+      大小是多少”。因此，linux對分區進行編號的順序並不是硬盤上分區的物理排列順序，
+      而是從第一個分區開始，不斷查找下一個分區。這樣的結果是編號很容易弄錯。
+      要處理分區時，一定要把當前分區情況備份一下
+      pqmagic分區軟件不如linux中的分區軟件好用，因爲它對混亂的分區編號處理
+      更容易出錯
+      啓動引導程序一般都裝到某個分區的第一個扇區裏面，和分區信息放到一起。
+      但是，如果安裝啓動引導程序時指定的設備錯了，那麼可能會把數據破壞掉，
+      或者將其他分區的引導程序破壞掉。典型的情況是這樣：windows將自己的引導程序
+      放在第一個分區－－主分區1的開頭，我們的linux
+      fans想把linux的引導程序，
+      lilo或者grub放到整個硬盤的開頭－－MBR裏面。MBR的設備名是
+      “/dev/hda”，
+      但是主分區1的設備名是
+      “/dev/hda1”。一個不小心，系統就啓動不了，壞掉了</dd>
+  <dt>國際化，locale的概念，utf8
+    等字符編碼的含義和用法</dt>
+  <dd>後兩個已經不用再多說了。是很過時的話題。但是前日還有人問turbolinux是不是內核漢
+      化的。用戶並不是直接和內核打交道，爲什麼要漢化內核呢？目前的內核包含各種編碼，
+      用於文件名的轉換，但是並沒有包含字體，因爲用戶不是直接和內核打交道！
+      國際化是整個系統範圍內的，對編碼進行規範，對輸入輸出方式的函數接口和通信協議進
+      行整體的設計，提供處理各種語言環境的統一方法。本地化中，對編碼的規定和對日期時
+      間、貨幣格式的規定是國家標準，而輸入法、字體還有應用程序界面的翻譯，還需要大家
+      共同努力。
+      國際化和本地化都應當在應用程序中實現，例如zhcon和cce。窗口系統中的國際化和本地
+      化也是由應用程序實現的，窗口系統本身只提供通信協議
+      zhcon還不是很完善，支持的編碼太少了</dd>
+  <dt>中文化是本地化的一種，終端的本地化不是很完整</dt>
+  <dd>對世界上所有的字符進行編碼，就是unicode。但是，具體的實現方法有很多種，有的採用
+      定長編碼，有的採用變長編碼。utf8編碼是變長的，能實現unicode的大部分要求
+      zh_CN.UTF-8，zh_CN.GB18030 這些locale
+      的定義，前一部分是國家代碼，語言代碼，後
+      一部分是編碼。不同的國家代碼和語言代碼對應着不同的輸入法，日期時間貨幣格式等等
+      ，對用戶比較重要，編碼則不是很重要，不同的語言可以使用相同的編碼，推薦使用utf8</dd>
+  <dt>模塊化的設計思想
+    界面無關 設備無關</dt>
+  <dd>這一段還沒有想好
+      很多程序是和界面沒有關係的。例如，字體的使用一般使用Xft2字體庫，但是它和窗口環
+      境沒有必然聯繫。大部分bt工具是和界面沒有關係的。圖形應用程序
+      我們使用計算機時，我們的一舉一動都是在和系統通信。系統中程序執行時也在互相通信
+      。想要打開輸入法，我們按下ctrl-space，這時候輸入法和應用程序之間就通過XIM協議開
+      始通信了－－過些日子，也許就不是這種協議了，但是通信是一定存在的
+      一方面，每個程序都關心自己的功能，另一方面，每個程序都要和其他程序進行通信。</dd>
+  <dt>進程的概念 線程</dt>
+  <dd>APUE
+      中提到，進程是一個程序的運行中的實例。進程有很多屬性，比如編號，所有者，當
+      前運行狀態，啓動時的命令行，環境變量，運行時間，打開了什麼文件....
+      線程和進程類似，也有很多屬性。同一個進程的不同線程可以很容易地互相訪問數據。so
+      laris的線程實現很不錯，非常靈活</dd>
+  <dt>什麼發行版好？什麼unix好？</dt>
+  <dd>精華區目錄中有各種unix的對比，linux的使用感受，可以看一看
+      還有對書和網站的推薦
+      debian
+      發展太慢了，除非用unstable
+      版本，但是那又太快了。用
+      knoppix 上上手不錯 redhat
+      一直很好用，但是升級時最好重裝系統。現在fedora的網絡升級不知道能不能完全
+      升級？
+      redhat對中文的支持也很好，但是需要手動安裝的軟件比較多
+      turbolinux magic
+      還有國內廠商的版本
+      對中文支持不錯
+      個人不喜歡mandrake，很難定製。slackware
+      需要自己處理的東西太多了
+      freebsd 的使用和debian
+      很相似，自動化程度很高</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="需要綜合使用命令纔可以完成的操作">需要綜合使用命令纔可以完成的操作<a class="anchor" href="#%E9%9C%80%E8%A6%81%E7%B6%9C%E5%90%88%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E7%BA%94%E5%8F%AF%E4%BB%A5%E5%AE%8C%E6%88%90%E7%9A%84%E6%93%8D%E4%BD%9C">¶</a></h2>
+<dl class="Bl-tag">
+  <dt>文件權限</dt>
+  <dd>文件權限並不是文件類型。所謂“可執行”，僅僅是文件的權限而不是類型。
+      傳統的文件權限是九個字符rwxrwxrwx三個一組一共三組，再加上文件所有者和組。高級的
+      文件權限就不是這麼簡單了，類似ntfs，可以指定任何用戶/組對某個文件的各種各樣的權
+      限用 “ls -l”
+      命令可以看到當前目錄中所有目錄和文件的權限
+      用 “chmod” “chown” 和
+      “chgrp”
+      命令可以修改權限</dd>
+  <dt>運行程序
+    來自bash手冊頁</dt>
+  <dd>假如看到文件的權限中帶有x，那麼它是一個可執行的程序。要執行它，可以使用相對路徑
+      ，也可以使用絕對路徑。例如，我的目錄中有一個“run-me”
+      文件是可執行的，那麼我可
+      以運行 “/root/bin/run-me”
+      ，或者先運行 “cd /root”
+      再運行 “bin/run-me”。
+      假如說這個可執行文件的位置在
+      “/usr/bin”
+      當中，那麼我不必使用路徑也可以直接執
+      行它，因爲環境變量
+      “PATH” 中包含了
+      “/usr/bin”。運行 “export”
+      可以看到 “ PATH”
+      的定義</dd>
+  <dt>具體目錄的作用
+    來自FHS 標準</dt>
+  <dd>這個標準不是很正式，但是很多unix系統都在用。意思就是，“/”
+      根目錄下面的子目錄
+      和文件都有它們各自的用處，不能隨意增加刪除。比如說，“/dev”
+      就是設備，“/etc”
+    
+      就是所有配置文件，“/var”
+      是應用程序自動管理的數據，比如用rpm安裝了一個軟件，
+      rpm會將那個軟件的信息存在“/var”
+      當中。“/usr”
+      當然就是應用程序的目錄。“/bo
+      ot”
+      是內核還有啓動時要用到的文件。試一試，“ls
+      lR /” :)</dd>
+  <dt>安裝和刪除軟件－－最簡單的辦法</dt>
+  <dd>最簡單的，把這個軟件包含的文件－－一般是一個可執行文件，複製到
+      “/usr” 當中就
+      可以了。複製到什麼地方呢？FHS
+      對 “/usr”
+      目錄中的子目錄也有規定。“/usr/bin”
+    
+      是可執行文件，“/usr/lib”
+      是庫文件，就是xxxxxx.so.1
+      之類的，“/usr/share” 是
+      不需要修改的數據，比如幫助手冊，桌面圖標等等。
+      要卸載軟件，只要從“/usr”
+      當中把複製過去的文件刪掉就可以了
+      複製用 cp
+      命令，刪除用 rm
+      命令。小心不要誤刪除了有用的東西
+      和windows裏面不太一樣，不會在一個系統中安裝四個或者五個QQ卻仍然找不到QQ裝在什麼
+      地方。一般安裝軟件要用make，rpm
+      或者dpkg
+      等等方法，不用自己操心複製刪除文件</dd>
+  <dt>進程間的關係，應當使用APUE
+    中的敘述</dt>
+  <dd>用ps
+      命令可以查看進程。用top命令可以動態地查看進程。當然，要搞清楚輸出是什麼意
+      思，需要仔細看看幫助
+      fg 和 bg
+      可以在一些進程中切換
+      kill 和killall
+      可以控制進程停止和退出
+      一邊執行命令，一邊可以到“/proc”
+      目錄看一看。這個目錄是整個系統的情況，包括硬
+      件和軟件的信息。多練一練
+      “cd”，“ls” 還有
+      “cat”。看了足夠多之後，對於ps
+      和 top
+      命令的輸出就大概明白了。我認爲“/proc”
+      是新手訓練的最佳場合</dd>
+  <dt>fork exec 環境變量
+    守護進程(daemon)</dt>
+  <dd></dd>
+  <dt>shell 編程初步-shell,awk,perl</dt>
+  <dd></dd>
+  <dt>命令</dt>
+  <dd>cd ls ；cat less ；rm cp mv ln ；mkdir chmod chgrp
+      ； reboot poweroff ；mount umount df du ；tar make
+      ； fdisk parted ；vi ；man info ； rpm apt-get
+      apt-cache dpkg ；lilo grub modprobe ； gcc g++ ；ps fg
+      bg top ；
+      最常用的命令是不是poweroff
+      和 reboot ？</dd>
+  <dt>命令的通用選項</dt>
+  <dd>cd -
+      切換到上次所在的目錄
+      cd .. 切換到上層目錄 ls -lh
+      很多命令的參數中，“-h”
+      表示的是將文件大小轉換爲以
+      “MB” 和 “kB” 爲單位
+      “-l”
+      是長格式，可以看到文件更多的信息
+      df -h du -h
+      查看磁盤空間，已用多少，剩餘多少
+      free
+      查看內存和交換空間使用情況。不過一般用top來看更好一些
+      less -isr
+      可以用這個命令來看看很多類型的文件的內容，包括文本文件，壓縮包等等。加上參數就
+      能處理中文了 rm -rf
+      強制刪除，包括目錄和文件
+      cp -a
+      完全複製，保留原來文件的所有屬性
+      cp -R
+      複製，包括目錄和文件。默認不包括目錄
+      ln -s
+      建立符號鏈接。符號鏈接的目標可以是目錄或文件，也可以不存在。產生的新文件和鏈接
+      目標屬性和作用完全一致。
+      tar zxf tar zcf tar jxf tar jcf
+      創建壓縮文件（c）和解壓縮（x）
+      j 對應的是 .tar.bz2，而 z
+      對應的是 .tar.gz fdisk -l
+      列出一個硬盤的分區情況。fdisk
+      命令交互執行更有意思
+      rpm -ivh rpm -Uvh 安裝一個軟件包
+      或者升級一個軟件包
+      rpm -qip rpm -qpl
+      查詢一個軟件包的信息和內容
+      rpm -qf
+      查詢一個文件屬於哪個軟件包
+      apt-get update
+      升級整個系統，但是不會強制升級一些不合規範的內容
+      apt-get install
+      安裝一個軟件。debian最吸引人的地方就在於容易地安裝和刪除軟件
+      dpkg -i dpkg -l apt-cache search
+      如果軟件名稱更容易記就好了</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="實習">實習<a class="anchor" href="#%E5%AF%A6%E7%BF%92">¶</a></h2>
+<dl class="Bl-tag">
+  <dt>安裝X輸入法</dt>
+  <dd>X
+      輸入法一般需要兩個環境變量，一個是
+      XMODIFIERS, 另外一個是 LC_CTYPE
+      比如要使用fcitx
+      輸入法，XMODIFIERS 最好是
+      “@im=fcitx”
+      （也可以是其他值），LC
+      _CTYPE 是一個locale
+      類型的變量，其中的國家代碼必須是zh，語言代碼和編碼倒是無所
+      謂再比如要使用scim
+      輸入法，XMODIFIERS 應當是
+      “@im=scim” , LC_CTYPE 在輸入
+      中文時同上，輸入其他文字時可以是其他國家代碼。
+      當然，如果你的系統中連中文字體都沒有，就不要指望有中文輸入法了。
+      因爲不同的進程有自己獨特的環境變量設置，所以完全可以在同一個窗口系統的不同應用
+      程序中使用各種輸入法，只要在啓動應用程序之前先設置
+      XMODIFIERS 就可以了。
+      安裝X輸入法最困難的是如何使輸入法可以隨着X窗口系統而啓動和退出。不同的發行版有
+      不同的運行輸入法的方法，比如redhat/fedora
+      可以修改 “/etc/X11/xinit/xinit.d/xi
+      nput” 文件</dd>
+  <dt>安裝終端的中文環境</dt>
+  <dd></dd>
+  <dt>遍歷 /proc 目錄</dt>
+  <dd></dd>
+  <dt>安裝軟件
+    查詢軟件包</dt>
+  <dd></dd>
+  <dt>配置文件，fstab lilo.conf grub.conf
+    XF86Config</dt>
+  <dd></dd>
+  <dt>配置lilo 或者 grub,
+    問題修復</dt>
+  <dd>建議找一個好一點的lilo.conf
+      或者 grub.conf
+      看一看，至少是能用的配置文件看一看，
+      然後再着手進行修復工作。有可能需要手動從頭開始寫一個配置文件
+      確定真的弄清楚了硬盤分區情況了嗎？在BBS上求助時，一定要把分區情況和配置文件，還
+    <p class="Pp">有導致出錯的步驟都貼上來
+        精華區lilo 和grub
+        目錄都各有上百篇帖子，講述安裝和修復的過程</p>
+  </dd>
+  <dt>mount</dt>
+  <dd>mount
+      命令用於將一個設備掛載到一個目錄上，然後就可以訪問其中的文件了。
+      mount
+      命令可選的參數非常多，但是要想正確掛載一個設備，必須搞清楚一些事情
+      例如： 	mount /dev/sda1 /mnt/u-disk/sda1 -t vfat -o
+      defaults,users
+      其中，USB移動硬盤設備對應的設備文件名是
+      “/dev/sda1”。如果設備文件名
+      搞錯了，那麼掛載肯定會出錯。很多出錯都是因爲
+      “/dev/sda1” 對應的設備
+      根本不存在 -o
+      可以指定的選項非常多，不同的文件系統都有自己特定的選項。常用的就是
+      users iocharset fmask dmask rw/ro
+      這一些。iocharset
+      是自己的編碼，在掛載
+      windows
+      網上鄰居的目錄時，iocodepage
+      是對方的編碼。
+      看幫助，man mount
+      非常長。常見的/etc/fstab中的一行是這樣：
+     /dev/hda1 /mnt/harddisk/C vfat defaults,users,umask=0 0 0
+      如果是kernel-2.6
+      那麼還可以加上fmask=111,dmask=0
+      來控制權限</dd>
+  <dt>安裝X字體</dt>
+  <dd>非常簡單。字體有兩個系統，一個是舊一點的X系統，一個是新一點的Xft2系統。要想在兩
+      個系統中同時使用某個字體，需要將這個字體複製到某個“/usr/local/share/fonts”
+      的
+      子目錄中去，然後在
+      “/etc/X11/fs/config”
+      中加入這個目錄，最後執行
+      “fc-cache -fv”
+      刷新字體列表，“service
+      xfs restart” 就可以了
+      不同的系統中，完成這幾個步驟的具體執行的命令可能不一樣。複製字體應該都一樣，然
+      後可能需要將這個目錄加入到
+      “/etc/X11/XF86Config”
+      當中去，最後也有可能需要重啓
+      動圖形系統。要靈活一點</dd>
+  <dt>配置latex 和 ps 系統</dt>
+  <dd></dd>
+  <dt>分區，重新安裝系統</dt>
+  <dd>這裏是實踐部分。硬盤分區，常見的分區方法是一個主分區，一個擴展分區，然後在擴展
+      分區中可以劃分很多很多邏輯分區。也有分區方法是劃分兩個主分區，例如IBM的系統還原
+      分區，還有dell也是這樣。
+      爲linux系統分區可以只分一個swap分區和一個
+      “/”
+      分區。swap分區大小三五百M就可以
+      了。而 “‘/’
+      分區”
+      的說法只是爲了方便，意思是將某個分區作爲
+      “/” 目錄來使用
+      。類似的，如果安裝程序要劃分
+      “‘/boot’
+      分區”，那麼也是將某個分區作爲
+      “/boo t” 目錄來使用。
+      任何一個目錄都可以單獨劃爲一個分區，例如可以將
+      “/usr/local”
+      目錄單獨劃爲一個
+      分區，這樣把數據放在裏面，重裝系統時不會被刪除掉。
+      高級的lvm和lvm2
+      只在大硬盤上纔有用</dd>
+</dl>
+</section>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="HISTORY_歷史">HISTORY 歷史<a class="anchor" href="#HISTORY_%E6%AD%B7%E5%8F%B2">¶</a></h1>
+版上討論了很久是不是要提高技術性了。的確，大部分入門級問題在
+  從前的帖子中都有涉及，精華區中大概也有答案，重複地提問“將有價值
+  的論題淹沒了”。
+<p class="Pp">
+  
+    要提高技術水平，就要找到更多的論題和提出更好的想法。但是，魯
+    迅先生說得好，要有“天才的土壤”才行。所以，對於新手問題也不能封
+    殺。一種設想，是請幾位熟練的使用者專人負責某一個方面的問題，用信
+    件聯繫，然後把有價值的討論結果發上來。但是，這樣效率不高。</p>
+<p class="Pp">
+  
+    我想試行一下這樣的做法，就是入門級問題以及解答就跟在這個帖子
+    後面，過一段時間就清理一下，總結到一篇文章中。請大家配合。暫時設
+    定精華區的第19個目錄和第29個目錄分別用作已解決/未解決問題的保存
+    之處。</p>
+<p class="Pp">
+  
+    後續的第二篇帖子是一些快速解答，可以在firefox
+    的搜索欄中使用
+    “頁面內搜索”功能來查找關心的內容。</p>
+<p class="Pp">
+   歡迎修改</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="Copyright">Copyright<a class="anchor" href="#Copyright">¶</a></h1>
+Permission is granted to copy, distribute and/or modify this page under the
+  terms of the GNU Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant Sections, no
+  Front-Cover Texts and no Back-Cover Texts.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="AUTHOR">AUTHOR<a class="anchor" href="#AUTHOR">¶</a></h1>
+最後一次修改者：bbbush&lt;bbbush@lilybbs&gt;@2004年2月11日
+<p class="Pp">最初的格式是txt
+    沒有排版，沒有鏈接</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">2004-05-01</td>
+    <td class="foot-os">lilybbs-linux入門以及精華區導讀</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+lilyfaq.7.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:33Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"lilyfaq(7)\"}}]}"
+</script>

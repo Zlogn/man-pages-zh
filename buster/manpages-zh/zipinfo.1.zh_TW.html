@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>zipinfo(1) — manpages-zh — Debian buster — Debian Manpages</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff');
+}
+
+body {
+	color: #000;
+	background-color: white;
+	background-image: linear-gradient(to bottom, #d7d9e2, #fff 70px);
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font-family: sans-serif;
+	font-size: 100%;
+	line-height: 1.2;
+	letter-spacing: 0.15px;
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	padding: 0 10px 0 52px;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 50px;
+	height: 5.07em;
+	min-height: 65px;
+}
+
+#logo a {
+	display: block;
+	height: 100%;
+}
+
+#logo img {
+	margin-top: 5px;
+	position: absolute;
+	bottom: 0.3em;
+	overflow: auto;
+	border: 0;
+}
+
+p.section {
+	margin: 0;
+	padding: 0 5px 0 5px;
+	font-size: 13px;
+	line-height: 16px;
+	color: white;
+	letter-spacing: 0.08em;
+	position: absolute;
+	top: 0px;
+	left: 52px;
+	background-color: #c70036;
+}
+
+p.section a {
+	color: white;
+	text-decoration: none;
+}
+
+.hidecss {
+	display: none;
+}
+
+#searchbox {
+	text-align:left;
+	line-height: 1;
+	margin: 0 10px 0 0.5em;
+	padding: 1px 0 1px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: .75em;
+}
+
+#navbar {
+	border-bottom: 1px solid #c70036;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#navbar li {
+	list-style: none;
+	float: left;
+}
+
+#navbar a {
+	display: block;
+	padding: 1.75em .5em .25em .5em;
+	color: #0035c7;
+	text-decoration: none;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+#navbar a:hover
+, #navbar a:visited:hover {
+	background-color: #f5f6f7;
+	border-left: 1px solid  #d2d3d7;
+	border-right: 1px solid #d2d3d7;
+	text-decoration: underline;
+}
+
+a:link {
+	color: #0035c7;
+}
+
+a:visited {
+	color: #54638c;
+}
+
+#breadcrumbs {
+	line-height: 2;
+	min-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 0.75em;
+	background-color: #f5f6f7;
+	border-bottom: 1px solid #d2d3d7;
+}
+
+#breadcrumbs:before {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+#content {
+    margin: 0 10px 0 52px;
+    display: flex;
+    flex-direction: row;
+}
+
+.paneljump {
+    background-color: #d70751;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-right: .5em;
+    display: none;
+}
+
+.paneljump a,
+.paneljump a:visited,
+.paneljump a:hover,
+.paneljump a:focus {
+    color: white;
+}
+
+@media all and (max-width: 800px) {
+    #content {
+	flex-direction: column;
+	margin: 0.5em;
+    }
+    .paneljump {
+	display: block;
+    }
+}
+
+.panels {
+    display: block;
+    order: 2;
+}
+
+.maincontent {
+    width: 100%;
+    max-width: 80ch;
+    order: 1;
+}
+
+.mandoc {
+    font-family: monospace;
+    font-size: 1.04rem;
+}
+
+.mandoc pre {
+    white-space: pre-wrap;
+}
+
+#footer {
+	border: 1px solid #dfdfe0;
+	border-left: 0;
+	border-right: 0;
+	background-color: #f5f6f7;
+	padding: 1em;
+	margin: 1em 10px 0 52px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+hr {
+	border-top: 1px solid #d2d3d7;
+	border-bottom: 1px solid white;
+	border-left: 0;
+	border-right: 0;
+	margin: 1.4375em 0 1.5em 0;
+	height: 0;
+	background-color: #bbb;
+}
+
+#content p {
+    padding-left: 1em;
+}
+
+ 
+
+a, a:hover, a:focus, a:visited {
+    color: #0530D7;
+    text-decoration: none;
+}
+
+ 
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading, .panel details {
+  margin: -15px -15px 0px;
+  background-color: #d70751;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-heading, .panel summary {
+  padding: 5px 5px;
+  font-size: 17.5px;
+  font-weight: 500;
+  color: #ffffff;
+  outline-style: none;
+}
+
+.panel summary {
+    padding-left: 7px;
+}
+
+summary, details {
+    display: block;
+}
+
+.panel details ul {
+  margin: 0;
+}
+
+.panel-footer {
+  padding: 5px 5px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: -1px;
+  border: 1px solid #dddddd;
+}
+
+.list-group-item > .list-item-key {
+  min-width: 27%;
+  display: inline-block;
+}
+.list-group-item > .list-item-key.versions-repository {
+  min-width: 40%;
+}
+.list-group-item > .list-item-key.versioned-links-version {
+  min-width: 40%
+}
+
+
+.versioned-links-icon {
+  margin-right: 2px;
+}
+.versioned-links-icon a {
+  color: black;
+}
+.versioned-links-icon a:hover {
+  color: blue;
+}
+.versioned-links-icon-inactive {
+  opacity: 0.5;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-group-item.active a {
+  z-index: 2;
+}
+
+.list-group-item.active {
+  background-color: #efefef;
+}
+
+.list-group-flush {
+  margin: 15px -15px -15px;
+}
+.panel .list-group-flush {
+  margin-top: -1px;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 1px 0;
+}
+
+.list-group-flush .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.list-group-flush .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+ 
+
+.panel {
+float: right;
+clear: right;
+min-width: 200px;
+}
+
+.toc {
+     
+    width: 200px;
+}
+
+.toc li {
+    font-size: 98%;
+    letter-spacing: 0.02em;
+    display: flex;
+}
+
+.otherversions {
+     
+    width: 200px;
+}
+
+.otherversions li,
+.otherlangs li {
+    display: flex;
+}
+
+.otherversions a,
+.otherlangs a {
+    flex-shrink: 0;
+}
+
+.pkgversion,
+.pkgname,
+.toc a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pkgversion,
+.pkgname {
+    margin-left: auto;
+    padding-left: 1em;
+}
+
+ 
+
+.mandoc {
+     
+    overflow: hidden;
+    margin-top: .5em;
+    margin-right: 45px;
+}
+table.head, table.foot {
+    width: 100%;
+}
+.head-vol {
+    text-align: center;
+}
+.head-rtitle {
+    text-align: right;
+}
+
+ 
+.spacer, .Pp {
+    min-height: 1em;
+}
+
+pre {
+    margin-left: 2em;
+}
+
+.anchor {
+    margin-left: .25em;
+    visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    visibility: visible;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .07em;
+    margin-top: 1.5em;
+    margin-bottom: .35em;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 125%;
+}
+
+@media print {
+    #header, #footer, .panel, .anchor, .paneljump {
+	display: none;
+    }
+    #content {
+	margin: 0;
+    }
+    .mandoc {
+	margin: 0;
+    }
+}
+
+ 
+ 
+
+.Bd { }
+.Bd-indent {	margin-left: 3.8em; }
+
+.Bl-bullet {	list-style-type: disc;
+		padding-left: 1em; }
+.Bl-bullet > li { }
+.Bl-dash {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-dash > li:before {
+		content: "\2014  "; }
+.Bl-item {	list-style-type: none;
+		padding-left: 0em; }
+.Bl-item > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-enum {	padding-left: 2em; }
+.Bl-enum > li { }
+.Bl-compact > li {
+		margin-top: 0em; }
+
+.Bl-diag { }
+.Bl-diag > dt {
+		font-style: normal;
+		font-weight: bold; }
+.Bl-diag > dd {
+		margin-left: 0em; }
+.Bl-hang { }
+.Bl-hang > dt { }
+.Bl-hang > dd {
+		margin-left: 5.5em; }
+.Bl-inset { }
+.Bl-inset > dt { }
+.Bl-inset > dd {
+		margin-left: 0em; }
+.Bl-ohang { }
+.Bl-ohang > dt { }
+.Bl-ohang > dd {
+		margin-left: 0em; }
+.Bl-tag {	margin-left: 5.5em; }
+.Bl-tag > dt {
+		float: left;
+		margin-top: 0em;
+		margin-left: -5.5em;
+		padding-right: 1.2em;
+		vertical-align: top; }
+.Bl-tag > dd {
+		clear: right;
+		width: 100%;
+		margin-top: 0em;
+		margin-left: 0em;
+		vertical-align: top;
+		overflow: auto; }
+.Bl-compact > dt {
+		margin-top: 0em; }
+
+.Bl-column { }
+.Bl-column > tbody > tr { }
+.Bl-column > tbody > tr > td {
+		margin-top: 1em; }
+.Bl-compact > tbody > tr > td {
+		margin-top: 0em; }
+
+.Rs {		font-style: normal;
+		font-weight: normal; }
+.RsA { }
+.RsB {		font-style: italic;
+		font-weight: normal; }
+.RsC { }
+.RsD { }
+.RsI {		font-style: italic;
+		font-weight: normal; }
+.RsJ {		font-style: italic;
+		font-weight: normal; }
+.RsN { }
+.RsO { }
+.RsP { }
+.RsQ { }
+.RsR { }
+.RsT {		text-decoration: underline; }
+.RsU { }
+.RsV { }
+
+.eqn { }
+.tbl { }
+
+.HP {		margin-left: 3.8em;
+		text-indent: -3.8em; }
+
+ 
+
+table.Nm { }
+code.Nm {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fl {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Cm {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ar {		font-style: italic;
+		font-weight: normal; }
+.Op {		display: inline; }
+.Ic {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ev {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Pa {		font-style: italic;
+		font-weight: normal; }
+
+ 
+
+.Lb { }
+code.In {	font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+a.In { }
+.Fd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ft {		font-style: italic;
+		font-weight: normal; }
+.Fn {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Fa {		font-style: italic;
+		font-weight: normal; }
+.Vt {		font-style: italic;
+		font-weight: normal; }
+.Va {		font-style: italic;
+		font-weight: normal; }
+.Dv {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+.Er {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+ 
+
+.An { }
+.Lk { }
+.Mt { }
+.Cd {		font-style: normal;
+		font-weight: bold;
+		font-family: inherit; }
+.Ad {		font-style: italic;
+		font-weight: normal; }
+.Ms {		font-style: normal;
+		font-weight: bold; }
+.St { }
+.Ux { }
+
+ 
+
+.Bf {		display: inline; }
+.No {		font-style: normal;
+		font-weight: normal; }
+.Em {		font-style: italic;
+		font-weight: normal; }
+.Sy {		font-style: normal;
+		font-weight: bold; }
+.Li {		font-style: normal;
+		font-weight: normal;
+		font-family: monospace; }
+
+</style>
+<script type="text/javascript">
+if (!!document['fonts']) {
+        var r = "body{font-family:'Roboto',sans-serif;}";
+        var i = ".mandoc,.mandoc pre,.mandoc code,p.section{font-family:'Inconsolata',monospace;}";
+        var l = function(m) {
+                if (!document.body) {
+                        document.write("<style>"+m+"</style>");
+                } else {
+                        document.body.innerHTML+="<style>"+m+"</style>";
+                }
+        };
+         
+        new FontFace('Roboto', "local('Roboto'), local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.woff2) format('woff2'), url(/Roboto-Regular.woff) format('woff')")
+                .load().then(function() { l(r); });
+        new FontFace('Inconsolata', "local('Inconsolata'), url(/Inconsolata.woff2) format('woff2'), url(/Inconsolata.woff) format('woff')")
+                .load().then(function() { l(i); });
+} else {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts-woff.css';
+        l.as = 'style';
+        l.onload = function() { this.rel = 'stylesheet'; };
+        document.head.appendChild(l);
+}
+</script>
+<link rel="search" title="Debian manpages" type="application/opensearchdescription+xml" href="../../opensearch.xml">
+<noscript>
+  <style type="text/css">
+    body { font-family: 'Roboto', sans-serif; }
+    .mandoc, .mandoc pre, .mandoc code, p.section { font-family: 'Inconsolata', monospace; }
+  </style>
+</noscript>
+<link rel="alternate" href="../../buster/unzip/zipinfo.1.en.html" hreflang="en">
+<link rel="alternate" href="../../buster/manpages-zh/zipinfo.1.zh_CN.html" hreflang="zh-CN">
+<link rel="alternate" href="../../buster/manpages-zh/zipinfo.1.zh_TW.html" hreflang="zh-TW">
+</head>
+<body>
+<div id="header">
+   <div id="upperheader">
+   <div id="logo">
+  <a href="../../" title="Debian Home"><img src="../../openlogo-50.svg" alt="Debian" width="50" height="61"></a>
+  </div>
+  <p class="section"><a href="../../">MANPAGES</a></p>
+  <div id="searchbox">
+    <form action="../../jump" method="get">
+      <input type="hidden" name="suite" value="buster">
+      <input type="hidden" name="binarypkg" value="manpages-zh">
+      <input type="hidden" name="section" value="1">
+      <input type="hidden" name="language" value="zh_TW">
+      <input type="text" name="q" placeholder="manpage name" required>
+      <input type="submit" value="Jump">
+    </form>
+  </div>
+ </div>
+<div id="navbar">
+<p class="hidecss"><a href="#content">Skip Quicknav</a></p>
+<ul>
+   <li><a href="../../">Index</a></li>
+   <li><a href="../../about.html">About Manpages</a></li>
+   <li><a href="../../faq.html">FAQ</a></li>
+   <li><a href="../../manpages.debian.org">Service Information</a></li>
+</ul>
+</div>
+   <p id="breadcrumbs">&nbsp;
+     
+     &#x2F; <a href="../../contents-buster.html">buster</a>
+     
+     
+     
+     &#x2F; <a href="../../buster/manpages-zh/index.html">manpages-zh</a>
+     
+     
+     
+     &#x2F; zipinfo(1)
+     
+     </p>
+</div>
+<div id="content">
+
+
+<div class="panels" id="panels">
+<div class="panel" role="complementary">
+<div class="panel-heading" role="heading">
+links
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/zipinfo.1">language-indep link</a>
+</li>
+<li class="list-group-item">
+<a href="../../pkg/manpages-zh">package tracker</a>
+</li>
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/zipinfo.1.zh_TW.gz">raw man page</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="panel toc" role="complementary" style="padding-bottom: 0">
+<details>
+<summary>
+table of contents
+</summary>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+  <a class="toclink" href="#NAME" title="NAME">NAME</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS" title="總覽 SYNOPSIS">總覽 SYNOPSIS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION" title="描述 DESCRIPTION">描述 DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E6%95%B8_ARGUMENTS" title="參數 ARGUMENTS">參數 ARGUMENTS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E9%81%B8%E9%A0%85_OPTIONS" title="選項 OPTIONS">選項 OPTIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%A9%B3%E7%B4%B0%E6%8F%8F%E8%BF%B0_DETAILED_DESCRIPTION" title="詳細描述 DETAILED DESCRIPTION">詳細描述 DETAILED DESCRIPTION</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%92%B0%E5%A2%83%E9%81%B8%E9%A0%85_ENVIRONMENT_OPTIONS" title="環境選項 ENVIRONMENT OPTIONS">環境選項 ENVIRONMENT OPTIONS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E7%A4%BA%E4%BE%8B_EXAMPLES" title="示例 EXAMPLES">示例 EXAMPLES</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E6%8A%80%E5%B7%A7_TIPS" title="技巧 TIPS">技巧 TIPS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#BUGS" title="BUGS">BUGS</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO" title="參見 SEE ALSO">參見 SEE ALSO</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#URL" title="URL">URL</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E4%BD%9C%E8%80%85_AUTHOR" title="作者 AUTHOR">作者 AUTHOR</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D" title="[中文版維護人]">[中文版維護人]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D" title="[中文版最新更新]">[中文版最新更新]</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#ZgotmplZ" title="《中國linux論壇man手冊翻譯計劃》:">《中國linux論壇man手冊翻譯計劃》:</a>
+</li>
+
+<li class="list-group-item">
+  <a class="toclink" href="#%E8%B7%8B" title="跋">跋</a>
+</li>
+
+</ul>
+</div>
+</details>
+</div>
+
+<div class="panel otherversions" role="complementary">
+<div class="panel-heading" role="heading">
+other versions
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/zipinfo.1.zh_TW.html">buster</a> <span class="pkgversion" title="1.6.3.3-1">1.6.3.3-1</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../testing/manpages-zh/zipinfo.1.zh_TW.html">testing</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+<li class="list-group-item">
+<a href="../../unstable/manpages-zh/zipinfo.1.zh_TW.html">unstable</a> <span class="pkgversion" title="1.6.3.3-2">1.6.3.3-2</span>
+</li>
+
+</ul>
+</div>
+</div>
+
+
+<div class="panel otherlangs" role="complementary">
+<div class="panel-heading" role="heading">
+other languages
+</div>
+<div class="panel-body">
+<ul class="list-group list-group-flush">
+
+<li class="list-group-item">
+<a href="../../buster/unzip/zipinfo.1.en.html" title="English (en)">English</a>
+
+</li>
+
+<li class="list-group-item">
+<a href="../../buster/manpages-zh/zipinfo.1.zh_CN.html" title="Chinese (zh_CN)">中文 (zh-CN)</a>
+
+</li>
+
+<li class="list-group-item active">
+<a href="../../buster/manpages-zh/zipinfo.1.zh_TW.html" title="Chinese (zh_TW)">繁體中文 (zh-TW)</a>
+
+</li>
+
+</ul>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+<div class="maincontent">
+<p class="paneljump"><a href="#panels">Scroll to navigation</a></p>
+<div class="mandoc">
+<table class="head">
+  <tbody><tr>
+    <td class="head-ltitle">ZIPINFO(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">ZIPINFO(1)</td>
+  </tr>
+</tbody></table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME">NAME<a class="anchor" href="#NAME">¶</a></h1>
+zipinfo -
+  列出關於某個ZIP壓縮包的詳細信息
+</section>
+<section class="Sh">
+<h1 class="Sh" id="總覽_SYNOPSIS">總覽 SYNOPSIS<a class="anchor" href="#%E7%B8%BD%E8%A6%BD_SYNOPSIS">¶</a></h1>
+<b>zipinfo</b> [<b>-12smlvhMtTz</b>] <i>file</i>[<i>.zip</i>]
+  [<i>file(s)</i> ...] [<b>-x</b> <i>xfile(s)</i> ...]
+<p class="Pp"><b>unzip</b> <b>-Z</b> [<b>-12smlvhMtTz</b>]
+    <i>file</i>[<i>.zip</i>] [<i>file(s)</i> ...]
+    [<b>-x</b> <i>xfile(s)</i> ...]</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="描述_DESCRIPTION">描述 DESCRIPTION<a class="anchor" href="#%E6%8F%8F%E8%BF%B0_DESCRIPTION">¶</a></h1>
+<i>zipinfo</i>
+  列出某個ZIP檔案中的所包含文件的技術信息,
+  它們絕大多數和MS-DOS系統中的相同.信息包括文件權限設置,加密狀態,壓縮類型,
+  以及壓縮程序的版本和所在的操作系統或者文件系統等.缺省時將爲檔案中的每一個
+  文件列出一行,並在首行和末行給出整個檔案的概括信息.其輸出的格式介於Unix中
+  ``ls -l&#39;&#39;和 ``unzip
+  -v&#39;&#39;的輸出結果.參看下面的
+  <b>詳細描述 DEATILED DESCRIPTION .</b>
+  請注意 <i>zipinfo</i>與<i>unzip</i>
+  是同一個程序
+  (在Unix中,是一個對它的連接);
+  然而在有些系統上,
+  <i>zipinfo</i> 的支持在<i>unzip</i>
+  集成後已被忽略.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參數_ARGUMENTS">參數 ARGUMENTS<a class="anchor" href="#%E5%8F%83%E6%95%B8_ARGUMENTS">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><i>file</i>[<i>.zip</i>]</dt>
+  <dd>ZIP
+      壓縮包的路徑.如果指定的文件是一個通配符,那麼將按照某種操作系統或者
+      文件系統所決定的順序處理每一個匹配的文件.只有文件名可以是通配符.路徑本
+      身不可以.通配符表達式和
+      Unix 中的 <a href="../../buster/manpages-zh/egrep.1.zh_TW.html">egrep(1)</a>
+      正則表達式相似,可能包括:</dd>
+</dl>
+<div class="Bd-indent">
+<dl class="Bl-tag">
+  <dt>*</dt>
+  <dd>匹配一個0或者任意多個字符組成的序列</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt>?</dt>
+  <dd>精確匹配一個字符</dd>
+  <dt>[...]</dt>
+  <dd>匹配中括號中的任何單個字符;也可以通過首字符,連字符和末字符指定一個匹配範圍.如果一個驚歎號或者插入符(`!&#39;或者`^&#39;)緊跟左括號;那麼將對括號中的內容取補集(也就是說,
+      任何不屬於括號中的字符將被匹配).</dd>
+</dl>
+</div>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>(如果有任何字符會被操作系統所改變,請使用引號,特別是在
+      Unix 或者 VMS
+      中)如果沒有匹配項出現,那麼指定的內容將被認爲是原始的文件名;如果這樣做也失敗,那麼將嘗試追加
+      .zip
+      後綴.注意自解壓的ZIP文件是支持的;只要明確指定
+      .exe 後綴即可.</dd>
+  <dt>[<i>file(s)</i>]</dt>
+  <dd>指定一個可選的待處理的檔案列表.正則表達式(通配符)可以用來匹配多個成員;如上所述.再次提醒如果表達式會被操作系統所擴展或者修改要使用引號.</dd>
+  <dt>[<b>-x</b> <i>xfile(s)</i>]</dt>
+  <dd>指定一個可選的將被忽略的檔案列表.</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="選項_OPTIONS">選項 OPTIONS<a class="anchor" href="#%E9%81%B8%E9%A0%85_OPTIONS">¶</a></h1>
+<dl class="Bl-tag">
+  <dt><b>-1</b></dt>
+  <dd>只列出文件名,一行一個.這個選項具有完全的排它性;首末行信息以及壓縮文件的描述信息將不會被輸出.它可以在Unix的Shell腳本中使用.</dd>
+  <dt><b>-2</b></dt>
+  <dd>只列出文件名,一行一個,但是允許輸出首行信息
+      (<b>-h</b>), 末行信息(<b>-t</b>)
+      和壓縮文件描述信息
+      (<b>-z</b>).
+      這個選項在文件名特別長的情況下或許有用.</dd>
+  <dt><b>-s</b></dt>
+  <dd>以Unix的 ``ls -l&#39;&#39;
+      的短格式列出壓縮文件的信息.這是缺省的,詳情見下.</dd>
+  <dt><b>-m</b></dt>
+  <dd>以 Unix的 ``ls -l&#39;&#39;
+      的中長格式列出壓縮文件的信息.和<b>-s</b>
+      的輸出結果相同,但是它會列出以百分數表示的壓縮比率.</dd>
+  <dt><b>-l</b></dt>
+  <dd>以 Unix的 ``ls -l&#39;&#39;
+      的長格式列出壓縮文件的信息.和
+      <b>-m</b>
+      輸出結果相同,除了壓縮比率被壓縮後的文件大小(以字節爲單位)所取代外.</dd>
+  <dt><b>-v</b></dt>
+  <dd>詳細地以多頁方式列出壓縮文件的信息.</dd>
+  <dt><b>-h</b></dt>
+  <dd>列出首行信息.並輸出檔案名字,實際大小(以字節爲單位)以及文件數目.</dd>
+  <dt><b>-M</b></dt>
+  <dd>將所有的輸出以和 Unix
+      中 <a href="../../buster/manpages-zh/more.1.zh_TW.html">more(1)</a>
+      命令相似的內部頁的方式輸出.在屏幕輸出的末尾,<i>zipinfo</i>
+      將會暫停,並給出``--More--&#39;&#39;
+      提示;可以按Enter(Return)或者空格鍵查看下一屏內容.按``q&#39;&#39;
+      鍵(在某些系統上可能是Enter/Return鍵)可以結束<i>zipinfo</i>
+      .與Unix中的more命令所不同,<i>zipinfo</i>
+      沒有向前搜索和編輯功能.同時,<i>zipinfo</i>
+      對於屏幕末的長行,不能有效地將它按兩行或者多行顯示出來,導致<i>zipinfo</i>
+      屏幕上方的一些文本在被瀏覽之前就捲過.在有些系統上屏幕上的可顯示行的數目是不能被取得的,在這種情況下,<i>zipinfo</i>
+      假定爲24行.</dd>
+  <dt><b>-t</b></dt>
+  <dd>列出所有或者要求被列出文件的總體信息.輸出文件的數目,壓縮前後的總大小,以及總的壓縮係數;或者如果只有總體信息被打印出,則給出整個檔案的信息.請注意總的壓縮數據的大小總是不同於實際的壓縮文件的大小,這是因爲後者包括了作爲壓縮數據附屬物的所有的壓縮文件內部的頭信息.</dd>
+  <dt><b>-T</b></dt>
+  <dd>以按點分十進制的格式(yymmdd.hhmmss)排序輸出文件的日期和時間.默認的日期格式是一個更加標準的,用戶易讀的,使用月份名縮寫(參看下文)的版本.</dd>
+  <dt><b>-z</b></dt>
+  <dd>包含檔案中的描述信息(如果有的話).</dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="詳細描述_DETAILED_DESCRIPTION">詳細描述 DETAILED DESCRIPTION<a class="anchor" href="#%E8%A9%B3%E7%B4%B0%E6%8F%8F%E8%BF%B0_DETAILED_DESCRIPTION">¶</a></h1>
+<i>zipinfo</i>
+  有很多種工作方式,如果不太熟悉
+  Unix 中的 <a href="../../buster/manpages-zh/ls.1.zh_TW.html">ls(1)</a>
+  (或者即使熟悉)的話,要掌握好它的使用也是比較困難的.默認的方式是以如下的格式列出文件:
+<p class="Pp"></p>
+<pre>-rw-rws---  1.9 unx    2802 t- defX 11-Aug-91 13:48 perms.2660
+</pre>
+<p class="Pp">最後的三個字段分別是文件的修改日期和時間,還有文件名.文件名的大小寫是區分的,這樣來自MS-DOS
+    PKZIP的壓縮文件總是被大寫.如果被壓縮的文件存儲了路徑名,也將被看作是文件名的一部分而被顯示.</p>
+<p class="Pp">第二,三個字段表示了文件是在
+    Unix 下以 1.9 版的 <i>zip</i>
+    壓縮的.由於它來自 Unix
+    ,行開頭的文件的存取權限以Unix
+    格式輸出.壓縮前的文件大小(本例中爲2802)在第四個字段中給出.</p>
+<p class="Pp">第五個字段包含了兩個字符,它們中的每個都能取若干個值.第一個字符可能是`t&#39;或者`b&#39;,相應地表示文件是文本的或者是二進制的;但是如果文件被加密,<i>zipinfo</i>
+    通過大寫字符(`T&#39;或者`B&#39;)來表示.第二個字符可以取四個值,它依賴於是否存在一個本地的頭信息並且/或者一個和那個文件相關的
+    &#34;額外&#34;
+    字段(詳細解釋參看 PKWare&#39;s
+    APPNOTE.TXT,它基本上類似於ANSI
+    C中的pragmas,它們提供了一種包含非標準信息的標準方法).如果兩者都不存在,該字段爲連字符(`-&#39;);如果有一個擴展的本地頭信息但是沒有額外字段,則爲`l&#39;;反之爲`x&#39;;如果都存在,則爲`X&#39;.這樣上面示例中的文件(很可能)是一個未被加密的文本文件,並且沒有額外字段和本地頭信息與之相關聯.下面的例子則是一個有額外信息的二進制文件.</p>
+<p class="Pp"></p>
+<pre>RWD,R,R     0.9 vms     168 Bx shrk  9-Aug-91 19:15 perms.0644
+</pre>
+<p class="Pp">額外的字段的使用是爲了滿足不同的需要(參看下面選項
+    <b>-v</b>
+    的討論)包括這裏討論所假設的情況:VMS
+    文件的存儲特性.
+    一些其他的可能是爲了處理操作系統(這是一個誤解,實際應該是文件系統更恰當些)包括
+    OS/2
+    或者使用高性能文件系統
+    (HPFS) 的 NT ,MS_DOS, OS/2
+    或者使用文件獲取表
+    (FAT) 作爲文件系統的 NT,
+    Macintosh.它們被如下所標示:</p>
+<p class="Pp"></p>
+<pre>-rw-a--     1.0 hpf    5358 Tl i4:3  4-Dec-91 11:33 longfilename.hpfs
+</pre>
+<pre>-r--ahs     1.1 fat    4096 b- i4:2 14-Jul-91 12:58 EA DATA. SF
+</pre>
+<pre>--w-------  1.0 mac   17357 bx i8:2  4-May-92 04:02 unzip.macr
+</pre>
+<p class="Pp">前兩個例子的文件的屬性以類Unix的格式表示,其中七個子域分別表示該文件是否(1)是一個目錄,(2)是可讀的(總是)(3)是可寫的,(4)是可執行的(猜測建立在假定它們的擴展名爲<i>.exe</i>,
+    <i>.com</i>, <i>.bat</i>, <i>.cmd</i>和<i>.btm</i>
+    的基礎上)(5)有它的歸檔位設置,(6)是隱藏的和(7)是一個系統文件.由於一些
+    Macintosh
+    歸檔工具不存儲任何檔案信息,
+    Macintosh
+    文件的解釋是不可信的.</p>
+<p class="Pp">最後,第六個字段表示了壓縮使用的方法和子方法.
+    現在已知有六種方法:存儲法(storing)(無壓縮),縮減法(reducing),收縮法(shrinking),
+    內爆法(impoding),標誌法(tokenizing)(從來沒有公開發布)和緊縮法(deflating).
+    更進一步,縮減法有4種級別(從1到4);內爆法有4種類型(4K或者8K的滑動字典,和2或者3個Shannon-Fano樹);緊縮法也有4個層次(超快,快,正常,最大壓縮).<i>zipinfo</i>
+    用如下的方式代表了這些方法和子方法:
+    <i>stor</i>;<i>re:1</i>, <i>re:2</i>, etc.; <i>shrk</i>; <i>i4:2</i>,
+    <i>i8:3</i>, etc.; <i>tokn</i>; and <i>defS</i>, <i>defF</i>, <i>defN</i>,
+    and <i>defX</i>.</p>
+<p class="Pp">中長和長列表格式顯示幾乎和短列表相同,除去它們附加了文件壓縮方面的信息.中長格式以百分數列出了文件壓縮率,它代表了被節省的空間:</p>
+<p class="Pp"></p>
+<pre>-rw-rws---  1.5 unx    2802 t- 81% defX 11-Aug-91 13:48 perms.2660
+</pre>
+<p class="Pp">在這個例子中,文件以超過5倍的比例被壓縮;壓縮後的數據大小僅爲原是大小的19%.長格式則以以字節大小爲單位的壓縮後文件大小表示該信息:</p>
+<p class="Pp"></p>
+<pre>-rw-rws---  1.5 unx    2802 t-     538 defX 11-Aug-91 13:48 perms.2660
+</pre>
+<p class="Pp">增加 <b>-T</b>
+    選項則將文件的日期和時間以點分格式輸出:</p>
+<p class="Pp"></p>
+<pre>-rw-rws---  1.5 unx    2802 t-     538 defX 910811.134804 perms.2660
+</pre>
+<p class="Pp">注意到因爲 MS-DOS
+    格式中用來存儲文件時間的限制,第二個域總是取值爲最近的偶數秒.對於
+    Unix 文件 <i>zip</i>(1L) 和 <i>unzip</i>
+    很可能在它們的下一個版本中改變.</p>
+<p class="Pp">作爲單獨文件信息的補充,默認的輸出還包括頭和末信息行:</p>
+<p class="Pp"></p>
+<pre>Archive:  OS2.zip   5453 bytes   5 files
+</pre>
+<pre>,,rw,       1.0 hpf     730 b- i4:3 26-Jun-92 23:40 Contents
+</pre>
+<pre>,,rw,       1.0 hpf    3710 b- i4:3 26-Jun-92 23:33 makefile.os2
+</pre>
+<pre>,,rw,       1.0 hpf    8753 b- i8:3 26-Jun-92 15:29 os2unzip.c
+</pre>
+<pre>,,rw,       1.0 hpf      98 b- stor 21-Aug-91 15:34 unzip.def
+</pre>
+<pre>,,rw,       1.0 hpf      95 b- stor 21-Aug-91 17:51 zipinfo.def
+</pre>
+<pre>5 files, 13386 bytes uncompressed, 4951 bytes compressed:  63.0%
+</pre>
+<p class="Pp">頭行給出了檔案的名字,它的總大小,總的文件數;末行給出了所列出的文件數,它們總的解壓後的大小和它們總的解壓前的大小(不包含任何的
+    <i>zip</i>
+    內部的部分).但是,如果指定一個或者若干的文件,則頭信息和末信息將不會列出.這種行爲與Unix中的
+    ``ls -l&#39;&#39;
+    類似;可以通過明確指定
+    <b>-h</b> h或者 <b>-t</b>
+    選項強制顯示.</p>
+<p class="Pp">在這種情況下,由於
+    <b>-h</b> 或 <b>-t</b>
+    (或同時)而沒有其他選項意味着只有頭信息或者末信息(或同時)被列出,列表的格式同樣需要明確地指定.對此可參看下面<b>
+    &#34;示例 EXAMPLES&#34; </b>
+    部分獲得這個無意義的半智能化的轉化.</p>
+<p class="Pp">冗餘的列表顯示內容大多數都是自解釋的.它還列出了文件和檔案文件的描述,如果有的話,還列出所有存儲在額外域中的類型和字節數.當前已知的額外域的類型包括
+    PKWARE 的認證(``AV&#39;&#39;)信息;OS/2
+    擴展屬性;VMS
+    文件系統信息,PLWARE 和 Info-ZIP
+    的版本; Macintosh 的resource forks;Acorn/Archimedes
+    SparkFS
+    信息等等.(對於OS/2的擴展屬性(壓縮文件額外域中最常用的部分)
+    <i>zipinfo</i> 報告的 EAs
+    的存儲大小可能與 OS/2
+    使用 <i>dir</i>
+    命令給出得結果不一致:OS/2
+    總是以16位格式輸出字節數,而
+    <i>zipinfo</i>
+    總是以32位存儲輸出.)</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="環境選項_ENVIRONMENT_OPTIONS">環境選項 ENVIRONMENT OPTIONS<a class="anchor" href="#%E7%92%B0%E5%A2%83%E9%81%B8%E9%A0%85_ENVIRONMENT_OPTIONS">¶</a></h1>
+通過設置在環境變量中的選項可以改變
+  <i>zipinfo</i>
+  的默認的工作方式，但是解釋起來稍微有點複雜,
+  這是因爲 <i>zipinfo</i>
+  試圖以一種直觀,類 Unix
+  的方式進行默認工作.(不要笑)然而這裏有一些內在的邏輯.簡言之,選項有三個優先等級:默認選項;環境選項,它是優先於默認選項的,並作爲其的補充;用戶傳遞的明確的選項,它是優先於上述兩類並作爲其補充的.
+<p class="Pp">默認的輸出列表格式,正如上述描述的,粗略地對應於
+    &#34;zipinfo -hst&#34;
+    命令(除非指定一個單獨的壓縮文件).
+    一個偏愛長輸出格式
+    (<b>-l</b>)
+    的用戶能夠使用<i>zipinfo</i>的環境變量來改變默認的運作:</p>
+<dl class="Bl-tag">
+  <dt>Unix Bourne shell:</dt>
+  <dd><span class="Li">ZIPINFO=-l; export ZIPINFO</span></dd>
+  <dt>Unix C shell:</dt>
+  <dd><span class="Li">setenv ZIPINFO -l</span></dd>
+  <dt>OS/2 or MS-DOS:</dt>
+  <dd><span class="Li">set ZIPINFO=-l</span></dd>
+  <dt>VMS (quotes for <i>lowercase</i>):</dt>
+  <dd><span class="Li">define ZIPINFO_OPTS &#34;-l&#34;</span></dd>
+</dl>
+<p class="Pp">另外,如果用戶不喜歡末行信息,<i>zipinfo</i>
+    的&#34;反選項&#34;的概念可以用來覆蓋默認的總結行信息.這可以通過在不想使用的選項前加上減號實現:例如,,在這個例子中可以使用``-l-t&#39;&#39;
+    或者 ``--tl&#39;&#39;
+    .第一個連字符是規則開關符,而`t&#39;之前的那個是減號.連續使用兩個連字符看起來有些笨拙.但是從直覺出發並非無意義:只用忽略第一個連字符並從此開始.它同樣和Unix命令中的
+    <a href="../../buster/manpages-zh/nice.1.zh_TW.html">nice(1)</a> 相一致.</p>
+<p class="Pp">正如上面所提到的,對於VMS默認的環境變量是ZIPINFO_OPTS(否則將作爲一個安裝
+    <i>zipinfo</i>
+    的外來命令和環境變量相混淆),而對於其它的操作系統則是ZIPINFO.爲了與<i>zip</i>(1L)
+    兼容,ZIPINFOOPT也被接受(不要問爲什麼).如果ZIPINFO和ZIPINFOOPT均被定義,則ZIPINFO優先.
+    <i>unzip</i> 的診斷選項(<b>-v</b>
+    且沒有壓縮文件名)能夠用來檢查所有的四個可能的
+    <i>unzip</i> 和 <i>zipinfo</i> 環境變量.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="示例_EXAMPLES">示例 EXAMPLES<a class="anchor" href="#%E7%A4%BA%E4%BE%8B_EXAMPLES">¶</a></h1>
+要獲得一個壓縮檔案
+  <i>storage.zip</i>
+  的基本的,短格式輸出的完整的內容,幷包含頭末行信息,使用檔案名作爲zipinfo
+  的參數即可:
+<p class="Pp"></p>
+<pre>zipinfo storage
+</pre>
+<p class="Pp">要獲得一個基本的,長格式(非冗餘)的,包含頭末行信息的列表,用
+    <b>-l</b>:</p>
+<p class="Pp"></p>
+<pre>zipinfo -l storage
+</pre>
+<p class="Pp">要獲得一個檔案的完整內容,並且不包含頭末行信息,可以使用
+    <b>-h</b> 和 <b>-t</b>
+    的反選項,也可以明確指定顯示內容:</p>
+<p class="Pp"></p>
+<pre>zipinfo --h-t storage
+zipinfo storage \*
+</pre>
+<p class="Pp">(這裏的反斜槓 (backslash
+    `´) 只是在 shell 會將 `*&#39;
+    通配符擴展時才必要,正如在
+    Unix
+    中雙引號擴起來的星號將會全局有效).如果要默認關閉所有的行顯示,可以使用環境變量(這裏假設是C
+    shell):</p>
+<p class="Pp"></p>
+<pre>setenv ZIPINFO --t
+zipinfo storage
+</pre>
+<p class="Pp">要獲得第一個例子的完整的,短格式的列表輸出,如果環境變量已經象前面的那樣設置好了,就需要明確指定<b>-s</b>
+    選項,因爲 <b>-t</b>
+    選項本身只表示輸出末行信息:</p>
+<p class="Pp"></p>
+<pre>setenv ZIPINFO --t
+zipinfo -t storage            [only totals line]
+zipinfo -st storage           [full listing]
+</pre>
+<p class="Pp"><b>-s</b> 選項和 <b>-m</b> 和 <b>-l</b>,
+    選項一樣,默認情況下包含了頭末行信息,除非另外指定,因爲規定不顯示末行信息的環境變量較之於默認的
+    <b>-s</b>
+    選項的優先權更高,因此爲了得到完整的列表輸出,就需要明確指定
+    <b>-t</b>
+    選項.沒有什麼(環境變量)與頭信息相關連,因此
+    <b>-s</b>
+    選項就足夠了.請注意當使用
+    <b>-h</b> 和 <b>-t</b>
+    選項的時候,將不顯示任何默認的文件列表;只顯示頭和/或末信息.在使用一個通配符作爲
+    <i>zipinfo</i>
+    的參數的時候,這種模式是有用的;所有文件的內容只用一個命令就歸納出了.</p>
+<p class="Pp">要以中長格式列出檔案中的一個單獨文件的信息,只用明確指定文件名就可以了:</p>
+<p class="Pp"></p>
+<pre>zipinfo -m storage unshrink.c
+</pre>
+<p class="Pp">指定任何一個檔案成員的文件名,就象在本例一樣,將不再顯示默認的頭末信息;只有顯示特定文件信息的那行將被輸出.當要獲得某個單獨的文件的信息的時候這種模式符合直覺.對於多個文件的情形,知道總共的壓縮前後的文件的大小常是有用的;在這種情況下
+    <b>-t</b>
+    選項常需要明確指定:</p>
+<p class="Pp"></p>
+<pre>zipinfo -mt storage &#34;*.[ch]&#34; Mak\*
+</pre>
+<p class="Pp">爲了獲得一個ZIP檔案的完全信息,可使用冗餘選項.如果操作系統允許的話把輸出重定向至一個過濾器例如Unix中的<a href="../../buster/manpages-zh/more.1.zh_TW.html">more(1)</a>
+    通常是明智之舉:</p>
+<p class="Pp"></p>
+<pre>zipinfo -v storage | more
+</pre>
+<p class="Pp">最後,爲了查看檔案中最近修改的文件,可使用
+    <b>-T</b>
+    選項配合外部的排序程序比如
+    Unix 中的 <a href="../../buster/manpages-zh/sort.1.zh_TW.html">sort(1)</a>
+    (還有這個例子中的
+    <a href="../../buster/manpages-zh/tail.1.zh_TW.html">tail(1)</a> ):</p>
+<p class="Pp"></p>
+<pre>zipinfo -T storage | sort -n +6 | tail -15
+</pre>
+<p class="Pp"><b>-n</b> 選項告訴 <a href="../../buster/manpages-zh/sort.1.zh_TW.html">sort(1)</a>
+    以數字大小排序而不是
+    ASCII 順序, <b>+6</b>
+    選項意爲以第一個後面的第六個字段排序(也就是說是第七個字段).這裏假定是默認的短格式輸出;如果使用了
+    <b>-m</b> 或者 <b>-l</b>
+    選項,則正確的 <a href="../../buster/manpages-zh/sort.1.zh_TW.html">sort(1)</a>
+    選項將是 <b>+7</b>.<a href="../../buster/manpages-zh/tail.1.zh_TW.html">tail(1)</a>
+    命令除去最後15行以外的所有內容.以後的版本的
+    <i>zipinfo</i>
+    可能會集成日期/時間和文件名的排序於內建的選項.</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="技巧_TIPS">技巧 TIPS<a class="anchor" href="#%E6%8A%80%E5%B7%A7_TIPS">¶</a></h1>
+作者發現如果在可以使用別名的系統(或者允許在系統上拷貝/重命名可執行程序,建立鏈接或者可以以<i>ii</i>
+  爲名建立一個命令文件)上定義
+  <i>zipinfo</i> 的別名爲 <i>ii</i>
+  將會帶來很大的方便.
+  <i>ii</i>
+  的用法和通常的作爲Unix中長格式輸出的別名的
+  <i>ll</i>
+  相平行,而且兩個命令的輸出的相似性是有意義的.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="BUGS">BUGS<a class="anchor" href="#BUGS">¶</a></h1>
+相對於 <i>unzip</i>,<i>zipinfo</i> 的 <b>-M</b>
+  (``more&#39;&#39;)
+  選項總體上來說在處理屏幕輸出時是過於簡單了;正如上面指出的,它不能正確地發現過長的行,因此很可能引起屏幕上端的行在被讀取之前就被滾動略過.如果附加一個額外的行,<i>zipinfo</i>
+  應該能發現並且處理這種情況.這需要獲得屏幕的寬和高.並且,<i>zipinfo</i>
+  還要獲得所有系統中的屏幕的真實尺寸.
+<p class="Pp"><i>zipinfo</i>的按列輸出的模式是沒有必要那麼複雜的,應進行簡化(這裏並不是說將會的到簡化).</p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="參見_SEE_ALSO">參見 SEE ALSO<a class="anchor" href="#%E5%8F%83%E8%A6%8B_SEE_ALSO">¶</a></h1>
+<a href="../../buster/manpages-zh/ls.1.zh_TW.html">ls(1)</a>, <i>funzip</i>(1L), <i>unzip</i>(1L), <i>unzipsfx</i>(1L),
+  <i>zip</i>(1L), <i>zipcloak</i>(1L), <i>zipnote</i>(1L), <i>zipsplit</i>(1L)
+</section>
+<section class="Sh">
+<h1 class="Sh" id="URL">URL<a class="anchor" href="#URL">¶</a></h1>
+The Info-ZIP home page is currently at
+<pre><a href="../../pub/infozip/">../../pub/infozip/</a>
+
+</pre>
+或
+<pre><a href="ftp://ftp.info-zip.org/pub/infozip/">ftp://ftp.info-zip.org/pub/infozip/</a> .
+
+</pre>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="作者_AUTHOR">作者 AUTHOR<a class="anchor" href="#%E4%BD%9C%E8%80%85_AUTHOR">¶</a></h1>
+Greg ``Cave Newt&#39;&#39; Roelofs. ZipInfo 包含了Mark
+  Adler的模式匹配的代碼以及其他很多人的修正/改進.請參考UnZip源程序發佈中的CONTRIBS文件獲得更加完整的列表.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版維護人]">[中文版維護人]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E7%B6%AD%E8%AD%B7%E4%BA%BA%5D">¶</a></h1>
+<b>嚴亞勤 &lt;tinyfat@263.net&gt;</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="[中文版最新更新]">[中文版最新更新]<a class="anchor" href="#%5B%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%80%E6%96%B0%E6%9B%B4%E6%96%B0%5D">¶</a></h1>
+<b>2003.11.22</b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="《中國linux論壇man手冊翻譯計劃》:">《中國linux論壇man手冊翻譯計劃》:<a class="anchor" href="#%E3%80%8A%E4%B8%AD%E5%9C%8Blinux%E8%AB%96%E5%A3%87man%E6%89%8B%E5%86%8A%E7%BF%BB%E8%AD%AF%E8%A8%88%E5%8A%83%E3%80%8B:">¶</a></h1>
+<b><a href="../..//cmpp.linuxforum.net</a></b>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="跋">跋<a class="anchor" href="#%E8%B7%8B">¶</a></h1>
+本頁面中文版由中文 man
+  手冊頁計劃提供。
+<br/>
+中文 man
+  手冊頁計劃：<b><a href="../../man-pages-zh/manpages-zh">../../man-pages-zh/manpages-zh</a></b>
+</section>
+</div>
+<table class="foot">
+  <tbody><tr>
+    <td class="foot-date">17 February 2002 (v2.4)</td>
+    <td class="foot-os">Info-ZIP</td>
+  </tr>
+</tbody></table>
+</div>
+
+</div>
+</div>
+<div id="footer">
+
+<p><table>
+<tr>
+<td>
+Source file:
+</td>
+<td>
+zipinfo.1.zh_TW.gz (from <a href="../../package/manpages-zh/1.6.3.3-1/">manpages-zh 1.6.3.3-1</a>)
+</td>
+</tr>
+
+<tr>
+<td>
+Source last updated:
+</td>
+<td>
+2018-04-28T10:54:36Z
+</td>
+</tr>
+
+<tr>
+<td>
+Converted to HTML:
+</td>
+<td>
+2019-10-22T07:36:29Z
+</td>
+</tr>
+</table></p>
+
+<hr>
+<div id="fineprint">
+<p>debiman HEAD, see <a
+href="../../Debian/debiman/">github.com/Debian/debiman</a>.
+Found a problem? See the <a href="../../faq.html">FAQ</a>.</p>
+</div>
+</div>
+<script type="text/javascript">
+(function(a){"use strict";var b=function(b,c,d){var e=a.document;var f=e.createElement("link");var g;if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1];}var i=e.styleSheets;f.rel="stylesheet";f.href=b;f.media="only x";function j(a){if(e.body)return a();setTimeout(function(){j(a);});}j(function(){g.parentNode.insertBefore(f,(c?g:g.nextSibling));});var k=function(a){var b=f.href;var c=i.length;while(c--)if(i[c].href===b)return a();setTimeout(function(){k(a);});};function l(){if(f.addEventListener)f.removeEventListener("load",l);f.media=d||"all";}if(f.addEventListener)f.addEventListener("load",l);f.onloadcssdefined=k;k(l);return f;};if(typeof exports!=="undefined")exports.loadCSS=b;else a.loadCSS=b;}(typeof global!=="undefined"?global:this));
+(function(a){if(!a.loadCSS)return;var b=loadCSS.relpreload={};b.support=function(){try{return a.document.createElement("link").relList.supports("preload");}catch(b){return false;}};b.poly=function(){var b=a.document.getElementsByTagName("link");for(var c=0;c<b.length;c++){var d=b[c];if(d.rel==="preload"&&d.getAttribute("as")==="style"){a.loadCSS(d.href,d);d.rel=null;}}};if(!b.support()){b.poly();var c=a.setInterval(b.poly,300);if(a.addEventListener)a.addEventListener("load",function(){a.clearInterval(c);});if(a.attachEvent)a.attachEvent("onload",function(){a.clearInterval(c);});}}(this));
+</script>
+
+<script type="application/ld+json">
+"{\"@context\":\"../../contents-buster.html\",\"name\":\"buster\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"Thing\",\"@id\":\"/buster/manpages-zh/index.html\",\"name\":\"manpages-zh\"}},{\"@type\":\"ListItem\",\"position\":3,\"item\":{\"@type\":\"Thing\",\"@id\":\"\",\"name\":\"zipinfo(1)\"}}]}"
+</script>
